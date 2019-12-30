@@ -1,5 +1,5 @@
 name: moviedb_app
-description: movie db Flutter application.
+description: Flutter application that demonstrates The Movie Database API.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43

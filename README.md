@@ -1,6 +1,6 @@
-# moviedb_app
+# Introduction
 
-movie db Flutter application.
+Flutter application that demonstrates The Movie Database API.
 
 ## Getting Started
 
