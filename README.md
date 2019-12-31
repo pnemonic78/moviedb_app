@@ -1,6 +1,6 @@
 # Introduction
 
-Flutter application that demonstrates The Movie Database API.
+Demonstration Flutter application that uses The Movie Database API.
 
 ## Getting Started
 
@@ -17,4 +17,5 @@ samples, guidance on mobile development, and a full API reference.
 
 ## The Movie Database API
 
-[OAS](https://api.stoplight.io/v1/versions/9WaNJfGpnnQ76opqe/export/oas.json)
+- [OAS](https://api.stoplight.io/v1/versions/9WaNJfGpnnQ76opqe/export/oas.json)
+- [OpenAPI plugins](https://openapi-generator.tech/docs/plugins)
