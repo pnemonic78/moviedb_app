@@ -1,4 +1,4 @@
-package com.tikalk.moviedb
+package com.tikalk.tmdb
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

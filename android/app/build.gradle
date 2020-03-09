@@ -37,7 +37,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.tikalk.moviedb"
+        applicationId "com.tikalk.tmdb"
         minSdkVersion 16
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
