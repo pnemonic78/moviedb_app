@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movie.dart';
 
-final _rowHeight = 40.0;
+final _posterWidth = 99.75;
+final _posterHeight = 150.0;
+final _rowHeight = _posterHeight + 10;
 
 class MovieWidget extends StatelessWidget {
   final Movie movie;
@@ -12,9 +15,21 @@ class MovieWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: _rowHeight,
-      child: Text(movie.title),
+    final imageWidth = _posterWidth;
+    final imageHeight = _posterHeight;
+    final path =
+        TMDBApi.generatePosterUrl(movie.posterPath, imageWidth, imageHeight);
+    final poster = Image.network(
+      path,
+      width: imageWidth,
+      height: imageHeight,
+    );
+
+    return Row(
+      children: <Widget>[
+        poster,
+        Text(movie.title),
+      ],
     );
   }
 }
