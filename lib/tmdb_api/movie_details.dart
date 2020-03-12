@@ -97,4 +97,21 @@ class MovieDetails extends Movie {
             video: video,
             voteAverage: voteAverage,
             voteCount: voteCount);
+
+  MovieDetails.of(Movie movie)
+      : this(
+            id: movie.id,
+            adult: movie.adult,
+            backdropPath: movie.backdropPath,
+            genres: null,
+            originalLanguage: movie.originalLanguage,
+            originalTitle: movie.originalTitle,
+            overview: movie.overview,
+            popularity: movie.popularity,
+            posterPath: movie.posterPath,
+            releaseDate: movie.releaseDate,
+            title: movie.title,
+            video: movie.video,
+            voteAverage: movie.voteAverage,
+            voteCount: movie.voteCount);
 }

@@ -1,4 +1,8 @@
 import 'package:sprintf/sprintf.dart';
+import 'package:tmdb/tmdb_api/movie_details.dart';
+
+import 'movie.dart';
+import 'movies.dart';
 
 class TMDBApi {
   static const image_url = "https://image.tmdb.org/t/p/%s%s";
@@ -93,5 +97,21 @@ class TMDBApi {
     }
 
     return result;
+  }
+
+  List<Movie> getMovies() {
+    return Movies.getMovies();
+  }
+
+  MovieDetails _fromMovie(int movieId) {
+    List<Movie> movies = getMovies();
+    Movie movie = movies.firstWhere((movie) => movie.id == movieId);
+    return (movie != null) ? MovieDetails.of(movie) : null;
+  }
+
+  MovieDetails getMovie(int movieId) {
+    List<MovieDetails> movies = Movies.getMovieDetails();
+    return movies.firstWhere((movie) => movie.id == movieId,
+        orElse: () => _fromMovie(movieId));
   }
 }

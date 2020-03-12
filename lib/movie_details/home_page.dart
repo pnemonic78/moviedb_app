@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tmdb/res/dimens.dart';
+import 'package:tmdb/tmdb_api/api.dart';
+import 'package:tmdb/tmdb_api/movie.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
 
 import 'movie.dart';
@@ -10,13 +12,37 @@ class MovieDetailsHomePage extends StatefulWidget {
         super(key: key);
 
   final String title;
-  final MovieDetails movie;
+  final Movie movie;
 
   @override
   _MovieDetailsHomePageState createState() => _MovieDetailsHomePageState();
 }
 
 class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
+  TMDBApi _api;
+  MovieDetails _movie;
+
+  @override
+  void didUpdateWidget(MovieDetailsHomePage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if ((_movie == null) || (oldWidget.movie.id != widget.movie.id)) {
+      _fetchMovie(widget.movie);
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_movie == null) {
+      _fetchMovie(widget.movie);
+    }
+  }
+
+  void _fetchMovie(Movie movie) {
+    if (_api == null) _api = TMDBApi();
+    _movie = _api.getMovie(movie.id);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +51,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
       ),
       body: Padding(
         padding: paddingAll_8,
-        child: MovieDetailsWidget(movie: widget.movie),
+        child: MovieDetailsWidget(movie: _movie),
       ),
     );
   }

@@ -8,9 +8,13 @@ final _dateFormat = DateFormat.yMMMd();
 
 class MovieWidget extends StatelessWidget {
   final Movie movie;
+  final ValueChanged<Movie> onTap;
 
-  const MovieWidget({Key key, @required this.movie})
-      : assert(movie != null),
+  const MovieWidget({
+    Key key,
+    @required this.movie,
+    @required this.onTap,
+  })  : assert(movie != null),
         super(key: key);
 
   @override
@@ -50,6 +54,7 @@ class MovieWidget extends StatelessWidget {
 
     return Card(
       child: InkWell(
+        onTap: onTap == null ? null : () => onTap(movie),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
