@@ -1,7 +1,10 @@
+import 'package:tmdb/tmdb_api/movie_details.dart';
+
 import 'movie.dart';
 
 class Movies {
   static final _movies = <Movie>[];
+  static final _movieDetails = <MovieDetails>[];
 
   static List<Movie> getMovies() {
     if (_movies.isEmpty) {
@@ -111,5 +114,28 @@ class Movies {
       ));
     }
     return _movies;
+  }
+
+  static List<MovieDetails> getMovieDetails() {
+    if (_movieDetails.isEmpty) {
+      _movieDetails.add(MovieDetails(
+        adult: false,
+        backdropPath: "/bd1X5nNrrAHVGG0MxsAeCOPPh1w.jpg",
+        genreIds: [10751, 16, 12, 35],
+        id: 335777,
+        originalLanguage: "en",
+        originalTitle: "The Nut Job 2: Nutty by Nature",
+        overview:
+            "When the evil mayor of Oakton decides to bulldoze Liberty Park and build a dangerous amusement park in its place, Surly Squirrel and his ragtag group of animal friends need to band together to save their home, defeat the mayor, and take back the park.",
+        popularity: 124.44905,
+        posterPath: "/xOfdQHNF9TlrdujyAjiKfUhxSXy.jpg",
+        releaseDate: DateTime.utc(2017, 8, 11),
+        title: "The Nut Job 2: Nutty by Nature",
+        video: false,
+        voteAverage: 5.9,
+        voteCount: 109,
+      ));
+    }
+    return _movieDetails;
   }
 }
