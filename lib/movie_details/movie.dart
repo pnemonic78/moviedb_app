@@ -3,8 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
 
-final _posterWidth = 99.75;
-final _posterHeight = 150.0;
+const _posterHeight = 300.0;
+const _posterWidth = _posterHeight * 0.665;
 
 const _padding = 8.0;
 
@@ -37,7 +37,7 @@ class MovieDetailsWidget extends StatelessWidget {
     final titleWidget = Text(
       movie.title,
       maxLines: 2,
-      style: textTheme.headline6,
+      style: textTheme.headline5,
       overflow: TextOverflow.ellipsis,
     );
 
@@ -55,11 +55,12 @@ class MovieDetailsWidget extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
     );
 
-    return Card(
-      child: InkWell(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          titleWidget,
+          SizedBox(height: _padding),
+          Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               poster,
@@ -70,8 +71,6 @@ class MovieDetailsWidget extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      titleWidget,
-                      SizedBox(height: _padding),
                       voteAverageWidget,
                       SizedBox(height: _padding),
                       dateWidget,
@@ -83,7 +82,7 @@ class MovieDetailsWidget extends StatelessWidget {
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }

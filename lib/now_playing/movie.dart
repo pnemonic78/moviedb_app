@@ -3,8 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movie.dart';
 
-final _posterWidth = 99.75;
-final _posterHeight = 150.0;
+const _posterHeight = 150.0;
+const _posterWidth = _posterHeight * 0.665;
 
 const _padding = 8.0;
 
