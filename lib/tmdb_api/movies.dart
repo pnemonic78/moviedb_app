@@ -130,7 +130,7 @@ class Movies {
         popularity: 124.44905,
         posterPath: "/xOfdQHNF9TlrdujyAjiKfUhxSXy.jpg",
         releaseDate: DateTime.utc(2017, 8, 11),
-        title: "The Nut Job 2: Nutty by Nature 1234567890 123456778990",
+        title: "The Nut Job 2: Nutty by Nature",
         video: false,
         voteAverage: 5.9,
         voteCount: 109,

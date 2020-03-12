@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tmdb/res/dimens.dart';
+import 'package:tmdb/res/strings.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
 
@@ -34,12 +35,27 @@ class MovieDetailsWidget extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
     );
 
+    final voteAverageLabel = Text(
+      R.string.vote_average_label,
+      style: textTheme.subtitle1,
+    );
+
     final voteAverageWidget =
         LinearProgressIndicator(value: movie.voteAverage / 10.0);
+
+    final dateLabel = Text(
+      R.string.release_date_label,
+      style: textTheme.subtitle1,
+    );
 
     final dateWidget = Text(
       _dateFormat.format(movie.releaseDate),
       maxLines: 1,
+    );
+
+    final summaryLabel = Text(
+      R.string.summary_label,
+      style: textTheme.subtitle1,
     );
 
     final summaryWidget = Text(
@@ -50,6 +66,7 @@ class MovieDetailsWidget extends StatelessWidget {
 
     return SingleChildScrollView(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           titleWidget,
           SizedBox(height: padding_8),
@@ -64,17 +81,20 @@ class MovieDetailsWidget extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
+                      voteAverageLabel,
                       voteAverageWidget,
                       SizedBox(height: padding_8),
+                      dateLabel,
                       dateWidget,
-                      SizedBox(height: padding_8),
-                      summaryWidget,
                     ],
                   ),
                 ),
               ),
             ],
           ),
+          SizedBox(height: padding_8),
+          summaryLabel,
+          summaryWidget,
         ],
       ),
     );
