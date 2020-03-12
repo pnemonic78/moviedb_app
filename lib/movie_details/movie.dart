@@ -45,7 +45,12 @@ class MovieDetailsWidget extends StatelessWidget {
     );
 
     final voteAverageWidget =
-        LinearProgressIndicator(value: movie.voteAverage / 10.0);
+        CircularProgressIndicator(value: movie.voteAverage / 10.0);
+
+    final voteAverageValue = Text(
+      movie.voteAverage.toString(),
+      style: textTheme.caption,
+    );
 
     final hasRuntime = movie.runtime != null;
 
@@ -127,8 +132,21 @@ class MovieDetailsWidget extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      voteAverageLabel,
-                      voteAverageWidget,
+                      Row(
+                        children: <Widget>[
+                          Stack(
+                            alignment: Alignment.center,
+                            children: <Widget>[
+                              voteAverageWidget,
+                              voteAverageValue,
+                            ],
+                          ),
+                          SizedBox(
+                            width: padding_8,
+                          ),
+                          voteAverageLabel,
+                        ],
+                      ),
                       dateMargin,
                       dateLabel,
                       dateWidget,
