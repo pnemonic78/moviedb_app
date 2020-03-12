@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
 
-const _posterHeight = 300.0;
-const _posterWidth = _posterHeight * 0.665;
-
-const _padding = 8.0;
-
-const _paddingLeft = const EdgeInsets.only(left: _padding);
-const _paddingTop = const EdgeInsets.only(top: _padding);
-
-final dateFormat = DateFormat.yMMMd();
+final _dateFormat = DateFormat.yMMMd();
 
 class MovieDetailsWidget extends StatelessWidget {
   final MovieDetails movie;
@@ -22,8 +15,8 @@ class MovieDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final imageWidth = _posterWidth;
-    final imageHeight = _posterHeight;
+    final imageWidth = posterDetailsWidth;
+    final imageHeight = posterDetailsHeight;
     final path =
         TMDBApi.generatePosterUrl(movie.posterPath, imageWidth, imageHeight);
     final poster = Image.network(
@@ -45,7 +38,7 @@ class MovieDetailsWidget extends StatelessWidget {
         LinearProgressIndicator(value: movie.voteAverage / 10.0);
 
     final dateWidget = Text(
-      dateFormat.format(movie.releaseDate),
+      _dateFormat.format(movie.releaseDate),
       maxLines: 1,
     );
 
@@ -59,22 +52,22 @@ class MovieDetailsWidget extends StatelessWidget {
       child: Column(
         children: <Widget>[
           titleWidget,
-          SizedBox(height: _padding),
+          SizedBox(height: padding_8),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               poster,
               Expanded(
                 child: Padding(
-                  padding: _paddingLeft,
+                  padding: paddingLeft_8,
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       voteAverageWidget,
-                      SizedBox(height: _padding),
+                      SizedBox(height: padding_8),
                       dateWidget,
-                      SizedBox(height: _padding),
+                      SizedBox(height: padding_8),
                       summaryWidget,
                     ],
                   ),

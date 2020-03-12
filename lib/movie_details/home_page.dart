@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
 
 import 'movie.dart';
@@ -30,7 +31,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
         title: Text(widget.title),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: paddingAll_8,
         child: MovieDetailsWidget(movie: widget.movie),
       ),
     );

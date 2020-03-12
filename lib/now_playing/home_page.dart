@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/movie.dart';
 import 'package:tmdb/tmdb_api/movies.dart';
 
@@ -50,7 +51,7 @@ class _NowPlayingHomePageState extends State<NowPlayingHomePage> {
         title: Text(widget.title),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: paddingAll_8,
         child: Container(
           width: double.infinity,
           child: Column(
