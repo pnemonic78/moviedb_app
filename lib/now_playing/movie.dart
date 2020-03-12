@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movie.dart';
 
 final _posterWidth = 99.75;
 final _posterHeight = 150.0;
-final _rowHeight = _posterHeight + 10;
+
+const _padding = 8.0;
+
+const _paddingLeft = const EdgeInsets.only(left: _padding);
+const _paddingTop = const EdgeInsets.only(top: _padding);
+
+final dateFormat = DateFormat.yMMMd();
 
 class MovieWidget extends StatelessWidget {
   final Movie movie;
@@ -25,11 +32,59 @@ class MovieWidget extends StatelessWidget {
       height: imageHeight,
     );
 
-    return Row(
-      children: <Widget>[
-        poster,
-        Text(movie.title),
-      ],
+    final textTheme = Theme.of(context).textTheme;
+
+    final titleWidget = Text(
+      movie.title,
+      maxLines: 2,
+      style: textTheme.headline6,
+      overflow: TextOverflow.ellipsis,
+    );
+
+    final voteAverageWidget =
+        LinearProgressIndicator(value: movie.voteAverage / 10.0);
+
+    final dateWidget = Text(
+      dateFormat.format(movie.releaseDate),
+      maxLines: 1,
+    );
+
+    final summaryWidget = Text(
+      movie.overview,
+      maxLines: 5,
+      overflow: TextOverflow.ellipsis,
+    );
+
+    return Card(
+      child: InkWell(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              poster,
+              Expanded(
+                child: Padding(
+                  padding: _paddingLeft,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      titleWidget,
+                      SizedBox(height: _padding),
+                      voteAverageWidget,
+                      SizedBox(height: _padding),
+                      dateWidget,
+                      SizedBox(height: _padding),
+                      summaryWidget,
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
