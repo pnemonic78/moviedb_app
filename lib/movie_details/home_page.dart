@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tmdb/res/dimens.dart';
-import 'package:tmdb/res/strings.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
 
 import 'movie.dart';
@@ -20,13 +19,6 @@ class MovieDetailsHomePage extends StatefulWidget {
 class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    final header = Text(
-      R.string.movie_details,
-      style: theme.textTheme.headline6,
-    );
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),

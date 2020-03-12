@@ -6,6 +6,8 @@ import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
 
 final _dateFormat = DateFormat.yMMMd();
+final _currencyFormat = NumberFormat.simpleCurrency(name: "USD");
+final _timeFormat = DateFormat.Hm();
 
 class MovieDetailsWidget extends StatelessWidget {
   final MovieDetails movie;
@@ -27,6 +29,8 @@ class MovieDetailsWidget extends StatelessWidget {
     );
 
     final textTheme = Theme.of(context).textTheme;
+    final labelStyle = textTheme.subtitle1;
+    final gone = Container();
 
     final titleWidget = Text(
       movie.title,
@@ -37,30 +41,72 @@ class MovieDetailsWidget extends StatelessWidget {
 
     final voteAverageLabel = Text(
       R.string.vote_average_label,
-      style: textTheme.subtitle1,
+      style: labelStyle,
     );
 
     final voteAverageWidget =
         LinearProgressIndicator(value: movie.voteAverage / 10.0);
 
+    final hasRuntime = movie.runtime != null;
+
+    final runtimeMargin = hasRuntime ? SizedBox(height: padding_8) : gone;
+
+    final runtimeLabel = hasRuntime
+        ? Text(
+            R.string.runtime_label,
+            style: labelStyle,
+          )
+        : gone;
+
+    final runtimeWidget = hasRuntime
+        ? Text(_timeFormat.format(DateTime.utc(0, 1, 1, 0, movie.runtime)))
+        : gone;
+
+    final hasBudget = movie.budget != null;
+
+    final budgetMargin = hasBudget ? SizedBox(height: padding_8) : gone;
+
+    final budgetLabel = hasBudget
+        ? Text(
+            R.string.budget_label,
+            style: labelStyle,
+          )
+        : gone;
+
+    final budgetWidget =
+        hasBudget ? Text(_currencyFormat.format(movie.budget)) : gone;
+
+    final hasRevenue = movie.revenue != null;
+
+    final revenueMargin = hasRevenue ? SizedBox(height: padding_8) : gone;
+
+    final revenueLabel = hasRevenue
+        ? Text(
+            R.string.revenue_label,
+            style: labelStyle,
+          )
+        : gone;
+
+    final revenueWidget =
+        hasRevenue ? Text(_currencyFormat.format(movie.revenue)) : gone;
+
+    final dateMargin = SizedBox(height: padding_8);
+
     final dateLabel = Text(
       R.string.release_date_label,
-      style: textTheme.subtitle1,
+      style: labelStyle,
     );
 
-    final dateWidget = Text(
-      _dateFormat.format(movie.releaseDate),
-      maxLines: 1,
-    );
+    final dateWidget = Text(_dateFormat.format(movie.releaseDate));
 
     final summaryLabel = Text(
       R.string.summary_label,
-      style: textTheme.subtitle1,
+      style: labelStyle,
     );
 
     final summaryWidget = Text(
       movie.overview,
-      maxLines: 5,
+      maxLines: 100,
       overflow: TextOverflow.ellipsis,
     );
 
@@ -76,16 +122,25 @@ class MovieDetailsWidget extends StatelessWidget {
               poster,
               Expanded(
                 child: Padding(
-                  padding: paddingLeft_8,
+                  padding: paddingLeft_16,
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       voteAverageLabel,
                       voteAverageWidget,
-                      SizedBox(height: padding_8),
+                      dateMargin,
                       dateLabel,
                       dateWidget,
+                      runtimeMargin,
+                      runtimeLabel,
+                      runtimeWidget,
+                      budgetMargin,
+                      budgetLabel,
+                      budgetWidget,
+                      revenueMargin,
+                      revenueLabel,
+                      revenueWidget,
                     ],
                   ),
                 ),

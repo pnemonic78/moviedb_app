@@ -120,20 +120,22 @@ class Movies {
     if (_movieDetails.isEmpty) {
       _movieDetails.add(MovieDetails(
         adult: false,
-        backdropPath: "/bd1X5nNrrAHVGG0MxsAeCOPPh1w.jpg",
-        genreIds: [10751, 16, 12, 35],
-        id: 335777,
+        backdropPath: "/stmYfCUGd8Iy6kAMBr6AmWqx8Bq.jpg",
+        budget: 85000000,
+        id: 454626,
         originalLanguage: "en",
-        originalTitle: "The Nut Job 2: Nutty by Nature",
+        originalTitle: "Sonic the Hedgehog",
         overview:
-            "When the evil mayor of Oakton decides to bulldoze Liberty Park and build a dangerous amusement park in its place, Surly Squirrel and his ragtag group of animal friends need to band together to save their home, defeat the mayor, and take back the park.",
-        popularity: 124.44905,
-        posterPath: "/xOfdQHNF9TlrdujyAjiKfUhxSXy.jpg",
-        releaseDate: DateTime.utc(2017, 8, 11),
-        title: "The Nut Job 2: Nutty by Nature",
+            "Based on the global blockbuster videogame franchise from Sega, Sonic the Hedgehog tells the story of the world’s speediest hedgehog as he embraces his new home on Earth. In this live-action adventure comedy, Sonic and his new best friend team up to defend the planet from the evil genius Dr. Robotnik and his plans for world domination.",
+        popularity: 294.837,
+        posterPath: "/aQvJ5WPzZgYVDrxLX4R6cLJCEaQ.jpg",
+        releaseDate: DateTime.utc(2020, 2, 12),
+        revenue: 265493652,
+        runtime: 99,
+        title: "Sonic the Hedgehog",
         video: false,
-        voteAverage: 5.9,
-        voteCount: 109,
+        voteAverage: 7.2,
+        voteCount: 862,
       ));
     }
     return _movieDetails;
