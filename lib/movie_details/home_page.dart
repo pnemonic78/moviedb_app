@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tmdb/res/dimens.dart';
+import 'package:tmdb/res/strings.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
 
 import 'movie.dart';
@@ -22,7 +23,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
     final theme = Theme.of(context);
 
     final header = Text(
-      'Movie Details',
+      R.string.movie_details,
       style: theme.textTheme.headline6,
     );
 

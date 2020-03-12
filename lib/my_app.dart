@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:tmdb/res/strings.dart';
 import 'now_playing/home_page.dart';
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'The Movie Database Demo',
+      title: R.string.app_title,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: NowPlayingHomePage(title: 'The Movie Database'),
+      home: NowPlayingHomePage(title: R.string.app_title),
     );
   }
 }

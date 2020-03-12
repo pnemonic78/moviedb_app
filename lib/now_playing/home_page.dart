@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tmdb/res/dimens.dart';
+import 'package:tmdb/res/strings.dart';
 import 'package:tmdb/tmdb_api/movie.dart';
 import 'package:tmdb/tmdb_api/movies.dart';
 
@@ -40,7 +41,7 @@ class _NowPlayingHomePageState extends State<NowPlayingHomePage> {
     final theme = Theme.of(context);
 
     final header = Text(
-      'Now Playing',
+      R.string.now_playing,
       style: theme.textTheme.headline6,
     );
 
@@ -55,7 +56,6 @@ class _NowPlayingHomePageState extends State<NowPlayingHomePage> {
         child: Container(
           width: double.infinity,
           child: Column(
-            //crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               header,
               Expanded(
