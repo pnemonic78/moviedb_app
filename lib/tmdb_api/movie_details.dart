@@ -6,7 +6,12 @@ class Genre {
   final int id;
   final String name;
 
-  Genre({this.id, this.name});
+  const Genre({this.id, this.name});
+
+  @override
+  String toString() {
+    return name;
+  }
 
   static List<int> toIds(List<Genre> genres) {
     return (genres != null) ? genres.map((g) => g.id).toList() : null;
@@ -23,7 +28,12 @@ class ProductionCompany {
   final String logoPath;
   final String originCountry;
 
-  ProductionCompany({this.id, this.name, this.logoPath, this.originCountry});
+  const ProductionCompany({this.id, this.name, this.logoPath, this.originCountry});
+
+  @override
+  String toString() {
+    return name;
+  }
 
   factory ProductionCompany.toJson(Map<String, dynamic> json) {
     return ProductionCompany(
@@ -38,7 +48,12 @@ class ProductionCountry {
   final String id;
   final String name;
 
-  ProductionCountry({this.id, this.name});
+  const ProductionCountry({this.id, this.name});
+
+  @override
+  String toString() {
+    return name;
+  }
 
   factory ProductionCountry.toJson(Map<String, dynamic> json) {
     return ProductionCountry(id: json['iso_3166_1'], name: json['name']);
@@ -49,7 +64,12 @@ class SpokenLanguage {
   final String id;
   final String name;
 
-  SpokenLanguage({this.id, this.name});
+  const SpokenLanguage({this.id, this.name});
+
+  @override
+  String toString() {
+    return name;
+  }
 
   factory SpokenLanguage.toJson(Map<String, dynamic> json) {
     return SpokenLanguage(id: json['iso_639_1'], name: json['name']);
@@ -76,6 +96,11 @@ class Status {
   ];
 
   const Status(this._value);
+
+  @override
+  String toString() {
+    return _value;
+  }
 
   factory Status.fromJson(String json) {
     return values.firstWhere((v) => json == v._value);

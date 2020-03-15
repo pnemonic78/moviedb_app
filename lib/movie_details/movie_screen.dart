@@ -115,6 +115,19 @@ class MovieDetailsWidget extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
     );
 
+    final hasGenres = movie.genres.isNotEmpty;
+
+    final genresMargin = hasGenres ? SizedBox(height: padding_8) : gone;
+
+    final genresLabel = hasGenres
+        ? Text(
+            R.string.genres_label,
+            style: labelStyle,
+          )
+        : gone;
+
+    final genresWidget = hasGenres ? Text(movie.genres.join(", ")) : gone;
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -159,6 +172,9 @@ class MovieDetailsWidget extends StatelessWidget {
                       revenueMargin,
                       revenueLabel,
                       revenueWidget,
+                      genresMargin,
+                      genresLabel,
+                      genresWidget,
                     ],
                   ),
                 ),

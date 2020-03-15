@@ -6,6 +6,7 @@ class _String {
 
   // Movie Details
   final budget_label = 'Budget';
+  final genres_label = 'Genres';
   final movie_details = 'Movie Details';
   final release_date_label = "Release Date";
   final revenue_label = 'Revenue';
