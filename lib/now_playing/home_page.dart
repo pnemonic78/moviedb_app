@@ -25,7 +25,14 @@ class _NowPlayingHomePageState extends State<NowPlayingHomePage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    _movies = _api.getMovies();
+    _api.getMovies(context).then((value) {
+      _movies = value;
+      setState(() {
+        if (_movies.length > 0) {
+          _currentMovie = _movies[0];
+        }
+      });
+    });
   }
 
   Widget _buildListWidgets() {

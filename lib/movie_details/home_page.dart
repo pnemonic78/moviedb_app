@@ -26,7 +26,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
   void didUpdateWidget(MovieDetailsHomePage oldWidget) {
     super.didUpdateWidget(oldWidget);
     if ((_movie == null) || (oldWidget.movie.id != widget.movie.id)) {
-      _fetchMovie(widget.movie);
+      _fetchMovie();
     }
   }
 
@@ -34,13 +34,22 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (_movie == null) {
-      _fetchMovie(widget.movie);
+      _fetchMovie();
     }
   }
 
-  void _fetchMovie(Movie movie) {
+  Future<void> _fetchMovie() async {
+    _fetchMovieDetails(widget.movie).then((value) {
+      _movie = value;
+      setState(() {
+        _updateUI();
+      });
+    });
+  }
+
+  Future<MovieDetails> _fetchMovieDetails(Movie movie) async {
     if (_api == null) _api = TMDBApi();
-    _movie = _api.getMovie(movie.id);
+    return await _api.getMovieDetails(movie);
   }
 
   @override
@@ -51,8 +60,12 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
       ),
       body: Padding(
         padding: paddingAll_8,
-        child: MovieDetailsWidget(movie: _movie),
+        child: (_movie != null)
+            ? MovieDetailsWidget(movie: _movie)
+            : Center(child: CircularProgressIndicator()),
       ),
     );
   }
+
+  void _updateUI() {}
 }

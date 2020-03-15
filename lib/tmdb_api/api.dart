@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
 
@@ -45,27 +46,6 @@ class TMDBApi {
     _original,
   ];
 
-//  String generatePosterUrl(Movie movie: , target: ImageView): ? {
-//  return generatePosterUrl(movie.posterPath, target)
-//  }
-//
-//  fun generatePosterUrl(movie: MovieDetails, target: ImageView): String? {
-//  return generatePosterUrl(movie.posterPath, target)
-//  }
-//
-//  fun generatePosterUrl(path: String?, target: ImageView): String? {
-//  var targetWidth = target.measuredWidth
-//  var targetHeight = target.measuredHeight
-//  val lp = target.layoutParams
-//  if (targetWidth <= 0) {
-//  targetWidth = lp.width
-//  }
-//  if (targetHeight <= 0) {
-//  targetHeight = lp.height
-//  }
-//  return generatePosterUrl(target.context, path, targetWidth, targetHeight)
-//}
-
   static String generatePosterUrl(String path, double width, double height) {
     if ((path == null) || (width <= 0) || (height <= 0)) {
       return null;
@@ -99,19 +79,24 @@ class TMDBApi {
     return result;
   }
 
-  List<Movie> getMovies() {
-    return Movies.getMovies();
+  Future<List<Movie>> getMovies(BuildContext context) async {
+    return Movies.getMovies(context);
   }
 
-  MovieDetails _fromMovie(int movieId) {
-    List<Movie> movies = getMovies();
+  Future<MovieDetails> _fromMovie(BuildContext context, int movieId) async {
+    List<Movie> movies = await getMovies(context);
     Movie movie = movies.firstWhere((movie) => movie.id == movieId);
     return (movie != null) ? MovieDetails.of(movie) : null;
   }
 
-  MovieDetails getMovie(int movieId) {
+  Future<MovieDetails> getMovie(BuildContext context, int movieId) async {
     List<MovieDetails> movies = Movies.getMovieDetails();
-    return movies.firstWhere((movie) => movie.id == movieId,
-        orElse: () => _fromMovie(movieId));
+    final e = await _fromMovie(context, movieId);
+    return movies.firstWhere((movie) => movie.id == movieId, orElse: () => e);
+  }
+
+  Future<MovieDetails> getMovieDetails(Movie movie) async {
+    List<MovieDetails> movies = Movies.getMovieDetails();
+    return movies.firstWhere((m) => m.id == movie.id, orElse: () => MovieDetails.of(movie));
   }
 }
