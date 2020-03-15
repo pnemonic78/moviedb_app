@@ -83,20 +83,9 @@ class TMDBApi {
     return Movies.getMovies(context);
   }
 
-  Future<MovieDetails> _fromMovie(BuildContext context, int movieId) async {
-    List<Movie> movies = await getMovies(context);
-    Movie movie = movies.firstWhere((movie) => movie.id == movieId);
-    return (movie != null) ? MovieDetails.of(movie) : null;
-  }
-
-  Future<MovieDetails> getMovie(BuildContext context, int movieId) async {
-    List<MovieDetails> movies = Movies.getMovieDetails();
-    final e = await _fromMovie(context, movieId);
-    return movies.firstWhere((movie) => movie.id == movieId, orElse: () => e);
-  }
-
-  Future<MovieDetails> getMovieDetails(Movie movie) async {
-    List<MovieDetails> movies = Movies.getMovieDetails();
-    return movies.firstWhere((m) => m.id == movie.id, orElse: () => MovieDetails.of(movie));
+  Future<MovieDetails> getMovieDetails(
+      BuildContext context, Movie movie) async {
+    MovieDetails movieDetails = await Movies.getMovieDetails(context, movie.id);
+    return movieDetails ?? MovieDetails.of(movie);
   }
 }

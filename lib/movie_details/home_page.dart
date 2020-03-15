@@ -49,7 +49,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
 
   Future<MovieDetails> _fetchMovieDetails(Movie movie) async {
     if (_api == null) _api = TMDBApi();
-    return await _api.getMovieDetails(movie);
+    return await _api.getMovieDetails(context, movie);
   }
 
   @override

@@ -16,7 +16,7 @@ class Movie {
   final double voteAverage;
   final int voteCount;
 
-  Movie({this.adult,
+  const Movie({this.adult,
     this.backdropPath,
     this.genreIds,
     @required this.id,
@@ -34,7 +34,7 @@ class Movie {
   /// Creates a [Movie] from a JSON object.
   factory Movie.fromJson(Map<String, dynamic> json) {
     var list = json['genre_ids'] as List;
-    List<int> genreIds = list.map((i) => i as int).toList();
+    List<int> genreIds = list.map((j) => j as int).toList();
 
     return Movie(
       adult: json['adult'],
