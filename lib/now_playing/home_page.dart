@@ -18,27 +18,23 @@ class NowPlayingHomePage extends StatefulWidget {
 
 class _NowPlayingHomePageState extends State<NowPlayingHomePage> {
   final _api = TMDBApi();
-  final _movieWidgets = <Widget>[];
+  List<Movie> _movies = <Movie>[];
   Movie _currentMovie;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    final List<Movie> movies = _api.getMovies();
-    _movieWidgets.clear();
-    for (var i = 0; i < movies.length; i++) {
-      _movieWidgets.add(MovieWidget(
-        movie: movies[i],
-        onTap: _onMovieTap,
-      ));
-    }
+    _movies = _api.getMovies();
   }
 
   Widget _buildListWidgets() {
     return ListView.builder(
-      itemBuilder: (BuildContext context, int index) => _movieWidgets[index],
-      itemCount: _movieWidgets.length,
+      itemBuilder: (BuildContext context, int index) => MovieTile(
+        movie: _movies[index],
+        onTap: _onMovieTap,
+      ),
+      itemCount: _movies.length,
     );
   }
 

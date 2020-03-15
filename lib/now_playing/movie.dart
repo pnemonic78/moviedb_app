@@ -6,11 +6,11 @@ import 'package:tmdb/tmdb_api/movie.dart';
 
 final _dateFormat = DateFormat.yMMMd();
 
-class MovieWidget extends StatelessWidget {
+class MovieTile extends StatelessWidget {
   final Movie movie;
   final ValueChanged<Movie> onTap;
 
-  const MovieWidget({
+  const MovieTile({
     Key key,
     @required this.movie,
     @required this.onTap,
