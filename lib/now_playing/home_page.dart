@@ -5,7 +5,7 @@ import 'package:tmdb/res/strings.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movie.dart';
 
-import 'movie.dart';
+import 'movie_tile.dart';
 
 class NowPlayingHomePage extends StatefulWidget {
   NowPlayingHomePage({Key key, this.title}) : super(key: key);

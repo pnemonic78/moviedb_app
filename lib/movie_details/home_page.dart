@@ -4,7 +4,7 @@ import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movie.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
 
-import 'movie.dart';
+import 'movie_screen.dart';
 
 class MovieDetailsHomePage extends StatefulWidget {
   MovieDetailsHomePage({Key key, this.title, this.movie})
