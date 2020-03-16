@@ -37,11 +37,11 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
     return FutureBuilder<MovieDetails>(
       future: _fetchMovie(),
       builder: (BuildContext context, AsyncSnapshot<MovieDetails> snapshot) {
-        Widget child;
+        Widget content;
         if (snapshot.connectionState == ConnectionState.done) {
-          child = MovieDetailsWidget(movie: snapshot.data);
+          content = MovieDetailsWidget(movie: snapshot.data);
         } else {
-          child = Center(child: CircularProgressIndicator());
+          content = Center(child: CircularProgressIndicator());
         }
 
         return Scaffold(
@@ -50,7 +50,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
           ),
           body: Padding(
             padding: paddingAll_8,
-            child: child,
+            child: content,
           ),
         );
       },

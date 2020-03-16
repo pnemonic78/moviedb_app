@@ -4,6 +4,7 @@ import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/strings.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movie.dart';
+import 'package:tmdb/tmdb_api/now_playing_response.dart';
 
 import 'movie_tile.dart';
 
@@ -18,37 +19,20 @@ class NowPlayingHomePage extends StatefulWidget {
 
 class _NowPlayingHomePageState extends State<NowPlayingHomePage> {
   final _api = TMDBApi();
-  List<Movie> _movies = <Movie>[];
-  Movie _currentMovie;
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    _api.getNowPlaying(context).then((value) {
-      _movies = value.results;
-      setState(() {
-        if (_movies.length > 0) {
-          _currentMovie = _movies[0];
-        }
-      });
-    });
-  }
-
-  Widget _buildListWidgets() {
+  Widget _buildListWidgets(List<Movie> movies) {
     return ListView.builder(
       itemBuilder: (BuildContext context, int index) => MovieTile(
-        movie: _movies[index],
+        movie: movies[index],
         onTap: _onMovieTap,
       ),
-      itemCount: _movies.length,
+      itemCount: movies.length,
     );
   }
 
   /// Function to call when a [Movie] is tapped.
   void _onMovieTap(Movie movie) {
     setState(() {
-      _currentMovie = movie;
       _navigateToDetails(movie);
     });
   }
@@ -73,26 +57,36 @@ class _NowPlayingHomePageState extends State<NowPlayingHomePage> {
       style: theme.textTheme.headline6,
     );
 
-    final listView = _buildListWidgets();
+    return FutureBuilder<MoviesNowPlayingResponse>(
+      future: _api.getNowPlaying(context),
+      builder: (BuildContext context,
+          AsyncSnapshot<MoviesNowPlayingResponse> snapshot) {
+        Widget content;
+        if (snapshot.connectionState == ConnectionState.done) {
+          content = _buildListWidgets(snapshot.data.results);
+        } else {
+          content = Center(child: CircularProgressIndicator());
+        }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Padding(
-        padding: paddingAll_8,
-        child: Container(
-          width: double.infinity,
-          child: Column(
-            children: <Widget>[
-              header,
-              Expanded(
-                child: listView,
-              ),
-            ],
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(widget.title),
           ),
-        ),
-      ),
+          body: Padding(
+            padding: paddingAll_8,
+            child: Container(
+              child: Column(
+                children: <Widget>[
+                  header,
+                  Expanded(
+                    child: content,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
