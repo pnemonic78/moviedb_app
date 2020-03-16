@@ -22,50 +22,38 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
   TMDBApi _api;
   MovieDetails _movie;
 
-  @override
-  void didUpdateWidget(MovieDetailsHomePage oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if ((_movie == null) || (oldWidget.movie.id != widget.movie.id)) {
-      _fetchMovie();
-    }
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (_movie == null) {
-      _fetchMovie();
-    }
-  }
-
-  Future<void> _fetchMovie() async {
-    _fetchMovieDetails(widget.movie).then((value) {
-      _movie = value;
-      setState(() {
-        _updateUI();
-      });
-    });
+  Future<MovieDetails> _fetchMovie() async {
+    return _fetchMovieDetails(widget.movie);
   }
 
   Future<MovieDetails> _fetchMovieDetails(Movie movie) async {
     if (_api == null) _api = TMDBApi();
-    return await _api.getMovieDetails(context, movie);
+    _movie = await _api.getMovieDetails(context, movie);
+    return _movie;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Padding(
-        padding: paddingAll_8,
-        child: (_movie != null)
-            ? MovieDetailsWidget(movie: _movie)
-            : Center(child: CircularProgressIndicator()),
-      ),
+    return FutureBuilder<MovieDetails>(
+      future: _fetchMovie(),
+      builder: (BuildContext context, AsyncSnapshot<MovieDetails> snapshot) {
+        Widget child;
+        if (snapshot.connectionState == ConnectionState.done) {
+          child = MovieDetailsWidget(movie: snapshot.data);
+        } else {
+          child = Center(child: CircularProgressIndicator());
+        }
+
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(widget.title),
+          ),
+          body: Padding(
+            padding: paddingAll_8,
+            child: child,
+          ),
+        );
+      },
     );
   }
-
-  void _updateUI() {}
 }
