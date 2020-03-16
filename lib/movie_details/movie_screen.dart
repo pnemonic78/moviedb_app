@@ -115,7 +115,7 @@ class MovieDetailsWidget extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
     );
 
-    final hasGenres = movie.genres.isNotEmpty;
+    final hasGenres = (movie.genres != null) && movie.genres.isNotEmpty;
 
     final genresMargin = hasGenres ? SizedBox(height: padding_8) : gone;
 

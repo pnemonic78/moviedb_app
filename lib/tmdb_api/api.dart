@@ -4,6 +4,7 @@ import 'package:tmdb/tmdb_api/movie_details.dart';
 
 import 'movie.dart';
 import 'movies.dart';
+import 'now_playing_response.dart';
 
 class TMDBApi {
   static const image_url = "https://image.tmdb.org/t/p/%s%s";
@@ -79,8 +80,8 @@ class TMDBApi {
     return result;
   }
 
-  Future<List<Movie>> getMovies(BuildContext context) async {
-    return Movies.getMovies(context);
+  Future<MoviesNowPlayingResponse> getNowPlaying(BuildContext context) async {
+    return Movies.getNowPlaying(context);
   }
 
   Future<MovieDetails> getMovieDetails(

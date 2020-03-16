@@ -11,13 +11,13 @@ class Movies {
 
   static Future<List<Movie>> getMovies(BuildContext context) async {
     if (_movies.isEmpty) {
-      final response = await fetchNowPlaying(context);
+      final response = await getNowPlaying(context);
       _movies.addAll(response.results);
     }
     return _movies;
   }
 
-  static Future<MoviesNowPlayingResponse> fetchNowPlaying(
+  static Future<MoviesNowPlayingResponse> getNowPlaying(
       BuildContext context) async {
     final text = DefaultAssetBundle.of(context)
         .loadString('assets/raw/200/now_playing.json');

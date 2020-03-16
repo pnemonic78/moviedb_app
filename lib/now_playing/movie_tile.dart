@@ -56,7 +56,7 @@ class MovieTile extends StatelessWidget {
       child: InkWell(
         onTap: onTap == null ? null : () => onTap(movie),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: paddingAll_8,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[

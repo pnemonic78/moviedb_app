@@ -17,7 +17,7 @@ class Genre {
     return (genres != null) ? genres.map((g) => g.id).toList() : null;
   }
 
-  factory Genre.toJson(Map<String, dynamic> json) {
+  factory Genre.fromJson(Map<String, dynamic> json) {
     return Genre(id: json['id'], name: json['name']);
   }
 }
@@ -35,7 +35,7 @@ class ProductionCompany {
     return name;
   }
 
-  factory ProductionCompany.toJson(Map<String, dynamic> json) {
+  factory ProductionCompany.fromJson(Map<String, dynamic> json) {
     return ProductionCompany(
         id: json['id'],
         name: json['name'],
@@ -55,7 +55,7 @@ class ProductionCountry {
     return name;
   }
 
-  factory ProductionCountry.toJson(Map<String, dynamic> json) {
+  factory ProductionCountry.fromJson(Map<String, dynamic> json) {
     return ProductionCountry(id: json['iso_3166_1'], name: json['name']);
   }
 }
@@ -71,7 +71,7 @@ class SpokenLanguage {
     return name;
   }
 
-  factory SpokenLanguage.toJson(Map<String, dynamic> json) {
+  factory SpokenLanguage.fromJson(Map<String, dynamic> json) {
     return SpokenLanguage(id: json['iso_639_1'], name: json['name']);
   }
 }
@@ -181,19 +181,19 @@ class MovieDetails extends Movie {
   /// Creates a [MovieDetails] from a JSON object.
   factory MovieDetails.fromJson(Map<String, dynamic> json) {
     var list = json['genres'] as List;
-    List<Genre> genres = list.map((j) => Genre.toJson(j)).toList();
+    List<Genre> genres = list.map((j) => Genre.fromJson(j)).toList();
 
     list = json['production_companies'] as List;
     List<ProductionCompany> productionCompanies =
-        list.map((j) => ProductionCompany.toJson(j)).toList();
+        list.map((j) => ProductionCompany.fromJson(j)).toList();
 
     list = json['production_countries'] as List;
     List<ProductionCountry> productionCountries =
-        list.map((j) => ProductionCountry.toJson(j)).toList();
+        list.map((j) => ProductionCountry.fromJson(j)).toList();
 
     list = json['spoken_languages'] as List;
     List<SpokenLanguage> spokenLanguages =
-        list.map((j) => SpokenLanguage.toJson(j)).toList();
+        list.map((j) => SpokenLanguage.fromJson(j)).toList();
 
     return MovieDetails(
       adult: json['adult'],

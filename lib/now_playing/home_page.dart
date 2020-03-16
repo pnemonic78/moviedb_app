@@ -25,8 +25,8 @@ class _NowPlayingHomePageState extends State<NowPlayingHomePage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    _api.getMovies(context).then((value) {
-      _movies = value;
+    _api.getNowPlaying(context).then((value) {
+      _movies = value.results;
       setState(() {
         if (_movies.length > 0) {
           _currentMovie = _movies[0];
