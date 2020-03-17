@@ -135,4 +135,14 @@ class TMDBApi {
     final url = sprintf(youtube_thumbnail, [videoId]);
     return Image.network(url, width: width, height: height);
   }
+
+  static String getVideoUrl(Video video) {
+    if (video == null) {
+      return null;
+    }
+    if (video.site == "YouTube") {
+      return sprintf(youtube_url, [video.key]);
+    }
+    return null;
+  }
 }

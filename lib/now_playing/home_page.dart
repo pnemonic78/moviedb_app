@@ -9,9 +9,9 @@ import 'package:tmdb/tmdb_api/now_playing_response.dart';
 import 'movie_tile.dart';
 
 class NowPlayingHomePage extends StatefulWidget {
-  NowPlayingHomePage({Key key, this.title}) : super(key: key);
-
   final String title;
+
+  NowPlayingHomePage({Key key, this.title}) : super(key: key);
 
   @override
   _NowPlayingHomePageState createState() => _NowPlayingHomePageState();
