@@ -16,5 +16,5 @@ const posterWidth = posterHeight * 0.665;
 const posterDetailsHeight = 300.0;
 const posterDetailsWidth = posterDetailsHeight * 0.665;
 
-const videoHeight = 75.0;
-const videoWidth = videoHeight * 16 / 9;
+const thumbnailHeight = 75.0;
+const thumbnailWidth = thumbnailHeight * 16 / 9;

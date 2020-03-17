@@ -20,7 +20,7 @@ class MovieDetailsHomePage extends StatefulWidget {
 }
 
 class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
-  TMDBApi _api;
+  TMDBApi _api = TMDBApi();
   MovieDetails _movie;
 
   Future<MovieDetails> _fetchMovie() async {
@@ -28,7 +28,6 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
   }
 
   Future<MovieDetails> _fetchMovieDetails(Movie movie) async {
-    if (_api == null) _api = TMDBApi();
     _movie = await _api.getMovieDetails(context, movie);
     return _movie;
   }

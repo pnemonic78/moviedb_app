@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -19,36 +18,34 @@ class VideoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final imageWidth = videoWidth;
-    final imageHeight = videoHeight;
+    final imageWidth = thumbnailWidth;
+    final imageHeight = thumbnailHeight;
 
-    return FutureBuilder<File>(
-      future: TMDBApi.generateVideoThumbnailFile(
+    return FutureBuilder<Image>(
+      future: TMDBApi.generateVideoThumbnail(
         video,
-        imageWidth.toInt(),
-        imageHeight.toInt(),
+        thumbnailWidth,
+        thumbnailHeight,
       ),
-      builder: (BuildContext context, AsyncSnapshot<File> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<Image> snapshot) {
         Widget content;
+        Function onVideoTap;
+
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
-            final file = snapshot.data;
-            final thumbnail = Image.file(
-              file,
-              width: imageWidth,
-              height: imageHeight,
-            );
+            final thumbnail = snapshot.data;
 
             content = Stack(
               alignment: Alignment.center,
               children: <Widget>[
                 thumbnail,
                 Icon(
-                  Icons.play_arrow,
-                  size: min(imageHeight, imageWidth),
+                  Icons.play_circle_outline,
+                  size: min(imageHeight, imageWidth) / 2,
                 ),
               ],
             );
+            onVideoTap = onTap == null ? null : () => onTap(video);
           } else {
             content = Icon(
               Icons.error_outline,
@@ -76,7 +73,7 @@ class VideoTile extends StatelessWidget {
 
         return Card(
           child: InkWell(
-            onTap: onTap == null ? null : () => onTap(video),
+            onTap: onVideoTap,
             child: Padding(
               padding: paddingAll_8,
               child: Row(

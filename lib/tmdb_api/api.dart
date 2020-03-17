@@ -16,6 +16,7 @@ import 'now_playing_response.dart';
 class TMDBApi {
   static const image_url = "https://image.tmdb.org/t/p/%s%s";
   static const youtube_url = "https://www.youtube.com/watch?v=%s";
+  static const youtube_thumbnail = "https://img.youtube.com/vi/%s/0.jpg";
 
   static const _original = "original";
   static const backdrop_sizes = [
@@ -103,28 +104,35 @@ class TMDBApi {
     return Movies.getMovieVideos(context, movie.id);
   }
 
-  static Future<File> generateVideoThumbnailFile(
-      Video video, int width, int height) async {
+  static Future<Image> generateVideoThumbnail(
+      Video video, double width, double height) async {
     if ((video == null) || (width <= 0) || (height <= 0)) {
       return null;
     }
 
-    var videoUrl;
     if (video.site == "YouTube") {
-      videoUrl = sprintf(youtube_url, [video.key]);
+      return _generateYouTubeThumbnail(video.key, width, height);
     }
 
+    var videoUrl;
     if (videoUrl != null) {
-      await Future.delayed(Duration(seconds: 5));//±!@
+      final temp = await getTemporaryDirectory();
       final path = await VideoThumbnail.thumbnailFile(
         video: videoUrl,
-        thumbnailPath: (await getTemporaryDirectory()).path,
+        thumbnailPath: temp.path,
         imageFormat: ImageFormat.JPEG,
-        maxHeight: height,
+        maxHeight: height.toInt(),
         quality: 75,
       );
-      return File(path);
+      final file = File(path);
+      return Image.file(file, width: width, height: height);
     }
     return null;
+  }
+
+  static Future<Image> _generateYouTubeThumbnail(
+      String videoId, double width, double height) async {
+    final url = sprintf(youtube_thumbnail, [videoId]);
+    return Image.network(url, width: width, height: height);
   }
 }
