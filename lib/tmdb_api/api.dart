@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ import 'movies.dart';
 import 'now_playing_response.dart';
 
 class TMDBApi {
+  static const api_url = "https://api.themoviedb.org/3/";
   static const image_url = "https://image.tmdb.org/t/p/%s%s";
   static const youtube_url = "https://www.youtube.com/watch?v=%s";
   static const youtube_thumbnail = "https://img.youtube.com/vi/%s/0.jpg";
@@ -55,6 +57,11 @@ class TMDBApi {
     "w300",
     _original,
   ];
+
+  /// We use the `dart:io` HttpClient. More details: https://flutter.io/networking/
+  // We specify the type here for readability. Since we're defining a final
+  // field, the type is determined at initialization.
+  final HttpClient _httpClient = HttpClient();
 
   static String generatePosterUrl(String path, double width, double height) {
     if ((path == null) || (width <= 0) || (height <= 0)) {
@@ -144,5 +151,26 @@ class TMDBApi {
       return sprintf(youtube_url, [video.key]);
     }
     return null;
+  }
+
+  /// Fetches and decodes a JSON object represented as a Dart [Map].
+  ///
+  /// Returns null if the API server is down, or the response is not JSON.
+  Future<Map<String, dynamic>> _getJson(Uri uri) async {
+    try {
+      final httpRequest = await _httpClient.getUrl(uri);
+      final httpResponse = await httpRequest.close();
+      if (httpResponse.statusCode != HttpStatus.ok) {
+        return null;
+      }
+      // The response is sent as a Stream of bytes that we need to convert to a
+      // `String`.
+      final responseBody = await httpResponse.transform(utf8.decoder).join();
+      // Finally, the string is parsed into a JSON object.
+      return json.decode(responseBody);
+    } on Exception catch (e) {
+      print(e);
+      return null;
+    }
   }
 }

@@ -56,6 +56,14 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final titleWidget = Text(
+      widget.video.name,
+      maxLines: 4,
+      style: textTheme.headline5,
+      overflow: TextOverflow.ellipsis,
+    );
+
     Widget player;
     if (_youtubeController != null) {
       player = YoutubePlayer(
@@ -81,7 +89,15 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
       ),
       body: Padding(
         padding: paddingAll_8,
-        child: Center(child: player),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            titleWidget,
+            Expanded(
+              child: Center(child: player),
+            ),
+          ],
+        ),
       ),
     );
   }
