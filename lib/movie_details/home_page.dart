@@ -3,6 +3,7 @@ import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movie.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
+import 'package:tmdb/tmdb_api/video.dart';
 
 import 'movie_screen.dart';
 
@@ -38,8 +39,12 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
       future: _fetchMovie(),
       builder: (BuildContext context, AsyncSnapshot<MovieDetails> snapshot) {
         Widget content;
-        if (snapshot.connectionState == ConnectionState.done) {
-          content = MovieDetailsWidget(movie: snapshot.data);
+        if ((snapshot.connectionState == ConnectionState.done) &&
+            snapshot.hasData) {
+          content = MovieDetailsWidget(
+            movie: snapshot.data,
+            onVideoTap: _onVideoTap,
+          );
         } else {
           content = Center(child: CircularProgressIndicator());
         }
@@ -55,5 +60,18 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
         );
       },
     );
+  }
+
+  /// Function to call when a [Video] is tapped.
+  void _onVideoTap(Video video) {
+    //setState(() {
+    _playVideo(video);
+    //});
+  }
+
+  /// Plays the video.
+  void _playVideo(Video video) {
+    //TODO implement me!
+    print('play video: $video');
   }
 }

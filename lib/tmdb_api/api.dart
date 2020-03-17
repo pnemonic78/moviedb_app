@@ -1,6 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
+import 'package:tmdb/tmdb_api/now_playing_response.dart';
+import 'package:tmdb/tmdb_api/video.dart';
+import 'package:tmdb/tmdb_api/videos_response.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 
 import 'movie.dart';
 import 'movies.dart';
@@ -8,6 +15,7 @@ import 'now_playing_response.dart';
 
 class TMDBApi {
   static const image_url = "https://image.tmdb.org/t/p/%s%s";
+  static const youtube_url = "https://www.youtube.com/watch?v=%s";
 
   static const _original = "original";
   static const backdrop_sizes = [
@@ -88,5 +96,35 @@ class TMDBApi {
       BuildContext context, Movie movie) async {
     MovieDetails movieDetails = await Movies.getMovieDetails(context, movie.id);
     return movieDetails ?? MovieDetails.of(movie);
+  }
+
+  Future<VideosResponse> getMovieVideos(
+      BuildContext context, Movie movie) async {
+    return Movies.getMovieVideos(context, movie.id);
+  }
+
+  static Future<File> generateVideoThumbnailFile(
+      Video video, int width, int height) async {
+    if ((video == null) || (width <= 0) || (height <= 0)) {
+      return null;
+    }
+
+    var videoUrl;
+    if (video.site == "YouTube") {
+      videoUrl = sprintf(youtube_url, [video.key]);
+    }
+
+    if (videoUrl != null) {
+      await Future.delayed(Duration(seconds: 5));//±!@
+      final path = await VideoThumbnail.thumbnailFile(
+        video: videoUrl,
+        thumbnailPath: (await getTemporaryDirectory()).path,
+        imageFormat: ImageFormat.JPEG,
+        maxHeight: height,
+        quality: 75,
+      );
+      return File(path);
+    }
+    return null;
   }
 }

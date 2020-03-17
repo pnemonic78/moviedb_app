@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
 import 'package:tmdb/tmdb_api/now_playing_response.dart';
+import 'package:tmdb/tmdb_api/videos_response.dart';
 
 import 'movie.dart';
 
@@ -38,6 +39,21 @@ class Movies {
         throw ('Data retrieved from API is not a Map');
       }
       return MovieDetails.fromJson(json);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  static Future<VideosResponse> getMovieVideos(
+      BuildContext context, int movieId) async {
+    try {
+      final text = DefaultAssetBundle.of(context)
+          .loadString('assets/raw/200/get-movie-videos_$movieId.json');
+      final json = JsonDecoder().convert(await text);
+      if (json is! Map) {
+        throw ('Data retrieved from API is not a Map');
+      }
+      return VideosResponse.fromJson(json);
     } catch (e) {
       return null;
     }

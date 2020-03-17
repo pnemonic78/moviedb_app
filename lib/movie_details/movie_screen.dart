@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:tmdb/movie_details/videos_list.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/strings.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
+import 'package:tmdb/tmdb_api/video.dart';
 
 final _dateFormat = DateFormat.yMMMd();
 final _currencyFormat = NumberFormat.simpleCurrency(name: "USD");
@@ -11,8 +13,9 @@ final _timeFormat = DateFormat.Hm();
 
 class MovieDetailsWidget extends StatelessWidget {
   final MovieDetails movie;
+  final ValueChanged<Video> onVideoTap;
 
-  const MovieDetailsWidget({Key key, @required this.movie})
+  const MovieDetailsWidget({Key key, @required this.movie, this.onVideoTap})
       : assert(movie != null),
         super(key: key);
 
@@ -104,6 +107,8 @@ class MovieDetailsWidget extends StatelessWidget {
 
     final dateWidget = Text(_dateFormat.format(movie.releaseDate));
 
+    final summaryMargin = SizedBox(height: padding_8);
+
     final summaryLabel = Text(
       R.string.summary_label,
       style: labelStyle,
@@ -127,6 +132,8 @@ class MovieDetailsWidget extends StatelessWidget {
         : gone;
 
     final genresWidget = hasGenres ? Text(movie.genres.join(", ")) : gone;
+
+    final videosMargin = SizedBox(height: padding_8);
 
     return SingleChildScrollView(
       child: Column(
@@ -181,9 +188,11 @@ class MovieDetailsWidget extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: padding_8),
+          summaryMargin,
           summaryLabel,
           summaryWidget,
+          videosMargin,
+          VideosList(movie: movie, onTap: onVideoTap),
         ],
       ),
     );

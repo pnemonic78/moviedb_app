@@ -25,7 +25,9 @@ dependencies:
   cupertino_icons: ^0.1.2
 
   intl: ^0.16.1
+  path_provider: ^1.6.5
   sprintf: ^4.0.2
+  video_thumbnail: ^0.2.0
 
 dev_dependencies:
   flutter_test:
@@ -47,6 +49,8 @@ flutter:
   assets:
     - assets/raw/200/details_550.json
     - assets/raw/200/details_454626.json
+    - assets/raw/200/get-movie-videos_550.json
+    - assets/raw/200/get-movie-videos_454626.json
     - assets/raw/200/now_playing.json
     - assets/raw/401/details_550.json
     - assets/raw/401/now_playing.json

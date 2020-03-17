@@ -52,6 +52,8 @@ class MovieTile extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
     );
 
+    final marginTop = SizedBox(height: padding_8);
+
     return Card(
       child: InkWell(
         onTap: onTap == null ? null : () => onTap(movie),
@@ -69,11 +71,11 @@ class MovieTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       titleWidget,
-                      SizedBox(height: padding_8),
+                      marginTop,
                       voteAverageWidget,
-                      SizedBox(height: padding_8),
+                      marginTop,
                       dateWidget,
-                      SizedBox(height: padding_8),
+                      marginTop,
                       summaryWidget,
                     ],
                   ),
