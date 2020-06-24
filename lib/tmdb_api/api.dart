@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sprintf/sprintf.dart';
@@ -140,7 +141,8 @@ class TMDBApi {
   static Future<Image> _generateYouTubeThumbnail(
       String videoId, double width, double height) async {
     final url = sprintf(youtube_thumbnail, [videoId]);
-    return Image.network(url, width: width, height: height);
+    return Image(
+        image: CachedNetworkImageProvider(url), width: width, height: height);
   }
 
   static String getVideoUrl(Video video) {

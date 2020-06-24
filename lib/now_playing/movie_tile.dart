@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tmdb/res/dimens.dart';
@@ -23,8 +24,8 @@ class MovieTile extends StatelessWidget {
     final imageHeight = posterHeight;
     final path =
         TMDBApi.generatePosterUrl(movie.posterPath, imageWidth, imageHeight);
-    final poster = Image.network(
-      path,
+    final poster = Image(
+      image: CachedNetworkImageProvider(path),
       width: imageWidth,
       height: imageHeight,
     );

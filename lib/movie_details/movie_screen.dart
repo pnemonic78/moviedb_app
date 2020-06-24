@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tmdb/movie_details/videos_list.dart';
@@ -25,8 +26,8 @@ class MovieDetailsWidget extends StatelessWidget {
     final imageHeight = posterDetailsHeight;
     final path =
         TMDBApi.generatePosterUrl(movie.posterPath, imageWidth, imageHeight);
-    final poster = Image.network(
-      path,
+    final poster = Image(
+      image: CachedNetworkImageProvider(path),
       width: imageWidth,
       height: imageHeight,
     );
