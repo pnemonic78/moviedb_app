@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movie.dart';
@@ -39,8 +40,12 @@ class MovieTile extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
     );
 
-    final voteAverageWidget =
-        LinearProgressIndicator(value: movie.voteAverage / 10.0);
+    final voteAverageWidget = SmoothStarRating(
+      rating: movie.voteAverage / 2.0,
+      isReadOnly: true,
+      color: Colors.yellow,
+      borderColor: Colors.yellow,
+    );
 
     final dateWidget = Text(
       _dateFormat.format(movie.releaseDate),

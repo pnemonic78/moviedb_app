@@ -142,7 +142,10 @@ class TMDBApi {
       String videoId, double width, double height) async {
     final url = sprintf(youtube_thumbnail, [videoId]);
     return Image(
-        image: CachedNetworkImageProvider(url), width: width, height: height);
+      image: CachedNetworkImageProvider(url),
+      width: width,
+      height: height,
+    );
   }
 
   static String getVideoUrl(Video video) {
