@@ -12,8 +12,8 @@ abstract class RestClient {
 
   @GET("movie/now_playing")
   Future<MoviesNowPlayingResponse> getMoviesNowPlaying(
-      @Query("api_key") String apiKey);
-//  @Query("language") language: String? = Locale.getDefault().language,
-//  @Query("page") page: Int? = 1,
-//  @Query("region") region: String? = null): Observable<>
+      {@Query("api_key") String apiKey,
+      @Query("language") String language = "en",
+      @Query("page") int page = 1,
+      @Query("region") String region});
 }

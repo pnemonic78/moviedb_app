@@ -17,10 +17,15 @@ class _RestClient implements RestClient {
   String baseUrl;
 
   @override
-  getMoviesNowPlaying(apiKey) async {
-    ArgumentError.checkNotNull(apiKey, 'apiKey');
+  getMoviesNowPlaying({apiKey, language = "en", page = 1, region}) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'api_key': apiKey};
+    final queryParameters = <String, dynamic>{
+      r'api_key': apiKey,
+      r'language': language,
+      r'page': page,
+      r'region': region
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final Response<Map<String, dynamic>> _result = await _dio.request(
         'movie/now_playing',

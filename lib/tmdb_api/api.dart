@@ -104,7 +104,7 @@ class TMDBApi {
     //return Movies.getNowPlaying(context);
     final dio = Dio();
     final client = RestClient(dio, baseUrl: api_url);
-    return client.getMoviesNowPlaying(_apiKey);
+    return client.getMoviesNowPlaying(apiKey: _apiKey);
   }
 
   Future<MovieDetails> getMovieDetails(
