@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:tmdb/movie_details/videos_list.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/strings.dart';
@@ -48,12 +49,16 @@ class MovieDetailsWidget extends StatelessWidget {
       style: labelStyle,
     );
 
-    final voteAverageWidget =
-        CircularProgressIndicator(value: movie.voteAverage / 10.0);
+    final voteAverageWidget = SmoothStarRating(
+      rating: movie.voteAverage / 2.0,
+      isReadOnly: true,
+      color: Colors.yellow,
+      borderColor: Colors.yellow,
+    );
 
     final voteAverageValue = Text(
       movie.voteAverage.toString(),
-      style: textTheme.caption,
+      style: textTheme.subtitle1,
     );
 
     final hasRuntime = movie.runtime != null;
@@ -153,19 +158,11 @@ class MovieDetailsWidget extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
+                      voteAverageLabel,
                       Row(
                         children: <Widget>[
-                          Stack(
-                            alignment: Alignment.center,
-                            children: <Widget>[
-                              voteAverageWidget,
-                              voteAverageValue,
-                            ],
-                          ),
-                          SizedBox(
-                            width: padding_8,
-                          ),
-                          voteAverageLabel,
+                          voteAverageWidget,
+                          voteAverageValue,
                         ],
                       ),
                       dateMargin,
