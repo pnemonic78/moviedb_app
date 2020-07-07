@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sprintf/sprintf.dart';
@@ -14,12 +15,14 @@ import 'package:video_thumbnail/video_thumbnail.dart';
 import 'movie.dart';
 import 'movies.dart';
 import 'now_playing_response.dart';
+import 'rest_client.dart';
 
 class TMDBApi {
   static const api_url = "https://api.themoviedb.org/3/";
   static const image_url = "https://image.tmdb.org/t/p/%s%s";
   static const youtube_url = "https://www.youtube.com/watch?v=%s";
   static const youtube_thumbnail = "https://img.youtube.com/vi/%s/0.jpg";
+  static const _apiKey = "";
 
   static const _original = "original";
   static const backdrop_sizes = [
@@ -98,7 +101,10 @@ class TMDBApi {
   }
 
   Future<MoviesNowPlayingResponse> getNowPlaying(BuildContext context) async {
-    return Movies.getNowPlaying(context);
+    //return Movies.getNowPlaying(context);
+    final dio = Dio();
+    final client = RestClient(dio, baseUrl: api_url);
+    return client.getMoviesNowPlaying(_apiKey);
   }
 
   Future<MovieDetails> getMovieDetails(
