@@ -108,9 +108,14 @@ class TMDBApi {
   }
 
   Future<MovieDetails> getMovieDetails(
-      BuildContext context, Movie movie) async {
-    MovieDetails movieDetails = await Movies.getMovieDetails(context, movie.id);
-    return movieDetails ?? MovieDetails.of(movie);
+      BuildContext context, Movie movie, bool cached) async {
+    if (cached) {
+      MovieDetails movieDetails = await Movies.getMovieDetails(context, movie.id);
+      return movieDetails ?? MovieDetails.of(movie);
+    }
+    final dio = Dio();
+    final client = RestClient(dio, baseUrl: api_url);
+    return await client.getMovieDetails(apiKey: _apiKey, moveId: movie.id);
   }
 
   Future<VideosResponse> getMovieVideos(

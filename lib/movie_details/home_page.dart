@@ -25,16 +25,34 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
   MovieDetails _movie;
 
   Future<MovieDetails> _fetchMovie() async {
-    return _fetchMovieDetails(widget.movie);
+    return _movie ?? _fetchMovieDetails(widget.movie);
   }
 
   Future<MovieDetails> _fetchMovieDetails(Movie movie) async {
-    _movie = await _api.getMovieDetails(context, movie);
+    _movie = await _api.getMovieDetails(context, movie, false);
     return _movie;
   }
 
   @override
   Widget build(BuildContext context) {
+    final futureCached = FutureBuilder<MovieDetails>(
+      future: _api.getMovieDetails(context, widget.movie, true),
+      builder: (BuildContext context, AsyncSnapshot<MovieDetails> snapshot) {
+        Widget content;
+        if ((snapshot.connectionState == ConnectionState.done) &&
+            snapshot.hasData) {
+          content = MovieDetailsWidget(
+            movie: snapshot.data,
+            onVideoTap: _onVideoTap,
+          );
+        } else {
+          content = Center(child: CircularProgressIndicator());
+        }
+
+        return content;
+      },
+    );
+
     return FutureBuilder<MovieDetails>(
       future: _fetchMovie(),
       builder: (BuildContext context, AsyncSnapshot<MovieDetails> snapshot) {
@@ -46,7 +64,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
             onVideoTap: _onVideoTap,
           );
         } else {
-          content = Center(child: CircularProgressIndicator());
+          content = futureCached;
         }
 
         return Scaffold(

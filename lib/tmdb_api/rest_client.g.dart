@@ -39,4 +39,27 @@ class _RestClient implements RestClient {
     final value = MoviesNowPlayingResponse.fromJson(_result.data);
     return value;
   }
+
+  @override
+  getMovieDetails({moveId, apiKey, language = "en", append}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'api_key': apiKey,
+      r'language': language,
+      r'append_to_response': append
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    final Response<Map<String, dynamic>> _result = await _dio.request(
+        'movie/$moveId',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = MovieDetails.fromJson(_result.data);
+    return value;
+  }
 }
