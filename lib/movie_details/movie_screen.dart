@@ -76,7 +76,7 @@ class MovieDetailsWidget extends StatelessWidget {
         ? Text(_timeFormat.format(DateTime.utc(0, 1, 1, 0, movie.runtime)))
         : gone;
 
-    final hasBudget = movie.budget != null;
+    final hasBudget = (movie.budget != null) && (movie.budget > 0);
 
     final budgetMargin = hasBudget ? SizedBox(height: padding_8) : gone;
 
@@ -90,7 +90,7 @@ class MovieDetailsWidget extends StatelessWidget {
     final budgetWidget =
         hasBudget ? Text(_currencyFormat.format(movie.budget)) : gone;
 
-    final hasRevenue = movie.revenue != null;
+    final hasRevenue = (movie.revenue != null) && (movie.revenue > 0);
 
     final revenueMargin = hasRevenue ? SizedBox(height: padding_8) : gone;
 
