@@ -62,7 +62,8 @@ class _NowPlayingHomePageState extends State<NowPlayingHomePage> {
       builder: (BuildContext context,
           AsyncSnapshot<MoviesNowPlayingResponse> snapshot) {
         Widget content;
-        if ((snapshot.connectionState == ConnectionState.done) && snapshot.hasData) {
+        if ((snapshot.connectionState == ConnectionState.done) &&
+            snapshot.hasData) {
           content = _buildListWidgets(snapshot.data.results);
         } else {
           content = Center(child: CircularProgressIndicator());
