@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sprintf/sprintf.dart';
+import 'package:tmdb/keys.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
 import 'package:tmdb/tmdb_api/now_playing_response.dart';
 import 'package:tmdb/tmdb_api/video.dart';
@@ -22,7 +23,7 @@ class TMDBApi {
   static const image_url = "https://image.tmdb.org/t/p/%s%s";
   static const youtube_url = "https://www.youtube.com/watch?v=%s";
   static const youtube_thumbnail = "https://img.youtube.com/vi/%s/0.jpg";
-  static const _apiKey = "";
+  static const _apiKey = Keys.apiKey;
 
   static const _original = "original";
   static const backdrop_sizes = [
