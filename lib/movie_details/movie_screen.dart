@@ -57,7 +57,7 @@ class MovieDetailsWidget extends StatelessWidget {
     );
 
     final voteAverageValue = Text(
-      movie.voteAverage.toString(),
+      NumberFormat.decimalPercentPattern(decimalDigits: 0).format(movie.voteAverage / 10),
       style: textTheme.subtitle1,
     );
 
