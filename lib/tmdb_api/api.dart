@@ -102,18 +102,13 @@ class TMDBApi {
   }
 
   Future<MoviesNowPlayingResponse> getNowPlaying(BuildContext context) async {
-    //return Movies.getNowPlaying(context);
     final dio = Dio();
     final client = RestClient(dio, baseUrl: api_url);
     return client.getMoviesNowPlaying(apiKey: _apiKey);
   }
 
   Future<MovieDetails> getMovieDetails(
-      BuildContext context, Movie movie, bool cached) async {
-    if (cached) {
-      MovieDetails movieDetails = await Movies.getMovieDetails(context, movie.id);
-      return movieDetails ?? MovieDetails.of(movie);
-    }
+      BuildContext context, Movie movie) async {
     final dio = Dio();
     final client = RestClient(dio, baseUrl: api_url);
     return await client.getMovieDetails(apiKey: _apiKey, moveId: movie.id);

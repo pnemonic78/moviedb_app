@@ -33,9 +33,9 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
   }
 
   Stream<MovieDetails> _fetchMovieDetails(Movie movie) async* {
-    _movie = await _api.getMovieDetails(context, movie, true);
+    _movie = MovieDetails.of(movie);
     yield _movie;
-    _movie = await _api.getMovieDetails(context, movie, false);
+    _movie = await _api.getMovieDetails(context, movie);
     yield _movie;
   }
 
