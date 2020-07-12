@@ -49,7 +49,9 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
 
   @override
   void dispose() {
+    _controller?.pause();
     _controller?.dispose();
+    _youtubeController?.pause();
     _youtubeController?.dispose();
     super.dispose();
   }
