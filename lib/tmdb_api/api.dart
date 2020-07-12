@@ -116,7 +116,9 @@ class TMDBApi {
 
   Future<VideosResponse> getMovieVideos(
       BuildContext context, Movie movie) async {
-    return Movies.getMovieVideos(context, movie.id);
+    final dio = Dio();
+    final client = RestClient(dio, baseUrl: api_url);
+    return await client.getMovieVideos(apiKey: _apiKey, moveId: movie.id);
   }
 
   static Future<Image> generateVideoThumbnail(

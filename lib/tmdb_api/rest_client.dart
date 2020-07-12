@@ -3,6 +3,7 @@ import 'package:retrofit/retrofit.dart';
 
 import 'movie_details.dart';
 import 'now_playing_response.dart';
+import 'videos_response.dart';
 
 part 'rest_client.g.dart';
 
@@ -14,13 +15,18 @@ abstract class RestClient {
   @GET("movie/now_playing")
   Future<MoviesNowPlayingResponse> getMoviesNowPlaying(
       {@Query("api_key") String apiKey,
-        @Query("language") String language = "en",
-        @Query("page") int page = 1,
-        @Query("region") String region});
+      @Query("language") String language = "en",
+      @Query("page") int page = 1,
+      @Query("region") String region});
 
   @GET("movie/{movie_id}")
-  Future<MovieDetails> getMovieDetails({@Path("movie_id") int moveId,
-    @Query("api_key") String apiKey,
-    @Query("language") String language = "en",
-    @Query("append_to_response") String append});
+  Future<MovieDetails> getMovieDetails(
+      {@Path("movie_id") int moveId,
+      @Query("api_key") String apiKey,
+      @Query("language") String language = "en",
+      @Query("append_to_response") String append});
+
+  @GET("movie/{movie_id}/videos")
+  Future<VideosResponse> getMovieVideos(
+      {@Path("movie_id") int moveId, @Query("api_key") String apiKey});
 }
