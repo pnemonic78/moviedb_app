@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -14,7 +13,6 @@ import 'package:tmdb/tmdb_api/videos_response.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
 import 'movie.dart';
-import 'movies.dart';
 import 'now_playing_response.dart';
 import 'rest_client.dart';
 
@@ -63,11 +61,6 @@ class TMDBApi {
     _original,
   ];
 
-  /// We use the `dart:io` HttpClient. More details: https://flutter.io/networking/
-  // We specify the type here for readability. Since we're defining a final
-  // field, the type is determined at initialization.
-  final HttpClient _httpClient = HttpClient();
-
   static String generatePosterUrl(String path, double width, double height) {
     if ((path == null) || (width <= 0) || (height <= 0)) {
       return null;
@@ -101,24 +94,25 @@ class TMDBApi {
     return result;
   }
 
-  Future<MoviesNowPlayingResponse> getNowPlaying(BuildContext context) async {
+  RestClient _client;
+
+  TMDBApi() {
     final dio = Dio();
-    final client = RestClient(dio, baseUrl: api_url);
-    return client.getMoviesNowPlaying(apiKey: _apiKey);
+    _client = RestClient(dio, baseUrl: api_url);
+  }
+
+  Future<MoviesNowPlayingResponse> getNowPlaying(BuildContext context) async {
+    return _client.getMoviesNowPlaying(apiKey: _apiKey);
   }
 
   Future<MovieDetails> getMovieDetails(
       BuildContext context, Movie movie) async {
-    final dio = Dio();
-    final client = RestClient(dio, baseUrl: api_url);
-    return await client.getMovieDetails(apiKey: _apiKey, moveId: movie.id);
+    return _client.getMovieDetails(apiKey: _apiKey, moveId: movie.id);
   }
 
   Future<VideosResponse> getMovieVideos(
       BuildContext context, Movie movie) async {
-    final dio = Dio();
-    final client = RestClient(dio, baseUrl: api_url);
-    return await client.getMovieVideos(apiKey: _apiKey, moveId: movie.id);
+    return _client.getMovieVideos(apiKey: _apiKey, moveId: movie.id);
   }
 
   static Future<Image> generateVideoThumbnail(
@@ -165,26 +159,5 @@ class TMDBApi {
       return sprintf(youtube_url, [video.key]);
     }
     return null;
-  }
-
-  /// Fetches and decodes a JSON object represented as a Dart [Map].
-  ///
-  /// Returns null if the API server is down, or the response is not JSON.
-  Future<Map<String, dynamic>> _getJson(Uri uri) async {
-    try {
-      final httpRequest = await _httpClient.getUrl(uri);
-      final httpResponse = await httpRequest.close();
-      if (httpResponse.statusCode != HttpStatus.ok) {
-        return null;
-      }
-      // The response is sent as a Stream of bytes that we need to convert to a
-      // `String`.
-      final responseBody = await httpResponse.transform(utf8.decoder).join();
-      // Finally, the string is parsed into a JSON object.
-      return json.decode(responseBody);
-    } on Exception catch (e) {
-      print(e);
-      return null;
-    }
   }
 }
