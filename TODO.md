@@ -1,6 +1,5 @@
 # To Do
 
-* "movie icon" placeholder for poster images
 * flutter_bloc
 * equatable
 * parallax
