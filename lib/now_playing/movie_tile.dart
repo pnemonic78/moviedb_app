@@ -64,7 +64,7 @@ class MovieTile extends StatelessWidget {
 
     final summaryWidget = Text(
       movie.overview,
-      maxLines: 5,
+      maxLines: 3,
       overflow: TextOverflow.ellipsis,
     );
 
@@ -79,22 +79,20 @@ class MovieTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               posterWidget,
+              SizedBox(width: padding_8),
               Expanded(
-                child: Padding(
-                  padding: paddingLeft_8,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      titleWidget,
-                      marginTop,
-                      voteAverageWidget,
-                      marginTop,
-                      dateWidget,
-                      marginTop,
-                      summaryWidget,
-                    ],
-                  ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    titleWidget,
+                    marginTop,
+                    voteAverageWidget,
+                    marginTop,
+                    dateWidget,
+                    marginTop,
+                    summaryWidget,
+                  ],
                 ),
               ),
             ],
