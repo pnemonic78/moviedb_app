@@ -35,7 +35,10 @@ class MovieDetailsWidget extends StatelessWidget {
       height: imageHeight,
     );
     final posterWidget = InkWell(
-      child: poster,
+      child: ClipRRect(
+        borderRadius: borderCircular_8,
+        child: poster,
+      ),
       onTap: () => onPosterTap(movie.posterPath),
     );
 
@@ -63,7 +66,8 @@ class MovieDetailsWidget extends StatelessWidget {
     );
 
     final voteAverageValue = Text(
-      NumberFormat.decimalPercentPattern(decimalDigits: 0).format(movie.voteAverage / 10),
+      NumberFormat.decimalPercentPattern(decimalDigits: 0)
+          .format(movie.voteAverage / 10),
       style: textTheme.subtitle1,
     );
 

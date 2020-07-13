@@ -30,6 +30,10 @@ class MovieTile extends StatelessWidget {
       width: imageWidth,
       height: imageHeight,
     );
+    final posterWidget = ClipRRect(
+      borderRadius: borderCircular_8,
+      child: poster,
+    );
 
     final textTheme = Theme.of(context).textTheme;
 
@@ -68,7 +72,7 @@ class MovieTile extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              poster,
+              posterWidget,
               Expanded(
                 child: Padding(
                   padding: paddingLeft_8,

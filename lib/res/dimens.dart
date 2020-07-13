@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const borderCircular_8 = BorderRadius.all(Radius.circular(8.0));
+
 const padding_8 = 8.0;
 const paddingAll_8 = const EdgeInsets.all(padding_8);
 const paddingLeft_8 = const EdgeInsets.only(left: padding_8);
