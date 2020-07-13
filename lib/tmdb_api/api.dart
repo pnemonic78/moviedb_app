@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
@@ -115,7 +116,7 @@ class TMDBApi {
     return _client.getMovieVideos(apiKey: _apiKey, moveId: movie.id);
   }
 
-  static Future<Image> generateVideoThumbnail(
+  static Future<Widget> generateVideoThumbnail(
       Video video, double width, double height) async {
     if ((video == null) || (width <= 0) || (height <= 0)) {
       return null;
@@ -141,11 +142,15 @@ class TMDBApi {
     return null;
   }
 
-  static Future<Image> _generateYouTubeThumbnail(
+  static Future<Widget> _generateYouTubeThumbnail(
       String videoId, double width, double height) async {
     final url = sprintf(youtube_thumbnail, [videoId]);
-    return Image(
-      image: CachedNetworkImageProvider(url),
+    return CachedNetworkImage(
+      imageUrl: url,
+      placeholder: (context, url) => Icon(
+        Icons.movie,
+        size: min(width, height),
+      ),
       width: width,
       height: height,
     );

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -23,10 +25,14 @@ class MovieTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final imageWidth = posterWidth;
     final imageHeight = posterHeight;
-    final path =
+    final url =
         TMDBApi.generatePosterUrl(movie.posterPath, imageWidth, imageHeight);
-    final poster = Image(
-      image: CachedNetworkImageProvider(path),
+    final poster = CachedNetworkImage(
+      imageUrl: url,
+      placeholder: (context, url) => Icon(
+        Icons.image,
+        size: min(imageWidth, imageHeight),
+      ),
       width: imageWidth,
       height: imageHeight,
     );

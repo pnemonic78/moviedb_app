@@ -21,13 +21,13 @@ class VideoTile extends StatelessWidget {
     final imageWidth = thumbnailWidth;
     final imageHeight = thumbnailHeight;
 
-    return FutureBuilder<Image>(
+    return FutureBuilder<Widget>(
       future: TMDBApi.generateVideoThumbnail(
         video,
         thumbnailWidth,
         thumbnailHeight,
       ),
-      builder: (BuildContext context, AsyncSnapshot<Image> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
         Widget content;
         Function onVideoTap;
 

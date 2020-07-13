@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pinch_zoom_image_updated/pinch_zoom_image_updated.dart';
@@ -20,10 +22,14 @@ class MoviePosterPage extends StatelessWidget {
     final screenHeight = size.height;
     final imageWidth = screenWidth;
     final imageHeight = screenHeight;
-    final path =
+    final url =
         TMDBApi.generatePosterUrl(this.path, double.infinity, double.infinity);
-    final poster = Image(
-      image: CachedNetworkImageProvider(path),
+    final poster = CachedNetworkImage(
+      imageUrl: url,
+      placeholder: (context, url) => Icon(
+        Icons.image,
+        size: min(imageWidth, imageHeight),
+      ),
       width: imageWidth,
       height: imageHeight,
     );
