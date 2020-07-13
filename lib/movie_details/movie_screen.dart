@@ -15,9 +15,11 @@ final _timeFormat = DateFormat.Hm();
 
 class MovieDetailsWidget extends StatelessWidget {
   final MovieDetails movie;
+  final ValueChanged<String> onPosterTap;
   final ValueChanged<Video> onVideoTap;
 
-  const MovieDetailsWidget({Key key, @required this.movie, this.onVideoTap})
+  const MovieDetailsWidget(
+      {Key key, @required this.movie, this.onPosterTap, this.onVideoTap})
       : assert(movie != null),
         super(key: key);
 
@@ -31,6 +33,10 @@ class MovieDetailsWidget extends StatelessWidget {
       image: CachedNetworkImageProvider(path),
       width: imageWidth,
       height: imageHeight,
+    );
+    final posterWidget = InkWell(
+      child: poster,
+      onTap: () => onPosterTap(movie.posterPath),
     );
 
     final textTheme = Theme.of(context).textTheme;
@@ -150,7 +156,7 @@ class MovieDetailsWidget extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              poster,
+              posterWidget,
               Expanded(
                 child: Padding(
                   padding: paddingLeft_16,

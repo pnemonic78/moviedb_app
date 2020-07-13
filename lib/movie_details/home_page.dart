@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tmdb/movie_details/poster_page.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movie.dart';
@@ -47,8 +48,10 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
         Widget content;
         if ((snapshot.connectionState == ConnectionState.done) &&
             snapshot.hasData) {
+          final Movie movie = snapshot.data;
           content = MovieDetailsWidget(
-            movie: snapshot.data,
+            movie: movie,
+            onPosterTap: _onPosterTap,
             onVideoTap: _onVideoTap,
           );
         } else {
@@ -66,6 +69,25 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
         );
       },
     );
+  }
+
+  /// Function to call when a poster [Image] is tapped.
+  void _onPosterTap(String posterPath) {
+    setState(() {
+      _navigateToPoster(posterPath);
+    });
+  }
+
+  /// Navigates to the movie poster.
+  void _navigateToPoster(String posterPath) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MoviePosterPage(
+                  title: widget.title,
+                  name: widget.movie.title,
+                  path: posterPath,
+                )));
   }
 
   /// Function to call when a [Video] is tapped.
