@@ -24,11 +24,14 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
 
+  # Images
+  cached_network_image: 2.2.0+1
+  pinch_zoom_image_updated: 0.2.6
+
   # Logging
   logger: 0.9.1
 
   # Network
-  cached_network_image: 2.2.0+1
   retrofit: 1.3.4
 
   # Texts

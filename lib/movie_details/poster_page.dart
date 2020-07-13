@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:pinch_zoom_image_updated/pinch_zoom_image_updated.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 
@@ -26,6 +27,9 @@ class MoviePosterPage extends StatelessWidget {
       width: imageWidth,
       height: imageHeight,
     );
+    final posterWidget = PinchZoomImage(
+      image: poster,
+    );
 
     final textTheme = Theme.of(context).textTheme;
 
@@ -46,9 +50,7 @@ class MoviePosterPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             titleWidget,
-            Expanded(
-              child: Center(child: poster),
-            ),
+            Expanded(child: posterWidget),
           ],
         ),
       ),
