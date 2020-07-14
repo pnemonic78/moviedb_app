@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tmdb/movie_details/home_page.dart';
 import 'package:tmdb/res/dimens.dart';
-import 'package:tmdb/res/strings.dart';
+import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movie.dart';
 import 'package:tmdb/tmdb_api/now_playing_response.dart';
@@ -9,9 +9,7 @@ import 'package:tmdb/tmdb_api/now_playing_response.dart';
 import 'movie_tile.dart';
 
 class NowPlayingHomePage extends StatefulWidget {
-  final String title;
-
-  NowPlayingHomePage({Key key, this.title}) : super(key: key);
+  NowPlayingHomePage({Key key}) : super(key: key);
 
   @override
   _NowPlayingHomePageState createState() => _NowPlayingHomePageState();
@@ -39,11 +37,13 @@ class _NowPlayingHomePageState extends State<NowPlayingHomePage> {
 
   /// Navigates to the movie details.
   void _navigateToDetails(Movie movie) {
+    final string = AppLocalizations.of(context);
+
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => MovieDetailsHomePage(
-                  title: widget.title,
+                  title: string.now_playing,
                   movie: movie,
                 )));
   }
@@ -51,9 +51,10 @@ class _NowPlayingHomePageState extends State<NowPlayingHomePage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final string = AppLocalizations.of(context);
 
     final header = Text(
-      R.string.now_playing,
+      string.now_playing,
       style: theme.textTheme.headline6,
     );
 
@@ -71,7 +72,7 @@ class _NowPlayingHomePageState extends State<NowPlayingHomePage> {
 
         return Scaffold(
           appBar: AppBar(
-            title: Text(widget.title),
+            title: Text(string.title),
           ),
           body: Padding(
             padding: paddingAll_8,

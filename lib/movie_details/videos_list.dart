@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tmdb/res/strings.dart';
+import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
 import 'package:tmdb/tmdb_api/video.dart';
@@ -46,9 +46,10 @@ class VideosList extends StatelessWidget {
   List<Widget> _buildVideoList(BuildContext context, List<Video> videos) {
     final textTheme = Theme.of(context).textTheme;
     final labelStyle = textTheme.subtitle1;
+    final string = AppLocalizations.of(context);
 
     final videosLabel = Text(
-      R.string.videos_label,
+      string.videos_label,
       style: labelStyle,
     );
 

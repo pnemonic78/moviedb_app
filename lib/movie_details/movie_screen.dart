@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:tmdb/movie_details/videos_list.dart';
 import 'package:tmdb/res/dimens.dart';
-import 'package:tmdb/res/strings.dart';
+import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
 import 'package:tmdb/tmdb_api/video.dart';
@@ -51,6 +51,7 @@ class MovieDetailsWidget extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final labelStyle = textTheme.subtitle1;
     final gone = Container();
+    final string = AppLocalizations.of(context);
 
     final titleWidget = Text(
       movie.title,
@@ -60,7 +61,7 @@ class MovieDetailsWidget extends StatelessWidget {
     );
 
     final voteAverageLabel = Text(
-      R.string.vote_average_label,
+      string.vote_average_label,
       style: labelStyle,
     );
 
@@ -83,7 +84,7 @@ class MovieDetailsWidget extends StatelessWidget {
 
     final runtimeLabel = hasRuntime
         ? Text(
-            R.string.runtime_label,
+            string.runtime_label,
             style: labelStyle,
           )
         : gone;
@@ -98,7 +99,7 @@ class MovieDetailsWidget extends StatelessWidget {
 
     final budgetLabel = hasBudget
         ? Text(
-            R.string.budget_label,
+            string.budget_label,
             style: labelStyle,
           )
         : gone;
@@ -112,7 +113,7 @@ class MovieDetailsWidget extends StatelessWidget {
 
     final revenueLabel = hasRevenue
         ? Text(
-            R.string.revenue_label,
+            string.revenue_label,
             style: labelStyle,
           )
         : gone;
@@ -123,7 +124,7 @@ class MovieDetailsWidget extends StatelessWidget {
     final dateMargin = SizedBox(height: padding_8);
 
     final dateLabel = Text(
-      R.string.release_date_label,
+      string.release_date_label,
       style: labelStyle,
     );
 
@@ -132,7 +133,7 @@ class MovieDetailsWidget extends StatelessWidget {
     final summaryMargin = SizedBox(height: padding_8);
 
     final summaryLabel = Text(
-      R.string.summary_label,
+      string.summary_label,
       style: labelStyle,
     );
 
@@ -148,7 +149,7 @@ class MovieDetailsWidget extends StatelessWidget {
 
     final genresLabel = hasGenres
         ? Text(
-            R.string.genres_label,
+            string.genres_label,
             style: labelStyle,
           )
         : gone;

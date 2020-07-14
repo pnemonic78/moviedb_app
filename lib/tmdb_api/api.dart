@@ -103,17 +103,29 @@ class TMDBApi {
   }
 
   Future<MoviesNowPlayingResponse> getNowPlaying(BuildContext context) async {
-    return _client.getMoviesNowPlaying(apiKey: _apiKey);
+    final Locale locale = Localizations.localeOf(context);
+    return _client.getMoviesNowPlaying(
+      apiKey: _apiKey,
+      language: locale.languageCode,
+    );
   }
 
   Future<MovieDetails> getMovieDetails(
       BuildContext context, Movie movie) async {
-    return _client.getMovieDetails(apiKey: _apiKey, moveId: movie.id);
+    final Locale locale = Localizations.localeOf(context);
+    return _client.getMovieDetails(
+      apiKey: _apiKey,
+      moveId: movie.id,
+      language: locale.languageCode,
+    );
   }
 
   Future<VideosResponse> getMovieVideos(
       BuildContext context, Movie movie) async {
-    return _client.getMovieVideos(apiKey: _apiKey, moveId: movie.id);
+    return _client.getMovieVideos(
+      apiKey: _apiKey,
+      moveId: movie.id,
+    );
   }
 
   static Future<Widget> generateVideoThumbnail(
