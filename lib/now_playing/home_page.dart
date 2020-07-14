@@ -18,8 +18,18 @@ class NowPlayingHomePage extends StatefulWidget {
 class _NowPlayingHomePageState extends State<NowPlayingHomePage> {
   final _api = TMDBApi();
 
+  //TODO can add listener to controller to load next page
+  ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+  }
+
   Widget _buildListWidgets(List<Movie> movies) {
     return ListView.builder(
+      controller: _scrollController,
       itemBuilder: (BuildContext context, int index) => MovieTile(
         movie: movies[index],
         onTap: _onMovieTap,
