@@ -80,23 +80,25 @@ class _NowPlayingHomePageState extends State<NowPlayingHomePage> {
           content = Center(child: CircularProgressIndicator());
         }
 
+        final body = Padding(
+          padding: paddingAll_8,
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                header,
+                Expanded(
+                  child: content,
+                ),
+              ],
+            ),
+          ),
+        );
+
         return Scaffold(
           appBar: AppBar(
             title: Text(string.title),
           ),
-          body: Padding(
-            padding: paddingAll_8,
-            child: Container(
-              child: Column(
-                children: <Widget>[
-                  header,
-                  Expanded(
-                    child: content,
-                  ),
-                ],
-              ),
-            ),
-          ),
+          body: body,
         );
       },
     );

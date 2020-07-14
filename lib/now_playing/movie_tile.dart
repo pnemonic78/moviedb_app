@@ -27,7 +27,7 @@ class MovieTile extends StatelessWidget {
     final imageHeight = posterHeight;
     final url =
         TMDBApi.generatePosterUrl(movie.posterPath, imageWidth, imageHeight);
-    final poster = CachedNetworkImage(
+    final posterImage = CachedNetworkImage(
       imageUrl: url,
       placeholder: (context, url) => Icon(
         Icons.image,
@@ -36,9 +36,9 @@ class MovieTile extends StatelessWidget {
       width: imageWidth,
       height: imageHeight,
     );
-    final posterWidget = ClipRRect(
+    final poster = ClipRRect(
       borderRadius: borderCircular_8,
-      child: poster,
+      child: posterImage,
     );
 
     final textTheme = Theme.of(context).textTheme;
@@ -70,7 +70,7 @@ class MovieTile extends StatelessWidget {
 
     final marginTop = SizedBox(height: padding_8);
 
-    return Card(
+    final card = Card(
       child: InkWell(
         onTap: onTap == null ? null : () => onTap(movie),
         child: Padding(
@@ -78,7 +78,7 @@ class MovieTile extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              posterWidget,
+              poster,
               SizedBox(width: padding_8),
               Expanded(
                 child: Column(
@@ -100,5 +100,7 @@ class MovieTile extends StatelessWidget {
         ),
       ),
     );
+
+    return card;
   }
 }
