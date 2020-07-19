@@ -27,16 +27,39 @@ class MovieDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery
+        .of(context)
+        .size;
+    final screenWidth = screenSize.width;
+    final screenHeight = screenSize.height;
+
+    final backdropWidth = screenWidth;
+    final backdropHeight = backdropWidth * 9 / 16;
+    final backdropUrl = TMDBApi.generatePosterUrl(
+        movie.backdropPath, backdropWidth, backdropHeight);
+    final backdrop = CachedNetworkImage(
+      imageUrl: backdropUrl,
+      placeholder: (context, url) =>
+          Icon(
+            Icons.image,
+            size: min(backdropWidth, backdropHeight),
+          ),
+      width: backdropWidth,
+      height: backdropHeight,
+    );
+    final backdropWidget = backdrop;
+
     final imageWidth = posterDetailsWidth;
     final imageHeight = posterDetailsHeight;
-    final url =
-        TMDBApi.generatePosterUrl(movie.posterPath, imageWidth, imageHeight);
+    final posterUrl =
+    TMDBApi.generatePosterUrl(movie.posterPath, imageWidth, imageHeight);
     final poster = CachedNetworkImage(
-      imageUrl: url,
-      placeholder: (context, url) => Icon(
-        Icons.image,
-        size: min(imageWidth, imageHeight),
-      ),
+      imageUrl: posterUrl,
+      placeholder: (context, url) =>
+          Icon(
+            Icons.image,
+            size: min(imageWidth, imageHeight),
+          ),
       width: imageWidth,
       height: imageHeight,
     );
@@ -48,7 +71,9 @@ class MovieDetailsWidget extends StatelessWidget {
       onTap: () => onPosterTap(movie.posterPath),
     );
 
-    final textTheme = Theme.of(context).textTheme;
+    final textTheme = Theme
+        .of(context)
+        .textTheme;
     final labelStyle = textTheme.subtitle1;
     final gone = Container();
     final string = AppLocalizations.of(context);
@@ -56,7 +81,7 @@ class MovieDetailsWidget extends StatelessWidget {
     final titleWidget = Text(
       movie.title,
       maxLines: 2,
-      style: textTheme.headline5,
+      style: textTheme.headline4,
       overflow: TextOverflow.ellipsis,
     );
 
@@ -91,9 +116,9 @@ class MovieDetailsWidget extends StatelessWidget {
 
     final runtimeLabel = hasRuntime
         ? Text(
-            string.runtime_label,
-            style: labelStyle,
-          )
+      string.runtime_label,
+      style: labelStyle,
+    )
         : gone;
 
     final runtimeWidget = hasRuntime
@@ -106,13 +131,13 @@ class MovieDetailsWidget extends StatelessWidget {
 
     final budgetLabel = hasBudget
         ? Text(
-            string.budget_label,
-            style: labelStyle,
-          )
+      string.budget_label,
+      style: labelStyle,
+    )
         : gone;
 
     final budgetWidget =
-        hasBudget ? Text(_currencyFormat.format(movie.budget)) : gone;
+    hasBudget ? Text(_currencyFormat.format(movie.budget)) : gone;
 
     final hasRevenue = (movie.revenue != null) && (movie.revenue > 0);
 
@@ -120,13 +145,13 @@ class MovieDetailsWidget extends StatelessWidget {
 
     final revenueLabel = hasRevenue
         ? Text(
-            string.revenue_label,
-            style: labelStyle,
-          )
+      string.revenue_label,
+      style: labelStyle,
+    )
         : gone;
 
     final revenueWidget =
-        hasRevenue ? Text(_currencyFormat.format(movie.revenue)) : gone;
+    hasRevenue ? Text(_currencyFormat.format(movie.revenue)) : gone;
 
     final dateMargin = SizedBox(height: padding_8);
 
@@ -156,22 +181,42 @@ class MovieDetailsWidget extends StatelessWidget {
 
     final genresLabel = hasGenres
         ? Text(
-            string.genres_label,
-            style: labelStyle,
-          )
+      string.genres_label,
+      style: labelStyle,
+    )
         : gone;
 
     final genresWidget = hasGenres ? Text(movie.genres.join(", ")) : gone;
 
     final videosMargin = SizedBox(height: padding_8);
 
-    return SingleChildScrollView(
+    final header = Container(
+      child: Stack(
+        alignment: Alignment.bottomLeft,
+        children: [
+          backdropWidget,
+          Container(
+            color: Colors.black45,
+            child: Padding(
+              padding: paddingAll_8,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  titleWidget,
+                  taglineWidget,
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    final details = Padding(
+      padding: paddingAll_8,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          titleWidget,
-          taglineWidget,
-          SizedBox(height: padding_8),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -214,6 +259,16 @@ class MovieDetailsWidget extends StatelessWidget {
           summaryWidget,
           videosMargin,
           VideosList(movie: movie, onTap: onVideoTap),
+        ],
+      ),
+    );
+
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          header,
+          details,
         ],
       ),
     );

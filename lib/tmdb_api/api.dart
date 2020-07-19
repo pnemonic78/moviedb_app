@@ -71,6 +71,15 @@ class TMDBApi {
     return sprintf(image_url, [size, path]);
   }
 
+  static String generateBackdropUrl(String path, double width, double height) {
+    if ((path == null) || (width <= 0) || (height <= 0)) {
+      return null;
+    }
+    final size = findSize(width, height, backdrop_sizes);
+
+    return sprintf(image_url, [size, path]);
+  }
+
   static String findSize(double width, double height, List<String> sizes) {
     String result = _original;
     double minDelta = double.infinity;

@@ -62,10 +62,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
           appBar: AppBar(
             title: Text(widget.title),
           ),
-          body: Padding(
-            padding: paddingAll_8,
-            child: content,
-          ),
+          body: content,
         );
       },
     );
