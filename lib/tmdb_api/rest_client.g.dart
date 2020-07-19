@@ -9,7 +9,7 @@ part of 'rest_client.dart';
 class _RestClient implements RestClient {
   _RestClient(this._dio, {this.baseUrl}) {
     ArgumentError.checkNotNull(_dio, '_dio');
-    this.baseUrl ??= 'https://api.themoviedb.org/3/';
+    this.baseUrl ??= 'https://api.themoviedb.org/3';
   }
 
   final Dio _dio;
@@ -17,7 +17,7 @@ class _RestClient implements RestClient {
   String baseUrl;
 
   @override
-  getMoviesNowPlaying({apiKey, language = "en", page = 1, region}) async {
+  getMoviesNowPlaying({apiKey, language = "en-US", page = 1, region}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'api_key': apiKey,
@@ -28,7 +28,7 @@ class _RestClient implements RestClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final Response<Map<String, dynamic>> _result = await _dio.request(
-        'movie/now_playing',
+        '/movie/now_playing',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'GET',
@@ -41,7 +41,7 @@ class _RestClient implements RestClient {
   }
 
   @override
-  getMovieDetails({moveId, apiKey, language = "en", append}) async {
+  getMovieDetails({moveId, apiKey, language = "en-US", append}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'api_key': apiKey,
@@ -51,7 +51,7 @@ class _RestClient implements RestClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final Response<Map<String, dynamic>> _result = await _dio.request(
-        'movie/$moveId',
+        '/movie/$moveId',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'GET',
@@ -64,13 +64,40 @@ class _RestClient implements RestClient {
   }
 
   @override
-  getMovieVideos({moveId, apiKey}) async {
+  getMovieImages(
+      {moveId, apiKey, language = "en-US", languageInclude = "en"}) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'api_key': apiKey};
+    final queryParameters = <String, dynamic>{
+      r'api_key': apiKey,
+      r'language': language,
+      r'include_image_language': languageInclude
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final Response<Map<String, dynamic>> _result = await _dio.request(
-        'movie/$moveId/videos',
+        '/movie/$moveId/images',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = ImagesResponse.fromJson(_result.data);
+    return value;
+  }
+
+  @override
+  getMovieVideos({moveId, apiKey, language = "en-US"}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'api_key': apiKey,
+      r'language': language
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    final Response<Map<String, dynamic>> _result = await _dio.request(
+        '/movie/$moveId/videos',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'GET',

@@ -129,7 +129,7 @@ class TMDBApi {
   }
 
   static Future<Widget> generateVideoThumbnail(
-      Video video, double width, double height) async {
+      MovieVideo video, double width, double height) async {
     if ((video == null) || (width <= 0) || (height <= 0)) {
       return null;
     }
@@ -168,7 +168,7 @@ class TMDBApi {
     );
   }
 
-  static String getVideoUrl(Video video) {
+  static String getVideoUrl(MovieVideo video) {
     if (video == null) {
       return null;
     }

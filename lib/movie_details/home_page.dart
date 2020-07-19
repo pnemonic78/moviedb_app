@@ -90,15 +90,15 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
                 )));
   }
 
-  /// Function to call when a [Video] is tapped.
-  void _onVideoTap(Video video) {
+  /// Function to call when a [MovieVideo] is tapped.
+  void _onVideoTap(MovieVideo video) {
     setState(() {
       _navigateToVideo(video);
     });
   }
 
   /// Navigates to the movie video.
-  void _navigateToVideo(Video video) {
+  void _navigateToVideo(MovieVideo video) {
     Navigator.push(
         context,
         MaterialPageRoute(

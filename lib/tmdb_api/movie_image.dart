@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class VideoType {
+class MovieImageType {
   final String _value;
 
-  static const trailer = VideoType("Trailer");
-  static const teaser = VideoType("Teaser");
-  static const clip = VideoType("Clip");
-  static const featurette = VideoType("Featurette");
-  static const behindTheScenes = VideoType("Behind the Scenes");
-  static const bloopers = VideoType("Bloopers");
+  static const trailer = MovieImageType("Trailer");
+  static const teaser = MovieImageType("Teaser");
+  static const clip = MovieImageType("Clip");
+  static const featurette = MovieImageType("Featurette");
+  static const behindTheScenes = MovieImageType("Behind the Scenes");
+  static const bloopers = MovieImageType("Bloopers");
 
   static const values = [
     trailer,
@@ -19,28 +19,28 @@ class VideoType {
     bloopers
   ];
 
-  const VideoType(this._value);
+  const MovieImageType(this._value);
 
   @override
   String toString() {
     return _value;
   }
 
-  factory VideoType.fromJson(String json) {
+  factory MovieImageType.fromJson(String json) {
     return values.firstWhere((v) => json == v._value);
   }
 }
 
-class MovieVideo {
+class MovieImage {
   final String id;
   final Locale locale;
   final String key;
   final String name;
   final String site;
   final int size;
-  final VideoType type;
+  final MovieImageType type;
 
-  const MovieVideo(
+  const MovieImage(
       {this.id,
       this.locale,
       this.key,
@@ -55,20 +55,20 @@ class MovieVideo {
     return '{id: $id, name: "$name", type: $type}';
   }
 
-  /// Creates a [MovieVideo] from a JSON object.
-  factory MovieVideo.fromJson(Map<String, dynamic> json) {
+  /// Creates a [MovieImage] from a JSON object.
+  factory MovieImage.fromJson(Map<String, dynamic> json) {
     final String languageCode = json['iso_639_1'] ?? 'und';
-    final String countryCode = json['iso_3166_1'] ?? '';
+    final String countryCode = json['iso_3166_1'];
     final Locale locale = Locale(languageCode, countryCode);
 
-    return MovieVideo(
+    return MovieImage(
       id: json['id'],
       locale: locale,
       key: json['key'],
       name: json['name'],
       site: json['site'],
       size: json['size'],
-      type: VideoType.fromJson(json['type']),
+      type: MovieImageType.fromJson(json['type']),
     );
   }
 }

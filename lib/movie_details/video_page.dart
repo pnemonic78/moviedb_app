@@ -7,7 +7,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoPlayerPage extends StatefulWidget {
   final String title;
-  final Video video;
+  final MovieVideo video;
 
   VideoPlayerPage({Key key, this.title, this.video})
       : assert(video != null),

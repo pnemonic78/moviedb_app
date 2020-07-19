@@ -6,8 +6,8 @@ import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/video.dart';
 
 class VideoTile extends StatelessWidget {
-  final Video video;
-  final ValueChanged<Video> onTap;
+  final MovieVideo video;
+  final ValueChanged<MovieVideo> onTap;
 
   const VideoTile({
     Key key,

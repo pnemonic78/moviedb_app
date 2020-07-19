@@ -9,7 +9,7 @@ import 'video_tile.dart';
 
 class VideosList extends StatelessWidget {
   final MovieDetails movie;
-  final ValueChanged<Video> onTap;
+  final ValueChanged<MovieVideo> onTap;
   final TMDBApi _api = TMDBApi();
 
   VideosList({Key key, @required this.movie, this.onTap})
@@ -43,7 +43,7 @@ class VideosList extends StatelessWidget {
     return _api.getMovieVideos(context, movie);
   }
 
-  List<Widget> _buildVideoList(BuildContext context, List<Video> videos) {
+  List<Widget> _buildVideoList(BuildContext context, List<MovieVideo> videos) {
     final textTheme = Theme.of(context).textTheme;
     final labelStyle = textTheme.subtitle1;
     final string = AppLocalizations.of(context);

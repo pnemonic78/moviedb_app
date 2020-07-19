@@ -18,7 +18,7 @@ final _timeFormat = DateFormat.Hm();
 class MovieDetailsWidget extends StatelessWidget {
   final MovieDetails movie;
   final ValueChanged<String> onPosterTap;
-  final ValueChanged<Video> onVideoTap;
+  final ValueChanged<MovieVideo> onVideoTap;
 
   const MovieDetailsWidget(
       {Key key, @required this.movie, this.onPosterTap, this.onVideoTap})
@@ -57,6 +57,13 @@ class MovieDetailsWidget extends StatelessWidget {
       movie.title,
       maxLines: 2,
       style: textTheme.headline5,
+      overflow: TextOverflow.ellipsis,
+    );
+
+    final taglineWidget = Text(
+      movie.tagline,
+      maxLines: 2,
+      style: textTheme.subtitle1,
       overflow: TextOverflow.ellipsis,
     );
 
@@ -163,6 +170,7 @@ class MovieDetailsWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           titleWidget,
+          taglineWidget,
           SizedBox(height: padding_8),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
