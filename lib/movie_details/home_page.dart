@@ -1,6 +1,8 @@
+import 'dart:math';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:tmdb/movie_details/poster_page.dart';
-import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movie.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
@@ -58,32 +60,71 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
           content = Center(child: CircularProgressIndicator());
         }
 
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(widget.title),
+        final Movie movie = widget.movie;
+
+        final screenSize = MediaQuery.of(context).size;
+        final screenWidth = screenSize.width;
+
+        final backdropWidth = screenWidth;
+        final backdropHeight = backdropWidth * 9 / 16;
+        final backdropUrl = TMDBApi.generatePosterUrl(
+            movie.backdropPath, backdropWidth, backdropHeight);
+        final backdrop = CachedNetworkImage(
+          imageUrl: backdropUrl,
+          placeholder: (context, url) => Icon(
+            Icons.image,
+            size: min(backdropWidth, backdropHeight),
           ),
-          body: content,
+          width: backdropWidth,
+          height: backdropHeight,
+        );
+
+        final textTheme = Theme.of(context).textTheme;
+        final titleWidget = Text(
+          movie.title,
+          maxLines: 2,
+          style: textTheme.headline5,
+          overflow: TextOverflow.ellipsis,
+        );
+
+        final bodySlivers = CustomScrollView(
+          slivers: <Widget>[
+            SliverAppBar(
+              expandedHeight: backdropHeight,
+              pinned: true,
+              flexibleSpace: FlexibleSpaceBar(
+                title: titleWidget,
+                background: backdrop,
+              ),
+            ),
+            SliverFillRemaining(
+              child: content,
+              hasScrollBody: false,
+            ),
+          ],
+        );
+
+        return Scaffold(
+          body: bodySlivers,
         );
       },
     );
   }
 
   /// Function to call when a poster [Image] is tapped.
-  void _onPosterTap(String posterPath) {
+  void _onPosterTap(MovieDetails movie) {
     setState(() {
-      _navigateToPoster(posterPath);
+      _navigateToPoster(movie);
     });
   }
 
   /// Navigates to the movie poster.
-  void _navigateToPoster(String posterPath) {
+  void _navigateToPoster(MovieDetails movie) {
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => MoviePosterPage(
-                  title: widget.title,
-                  name: widget.movie.title,
-                  path: posterPath,
+                  movie: movie,
                 )));
   }
 

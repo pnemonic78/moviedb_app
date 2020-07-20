@@ -5,15 +5,34 @@ import 'package:flutter/material.dart';
 import 'package:pinch_zoom_image_updated/pinch_zoom_image_updated.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
+import 'package:tmdb/tmdb_api/movie_details.dart';
 
 class MoviePosterPage extends StatelessWidget {
-  final String title;
-  final String name;
-  final String path;
+  final MovieDetails movie;
 
-  MoviePosterPage({Key key, this.title, this.name, this.path})
-      : assert(path != null),
+  MoviePosterPage({Key key, this.movie})
+      : assert(movie != null),
         super(key: key);
+
+  // The small poster that should be cached from the details page.
+  Widget _posterSmall(
+    BuildContext context,
+    double imageWidth,
+    double imageHeight,
+  ) {
+    final posterUrl = TMDBApi.generatePosterUrl(
+        movie.posterPath, posterDetailsWidth, posterDetailsHeight);
+    final poster = CachedNetworkImage(
+      imageUrl: posterUrl,
+      placeholder: (context, url) => Icon(
+        Icons.image,
+        size: min(imageWidth, imageHeight),
+      ),
+      width: imageWidth,
+      height: imageHeight,
+    );
+    return poster;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +41,13 @@ class MoviePosterPage extends StatelessWidget {
     final screenHeight = size.height;
     final imageWidth = screenWidth;
     final imageHeight = screenHeight;
-    final url =
-        TMDBApi.generatePosterUrl(this.path, double.infinity, double.infinity);
+    final imagePath = movie.posterPath;
+    final imageUrl =
+        TMDBApi.generatePosterUrl(imagePath, double.infinity, double.infinity);
     final poster = CachedNetworkImage(
-      imageUrl: url,
-      placeholder: (context, url) => Icon(
-        Icons.image,
-        size: min(imageWidth, imageHeight),
-      ),
+      imageUrl: imageUrl,
+      placeholder: (context, url) =>
+          _posterSmall(context, imageWidth, imageHeight),
       width: imageWidth,
       height: imageHeight,
     );
@@ -37,28 +55,13 @@ class MoviePosterPage extends StatelessWidget {
       image: poster,
     );
 
-    final textTheme = Theme.of(context).textTheme;
-
-    final titleWidget = Text(
-      name,
-      maxLines: 2,
-      style: textTheme.headline5,
-      overflow: TextOverflow.ellipsis,
-    );
-
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(movie.title),
       ),
       body: Padding(
         padding: paddingAll_8,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            titleWidget,
-            Expanded(child: posterWidget),
-          ],
-        ),
+        child: posterWidget,
       ),
     );
   }
