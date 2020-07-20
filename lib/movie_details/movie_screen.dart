@@ -27,9 +27,7 @@ class MovieDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery
-        .of(context)
-        .size;
+    final screenSize = MediaQuery.of(context).size;
     final screenWidth = screenSize.width;
     final screenHeight = screenSize.height;
 
@@ -39,11 +37,10 @@ class MovieDetailsWidget extends StatelessWidget {
         movie.backdropPath, backdropWidth, backdropHeight);
     final backdrop = CachedNetworkImage(
       imageUrl: backdropUrl,
-      placeholder: (context, url) =>
-          Icon(
-            Icons.image,
-            size: min(backdropWidth, backdropHeight),
-          ),
+      placeholder: (context, url) => Icon(
+        Icons.image,
+        size: min(backdropWidth, backdropHeight),
+      ),
       width: backdropWidth,
       height: backdropHeight,
     );
@@ -52,14 +49,13 @@ class MovieDetailsWidget extends StatelessWidget {
     final imageWidth = posterDetailsWidth;
     final imageHeight = posterDetailsHeight;
     final posterUrl =
-    TMDBApi.generatePosterUrl(movie.posterPath, imageWidth, imageHeight);
+        TMDBApi.generatePosterUrl(movie.posterPath, imageWidth, imageHeight);
     final poster = CachedNetworkImage(
       imageUrl: posterUrl,
-      placeholder: (context, url) =>
-          Icon(
-            Icons.image,
-            size: min(imageWidth, imageHeight),
-          ),
+      placeholder: (context, url) => Icon(
+        Icons.image,
+        size: min(imageWidth, imageHeight),
+      ),
       width: imageWidth,
       height: imageHeight,
     );
@@ -71,9 +67,7 @@ class MovieDetailsWidget extends StatelessWidget {
       onTap: () => onPosterTap(movie.posterPath),
     );
 
-    final textTheme = Theme
-        .of(context)
-        .textTheme;
+    final textTheme = Theme.of(context).textTheme;
     final labelStyle = textTheme.subtitle1;
     final gone = Container();
     final string = AppLocalizations.of(context);
@@ -116,9 +110,9 @@ class MovieDetailsWidget extends StatelessWidget {
 
     final runtimeLabel = hasRuntime
         ? Text(
-      string.runtime_label,
-      style: labelStyle,
-    )
+            string.runtime_label,
+            style: labelStyle,
+          )
         : gone;
 
     final runtimeWidget = hasRuntime
@@ -131,13 +125,13 @@ class MovieDetailsWidget extends StatelessWidget {
 
     final budgetLabel = hasBudget
         ? Text(
-      string.budget_label,
-      style: labelStyle,
-    )
+            string.budget_label,
+            style: labelStyle,
+          )
         : gone;
 
     final budgetWidget =
-    hasBudget ? Text(_currencyFormat.format(movie.budget)) : gone;
+        hasBudget ? Text(_currencyFormat.format(movie.budget)) : gone;
 
     final hasRevenue = (movie.revenue != null) && (movie.revenue > 0);
 
@@ -145,13 +139,13 @@ class MovieDetailsWidget extends StatelessWidget {
 
     final revenueLabel = hasRevenue
         ? Text(
-      string.revenue_label,
-      style: labelStyle,
-    )
+            string.revenue_label,
+            style: labelStyle,
+          )
         : gone;
 
     final revenueWidget =
-    hasRevenue ? Text(_currencyFormat.format(movie.revenue)) : gone;
+        hasRevenue ? Text(_currencyFormat.format(movie.revenue)) : gone;
 
     final dateMargin = SizedBox(height: padding_8);
 
@@ -181,9 +175,9 @@ class MovieDetailsWidget extends StatelessWidget {
 
     final genresLabel = hasGenres
         ? Text(
-      string.genres_label,
-      style: labelStyle,
-    )
+            string.genres_label,
+            style: labelStyle,
+          )
         : gone;
 
     final genresWidget = hasGenres ? Text(movie.genres.join(", ")) : gone;
