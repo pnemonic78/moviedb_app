@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tmdb/res/i18n.dart';
+import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
 import 'package:tmdb/tmdb_api/video.dart';
@@ -24,9 +24,13 @@ class VideosList extends StatelessWidget {
         Widget content;
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
-            content = Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: _buildVideoList(context, snapshot.data.results));
+            content = Container(
+              height: thumbnailHeight + 55,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: _buildVideoList(context, snapshot.data.results),
+              ),
+            );
           } else {
             content = Container();
           }
@@ -44,17 +48,7 @@ class VideosList extends StatelessWidget {
   }
 
   List<Widget> _buildVideoList(BuildContext context, List<MovieVideo> videos) {
-    final textTheme = Theme.of(context).textTheme;
-    final labelStyle = textTheme.subtitle1;
-    final string = AppLocalizations.of(context);
-
-    final videosLabel = Text(
-      string.videos_label,
-      style: labelStyle,
-    );
-
     final list = <Widget>[];
-    list.add(videosLabel);
 
     for (var video in videos) {
       list.add(VideoTile(

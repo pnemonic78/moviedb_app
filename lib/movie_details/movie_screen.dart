@@ -156,7 +156,14 @@ class MovieDetailsWidget extends StatelessWidget {
 
     final genresWidget = hasGenres ? Text(movie.genres.join(", ")) : gone;
 
+    final videosLabel = Text(
+      string.videos_label,
+      style: labelStyle,
+    );
+
     final videosMargin = SizedBox(height: padding_8);
+
+    final videosWidget = VideosList(movie: movie, onTap: onVideoTap);
 
     final details = Padding(
       padding: paddingAll_8,
@@ -204,7 +211,8 @@ class MovieDetailsWidget extends StatelessWidget {
           summaryLabel,
           summaryWidget,
           videosMargin,
-          VideosList(movie: movie, onTap: onVideoTap),
+          videosLabel,
+          videosWidget,
         ],
       ),
     );
