@@ -41,7 +41,7 @@ class VideoTile extends StatelessWidget {
                 thumbnail,
                 Icon(
                   Icons.play_circle_outline,
-                  size: min(imageHeight, imageWidth) / 2,
+                  size: min(imageWidth, imageHeight) / 2,
                 ),
               ],
             );
@@ -66,7 +66,7 @@ class VideoTile extends StatelessWidget {
 
         final titleWidget = Text(
           video.name,
-          maxLines: 3,
+          maxLines: 2,
           style: textTheme.caption,
           overflow: TextOverflow.ellipsis,
         );
@@ -76,17 +76,14 @@ class VideoTile extends StatelessWidget {
             onTap: onVideoTap,
             child: Padding(
               padding: paddingAll_8,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  content,
-                  Expanded(
-                    child: Padding(
-                      padding: paddingLeft_8,
-                      child: titleWidget,
-                    ),
-                  ),
-                ],
+              child: Container(
+                width: imageWidth,
+                child: Column(
+                  children: <Widget>[
+                    content,
+                    titleWidget,
+                  ],
+                ),
               ),
             ),
           ),
