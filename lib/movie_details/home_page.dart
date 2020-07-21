@@ -80,6 +80,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
         );
 
         final textTheme = Theme.of(context).textTheme;
+        // Beware fo white text on light backdrop!
         final titleWidget = Text(
           movie.title,
           maxLines: 2,
