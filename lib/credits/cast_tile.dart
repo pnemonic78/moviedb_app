@@ -46,22 +46,18 @@ class CastTile extends StatelessWidget {
 
     final textTheme = Theme.of(context).textTheme;
 
-    final titleWidget = Flexible(
-      child: Text(
-        cast.name,
-        maxLines: 2,
-        style: textTheme.subtitle1,
-        overflow: TextOverflow.ellipsis,
-      ),
+    final titleWidget = Text(
+      cast.name,
+      maxLines: 2,
+      style: textTheme.subtitle1,
+      overflow: TextOverflow.ellipsis,
     );
 
-    final characterWidget = Flexible(
-      child: Text(
-        cast.character,
-        maxLines: 2,
-        style: textTheme.subtitle2,
-        overflow: TextOverflow.ellipsis,
-      ),
+    final characterWidget = Text(
+      cast.character,
+      maxLines: 2,
+      style: textTheme.subtitle2,
+      overflow: TextOverflow.ellipsis,
     );
 
     return Card(
