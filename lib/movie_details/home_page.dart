@@ -2,16 +2,16 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:tmdb/credits/cast_page.dart';
 import 'package:tmdb/movie_details/poster_page.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/cast.dart';
 import 'package:tmdb/tmdb_api/movie.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
 import 'package:tmdb/tmdb_api/video.dart';
+import 'package:tmdb/videos/video_page.dart';
 
-import 'cast_page.dart';
 import 'movie_screen.dart';
-import 'video_page.dart';
 
 class MovieDetailsHomePage extends StatefulWidget {
   final String title;

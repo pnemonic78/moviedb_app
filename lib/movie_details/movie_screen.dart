@@ -4,15 +4,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
-import 'package:tmdb/movie_details/videos_list.dart';
+import 'package:tmdb/credits/cast_list.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/cast.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
 import 'package:tmdb/tmdb_api/video.dart';
-
-import 'cast_list.dart';
+import 'package:tmdb/videos/videos_list.dart';
 
 final _dateFormat = DateFormat.yMMMd();
 final _currencyFormat = NumberFormat.simpleCurrency(name: "USD");
