@@ -1,14 +1,16 @@
+import 'gender.dart';
+
 class Person {
   final int id;
   final String name;
   final String profilePath;
-  final int gender;
+  final Gender gender;
 
   const Person(
     this.id,
     this.name, {
     this.profilePath,
-    this.gender = 0,
+    this.gender = Gender.unknown,
   });
 
   @override

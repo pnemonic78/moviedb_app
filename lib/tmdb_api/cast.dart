@@ -1,5 +1,7 @@
 import 'package:tmdb/tmdb_api/credit.dart';
 
+import 'gender.dart';
+
 class MovieCast extends MovieCredit {
   final int castId;
   final String character;
@@ -13,7 +15,7 @@ class MovieCast extends MovieCredit {
     this.character,
     this.order,
     String profilePath,
-    int gender,
+    Gender gender,
   }) : super(
           id,
           name,
@@ -29,13 +31,15 @@ class MovieCast extends MovieCredit {
 
   /// Creates a [MovieCast] from a JSON object.
   factory MovieCast.fromJson(Map<String, dynamic> json) {
+    final gender = Gender_fromJson(json['gender']);
+
     return MovieCast(
       json['id'],
       json['name'],
       json['credit_id'],
       json['cast_id'],
       profilePath: json['profile_path'],
-      gender: json['gender'],
+      gender: gender,
 
       // cast
       character: json['character'],

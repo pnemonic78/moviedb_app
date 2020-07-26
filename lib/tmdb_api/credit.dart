@@ -1,3 +1,4 @@
+import 'gender.dart';
 import 'person.dart';
 
 abstract class MovieCredit extends Person {
@@ -8,6 +9,6 @@ abstract class MovieCredit extends Person {
     String name,
     this.creditId, {
     String profilePath,
-    int gender,
+    Gender gender,
   }) : super(id, name, profilePath: profilePath, gender: gender);
 }
