@@ -1,15 +1,13 @@
-abstract class MovieCredit {
-  final int id;
+import 'person.dart';
+
+abstract class MovieCredit extends Person {
   final String creditId;
-  final String name;
-  final String profilePath;
-  final int gender;
 
   const MovieCredit(
-      {this.creditId, this.id, this.name, this.profilePath, this.gender});
-
-  @override
-  String toString() {
-    return '{id: $id, name: "$name"}';
-  }
+    int id,
+    String name,
+    this.creditId, {
+    String profilePath,
+    int gender,
+  }) : super(id, name, profilePath: profilePath, gender: gender);
 }

@@ -5,17 +5,17 @@ class MovieCrew extends MovieCredit {
   final String job;
 
   const MovieCrew(
-      {int id,
-      this.department,
-      this.job,
-      String creditId,
-      String name,
-      String profilePath,
-      int gender})
-      : super(
-          id: id,
-          creditId: creditId,
-          name: name,
+    int id,
+    String name,
+    String creditId, {
+    this.department,
+    this.job,
+    String profilePath,
+    int gender,
+  }) : super(
+          id,
+          name,
+          creditId,
           profilePath: profilePath,
           gender: gender,
         );
@@ -29,9 +29,9 @@ class MovieCrew extends MovieCredit {
   factory MovieCrew.fromJson(Map<String, dynamic> json) {
     return MovieCrew(
       // credit
-      id: json['id'],
-      creditId: json['credit_id'],
-      name: json['name'],
+      json['id'],
+      json['name'],
+      json['credit_id'],
       profilePath: json['profile_path'],
       gender: json['gender'],
 

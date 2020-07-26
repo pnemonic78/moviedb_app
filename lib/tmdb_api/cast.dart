@@ -6,18 +6,18 @@ class MovieCast extends MovieCredit {
   final int order;
 
   const MovieCast(
-      {int id,
-      this.castId,
-      this.character,
-      this.order,
-      String creditId,
-      String name,
-      String profilePath,
-      int gender})
-      : super(
-          id: id,
-          creditId: creditId,
-          name: name,
+    int id,
+    String name,
+    String creditId,
+    this.castId, {
+    this.character,
+    this.order,
+    String profilePath,
+    int gender,
+  }) : super(
+          id,
+          name,
+          creditId,
           profilePath: profilePath,
           gender: gender,
         );
@@ -30,15 +30,14 @@ class MovieCast extends MovieCredit {
   /// Creates a [MovieCast] from a JSON object.
   factory MovieCast.fromJson(Map<String, dynamic> json) {
     return MovieCast(
-      // credit
-      id: json['id'],
-      creditId: json['credit_id'],
-      name: json['name'],
+      json['id'],
+      json['name'],
+      json['credit_id'],
+      json['cast_id'],
       profilePath: json['profile_path'],
       gender: json['gender'],
 
       // cast
-      castId: json['cast_id'],
       character: json['character'],
       order: json['order'],
     );
