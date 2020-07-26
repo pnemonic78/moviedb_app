@@ -23,12 +23,17 @@ class MovieTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final media = MediaQuery.of(context);
     final imageWidth = posterWidth;
     final imageHeight = posterHeight;
-    final url =
-        TMDBApi.generatePosterUrl(movie.posterPath, imageWidth, imageHeight);
+    final posterUrl = TMDBApi.generatePosterUrl(
+      movie.posterPath,
+      imageWidth,
+      imageHeight,
+      devicePixelRatio: media.devicePixelRatio,
+    );
     final posterImage = CachedNetworkImage(
-      imageUrl: url,
+      imageUrl: posterUrl,
       placeholder: (context, url) => Icon(
         Icons.image,
         size: min(imageWidth, imageHeight),

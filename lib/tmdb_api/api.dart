@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:tmdb/keys.dart';
-import 'package:tmdb/tmdb_api/cast.dart';
 import 'package:tmdb/tmdb_api/credits_response.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
 import 'package:tmdb/tmdb_api/now_playing_response.dart';
@@ -64,16 +63,22 @@ class TMDBApi {
     _original,
   ];
 
-  static String generatePosterUrl(String path, double width, double height) {
+  static String generatePosterUrl(String path, double width, double height,
+      {double devicePixelRatio = 1.0}) {
     if ((path == null) || (width <= 0) || (height <= 0)) {
       return null;
     }
-    final size = findSize(width, height, poster_sizes);
+    final targetWidth =
+        (width == double.infinity) ? width : width * devicePixelRatio;
+    final targetHeight =
+        (height == double.infinity) ? height : height * devicePixelRatio;
+    final size = findSize(targetWidth, targetHeight, poster_sizes);
 
     return sprintf(image_url, [size, path]);
   }
 
-  static String generateBackdropUrl(String path, double width, double height) {
+  static String generateBackdropUrl(String path, double width, double height,
+      {double devicePixelRatio = 1.0}) {
     if ((path == null) || (width <= 0) || (height <= 0)) {
       return null;
     }
@@ -82,7 +87,9 @@ class TMDBApi {
     return sprintf(image_url, [size, path]);
   }
 
-  static String generateProfileThumbnail(String path, double width, double height) {
+  static String generateProfileThumbnail(
+      String path, double width, double height,
+      {double devicePixelRatio = 1.0}) {
     if ((path == null) || (width <= 0) || (height <= 0)) {
       return null;
     }
@@ -98,15 +105,17 @@ class TMDBApi {
 
     for (var size in sizes) {
       if (size.startsWith("w")) {
-        final posterWidth = double.parse(size.substring(1));
-        delta = (width - posterWidth).abs();
+        final sizeWidth = double.parse(size.substring(1));
+        delta = (width - sizeWidth).abs();
         if (delta < minDelta) {
+          minDelta = delta;
           result = size;
         }
       } else if (size.startsWith("h")) {
-        final posterHeight = double.parse(size.substring(1));
-        delta = (height - posterHeight).abs();
+        final sizeHeight = double.parse(size.substring(1));
+        delta = (height - sizeHeight).abs();
         if (delta < minDelta) {
+          minDelta = delta;
           result = size;
         }
       }

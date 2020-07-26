@@ -20,8 +20,13 @@ class MoviePosterPage extends StatelessWidget {
     double imageWidth,
     double imageHeight,
   ) {
+    final media = MediaQuery.of(context);
     final posterUrl = TMDBApi.generatePosterUrl(
-        movie.posterPath, posterDetailsWidth, posterDetailsHeight);
+      movie.posterPath,
+      posterDetailsWidth,
+      posterDetailsHeight,
+      devicePixelRatio: media.devicePixelRatio,
+    );
     final poster = CachedNetworkImage(
       imageUrl: posterUrl,
       placeholder: (context, url) => Icon(

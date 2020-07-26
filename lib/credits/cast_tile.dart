@@ -21,12 +21,14 @@ class CastTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final onCastTap = onTap == null ? null : () => onTap(cast);
 
+    final media = MediaQuery.of(context);
     final imageWidth = castDetailsWidth;
     final imageHeight = castDetailsHeight;
     final thumbnailUrl = TMDBApi.generateProfileThumbnail(
       cast.profilePath,
       imageWidth,
       imageHeight,
+      devicePixelRatio: media.devicePixelRatio,
     );
     final thumbnail = CachedNetworkImage(
       imageUrl: thumbnailUrl,

@@ -65,13 +65,18 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
 
         final Movie movie = widget.movie;
 
-        final screenSize = MediaQuery.of(context).size;
+        final media = MediaQuery.of(context);
+        final screenSize = media.size;
         final screenWidth = screenSize.width;
 
         final backdropWidth = screenWidth;
         final backdropHeight = backdropWidth * 9 / 16;
-        final backdropUrl = TMDBApi.generatePosterUrl(
-            movie.backdropPath, backdropWidth, backdropHeight);
+        final backdropUrl = TMDBApi.generateBackdropUrl(
+          movie.backdropPath,
+          backdropWidth,
+          backdropHeight,
+          devicePixelRatio: media.devicePixelRatio,
+        );
         final backdrop = CachedNetworkImage(
           imageUrl: backdropUrl,
           placeholder: (context, url) => Icon(
@@ -80,6 +85,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
           ),
           width: backdropWidth,
           height: backdropHeight,
+          fit: BoxFit.fitWidth,
         );
 
         final textTheme = Theme.of(context).textTheme;
@@ -163,8 +169,8 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
         context,
         MaterialPageRoute(
             builder: (context) => CastDetailsPage(
-              title: cast.name,
-              cast: cast,
-            )));
+                  title: cast.name,
+                  cast: cast,
+                )));
   }
 }

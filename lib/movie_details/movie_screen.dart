@@ -23,17 +23,26 @@ class MovieDetailsWidget extends StatelessWidget {
   final ValueChanged<MovieVideo> onVideoTap;
   final ValueChanged<MovieCast> onCastTap;
 
-  const MovieDetailsWidget(
-      {Key key, @required this.movie, this.onPosterTap, this.onVideoTap, this.onCastTap})
-      : assert(movie != null),
+  const MovieDetailsWidget({
+    Key key,
+    @required this.movie,
+    this.onPosterTap,
+    this.onVideoTap,
+    this.onCastTap,
+  })  : assert(movie != null),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final media = MediaQuery.of(context);
     final imageWidth = posterDetailsWidth;
     final imageHeight = posterDetailsHeight;
-    final posterUrl =
-        TMDBApi.generatePosterUrl(movie.posterPath, imageWidth, imageHeight);
+    final posterUrl = TMDBApi.generatePosterUrl(
+      movie.posterPath,
+      imageWidth,
+      imageHeight,
+      devicePixelRatio: media.devicePixelRatio,
+    );
     final poster = CachedNetworkImage(
       imageUrl: posterUrl,
       placeholder: (context, url) => Icon(
