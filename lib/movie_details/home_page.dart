@@ -4,10 +4,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:tmdb/movie_details/poster_page.dart';
 import 'package:tmdb/tmdb_api/api.dart';
+import 'package:tmdb/tmdb_api/cast.dart';
 import 'package:tmdb/tmdb_api/movie.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
 import 'package:tmdb/tmdb_api/video.dart';
 
+import 'cast_page.dart';
 import 'movie_screen.dart';
 import 'video_page.dart';
 
@@ -55,6 +57,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
             movie: movie,
             onPosterTap: _onPosterTap,
             onVideoTap: _onVideoTap,
+            onCastTap: _onCastTap,
           );
         } else {
           content = Center(child: CircularProgressIndicator());
@@ -145,5 +148,23 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
                   title: widget.title,
                   video: video,
                 )));
+  }
+
+  /// Function to call when a [MovieCast] is tapped.
+  void _onCastTap(MovieCast cast) {
+    setState(() {
+      _navigateToCast(cast);
+    });
+  }
+
+  /// Navigates to the movie cast.
+  void _navigateToCast(MovieCast cast) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => CastDetailsPage(
+              title: cast.name,
+              cast: cast,
+            )));
   }
 }

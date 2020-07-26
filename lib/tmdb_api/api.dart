@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:tmdb/keys.dart';
+import 'package:tmdb/tmdb_api/cast.dart';
+import 'package:tmdb/tmdb_api/credits_response.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
 import 'package:tmdb/tmdb_api/now_playing_response.dart';
 import 'package:tmdb/tmdb_api/video.dart';
@@ -80,6 +82,15 @@ class TMDBApi {
     return sprintf(image_url, [size, path]);
   }
 
+  static String generateProfileThumbnail(String path, double width, double height) {
+    if ((path == null) || (width <= 0) || (height <= 0)) {
+      return null;
+    }
+    final size = findSize(width, height, profile_sizes);
+
+    return sprintf(image_url, [size, path]);
+  }
+
   static String findSize(double width, double height, List<String> sizes) {
     String result = _original;
     double minDelta = double.infinity;
@@ -116,6 +127,14 @@ class TMDBApi {
     return _client.getMoviesNowPlaying(
       apiKey: _apiKey,
       language: locale.languageCode,
+    );
+  }
+
+  Future<CreditsResponse> getMovieCredits(
+      BuildContext context, Movie movie) async {
+    return _client.getMovieCredits(
+      apiKey: _apiKey,
+      moveId: movie.id,
     );
   }
 

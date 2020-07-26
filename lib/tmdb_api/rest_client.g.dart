@@ -41,6 +41,25 @@ class _RestClient implements RestClient {
   }
 
   @override
+  getMovieCredits({moveId, apiKey}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'api_key': apiKey};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    final Response<Map<String, dynamic>> _result = await _dio.request(
+        '/movie/$moveId/credits',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = CreditsResponse.fromJson(_result.data);
+    return value;
+  }
+
+  @override
   getMovieDetails({moveId, apiKey, language = "en-US", append}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{

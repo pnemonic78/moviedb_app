@@ -11,10 +11,10 @@ class ImagesResponse {
   factory ImagesResponse.fromJson(Map<String, dynamic> json) {
     var list = json['backdrops'] as List;
     List<MovieImage> backdrops =
-        list.map((j) => MovieImage.fromJson(j)).toList();
+        list.map((i) => MovieImage.fromJson(i)).toList();
 
     list = json['posters'] as List;
-    List<MovieImage> posters = list.map((j) => MovieImage.fromJson(j)).toList();
+    List<MovieImage> posters = list.map((i) => MovieImage.fromJson(i)).toList();
 
     return ImagesResponse(
       id: json['id'],

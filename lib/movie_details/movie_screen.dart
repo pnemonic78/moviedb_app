@@ -8,8 +8,11 @@ import 'package:tmdb/movie_details/videos_list.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
+import 'package:tmdb/tmdb_api/cast.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
 import 'package:tmdb/tmdb_api/video.dart';
+
+import 'cast_list.dart';
 
 final _dateFormat = DateFormat.yMMMd();
 final _currencyFormat = NumberFormat.simpleCurrency(name: "USD");
@@ -19,9 +22,10 @@ class MovieDetailsWidget extends StatelessWidget {
   final MovieDetails movie;
   final ValueChanged<MovieDetails> onPosterTap;
   final ValueChanged<MovieVideo> onVideoTap;
+  final ValueChanged<MovieCast> onCastTap;
 
   const MovieDetailsWidget(
-      {Key key, @required this.movie, this.onPosterTap, this.onVideoTap})
+      {Key key, @required this.movie, this.onPosterTap, this.onVideoTap, this.onCastTap})
       : assert(movie != null),
         super(key: key);
 
@@ -165,6 +169,15 @@ class MovieDetailsWidget extends StatelessWidget {
 
     final videosWidget = VideosList(movie: movie, onTap: onVideoTap);
 
+    final castLabel = Text(
+      string.cast_label,
+      style: labelStyle,
+    );
+
+    final castMargin = SizedBox(height: padding_8);
+
+    final castWidget = CastList(movie: movie, onTap: onCastTap);
+
     final details = Padding(
       padding: paddingAll_8,
       child: Column(
@@ -213,6 +226,9 @@ class MovieDetailsWidget extends StatelessWidget {
           videosMargin,
           videosLabel,
           videosWidget,
+          castMargin,
+          castLabel,
+          castWidget,
         ],
       ),
     );

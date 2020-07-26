@@ -20,7 +20,7 @@ class MoviesNowPlayingResponse {
   /// Creates a [MoviesNowPlayingResponse] from a JSON object.
   factory MoviesNowPlayingResponse.fromJson(Map<String, dynamic> json) {
     final list = json['results'] as List;
-    List<Movie> results = list.map((j) => Movie.fromJson(j)).toList();
+    List<Movie> results = list.map((i) => Movie.fromJson(i)).toList();
 
     return MoviesNowPlayingResponse(
       results: results,

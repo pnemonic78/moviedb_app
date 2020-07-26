@@ -32,6 +32,10 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]['budget_label'];
   }
 
+  String get cast_label {
+    return _localizedValues[locale.languageCode]['cast_label'];
+  }
+
   String get genres_label {
     return _localizedValues[locale.languageCode]['genres_label'];
   }

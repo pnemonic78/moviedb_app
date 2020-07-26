@@ -7,6 +7,7 @@ class R {
 
     // Movie Details
     "budget_label": "Budget",
+    "cast_label": "Credited Cast",
     "genres_label": "Genres",
     "movie_details": "Movie Details",
     "popularity_label": "Popularity",

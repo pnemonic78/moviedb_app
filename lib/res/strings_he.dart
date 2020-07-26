@@ -8,6 +8,7 @@ class R_he {
 
     // Movie Details
     "budget_label": "תקציב",
+    "cast_label": "שחקנים עיקריים",
     "genres_label": "ז\'אנרים",
     "movie_details": "פרטי הסרט",
     "popularity_label": "פופולריות",

@@ -9,7 +9,7 @@ class VideosResponse {
   /// Creates a [VideosResponse] from a JSON object.
   factory VideosResponse.fromJson(Map<String, dynamic> json) {
     var list = json['results'] as List;
-    List<MovieVideo> results = list.map((j) => MovieVideo.fromJson(j)).toList();
+    List<MovieVideo> results = list.map((i) => MovieVideo.fromJson(i)).toList();
 
     return VideosResponse(
       id: json['id'],

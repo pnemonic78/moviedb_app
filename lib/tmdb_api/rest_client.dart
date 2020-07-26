@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:tmdb/tmdb_api/credits_response.dart';
 
 import 'images_response.dart';
 import 'movie_details.dart';
@@ -14,18 +15,26 @@ abstract class RestClient {
   factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
 
   @GET("/movie/now_playing")
-  Future<MoviesNowPlayingResponse> getMoviesNowPlaying(
-      {@Query("api_key") String apiKey,
-      @Query("language") String language = "en-US",
-      @Query("page") int page = 1,
-      @Query("region") String region});
+  Future<MoviesNowPlayingResponse> getMoviesNowPlaying({
+    @Query("api_key") String apiKey,
+    @Query("language") String language = "en-US",
+    @Query("page") int page = 1,
+    @Query("region") String region,
+  });
+
+  @GET("/movie/{movie_id}/credits")
+  Future<CreditsResponse> getMovieCredits({
+    @Path("movie_id") int moveId,
+    @Query("api_key") String apiKey,
+  });
 
   @GET("/movie/{movie_id}")
-  Future<MovieDetails> getMovieDetails(
-      {@Path("movie_id") int moveId,
-      @Query("api_key") String apiKey,
-      @Query("language") String language = "en-US",
-      @Query("append_to_response") String append});
+  Future<MovieDetails> getMovieDetails({
+    @Path("movie_id") int moveId,
+    @Query("api_key") String apiKey,
+    @Query("language") String language = "en-US",
+    @Query("append_to_response") String append,
+  });
 
   @GET("/movie/{movie_id}/images")
   Future<ImagesResponse> getMovieImages({

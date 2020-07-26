@@ -49,7 +49,6 @@ class MovieVideo {
       this.size,
       this.type});
 
-
   @override
   String toString() {
     return '{id: $id, name: "$name", type: $type}';
