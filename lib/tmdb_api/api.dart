@@ -68,11 +68,7 @@ class TMDBApi {
     if ((path == null) || (width <= 0) || (height <= 0)) {
       return null;
     }
-    final targetWidth =
-        (width == double.infinity) ? width : width * devicePixelRatio;
-    final targetHeight =
-        (height == double.infinity) ? height : height * devicePixelRatio;
-    final size = findSize(targetWidth, targetHeight, poster_sizes);
+    final size = findSize(width, height, poster_sizes);
 
     return sprintf(image_url, [size, path]);
   }
@@ -98,7 +94,14 @@ class TMDBApi {
     return sprintf(image_url, [size, path]);
   }
 
-  static String findSize(double width, double height, List<String> sizes) {
+  static String findSize(double width, double height, List<String> sizes,
+      {double devicePixelRatio = 1.0}) {
+    final widthPx =
+        (width.isInfinite || width.isNaN) ? width : (width * devicePixelRatio);
+    final heightPx = (height.isInfinite || height.isNaN)
+        ? height
+        : (height * devicePixelRatio);
+
     String result = _original;
     double minDelta = double.infinity;
     double delta;
@@ -106,14 +109,14 @@ class TMDBApi {
     for (var size in sizes) {
       if (size.startsWith("w")) {
         final sizeWidth = double.parse(size.substring(1));
-        delta = (width - sizeWidth).abs();
+        delta = (widthPx - sizeWidth).abs();
         if (delta < minDelta) {
           minDelta = delta;
           result = size;
         }
       } else if (size.startsWith("h")) {
         final sizeHeight = double.parse(size.substring(1));
-        delta = (height - sizeHeight).abs();
+        delta = (heightPx - sizeHeight).abs();
         if (delta < minDelta) {
           minDelta = delta;
           result = size;

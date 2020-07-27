@@ -51,6 +51,7 @@ class MovieDetailsWidget extends StatelessWidget {
       ),
       width: imageWidth,
       height: imageHeight,
+      fit: BoxFit.fitHeight,
     );
     final posterWidget = InkWell(
       child: ClipRRect(

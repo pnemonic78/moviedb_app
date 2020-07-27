@@ -40,6 +40,7 @@ class MovieTile extends StatelessWidget {
       ),
       width: imageWidth,
       height: imageHeight,
+      fit: BoxFit.fitHeight,
     );
     final poster = ClipRRect(
       borderRadius: borderCircular_8,

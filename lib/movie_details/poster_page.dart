@@ -35,6 +35,7 @@ class MoviePosterPage extends StatelessWidget {
       ),
       width: imageWidth,
       height: imageHeight,
+      fit: BoxFit.contain,
     );
     return poster;
   }
@@ -55,6 +56,7 @@ class MoviePosterPage extends StatelessWidget {
           _posterSmall(context, imageWidth, imageHeight),
       width: imageWidth,
       height: imageHeight,
+      fit: BoxFit.contain,
     );
     final posterWidget = PinchZoomImage(
       image: poster,

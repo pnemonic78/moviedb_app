@@ -38,6 +38,7 @@ class CastTile extends StatelessWidget {
       ),
       width: imageWidth,
       height: imageHeight,
+      fit: BoxFit.fitWidth,
     );
     final thumbnailWidget = ClipRRect(
       borderRadius: borderCircular_8,
