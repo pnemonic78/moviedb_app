@@ -29,7 +29,7 @@ class CastList extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 children: _buildCastList(context, snapshot.data.cast),
               ),
-              height: castDetailsHeight + 100,
+              height: castTileHeight + 100,
             );
           } else {
             content = Container();

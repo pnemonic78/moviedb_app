@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tmdb/res/dimens.dart';
+import 'package:tmdb/credits/cast_screen.dart';
 import 'package:tmdb/tmdb_api/cast.dart';
 
 class CastDetailsPage extends StatefulWidget {
@@ -19,27 +19,11 @@ class _CastDetailsPageState extends State<CastDetailsPage> {
   Widget build(BuildContext context) {
     final cast = widget.cast;
 
-    final textTheme = Theme.of(context).textTheme;
-    final titleWidget = Text(
-      cast.name,
-      maxLines: 4,
-      style: textTheme.headline5,
-      overflow: TextOverflow.ellipsis,
-    );
-
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(cast.name),
       ),
-      body: Padding(
-        padding: paddingAll_8,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            titleWidget,
-          ],
-        ),
-      ),
+      body: CastDetailsWidget(cast: cast),
     );
   }
 }

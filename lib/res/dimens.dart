@@ -30,5 +30,8 @@ const thumbnailWidth = thumbnailHeight * 16 / 9;
 const backdropHeight = 300.0;
 const backdropWidth = backdropHeight * 16 / 9;
 
-const castDetailsHeight = 175.0;
-const castDetailsWidth = castDetailsHeight / 1.25;
+const castTileHeight = 175.0;
+const castTileWidth = castTileHeight / 1.5;
+
+const castDetailsHeight = 300.0;
+const castDetailsWidth = castDetailsHeight / 1.5;

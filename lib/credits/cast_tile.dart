@@ -22,8 +22,8 @@ class CastTile extends StatelessWidget {
     final onCastTap = onTap == null ? null : () => onTap(cast);
 
     final media = MediaQuery.of(context);
-    final imageWidth = castDetailsWidth;
-    final imageHeight = castDetailsHeight;
+    final imageWidth = castTileWidth;
+    final imageHeight = castTileHeight;
     final thumbnailUrl = TMDBApi.generateProfileThumbnail(
       cast.profilePath,
       imageWidth,
@@ -40,8 +40,12 @@ class CastTile extends StatelessWidget {
       height: imageHeight,
       fit: BoxFit.fitWidth,
     );
-    final thumbnailWidget = ClipRRect(
-      borderRadius: borderCircular_8,
+    final thumbnailWidget = ClipPath.shape(
+      // rounded rectangle crop for top side only.
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: Colors.blue),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(8.0)),
+      ),
       child: thumbnail,
     );
 
@@ -65,9 +69,9 @@ class CastTile extends StatelessWidget {
       child: InkWell(
         onTap: onCastTap,
         child: Container(
-//          color: Colors.green,
-          width: imageWidth - 24,
+          width: imageWidth,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               thumbnailWidget,
