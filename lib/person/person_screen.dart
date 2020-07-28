@@ -5,17 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
-import 'package:tmdb/tmdb_api/model/cast.dart';
+import 'package:tmdb/tmdb_api/model/person.dart';
 
 class PersonDetailsWidget extends StatelessWidget {
-  final MovieCast cast;
-  final ValueChanged<MovieCast> onPosterTap;
+  final Person person;
+  final ValueChanged<Person> onPosterTap;
 
   const PersonDetailsWidget({
     Key key,
-    @required this.cast,
+    @required this.person,
     this.onPosterTap,
-  })  : assert(cast != null),
+  })  : assert(person != null),
         super(key: key);
 
   @override
@@ -24,7 +24,7 @@ class PersonDetailsWidget extends StatelessWidget {
     final imageWidth = castDetailsWidth;
     final imageHeight = castDetailsHeight;
     final posterUrl = TMDBApi.generatePosterUrl(
-      cast.profilePath,
+      person.profilePath,
       imageWidth,
       imageHeight,
       devicePixelRatio: media.devicePixelRatio,
@@ -44,7 +44,7 @@ class PersonDetailsWidget extends StatelessWidget {
         borderRadius: borderCircular_8,
         child: poster,
       ),
-      onTap: () => onPosterTap(cast),
+      onTap: () => onPosterTap(person),
     );
 
     final textTheme = Theme.of(context).textTheme;
