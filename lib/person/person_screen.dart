@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
+import 'package:tmdb/tmdb_api/model/gender.dart';
 import 'package:tmdb/tmdb_api/model/person.dart';
 
 class PersonDetailsWidget extends StatelessWidget {
@@ -48,8 +49,9 @@ class PersonDetailsWidget extends StatelessWidget {
     );
 
     final textTheme = Theme.of(context).textTheme;
-    final groupStyle = textTheme.headline6;
-    final labelStyle = textTheme.subtitle1;
+    final groupStyle = textTheme.headline5;
+    final labelStyle = textTheme.headline6;
+    final textStyle = textTheme.bodyText2.apply(fontSizeFactor: 1.25);
     final gone = Container();
     final string = AppLocalizations.of(context);
 
@@ -60,76 +62,85 @@ class PersonDetailsWidget extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
     );
 
-//    final voteAverageLabel = Text(
-//      string.vote_average_label,
-//      style: labelStyle,
-//    );
-//
-//    final voteAverageWidget = SmoothStarRating(
-//      rating: person.voteAverage / 2.0,
-//      isReadOnly: true,
-//      color: Colors.yellow,
-//      borderColor: Colors.yellow,
-//    );
-//
-//    final voteAverageValue = Text(
-//      NumberFormat.decimalPercentPattern(decimalDigits: 0)
-//          .format(person.voteAverage / 10),
-//      style: textTheme.subtitle1,
-//    );
-//
-//    final hasRuntime = person.runtime != null;
-//
-//    final runtimeMargin = hasRuntime ? SizedBox(height: padding_8) : gone;
-//
-//    final runtimeLabel = hasRuntime
-//        ? Text(
-//            string.runtime_label,
-//            style: labelStyle,
-//          )
-//        : gone;
-//
-//    final runtimeWidget = hasRuntime
-//        ? Text(_timeFormat.format(DateTime.utc(0, 1, 1, 0, person.runtime)))
-//        : gone;
-//
-//    final hasBudget = (person.budget != null) && (person.budget > 0);
-//
-//    final budgetMargin = hasBudget ? SizedBox(height: padding_8) : gone;
-//
-//    final budgetLabel = hasBudget
-//        ? Text(
-//            string.budget_label,
-//            style: labelStyle,
-//          )
-//        : gone;
-//
-//    final budgetWidget =
-//        hasBudget ? Text(_currencyFormat.format(person.budget)) : gone;
-//
-//    final hasRevenue = (person.revenue != null) && (person.revenue > 0);
-//
-//    final revenueMargin = hasRevenue ? SizedBox(height: padding_8) : gone;
-//
-//    final revenueLabel = hasRevenue
-//        ? Text(
-//            string.revenue_label,
-//            style: labelStyle,
-//          )
-//        : gone;
-//
-//    final revenueWidget =
-//        hasRevenue ? Text(_currencyFormat.format(person.revenue)) : gone;
-//
-//    final dateMargin = SizedBox(height: padding_8);
-//
-//    final dateLabel = Text(
-//      string.release_date_label,
-//      style: labelStyle,
-//    );
-//
-//    final dateWidget = Text(_dateFormat.format(person.releaseDate));
-//
+    final personalInfoLabel = Text(
+      string.personal_info_label,
+      style: groupStyle,
+    );
+
+    final knownForMargin = SizedBox(height: padding_8);
+
+    final knownForLabel = Text(
+      string.known_for_label,
+      style: labelStyle,
+    );
+
+    final knownForValue = Text(
+      person.knownDepartment,
+      style: textStyle,
+    );
+
+    String gender = "";
+    switch (person.gender) {
+      case Gender.female:
+        gender = string.gender_female;
+        break;
+      case Gender.male:
+        gender = string.gender_male;
+        break;
+      default:
+        break;
+    }
+
+    final hasGender = (gender == null) || gender.isNotEmpty;
+
+    final genderMargin = hasGender ? SizedBox(height: padding_8) : gone;
+
+    final genderLabel =
+        hasGender ? Text(string.gender_label, style: labelStyle) : gone;
+
+    final genderValue = hasGender ? Text(gender, style: textStyle) : gone;
+
+    final hasBirthday = (person.birthday != null);
+
+    final birthdayMargin = hasBirthday ? SizedBox(height: padding_8) : gone;
+
+    final birthdayLabel =
+        hasBirthday ? Text(string.birthday_label, style: labelStyle) : gone;
+
+    final birthdayValue =
+        hasBirthday ? Text(person.birthday, style: textStyle) : gone;
+
+    final hasBirthplace = (person.birthday != null);
+
+    final birthplaceMargin = hasBirthplace ? SizedBox(height: padding_8) : gone;
+
+    final birthplaceLabel = hasBirthplace
+        ? Text(string.place_of_birth_label, style: labelStyle)
+        : gone;
+
+    final birthplaceValue =
+        hasBirthplace ? Text(person.birthplace, style: textStyle) : gone;
+
+    final hasDeathday = (person.deathday != null);
+
+    final deathdayMargin = hasDeathday ? SizedBox(height: padding_8) : gone;
+
+    final deathdayLabel =
+        hasDeathday ? Text(string.deathday_label, style: labelStyle) : gone;
+
+    final deathdayValue =
+        hasDeathday ? Text(person.deathday, style: textStyle) : gone;
+
+    final hasAliases = (person.aliases != null) && person.aliases.isNotEmpty;
+
+    final aliasesMargin = hasDeathday ? SizedBox(height: padding_8) : gone;
+
+    final aliasesLabel =
+        hasAliases ? Text(string.also_known_as_label, style: labelStyle) : gone;
+
+    final aliasesValue =
+        hasAliases ? Text(person.aliases.join(", "), style: textStyle) : gone;
+
     final biographyMargin = SizedBox(height: padding_8);
 
     final biographyLabel = Text(
@@ -141,6 +152,7 @@ class PersonDetailsWidget extends StatelessWidget {
       person.biography ?? "",
       maxLines: 1000,
       overflow: TextOverflow.ellipsis,
+      style: textStyle,
     );
 
     final details = Padding(
@@ -155,36 +167,33 @@ class PersonDetailsWidget extends StatelessWidget {
             children: <Widget>[
               posterWidget,
               SizedBox(width: padding_16),
-//              Expanded(
-//                child: Column(
-//                  mainAxisSize: MainAxisSize.max,
-//                  crossAxisAlignment: CrossAxisAlignment.start,
-//                  children: <Widget>[
-//                    voteAverageLabel,
-//                    Row(
-//                      children: <Widget>[
-//                        voteAverageWidget,
-//                        voteAverageValue,
-//                      ],
-//                    ),
-//                    dateMargin,
-//                    dateLabel,
-//                    dateWidget,
-//                    runtimeMargin,
-//                    runtimeLabel,
-//                    runtimeWidget,
-//                    budgetMargin,
-//                    budgetLabel,
-//                    budgetWidget,
-//                    revenueMargin,
-//                    revenueLabel,
-//                    revenueWidget,
-//                    genresMargin,
-//                    genresLabel,
-//                    genresWidget,
-//                  ],
-//                ),
-//              ),
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    personalInfoLabel,
+                    knownForMargin,
+                    knownForLabel,
+                    knownForValue,
+                    genderMargin,
+                    genderLabel,
+                    genderValue,
+                    birthdayMargin,
+                    birthdayLabel,
+                    birthdayValue,
+                    birthplaceMargin,
+                    birthplaceLabel,
+                    birthplaceValue,
+                    deathdayMargin,
+                    deathdayLabel,
+                    deathdayValue,
+                    aliasesMargin,
+                    aliasesLabel,
+                    aliasesValue,
+                  ],
+                ),
+              ),
             ],
           ),
           biographyMargin,

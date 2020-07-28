@@ -97,12 +97,24 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]["place_of_birth_label"];
   }
 
+  String get deathday_label {
+    return _localizedValues[locale.languageCode]["deathday_label"];
+  }
+
   String get also_known_as_label {
     return _localizedValues[locale.languageCode]["also_known_as_label"];
   }
 
   String get biography_label {
     return _localizedValues[locale.languageCode]["biography_label"];
+  }
+
+  String get gender_female {
+    return _localizedValues[locale.languageCode]["gender_female"];
+  }
+
+  String get gender_male {
+    return _localizedValues[locale.languageCode]["gender_male"];
   }
 }
 

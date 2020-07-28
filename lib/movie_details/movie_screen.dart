@@ -62,7 +62,8 @@ class MovieDetailsWidget extends StatelessWidget {
     );
 
     final textTheme = Theme.of(context).textTheme;
-    final labelStyle = textTheme.subtitle1;
+    final labelStyle = textTheme.headline6;
+    final textStyle = textTheme.bodyText2.apply(fontSizeFactor: 1.25);
     final gone = Container();
     final string = AppLocalizations.of(context);
 
@@ -88,7 +89,7 @@ class MovieDetailsWidget extends StatelessWidget {
     final voteAverageValue = Text(
       NumberFormat.decimalPercentPattern(decimalDigits: 0)
           .format(movie.voteAverage / 10),
-      style: textTheme.subtitle1,
+      style: textStyle,
     );
 
     final hasRuntime = movie.runtime != null;
@@ -103,7 +104,10 @@ class MovieDetailsWidget extends StatelessWidget {
         : gone;
 
     final runtimeWidget = hasRuntime
-        ? Text(_timeFormat.format(DateTime.utc(0, 1, 1, 0, movie.runtime)))
+        ? Text(
+            _timeFormat.format(DateTime.utc(0, 1, 1, 0, movie.runtime)),
+            style: textStyle,
+          )
         : gone;
 
     final hasBudget = (movie.budget != null) && (movie.budget > 0);
@@ -117,8 +121,12 @@ class MovieDetailsWidget extends StatelessWidget {
           )
         : gone;
 
-    final budgetWidget =
-        hasBudget ? Text(_currencyFormat.format(movie.budget)) : gone;
+    final budgetWidget = hasBudget
+        ? Text(
+            _currencyFormat.format(movie.budget),
+            style: textStyle,
+          )
+        : gone;
 
     final hasRevenue = (movie.revenue != null) && (movie.revenue > 0);
 
@@ -131,8 +139,12 @@ class MovieDetailsWidget extends StatelessWidget {
           )
         : gone;
 
-    final revenueWidget =
-        hasRevenue ? Text(_currencyFormat.format(movie.revenue)) : gone;
+    final revenueWidget = hasRevenue
+        ? Text(
+            _currencyFormat.format(movie.revenue),
+            style: textStyle,
+          )
+        : gone;
 
     final dateMargin = SizedBox(height: padding_8);
 
@@ -141,7 +153,10 @@ class MovieDetailsWidget extends StatelessWidget {
       style: labelStyle,
     );
 
-    final dateWidget = Text(_dateFormat.format(movie.releaseDate));
+    final dateWidget = Text(
+      _dateFormat.format(movie.releaseDate),
+      style: textStyle,
+    );
 
     final summaryMargin = SizedBox(height: padding_8);
 
@@ -154,6 +169,7 @@ class MovieDetailsWidget extends StatelessWidget {
       movie.overview,
       maxLines: 100,
       overflow: TextOverflow.ellipsis,
+      style: textStyle,
     );
 
     final hasGenres = (movie.genres != null) && movie.genres.isNotEmpty;
@@ -167,7 +183,12 @@ class MovieDetailsWidget extends StatelessWidget {
           )
         : gone;
 
-    final genresWidget = hasGenres ? Text(movie.genres.join(", ")) : gone;
+    final genresWidget = hasGenres
+        ? Text(
+            movie.genres.join(", "),
+            style: textStyle,
+          )
+        : gone;
 
     final videosLabel = Text(
       string.videos_label,

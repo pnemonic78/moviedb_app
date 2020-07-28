@@ -25,7 +25,10 @@ class R {
     "gender_label": "Gender",
     "birthday_label": "Birthday",
     "place_of_birth_label": "Place of Birth",
+    "deathday_label": "Date of Death",
     "also_known_as_label": "Also Known As",
     "biography_label": "Biography",
+    "gender_female": "Female",
+    "gender_male": "Male",
   };
 }
