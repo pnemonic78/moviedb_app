@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tmdb/credits/cast_screen.dart';
+import 'package:tmdb/person/cast_screen.dart';
 import 'package:tmdb/tmdb_api/model/person.dart';
 
 class CastDetailsPage extends StatefulWidget {

@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:tmdb/credits/cast_page.dart';
 import 'package:tmdb/movie_details/poster_page.dart';
+import 'package:tmdb/person/cast_page.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/cast.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
