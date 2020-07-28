@@ -7,6 +7,7 @@ import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/gender.dart';
 import 'package:tmdb/tmdb_api/model/person.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PersonDetailsWidget extends StatelessWidget {
   final Person person;
@@ -22,8 +23,8 @@ class PersonDetailsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context);
-    final imageWidth = castDetailsWidth;
-    final imageHeight = castDetailsHeight;
+    final imageWidth = personDetailsWidth;
+    final imageHeight = personDetailsHeight;
     final posterUrl = TMDBApi.generatePosterUrl(
       person.profilePath,
       imageWidth,
@@ -133,7 +134,7 @@ class PersonDetailsWidget extends StatelessWidget {
 
     final hasAliases = (person.aliases != null) && person.aliases.isNotEmpty;
 
-    final aliasesMargin = hasDeathday ? SizedBox(height: padding_8) : gone;
+    final aliasesMargin = hasAliases ? SizedBox(height: padding_8) : gone;
 
     final aliasesLabel =
         hasAliases ? Text(string.also_known_as_label, style: labelStyle) : gone;
@@ -155,6 +156,18 @@ class PersonDetailsWidget extends StatelessWidget {
       style: textStyle,
     );
 
+    final hasHomepage = (person.homepage != null);
+
+    final homepageWidget = hasHomepage
+        ? InkWell(
+            child: Icon(
+              Icons.home,
+              size: personIconSize,
+            ),
+            onTap: _gotoHomepage,
+          )
+        : gone;
+
     final details = Padding(
       padding: paddingAll_8,
       child: Column(
@@ -165,11 +178,20 @@ class PersonDetailsWidget extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              posterWidget,
+              Column(
+                children: [
+                  posterWidget,
+                  SizedBox(height: padding_8),
+                  Row(
+                    children: [
+                      homepageWidget,
+                    ],
+                  )
+                ],
+              ),
               SizedBox(width: padding_16),
               Expanded(
                 child: Column(
-                  mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     personalInfoLabel,
@@ -204,5 +226,12 @@ class PersonDetailsWidget extends StatelessWidget {
     );
 
     return details;
+  }
+
+  void _gotoHomepage() async {
+    final url = person.homepage;
+    if (await canLaunch(url)) {
+      await launch(url);
+    }
   }
 }

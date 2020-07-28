@@ -33,5 +33,7 @@ const backdropWidth = backdropHeight * 16 / 9;
 const castTileHeight = 175.0;
 const castTileWidth = castTileHeight / 1.5;
 
-const castDetailsHeight = 300.0;
-const castDetailsWidth = castDetailsHeight / 1.5;
+const personDetailsHeight = 300.0;
+const personDetailsWidth = personDetailsHeight / 1.5;
+
+const personIconSize = personDetailsWidth / 6;
