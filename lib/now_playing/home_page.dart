@@ -3,7 +3,7 @@ import 'package:tmdb/movie_details/home_page.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
-import 'package:tmdb/tmdb_api/movie.dart';
+import 'package:tmdb/tmdb_api/model/movie.dart';
 import 'package:tmdb/tmdb_api/now_playing_response.dart';
 
 import 'movie_tile.dart';

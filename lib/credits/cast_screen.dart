@@ -2,11 +2,10 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
-import 'package:tmdb/tmdb_api/cast.dart';
+import 'package:tmdb/tmdb_api/model/cast.dart';
 
 class CastDetailsWidget extends StatelessWidget {
   final MovieCast cast;

@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
-import 'package:tmdb/tmdb_api/movie.dart';
+import 'package:tmdb/tmdb_api/model/movie.dart';
 
 final _dateFormat = DateFormat.yMMMd();
 

@@ -8,13 +8,13 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:tmdb/keys.dart';
 import 'package:tmdb/tmdb_api/credits_response.dart';
-import 'package:tmdb/tmdb_api/movie_details.dart';
+import 'package:tmdb/tmdb_api/model/movie_details.dart';
 import 'package:tmdb/tmdb_api/now_playing_response.dart';
-import 'package:tmdb/tmdb_api/video.dart';
+import 'package:tmdb/tmdb_api/model/video.dart';
 import 'package:tmdb/tmdb_api/videos_response.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
-import 'movie.dart';
+import 'model/movie.dart';
 import 'now_playing_response.dart';
 import 'rest_client.dart';
 

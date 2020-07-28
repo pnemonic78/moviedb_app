@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
-import 'package:tmdb/tmdb_api/video.dart';
+import 'package:tmdb/tmdb_api/model/video.dart';
 
 class VideoTile extends StatelessWidget {
   final MovieVideo video;

@@ -1,4 +1,4 @@
-import 'video.dart';
+import 'model/video.dart';
 
 class VideosResponse {
   final int id;

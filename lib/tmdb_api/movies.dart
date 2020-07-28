@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:tmdb/tmdb_api/movie_details.dart';
+import 'package:tmdb/tmdb_api/model/movie_details.dart';
 import 'package:tmdb/tmdb_api/now_playing_response.dart';
 import 'package:tmdb/tmdb_api/videos_response.dart';
 
-import 'movie.dart';
+import 'model/movie.dart';
 
 class Movies {
   static final _movies = <Movie>[];

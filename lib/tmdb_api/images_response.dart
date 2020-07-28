@@ -1,4 +1,4 @@
-import 'image.dart';
+import 'model/image.dart';
 
 class ImagesResponse {
   final int id;

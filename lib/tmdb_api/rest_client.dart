@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:tmdb/tmdb_api/credits_response.dart';
-import 'package:tmdb/tmdb_api/person.dart';
+import 'package:tmdb/tmdb_api/model/person.dart';
 
 import 'images_response.dart';
-import 'movie_details.dart';
+import 'model/movie_details.dart';
 import 'now_playing_response.dart';
 import 'videos_response.dart';
 

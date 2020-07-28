@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
-import 'package:tmdb/tmdb_api/movie_details.dart';
-import 'package:tmdb/tmdb_api/video.dart';
+import 'package:tmdb/tmdb_api/model/movie_details.dart';
+import 'package:tmdb/tmdb_api/model/video.dart';
 import 'package:tmdb/tmdb_api/videos_response.dart';
 
 import 'video_tile.dart';

@@ -1,5 +1,5 @@
-import 'cast.dart';
-import 'crew.dart';
+import 'model/cast.dart';
+import 'model/crew.dart';
 
 class CreditsResponse {
   final int id;

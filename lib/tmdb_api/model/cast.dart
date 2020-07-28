@@ -1,4 +1,4 @@
-import 'package:tmdb/tmdb_api/credit.dart';
+import 'package:tmdb/tmdb_api/model/credit.dart';
 
 import 'gender.dart';
 

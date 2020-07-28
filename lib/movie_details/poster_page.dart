@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:pinch_zoom_image_updated/pinch_zoom_image_updated.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
-import 'package:tmdb/tmdb_api/movie_details.dart';
+import 'package:tmdb/tmdb_api/model/movie_details.dart';
 
 class MoviePosterPage extends StatelessWidget {
   final MovieDetails movie;

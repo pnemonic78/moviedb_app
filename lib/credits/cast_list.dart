@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
-import 'package:tmdb/tmdb_api/cast.dart';
 import 'package:tmdb/tmdb_api/credits_response.dart';
-import 'package:tmdb/tmdb_api/movie_details.dart';
+import 'package:tmdb/tmdb_api/model/cast.dart';
+import 'package:tmdb/tmdb_api/model/movie_details.dart';
 
 import 'cast_tile.dart';
 

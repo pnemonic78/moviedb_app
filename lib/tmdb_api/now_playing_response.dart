@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
-import 'dates.dart';
-import 'movie.dart';
+import 'model/dates.dart';
+import 'model/movie.dart';
 
 class MoviesNowPlayingResponse {
   final List<Movie> results;

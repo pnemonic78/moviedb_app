@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
-import 'package:tmdb/tmdb_api/video.dart';
+import 'package:tmdb/tmdb_api/model/video.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
