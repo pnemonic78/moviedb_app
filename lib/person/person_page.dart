@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:tmdb/person/cast_screen.dart';
 import 'package:tmdb/tmdb_api/model/person.dart';
 
-class CastDetailsPage extends StatefulWidget {
+import 'person_screen.dart';
+
+class PersonPage extends StatefulWidget {
   final String title;
   final Person person;
 
-  CastDetailsPage({Key key, this.title, this.person})
+  PersonPage({Key key, this.title, this.person})
       : assert(person != null),
         super(key: key);
 
   @override
-  _CastDetailsPageState createState() => _CastDetailsPageState();
+  _PersonPageState createState() => _PersonPageState();
 }
 
-class _CastDetailsPageState extends State<CastDetailsPage> {
+class _PersonPageState extends State<PersonPage> {
   @override
   Widget build(BuildContext context) {
     final person = widget.person;
@@ -23,7 +24,7 @@ class _CastDetailsPageState extends State<CastDetailsPage> {
       appBar: AppBar(
         title: Text(person.name),
       ),
-      body: CastDetailsWidget(cast: person),
+      body: PersonDetailsWidget(cast: person),
     );
   }
 }

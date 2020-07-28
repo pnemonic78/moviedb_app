@@ -7,11 +7,11 @@ import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/cast.dart';
 
-class CastDetailsWidget extends StatelessWidget {
+class PersonDetailsWidget extends StatelessWidget {
   final MovieCast cast;
   final ValueChanged<MovieCast> onPosterTap;
 
-  const CastDetailsWidget({
+  const PersonDetailsWidget({
     Key key,
     @required this.cast,
     this.onPosterTap,
