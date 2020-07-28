@@ -18,5 +18,15 @@ class R_he {
     "summary_label": "סקירה כללית",
     "videos_label": "סרטונים",
     "vote_average_label":  "ציון משתמש",
+
+    // Person
+    "personal_info_label": "מידע אישי",
+    "known_for_label": "ידוע/ה בשל",
+    "known_credits_label": "קרדיטים ידועים",
+    "gender_label": "מגדר",
+    "birthday_label": "יום הולדת",
+    "place_of_birth_label": "מקום לידה",
+    "also_known_as_label": "ידוע/ה גם בתור",
+    "biography_label": "ביוגרפיה",
   };
 }

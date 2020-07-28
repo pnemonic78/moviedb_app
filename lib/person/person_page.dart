@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tmdb/person/poster_page.dart';
+import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/person.dart';
 
 import 'person_screen.dart';
@@ -17,18 +18,46 @@ class PersonPage extends StatefulWidget {
 }
 
 class _PersonPageState extends State<PersonPage> {
+  final _api = TMDBApi();
+  Person _person;
+
+  Stream<Person> _fetchPerson() async* {
+    if (_person != null) {
+      yield _person;
+      return;
+    }
+    _person = await _api.getPerson(context, widget.person);
+    yield _person;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final person = widget.person;
+    return StreamBuilder<Person>(
+      stream: _fetchPerson(),
+      builder: (BuildContext context, AsyncSnapshot<Person> snapshot) {
+        Widget content;
+        if ((snapshot.connectionState == ConnectionState.done) &&
+            snapshot.hasData) {
+          final Person person = snapshot.data;
+          content = PersonDetailsWidget(
+            person: person,
+            onPosterTap: _onPosterTap,
+          );
+        } else {
+          content = Center(child: CircularProgressIndicator());
+        }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(person.name),
-      ),
-      body: PersonDetailsWidget(
-        person: person,
-        onPosterTap: _onPosterTap,
-      ),
+        final person = widget.person;
+
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(person.name),
+          ),
+          body: SingleChildScrollView(
+            child: content,
+          ),
+        );
+      },
     );
   }
 

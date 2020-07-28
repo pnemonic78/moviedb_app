@@ -71,10 +71,42 @@ class AppLocalizations {
   String get vote_average_label {
     return _localizedValues[locale.languageCode]['vote_average_label'];
   }
+
+  // Person
+  String get personal_info_label {
+    return _localizedValues[locale.languageCode]["personal_info_label"];
+  }
+
+  String get known_for_label {
+    return _localizedValues[locale.languageCode]["known_for_label"];
+  }
+
+  String get known_credits_label {
+    return _localizedValues[locale.languageCode]["known_credits_label"];
+  }
+
+  String get gender_label {
+    return _localizedValues[locale.languageCode]["gender_label"];
+  }
+
+  String get birthday_label {
+    return _localizedValues[locale.languageCode]["birthday_label"];
+  }
+
+  String get place_of_birth_label {
+    return _localizedValues[locale.languageCode]["place_of_birth_label"];
+  }
+
+  String get also_known_as_label {
+    return _localizedValues[locale.languageCode]["also_known_as_label"];
+  }
+
+  String get biography_label {
+    return _localizedValues[locale.languageCode]["biography_label"];
+  }
 }
 
-class AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const AppLocalizationsDelegate();
 
   static const _languages = ['en', 'he'];

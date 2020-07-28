@@ -48,24 +48,25 @@ class PersonDetailsWidget extends StatelessWidget {
     );
 
     final textTheme = Theme.of(context).textTheme;
+    final groupStyle = textTheme.headline6;
     final labelStyle = textTheme.subtitle1;
     final gone = Container();
     final string = AppLocalizations.of(context);
 
-//    final taglineWidget = Text(
-//      movie.tagline,
-//      maxLines: 2,
-//      style: textTheme.subtitle1,
-//      overflow: TextOverflow.ellipsis,
-//    );
-//
+    final nameWidget = Text(
+      person.name,
+      maxLines: 2,
+      style: textTheme.headline4,
+      overflow: TextOverflow.ellipsis,
+    );
+
 //    final voteAverageLabel = Text(
 //      string.vote_average_label,
 //      style: labelStyle,
 //    );
 //
 //    final voteAverageWidget = SmoothStarRating(
-//      rating: movie.voteAverage / 2.0,
+//      rating: person.voteAverage / 2.0,
 //      isReadOnly: true,
 //      color: Colors.yellow,
 //      borderColor: Colors.yellow,
@@ -73,11 +74,11 @@ class PersonDetailsWidget extends StatelessWidget {
 //
 //    final voteAverageValue = Text(
 //      NumberFormat.decimalPercentPattern(decimalDigits: 0)
-//          .format(movie.voteAverage / 10),
+//          .format(person.voteAverage / 10),
 //      style: textTheme.subtitle1,
 //    );
 //
-//    final hasRuntime = movie.runtime != null;
+//    final hasRuntime = person.runtime != null;
 //
 //    final runtimeMargin = hasRuntime ? SizedBox(height: padding_8) : gone;
 //
@@ -89,10 +90,10 @@ class PersonDetailsWidget extends StatelessWidget {
 //        : gone;
 //
 //    final runtimeWidget = hasRuntime
-//        ? Text(_timeFormat.format(DateTime.utc(0, 1, 1, 0, movie.runtime)))
+//        ? Text(_timeFormat.format(DateTime.utc(0, 1, 1, 0, person.runtime)))
 //        : gone;
 //
-//    final hasBudget = (movie.budget != null) && (movie.budget > 0);
+//    final hasBudget = (person.budget != null) && (person.budget > 0);
 //
 //    final budgetMargin = hasBudget ? SizedBox(height: padding_8) : gone;
 //
@@ -104,9 +105,9 @@ class PersonDetailsWidget extends StatelessWidget {
 //        : gone;
 //
 //    final budgetWidget =
-//        hasBudget ? Text(_currencyFormat.format(movie.budget)) : gone;
+//        hasBudget ? Text(_currencyFormat.format(person.budget)) : gone;
 //
-//    final hasRevenue = (movie.revenue != null) && (movie.revenue > 0);
+//    final hasRevenue = (person.revenue != null) && (person.revenue > 0);
 //
 //    final revenueMargin = hasRevenue ? SizedBox(height: padding_8) : gone;
 //
@@ -118,7 +119,7 @@ class PersonDetailsWidget extends StatelessWidget {
 //        : gone;
 //
 //    final revenueWidget =
-//        hasRevenue ? Text(_currencyFormat.format(movie.revenue)) : gone;
+//        hasRevenue ? Text(_currencyFormat.format(person.revenue)) : gone;
 //
 //    final dateMargin = SizedBox(height: padding_8);
 //
@@ -127,57 +128,28 @@ class PersonDetailsWidget extends StatelessWidget {
 //      style: labelStyle,
 //    );
 //
-//    final dateWidget = Text(_dateFormat.format(movie.releaseDate));
+//    final dateWidget = Text(_dateFormat.format(person.releaseDate));
 //
-//    final summaryMargin = SizedBox(height: padding_8);
-//
-//    final summaryLabel = Text(
-//      string.summary_label,
-//      style: labelStyle,
-//    );
-//
-//    final summaryWidget = Text(
-//      movie.overview,
-//      maxLines: 100,
-//      overflow: TextOverflow.ellipsis,
-//    );
-//
-//    final hasGenres = (movie.genres != null) && movie.genres.isNotEmpty;
-//
-//    final genresMargin = hasGenres ? SizedBox(height: padding_8) : gone;
-//
-//    final genresLabel = hasGenres
-//        ? Text(
-//            string.genres_label,
-//            style: labelStyle,
-//          )
-//        : gone;
-//
-//    final genresWidget = hasGenres ? Text(movie.genres.join(", ")) : gone;
-//
-//    final videosLabel = Text(
-//      string.videos_label,
-//      style: labelStyle,
-//    );
-//
-//    final videosMargin = SizedBox(height: padding_8);
-//
-//    final videosWidget = VideosList(movie: movie, onTap: onVideoTap);
-//
-//    final castLabel = Text(
-//      string.cast_label,
-//      style: labelStyle,
-//    );
-//
-//    final castMargin = SizedBox(height: padding_8);
-//
-//    final castWidget = CastList(movie: movie, onTap: onCastTap);
+    final biographyMargin = SizedBox(height: padding_8);
+
+    final biographyLabel = Text(
+      string.biography_label,
+      style: labelStyle,
+    );
+
+    final biographyWidget = Text(
+      person.biography ?? "",
+      maxLines: 1000,
+      overflow: TextOverflow.ellipsis,
+    );
 
     final details = Padding(
       padding: paddingAll_8,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          nameWidget,
+          SizedBox(height: padding_8),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -215,25 +187,13 @@ class PersonDetailsWidget extends StatelessWidget {
 //              ),
             ],
           ),
-//          summaryMargin,
-//          summaryLabel,
-//          summaryWidget,
-//          videosMargin,
-//          videosLabel,
-//          videosWidget,
-//          castMargin,
-//          castLabel,
-//          castWidget,
+          biographyMargin,
+          biographyLabel,
+          biographyWidget,
         ],
       ),
     );
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-//        taglineWidget,
-        details,
-      ],
-    );
+    return details;
   }
 }

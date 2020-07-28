@@ -64,7 +64,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
           content = Center(child: CircularProgressIndicator());
         }
 
-        final Movie movie = widget.movie;
+        final movie = widget.movie;
 
         final media = MediaQuery.of(context);
         final screenSize = media.size;

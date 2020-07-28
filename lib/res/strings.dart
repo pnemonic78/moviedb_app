@@ -17,5 +17,15 @@ class R {
     "summary_label": "Overview",
     "videos_label": "Videos",
     "vote_average_label": "User Score",
+
+    // Person
+    "personal_info_label": "Personal Info",
+    "known_for_label": "Known For",
+    "known_credits_label": "Known Credits",
+    "gender_label": "Gender",
+    "birthday_label": "Birthday",
+    "place_of_birth_label": "Place of Birth",
+    "also_known_as_label": "Also Known As",
+    "biography_label": "Biography",
   };
 }

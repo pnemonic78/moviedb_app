@@ -9,8 +9,9 @@ import 'package:sprintf/sprintf.dart';
 import 'package:tmdb/keys.dart';
 import 'package:tmdb/tmdb_api/credits_response.dart';
 import 'package:tmdb/tmdb_api/model/movie_details.dart';
-import 'package:tmdb/tmdb_api/now_playing_response.dart';
+import 'package:tmdb/tmdb_api/model/person.dart';
 import 'package:tmdb/tmdb_api/model/video.dart';
+import 'package:tmdb/tmdb_api/now_playing_response.dart';
 import 'package:tmdb/tmdb_api/videos_response.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
@@ -166,6 +167,19 @@ class TMDBApi {
       apiKey: _apiKey,
       moveId: movie.id,
     );
+  }
+
+  Future<Person> getPersonById(BuildContext context, int personId) async {
+    final Locale locale = Localizations.localeOf(context);
+    return _client.getPerson(
+      apiKey: _apiKey,
+      personId: personId,
+      language: locale.languageCode,
+    );
+  }
+
+  Future<Person> getPerson(BuildContext context, Person person) async {
+    return getPersonById(context, person.id);
   }
 
   static Future<Widget> generateVideoThumbnail(
