@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:tmdb/credits/cast_screen.dart';
-import 'package:tmdb/tmdb_api/cast.dart';
+import 'package:tmdb/tmdb_api/person.dart';
 
 class CastDetailsPage extends StatefulWidget {
   final String title;
-  final MovieCast cast;
+  final Person person;
 
-  CastDetailsPage({Key key, this.title, this.cast})
-      : assert(cast != null),
+  CastDetailsPage({Key key, this.title, this.person})
+      : assert(person != null),
         super(key: key);
 
   @override
@@ -17,13 +17,13 @@ class CastDetailsPage extends StatefulWidget {
 class _CastDetailsPageState extends State<CastDetailsPage> {
   @override
   Widget build(BuildContext context) {
-    final cast = widget.cast;
+    final person = widget.person;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(cast.name),
+        title: Text(person.name),
       ),
-      body: CastDetailsWidget(cast: cast),
+      body: CastDetailsWidget(cast: person),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:tmdb/tmdb_api/credits_response.dart';
+import 'package:tmdb/tmdb_api/person.dart';
 
 import 'images_response.dart';
 import 'movie_details.dart';
@@ -47,6 +48,13 @@ abstract class RestClient {
   @GET("/movie/{movie_id}/videos")
   Future<VideosResponse> getMovieVideos({
     @Path("movie_id") int moveId,
+    @Query("api_key") String apiKey,
+    @Query("language") String language = "en-US",
+  });
+
+  @GET("/person/{person_id}")
+  Future<Person> getPerson({
+    @Path("person_id") int personId,
     @Query("api_key") String apiKey,
     @Query("language") String language = "en-US",
   });

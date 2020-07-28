@@ -8,10 +8,6 @@ import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/cast.dart';
 
-final _dateFormat = DateFormat.yMMMd();
-final _currencyFormat = NumberFormat.simpleCurrency(name: "USD");
-final _timeFormat = DateFormat.Hm();
-
 class CastDetailsWidget extends StatelessWidget {
   final MovieCast cast;
   final ValueChanged<MovieCast> onPosterTap;

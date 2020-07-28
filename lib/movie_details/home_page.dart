@@ -8,6 +8,7 @@ import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/cast.dart';
 import 'package:tmdb/tmdb_api/movie.dart';
 import 'package:tmdb/tmdb_api/movie_details.dart';
+import 'package:tmdb/tmdb_api/person.dart';
 import 'package:tmdb/tmdb_api/video.dart';
 import 'package:tmdb/videos/video_page.dart';
 
@@ -159,18 +160,18 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
   /// Function to call when a [MovieCast] is tapped.
   void _onCastTap(MovieCast cast) {
     setState(() {
-      _navigateToCast(cast);
+      _navigateToPerson(cast);
     });
   }
 
-  /// Navigates to the movie cast.
-  void _navigateToCast(MovieCast cast) {
+  /// Navigates to the person.
+  void _navigateToPerson(Person person) {
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => CastDetailsPage(
-                  title: cast.name,
-                  cast: cast,
+                  title: person.name,
+                  person: person,
                 )));
   }
 }

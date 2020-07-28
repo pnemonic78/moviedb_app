@@ -181,19 +181,19 @@ class MovieDetails extends Movie {
   /// Creates a [MovieDetails] from a JSON object.
   factory MovieDetails.fromJson(Map<String, dynamic> json) {
     var list = json['genres'] as List;
-    List<Genre> genres = list.map((j) => Genre.fromJson(j)).toList();
+    List<Genre> genres = list.map((i) => Genre.fromJson(i)).toList();
 
     list = json['production_companies'] as List;
     List<ProductionCompany> productionCompanies =
-        list.map((j) => ProductionCompany.fromJson(j)).toList();
+        list.map((i) => ProductionCompany.fromJson(i)).toList();
 
     list = json['production_countries'] as List;
     List<ProductionCountry> productionCountries =
-        list.map((j) => ProductionCountry.fromJson(j)).toList();
+        list.map((i) => ProductionCountry.fromJson(i)).toList();
 
     list = json['spoken_languages'] as List;
     List<SpokenLanguage> spokenLanguages =
-        list.map((j) => SpokenLanguage.fromJson(j)).toList();
+        list.map((i) => SpokenLanguage.fromJson(i)).toList();
 
     return MovieDetails(
       adult: json['adult'],

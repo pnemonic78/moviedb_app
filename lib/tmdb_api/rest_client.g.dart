@@ -127,4 +127,26 @@ class _RestClient implements RestClient {
     final value = VideosResponse.fromJson(_result.data);
     return value;
   }
+
+  @override
+  getPerson({personId, apiKey, language = "en-US"}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'api_key': apiKey,
+      r'language': language
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    final Response<Map<String, dynamic>> _result = await _dio.request(
+        '/person/$personId',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = Person.fromJson(_result.data);
+    return value;
+  }
 }
