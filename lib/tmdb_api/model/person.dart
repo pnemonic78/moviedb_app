@@ -1,3 +1,4 @@
+import 'external_ids.dart';
 import 'gender.dart';
 
 class Person {
@@ -15,6 +16,7 @@ class Person {
   final bool adult;
   final String imdbId;
   final String homepage;
+  final PersonExternalIds externalIds;
 
   const Person(
     this.id,
@@ -31,6 +33,7 @@ class Person {
     this.adult,
     this.imdbId,
     this.homepage,
+    this.externalIds,
   });
 
   @override
@@ -43,14 +46,12 @@ class Person {
     var list = json['also_known_as'] as List;
     List<String> aliases = list.map((i) => i.toString()).toList();
 
-    final gender = Gender_fromJson(json['gender']);
-
     return Person(
       json['id'],
       json['name'],
       aliases: aliases,
       profilePath: json['profile_path'],
-      gender: gender,
+      gender: Gender_fromJson(json['gender']),
       birthday: json['birthday'],
       deathday: json['deathday'],
       knownDepartment: json['known_for_department'],
@@ -60,6 +61,7 @@ class Person {
       adult: json['adult'],
       imdbId: json['imdb_id'],
       homepage: json['homepage'],
+      externalIds: PersonExternalIds.fromJson(json['external_ids']),
     );
   }
 }

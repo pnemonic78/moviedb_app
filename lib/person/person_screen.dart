@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
@@ -151,7 +152,7 @@ class PersonDetailsWidget extends StatelessWidget {
 
     final biographyWidget = Text(
       person.biography ?? "",
-      maxLines: 1000,
+      maxLines: 10000,
       overflow: TextOverflow.ellipsis,
       style: textStyle,
     );
@@ -161,10 +162,69 @@ class PersonDetailsWidget extends StatelessWidget {
     final homepageWidget = hasHomepage
         ? InkWell(
             child: Icon(
-              Icons.home,
+              MdiIcons.web,
               size: personIconSize,
             ),
             onTap: _gotoHomepage,
+          )
+        : gone;
+
+    final hasFacebook =
+        (person.externalIds != null) && (person.externalIds.facebookId != null);
+
+    final facebookMargin = hasFacebook ? SizedBox(width: padding_8) : gone;
+
+    final facebookWidget = hasFacebook
+        ? InkWell(
+            child: Icon(
+              MdiIcons.facebook,
+              size: personIconSize,
+            ),
+            onTap: _gotoFacebook,
+          )
+        : gone;
+
+    final hasImdb = (person.imdbId != null);
+
+    final imdbMargin = hasImdb ? SizedBox(width: padding_8) : gone;
+
+    final imdbWidget = hasImdb
+        ? InkWell(
+            child: Icon(
+              MdiIcons.database,
+              size: personIconSize,
+            ),
+            onTap: _gotoImdb,
+          )
+        : gone;
+
+    final hasInstagram = (person.externalIds != null) &&
+        (person.externalIds.instagramId != null);
+
+    final instagramMargin = hasInstagram ? SizedBox(width: padding_8) : gone;
+
+    final instagramWidget = hasInstagram
+        ? InkWell(
+            child: Icon(
+              MdiIcons.instagram,
+              size: personIconSize,
+            ),
+            onTap: _gotoInstagram,
+          )
+        : gone;
+
+    final hasTwitter =
+        (person.externalIds != null) && (person.externalIds.twitterId != null);
+
+    final twitterMargin = hasTwitter ? SizedBox(width: padding_8) : gone;
+
+    final twitterWidget = hasTwitter
+        ? InkWell(
+            child: Icon(
+              MdiIcons.twitter,
+              size: personIconSize,
+            ),
+            onTap: _gotoTwitter,
           )
         : gone;
 
@@ -185,6 +245,14 @@ class PersonDetailsWidget extends StatelessWidget {
                   Row(
                     children: [
                       homepageWidget,
+                      imdbMargin,
+                      imdbWidget,
+                      facebookMargin,
+                      facebookWidget,
+                      instagramMargin,
+                      instagramWidget,
+                      twitterMargin,
+                      twitterWidget,
                     ],
                   )
                 ],
@@ -228,8 +296,32 @@ class PersonDetailsWidget extends StatelessWidget {
     return details;
   }
 
+  void _gotoFacebook() async {
+    final url = "https://facebook.com/${person.externalIds.facebookId}";
+    _goto(url);
+  }
+
   void _gotoHomepage() async {
     final url = person.homepage;
+    _goto(url);
+  }
+
+  void _gotoImdb() async {
+    final url = "https://imdb.com/name/${person.imdbId}";
+    _goto(url);
+  }
+
+  void _gotoInstagram() async {
+    final url = "https://instagram.com/${person.externalIds.instagramId}";
+    _goto(url);
+  }
+
+  void _gotoTwitter() async {
+    final url = "https://twitter.com/${person.externalIds.twitterId}";
+    _goto(url);
+  }
+
+  void _goto(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
     }

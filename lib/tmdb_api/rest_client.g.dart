@@ -129,11 +129,12 @@ class _RestClient implements RestClient {
   }
 
   @override
-  getPerson({personId, apiKey, language = "en-US"}) async {
+  getPerson({personId, apiKey, language = "en-US", append}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'api_key': apiKey,
-      r'language': language
+      r'language': language,
+      r'append_to_response': append
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};

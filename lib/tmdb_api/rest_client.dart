@@ -57,5 +57,6 @@ abstract class RestClient {
     @Path("person_id") int personId,
     @Query("api_key") String apiKey,
     @Query("language") String language = "en-US",
+    @Query("append_to_response") String append,
   });
 }

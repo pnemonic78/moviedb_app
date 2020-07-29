@@ -175,6 +175,7 @@ class TMDBApi {
       apiKey: _apiKey,
       personId: personId,
       language: locale.languageCode,
+      append: "external_ids",
     );
   }
 
