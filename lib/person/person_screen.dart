@@ -10,7 +10,10 @@ import 'package:tmdb/tmdb_api/model/gender.dart';
 import 'package:tmdb/tmdb_api/model/person.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class PersonDetailsWidget extends StatelessWidget {
+final _biographyLinesMin = 5;
+final _biographyLinesMax = 1000;
+
+class PersonDetailsWidget extends StatefulWidget {
   final Person person;
   final ValueChanged<Person> onPosterTap;
 
@@ -22,7 +25,21 @@ class PersonDetailsWidget extends StatelessWidget {
         super(key: key);
 
   @override
+  _PersonDetailsWidgetState createState() => _PersonDetailsWidgetState();
+}
+
+class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
+  bool _biographyLinesExpanded;
+
+  @override
+  void initState() {
+    super.initState();
+    _biographyLinesExpanded = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final person = widget.person;
     final media = MediaQuery.of(context);
     final imageWidth = personDetailsWidth;
     final imageHeight = personDetailsHeight;
@@ -47,7 +64,7 @@ class PersonDetailsWidget extends StatelessWidget {
         borderRadius: borderCircular_8,
         child: poster,
       ),
-      onTap: () => onPosterTap(person),
+      onTap: () => widget.onPosterTap(person),
     );
 
     final textTheme = Theme.of(context).textTheme;
@@ -150,11 +167,19 @@ class PersonDetailsWidget extends StatelessWidget {
       style: labelStyle,
     );
 
-    final biographyWidget = Text(
-      person.biography ?? "",
-      maxLines: 10000,
-      overflow: TextOverflow.ellipsis,
-      style: textStyle,
+    final biographyWidget = InkWell(
+      child: Text(
+        person.biography ?? "",
+        maxLines:
+            (_biographyLinesExpanded ? _biographyLinesMax : _biographyLinesMin),
+        overflow: TextOverflow.ellipsis,
+        style: textStyle,
+      ),
+      onTap: () {
+        setState(() {
+          _biographyLinesExpanded = !_biographyLinesExpanded;
+        });
+      },
     );
 
     final hasHomepage = (person.homepage != null);
@@ -297,27 +322,28 @@ class PersonDetailsWidget extends StatelessWidget {
   }
 
   void _gotoFacebook() async {
-    final url = "https://facebook.com/${person.externalIds.facebookId}";
+    final url = "https://facebook.com/${widget.person.externalIds.facebookId}";
     _goto(url);
   }
 
   void _gotoHomepage() async {
-    final url = person.homepage;
+    final url = widget.person.homepage;
     _goto(url);
   }
 
   void _gotoImdb() async {
-    final url = "https://imdb.com/name/${person.imdbId}";
+    final url = "https://imdb.com/name/${widget.person.imdbId}";
     _goto(url);
   }
 
   void _gotoInstagram() async {
-    final url = "https://instagram.com/${person.externalIds.instagramId}";
+    final url =
+        "https://instagram.com/${widget.person.externalIds.instagramId}";
     _goto(url);
   }
 
   void _gotoTwitter() async {
-    final url = "https://twitter.com/${person.externalIds.twitterId}";
+    final url = "https://twitter.com/${widget.person.externalIds.twitterId}";
     _goto(url);
   }
 

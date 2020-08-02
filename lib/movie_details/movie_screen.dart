@@ -17,7 +17,10 @@ final _dateFormat = DateFormat.yMMMd();
 final _currencyFormat = NumberFormat.simpleCurrency(name: "USD");
 final _timeFormat = DateFormat.Hm();
 
-class MovieDetailsWidget extends StatelessWidget {
+final _summaryLinesMin = 5;
+final _summaryLinesMax = 1000;
+
+class MovieDetailsWidget extends StatefulWidget {
   final MovieDetails movie;
   final ValueChanged<MovieDetails> onPosterTap;
   final ValueChanged<MovieVideo> onVideoTap;
@@ -33,7 +36,21 @@ class MovieDetailsWidget extends StatelessWidget {
         super(key: key);
 
   @override
+  _MovieDetailsWidgetState createState() => _MovieDetailsWidgetState();
+}
+
+class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
+  bool _summaryLinesExpanded;
+
+  @override
+  void initState() {
+    super.initState();
+    _summaryLinesExpanded = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final movie = widget.movie;
     final media = MediaQuery.of(context);
     final imageWidth = posterDetailsWidth;
     final imageHeight = posterDetailsHeight;
@@ -58,7 +75,7 @@ class MovieDetailsWidget extends StatelessWidget {
         borderRadius: borderCircular_8,
         child: poster,
       ),
-      onTap: () => onPosterTap(movie),
+      onTap: () => widget.onPosterTap(movie),
     );
 
     final textTheme = Theme.of(context).textTheme;
@@ -165,11 +182,18 @@ class MovieDetailsWidget extends StatelessWidget {
       style: labelStyle,
     );
 
-    final summaryWidget = Text(
-      movie.overview,
-      maxLines: 100,
-      overflow: TextOverflow.ellipsis,
-      style: textStyle,
+    final summaryWidget = InkWell(
+      child: Text(
+        movie.overview ?? "",
+        maxLines: (_summaryLinesExpanded ? _summaryLinesMax : _summaryLinesMin),
+        overflow: TextOverflow.ellipsis,
+        style: textStyle,
+      ),
+      onTap: () {
+        setState(() {
+          _summaryLinesExpanded = !_summaryLinesExpanded;
+        });
+      },
     );
 
     final hasGenres = (movie.genres != null) && movie.genres.isNotEmpty;
@@ -197,7 +221,7 @@ class MovieDetailsWidget extends StatelessWidget {
 
     final videosMargin = SizedBox(height: padding_8);
 
-    final videosWidget = VideosList(movie: movie, onTap: onVideoTap);
+    final videosWidget = VideosList(movie: movie, onTap: widget.onVideoTap);
 
     final castLabel = Text(
       string.cast_label,
@@ -206,7 +230,7 @@ class MovieDetailsWidget extends StatelessWidget {
 
     final castMargin = SizedBox(height: padding_8);
 
-    final castWidget = CastList(movie: movie, onTap: onCastTap);
+    final castWidget = CastList(movie: movie, onTap: widget.onCastTap);
 
     final details = Padding(
       padding: paddingAll_8,
