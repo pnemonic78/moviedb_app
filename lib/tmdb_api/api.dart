@@ -24,6 +24,10 @@ class TMDBApi {
   static const image_url = "https://image.tmdb.org/t/p/%s%s";
   static const youtube_url = "https://www.youtube.com/watch?v=%s";
   static const youtube_thumbnail = "https://img.youtube.com/vi/%s/0.jpg";
+  static const facebook_url = "https://facebook.com/%s";
+  static const imdb_url = "https://imdb.com/name/%s";
+  static const instagram_url = "https://instagram.com/%s";
+  static const twitter_url = "https://twitter.com/%s";
   static const _apiKey = Keys.apiKey;
 
   static const _original = "original";
@@ -175,7 +179,7 @@ class TMDBApi {
       apiKey: _apiKey,
       personId: personId,
       language: locale.languageCode,
-      append: "external_ids",
+      append: "external_ids,combined_credits",
     );
   }
 
