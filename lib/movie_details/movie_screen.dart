@@ -41,11 +41,27 @@ class MovieDetailsWidget extends StatefulWidget {
 
 class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   bool _summaryLinesExpanded;
+  VideosList _videoList;
+  CastList _castList;
 
   @override
   void initState() {
     super.initState();
     _summaryLinesExpanded = false;
+  }
+
+  Widget _buildVideos(MovieDetails movie) {
+    if (_videoList == null) {
+      _videoList = VideosList(movie: movie, onTap: widget.onVideoTap);
+    }
+    return _videoList;
+  }
+
+  Widget _buildCast(MovieDetails movie) {
+    if (_castList == null) {
+      _castList = CastList(movie: movie, onTap: widget.onCastTap);
+    }
+    return _castList;
   }
 
   @override
@@ -221,7 +237,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
 
     final videosMargin = SizedBox(height: padding_8);
 
-    final videosWidget = VideosList(movie: movie, onTap: widget.onVideoTap);
+    final videosWidget = _buildVideos(movie);
 
     final castLabel = Text(
       string.cast_label,
@@ -230,7 +246,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
 
     final castMargin = SizedBox(height: padding_8);
 
-    final castWidget = CastList(movie: movie, onTap: widget.onCastTap);
+    final castWidget = _buildCast(movie);
 
     final details = Padding(
       padding: paddingAll_8,
