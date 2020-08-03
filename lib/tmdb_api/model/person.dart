@@ -1,3 +1,5 @@
+import 'package:tmdb/tmdb_api/credits_response.dart';
+
 import 'external_ids.dart';
 import 'gender.dart';
 
@@ -17,6 +19,7 @@ class Person {
   final String imdbId;
   final String homepage;
   final PersonExternalIds externalIds;
+  final CreditsResponse credits;
 
   const Person(
     this.id,
@@ -34,6 +37,7 @@ class Person {
     this.imdbId,
     this.homepage,
     this.externalIds,
+    this.credits,
   });
 
   @override
@@ -43,8 +47,10 @@ class Person {
 
   /// Creates a [Person] from a JSON object.
   factory Person.fromJson(Map<String, dynamic> json) {
+    if (json == null) return null;
+
     var list = json['also_known_as'] as List;
-    List<String> aliases = list.map((i) => i.toString()).toList();
+    List<String> aliases = list?.map((i) => i.toString())?.toList();
 
     return Person(
       json['id'],
@@ -62,6 +68,7 @@ class Person {
       imdbId: json['imdb_id'],
       homepage: json['homepage'],
       externalIds: PersonExternalIds.fromJson(json['external_ids']),
+      credits: CreditsResponse.fromJson(json['combined_credits']),
     );
   }
 }

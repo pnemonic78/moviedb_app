@@ -10,6 +10,8 @@ class CreditsResponse {
 
   /// Creates a [CreditsResponse] from a JSON object.
   factory CreditsResponse.fromJson(Map<String, dynamic> json) {
+    if (json == null) return null;
+
     var list = json['cast'] as List;
     List<MovieCast> cast = list.map((i) => MovieCast.fromJson(i)).toList();
     list = json['crew'] as List;

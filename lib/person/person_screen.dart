@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sprintf/sprintf.dart';
+import 'package:tmdb/credits/credits_list.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
@@ -254,6 +255,23 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
           )
         : gone;
 
+    final hasCredits = person.credits != null;
+
+    final creditsMargin = hasCredits ? SizedBox(height: padding_8) : gone;
+
+    final creditsLabel = hasCredits
+        ? Text(
+            string.known_credits_label,
+            style: groupStyle,
+          )
+        : gone;
+
+    final creditsWidget = hasCredits
+        ? CreditsList(
+            credits: person.credits,
+          )
+        : gone;
+
     final details = Padding(
       padding: paddingAll_8,
       child: Column(
@@ -315,6 +333,9 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
           biographyMargin,
           biographyLabel,
           biographyWidget,
+          creditsMargin,
+          creditsLabel,
+          creditsWidget,
         ],
       ),
     );

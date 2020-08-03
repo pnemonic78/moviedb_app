@@ -147,22 +147,32 @@ class TMDBApi {
     );
   }
 
-  Future<CreditsResponse> getMovieCredits(
-      BuildContext context, Movie movie) async {
+  Future<CreditsResponse> getMovieCreditsById(
+      BuildContext context, int movieId) async {
     return _client.getMovieCredits(
       apiKey: _apiKey,
-      moveId: movie.id,
+      moveId: movieId,
+    );
+  }
+
+  Future<CreditsResponse> getMovieCredits(
+      BuildContext context, Movie movie) async {
+    return getMovieCreditsById(context, movie.id);
+  }
+
+  Future<MovieDetails> getMovieDetailsById(
+      BuildContext context, int movieId) async {
+    final Locale locale = Localizations.localeOf(context);
+    return _client.getMovieDetails(
+      apiKey: _apiKey,
+      moveId: movieId,
+      language: locale.languageCode,
     );
   }
 
   Future<MovieDetails> getMovieDetails(
       BuildContext context, Movie movie) async {
-    final Locale locale = Localizations.localeOf(context);
-    return _client.getMovieDetails(
-      apiKey: _apiKey,
-      moveId: movie.id,
-      language: locale.languageCode,
-    );
+    return getMovieDetailsById(context, movie.id);
   }
 
   Future<VideosResponse> getMovieVideos(
@@ -179,7 +189,8 @@ class TMDBApi {
       apiKey: _apiKey,
       personId: personId,
       language: locale.languageCode,
-      append: "external_ids,combined_credits",
+      //append: "external_ids,combined_credits",
+      append: "external_ids",
     );
   }
 
