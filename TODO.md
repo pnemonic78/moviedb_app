@@ -1,7 +1,5 @@
 # To Do
 
-* details with list of cast
-* details with backdrop
 * flutter_bloc
 * equatable
 * dependency injection
