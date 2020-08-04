@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tmdb/credits/cast_tile.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/credits_response.dart';
@@ -27,13 +26,15 @@ class CreditsList extends StatelessWidget {
 
     final castLabel = hasCast
         ? Text(
-            string.known_for_label,
+            string.person_cast_label,
             style: labelStyle,
           )
         : gone;
 
     final castWidget = hasCast
         ? ListView(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
             children: _buildCastList(context, cast),
           )
         : gone;
@@ -44,18 +45,21 @@ class CreditsList extends StatelessWidget {
 
     final crewLabel = hasCrew
         ? Text(
-            string.known_for_label,
+            string.person_crew_label,
             style: labelStyle,
           )
         : gone;
 
     final crewWidget = hasCrew
         ? ListView(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
             children: _buildCrewList(context, crew),
           )
         : gone;
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         castLabel,
         castWidget,
@@ -68,12 +72,19 @@ class CreditsList extends StatelessWidget {
 
   List<Widget> _buildCastList(BuildContext context, List<MovieCast> cast) {
     final list = <Widget>[];
-    cast.sort((a, b) => a.releaseDate.compareTo(b.releaseDate));
+    cast.sort((a, b) => (b.releaseDate ?? b.firstAirDate ?? "")
+        .compareTo(a.releaseDate ?? a.firstAirDate ?? ""));
 
     for (var member in cast) {
-      list.add(CastTile(
-        cast: member,
-        //TODO onTap: onTap,
+      list.add(Text(
+        (member.releaseDate ?? member.firstAirDate ?? "—") +
+            " - " +
+            (member.title ??
+                member.originalTitle ??
+                member.originalName ??
+                "TITLE") +
+            " as " +
+            (member.character ?? "CHAR"),
       ));
     }
 
@@ -82,10 +93,18 @@ class CreditsList extends StatelessWidget {
 
   List<Widget> _buildCrewList(BuildContext context, List<MovieCrew> crew) {
     final list = <Widget>[];
-    //TODO crew.sort((a, b) => a.releaseDate.compareTo(b.releaseDate));
+    crew.sort((a, b) => (b.releaseDate ?? b.firstAirDate ?? "")
+        .compareTo(a.releaseDate ?? a.firstAirDate ?? ""));
 
     for (var member in crew) {
-      //TODO add row tile.
+      list.add(Text((member.releaseDate ?? member.firstAirDate ?? "—") +
+          " - " +
+          (member.title ??
+              member.originalTitle ??
+              member.originalName ??
+              "TITLE") +
+          " - " +
+          (member.job ?? "JOB")));
     }
 
     return list;

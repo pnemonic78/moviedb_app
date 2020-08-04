@@ -116,6 +116,14 @@ class AppLocalizations {
   String get gender_male {
     return _localizedValues[locale.languageCode]["gender_male"];
   }
+
+  String get person_cast_label {
+    return _localizedValues[locale.languageCode]["person_cast_label"];
+  }
+
+  String get person_crew_label {
+    return _localizedValues[locale.languageCode]["person_crew_label"];
+  }
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

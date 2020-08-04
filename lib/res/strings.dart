@@ -30,5 +30,7 @@ class R {
     "biography_label": "Biography",
     "gender_female": "Female",
     "gender_male": "Male",
+    "person_cast_label": "Acting",
+    "person_crew_label": "Production",
   };
 }

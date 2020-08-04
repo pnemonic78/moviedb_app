@@ -1,4 +1,3 @@
-import 'package:tmdb/tmdb_api/credits_response.dart';
 import 'package:tmdb/tmdb_api/model/credit.dart';
 import 'package:tmdb/tmdb_api/model/person.dart';
 
@@ -29,7 +28,6 @@ class MovieCast extends MovieCredit {
     final String imdbId,
     final String homepage,
     final PersonExternalIds externalIds,
-    final CreditsResponse credits,
     // credit
     final String backdropPath,
     final int episodeCount,
@@ -68,7 +66,6 @@ class MovieCast extends MovieCredit {
           imdbId: imdbId,
           homepage: homepage,
           externalIds: externalIds,
-          credits: credits,
           // credit
           backdropPath: backdropPath,
           episodeCount: episodeCount,
@@ -90,7 +87,7 @@ class MovieCast extends MovieCredit {
 
   @override
   String toString() {
-    return '{id: $id, name: "$name, character: $character"}';
+    return '{id: $id, name: "$name", character: "$character"}';
   }
 
   /// Creates a [MovieCast] from a JSON object.
@@ -120,7 +117,6 @@ class MovieCast extends MovieCredit {
       imdbId: person.imdbId,
       homepage: person.homepage,
       externalIds: person.externalIds,
-      credits: person.credits,
 
       // credit
       backdropPath: credit.backdropPath,

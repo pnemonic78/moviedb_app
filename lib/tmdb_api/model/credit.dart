@@ -1,5 +1,3 @@
-import 'package:tmdb/tmdb_api/credits_response.dart';
-
 import 'external_ids.dart';
 import 'gender.dart';
 import 'person.dart';
@@ -41,7 +39,6 @@ class MovieCredit extends Person {
     final String imdbId,
     final String homepage,
     final PersonExternalIds externalIds,
-    final CreditsResponse credits,
     // credit
     this.backdropPath,
     this.episodeCount,
@@ -76,7 +73,6 @@ class MovieCredit extends Person {
           imdbId: imdbId,
           homepage: homepage,
           externalIds: externalIds,
-          credits: credits,
         );
 
   /// Creates a [MovieCredit] from a JSON object.
@@ -110,7 +106,6 @@ class MovieCredit extends Person {
       imdbId: person.imdbId,
       homepage: person.homepage,
       externalIds: person.externalIds,
-      credits: person.credits,
 
       // credit
       backdropPath: json['backdrop_path'],
@@ -127,7 +122,7 @@ class MovieCredit extends Person {
       releaseDate: json['release_date'],
       title: json['title'],
       video: json['video'],
-      voteAverage: json['vote_average'],
+      voteAverage: json['vote_average']?.toDouble(),
       voteCount: json['vote_count'],
     );
   }

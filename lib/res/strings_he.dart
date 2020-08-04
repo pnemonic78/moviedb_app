@@ -30,5 +30,7 @@ class R_he {
     "biography_label": "ביוגרפיה",
     "gender_female": "נקבה",
     "gender_male": "זכר",
+    "person_cast_label": "משחק",
+    "person_crew_label": "הפקה",
   };
 }

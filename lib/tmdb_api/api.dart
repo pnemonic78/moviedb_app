@@ -189,8 +189,7 @@ class TMDBApi {
       apiKey: _apiKey,
       personId: personId,
       language: locale.languageCode,
-      //append: "external_ids,combined_credits",
-      append: "external_ids",
+      append: "external_ids,combined_credits",
     );
   }
 
