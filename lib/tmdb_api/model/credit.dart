@@ -115,7 +115,7 @@ class MovieCredit extends Person {
       episodeCount: json['episode_count'],
       firstAirDate: parseDateTime(json['first_air_date']),
       genreIds: genreIds,
-      mediaType: MediaType_fromJson(json['media_type']),
+      mediaType: MediaType.fromJson(json['media_type']),
       originCountry: countries,
       originalLanguage: json['original_language'],
       originalName: json['original_name'],

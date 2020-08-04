@@ -1,28 +1,22 @@
-enum MediaType {
-  /// All movies, TV shows and people.
-  all,
+class MediaType {
+  final String name;
 
-  /// Movies.
-  movie,
+  static const all = MediaType("all");
+  static const movie = MediaType("movie");
+  static const tv = MediaType("tv");
+  static const person = MediaType("person");
 
-  /// TV shows.
-  tv,
+  static const values = [all, movie, tv, person];
 
-  /// People.
-  person,
-}
+  const MediaType(this.name);
 
-MediaType MediaType_fromJson(String value) {
-  switch (value) {
-    case "all":
-      return MediaType.all;
-    case "movie":
-      return MediaType.movie;
-    case "tv":
-      return MediaType.tv;
-    case "person":
-      return MediaType.person;
-    default:
-      return MediaType.all;
+  @override
+  String toString() {
+    return name;
+  }
+
+  factory MediaType.fromJson(String json) {
+    if (json == null) return MediaType.all;
+    return values.firstWhere((v) => json == v.name) ?? MediaType.all;
   }
 }
