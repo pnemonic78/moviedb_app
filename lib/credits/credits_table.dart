@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tmdb/credits/credits_row.dart';
+import 'package:tmdb/credits/crew_row.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/credits_response.dart';
 import 'package:tmdb/tmdb_api/model/cast.dart';
 import 'package:tmdb/tmdb_api/model/credit.dart';
 import 'package:tmdb/tmdb_api/model/crew.dart';
+
+import 'cast_row.dart';
 
 class CreditsTable extends StatelessWidget {
   final CreditsResponse credits;
@@ -34,8 +36,11 @@ class CreditsTable extends StatelessWidget {
         : gone;
 
     final castWidget = hasCast
-        ? Table(
-            children: _buildCastList(context, cast),
+        ? Card(
+            child: Table(
+              children: _buildCastList(context, cast),
+              columnWidths: {0: IntrinsicColumnWidth()},
+            ),
           )
         : gone;
 
@@ -51,10 +56,11 @@ class CreditsTable extends StatelessWidget {
         : gone;
 
     final crewWidget = hasCrew
-        ? ListView(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            children: _buildCrewList(context, crew),
+        ? Card(
+            child: Table(
+              children: _buildCrewList(context, crew),
+              columnWidths: {0: IntrinsicColumnWidth()},
+            ),
           )
         : gone;
 
@@ -86,30 +92,27 @@ class CreditsTable extends StatelessWidget {
     final list = <TableRow>[];
     cast.sort((a, b) => _getDate(b).compareTo(_getDate(a)));
 
+    final row = CreditsCastRow();
+
     for (var member in cast) {
-      final row = CreditsCastRow(
-        cast: member,
-        onTap: null,
-      );
-      list.add(TableRow(children: row.build(context)));
+      list.add(TableRow(
+        children: row.build(context, member, null),
+      ));
     }
 
     return list;
   }
 
-  List<Widget> _buildCrewList(BuildContext context, List<MovieCrew> crew) {
-    final list = <Widget>[];
+  List<TableRow> _buildCrewList(BuildContext context, List<MovieCrew> crew) {
+    final list = <TableRow>[];
     crew.sort((a, b) => _getDate(b).compareTo(_getDate(a)));
 
+    final row = CreditsCrewRow();
+
     for (var member in crew) {
-      list.add(Text((member.releaseDate ?? member.firstAirDate ?? "—") +
-          " - " +
-          (member.title ??
-              member.originalTitle ??
-              member.originalName ??
-              "TITLE") +
-          " - " +
-          (member.job ?? "JOB")));
+      list.add(TableRow(
+        children: row.build(context, member, null),
+      ));
     }
 
     return list;
