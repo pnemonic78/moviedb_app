@@ -44,11 +44,13 @@ class _PersonPageState extends State<PersonPage> {
         if ((snapshot.connectionState == ConnectionState.done) &&
             snapshot.hasData) {
           final Person person = snapshot.data;
-          content = PersonDetailsWidget(
-            person: person,
-            onPosterTap: _onPosterTap,
-            onCastTap: _onCastTap,
-            onCrewTap: _onCrewTap,
+          content = SingleChildScrollView(
+            child: PersonDetailsWidget(
+              person: person,
+              onPosterTap: _onPosterTap,
+              onCastTap: _onCastTap,
+              onCrewTap: _onCrewTap,
+            ),
           );
         } else {
           content = Center(child: CircularProgressIndicator());
@@ -60,9 +62,7 @@ class _PersonPageState extends State<PersonPage> {
           appBar: AppBar(
             title: Text(person.name),
           ),
-          body: SingleChildScrollView(
-            child: content,
-          ),
+          body: content,
         );
       },
     );
