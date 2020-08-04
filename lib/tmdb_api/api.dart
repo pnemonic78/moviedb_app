@@ -167,6 +167,7 @@ class TMDBApi {
       apiKey: _apiKey,
       moveId: movieId,
       language: locale.languageCode,
+      append: "credits",
     );
   }
 

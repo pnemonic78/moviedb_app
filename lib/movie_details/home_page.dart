@@ -53,7 +53,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
         Widget content;
         if ((snapshot.connectionState == ConnectionState.done) &&
             snapshot.hasData) {
-          final Movie movie = snapshot.data;
+          final MovieDetails movie = snapshot.data;
           content = MovieDetailsWidget(
             movie: movie,
             onPosterTap: _onPosterTap,

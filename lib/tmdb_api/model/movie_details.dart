@@ -1,5 +1,7 @@
 import 'dart:core';
 
+import 'package:tmdb/tmdb_api/credits_response.dart';
+
 import 'dates.dart';
 import 'genre.dart';
 import 'language.dart';
@@ -20,6 +22,7 @@ class MovieDetails extends Movie {
   final List<SpokenLanguage> spokenLanguages;
   final MovieStatus status;
   final String tagline;
+  final CreditsResponse credits;
 
   MovieDetails(final int id,
       {adult,
@@ -44,7 +47,8 @@ class MovieDetails extends Movie {
       title,
       video,
       voteAverage,
-      voteCount})
+      voteCount,
+      this.credits})
       : super(id,
             adult: adult,
             backdropPath: backdropPath,
@@ -118,6 +122,7 @@ class MovieDetails extends Movie {
       spokenLanguages: spokenLanguages,
       status: MovieStatus.fromJson(json['status']),
       tagline: json['tagline'],
+      credits: CreditsResponse.fromJson(json['credits']),
     );
   }
 }

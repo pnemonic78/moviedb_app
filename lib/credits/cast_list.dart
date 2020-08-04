@@ -3,12 +3,12 @@ import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/credits_response.dart';
 import 'package:tmdb/tmdb_api/model/cast.dart';
-import 'package:tmdb/tmdb_api/model/movie.dart';
+import 'package:tmdb/tmdb_api/model/movie_details.dart';
 
 import 'cast_tile.dart';
 
 class CastList extends StatelessWidget {
-  final Movie movie;
+  final MovieDetails movie;
   final ValueChanged<MovieCast> onTap;
   final TMDBApi _api = TMDBApi();
 
@@ -44,7 +44,7 @@ class CastList extends StatelessWidget {
   }
 
   Future<CreditsResponse> _fetchCast(BuildContext context) async {
-    return _api.getMovieCredits(context, movie);
+    return movie.credits ?? _api.getMovieCredits(context, movie);
   }
 
   List<Widget> _buildCastList(BuildContext context, List<MovieCast> cast) {
