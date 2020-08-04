@@ -4,7 +4,6 @@ import 'dates.dart';
 import 'media.dart';
 
 class Movie extends Media {
-  final int id;
   final bool adult;
   final String backdropPath;
   final List<int> genreIds;
@@ -19,20 +18,21 @@ class Movie extends Media {
   final double voteAverage;
   final int voteCount;
 
-  const Movie({this.adult,
-    this.backdropPath,
-    this.genreIds,
-    @required this.id,
-    this.originalLanguage,
-    @required this.originalTitle,
-    this.overview,
-    this.popularity,
-    this.posterPath,
-    this.releaseDate,
-    @required this.title,
-    this.video,
-    this.voteAverage,
-    this.voteCount});
+  const Movie(final int id,
+      {this.adult,
+      this.backdropPath,
+      this.genreIds,
+      this.originalLanguage,
+      @required this.originalTitle,
+      this.overview,
+      this.popularity,
+      this.posterPath,
+      this.releaseDate,
+      @required this.title,
+      this.video,
+      this.voteAverage,
+      this.voteCount})
+      : super(id);
 
   /// Creates a [Movie] from a JSON object.
   factory Movie.fromJson(Map<String, dynamic> json) {
@@ -40,10 +40,10 @@ class Movie extends Media {
     List<int> genreIds = list.map((i) => i as int).toList();
 
     return Movie(
+      json['id'],
       adult: json['adult'],
       backdropPath: json['backdrop_path'],
       genreIds: genreIds,
-      id: json['id'],
       originalLanguage: json['original_language'],
       originalTitle: json['original_title'],
       overview: json['overview'],

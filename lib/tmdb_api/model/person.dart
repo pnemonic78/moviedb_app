@@ -1,12 +1,11 @@
 import 'package:tmdb/tmdb_api/credits_response.dart';
-import 'package:tmdb/tmdb_api/model/Media.dart';
 
 import 'dates.dart';
 import 'external_ids.dart';
 import 'gender.dart';
+import 'media.dart';
 
 class Person extends Media {
-  final int id;
   final String name;
   final List<String> aliases;
   final String profilePath;
@@ -24,7 +23,7 @@ class Person extends Media {
   final CreditsResponse credits;
 
   const Person(
-    this.id,
+    final int id,
     this.name, {
     this.aliases,
     this.profilePath,
@@ -40,7 +39,7 @@ class Person extends Media {
     this.homepage,
     this.externalIds,
     this.credits,
-  }) : super();
+  }) : super(id);
 
   @override
   String toString() {

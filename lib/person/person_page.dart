@@ -5,6 +5,7 @@ import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/cast.dart';
 import 'package:tmdb/tmdb_api/model/credit.dart';
 import 'package:tmdb/tmdb_api/model/crew.dart';
+import 'package:tmdb/tmdb_api/model/media_type.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
 import 'package:tmdb/tmdb_api/model/person.dart';
 
@@ -102,13 +103,13 @@ class _PersonPageState extends State<PersonPage> {
   /// Navigates to the movie.
   void _navigateToMovie(MovieCredit credit) {
     final type = credit.mediaType;
-    if (type != "movie") return; //TODO we only support movies for now.
+    if (type != MediaType.movie) return; //TODO we only support movies for now.
 
     Movie movie = Movie(
+      credit.id,
       adult: credit.adult,
       backdropPath: credit.backdropPath,
       genreIds: credit.genreIds,
-      id: credit.id,
       originalLanguage: credit.originalLanguage,
       originalTitle: credit.originalTitle,
       overview: credit.overview,

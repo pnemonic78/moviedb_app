@@ -1,112 +1,12 @@
 import 'dart:core';
 
 import 'dates.dart';
+import 'genre.dart';
+import 'language.dart';
 import 'movie.dart';
-
-class Genre {
-  final int id;
-  final String name;
-
-  const Genre({this.id, this.name});
-
-  @override
-  String toString() {
-    return name;
-  }
-
-  static List<int> toIds(List<Genre> genres) {
-    return (genres != null) ? genres.map((g) => g.id).toList() : null;
-  }
-
-  factory Genre.fromJson(Map<String, dynamic> json) {
-    return Genre(id: json['id'], name: json['name']);
-  }
-}
-
-class ProductionCompany {
-  final int id;
-  final String name;
-  final String logoPath;
-  final String originCountry;
-
-  const ProductionCompany({this.id, this.name, this.logoPath, this.originCountry});
-
-  @override
-  String toString() {
-    return name;
-  }
-
-  factory ProductionCompany.fromJson(Map<String, dynamic> json) {
-    return ProductionCompany(
-        id: json['id'],
-        name: json['name'],
-        logoPath: json['logo_path'],
-        originCountry: json['origin_country']);
-  }
-}
-
-class ProductionCountry {
-  final String id;
-  final String name;
-
-  const ProductionCountry({this.id, this.name});
-
-  @override
-  String toString() {
-    return name;
-  }
-
-  factory ProductionCountry.fromJson(Map<String, dynamic> json) {
-    return ProductionCountry(id: json['iso_3166_1'], name: json['name']);
-  }
-}
-
-class SpokenLanguage {
-  final String id;
-  final String name;
-
-  const SpokenLanguage({this.id, this.name});
-
-  @override
-  String toString() {
-    return name;
-  }
-
-  factory SpokenLanguage.fromJson(Map<String, dynamic> json) {
-    return SpokenLanguage(id: json['iso_639_1'], name: json['name']);
-  }
-}
-
-class Status {
-  final String _value;
-
-  static const rumored = Status("Rumored");
-  static const planned = Status("Planned");
-  static const inProduction = Status("In Production");
-  static const postProduction = Status("Post Production");
-  static const released = Status("Released");
-  static const canceled = Status("Canceled");
-
-  static const values = [
-    rumored,
-    planned,
-    inProduction,
-    postProduction,
-    released,
-    canceled
-  ];
-
-  const Status(this._value);
-
-  @override
-  String toString() {
-    return _value;
-  }
-
-  factory Status.fromJson(String json) {
-    return values.firstWhere((v) => json == v._value);
-  }
-}
+import 'movie_status.dart';
+import 'production_company.dart';
+import 'production_country.dart';
 
 class MovieDetails extends Movie {
   final int budget;
@@ -118,12 +18,11 @@ class MovieDetails extends Movie {
   final int revenue;
   final int runtime; // integer or null
   final List<SpokenLanguage> spokenLanguages;
-  final Status status;
+  final MovieStatus status;
   final String tagline;
 
-  MovieDetails(
-      {id,
-      adult,
+  MovieDetails(final int id,
+      {adult,
       backdropPath,
       this.budget,
       this.genres,
@@ -140,14 +39,13 @@ class MovieDetails extends Movie {
       this.revenue,
       this.runtime,
       this.spokenLanguages,
-      this.status = Status.released,
+      this.status = MovieStatus.released,
       this.tagline,
       title,
       video,
       voteAverage,
       voteCount})
-      : super(
-            id: id,
+      : super(id,
             adult: adult,
             backdropPath: backdropPath,
             genreIds: Genre.toIds(genres),
@@ -163,8 +61,7 @@ class MovieDetails extends Movie {
             voteCount: voteCount);
 
   MovieDetails.of(Movie movie)
-      : this(
-            id: movie.id,
+      : this(movie.id,
             adult: movie.adult,
             backdropPath: movie.backdropPath,
             genres: null,
@@ -197,9 +94,9 @@ class MovieDetails extends Movie {
         list.map((i) => SpokenLanguage.fromJson(i)).toList();
 
     return MovieDetails(
+      json['id'],
       adult: json['adult'],
       backdropPath: json['backdrop_path'],
-      id: json['id'],
       originalLanguage: json['original_language'],
       originalTitle: json['original_title'],
       overview: json['overview'],
@@ -219,7 +116,7 @@ class MovieDetails extends Movie {
       revenue: json['revenue'],
       runtime: json['runtime'],
       spokenLanguages: spokenLanguages,
-      status: Status.fromJson(json['status']),
+      status: MovieStatus.fromJson(json['status']),
       tagline: json['tagline'],
     );
   }
