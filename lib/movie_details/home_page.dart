@@ -78,16 +78,21 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
           backdropHeight,
           devicePixelRatio: media.devicePixelRatio,
         );
-        final backdrop = CachedNetworkImage(
-          imageUrl: backdropUrl,
-          placeholder: (context, url) => Icon(
-            Icons.image,
-            size: min(backdropWidth, backdropHeight),
-          ),
-          width: backdropWidth,
-          height: backdropHeight,
-          fit: BoxFit.fitWidth,
-        );
+        final backdrop = (backdropUrl != null)
+            ? CachedNetworkImage(
+                imageUrl: backdropUrl,
+                placeholder: (context, url) => Icon(
+                  Icons.image,
+                  size: min(backdropWidth, backdropHeight),
+                ),
+                width: backdropWidth,
+                height: backdropHeight,
+                fit: BoxFit.fitWidth,
+              )
+            : Container(
+                width: backdropWidth,
+                height: backdropHeight,
+              );
 
         final textTheme = Theme.of(context).textTheme;
         // Beware fo white text on light backdrop!

@@ -30,16 +30,25 @@ class CastTile extends StatelessWidget {
       imageHeight,
       devicePixelRatio: media.devicePixelRatio,
     );
-    final thumbnail = CachedNetworkImage(
-      imageUrl: thumbnailUrl,
-      placeholder: (context, url) => Icon(
-        Icons.image,
-        size: min(imageWidth, imageHeight),
-      ),
-      width: imageWidth,
-      height: imageHeight,
-      fit: BoxFit.fitWidth,
-    );
+    final thumbnail = (thumbnailUrl != null)
+        ? CachedNetworkImage(
+            imageUrl: thumbnailUrl,
+            placeholder: (context, url) => Icon(
+              Icons.person,
+              size: min(imageWidth, imageHeight),
+            ),
+            width: imageWidth,
+            height: imageHeight,
+            fit: BoxFit.fitWidth,
+          )
+        : Container(
+            width: imageWidth,
+            height: imageHeight,
+            child: Icon(
+              Icons.person,
+              size: min(imageWidth, imageHeight),
+            ),
+          );
     final thumbnailWidget = ClipPath.shape(
       // rounded rectangle crop for top side only.
       shape: RoundedRectangleBorder(

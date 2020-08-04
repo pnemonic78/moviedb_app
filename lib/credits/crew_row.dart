@@ -7,7 +7,7 @@ import 'package:tmdb/tmdb_api/model/crew.dart';
 class CreditsCrewRow {
   List<Widget> build(
       BuildContext context, MovieCrew item, ValueChanged<MovieCrew> onTap) {
-    //TODO final onCastTap = onTap == null ? null : () => onTap(cast);
+    final onItemTap = onTap == null ? null : () => onTap(item);
 
     //TODO final textTheme = Theme.of(context).textTheme;
     final string = AppLocalizations.of(context);
@@ -30,8 +30,14 @@ class CreditsCrewRow {
     );
 
     return [
-      Padding(padding: paddingAll_8, child: yearWidget),
-      Padding(padding: paddingAll_8, child: jobWidget),
+      TableRowInkWell(
+        child: Padding(padding: paddingAll_8, child: yearWidget),
+        onTap: onItemTap,
+      ),
+      TableRowInkWell(
+        child: Padding(padding: paddingAll_8, child: jobWidget),
+        onTap: onItemTap,
+      ),
     ];
   }
 }

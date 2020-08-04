@@ -11,9 +11,15 @@ import 'cast_row.dart';
 
 class CreditsTable extends StatelessWidget {
   final CreditsResponse credits;
+  final ValueChanged<MovieCast> onCastTap;
+  final ValueChanged<MovieCrew> onCrewTap;
 
-  const CreditsTable({Key key, this.credits})
-      : assert(credits != null),
+  const CreditsTable({
+    Key key,
+    this.credits,
+    this.onCastTap,
+    this.onCrewTap,
+  })  : assert(credits != null),
         super(key: key);
 
   @override
@@ -96,7 +102,7 @@ class CreditsTable extends StatelessWidget {
 
     for (var member in cast) {
       list.add(TableRow(
-        children: row.build(context, member, null),
+        children: row.build(context, member, onCastTap),
       ));
     }
 
@@ -111,7 +117,7 @@ class CreditsTable extends StatelessWidget {
 
     for (var member in crew) {
       list.add(TableRow(
-        children: row.build(context, member, null),
+        children: row.build(context, member, onCrewTap),
       ));
     }
 

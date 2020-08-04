@@ -67,6 +67,13 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   @override
   Widget build(BuildContext context) {
     final movie = widget.movie;
+
+    final textTheme = Theme.of(context).textTheme;
+    final labelStyle = textTheme.headline6;
+    final textStyle = textTheme.bodyText2.apply(fontSizeFactor: 1.25);
+    final gone = Container();
+    final string = AppLocalizations.of(context);
+
     final media = MediaQuery.of(context);
     final imageWidth = posterDetailsWidth;
     final imageHeight = posterDetailsHeight;
@@ -76,16 +83,21 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
       imageHeight,
       devicePixelRatio: media.devicePixelRatio,
     );
-    final poster = CachedNetworkImage(
-      imageUrl: posterUrl,
-      placeholder: (context, url) => Icon(
-        Icons.image,
-        size: min(imageWidth, imageHeight),
-      ),
-      width: imageWidth,
-      height: imageHeight,
-      fit: BoxFit.fitHeight,
-    );
+    final poster = (posterUrl != null)
+        ? CachedNetworkImage(
+            imageUrl: posterUrl,
+            placeholder: (context, url) => Icon(
+              Icons.image,
+              size: min(imageWidth, imageHeight),
+            ),
+            width: imageWidth,
+            height: imageHeight,
+            fit: BoxFit.fitHeight,
+          )
+        : Container(
+            width: imageWidth,
+            height: imageHeight,
+          );
     final posterWidget = InkWell(
       child: ClipRRect(
         borderRadius: borderCircular_8,
@@ -93,12 +105,6 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
       ),
       onTap: () => widget.onPosterTap(movie),
     );
-
-    final textTheme = Theme.of(context).textTheme;
-    final labelStyle = textTheme.headline6;
-    final textStyle = textTheme.bodyText2.apply(fontSizeFactor: 1.25);
-    final gone = Container();
-    final string = AppLocalizations.of(context);
 
     final taglineWidget = Text(
       movie.tagline,

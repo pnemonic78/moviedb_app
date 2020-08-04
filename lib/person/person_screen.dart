@@ -8,6 +8,8 @@ import 'package:tmdb/credits/credits_table.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
+import 'package:tmdb/tmdb_api/model/cast.dart';
+import 'package:tmdb/tmdb_api/model/crew.dart';
 import 'package:tmdb/tmdb_api/model/gender.dart';
 import 'package:tmdb/tmdb_api/model/person.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -18,11 +20,15 @@ final _biographyLinesMax = 1000;
 class PersonDetailsWidget extends StatefulWidget {
   final Person person;
   final ValueChanged<Person> onPosterTap;
+  final ValueChanged<MovieCast> onCastTap;
+  final ValueChanged<MovieCrew> onCrewTap;
 
   const PersonDetailsWidget({
     Key key,
     @required this.person,
     this.onPosterTap,
+    this.onCastTap,
+    this.onCrewTap,
   })  : assert(person != null),
         super(key: key);
 
@@ -131,7 +137,7 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
     final birthdayValue =
         hasBirthday ? Text(person.birthday, style: textStyle) : gone;
 
-    final hasBirthplace = (person.birthday != null);
+    final hasBirthplace = (person.birthplace != null);
 
     final birthplaceMargin = hasBirthplace ? SizedBox(height: padding_8) : gone;
 
@@ -269,6 +275,8 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
     final creditsWidget = hasCredits
         ? CreditsTable(
             credits: person.credits,
+            onCastTap: widget.onCastTap,
+            onCrewTap: widget.onCrewTap,
           )
         : gone;
 

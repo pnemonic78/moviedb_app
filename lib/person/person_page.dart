@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tmdb/movie_details/home_page.dart';
 import 'package:tmdb/person/poster_page.dart';
 import 'package:tmdb/tmdb_api/api.dart';
+import 'package:tmdb/tmdb_api/model/cast.dart';
+import 'package:tmdb/tmdb_api/model/credit.dart';
+import 'package:tmdb/tmdb_api/model/crew.dart';
+import 'package:tmdb/tmdb_api/model/movie.dart';
 import 'package:tmdb/tmdb_api/model/person.dart';
 
 import 'person_screen.dart';
@@ -42,6 +47,8 @@ class _PersonPageState extends State<PersonPage> {
           content = PersonDetailsWidget(
             person: person,
             onPosterTap: _onPosterTap,
+            onCastTap: _onCastTap,
+            onCrewTap: _onCrewTap,
           );
         } else {
           content = Center(child: CircularProgressIndicator());
@@ -75,6 +82,50 @@ class _PersonPageState extends State<PersonPage> {
         MaterialPageRoute(
             builder: (context) => PersonPosterPage(
                   person: person,
+                )));
+  }
+
+  /// Function to call when a cast item is tapped.
+  void _onCastTap(MovieCast item) {
+    setState(() {
+      _navigateToMovie(item);
+    });
+  }
+
+  /// Function to call when a crew item is tapped.
+  void _onCrewTap(MovieCrew item) {
+    setState(() {
+      _navigateToMovie(item);
+    });
+  }
+
+  /// Navigates to the movie.
+  void _navigateToMovie(MovieCredit credit) {
+    final type = credit.mediaType;
+    if (type != "movie") return; //TODO we only support movies for now.
+
+    Movie movie = Movie(
+      adult: credit.adult,
+      backdropPath: credit.backdropPath,
+      genreIds: credit.genreIds,
+      id: credit.id,
+      originalLanguage: credit.originalLanguage,
+      originalTitle: credit.originalTitle,
+      overview: credit.overview,
+      popularity: credit.popularity,
+      posterPath: credit.posterPath,
+      //FIXME releaseDate: credit.releaseDate,
+      title: credit.title,
+      video: credit.video,
+      voteAverage: credit.voteAverage,
+      voteCount: credit.voteCount,
+    );
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MovieDetailsHomePage(
+                  movie: movie,
                 )));
   }
 }
