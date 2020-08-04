@@ -18,36 +18,36 @@ class MovieDetails extends Movie {
   final List<ProductionCompany> productionCompanies;
   final List<ProductionCountry> productionCountries;
   final int revenue;
-  final int runtime; // integer or null
+  final int runtime;
   final List<SpokenLanguage> spokenLanguages;
   final MovieStatus status;
   final String tagline;
   final CreditsResponse credits;
 
   MovieDetails(final int id,
-      {adult,
-      backdropPath,
+      {final bool adult,
+      final String backdropPath,
       this.budget,
       this.genres,
       this.homepage,
       this.imdbId,
-      originalLanguage,
-      originalTitle,
-      overview,
-      popularity,
-      posterPath,
+      final String originalLanguage,
+      final String originalTitle,
+      final String overview,
+      final double popularity,
+      final String posterPath,
       this.productionCompanies,
       this.productionCountries,
-      releaseDate,
+      final DateTime releaseDate,
       this.revenue,
       this.runtime,
       this.spokenLanguages,
       this.status = MovieStatus.released,
       this.tagline,
-      title,
-      video,
-      voteAverage,
-      voteCount,
+      final String title,
+      final bool video,
+      final double voteAverage,
+      final int voteCount,
       this.credits})
       : super(id,
             adult: adult,

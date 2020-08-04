@@ -4,13 +4,11 @@ import 'dates.dart';
 import 'media.dart';
 
 class Movie extends Media {
-  final bool adult;
   final String backdropPath;
   final List<int> genreIds;
   final String originalLanguage;
   final String originalTitle;
   final String overview;
-  final double popularity;
   final String posterPath;
   final DateTime releaseDate;
   final String title;
@@ -19,20 +17,24 @@ class Movie extends Media {
   final int voteCount;
 
   const Movie(final int id,
-      {this.adult,
+      {final bool adult,
       this.backdropPath,
       this.genreIds,
       this.originalLanguage,
       @required this.originalTitle,
       this.overview,
-      this.popularity,
+      final double popularity,
       this.posterPath,
       this.releaseDate,
       @required this.title,
       this.video,
       this.voteAverage,
       this.voteCount})
-      : super(id);
+      : super(
+          id,
+          adult: adult,
+          popularity: popularity,
+        );
 
   /// Creates a [Movie] from a JSON object.
   factory Movie.fromJson(Map<String, dynamic> json) {

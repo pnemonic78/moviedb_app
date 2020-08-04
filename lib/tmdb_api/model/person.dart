@@ -14,9 +14,7 @@ class Person extends Media {
   final DateTime deathday;
   final String knownDepartment;
   final String biography;
-  final double popularity;
   final String birthplace;
-  final bool adult;
   final String imdbId;
   final String homepage;
   final PersonExternalIds externalIds;
@@ -32,14 +30,18 @@ class Person extends Media {
     this.deathday,
     this.knownDepartment,
     this.biography,
-    this.popularity,
+    final double popularity,
     this.birthplace,
-    this.adult,
+    final bool adult,
     this.imdbId,
     this.homepage,
     this.externalIds,
     this.credits,
-  }) : super(id);
+  }) : super(
+          id,
+          adult: adult,
+          popularity: popularity,
+        );
 
   @override
   String toString() {
