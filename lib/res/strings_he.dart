@@ -31,6 +31,10 @@ class R_he {
     "gender_female": "נקבה",
     "gender_male": "זכר",
     "person_cast_label": "משחק",
+    "person_cast_format": "%s בתור %s",
+    "person_cast_format_none": "%s",
     "person_crew_label": "הפקה",
+    "person_crew_format": "%s בתור %s",
+    "person_crew_format_none": "%s",
   };
 }

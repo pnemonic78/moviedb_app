@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:tmdb/credits/credits_row.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/credits_response.dart';
 import 'package:tmdb/tmdb_api/model/cast.dart';
+import 'package:tmdb/tmdb_api/model/credit.dart';
 import 'package:tmdb/tmdb_api/model/crew.dart';
 
-class CreditsList extends StatelessWidget {
+class CreditsTable extends StatelessWidget {
   final CreditsResponse credits;
 
-  const CreditsList({Key key, this.credits})
+  const CreditsTable({Key key, this.credits})
       : assert(credits != null),
         super(key: key);
 
@@ -32,9 +34,7 @@ class CreditsList extends StatelessWidget {
         : gone;
 
     final castWidget = hasCast
-        ? ListView(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+        ? Table(
             children: _buildCastList(context, cast),
           )
         : gone;
@@ -70,22 +70,28 @@ class CreditsList extends StatelessWidget {
     );
   }
 
-  List<Widget> _buildCastList(BuildContext context, List<MovieCast> cast) {
-    final list = <Widget>[];
-    cast.sort((a, b) => (b.releaseDate ?? b.firstAirDate ?? "")
-        .compareTo(a.releaseDate ?? a.firstAirDate ?? ""));
+  String _getDate(MovieCredit credit) {
+    final releaseDate = credit.releaseDate;
+    if ((releaseDate != null) && releaseDate.isNotEmpty) {
+      return releaseDate;
+    }
+    final firstAirDate = credit.firstAirDate;
+    if ((firstAirDate != null) && firstAirDate.isNotEmpty) {
+      return firstAirDate;
+    }
+    return "9999-99-99";
+  }
+
+  List<TableRow> _buildCastList(BuildContext context, List<MovieCast> cast) {
+    final list = <TableRow>[];
+    cast.sort((a, b) => _getDate(b).compareTo(_getDate(a)));
 
     for (var member in cast) {
-      list.add(Text(
-        (member.releaseDate ?? member.firstAirDate ?? "—") +
-            " - " +
-            (member.title ??
-                member.originalTitle ??
-                member.originalName ??
-                "TITLE") +
-            " as " +
-            (member.character ?? "CHAR"),
-      ));
+      final row = CreditsCastRow(
+        cast: member,
+        onTap: null,
+      );
+      list.add(TableRow(children: row.build(context)));
     }
 
     return list;
@@ -93,8 +99,7 @@ class CreditsList extends StatelessWidget {
 
   List<Widget> _buildCrewList(BuildContext context, List<MovieCrew> crew) {
     final list = <Widget>[];
-    crew.sort((a, b) => (b.releaseDate ?? b.firstAirDate ?? "")
-        .compareTo(a.releaseDate ?? a.firstAirDate ?? ""));
+    crew.sort((a, b) => _getDate(b).compareTo(_getDate(a)));
 
     for (var member in crew) {
       list.add(Text((member.releaseDate ?? member.firstAirDate ?? "—") +

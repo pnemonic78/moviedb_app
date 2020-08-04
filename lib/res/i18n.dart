@@ -124,6 +124,23 @@ class AppLocalizations {
   String get person_crew_label {
     return _localizedValues[locale.languageCode]["person_crew_label"];
   }
+
+  String get person_cast_format {
+    return _localizedValues[locale.languageCode]["person_cast_format"];
+  }
+
+  String get person_cast_format_none {
+    return _localizedValues[locale.languageCode]["person_cast_format_none"];
+  }
+
+  String get person_crew_format {
+    return _localizedValues[locale.languageCode]["person_crew_format"];
+  }
+
+  String get person_crew_format_none {
+    return _localizedValues[locale.languageCode]["person_crew_format_none"];
+  }
+
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sprintf/sprintf.dart';
-import 'package:tmdb/credits/credits_list.dart';
+import 'package:tmdb/credits/credits_table.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
@@ -267,7 +267,7 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
         : gone;
 
     final creditsWidget = hasCredits
-        ? CreditsList(
+        ? CreditsTable(
             credits: person.credits,
           )
         : gone;

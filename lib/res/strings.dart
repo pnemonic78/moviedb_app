@@ -31,6 +31,10 @@ class R {
     "gender_female": "Female",
     "gender_male": "Male",
     "person_cast_label": "Acting",
+    "person_cast_format": "%s as %s",
+    "person_cast_format_none": "%s",
     "person_crew_label": "Production",
+    "person_crew_format": "%s as %s",
+    "person_crew_format_none": "%s",
   };
 }
