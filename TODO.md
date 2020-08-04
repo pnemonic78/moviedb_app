@@ -1,5 +1,6 @@
 # To Do
 
+* json serializable
 * flutter_bloc
 * equatable
 * dependency injection

@@ -3,6 +3,7 @@ import 'package:tmdb/tmdb_api/model/person.dart';
 
 import 'external_ids.dart';
 import 'gender.dart';
+import 'media_type.dart';
 
 class MovieCrew extends MovieCredit {
   final String department;
@@ -31,7 +32,7 @@ class MovieCrew extends MovieCredit {
     final int episodeCount,
     final DateTime firstAirDate,
     final List<int> genreIds,
-    final String mediaType,
+    final MediaType mediaType,
     final List<String> originCountry,
     final String originalLanguage,
     final String originalName,

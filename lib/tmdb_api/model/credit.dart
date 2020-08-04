@@ -1,3 +1,5 @@
+import 'package:tmdb/tmdb_api/model/media_type.dart';
+
 import 'dates.dart';
 import 'external_ids.dart';
 import 'gender.dart';
@@ -9,7 +11,7 @@ class MovieCredit extends Person {
   final int episodeCount;
   final DateTime firstAirDate;
   final List<int> genreIds;
-  final String mediaType;
+  final MediaType mediaType;
   final List<String> originCountry;
   final String originalLanguage;
   final String originalName;
@@ -113,7 +115,7 @@ class MovieCredit extends Person {
       episodeCount: json['episode_count'],
       firstAirDate: parseDateTime(json['first_air_date']),
       genreIds: genreIds,
-      mediaType: json['media_type'],
+      mediaType: MediaType_fromJson(json['media_type']),
       originCountry: countries,
       originalLanguage: json['original_language'],
       originalName: json['original_name'],

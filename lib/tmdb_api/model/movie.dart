@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 
 import 'dates.dart';
+import 'media.dart';
 
-class Movie {
+class Movie extends Media {
   final int id;
   final bool adult;
   final String backdropPath;

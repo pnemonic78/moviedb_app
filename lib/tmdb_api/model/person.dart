@@ -1,10 +1,11 @@
 import 'package:tmdb/tmdb_api/credits_response.dart';
+import 'package:tmdb/tmdb_api/model/Media.dart';
 
 import 'dates.dart';
 import 'external_ids.dart';
 import 'gender.dart';
 
-class Person {
+class Person extends Media {
   final int id;
   final String name;
   final List<String> aliases;
@@ -39,7 +40,7 @@ class Person {
     this.homepage,
     this.externalIds,
     this.credits,
-  });
+  }) : super();
 
   @override
   String toString() {
