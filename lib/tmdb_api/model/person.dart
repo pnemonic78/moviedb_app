@@ -58,7 +58,7 @@ class Person extends Media {
       json['name'],
       aliases: aliases,
       profilePath: json['profile_path'],
-      gender: Gender_fromJson(json['gender']),
+      gender: Gender.fromJson(json['gender']),
       birthday: parseDateTime(json['birthday']),
       deathday: parseDateTime(json['deathday']),
       knownDepartment: json['known_for_department'],
