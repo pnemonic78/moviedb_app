@@ -1,5 +1,6 @@
 import 'dart:core';
 
+import 'dates.dart';
 import 'movie.dart';
 
 class Genre {
@@ -204,7 +205,7 @@ class MovieDetails extends Movie {
       overview: json['overview'],
       popularity: json['popularity'].toDouble(),
       posterPath: json['poster_path'],
-      releaseDate: DateTime.parse(json['release_date']),
+      releaseDate: parseDateTime(json['release_date']),
       title: json['title'],
       video: json['video'],
       voteAverage: json['vote_average'].toDouble(),

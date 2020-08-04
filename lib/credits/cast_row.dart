@@ -12,9 +12,8 @@ class CreditsCastRow {
     //TODO final textTheme = Theme.of(context).textTheme;
     final string = AppLocalizations.of(context);
 
-    final date = item.releaseDate ?? item.firstAirDate ?? "-";
-    final yearToken = date.split("-")[0];
-    final year = yearToken.isEmpty ? "—" : yearToken;
+    final date = item.releaseDate ?? item.firstAirDate;
+    final year = date?.year?.toString() ?? "—";
     final yearWidget = Text(year);
 
     final String title = item.title ?? item.originalTitle ?? item.originalName;

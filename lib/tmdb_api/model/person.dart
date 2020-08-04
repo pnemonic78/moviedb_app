@@ -1,5 +1,6 @@
 import 'package:tmdb/tmdb_api/credits_response.dart';
 
+import 'dates.dart';
 import 'external_ids.dart';
 import 'gender.dart';
 
@@ -9,8 +10,8 @@ class Person {
   final List<String> aliases;
   final String profilePath;
   final Gender gender;
-  final String birthday;
-  final String deathday;
+  final DateTime birthday;
+  final DateTime deathday;
   final String knownDepartment;
   final String biography;
   final double popularity;
@@ -58,8 +59,8 @@ class Person {
       aliases: aliases,
       profilePath: json['profile_path'],
       gender: Gender_fromJson(json['gender']),
-      birthday: json['birthday'],
-      deathday: json['deathday'],
+      birthday: parseDateTime(json['birthday']),
+      deathday: parseDateTime(json['deathday']),
       knownDepartment: json['known_for_department'],
       biography: json['biography'],
       popularity: json['popularity'],

@@ -9,6 +9,8 @@ import 'package:tmdb/tmdb_api/model/crew.dart';
 
 import 'cast_row.dart';
 
+final _dateFuture = DateTime.parse("9999-99-99");
+
 class CreditsTable extends StatelessWidget {
   final CreditsResponse credits;
   final ValueChanged<MovieCast> onCastTap;
@@ -82,16 +84,8 @@ class CreditsTable extends StatelessWidget {
     );
   }
 
-  String _getDate(MovieCredit credit) {
-    final releaseDate = credit.releaseDate;
-    if ((releaseDate != null) && releaseDate.isNotEmpty) {
-      return releaseDate;
-    }
-    final firstAirDate = credit.firstAirDate;
-    if ((firstAirDate != null) && firstAirDate.isNotEmpty) {
-      return firstAirDate;
-    }
-    return "9999-99-99";
+  DateTime _getDate(MovieCredit credit) {
+    return credit.releaseDate ?? credit.firstAirDate ?? _dateFuture;
   }
 
   List<TableRow> _buildCastList(BuildContext context, List<MovieCast> cast) {

@@ -114,7 +114,7 @@ class _PersonPageState extends State<PersonPage> {
       overview: credit.overview,
       popularity: credit.popularity,
       posterPath: credit.posterPath,
-      //FIXME releaseDate: credit.releaseDate,
+      releaseDate: credit.releaseDate,
       title: credit.title,
       video: credit.video,
       voteAverage: credit.voteAverage,

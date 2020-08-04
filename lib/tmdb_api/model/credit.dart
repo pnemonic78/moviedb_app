@@ -1,3 +1,4 @@
+import 'dates.dart';
 import 'external_ids.dart';
 import 'gender.dart';
 import 'person.dart';
@@ -6,7 +7,7 @@ class MovieCredit extends Person {
   final String creditId;
   final String backdropPath;
   final int episodeCount;
-  final String firstAirDate;
+  final DateTime firstAirDate;
   final List<int> genreIds;
   final String mediaType;
   final List<String> originCountry;
@@ -15,7 +16,7 @@ class MovieCredit extends Person {
   final String originalTitle;
   final String overview;
   final String posterPath;
-  final String releaseDate;
+  final DateTime releaseDate;
   final String title;
   final bool video;
   final double voteAverage;
@@ -29,8 +30,8 @@ class MovieCredit extends Person {
     final List<String> aliases,
     final String profilePath,
     final Gender gender,
-    final String birthday,
-    final String deathday,
+    final DateTime birthday,
+    final DateTime deathday,
     final String knownDepartment,
     final String biography,
     final double popularity,
@@ -110,7 +111,7 @@ class MovieCredit extends Person {
       // credit
       backdropPath: json['backdrop_path'],
       episodeCount: json['episode_count'],
-      firstAirDate: json['first_air_date'],
+      firstAirDate: parseDateTime(json['first_air_date']),
       genreIds: genreIds,
       mediaType: json['media_type'],
       originCountry: countries,
@@ -119,7 +120,7 @@ class MovieCredit extends Person {
       originalTitle: json['original_title'],
       overview: json['overview'],
       posterPath: json['poster_path'],
-      releaseDate: json['release_date'],
+      releaseDate: parseDateTime(json['release_date']),
       title: json['title'],
       video: json['video'],
       voteAverage: json['vote_average']?.toDouble(),

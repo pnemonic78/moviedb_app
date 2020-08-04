@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:tmdb/credits/credits_table.dart';
@@ -13,6 +14,8 @@ import 'package:tmdb/tmdb_api/model/crew.dart';
 import 'package:tmdb/tmdb_api/model/gender.dart';
 import 'package:tmdb/tmdb_api/model/person.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+final _dateFormat = DateFormat.yMMMd();
 
 final _biographyLinesMin = 5;
 final _biographyLinesMax = 1000;
@@ -134,8 +137,9 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
     final birthdayLabel =
         hasBirthday ? Text(string.birthday_label, style: labelStyle) : gone;
 
-    final birthdayValue =
-        hasBirthday ? Text(person.birthday, style: textStyle) : gone;
+    final birthdayValue = hasBirthday
+        ? Text(_dateFormat.format(person.birthday), style: textStyle)
+        : gone;
 
     final hasBirthplace = (person.birthplace != null);
 
@@ -155,8 +159,9 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
     final deathdayLabel =
         hasDeathday ? Text(string.deathday_label, style: labelStyle) : gone;
 
-    final deathdayValue =
-        hasDeathday ? Text(person.deathday, style: textStyle) : gone;
+    final deathdayValue = hasDeathday
+        ? Text(_dateFormat.format(person.deathday), style: textStyle)
+        : gone;
 
     final hasAliases = (person.aliases != null) && person.aliases.isNotEmpty;
 

@@ -1,5 +1,10 @@
 import 'package:flutter/foundation.dart';
 
+DateTime parseDateTime(String s) {
+  if ((s == null) || s.isEmpty) return null;
+  return DateTime.parse(s);
+}
+
 class Dates {
   final DateTime maximum;
   final DateTime minimum;
@@ -9,8 +14,8 @@ class Dates {
   /// Creates a [Dates] from a JSON object.
   factory Dates.fromJson(Map<String, dynamic> json) {
     return Dates(
-      minimum: DateTime.parse(json['minimum']),
-      maximum: DateTime.parse(json['maximum']),
+      minimum: parseDateTime(json['minimum']),
+      maximum: parseDateTime(json['maximum']),
     );
   }
 }
