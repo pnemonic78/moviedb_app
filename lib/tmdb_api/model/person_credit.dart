@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'media.dart';
 import 'person.dart';
 
-/// A [Person] that belongs to a [Media].
+/// A [Media] credit that belongs to a [Person].
 class PersonCredit {
   final String creditId;
   final Media media;
