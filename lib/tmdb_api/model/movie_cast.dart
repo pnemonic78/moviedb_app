@@ -16,7 +16,6 @@ class MovieCast extends MovieCredit {
   }) : super(
           creditId: credit.creditId,
           movie: credit.movie,
-          originCountry: credit.originCountry,
           person: credit.person,
         );
 

@@ -16,7 +16,6 @@ class PersonCast extends PersonCredit {
   }) : super(
           creditId: credit.creditId,
           media: credit.media,
-          originCountry: credit.originCountry,
           person: credit.person,
         );
 

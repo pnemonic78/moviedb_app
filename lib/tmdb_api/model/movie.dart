@@ -8,6 +8,7 @@ class Movie extends Media {
   final String backdropPath;
   final List<int> genreIds;
   final Media media;
+  final List<String> originCountry;
   final String originalLanguage;
   final String originalTitle;
   final String overview;
@@ -22,6 +23,7 @@ class Movie extends Media {
     this.backdropPath,
     this.genreIds,
     @required this.media,
+    this.originCountry,
     this.originalLanguage,
     @required this.originalTitle,
     this.overview,
@@ -46,10 +48,14 @@ class Movie extends Media {
     var list = json['genre_ids'] as List;
     List<int> genreIds = list?.map((i) => i as int)?.toList();
 
+    list = json['origin_country'] as List;
+    List<String> countries = list?.map((i) => i.toString())?.toList();
+
     return Movie(
       backdropPath: json['backdrop_path'],
       genreIds: genreIds,
       media: Media.fromJson(json),
+      originCountry: countries,
       originalLanguage: json['original_language'],
       originalTitle: json['original_title'],
       overview: json['overview'],
