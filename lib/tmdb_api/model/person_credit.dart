@@ -4,7 +4,7 @@ import 'dates.dart';
 import 'media.dart';
 import 'person.dart';
 
-class PersonCredit extends Person {
+class PersonCredit {
   final String backdropPath;
   final String creditId;
   final Media creditMedia;
@@ -44,21 +44,12 @@ class PersonCredit extends Person {
     this.voteAverage,
     this.voteCount,
   })  : assert(creditId != null),
-        super(
-          aliases: person.aliases,
-          biography: person.biography,
-          birthday: person.birthday,
-          birthplace: person.birthplace,
-          deathday: person.deathday,
-          externalIds: person.externalIds,
-          gender: person.gender,
-          homepage: person.homepage,
-          imdbId: person.imdbId,
-          knownDepartment: person.knownDepartment,
-          media: person.media,
-          name: person.name,
-          profilePath: person.profilePath,
-        );
+        super();
+
+  @override
+  String toString() {
+    return person.toString();
+  }
 
   /// Creates a [PersonCredit] from a JSON object.
   factory PersonCredit.fromJson(Map<String, dynamic> json) {

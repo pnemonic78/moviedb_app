@@ -15,6 +15,7 @@ class PersonCrew extends PersonCredit {
         super(
           backdropPath: credit.backdropPath,
           creditId: credit.creditId,
+          creditMedia: credit.creditMedia,
           episodeCount: credit.episodeCount,
           firstAirDate: credit.firstAirDate,
           genreIds: credit.genreIds,
@@ -34,7 +35,7 @@ class PersonCrew extends PersonCredit {
 
   @override
   String toString() {
-    return '{id: $id, name: "$name", department: "$department", job: "$job"}';
+    return '{id: ${person.id}, name: "${person.name}", department: "$department", job: "$job"}';
   }
 
   /// Creates a [PersonCrew] from a JSON object.

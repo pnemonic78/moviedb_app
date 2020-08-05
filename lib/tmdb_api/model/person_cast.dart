@@ -13,9 +13,10 @@ class PersonCast extends PersonCredit {
     this.character,
     @required this.credit,
     this.order,
-  })  : super(
+  }) : super(
           backdropPath: credit.backdropPath,
           creditId: credit.creditId,
+          creditMedia: credit.creditMedia,
           episodeCount: credit.episodeCount,
           firstAirDate: credit.firstAirDate,
           genreIds: credit.genreIds,
@@ -35,7 +36,7 @@ class PersonCast extends PersonCredit {
 
   @override
   String toString() {
-    return '{id: $id, name: "$name", character: "$character"}';
+    return '{id: ${person.id}, name: "${person.name}", character: "$character"}';
   }
 
   /// Creates a [PersonCast] from a JSON object.
