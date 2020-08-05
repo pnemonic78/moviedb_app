@@ -80,4 +80,9 @@ class Person extends Media {
   DateTime date() {
     return birthday;
   }
+
+  @override
+  String getTitle() {
+    return name;
+  }
 }

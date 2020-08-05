@@ -19,7 +19,7 @@ class CreditsCastRow {
     final year = date?.year?.toString() ?? "—";
     final yearWidget = Text(year);
 
-    final String title = item.title ?? item.originalTitle ?? item.originalName;
+    final String title = item.title();
     final String character = item.character ?? "";
     final format = character.isEmpty
         ? string.person_cast_format_none

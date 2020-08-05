@@ -14,22 +14,11 @@ class MovieCast extends MovieCredit {
     @required this.credit,
     this.order,
   }) : super(
-          backdropPath: credit.backdropPath,
           creditId: credit.creditId,
-          genreIds: credit.genreIds,
           movie: credit.movie,
           originCountry: credit.originCountry,
-          originalLanguage: credit.originalLanguage,
           originalName: credit.originalName,
-          originalTitle: credit.originalTitle,
-          overview: credit.overview,
           person: credit.person,
-          posterPath: credit.posterPath,
-          releaseDate: credit.releaseDate,
-          title: credit.title,
-          video: credit.video,
-          voteAverage: credit.voteAverage,
-          voteCount: credit.voteCount,
         );
 
   @override

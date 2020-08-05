@@ -68,4 +68,9 @@ class Movie extends Media {
   DateTime date() {
     return releaseDate;
   }
+
+  @override
+  String getTitle() {
+    return title ?? originalTitle;
+  }
 }

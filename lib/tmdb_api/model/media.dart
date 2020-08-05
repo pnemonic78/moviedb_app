@@ -50,4 +50,8 @@ class Media {
   DateTime date() {
     return null;
   }
+
+  String getTitle() {
+    return null;
+  }
 }

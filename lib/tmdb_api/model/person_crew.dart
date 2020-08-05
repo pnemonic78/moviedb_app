@@ -13,22 +13,11 @@ class PersonCrew extends PersonCredit {
     @required this.job,
   })  : assert(job != null),
         super(
-          backdropPath: credit.backdropPath,
           creditId: credit.creditId,
           media: credit.media,
-          genreIds: credit.genreIds,
           originCountry: credit.originCountry,
-          originalLanguage: credit.originalLanguage,
           originalName: credit.originalName,
-          originalTitle: credit.originalTitle,
-          overview: credit.overview,
           person: credit.person,
-          posterPath: credit.posterPath,
-          releaseDate: credit.releaseDate,
-          title: credit.title,
-          video: credit.video,
-          voteAverage: credit.voteAverage,
-          voteCount: credit.voteCount,
         );
 
   @override
