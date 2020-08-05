@@ -2,15 +2,17 @@ import 'package:flutter/foundation.dart';
 
 import 'dates.dart';
 import 'media_type.dart';
+import 'movie.dart';
 import 'person.dart';
 
-class MovieCredit extends Person {
+class MovieCredit extends Movie {
   final String creditId;
   final String backdropPath;
   final int episodeCount;
   final DateTime firstAirDate;
   final List<int> genreIds;
   final MediaType mediaType;
+  final Movie movie;
   final List<String> originCountry;
   final String originalLanguage;
   final String originalName;
@@ -31,12 +33,13 @@ class MovieCredit extends Person {
     this.firstAirDate,
     this.genreIds,
     this.mediaType,
-    @required this.person,
+    @required this.movie,
     this.originCountry,
     this.originalLanguage,
     this.originalName,
     this.originalTitle,
     this.overview,
+    @required this.person,
     this.posterPath,
     this.releaseDate,
     this.title,
@@ -45,19 +48,18 @@ class MovieCredit extends Person {
     this.voteCount,
   })  : assert(creditId != null),
         super(
-          aliases: person.aliases,
-          biography: person.biography,
-          birthday: person.birthday,
-          birthplace: person.birthplace,
-          deathday: person.deathday,
-          externalIds: person.externalIds,
-          gender: person.gender,
-          homepage: person.homepage,
-          imdbId: person.imdbId,
-          knownDepartment: person.knownDepartment,
-          media: person.media,
-          name: person.name,
-          profilePath: person.profilePath,
+          backdropPath: movie.backdropPath,
+          genreIds: movie.genreIds,
+          media: movie.media,
+          originalLanguage: movie.originalLanguage,
+          originalTitle: movie.originalTitle,
+          overview: movie.overview,
+          posterPath: movie.posterPath,
+          releaseDate: movie.releaseDate,
+          title: movie.title,
+          video: movie.video,
+          voteAverage: movie.voteAverage,
+          voteCount: movie.voteCount,
         );
 
   /// Creates a [MovieCredit] from a JSON object.
@@ -77,6 +79,7 @@ class MovieCredit extends Person {
       firstAirDate: parseDateTime(json['first_air_date']),
       genreIds: genreIds,
       mediaType: MediaType.fromJson(json['media_type']),
+      movie: Movie.fromJson(json),
       originCountry: countries,
       originalLanguage: json['original_language'],
       originalName: json['original_name'],

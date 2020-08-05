@@ -13,13 +13,14 @@ class MovieCast extends MovieCredit {
     this.character,
     @required this.credit,
     this.order,
-  })  : super(
+  }) : super(
           backdropPath: credit.backdropPath,
           creditId: credit.creditId,
           episodeCount: credit.episodeCount,
           firstAirDate: credit.firstAirDate,
           genreIds: credit.genreIds,
           mediaType: credit.mediaType,
+          movie: credit.movie,
           originCountry: credit.originCountry,
           originalLanguage: credit.originalLanguage,
           originalName: credit.originalName,
@@ -36,7 +37,7 @@ class MovieCast extends MovieCredit {
 
   @override
   String toString() {
-    return '{id: $id, name: "$name", character: "$character"}';
+    return '{id: $id, name: "${person?.name}", character: "$character"}';
   }
 
   /// Creates a [MovieCast] from a JSON object.
