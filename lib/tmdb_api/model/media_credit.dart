@@ -1,20 +1,20 @@
 import 'package:flutter/foundation.dart';
+import 'package:tmdb/tmdb_api/model/media.dart';
 
-import 'movie.dart';
 import 'person.dart';
 
 /// A [Person] credit that belongs to a [Media].
 class MediaCredit {
   final String creditId;
-  final Movie movie;
+  final Media media;
   final Person person;
 
   MediaCredit({
     @required this.creditId,
-    @required this.movie,
+    @required this.media,
     @required this.person,
   })  : assert(creditId != null),
-        assert(movie != null),
+        assert(media != null),
         assert(person != null),
         super();
 
@@ -29,7 +29,7 @@ class MediaCredit {
 
     return MediaCredit(
       creditId: json['credit_id'],
-      movie: Movie.fromJson(json),
+      media: Media.fromJsonType(json),
       person: Person.fromJson(json),
     );
   }

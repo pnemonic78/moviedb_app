@@ -15,7 +15,7 @@ class MediaCast extends MediaCredit {
     this.order,
   }) : super(
           creditId: credit.creditId,
-          movie: credit.movie,
+          media: credit.media,
           person: credit.person,
         );
 

@@ -14,7 +14,7 @@ class MediaCrew extends MediaCredit {
   })  : assert(job != null),
         super(
           creditId: credit.creditId,
-          movie: credit.movie,
+          media: credit.media,
           person: credit.person,
         );
 
