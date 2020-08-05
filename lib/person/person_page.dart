@@ -13,7 +13,7 @@ import 'person_screen.dart';
 
 class PersonPage extends StatefulWidget {
   final String title;
-  final Person person;
+  Person person;
 
   PersonPage({Key key, this.title, this.person})
       : assert(person != null),
@@ -45,6 +45,7 @@ class _PersonPageState extends State<PersonPage> {
         if ((snapshot.connectionState == ConnectionState.done) &&
             snapshot.hasData) {
           final Person person = snapshot.data;
+          widget.person = person;
           content = SingleChildScrollView(
             child: PersonDetailsWidget(
               person: person,
@@ -61,7 +62,7 @@ class _PersonPageState extends State<PersonPage> {
 
         return Scaffold(
           appBar: AppBar(
-            title: Text(person.name),
+            title: Text(person.name ?? ""),
           ),
           body: content,
         );
@@ -105,22 +106,7 @@ class _PersonPageState extends State<PersonPage> {
     final type = credit.mediaType;
     if (type != MediaType.movie) return; //TODO we only support movies for now.
 
-    Movie movie = Movie(
-      id: credit.id,
-      adult: credit.adult,
-      backdropPath: credit.backdropPath,
-      genreIds: credit.genreIds,
-      originalLanguage: credit.originalLanguage,
-      originalTitle: credit.originalTitle,
-      overview: credit.overview,
-      popularity: credit.popularity,
-      posterPath: credit.posterPath,
-      releaseDate: credit.releaseDate,
-      title: credit.title,
-      video: credit.video,
-      voteAverage: credit.voteAverage,
-      voteCount: credit.voteCount,
-    );
+    Movie movie = Movie.of(credit);
 
     Navigator.push(
         context,

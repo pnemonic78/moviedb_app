@@ -16,7 +16,7 @@ import 'movie_screen.dart';
 
 class MovieDetailsHomePage extends StatefulWidget {
   final String title;
-  final Movie movie;
+  Movie movie;
 
   MovieDetailsHomePage({Key key, this.title, this.movie})
       : assert(movie != null),
@@ -54,6 +54,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
         if ((snapshot.connectionState == ConnectionState.done) &&
             snapshot.hasData) {
           final MovieDetails movie = snapshot.data;
+          widget.movie = movie;
           content = MovieDetailsWidget(
             movie: movie,
             onPosterTap: _onPosterTap,
@@ -97,7 +98,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
         final textTheme = Theme.of(context).textTheme;
         // Beware fo white text on light backdrop!
         final titleWidget = Text(
-          movie.title,
+          movie.title ?? movie.originalTitle ?? "",
           maxLines: 2,
           style: textTheme.headline5,
           overflow: TextOverflow.ellipsis,
