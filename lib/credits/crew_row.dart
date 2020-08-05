@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
-import 'package:tmdb/tmdb_api/model/movie_crew.dart';
+import 'package:tmdb/tmdb_api/model/person_crew.dart';
 
 class CreditsCrewRow {
   List<Widget> build(
-      BuildContext context, MovieCrew item, ValueChanged<MovieCrew> onTap) {
+    BuildContext context,
+    PersonCrew item,
+    ValueChanged<PersonCrew> onTap,
+  ) {
     final onItemTap = onTap == null ? null : () => onTap(item);
 
     //TODO final textTheme = Theme.of(context).textTheme;

@@ -10,9 +10,9 @@ import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/gender.dart';
-import 'package:tmdb/tmdb_api/model/movie_cast.dart';
-import 'package:tmdb/tmdb_api/model/movie_crew.dart';
 import 'package:tmdb/tmdb_api/model/person.dart';
+import 'package:tmdb/tmdb_api/model/person_cast.dart';
+import 'package:tmdb/tmdb_api/model/person_crew.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 final _dateFormat = DateFormat.yMMMd();
@@ -23,8 +23,8 @@ final _biographyLinesMax = 1000;
 class PersonDetailsWidget extends StatefulWidget {
   final Person person;
   final ValueChanged<Person> onPosterTap;
-  final ValueChanged<MovieCast> onCastTap;
-  final ValueChanged<MovieCrew> onCrewTap;
+  final ValueChanged<PersonCast> onCastTap;
+  final ValueChanged<PersonCrew> onCrewTap;
 
   const PersonDetailsWidget({
     Key key,

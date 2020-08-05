@@ -1,10 +1,10 @@
-import 'model/movie_cast.dart';
-import 'model/movie_crew.dart';
+import 'model/person_cast.dart';
+import 'model/person_crew.dart';
 
 class PersonCreditsResponse {
   final int id;
-  final List<MovieCast> cast;
-  final List<MovieCrew> crew;
+  final List<PersonCast> cast;
+  final List<PersonCrew> crew;
 
   const PersonCreditsResponse({this.id, this.cast, this.crew});
 
@@ -13,9 +13,9 @@ class PersonCreditsResponse {
     if (json == null) return null;
 
     var list = json['cast'] as List;
-    List<MovieCast> cast = list?.map((i) => MovieCast.fromJson(i))?.toList();
+    List<PersonCast> cast = list?.map((i) => PersonCast.fromJson(i))?.toList();
     list = json['crew'] as List;
-    List<MovieCrew> crew = list?.map((i) => MovieCrew.fromJson(i))?.toList();
+    List<PersonCrew> crew = list?.map((i) => PersonCrew.fromJson(i))?.toList();
 
     return PersonCreditsResponse(
       id: json['id'],

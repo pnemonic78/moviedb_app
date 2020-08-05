@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:tmdb/credits/crew_row.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
-import 'package:tmdb/tmdb_api/model/movie_cast.dart';
-import 'package:tmdb/tmdb_api/model/movie_credit.dart';
-import 'package:tmdb/tmdb_api/model/movie_crew.dart';
+import 'package:tmdb/tmdb_api/model/person_cast.dart';
+import 'package:tmdb/tmdb_api/model/person_credit.dart';
+import 'package:tmdb/tmdb_api/model/person_crew.dart';
 import 'package:tmdb/tmdb_api/person_credits_response.dart';
 
 import 'cast_row.dart';
@@ -13,8 +13,8 @@ final _dateFuture = DateTime.parse("9999-99-99");
 
 class CreditsTable extends StatelessWidget {
   final PersonCreditsResponse credits;
-  final ValueChanged<MovieCast> onCastTap;
-  final ValueChanged<MovieCrew> onCrewTap;
+  final ValueChanged<PersonCast> onCastTap;
+  final ValueChanged<PersonCrew> onCrewTap;
 
   const CreditsTable({
     Key key,
@@ -84,11 +84,11 @@ class CreditsTable extends StatelessWidget {
     );
   }
 
-  DateTime _getDate(MovieCredit credit) {
+  DateTime _getDate(PersonCredit credit) {
     return credit.releaseDate ?? credit.firstAirDate ?? _dateFuture;
   }
 
-  List<TableRow> _buildCastList(BuildContext context, List<MovieCast> cast) {
+  List<TableRow> _buildCastList(BuildContext context, List<PersonCast> cast) {
     final list = <TableRow>[];
     cast.sort((a, b) => _getDate(b).compareTo(_getDate(a)));
 
@@ -103,7 +103,7 @@ class CreditsTable extends StatelessWidget {
     return list;
   }
 
-  List<TableRow> _buildCrewList(BuildContext context, List<MovieCrew> crew) {
+  List<TableRow> _buildCrewList(BuildContext context, List<PersonCrew> crew) {
     final list = <TableRow>[];
     crew.sort((a, b) => _getDate(b).compareTo(_getDate(a)));
 

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:tmdb/movie_details/home_page.dart';
 import 'package:tmdb/person/poster_page.dart';
 import 'package:tmdb/tmdb_api/api.dart';
-import 'package:tmdb/tmdb_api/model/movie_cast.dart';
-import 'package:tmdb/tmdb_api/model/movie_credit.dart';
-import 'package:tmdb/tmdb_api/model/movie_crew.dart';
 import 'package:tmdb/tmdb_api/model/media_type.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
 import 'package:tmdb/tmdb_api/model/person.dart';
+import 'package:tmdb/tmdb_api/model/person_cast.dart';
+import 'package:tmdb/tmdb_api/model/person_credit.dart';
+import 'package:tmdb/tmdb_api/model/person_crew.dart';
 
 import 'person_screen.dart';
 
@@ -87,21 +87,21 @@ class _PersonPageState extends State<PersonPage> {
   }
 
   /// Function to call when a cast item is tapped.
-  void _onCastTap(MovieCast item) {
+  void _onCastTap(PersonCast item) {
     setState(() {
       _navigateToMovie(item);
     });
   }
 
   /// Function to call when a crew item is tapped.
-  void _onCrewTap(MovieCrew item) {
+  void _onCrewTap(PersonCrew item) {
     setState(() {
       _navigateToMovie(item);
     });
   }
 
   /// Navigates to the movie.
-  void _navigateToMovie(MovieCredit credit) {
+  void _navigateToMovie(PersonCredit credit) {
     final type = credit.mediaType;
     if (type != MediaType.movie) return; //TODO we only support movies for now.
 
