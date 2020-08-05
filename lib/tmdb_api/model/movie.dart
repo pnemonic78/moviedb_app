@@ -16,23 +16,24 @@ class Movie extends Media {
   final double voteAverage;
   final int voteCount;
 
-  const Movie(final int id,
-      {final bool adult,
-      this.backdropPath,
-      this.genreIds,
-      this.originalLanguage,
-      @required this.originalTitle,
-      this.overview,
-      final double popularity,
-      this.posterPath,
-      this.releaseDate,
-      @required this.title,
-      this.video,
-      this.voteAverage,
-      this.voteCount})
-      : super(
-          id,
+  const Movie({
+    final bool adult,
+    this.backdropPath,
+    this.genreIds,
+    final int id,
+    this.originalLanguage,
+    @required this.originalTitle,
+    this.overview,
+    final double popularity,
+    this.posterPath,
+    this.releaseDate,
+    @required this.title,
+    this.video,
+    this.voteAverage,
+    this.voteCount,
+  }) : super(
           adult: adult,
+          id: id,
           popularity: popularity,
         );
 
@@ -42,10 +43,10 @@ class Movie extends Media {
     List<int> genreIds = list.map((i) => i as int).toList();
 
     return Movie(
-      json['id'],
       adult: json['adult'],
       backdropPath: json['backdrop_path'],
       genreIds: genreIds,
+      id: json['id'],
       originalLanguage: json['original_language'],
       originalTitle: json['original_title'],
       overview: json['overview'],

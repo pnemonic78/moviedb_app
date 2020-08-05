@@ -24,12 +24,13 @@ class MovieDetails extends Movie {
   final String tagline;
   final CreditsResponse credits;
 
-  MovieDetails(final int id,
+  MovieDetails(
       {final bool adult,
       final String backdropPath,
       this.budget,
       this.genres,
       this.homepage,
+      final int id,
       this.imdbId,
       final String originalLanguage,
       final String originalTitle,
@@ -49,10 +50,11 @@ class MovieDetails extends Movie {
       final double voteAverage,
       final int voteCount,
       this.credits})
-      : super(id,
+      : super(
             adult: adult,
             backdropPath: backdropPath,
             genreIds: Genre.toIds(genres),
+            id: id,
             originalLanguage: originalLanguage,
             originalTitle: originalTitle,
             overview: overview,
@@ -65,10 +67,11 @@ class MovieDetails extends Movie {
             voteCount: voteCount);
 
   MovieDetails.of(Movie movie)
-      : this(movie.id,
+      : this(
             adult: movie.adult,
             backdropPath: movie.backdropPath,
             genres: null,
+            id: movie.id,
             originalLanguage: movie.originalLanguage,
             originalTitle: movie.originalTitle,
             overview: movie.overview,
@@ -98,9 +101,9 @@ class MovieDetails extends Movie {
         list.map((i) => SpokenLanguage.fromJson(i)).toList();
 
     return MovieDetails(
-      json['id'],
       adult: json['adult'],
       backdropPath: json['backdrop_path'],
+      id: json['id'],
       originalLanguage: json['original_language'],
       originalTitle: json['original_title'],
       overview: json['overview'],

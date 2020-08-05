@@ -106,7 +106,7 @@ class _PersonPageState extends State<PersonPage> {
     if (type != MediaType.movie) return; //TODO we only support movies for now.
 
     Movie movie = Movie(
-      credit.id,
+      id: credit.id,
       adult: credit.adult,
       backdropPath: credit.backdropPath,
       genreIds: credit.genreIds,

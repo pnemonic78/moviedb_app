@@ -10,11 +10,11 @@ class PersonCast extends PersonCredit {
   final String character;
   final int order;
 
-  const PersonCast(
+  const PersonCast({
     final int id,
     final String name,
     final String creditId,
-    this.castId, {
+    this.castId,
     // person
     final List<String> aliases,
     final String profilePath,
@@ -50,9 +50,9 @@ class PersonCast extends PersonCredit {
     this.character,
     this.order,
   }) : super(
-          id,
-          name,
-          creditId,
+          id: id,
+          name: name,
+          creditId: creditId,
           // person
           aliases: aliases,
           profilePath: profilePath,
@@ -99,10 +99,10 @@ class PersonCast extends PersonCredit {
     final Person person = credit;
 
     return PersonCast(
-      credit.id,
-      credit.name,
-      credit.creditId,
-      json['cast_id'],
+      id: credit.id,
+      name: credit.name,
+      creditId: credit.creditId,
+      castId: json['cast_id'],
 
       // person
       aliases: person.aliases,

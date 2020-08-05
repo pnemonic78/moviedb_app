@@ -20,9 +20,9 @@ class Person extends Media {
   final PersonExternalIds externalIds;
   final PersonCreditsResponse credits;
 
-  const Person(
+  const Person({
     final int id,
-    this.name, {
+    this.name,
     this.aliases,
     this.profilePath,
     this.gender = Gender.unknown,
@@ -38,8 +38,8 @@ class Person extends Media {
     this.externalIds,
     this.credits,
   }) : super(
-          id,
           adult: adult,
+          id: id,
           popularity: popularity,
         );
 
@@ -56,8 +56,8 @@ class Person extends Media {
     List<String> aliases = list?.map((i) => i.toString())?.toList();
 
     return Person(
-      json['id'],
-      json['name'],
+      id: json['id'],
+      name: json['name'],
       aliases: aliases,
       profilePath: json['profile_path'],
       gender: Gender.fromJson(json['gender']),

@@ -9,10 +9,10 @@ class MovieCrew extends MovieCredit {
   final String department;
   final String job;
 
-  const MovieCrew(
+  const MovieCrew({
     int id,
     String name,
-    String creditId, {
+    String creditId,
     // person
     final List<String> aliases,
     final String profilePath,
@@ -48,9 +48,9 @@ class MovieCrew extends MovieCredit {
     this.department,
     this.job,
   }) : super(
-          id,
-          name,
-          creditId,
+          id: id,
+          name: name,
+          creditId: creditId,
           // person
           aliases: aliases,
           profilePath: profilePath,
@@ -97,9 +97,9 @@ class MovieCrew extends MovieCredit {
     final Person person = credit;
 
     return MovieCrew(
-      credit.id,
-      credit.name,
-      credit.creditId,
+      id: credit.id,
+      name: credit.name,
+      creditId: credit.creditId,
 
       // person
       aliases: person.aliases,

@@ -24,10 +24,10 @@ class PersonCredit extends Person {
   final double voteAverage;
   final int voteCount;
 
-  const PersonCredit(
+  const PersonCredit({
     final int id,
     final String name,
-    this.creditId, {
+    this.creditId,
     // person
     final List<String> aliases,
     final String profilePath,
@@ -60,8 +60,8 @@ class PersonCredit extends Person {
     this.voteAverage,
     this.voteCount,
   }) : super(
-          id,
-          name,
+          id: id,
+          name: name,
           // person
           aliases: aliases,
           profilePath: profilePath,
@@ -91,9 +91,9 @@ class PersonCredit extends Person {
     List<String> countries = list?.map((i) => i.toString())?.toList();
 
     return PersonCredit(
-      person.id,
-      person.name,
-      json['credit_id'],
+      id: person.id,
+      name: person.name,
+      creditId: json['credit_id'],
 
       // person
       aliases: person.aliases,
