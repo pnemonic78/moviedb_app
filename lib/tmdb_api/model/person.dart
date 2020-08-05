@@ -21,6 +21,7 @@ class Person extends Media {
   final String knownDepartment;
   final Media media;
   final String name;
+  final String originalName;
   final String profilePath;
 
   Person({
@@ -37,6 +38,7 @@ class Person extends Media {
     this.knownDepartment,
     @required this.media,
     this.name,
+    this.originalName,
     this.profilePath,
   })  : assert(media != null),
         super(
@@ -72,6 +74,7 @@ class Person extends Media {
       knownDepartment: json['known_for_department'],
       media: Media.fromJson(json),
       name: json['name'],
+      originalName: json['original_name'],
       profilePath: json['profile_path'],
     );
   }
@@ -83,6 +86,6 @@ class Person extends Media {
 
   @override
   String getTitle() {
-    return name;
+    return name ?? originalName;
   }
 }

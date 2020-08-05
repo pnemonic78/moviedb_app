@@ -17,7 +17,6 @@ class PersonCast extends PersonCredit {
           creditId: credit.creditId,
           media: credit.media,
           originCountry: credit.originCountry,
-          originalName: credit.originalName,
           person: credit.person,
         );
 

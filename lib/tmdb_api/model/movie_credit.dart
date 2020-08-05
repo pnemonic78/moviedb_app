@@ -7,14 +7,12 @@ class MovieCredit {
   final String creditId;
   final Movie movie;
   final List<String> originCountry;
-  final String originalName;
   final Person person;
 
   MovieCredit({
     @required this.creditId,
     @required this.movie,
     this.originCountry,
-    this.originalName,
     @required this.person,
   })  : assert(creditId != null),
         assert(movie != null),
@@ -37,7 +35,6 @@ class MovieCredit {
       creditId: json['credit_id'],
       movie: Movie.fromJson(json),
       originCountry: countries,
-      originalName: json['original_name'],
       person: Person.fromJson(json),
     );
   }
