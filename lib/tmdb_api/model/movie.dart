@@ -59,4 +59,21 @@ class Movie extends Media {
       voteCount: json['vote_count'],
     );
   }
+
+  Movie.of(Media media)
+      : this(
+          adult: media.adult,
+          id: media.id,
+          //mediaType: media.mediaType,
+          //originalLanguage: media.originalLanguage,
+          //originalTitle: media.originalTitle,
+          //overview: media.overview,
+          popularity: media.popularity,
+          //posterPath: media.posterPath,
+          //releaseDate: media.releaseDate,
+          //title: media.title,
+          //video: media.video,
+          //voteAverage: media.voteAverage,
+          //voteCount: media.voteCount,
+        );
 }
