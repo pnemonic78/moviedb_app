@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:tmdb/tmdb_api/person_credits_response.dart';
 
 import 'dates.dart';
@@ -6,41 +7,41 @@ import 'gender.dart';
 import 'media.dart';
 
 class Person extends Media {
-  final String name;
   final List<String> aliases;
-  final String profilePath;
-  final Gender gender;
-  final DateTime birthday;
-  final DateTime deathday;
-  final String knownDepartment;
   final String biography;
-  final String birthplace;
-  final String imdbId;
-  final String homepage;
-  final PersonExternalIds externalIds;
+  final DateTime birthday;
   final PersonCreditsResponse credits;
+  final String birthplace;
+  final DateTime deathday;
+  final PersonExternalIds externalIds;
+  final Gender gender;
+  final String homepage;
+  final String imdbId;
+  final String knownDepartment;
+  final Media media;
+  final String name;
+  final String profilePath;
 
-  const Person({
-    final int id,
-    this.name,
+  Person({
     this.aliases,
-    this.profilePath,
-    this.gender = Gender.unknown,
-    this.birthday,
-    this.deathday,
-    this.knownDepartment,
     this.biography,
-    final double popularity,
+    this.birthday,
     this.birthplace,
-    final bool adult,
-    this.imdbId,
-    this.homepage,
-    this.externalIds,
     this.credits,
-  }) : super(
-          adult: adult,
-          id: id,
-          popularity: popularity,
+    this.deathday,
+    this.externalIds,
+    this.gender = Gender.unknown,
+    this.homepage,
+    this.imdbId,
+    this.knownDepartment,
+    @required this.media,
+    this.name,
+    this.profilePath,
+  })  : assert(media != null),
+        super(
+          adult: media.adult,
+          id: media.id,
+          popularity: media.popularity,
         );
 
   @override
@@ -56,22 +57,20 @@ class Person extends Media {
     List<String> aliases = list?.map((i) => i.toString())?.toList();
 
     return Person(
-      id: json['id'],
-      name: json['name'],
       aliases: aliases,
-      profilePath: json['profile_path'],
-      gender: Gender.fromJson(json['gender']),
-      birthday: parseDateTime(json['birthday']),
-      deathday: parseDateTime(json['deathday']),
-      knownDepartment: json['known_for_department'],
       biography: json['biography'],
-      popularity: json['popularity'],
+      birthday: parseDateTime(json['birthday']),
       birthplace: json['place_of_birth'],
-      adult: json['adult'],
-      imdbId: json['imdb_id'],
-      homepage: json['homepage'],
-      externalIds: PersonExternalIds.fromJson(json['external_ids']),
       credits: PersonCreditsResponse.fromJson(json['combined_credits']),
+      deathday: parseDateTime(json['deathday']),
+      externalIds: PersonExternalIds.fromJson(json['external_ids']),
+      gender: Gender.fromJson(json['gender']),
+      homepage: json['homepage'],
+      imdbId: json['imdb_id'],
+      knownDepartment: json['known_for_department'],
+      media: Media.fromJson(json),
+      name: json['name'],
+      profilePath: json['profile_path'],
     );
   }
 }

@@ -6,6 +6,7 @@ import 'media.dart';
 class Movie extends Media {
   final String backdropPath;
   final List<int> genreIds;
+  final Media media;
   final String originalLanguage;
   final String originalTitle;
   final String overview;
@@ -16,64 +17,48 @@ class Movie extends Media {
   final double voteAverage;
   final int voteCount;
 
-  const Movie({
-    final bool adult,
+  Movie({
     this.backdropPath,
     this.genreIds,
-    final int id,
+    @required this.media,
     this.originalLanguage,
     @required this.originalTitle,
     this.overview,
-    final double popularity,
     this.posterPath,
     this.releaseDate,
     @required this.title,
     this.video,
     this.voteAverage,
     this.voteCount,
-  }) : super(
-          adult: adult,
-          id: id,
-          popularity: popularity,
+  })  : assert(media != null),
+        super(
+          adult: media.adult,
+          id: media.id,
+          popularity: media.popularity,
         );
 
   /// Creates a [Movie] from a JSON object.
   factory Movie.fromJson(Map<String, dynamic> json) {
+    if (json == null) return null;
+
     var list = json['genre_ids'] as List;
-    List<int> genreIds = list.map((i) => i as int).toList();
+    List<int> genreIds = list?.map((i) => i as int)?.toList();
 
     return Movie(
-      adult: json['adult'],
       backdropPath: json['backdrop_path'],
       genreIds: genreIds,
-      id: json['id'],
+      media: Media.fromJson(json),
       originalLanguage: json['original_language'],
       originalTitle: json['original_title'],
       overview: json['overview'],
-      popularity: json['popularity'].toDouble(),
       posterPath: json['poster_path'],
       releaseDate: parseDateTime(json['release_date']),
       title: json['title'],
       video: json['video'],
-      voteAverage: json['vote_average'].toDouble(),
+      voteAverage: json['vote_average']?.toDouble(),
       voteCount: json['vote_count'],
     );
   }
 
-  Movie.of(Media media)
-      : this(
-          adult: media.adult,
-          id: media.id,
-          //mediaType: media.mediaType,
-          //originalLanguage: media.originalLanguage,
-          //originalTitle: media.originalTitle,
-          //overview: media.overview,
-          popularity: media.popularity,
-          //posterPath: media.posterPath,
-          //releaseDate: media.releaseDate,
-          //title: media.title,
-          //video: media.video,
-          //voteAverage: media.voteAverage,
-          //voteCount: media.voteCount,
-        );
+  Movie.of(Media media) : this(media: media);
 }

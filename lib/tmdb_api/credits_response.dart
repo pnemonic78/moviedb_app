@@ -14,6 +14,7 @@ class CreditsResponse {
 
     var list = json['cast'] as List;
     List<MovieCast> cast = list?.map((i) => MovieCast.fromJson(i))?.toList();
+
     list = json['crew'] as List;
     List<MovieCrew> crew = list?.map((i) => MovieCrew.fromJson(i))?.toList();
 

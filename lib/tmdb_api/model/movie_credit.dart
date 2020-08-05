@@ -1,8 +1,7 @@
-import 'package:tmdb/tmdb_api/model/media_type.dart';
+import 'package:flutter/foundation.dart';
 
 import 'dates.dart';
-import 'external_ids.dart';
-import 'gender.dart';
+import 'media_type.dart';
 import 'person.dart';
 
 class MovieCredit extends Person {
@@ -17,6 +16,7 @@ class MovieCredit extends Person {
   final String originalName;
   final String originalTitle;
   final String overview;
+  final Person person;
   final String posterPath;
   final DateTime releaseDate;
   final String title;
@@ -24,30 +24,14 @@ class MovieCredit extends Person {
   final double voteAverage;
   final int voteCount;
 
-  const MovieCredit({
-    final int id,
-    final String name,
-    this.creditId,
-    // person
-    final List<String> aliases,
-    final String profilePath,
-    final Gender gender,
-    final DateTime birthday,
-    final DateTime deathday,
-    final String knownDepartment,
-    final String biography,
-    final double popularity,
-    final String birthplace,
-    final bool adult,
-    final String imdbId,
-    final String homepage,
-    final PersonExternalIds externalIds,
-    // credit
+  MovieCredit({
     this.backdropPath,
+    @required this.creditId,
     this.episodeCount,
     this.firstAirDate,
     this.genreIds,
     this.mediaType,
+    @required this.person,
     this.originCountry,
     this.originalLanguage,
     this.originalName,
@@ -59,30 +43,26 @@ class MovieCredit extends Person {
     this.video,
     this.voteAverage,
     this.voteCount,
-  }) : super(
-          id: id,
-          name: name,
-          // person
-          aliases: aliases,
-          profilePath: profilePath,
-          gender: gender,
-          birthday: birthday,
-          deathday: deathday,
-          knownDepartment: knownDepartment,
-          biography: biography,
-          popularity: popularity,
-          birthplace: birthplace,
-          adult: adult,
-          imdbId: imdbId,
-          homepage: homepage,
-          externalIds: externalIds,
+  })  : assert(creditId != null),
+        super(
+          aliases: person.aliases,
+          biography: person.biography,
+          birthday: person.birthday,
+          birthplace: person.birthplace,
+          deathday: person.deathday,
+          externalIds: person.externalIds,
+          gender: person.gender,
+          homepage: person.homepage,
+          imdbId: person.imdbId,
+          knownDepartment: person.knownDepartment,
+          media: person.media,
+          name: person.name,
+          profilePath: person.profilePath,
         );
 
   /// Creates a [MovieCredit] from a JSON object.
   factory MovieCredit.fromJson(Map<String, dynamic> json) {
     if (json == null) return null;
-
-    final person = Person.fromJson(json);
 
     var list = json['genre_ids'] as List;
     List<int> genreIds = list?.map((i) => i as int)?.toList();
@@ -91,27 +71,8 @@ class MovieCredit extends Person {
     List<String> countries = list?.map((i) => i.toString())?.toList();
 
     return MovieCredit(
-      id: person.id,
-      name: person.name,
-      creditId: json['credit_id'],
-
-      // person
-      aliases: person.aliases,
-      profilePath: person.profilePath,
-      gender: person.gender,
-      birthday: person.birthday,
-      deathday: person.deathday,
-      knownDepartment: person.knownDepartment,
-      biography: person.biography,
-      popularity: person.popularity,
-      birthplace: person.birthplace,
-      adult: person.adult,
-      imdbId: person.imdbId,
-      homepage: person.homepage,
-      externalIds: person.externalIds,
-
-      // credit
       backdropPath: json['backdrop_path'],
+      creditId: json['credit_id'],
       episodeCount: json['episode_count'],
       firstAirDate: parseDateTime(json['first_air_date']),
       genreIds: genreIds,
@@ -121,6 +82,7 @@ class MovieCredit extends Person {
       originalName: json['original_name'],
       originalTitle: json['original_title'],
       overview: json['overview'],
+      person: Person.fromJson(json),
       posterPath: json['poster_path'],
       releaseDate: parseDateTime(json['release_date']),
       title: json['title'],
