@@ -15,8 +15,6 @@ class MovieCrew extends MovieCredit {
         super(
           backdropPath: credit.backdropPath,
           creditId: credit.creditId,
-          episodeCount: credit.episodeCount,
-          firstAirDate: credit.firstAirDate,
           genreIds: credit.genreIds,
           movie: credit.movie,
           originCountry: credit.originCountry,

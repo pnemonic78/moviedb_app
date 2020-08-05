@@ -75,4 +75,9 @@ class Person extends Media {
       profilePath: json['profile_path'],
     );
   }
+
+  @override
+  DateTime date() {
+    return birthday;
+  }
 }

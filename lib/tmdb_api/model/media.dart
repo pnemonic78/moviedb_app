@@ -46,4 +46,8 @@ class Media {
         return Media.fromJson(json);
     }
   }
+
+  DateTime date() {
+    return null;
+  }
 }

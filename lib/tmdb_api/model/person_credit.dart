@@ -8,8 +8,6 @@ class PersonCredit {
   final String backdropPath;
   final String creditId;
   final Media media;
-  final int episodeCount;
-  final DateTime firstAirDate;
   final List<int> genreIds;
   final List<String> originCountry;
   final String originalLanguage;
@@ -28,8 +26,6 @@ class PersonCredit {
     this.backdropPath,
     @required this.creditId,
     @required this.media,
-    this.episodeCount,
-    this.firstAirDate,
     this.genreIds,
     @required this.person,
     this.originCountry,
@@ -67,8 +63,6 @@ class PersonCredit {
       backdropPath: json['backdrop_path'],
       creditId: json['credit_id'],
       media: Media.fromJsonType(json),
-      episodeCount: json['episode_count'],
-      firstAirDate: parseDateTime(json['first_air_date']),
       genreIds: genreIds,
       originCountry: countries,
       originalLanguage: json['original_language'],

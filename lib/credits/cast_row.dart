@@ -15,7 +15,7 @@ class CreditsCastRow {
     //TODO final textTheme = Theme.of(context).textTheme;
     final string = AppLocalizations.of(context);
 
-    final date = item.releaseDate ?? item.firstAirDate;
+    final date = item.media.date();
     final year = date?.year?.toString() ?? "—";
     final yearWidget = Text(year);
 

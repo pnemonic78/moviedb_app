@@ -7,8 +7,6 @@ import 'person.dart';
 class MovieCredit {
   final String creditId;
   final String backdropPath;
-  final int episodeCount;
-  final DateTime firstAirDate;
   final List<int> genreIds;
   final Movie movie;
   final List<String> originCountry;
@@ -27,8 +25,6 @@ class MovieCredit {
   MovieCredit({
     this.backdropPath,
     @required this.creditId,
-    this.episodeCount,
-    this.firstAirDate,
     this.genreIds,
     @required this.movie,
     this.originCountry,
@@ -66,8 +62,6 @@ class MovieCredit {
     return MovieCredit(
       backdropPath: json['backdrop_path'],
       creditId: json['credit_id'],
-      episodeCount: json['episode_count'],
-      firstAirDate: parseDateTime(json['first_air_date']),
       genreIds: genreIds,
       movie: Movie.fromJson(json),
       originCountry: countries,

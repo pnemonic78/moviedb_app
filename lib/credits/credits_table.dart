@@ -85,7 +85,7 @@ class CreditsTable extends StatelessWidget {
   }
 
   DateTime _getDate(PersonCredit credit) {
-    return credit.releaseDate ?? credit.firstAirDate ?? _dateFuture;
+    return credit.media.date() ?? _dateFuture;
   }
 
   List<TableRow> _buildCastList(BuildContext context, List<PersonCast> cast) {

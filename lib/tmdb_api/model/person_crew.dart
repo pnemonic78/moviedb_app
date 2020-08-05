@@ -16,8 +16,6 @@ class PersonCrew extends PersonCredit {
           backdropPath: credit.backdropPath,
           creditId: credit.creditId,
           media: credit.media,
-          episodeCount: credit.episodeCount,
-          firstAirDate: credit.firstAirDate,
           genreIds: credit.genreIds,
           originCountry: credit.originCountry,
           originalLanguage: credit.originalLanguage,

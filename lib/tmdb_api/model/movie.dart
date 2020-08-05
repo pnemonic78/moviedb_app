@@ -63,4 +63,9 @@ class Movie extends Media {
   }
 
   Movie.of(Media media) : this(media: media);
+
+  @override
+  DateTime date() {
+    return releaseDate;
+  }
 }
