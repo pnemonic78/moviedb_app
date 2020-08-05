@@ -1,11 +1,13 @@
 import 'package:flutter/foundation.dart';
 
 import 'dates.dart';
+import 'media.dart';
 import 'person.dart';
 
 class PersonCredit extends Person {
-  final String creditId;
   final String backdropPath;
+  final String creditId;
+  final Media creditMedia;
   final int episodeCount;
   final DateTime firstAirDate;
   final List<int> genreIds;
@@ -25,6 +27,7 @@ class PersonCredit extends Person {
   PersonCredit({
     this.backdropPath,
     @required this.creditId,
+    @required this.creditMedia,
     this.episodeCount,
     this.firstAirDate,
     this.genreIds,
@@ -70,6 +73,7 @@ class PersonCredit extends Person {
     return PersonCredit(
       backdropPath: json['backdrop_path'],
       creditId: json['credit_id'],
+      creditMedia: Media.fromJsonType(json),
       episodeCount: json['episode_count'],
       firstAirDate: parseDateTime(json['first_air_date']),
       genreIds: genreIds,
