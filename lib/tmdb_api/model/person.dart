@@ -1,4 +1,4 @@
-import 'package:tmdb/tmdb_api/credits_response.dart';
+import 'package:tmdb/tmdb_api/person_credits_response.dart';
 
 import 'dates.dart';
 import 'external_ids.dart';
@@ -18,7 +18,7 @@ class Person extends Media {
   final String imdbId;
   final String homepage;
   final PersonExternalIds externalIds;
-  final CreditsResponse credits;
+  final PersonCreditsResponse credits;
 
   const Person(
     final int id,
@@ -71,7 +71,7 @@ class Person extends Media {
       imdbId: json['imdb_id'],
       homepage: json['homepage'],
       externalIds: PersonExternalIds.fromJson(json['external_ids']),
-      credits: CreditsResponse.fromJson(json['combined_credits']),
+      credits: PersonCreditsResponse.fromJson(json['combined_credits']),
     );
   }
 }
