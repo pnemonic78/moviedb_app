@@ -35,7 +35,7 @@ class MovieCrew extends MovieCredit {
 
   @override
   String toString() {
-    return '{id: $id, name: "${person?.name}", department: "$department", job: "$job"}';
+    return '{id: ${person.id}, name: "${person.name}", department: "$department", job: "$job"}';
   }
 
   /// Creates a [MovieCrew] from a JSON object.

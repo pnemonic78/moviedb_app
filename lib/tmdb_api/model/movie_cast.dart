@@ -36,7 +36,7 @@ class MovieCast extends MovieCredit {
 
   @override
   String toString() {
-    return '{id: $id, name: "${person?.name}", character: "$character"}';
+    return '{id: ${person.id}, name: "${person.name}", character: "$character"}';
   }
 
   /// Creates a [MovieCast] from a JSON object.

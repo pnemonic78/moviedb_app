@@ -16,7 +16,7 @@ class PersonCast extends PersonCredit {
   }) : super(
           backdropPath: credit.backdropPath,
           creditId: credit.creditId,
-          creditMedia: credit.creditMedia,
+          media: credit.media,
           episodeCount: credit.episodeCount,
           firstAirDate: credit.firstAirDate,
           genreIds: credit.genreIds,

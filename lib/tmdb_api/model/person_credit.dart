@@ -7,7 +7,7 @@ import 'person.dart';
 class PersonCredit {
   final String backdropPath;
   final String creditId;
-  final Media creditMedia;
+  final Media media;
   final int episodeCount;
   final DateTime firstAirDate;
   final List<int> genreIds;
@@ -27,7 +27,7 @@ class PersonCredit {
   PersonCredit({
     this.backdropPath,
     @required this.creditId,
-    @required this.creditMedia,
+    @required this.media,
     this.episodeCount,
     this.firstAirDate,
     this.genreIds,
@@ -44,6 +44,8 @@ class PersonCredit {
     this.voteAverage,
     this.voteCount,
   })  : assert(creditId != null),
+        assert(media != null),
+        assert(person != null),
         super();
 
   @override
@@ -64,7 +66,7 @@ class PersonCredit {
     return PersonCredit(
       backdropPath: json['backdrop_path'],
       creditId: json['credit_id'],
-      creditMedia: Media.fromJsonType(json),
+      media: Media.fromJsonType(json),
       episodeCount: json['episode_count'],
       firstAirDate: parseDateTime(json['first_air_date']),
       genreIds: genreIds,

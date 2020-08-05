@@ -4,7 +4,7 @@ import 'dates.dart';
 import 'movie.dart';
 import 'person.dart';
 
-class MovieCredit extends Movie {
+class MovieCredit {
   final String creditId;
   final String backdropPath;
   final int episodeCount;
@@ -44,20 +44,14 @@ class MovieCredit extends Movie {
     this.voteAverage,
     this.voteCount,
   })  : assert(creditId != null),
-        super(
-          backdropPath: movie.backdropPath,
-          genreIds: movie.genreIds,
-          media: movie.media,
-          originalLanguage: movie.originalLanguage,
-          originalTitle: movie.originalTitle,
-          overview: movie.overview,
-          posterPath: movie.posterPath,
-          releaseDate: movie.releaseDate,
-          title: movie.title,
-          video: movie.video,
-          voteAverage: movie.voteAverage,
-          voteCount: movie.voteCount,
-        );
+        assert(movie != null),
+        assert(person != null),
+        super();
+
+  @override
+  String toString() {
+    return person.toString();
+  }
 
   /// Creates a [MovieCredit] from a JSON object.
   factory MovieCredit.fromJson(Map<String, dynamic> json) {

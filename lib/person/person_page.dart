@@ -103,10 +103,10 @@ class _PersonPageState extends State<PersonPage> {
 
   /// Navigates to the movie.
   void _navigateToMovie(PersonCredit credit) {
-    final type = credit.creditMedia.mediaType;
+    final type = credit.media.mediaType;
     if (type != MediaType.movie) return; //TODO we only support movies for now.
 
-    Movie movie = Movie.of(credit.creditMedia);
+    Movie movie = Movie.of(credit.media);
 
     Navigator.push(
         context,
