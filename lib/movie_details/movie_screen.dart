@@ -8,7 +8,7 @@ import 'package:tmdb/credits/cast_list.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
-import 'package:tmdb/tmdb_api/model/movie_cast.dart';
+import 'package:tmdb/tmdb_api/model/media_cast.dart';
 import 'package:tmdb/tmdb_api/model/movie_details.dart';
 import 'package:tmdb/tmdb_api/model/video.dart';
 import 'package:tmdb/videos/videos_list.dart';
@@ -24,7 +24,7 @@ class MovieDetailsWidget extends StatefulWidget {
   final MovieDetails movie;
   final ValueChanged<MovieDetails> onPosterTap;
   final ValueChanged<MovieVideo> onVideoTap;
-  final ValueChanged<MovieCast> onCastTap;
+  final ValueChanged<MediaCast> onCastTap;
 
   const MovieDetailsWidget({
     Key key,

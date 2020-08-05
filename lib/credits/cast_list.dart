@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/credits_response.dart';
-import 'package:tmdb/tmdb_api/model/movie_cast.dart';
+import 'package:tmdb/tmdb_api/model/media_cast.dart';
 import 'package:tmdb/tmdb_api/model/movie_details.dart';
 
 import 'cast_tile.dart';
 
 class CastList extends StatelessWidget {
   final MovieDetails movie;
-  final ValueChanged<MovieCast> onTap;
+  final ValueChanged<MediaCast> onTap;
   final TMDBApi _api = TMDBApi();
 
   CastList({Key key, @required this.movie, this.onTap})
@@ -47,7 +47,7 @@ class CastList extends StatelessWidget {
     return movie.credits ?? _api.getMovieCredits(context, movie);
   }
 
-  List<Widget> _buildCastList(BuildContext context, List<MovieCast> cast) {
+  List<Widget> _buildCastList(BuildContext context, List<MediaCast> cast) {
     final list = <Widget>[];
     cast.sort((a, b) => a.order.compareTo(b.order));
 

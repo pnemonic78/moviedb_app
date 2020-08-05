@@ -1,10 +1,10 @@
-import 'model/movie_cast.dart';
-import 'model/movie_crew.dart';
+import 'model/media_cast.dart';
+import 'model/media_crew.dart';
 
 class CreditsResponse {
   final int id;
-  final List<MovieCast> cast;
-  final List<MovieCrew> crew;
+  final List<MediaCast> cast;
+  final List<MediaCrew> crew;
 
   const CreditsResponse({this.id, this.cast, this.crew});
 
@@ -13,10 +13,10 @@ class CreditsResponse {
     if (json == null) return null;
 
     var list = json['cast'] as List;
-    List<MovieCast> cast = list?.map((i) => MovieCast.fromJson(i))?.toList();
+    List<MediaCast> cast = list?.map((i) => MediaCast.fromJson(i))?.toList();
 
     list = json['crew'] as List;
-    List<MovieCrew> crew = list?.map((i) => MovieCrew.fromJson(i))?.toList();
+    List<MediaCrew> crew = list?.map((i) => MediaCrew.fromJson(i))?.toList();
 
     return CreditsResponse(
       id: json['id'],

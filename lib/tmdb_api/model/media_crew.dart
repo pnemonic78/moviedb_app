@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 
-import 'movie_credit.dart';
+import 'media_credit.dart';
 
-class MovieCrew extends MovieCredit {
-  final MovieCredit credit;
+class MediaCrew extends MediaCredit {
+  final MediaCredit credit;
   final String department;
   final String job;
 
-  MovieCrew({
+  MediaCrew({
     @required this.credit,
     this.department,
     @required this.job,
@@ -23,12 +23,12 @@ class MovieCrew extends MovieCredit {
     return '{id: ${person.id}, name: "${person.name}", department: "$department", job: "$job"}';
   }
 
-  /// Creates a [MovieCrew] from a JSON object.
-  factory MovieCrew.fromJson(Map<String, dynamic> json) {
+  /// Creates a [MediaCrew] from a JSON object.
+  factory MediaCrew.fromJson(Map<String, dynamic> json) {
     if (json == null) return null;
 
-    return MovieCrew(
-      credit: MovieCredit.fromJson(json),
+    return MediaCrew(
+      credit: MediaCredit.fromJson(json),
       department: json['department'],
       job: json['job'],
     );

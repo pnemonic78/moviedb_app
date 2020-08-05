@@ -1,14 +1,14 @@
 import 'package:flutter/foundation.dart';
 
-import 'movie_credit.dart';
+import 'media_credit.dart';
 
-class MovieCast extends MovieCredit {
+class MediaCast extends MediaCredit {
   final int castId;
   final String character;
-  final MovieCredit credit;
+  final MediaCredit credit;
   final int order;
 
-  MovieCast({
+  MediaCast({
     this.castId,
     this.character,
     @required this.credit,
@@ -24,14 +24,14 @@ class MovieCast extends MovieCredit {
     return '{id: ${person.id}, name: "${person.name}", character: "$character"}';
   }
 
-  /// Creates a [MovieCast] from a JSON object.
-  factory MovieCast.fromJson(Map<String, dynamic> json) {
+  /// Creates a [MediaCast] from a JSON object.
+  factory MediaCast.fromJson(Map<String, dynamic> json) {
     if (json == null) return null;
 
-    return MovieCast(
+    return MediaCast(
       castId: json['cast_id'],
       character: json['character'],
-      credit: MovieCredit.fromJson(json),
+      credit: MediaCredit.fromJson(json),
       order: json['order'],
     );
   }

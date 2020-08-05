@@ -4,11 +4,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
-import 'package:tmdb/tmdb_api/model/movie_cast.dart';
+import 'package:tmdb/tmdb_api/model/media_cast.dart';
 
 class CastTile extends StatelessWidget {
-  final MovieCast cast;
-  final ValueChanged<MovieCast> onTap;
+  final MediaCast cast;
+  final ValueChanged<MediaCast> onTap;
 
   const CastTile({
     Key key,

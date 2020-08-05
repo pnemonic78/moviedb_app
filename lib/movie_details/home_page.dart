@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:tmdb/movie_details/poster_page.dart';
 import 'package:tmdb/person/person_page.dart';
 import 'package:tmdb/tmdb_api/api.dart';
+import 'package:tmdb/tmdb_api/model/media_cast.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
-import 'package:tmdb/tmdb_api/model/movie_cast.dart';
 import 'package:tmdb/tmdb_api/model/movie_details.dart';
 import 'package:tmdb/tmdb_api/model/person.dart';
 import 'package:tmdb/tmdb_api/model/video.dart';
@@ -163,8 +163,8 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
                 )));
   }
 
-  /// Function to call when a [MovieCast] is tapped.
-  void _onCastTap(MovieCast cast) {
+  /// Function to call when a [MediaCast] is tapped.
+  void _onCastTap(MediaCast cast) {
     setState(() {
       _navigateToPerson(cast.person);
     });

@@ -3,13 +3,13 @@ import 'package:flutter/foundation.dart';
 import 'movie.dart';
 import 'person.dart';
 
-/// A [Media] with a [Person].
-class MovieCredit {
+/// A [Person] credit that belongs to a [Media].
+class MediaCredit {
   final String creditId;
   final Movie movie;
   final Person person;
 
-  MovieCredit({
+  MediaCredit({
     @required this.creditId,
     @required this.movie,
     @required this.person,
@@ -23,11 +23,11 @@ class MovieCredit {
     return person.toString();
   }
 
-  /// Creates a [MovieCredit] from a JSON object.
-  factory MovieCredit.fromJson(Map<String, dynamic> json) {
+  /// Creates a [MediaCredit] from a JSON object.
+  factory MediaCredit.fromJson(Map<String, dynamic> json) {
     if (json == null) return null;
 
-    return MovieCredit(
+    return MediaCredit(
       creditId: json['credit_id'],
       movie: Movie.fromJson(json),
       person: Person.fromJson(json),
