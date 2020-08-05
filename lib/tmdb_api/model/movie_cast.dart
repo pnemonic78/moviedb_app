@@ -1,18 +1,20 @@
-import 'package:tmdb/tmdb_api/model/credit.dart';
+import 'package:tmdb/tmdb_api/model/movie_credit.dart';
 import 'package:tmdb/tmdb_api/model/person.dart';
 
 import 'external_ids.dart';
 import 'gender.dart';
 import 'media_type.dart';
 
-class MovieCrew extends MovieCredit {
-  final String department;
-  final String job;
+class MovieCast extends MovieCredit {
+  final int castId;
+  final String character;
+  final int order;
 
-  const MovieCrew(
-    int id,
-    String name,
-    String creditId, {
+  const MovieCast(
+    final int id,
+    final String name,
+    final String creditId,
+    this.castId, {
     // person
     final List<String> aliases,
     final String profilePath,
@@ -44,9 +46,9 @@ class MovieCrew extends MovieCredit {
     final bool video,
     final double voteAverage,
     final int voteCount,
-    // crew
-    this.department,
-    this.job,
+    // cast
+    this.character,
+    this.order,
   }) : super(
           id,
           name,
@@ -86,20 +88,21 @@ class MovieCrew extends MovieCredit {
 
   @override
   String toString() {
-    return '{id: $id, name: "$name", department: "$department", job: "$job"}';
+    return '{id: $id, name: "$name", character: "$character"}';
   }
 
-  /// Creates a [MovieCrew] from a JSON object.
-  factory MovieCrew.fromJson(Map<String, dynamic> json) {
+  /// Creates a [MovieCast] from a JSON object.
+  factory MovieCast.fromJson(Map<String, dynamic> json) {
     if (json == null) return null;
 
     final credit = MovieCredit.fromJson(json);
     final Person person = credit;
 
-    return MovieCrew(
+    return MovieCast(
       credit.id,
       credit.name,
       credit.creditId,
+      json['cast_id'],
 
       // person
       aliases: person.aliases,
@@ -134,9 +137,9 @@ class MovieCrew extends MovieCredit {
       voteAverage: credit.voteAverage,
       voteCount: credit.voteCount,
 
-      // crew
-      department: json['department'],
-      job: json['job'],
+      // cast
+      character: json['character'],
+      order: json['order'],
     );
   }
 }

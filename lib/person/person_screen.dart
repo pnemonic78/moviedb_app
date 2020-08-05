@@ -9,9 +9,9 @@ import 'package:tmdb/credits/credits_table.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
-import 'package:tmdb/tmdb_api/model/cast.dart';
-import 'package:tmdb/tmdb_api/model/crew.dart';
 import 'package:tmdb/tmdb_api/model/gender.dart';
+import 'package:tmdb/tmdb_api/model/movie_cast.dart';
+import 'package:tmdb/tmdb_api/model/movie_crew.dart';
 import 'package:tmdb/tmdb_api/model/person.dart';
 import 'package:url_launcher/url_launcher.dart';
 

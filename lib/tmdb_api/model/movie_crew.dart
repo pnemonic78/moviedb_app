@@ -1,20 +1,18 @@
-import 'package:tmdb/tmdb_api/model/credit.dart';
+import 'package:tmdb/tmdb_api/model/movie_credit.dart';
 import 'package:tmdb/tmdb_api/model/person.dart';
 
 import 'external_ids.dart';
 import 'gender.dart';
 import 'media_type.dart';
 
-class MovieCast extends MovieCredit {
-  final int castId;
-  final String character;
-  final int order;
+class MovieCrew extends MovieCredit {
+  final String department;
+  final String job;
 
-  const MovieCast(
-    final int id,
-    final String name,
-    final String creditId,
-    this.castId, {
+  const MovieCrew(
+    int id,
+    String name,
+    String creditId, {
     // person
     final List<String> aliases,
     final String profilePath,
@@ -46,9 +44,9 @@ class MovieCast extends MovieCredit {
     final bool video,
     final double voteAverage,
     final int voteCount,
-    // cast
-    this.character,
-    this.order,
+    // crew
+    this.department,
+    this.job,
   }) : super(
           id,
           name,
@@ -88,21 +86,20 @@ class MovieCast extends MovieCredit {
 
   @override
   String toString() {
-    return '{id: $id, name: "$name", character: "$character"}';
+    return '{id: $id, name: "$name", department: "$department", job: "$job"}';
   }
 
-  /// Creates a [MovieCast] from a JSON object.
-  factory MovieCast.fromJson(Map<String, dynamic> json) {
+  /// Creates a [MovieCrew] from a JSON object.
+  factory MovieCrew.fromJson(Map<String, dynamic> json) {
     if (json == null) return null;
 
     final credit = MovieCredit.fromJson(json);
     final Person person = credit;
 
-    return MovieCast(
+    return MovieCrew(
       credit.id,
       credit.name,
       credit.creditId,
-      json['cast_id'],
 
       // person
       aliases: person.aliases,
@@ -137,9 +134,9 @@ class MovieCast extends MovieCredit {
       voteAverage: credit.voteAverage,
       voteCount: credit.voteCount,
 
-      // cast
-      character: json['character'],
-      order: json['order'],
+      // crew
+      department: json['department'],
+      job: json['job'],
     );
   }
 }

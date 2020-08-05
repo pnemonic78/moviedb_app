@@ -1,5 +1,5 @@
-import 'model/cast.dart';
-import 'model/crew.dart';
+import 'model/movie_cast.dart';
+import 'model/movie_crew.dart';
 
 class CreditsResponse {
   final int id;

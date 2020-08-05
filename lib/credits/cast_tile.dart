@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
-import 'package:tmdb/tmdb_api/model/cast.dart';
+import 'package:tmdb/tmdb_api/model/movie_cast.dart';
 
 class CastTile extends StatelessWidget {
   final MovieCast cast;

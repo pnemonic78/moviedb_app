@@ -8,7 +8,7 @@ import 'package:tmdb/credits/cast_list.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
-import 'package:tmdb/tmdb_api/model/cast.dart';
+import 'package:tmdb/tmdb_api/model/movie_cast.dart';
 import 'package:tmdb/tmdb_api/model/movie_details.dart';
 import 'package:tmdb/tmdb_api/model/video.dart';
 import 'package:tmdb/videos/videos_list.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
-import 'package:tmdb/tmdb_api/model/crew.dart';
+import 'package:tmdb/tmdb_api/model/movie_crew.dart';
 
 class CreditsCrewRow {
   List<Widget> build(

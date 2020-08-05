@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:tmdb/credits/crew_row.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
-import 'package:tmdb/tmdb_api/model/cast.dart';
-import 'package:tmdb/tmdb_api/model/credit.dart';
-import 'package:tmdb/tmdb_api/model/crew.dart';
+import 'package:tmdb/tmdb_api/model/movie_cast.dart';
+import 'package:tmdb/tmdb_api/model/movie_credit.dart';
+import 'package:tmdb/tmdb_api/model/movie_crew.dart';
 import 'package:tmdb/tmdb_api/person_credits_response.dart';
 
 import 'cast_row.dart';
