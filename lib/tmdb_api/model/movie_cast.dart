@@ -19,7 +19,6 @@ class MovieCast extends MovieCredit {
           episodeCount: credit.episodeCount,
           firstAirDate: credit.firstAirDate,
           genreIds: credit.genreIds,
-          mediaType: credit.mediaType,
           movie: credit.movie,
           originCountry: credit.originCountry,
           originalLanguage: credit.originalLanguage,

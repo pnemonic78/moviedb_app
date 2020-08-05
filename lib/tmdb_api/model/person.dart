@@ -5,6 +5,7 @@ import 'dates.dart';
 import 'external_ids.dart';
 import 'gender.dart';
 import 'media.dart';
+import 'media_type.dart';
 
 class Person extends Media {
   final List<String> aliases;
@@ -41,6 +42,7 @@ class Person extends Media {
         super(
           adult: media.adult,
           id: media.id,
+          mediaType: media.mediaType ?? MediaType.person,
           popularity: media.popularity,
         );
 

@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 
 import 'dates.dart';
 import 'media.dart';
+import 'media_type.dart';
 
 class Movie extends Media {
   final String backdropPath;
@@ -34,6 +35,7 @@ class Movie extends Media {
         super(
           adult: media.adult,
           id: media.id,
+          mediaType: media.mediaType ?? MediaType.movie,
           popularity: media.popularity,
         );
 

@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 
 import 'dates.dart';
-import 'media_type.dart';
 import 'person.dart';
 
 class PersonCredit extends Person {
@@ -10,7 +9,6 @@ class PersonCredit extends Person {
   final int episodeCount;
   final DateTime firstAirDate;
   final List<int> genreIds;
-  final MediaType mediaType;
   final List<String> originCountry;
   final String originalLanguage;
   final String originalName;
@@ -30,7 +28,6 @@ class PersonCredit extends Person {
     this.episodeCount,
     this.firstAirDate,
     this.genreIds,
-    this.mediaType,
     @required this.person,
     this.originCountry,
     this.originalLanguage,
@@ -76,7 +73,6 @@ class PersonCredit extends Person {
       episodeCount: json['episode_count'],
       firstAirDate: parseDateTime(json['first_air_date']),
       genreIds: genreIds,
-      mediaType: MediaType.fromJson(json['media_type']),
       originCountry: countries,
       originalLanguage: json['original_language'],
       originalName: json['original_name'],

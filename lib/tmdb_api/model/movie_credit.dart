@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 
 import 'dates.dart';
-import 'media_type.dart';
 import 'movie.dart';
 import 'person.dart';
 
@@ -11,7 +10,6 @@ class MovieCredit extends Movie {
   final int episodeCount;
   final DateTime firstAirDate;
   final List<int> genreIds;
-  final MediaType mediaType;
   final Movie movie;
   final List<String> originCountry;
   final String originalLanguage;
@@ -32,7 +30,6 @@ class MovieCredit extends Movie {
     this.episodeCount,
     this.firstAirDate,
     this.genreIds,
-    this.mediaType,
     @required this.movie,
     this.originCountry,
     this.originalLanguage,
@@ -78,7 +75,6 @@ class MovieCredit extends Movie {
       episodeCount: json['episode_count'],
       firstAirDate: parseDateTime(json['first_air_date']),
       genreIds: genreIds,
-      mediaType: MediaType.fromJson(json['media_type']),
       movie: Movie.fromJson(json),
       originCountry: countries,
       originalLanguage: json['original_language'],

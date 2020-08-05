@@ -16,7 +16,7 @@ class MediaType {
   }
 
   factory MediaType.fromJson(String json) {
-    if (json == null) return MediaType.all;
-    return values.firstWhere((v) => json == v.name) ?? MediaType.all;
+    if (json == null) return null;
+    return values.firstWhere((v) => json == v.name);
   }
 }

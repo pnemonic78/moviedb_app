@@ -19,7 +19,6 @@ class PersonCast extends PersonCredit {
           episodeCount: credit.episodeCount,
           firstAirDate: credit.firstAirDate,
           genreIds: credit.genreIds,
-          mediaType: credit.mediaType,
           originCountry: credit.originCountry,
           originalLanguage: credit.originalLanguage,
           originalName: credit.originalName,
