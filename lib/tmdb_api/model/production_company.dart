@@ -1,7 +1,16 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'production_company.g.dart';
+
+@JsonSerializable(explicitToJson: true, createToJson: false)
 class ProductionCompany {
+  @JsonKey(name: 'id')
   int id;
+  @JsonKey(name: 'name')
   String name;
+  @JsonKey(name: 'logo_path')
   String logoPath;
+  @JsonKey(name: 'origin_country')
   String originCountry;
 
   ProductionCompany({
@@ -16,11 +25,6 @@ class ProductionCompany {
     return name;
   }
 
-  factory ProductionCompany.fromJson(Map<String, dynamic> json) {
-    return ProductionCompany(
-        id: json['id'],
-        name: json['name'],
-        logoPath: json['logo_path'],
-        originCountry: json['origin_country']);
-  }
+  factory ProductionCompany.fromJson(Map<String, dynamic> json) =>
+      _$ProductionCompanyFromJson(json);
 }

@@ -1,22 +1,12 @@
-class MediaType {
-  final String name;
+import 'package:json_annotation/json_annotation.dart';
 
-  const MediaType(this.name);
-
-  static const all = MediaType("all");
-  static const movie = MediaType("movie");
-  static const tv = MediaType("tv");
-  static const person = MediaType("person");
-
-  static const values = [all, movie, tv, person];
-
-  @override
-  String toString() {
-    return name;
-  }
-
-  factory MediaType.valueOf(String json) {
-    if (json == null) return null;
-    return values.firstWhere((v) => json == v.name);
-  }
+enum MediaType {
+  @JsonValue("all")
+  all,
+  @JsonValue("movie")
+  movie,
+  @JsonValue("tv")
+  tv,
+  @JsonValue("person")
+  person,
 }

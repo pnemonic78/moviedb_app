@@ -1,14 +1,22 @@
 import 'package:flutter/foundation.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:tmdb/tmdb_api/model/tv.dart';
 
 import 'media_type.dart';
 import 'movie.dart';
 import 'person.dart';
 
+part 'media.g.dart';
+
+@JsonSerializable(explicitToJson: true, createToJson: false)
 class Media {
+  @JsonKey(name: 'adult')
   bool adult;
+  @JsonKey(name: 'id')
   int id;
+  @JsonKey(name: 'media_type')
   MediaType mediaType;
+  @JsonKey(name: 'popularity')
   double popularity;
 
   Media({
@@ -19,21 +27,13 @@ class Media {
   }) : assert(id != null);
 
   /// Creates a [Media] from a JSON object.
-  factory Media.fromJson(Map<String, dynamic> json) {
-    if (json == null) return null;
-
-    return Media(
-      adult: json['adult'],
-      id: json['id'],
-      mediaType: MediaType.valueOf(json['media_type']),
-      popularity: json['popularity']?.toDouble(),
-    );
-  }
+  factory Media.fromJson(Map<String, dynamic> json) =>
+      (json != null) ? _$MediaFromJson(json) : null;
 
   factory Media.fromJsonType(Map<String, dynamic> json) {
     if (json == null) return null;
 
-    final mediaType = MediaType.valueOf(json['media_type']) ?? MediaType.all;
+    final mediaType =  _$enumDecodeNullable(_$MediaTypeEnumMap, json['media_type']) ?? MediaType.all;
 
     switch (mediaType) {
       case MediaType.movie:
