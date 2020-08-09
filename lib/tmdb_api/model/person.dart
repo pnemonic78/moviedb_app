@@ -1,26 +1,43 @@
 import 'package:flutter/foundation.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:tmdb/tmdb_api/person_credits_response.dart';
 
-import 'dates.dart';
 import 'external_ids.dart';
 import 'gender.dart';
 import 'media.dart';
 import 'media_type.dart';
 
+part 'person.g.dart';
+
+@JsonSerializable(explicitToJson: true, createToJson: false)
 class Person extends Media {
+  @JsonKey(name: 'also_known_as')
   List<String> aliases;
+  @JsonKey(name: 'biography')
   String biography;
+  @JsonKey(name: 'birthday')
   DateTime birthday;
+  @JsonKey(name: 'combined_credits')
   PersonCreditsResponse credits;
+  @JsonKey(name: 'place_of_birth')
   String birthplace;
+  @JsonKey(name: 'deathday')
   DateTime deathday;
+  @JsonKey(name: 'external_ids')
   PersonExternalIds externalIds;
+  @JsonKey(name: 'gender')
   Gender gender;
+  @JsonKey(name: 'homepage')
   String homepage;
+  @JsonKey(name: 'imdb_id')
   String imdbId;
+  @JsonKey(name: 'known_for_department')
   String knownDepartment;
+  @JsonKey(name: 'name')
   String name;
+  @JsonKey(name: 'original_name')
   String originalName;
+  @JsonKey(name: 'profile_path')
   String profilePath;
 
   Person({
@@ -53,30 +70,8 @@ class Person extends Media {
   }
 
   /// Creates a [Person] from a JSON object.
-  factory Person.fromJson(Map<String, dynamic> json) {
-    if (json == null) return null;
-
-    var list = json['also_known_as'] as List;
-    List<String> aliases = list?.map((i) => i.toString())?.toList();
-
-    return Person(
-      aliases: aliases,
-      biography: json['biography'],
-      birthday: parseDateTime(json['birthday']),
-      birthplace: json['place_of_birth'],
-      credits: PersonCreditsResponse.fromJson(json['combined_credits']),
-      deathday: parseDateTime(json['deathday']),
-      externalIds: PersonExternalIds.fromJson(json['external_ids']),
-      gender: Gender.valueOf(json['gender']),
-      homepage: json['homepage'],
-      imdbId: json['imdb_id'],
-      knownDepartment: json['known_for_department'],
-      media: Media.fromJson(json),
-      name: json['name'],
-      originalName: json['original_name'],
-      profilePath: json['profile_path'],
-    );
-  }
+  factory Person.fromJson(Map<String, dynamic> json) =>
+      (json != null) ? _$PersonFromJson(json) : null;
 
   @override
   DateTime date() {
