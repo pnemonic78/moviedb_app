@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'now_playing/home_page.dart';
+import 'now_playing/now_playing_page.dart';
 import 'res/i18n.dart';
 
 class MyApp extends StatelessWidget {
