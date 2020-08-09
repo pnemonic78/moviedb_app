@@ -3,9 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'media_credit.dart';
 
 class MediaCrew extends MediaCredit {
-  final MediaCredit credit;
-  final String department;
-  final String job;
+  MediaCredit credit;
+  String department;
+  String job;
 
   MediaCrew({
     @required this.credit,

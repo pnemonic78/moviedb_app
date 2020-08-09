@@ -1,11 +1,15 @@
 import 'model/image.dart';
 
 class ImagesResponse {
-  final int id;
-  final List<MovieImage> backdrops;
-  final List<MovieImage> posters;
+  int id;
+  List<MovieImage> backdrops;
+  List<MovieImage> posters;
 
-  const ImagesResponse({this.id, this.backdrops, this.posters});
+  ImagesResponse({
+    this.id,
+    this.backdrops,
+    this.posters,
+  });
 
   /// Creates a [ImagesResponse] from a JSON object.
   factory ImagesResponse.fromJson(Map<String, dynamic> json) {

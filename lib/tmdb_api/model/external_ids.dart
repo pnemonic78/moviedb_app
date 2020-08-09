@@ -1,28 +1,28 @@
 import 'package:flutter/foundation.dart';
 
 class PersonExternalIds {
-  final int id;
+  int id;
 
   /// IMDB ID
-  final String imdbId;
+  String imdbId;
 
   /// Facebook
-  final String facebookId;
+  String facebookId;
 
   /// Freebase MID
-  final String freebaseMid;
+  String freebaseMid;
 
   /// Freebase ID
-  final String freebaseId;
+  String freebaseId;
 
   /// Instagram
-  final String instagramId;
+  String instagramId;
 
   /// TVRage ID
-  final int tvRageId;
+  int tvRageId;
 
   /// Twitter
-  final String twitterId;
+  String twitterId;
 
   PersonExternalIds({
     @required this.id,

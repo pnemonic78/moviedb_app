@@ -1,8 +1,8 @@
 class SpokenLanguage {
-  final String id;
-  final String name;
+  String id;
+  String name;
 
-  const SpokenLanguage({this.id, this.name});
+  SpokenLanguage({this.id, this.name});
 
   @override
   String toString() {

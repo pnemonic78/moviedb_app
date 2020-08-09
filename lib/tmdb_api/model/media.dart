@@ -6,10 +6,10 @@ import 'movie.dart';
 import 'person.dart';
 
 class Media {
-  final bool adult;
-  final int id;
-  final MediaType mediaType;
-  final double popularity;
+  bool adult;
+  int id;
+  MediaType mediaType;
+  double popularity;
 
   Media({
     this.adult,

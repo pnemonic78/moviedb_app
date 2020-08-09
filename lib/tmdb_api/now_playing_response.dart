@@ -4,22 +4,23 @@ import 'model/dates.dart';
 import 'model/movie.dart';
 
 class MoviesNowPlayingResponse {
-  final List<Movie> results;
-  final Dates dates;
-  final int page;
-  final int totalPages;
-  final int totalResults;
+  List<Movie> results;
+  Dates dates;
+  int page;
+  int totalPages;
+  int totalResults;
 
-  const MoviesNowPlayingResponse(
-      {@required this.results,
-      this.dates,
-      @required this.page,
-      @required this.totalPages,
-      this.totalResults});
+  MoviesNowPlayingResponse({
+    @required this.results,
+    this.dates,
+    @required this.page,
+    @required this.totalPages,
+    this.totalResults,
+  });
 
   /// Creates a [MoviesNowPlayingResponse] from a JSON object.
   factory MoviesNowPlayingResponse.fromJson(Map<String, dynamic> json) {
-    final list = json['results'] as List;
+    var list = json['results'] as List;
     List<Movie> results = list.map((i) => Movie.fromJson(i)).toList();
 
     return MoviesNowPlayingResponse(

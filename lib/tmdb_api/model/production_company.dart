@@ -1,11 +1,15 @@
 class ProductionCompany {
-  final int id;
-  final String name;
-  final String logoPath;
-  final String originCountry;
+  int id;
+  String name;
+  String logoPath;
+  String originCountry;
 
-  const ProductionCompany(
-      {this.id, this.name, this.logoPath, this.originCountry});
+  ProductionCompany({
+    this.id,
+    this.name,
+    this.logoPath,
+    this.originCountry,
+  });
 
   @override
   String toString() {

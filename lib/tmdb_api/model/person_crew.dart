@@ -3,9 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'person_credit.dart';
 
 class PersonCrew extends PersonCredit {
-  final PersonCredit credit;
-  final String department;
-  final String job;
+  PersonCredit credit;
+  String department;
+  String job;
 
   PersonCrew({
     @required this.credit,

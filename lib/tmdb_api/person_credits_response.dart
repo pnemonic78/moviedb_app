@@ -2,11 +2,15 @@ import 'model/person_cast.dart';
 import 'model/person_crew.dart';
 
 class PersonCreditsResponse {
-  final int id;
-  final List<PersonCast> cast;
-  final List<PersonCrew> crew;
+  int id;
+  List<PersonCast> cast;
+  List<PersonCrew> crew;
 
-  const PersonCreditsResponse({this.id, this.cast, this.crew});
+  PersonCreditsResponse({
+    this.id,
+    this.cast,
+    this.crew,
+  });
 
   /// Creates a [PersonCreditsResponse] from a JSON object.
   factory PersonCreditsResponse.fromJson(Map<String, dynamic> json) {

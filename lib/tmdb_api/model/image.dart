@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 
 class MovieImage {
-  final String id;
-  final Locale locale;
-  final int width;
-  final int height;
-  final double aspectRatio;
-  final String path;
-  final double voteAverage;
-  final int voteCount;
+  String id;
+  Locale locale;
+  int width;
+  int height;
+  double aspectRatio;
+  String path;
+  double voteAverage;
+  int voteCount;
 
-  const MovieImage(
-      {this.id,
-      this.locale,
-      this.width,
-      this.height,
-      this.aspectRatio,
-      this.path,
-      this.voteAverage,
-      this.voteCount});
-
+  MovieImage({
+    this.id,
+    this.locale,
+    this.width,
+    this.height,
+    this.aspectRatio,
+    this.path,
+    this.voteAverage,
+    this.voteCount,
+  });
 
   @override
   String toString() {
@@ -28,9 +28,9 @@ class MovieImage {
 
   /// Creates a [MovieImage] from a JSON object.
   factory MovieImage.fromJson(Map<String, dynamic> json) {
-    final String languageCode = json['iso_639_1'] ?? 'und';
-    final String countryCode = json['iso_3166_1'] ?? '';
-    final Locale locale = Locale(languageCode, countryCode);
+    String languageCode = json['iso_639_1'] ?? 'und';
+    String countryCode = json['iso_3166_1'] ?? '';
+    Locale locale = Locale(languageCode, countryCode);
 
     return MovieImage(
       id: json['id'],

@@ -1,9 +1,9 @@
 class ApiError {
-  final int statusCode;
-  final String statusMessage;
-  final bool success;
+  int statusCode;
+  String statusMessage;
+  bool success;
 
-  const ApiError({this.statusCode, this.statusMessage, this.success});
+  ApiError({this.statusCode, this.statusMessage, this.success});
 
   /// Creates a [ApiError] from a JSON object.
   factory ApiError.fromJson(Map<String, dynamic> json) {

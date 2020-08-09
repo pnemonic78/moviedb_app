@@ -5,9 +5,9 @@ import 'dates.dart';
 import 'media_type.dart';
 
 class Television extends Media {
-  final int episodeCount;
-  final DateTime firstAirDate;
-  final Media media;
+  int episodeCount;
+  DateTime firstAirDate;
+  Media media;
 
   Television({
     this.episodeCount,

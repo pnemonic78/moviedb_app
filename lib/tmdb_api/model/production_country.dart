@@ -1,8 +1,8 @@
 class ProductionCountry {
-  final String id;
-  final String name;
+  String id;
+  String name;
 
-  const ProductionCountry({this.id, this.name});
+  ProductionCountry({this.id, this.name});
 
   @override
   String toString() {

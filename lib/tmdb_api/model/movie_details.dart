@@ -10,19 +10,19 @@ import 'production_company.dart';
 import 'production_country.dart';
 
 class MovieDetails extends Movie {
-  final int budget;
-  final CreditsResponse credits;
-  final List<Genre> genres;
-  final String homepage;
-  final String imdbId;
-  final Movie movie;
-  final List<ProductionCompany> productionCompanies;
-  final List<ProductionCountry> productionCountries;
-  final int revenue;
-  final int runtime;
-  final List<SpokenLanguage> spokenLanguages;
-  final MovieStatus status;
-  final String tagline;
+  int budget;
+  CreditsResponse credits;
+  List<Genre> genres;
+  String homepage;
+  String imdbId;
+  Movie movie;
+  List<ProductionCompany> productionCompanies;
+  List<ProductionCountry> productionCountries;
+  int revenue;
+  int runtime;
+  List<SpokenLanguage> spokenLanguages;
+  MovieStatus status;
+  String tagline;
 
   MovieDetails({
     this.budget,

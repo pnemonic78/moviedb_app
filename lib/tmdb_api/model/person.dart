@@ -8,21 +8,21 @@ import 'media.dart';
 import 'media_type.dart';
 
 class Person extends Media {
-  final List<String> aliases;
-  final String biography;
-  final DateTime birthday;
-  final PersonCreditsResponse credits;
-  final String birthplace;
-  final DateTime deathday;
-  final PersonExternalIds externalIds;
-  final Gender gender;
-  final String homepage;
-  final String imdbId;
-  final String knownDepartment;
-  final Media media;
-  final String name;
-  final String originalName;
-  final String profilePath;
+  List<String> aliases;
+  String biography;
+  DateTime birthday;
+  PersonCreditsResponse credits;
+  String birthplace;
+  DateTime deathday;
+  PersonExternalIds externalIds;
+  Gender gender;
+  String homepage;
+  String imdbId;
+  String knownDepartment;
+  Media media;
+  String name;
+  String originalName;
+  String profilePath;
 
   Person({
     this.aliases,

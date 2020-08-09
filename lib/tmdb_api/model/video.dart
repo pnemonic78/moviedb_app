@@ -32,22 +32,23 @@ class VideoType {
 }
 
 class MovieVideo {
-  final String id;
-  final Locale locale;
-  final String key;
-  final String name;
-  final String site;
-  final int size;
-  final VideoType type;
+  String id;
+  Locale locale;
+  String key;
+  String name;
+  String site;
+  int size;
+  VideoType type;
 
-  const MovieVideo(
-      {this.id,
-      this.locale,
-      this.key,
-      this.name,
-      this.site,
-      this.size,
-      this.type});
+  MovieVideo({
+    this.id,
+    this.locale,
+    this.key,
+    this.name,
+    this.site,
+    this.size,
+    this.type,
+  });
 
   @override
   String toString() {
@@ -56,9 +57,9 @@ class MovieVideo {
 
   /// Creates a [MovieVideo] from a JSON object.
   factory MovieVideo.fromJson(Map<String, dynamic> json) {
-    final String languageCode = json['iso_639_1'] ?? 'und';
-    final String countryCode = json['iso_3166_1'] ?? '';
-    final Locale locale = Locale(languageCode, countryCode);
+    String languageCode = json['iso_639_1'] ?? 'und';
+    String countryCode = json['iso_3166_1'] ?? '';
+    Locale locale = Locale(languageCode, countryCode);
 
     return MovieVideo(
       id: json['id'],

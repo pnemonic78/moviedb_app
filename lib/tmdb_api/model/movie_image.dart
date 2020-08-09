@@ -32,23 +32,23 @@ class MovieImageType {
 }
 
 class MovieImage {
-  final String id;
-  final Locale locale;
-  final String key;
-  final String name;
-  final String site;
-  final int size;
-  final MovieImageType type;
+  String id;
+  Locale locale;
+  String key;
+  String name;
+  String site;
+  int size;
+  MovieImageType type;
 
-  const MovieImage(
-      {this.id,
-      this.locale,
-      this.key,
-      this.name,
-      this.site,
-      this.size,
-      this.type});
-
+  MovieImage({
+    this.id,
+    this.locale,
+    this.key,
+    this.name,
+    this.site,
+    this.size,
+    this.type,
+  });
 
   @override
   String toString() {

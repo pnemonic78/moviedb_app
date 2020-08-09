@@ -2,11 +2,15 @@ import 'model/media_cast.dart';
 import 'model/media_crew.dart';
 
 class CreditsResponse {
-  final int id;
-  final List<MediaCast> cast;
-  final List<MediaCrew> crew;
+  int id;
+  List<MediaCast> cast;
+  List<MediaCrew> crew;
 
-  const CreditsResponse({this.id, this.cast, this.crew});
+  CreditsResponse({
+    this.id,
+    this.cast,
+    this.crew,
+  });
 
   /// Creates a [CreditsResponse] from a JSON object.
   factory CreditsResponse.fromJson(Map<String, dynamic> json) {

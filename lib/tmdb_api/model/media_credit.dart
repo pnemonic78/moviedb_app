@@ -5,9 +5,9 @@ import 'person.dart';
 
 /// A [Person] credit that belongs to a [Media].
 class MediaCredit {
-  final String creditId;
-  final Media media;
-  final Person person;
+  String creditId;
+  Media media;
+  Person person;
 
   MediaCredit({
     @required this.creditId,

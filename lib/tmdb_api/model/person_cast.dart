@@ -3,10 +3,10 @@ import 'package:flutter/foundation.dart';
 import 'person_credit.dart';
 
 class PersonCast extends PersonCredit {
-  final int castId;
-  final String character;
-  final PersonCredit credit;
-  final int order;
+  int castId;
+  String character;
+  PersonCredit credit;
+  int order;
 
   PersonCast({
     this.castId,

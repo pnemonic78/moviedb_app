@@ -5,19 +5,19 @@ import 'media.dart';
 import 'media_type.dart';
 
 class Movie extends Media {
-  final String backdropPath;
-  final List<int> genreIds;
-  final Media media;
-  final List<String> originCountry;
-  final String originalLanguage;
-  final String originalTitle;
-  final String overview;
-  final String posterPath;
-  final DateTime releaseDate;
-  final String title;
-  final bool video;
-  final double voteAverage;
-  final int voteCount;
+  String backdropPath;
+  List<int> genreIds;
+  Media media;
+  List<String> originCountry;
+  String originalLanguage;
+  String originalTitle;
+  String overview;
+  String posterPath;
+  DateTime releaseDate;
+  String title;
+  bool video;
+  double voteAverage;
+  int voteCount;
 
   Movie({
     this.backdropPath,

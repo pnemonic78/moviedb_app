@@ -6,8 +6,8 @@ DateTime parseDateTime(String s) {
 }
 
 class Dates {
-  final DateTime maximum;
-  final DateTime minimum;
+  DateTime maximum;
+  DateTime minimum;
 
   Dates({@required this.minimum, @required this.maximum});
 

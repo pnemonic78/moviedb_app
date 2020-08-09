@@ -3,10 +3,10 @@ import 'package:flutter/foundation.dart';
 import 'media_credit.dart';
 
 class MediaCast extends MediaCredit {
-  final int castId;
-  final String character;
-  final MediaCredit credit;
-  final int order;
+  int castId;
+  String character;
+  MediaCredit credit;
+  int order;
 
   MediaCast({
     this.castId,

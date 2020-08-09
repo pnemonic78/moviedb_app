@@ -1,8 +1,8 @@
 class Genre {
-  final int id;
-  final String name;
+  int id;
+  String name;
 
-  const Genre({this.id, this.name});
+  Genre({this.id, this.name});
 
   @override
   String toString() {
@@ -10,7 +10,7 @@ class Genre {
   }
 
   static List<int> toIds(List<Genre> genres) {
-    return (genres != null) ? genres.map((g) => g.id).toList() : null;
+    return genres?.map((g) => g.id)?.toList();
   }
 
   factory Genre.fromJson(Map<String, dynamic> json) {
