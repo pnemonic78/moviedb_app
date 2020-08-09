@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'media_image_type.dart';
 
-class MovieImage {
+class MediaImage {
   String id;
   Locale locale;
   String key;
@@ -11,7 +11,7 @@ class MovieImage {
   int size;
   MovieImageType type;
 
-  MovieImage({
+  MediaImage({
     this.id,
     this.locale,
     this.key,
@@ -26,13 +26,13 @@ class MovieImage {
     return '{id: $id, name: "$name", type: $type}';
   }
 
-  /// Creates a [MovieImage] from a JSON object.
-  factory MovieImage.fromJson(Map<String, dynamic> json) {
+  /// Creates a [MediaImage] from a JSON object.
+  factory MediaImage.fromJson(Map<String, dynamic> json) {
     final String languageCode = json['iso_639_1'] ?? 'und';
     final String countryCode = json['iso_3166_1'];
     final Locale locale = Locale(languageCode, countryCode);
 
-    return MovieImage(
+    return MediaImage(
       id: json['id'],
       locale: locale,
       key: json['key'],
