@@ -1,35 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MovieImageType {
-  final String _value;
-
-  static const trailer = MovieImageType("Trailer");
-  static const teaser = MovieImageType("Teaser");
-  static const clip = MovieImageType("Clip");
-  static const featurette = MovieImageType("Featurette");
-  static const behindTheScenes = MovieImageType("Behind the Scenes");
-  static const bloopers = MovieImageType("Bloopers");
-
-  static const values = [
-    trailer,
-    teaser,
-    clip,
-    featurette,
-    behindTheScenes,
-    bloopers
-  ];
-
-  const MovieImageType(this._value);
-
-  @override
-  String toString() {
-    return _value;
-  }
-
-  factory MovieImageType.fromJson(String json) {
-    return values.firstWhere((v) => json == v._value);
-  }
-}
+import 'media_image_type.dart';
 
 class MovieImage {
   String id;
@@ -68,7 +39,7 @@ class MovieImage {
       name: json['name'],
       site: json['site'],
       size: json['size'],
-      type: MovieImageType.fromJson(json['type']),
+      type: MovieImageType.valueOf(json['type']),
     );
   }
 }

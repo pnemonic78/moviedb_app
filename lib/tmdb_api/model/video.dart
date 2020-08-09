@@ -1,35 +1,6 @@
 import 'package:flutter/material.dart';
 
-class VideoType {
-  final String _value;
-
-  static const trailer = VideoType("Trailer");
-  static const teaser = VideoType("Teaser");
-  static const clip = VideoType("Clip");
-  static const featurette = VideoType("Featurette");
-  static const behindTheScenes = VideoType("Behind the Scenes");
-  static const bloopers = VideoType("Bloopers");
-
-  static const values = [
-    trailer,
-    teaser,
-    clip,
-    featurette,
-    behindTheScenes,
-    bloopers
-  ];
-
-  const VideoType(this._value);
-
-  @override
-  String toString() {
-    return _value;
-  }
-
-  factory VideoType.fromJson(String json) {
-    return values.firstWhere((v) => json == v._value);
-  }
-}
+import 'video_type.dart';
 
 class MovieVideo {
   String id;
@@ -68,7 +39,7 @@ class MovieVideo {
       name: json['name'],
       site: json['site'],
       size: json['size'],
-      type: VideoType.fromJson(json['type']),
+      type: VideoType.valueOf(json['type']),
     );
   }
 }

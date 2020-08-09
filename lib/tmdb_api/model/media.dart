@@ -25,7 +25,7 @@ class Media {
     return Media(
       adult: json['adult'],
       id: json['id'],
-      mediaType: MediaType.fromJson(json['media_type']),
+      mediaType: MediaType.valueOf(json['media_type']),
       popularity: json['popularity']?.toDouble(),
     );
   }
@@ -33,7 +33,7 @@ class Media {
   factory Media.fromJsonType(Map<String, dynamic> json) {
     if (json == null) return null;
 
-    final mediaType = MediaType.fromJson(json['media_type']) ?? MediaType.all;
+    final mediaType = MediaType.valueOf(json['media_type']) ?? MediaType.all;
 
     switch (mediaType) {
       case MediaType.movie:

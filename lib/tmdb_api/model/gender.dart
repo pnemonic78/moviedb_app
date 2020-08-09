@@ -1,5 +1,7 @@
 class Gender {
-  final int id;
+  final int _id;
+
+  const Gender(this._id);
 
   static const unknown = Gender(0);
   static const female = Gender(1);
@@ -7,10 +9,12 @@ class Gender {
 
   static const values = [unknown, female, male];
 
-  const Gender(this.id);
-
-  factory Gender.fromJson(int json) {
+  factory Gender.valueOf(int json) {
     if (json ==null) return Gender.unknown;
-    return values.firstWhere((v) => json == v.id) ?? Gender.unknown;
+    return values.firstWhere((v) => json == v._id) ?? Gender.unknown;
+  }
+
+  factory Gender.fromJson(Map<String, dynamic> json) {
+    return Gender.valueOf(json['gender']);
   }
 }

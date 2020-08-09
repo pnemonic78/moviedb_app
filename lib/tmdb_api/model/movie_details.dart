@@ -38,8 +38,7 @@ class MovieDetails extends Movie {
     this.status = MovieStatus.released,
     this.tagline,
     this.credits,
-  })  : assert(movie != null),
-        super(
+  })  :super(
           backdropPath: movie.backdropPath,
           genreIds: movie.genreIds,
           media: movie.media,
@@ -87,7 +86,7 @@ class MovieDetails extends Movie {
       revenue: json['revenue'],
       runtime: json['runtime'],
       spokenLanguages: spokenLanguages,
-      status: MovieStatus.fromJson(json['status']),
+      status: MovieStatus.valueOf(json['status']),
       tagline: json['tagline'],
     );
   }

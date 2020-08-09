@@ -68,7 +68,7 @@ class Person extends Media {
       credits: PersonCreditsResponse.fromJson(json['combined_credits']),
       deathday: parseDateTime(json['deathday']),
       externalIds: PersonExternalIds.fromJson(json['external_ids']),
-      gender: Gender.fromJson(json['gender']),
+      gender: Gender.valueOf(json['gender']),
       homepage: json['homepage'],
       imdbId: json['imdb_id'],
       knownDepartment: json['known_for_department'],
