@@ -24,7 +24,7 @@ class Media {
     @required this.id,
     this.mediaType,
     this.popularity,
-  }) : assert(id != null);
+  });
 
   /// Creates a [Media] from a JSON object.
   factory Media.fromJson(Map<String, dynamic> json) =>

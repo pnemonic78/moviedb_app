@@ -1,33 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'person.dart';
+part of 'tv.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Person _$PersonFromJson(Map<String, dynamic> json) {
-  return Person(
-    aliases: (json['also_known_as'] as List)?.map((e) => e as String)?.toList(),
-    biography: json['biography'] as String,
-    birthday: parseDateTime(json['birthday']),
-    birthplace: json['place_of_birth'] as String,
-    credits: json['combined_credits'] == null
-        ? null
-        : PersonCreditsResponse.fromJson(
-            json['combined_credits'] as Map<String, dynamic>),
-    deathday: parseDateTime(json['deathday']),
-    externalIds: json['external_ids'] == null
-        ? null
-        : PersonExternalIds.fromJson(
-            json['external_ids'] as Map<String, dynamic>),
-    gender: _$enumDecodeNullable(_$GenderEnumMap, json['gender']),
-    homepage: json['homepage'] as String,
-    imdbId: json['imdb_id'] as String,
-    knownDepartment: json['known_for_department'] as String,
-    name: json['name'] as String,
-    originalName: json['original_name'] as String,
-    profilePath: json['profile_path'] as String,
+Television _$TelevisionFromJson(Map<String, dynamic> json) {
+  return Television(
+    episodeCount: json['episode_count'] as int,
+    firstAirDate: parseDateTime(json['first_air_date']),
   )
     ..adult = json['adult'] as bool
     ..id = json['id'] as int
@@ -66,12 +48,6 @@ T _$enumDecodeNullable<T>(
   }
   return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
 }
-
-const _$GenderEnumMap = {
-  Gender.unknown: 0,
-  Gender.female: 1,
-  Gender.male: 2,
-};
 
 const _$MediaTypeEnumMap = {
   MediaType.all: 'all',

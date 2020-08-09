@@ -1,35 +1,33 @@
 import 'package:flutter/foundation.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:tmdb/tmdb_api/model/media.dart';
 
 import 'dates.dart';
 import 'media_type.dart';
 
+part 'tv.g.dart';
+
+@JsonSerializable(explicitToJson: true, createToJson: false)
 class Television extends Media {
+  @JsonKey(name: 'episode_count')
   int episodeCount;
+  @JsonKey(name: 'first_air_date')
   DateTime firstAirDate;
 
   Television({
     this.episodeCount,
     this.firstAirDate,
     @required Media media,
-  })  : assert(media != null),
-        super(
-          adult: media.adult,
-          id: media.id,
-          mediaType: media.mediaType ?? MediaType.tv,
-          popularity: media.popularity,
+  })  : super(
+          adult: media?.adult,
+          id: media?.id,
+          mediaType: media?.mediaType ?? MediaType.tv,
+          popularity: media?.popularity,
         );
 
   /// Creates a [Television] from a JSON object.
-  factory Television.fromJson(Map<String, dynamic> json) {
-    if (json == null) return null;
-
-    return Television(
-      episodeCount: json['episode_count'],
-      firstAirDate: parseDateTime(json['first_air_date']),
-      media: Media.fromJson(json),
-    );
-  }
+  factory Television.fromJson(Map<String, dynamic> json) =>
+      (json != null) ? _$TelevisionFromJson(json) : null;
 
   @override
   DateTime date() {

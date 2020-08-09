@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tmdb/tmdb_api/person_credits_response.dart';
 
+import 'dates.dart';
 import 'external_ids.dart';
 import 'gender.dart';
 import 'media.dart';
@@ -56,12 +57,11 @@ class Person extends Media {
     this.name,
     this.originalName,
     this.profilePath,
-  })  : assert(media != null),
-        super(
-          adult: media.adult,
-          id: media.id,
-          mediaType: media.mediaType ?? MediaType.person,
-          popularity: media.popularity,
+  })  : super(
+          adult: media?.adult,
+          id: media?.id,
+          mediaType: media?.mediaType ?? MediaType.person,
+          popularity: media?.popularity,
         );
 
   @override

@@ -1,21 +1,37 @@
 import 'package:flutter/foundation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 import 'dates.dart';
 import 'media.dart';
 import 'media_type.dart';
 
+part 'movie.g.dart';
+
+@JsonSerializable(explicitToJson: true, createToJson: false)
 class Movie extends Media {
+  @JsonKey(name: 'backdrop_path')
   String backdropPath;
+  @JsonKey(name: 'genre_ids')
   List<int> genreIds;
+  @JsonKey(name: 'origin_country')
   List<String> originCountry;
+  @JsonKey(name: 'original_language')
   String originalLanguage;
+  @JsonKey(name: 'original_title')
   String originalTitle;
+  @JsonKey(name: 'overview')
   String overview;
+  @JsonKey(name: 'poster_path')
   String posterPath;
+  @JsonKey(name: 'release_date')
   DateTime releaseDate;
+  @JsonKey(name: 'title')
   String title;
+  @JsonKey(name: 'video')
   bool video;
+  @JsonKey(name: 'vote_average')
   double voteAverage;
+  @JsonKey(name: 'vote_count')
   int voteCount;
 
   Movie({
@@ -32,40 +48,16 @@ class Movie extends Media {
     this.video,
     this.voteAverage,
     this.voteCount,
-  })  : assert(media != null),
-        super(
-          adult: media.adult,
-          id: media.id,
-          mediaType: media.mediaType ?? MediaType.movie,
-          popularity: media.popularity,
+  }) : super(
+          adult: media?.adult,
+          id: media?.id,
+          mediaType: media?.mediaType ?? MediaType.movie,
+          popularity: media?.popularity,
         );
 
   /// Creates a [Movie] from a JSON object.
-  factory Movie.fromJson(Map<String, dynamic> json) {
-    if (json == null) return null;
-
-    var list = json['genre_ids'] as List;
-    List<int> genreIds = list?.map((i) => i as int)?.toList();
-
-    list = json['origin_country'] as List;
-    List<String> countries = list?.map((i) => i.toString())?.toList();
-
-    return Movie(
-      backdropPath: json['backdrop_path'],
-      genreIds: genreIds,
-      media: Media.fromJson(json),
-      originCountry: countries,
-      originalLanguage: json['original_language'],
-      originalTitle: json['original_title'],
-      overview: json['overview'],
-      posterPath: json['poster_path'],
-      releaseDate: parseDateTime(json['release_date']),
-      title: json['title'],
-      video: json['video'],
-      voteAverage: json['vote_average']?.toDouble(),
-      voteCount: json['vote_count'],
-    );
-  }
+  factory Movie.fromJson(Map<String, dynamic> json) =>
+      (json != null) ? _$MovieFromJson(json) : null;
 
   Movie.of(Media media) : this(media: media);
 
