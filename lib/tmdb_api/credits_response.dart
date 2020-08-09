@@ -1,9 +1,17 @@
+import 'package:json_annotation/json_annotation.dart';
+
 import 'model/media_cast.dart';
 import 'model/media_crew.dart';
 
+part 'credits_response.g.dart';
+
+@JsonSerializable(explicitToJson: true, createToJson: false)
 class CreditsResponse {
+  @JsonKey(name: 'id')
   int id;
+  @JsonKey(name: 'cast')
   List<MediaCast> cast;
+  @JsonKey(name: 'crew')
   List<MediaCrew> crew;
 
   CreditsResponse({
@@ -13,19 +21,6 @@ class CreditsResponse {
   });
 
   /// Creates a [CreditsResponse] from a JSON object.
-  factory CreditsResponse.fromJson(Map<String, dynamic> json) {
-    if (json == null) return null;
-
-    var list = json['cast'] as List;
-    List<MediaCast> cast = list?.map((i) => MediaCast.fromJson(i))?.toList();
-
-    list = json['crew'] as List;
-    List<MediaCrew> crew = list?.map((i) => MediaCrew.fromJson(i))?.toList();
-
-    return CreditsResponse(
-      id: json['id'],
-      cast: cast,
-      crew: crew,
-    );
-  }
+  factory CreditsResponse.fromJson(Map<String, dynamic> json) =>
+      (json != null) ? _$CreditsResponseFromJson(json) : null;
 }

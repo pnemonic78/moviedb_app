@@ -1,8 +1,16 @@
+import 'package:json_annotation/json_annotation.dart';
+
 import 'model/image.dart';
 
+part 'images_response.g.dart';
+
+@JsonSerializable(explicitToJson: true, createToJson: false)
 class ImagesResponse {
+  @JsonKey(name: 'id')
   int id;
+  @JsonKey(name: 'backdrops')
   List<MovieImage> backdrops;
+  @JsonKey(name: 'posters')
   List<MovieImage> posters;
 
   ImagesResponse({
@@ -12,18 +20,6 @@ class ImagesResponse {
   });
 
   /// Creates a [ImagesResponse] from a JSON object.
-  factory ImagesResponse.fromJson(Map<String, dynamic> json) {
-    var list = json['backdrops'] as List;
-    List<MovieImage> backdrops =
-        list.map((i) => MovieImage.fromJson(i)).toList();
-
-    list = json['posters'] as List;
-    List<MovieImage> posters = list.map((i) => MovieImage.fromJson(i)).toList();
-
-    return ImagesResponse(
-      id: json['id'],
-      backdrops: backdrops,
-      posters: posters,
-    );
-  }
+  factory ImagesResponse.fromJson(Map<String, dynamic> json) =>
+      (json != null) ? _$ImagesResponseFromJson(json) : null;
 }

@@ -1,7 +1,14 @@
+import 'package:json_annotation/json_annotation.dart';
+
 import 'model/video.dart';
 
+part 'videos_response.g.dart';
+
+@JsonSerializable(explicitToJson: true, createToJson: false)
 class VideosResponse {
+  @JsonKey(name: 'id')
   int id;
+  @JsonKey(name: 'results')
   List<MovieVideo> results;
 
   VideosResponse({
@@ -10,13 +17,6 @@ class VideosResponse {
   });
 
   /// Creates a [VideosResponse] from a JSON object.
-  factory VideosResponse.fromJson(Map<String, dynamic> json) {
-    var list = json['results'] as List;
-    List<MovieVideo> results = list.map((i) => MovieVideo.fromJson(i)).toList();
-
-    return VideosResponse(
-      id: json['id'],
-      results: results,
-    );
-  }
+  factory VideosResponse.fromJson(Map<String, dynamic> json) =>
+      (json != null) ? _$VideosResponseFromJson(json) : null;
 }
