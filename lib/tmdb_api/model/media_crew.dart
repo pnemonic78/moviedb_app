@@ -3,19 +3,18 @@ import 'package:flutter/foundation.dart';
 import 'media_credit.dart';
 
 class MediaCrew extends MediaCredit {
-  MediaCredit credit;
   String department;
   String job;
 
   MediaCrew({
-    @required this.credit,
+    MediaCredit credit,
     this.department,
     @required this.job,
   })  : assert(job != null),
         super(
-          creditId: credit.creditId,
-          media: credit.media,
-          person: credit.person,
+          creditId: credit?.creditId,
+          media: credit?.media,
+          person: credit?.person,
         );
 
   @override

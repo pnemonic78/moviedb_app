@@ -7,12 +7,11 @@ import 'media_type.dart';
 class Television extends Media {
   int episodeCount;
   DateTime firstAirDate;
-  Media media;
 
   Television({
     this.episodeCount,
     this.firstAirDate,
-    @required this.media,
+    @required Media media,
   })  : assert(media != null),
         super(
           adult: media.adult,

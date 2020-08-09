@@ -5,13 +5,12 @@ import 'person_credit.dart';
 class PersonCast extends PersonCredit {
   int castId;
   String character;
-  PersonCredit credit;
   int order;
 
   PersonCast({
     this.castId,
     this.character,
-    @required this.credit,
+    @required PersonCredit credit,
     this.order,
   }) : super(
           creditId: credit.creditId,

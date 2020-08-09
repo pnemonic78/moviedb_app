@@ -3,12 +3,11 @@ import 'package:flutter/foundation.dart';
 import 'person_credit.dart';
 
 class PersonCrew extends PersonCredit {
-  PersonCredit credit;
   String department;
   String job;
 
   PersonCrew({
-    @required this.credit,
+    @required PersonCredit credit,
     this.department,
     @required this.job,
   })  : assert(job != null),

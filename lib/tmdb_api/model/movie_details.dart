@@ -1,5 +1,6 @@
 import 'dart:core';
 
+import 'package:flutter/foundation.dart';
 import 'package:tmdb/tmdb_api/credits_response.dart';
 
 import 'genre.dart';
@@ -15,7 +16,6 @@ class MovieDetails extends Movie {
   List<Genre> genres;
   String homepage;
   String imdbId;
-  Movie movie;
   List<ProductionCompany> productionCompanies;
   List<ProductionCountry> productionCountries;
   int revenue;
@@ -29,7 +29,7 @@ class MovieDetails extends Movie {
     this.genres,
     this.homepage,
     this.imdbId,
-    this.movie,
+    @required Movie movie,
     this.productionCompanies,
     this.productionCountries,
     this.revenue,
@@ -41,7 +41,7 @@ class MovieDetails extends Movie {
   })  :super(
           backdropPath: movie.backdropPath,
           genreIds: movie.genreIds,
-          media: movie.media,
+          media: movie,
           originalLanguage: movie.originalLanguage,
           originalTitle: movie.originalTitle,
           overview: movie.overview,

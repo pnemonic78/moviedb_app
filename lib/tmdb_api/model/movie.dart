@@ -7,7 +7,6 @@ import 'media_type.dart';
 class Movie extends Media {
   String backdropPath;
   List<int> genreIds;
-  Media media;
   List<String> originCountry;
   String originalLanguage;
   String originalTitle;
@@ -22,7 +21,7 @@ class Movie extends Media {
   Movie({
     this.backdropPath,
     this.genreIds,
-    @required this.media,
+    @required Media media,
     this.originCountry,
     this.originalLanguage,
     @required this.originalTitle,

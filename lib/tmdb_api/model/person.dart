@@ -19,7 +19,6 @@ class Person extends Media {
   String homepage;
   String imdbId;
   String knownDepartment;
-  Media media;
   String name;
   String originalName;
   String profilePath;
@@ -36,7 +35,7 @@ class Person extends Media {
     this.homepage,
     this.imdbId,
     this.knownDepartment,
-    @required this.media,
+    @required Media media,
     this.name,
     this.originalName,
     this.profilePath,

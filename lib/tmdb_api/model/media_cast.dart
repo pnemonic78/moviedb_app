@@ -1,22 +1,19 @@
-import 'package:flutter/foundation.dart';
-
 import 'media_credit.dart';
 
 class MediaCast extends MediaCredit {
   int castId;
   String character;
-  MediaCredit credit;
   int order;
 
   MediaCast({
     this.castId,
     this.character,
-    @required this.credit,
+    MediaCredit credit,
     this.order,
   }) : super(
-          creditId: credit.creditId,
-          media: credit.media,
-          person: credit.person,
+          creditId: credit?.creditId,
+          media: credit?.media,
+          person: credit?.person,
         );
 
   @override
