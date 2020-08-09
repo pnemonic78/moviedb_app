@@ -35,6 +35,6 @@ class PersonCredit {
   }
 
   String title() {
-    return media.getTitle();
+    return media.getTitle() ?? person.getTitle();
   }
 }

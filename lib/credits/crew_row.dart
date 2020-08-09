@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sprintf/sprintf.dart';
+import 'package:styled_text/styled_text.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/model/person_crew.dart';
@@ -12,7 +13,6 @@ class CreditsCrewRow {
   ) {
     final onItemTap = onTap == null ? null : () => onTap(item);
 
-    //TODO final textTheme = Theme.of(context).textTheme;
     final string = AppLocalizations.of(context);
 
     final date = item.media.date();
@@ -26,9 +26,12 @@ class CreditsCrewRow {
         : string.person_cast_format;
     final formatted = sprintf(format, [title, character]);
 
-    final jobWidget = Text(
-      formatted,
+    final jobWidget = StyledText(
+      text: formatted,
       overflow: TextOverflow.ellipsis,
+      styles: {
+        'b': TextStyle(fontWeight: FontWeight.bold),
+      },
     );
 
     return [
