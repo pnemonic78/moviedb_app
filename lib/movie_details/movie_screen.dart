@@ -107,7 +107,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     );
 
     final taglineWidget = Text(
-      movie.tagline,
+      movie.tagline ?? "",
       maxLines: 2,
       style: textTheme.subtitle1,
       overflow: TextOverflow.ellipsis,
