@@ -1,13 +1,29 @@
-import 'package:flutter/material.dart';
+import 'dart:ui';
 
+import 'package:json_annotation/json_annotation.dart';
+
+import 'locale_converter.dart';
+
+part 'image.g.dart';
+
+@JsonSerializable(explicitToJson: true, createToJson: false)
+@MovieLocaleConverter()
 class MovieImage {
+  @JsonKey(name: 'id')
   String id;
+  @JsonKey(name: 'iso_639_1')
   Locale locale;
+  @JsonKey(name: 'width')
   int width;
+  @JsonKey(name: 'height')
   int height;
+  @JsonKey(name: 'aspect_ratio')
   double aspectRatio;
+  @JsonKey(name: 'file_path')
   String path;
+  @JsonKey(name: 'vote_average')
   double voteAverage;
+  @JsonKey(name: 'vote_count')
   int voteCount;
 
   MovieImage({
@@ -27,20 +43,7 @@ class MovieImage {
   }
 
   /// Creates a [MovieImage] from a JSON object.
-  factory MovieImage.fromJson(Map<String, dynamic> json) {
-    String languageCode = json['iso_639_1'] ?? 'und';
-    String countryCode = json['iso_3166_1'] ?? '';
-    Locale locale = Locale(languageCode, countryCode);
-
-    return MovieImage(
-      id: json['id'],
-      locale: locale,
-      width: json['width'],
-      height: json['height'],
-      aspectRatio: json['aspect_ratio'],
-      path: json['file_path'],
-      voteAverage: json['vote_average'].toDouble(),
-      voteCount: json['vote_count'],
-    );
-  }
+  factory MovieImage.fromJson(Map<String, dynamic> json) =>
+      (json == null) ? null : _$MovieImageFromJson(json)
+        ..locale = MovieLocaleConverter.fromJsons(json);
 }

@@ -1,15 +1,28 @@
-import 'package:flutter/material.dart';
+import 'dart:ui';
 
-import 'video_type.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+import 'locale_converter.dart';
+
+part 'video.g.dart';
+
+@JsonSerializable(explicitToJson: true, createToJson: false)
+@MovieLocaleConverter()
 class MovieVideo {
+  @JsonKey(name: 'id')
   String id;
+  @JsonKey(name: 'iso_639_1')
   Locale locale;
+  @JsonKey(name: 'key')
   String key;
+  @JsonKey(name: 'name')
   String name;
+  @JsonKey(name: 'site')
   String site;
+  @JsonKey(name: 'size')
   int size;
-  VideoType type;
+  @JsonKey(name: 'type')
+  String type;
 
   MovieVideo({
     this.id,
@@ -27,19 +40,7 @@ class MovieVideo {
   }
 
   /// Creates a [MovieVideo] from a JSON object.
-  factory MovieVideo.fromJson(Map<String, dynamic> json) {
-    String languageCode = json['iso_639_1'] ?? 'und';
-    String countryCode = json['iso_3166_1'] ?? '';
-    Locale locale = Locale(languageCode, countryCode);
-
-    return MovieVideo(
-      id: json['id'],
-      locale: locale,
-      key: json['key'],
-      name: json['name'],
-      site: json['site'],
-      size: json['size'],
-      type: VideoType.valueOf(json['type']),
-    );
-  }
+  factory MovieVideo.fromJson(Map<String, dynamic> json) =>
+      (json == null) ? null : _$MovieVideoFromJson(json)
+        ..locale = MovieLocaleConverter.fromJsons(json);
 }
