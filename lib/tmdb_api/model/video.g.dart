@@ -9,6 +9,7 @@ part of 'video.dart';
 MovieVideo _$MovieVideoFromJson(Map<String, dynamic> json) {
   return MovieVideo(
     id: json['id'] as String,
+    locale: const MovieLocaleConverter().fromJson(json['iso_639_1'] as String),
     key: json['key'] as String,
     name: json['name'] as String,
     site: json['site'] as String,

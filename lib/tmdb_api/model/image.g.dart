@@ -9,6 +9,7 @@ part of 'image.dart';
 MovieImage _$MovieImageFromJson(Map<String, dynamic> json) {
   return MovieImage(
     id: json['id'] as String,
+    locale: const MovieLocaleConverter().fromJson(json['iso_639_1'] as String),
     width: json['width'] as int,
     height: json['height'] as int,
     aspectRatio: (json['aspect_ratio'] as num)?.toDouble(),
