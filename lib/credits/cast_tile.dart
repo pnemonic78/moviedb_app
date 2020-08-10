@@ -25,7 +25,7 @@ class CastTile extends StatelessWidget {
     final imageWidth = castTileWidth;
     final imageHeight = castTileHeight;
     final thumbnailUrl = TMDBApi.generateProfileThumbnail(
-      cast.person.profilePath,
+      cast.profilePath,
       imageWidth,
       imageHeight,
       devicePixelRatio: media.devicePixelRatio,
@@ -61,7 +61,7 @@ class CastTile extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     final titleWidget = Text(
-      cast.person.name,
+      cast.name,
       maxLines: 2,
       style: textTheme.subtitle1,
       overflow: TextOverflow.ellipsis,

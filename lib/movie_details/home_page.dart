@@ -166,7 +166,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
   /// Function to call when a [MediaCast] is tapped.
   void _onCastTap(MediaCast cast) {
     setState(() {
-      _navigateToPerson(cast.person);
+      _navigateToPerson(cast);
     });
   }
 
