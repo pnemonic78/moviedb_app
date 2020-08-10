@@ -22,5 +22,5 @@ class CreditsResponse {
 
   /// Creates a [CreditsResponse] from a JSON object.
   factory CreditsResponse.fromJson(Map<String, dynamic> json) =>
-      (json != null) ? _$CreditsResponseFromJson(json) : null;
+      (json == null) ? null : _$CreditsResponseFromJson(json);
 }

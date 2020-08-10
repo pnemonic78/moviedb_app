@@ -28,7 +28,7 @@ class Television extends Media {
 
   /// Creates a [Television] from a JSON object.
   factory Television.fromJson(Map<String, dynamic> json) =>
-      (json != null) ? _$TelevisionFromJson(json) : null;
+      (json == null) ? null : _$TelevisionFromJson(json);
 
   @override
   DateTime date() {

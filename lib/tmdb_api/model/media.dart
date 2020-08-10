@@ -28,7 +28,7 @@ class Media {
 
   /// Creates a [Media] from a JSON object.
   factory Media.fromJson(Map<String, dynamic> json) =>
-      (json != null) ? _$MediaFromJson(json) : null;
+      (json == null) ? null : _$MediaFromJson(json);
 
   factory Media.fromJsonType(Map<String, dynamic> json) {
     if (json == null) return null;

@@ -58,7 +58,7 @@ class Movie extends Media {
 
   /// Creates a [Movie] from a JSON object.
   factory Movie.fromJson(Map<String, dynamic> json) =>
-      (json != null) ? _$MovieFromJson(json) : null;
+      (json == null) ? null : _$MovieFromJson(json);
 
   Movie.of(Media media) : this(media: media);
 

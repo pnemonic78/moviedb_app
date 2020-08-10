@@ -72,7 +72,7 @@ class Person extends Media {
 
   /// Creates a [Person] from a JSON object.
   factory Person.fromJson(Map<String, dynamic> json) =>
-      (json != null) ? _$PersonFromJson(json) : null;
+      (json == null) ? null : _$PersonFromJson(json);
 
   @override
   DateTime date() {

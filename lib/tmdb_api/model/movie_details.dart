@@ -75,5 +75,5 @@ class MovieDetails extends Movie {
 
   /// Creates a [MovieDetails] from a JSON object.
   factory MovieDetails.fromJson(Map<String, dynamic> json) =>
-      (json != null) ? _$MovieDetailsFromJson(json) : null;
+      (json == null) ? null : _$MovieDetailsFromJson(json);
 }

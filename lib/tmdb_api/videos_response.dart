@@ -18,5 +18,5 @@ class VideosResponse {
 
   /// Creates a [VideosResponse] from a JSON object.
   factory VideosResponse.fromJson(Map<String, dynamic> json) =>
-      (json != null) ? _$VideosResponseFromJson(json) : null;
+      (json == null) ? null : _$VideosResponseFromJson(json);
 }

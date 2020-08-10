@@ -14,5 +14,5 @@ class Dates {
 
   /// Creates a [Dates] from a JSON object.
   factory Dates.fromJson(Map<String, dynamic> json) =>
-      (json != null) ? _$DatesFromJson(json) : null;
+      (json == null) ? null : _$DatesFromJson(json);
 }

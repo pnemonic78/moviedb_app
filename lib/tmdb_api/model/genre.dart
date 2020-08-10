@@ -17,5 +17,5 @@ class Genre {
   }
 
   factory Genre.fromJson(Map<String, dynamic> json) =>
-      (json != null) ? _$GenreFromJson(json) : null;
+      (json == null) ? null : _$GenreFromJson(json);
 }

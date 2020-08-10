@@ -49,5 +49,5 @@ class PersonExternalIds {
 
   /// Creates a [PersonExternalIds] from a JSON object.
   factory PersonExternalIds.fromJson(Map<String, dynamic> json) =>
-      (json != null) ? _$PersonExternalIdsFromJson(json) : null;
+      (json == null) ? null : _$PersonExternalIdsFromJson(json);
 }

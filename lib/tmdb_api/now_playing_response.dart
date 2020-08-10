@@ -29,5 +29,5 @@ class MoviesNowPlayingResponse {
 
   /// Creates a [MoviesNowPlayingResponse] from a JSON object.
   factory MoviesNowPlayingResponse.fromJson(Map<String, dynamic> json) =>
-      (json != null) ? _$MoviesNowPlayingResponseFromJson(json) : null;
+      (json == null) ? null : _$MoviesNowPlayingResponseFromJson(json);
 }

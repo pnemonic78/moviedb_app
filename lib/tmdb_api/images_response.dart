@@ -21,5 +21,5 @@ class ImagesResponse {
 
   /// Creates a [ImagesResponse] from a JSON object.
   factory ImagesResponse.fromJson(Map<String, dynamic> json) =>
-      (json != null) ? _$ImagesResponseFromJson(json) : null;
+      (json == null) ? null : _$ImagesResponseFromJson(json);
 }
