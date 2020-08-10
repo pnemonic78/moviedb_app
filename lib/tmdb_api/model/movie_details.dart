@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tmdb/tmdb_api/credits_response.dart';
 
-import 'dates.dart';
+import 'date_converter.dart';
 import 'genre.dart';
 import 'language.dart';
 import 'media_type.dart';
@@ -15,6 +15,7 @@ import 'production_country.dart';
 part 'movie_details.g.dart';
 
 @JsonSerializable(explicitToJson: true, createToJson: false)
+@MovieDateTimeConverter()
 class MovieDetails extends Movie {
   @JsonKey(name: 'budget')
   int budget;

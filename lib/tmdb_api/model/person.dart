@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tmdb/tmdb_api/person_credits_response.dart';
 
-import 'dates.dart';
+import 'date_converter.dart';
 import 'external_ids.dart';
 import 'gender.dart';
 import 'media.dart';
@@ -11,6 +11,7 @@ import 'media_type.dart';
 part 'person.g.dart';
 
 @JsonSerializable(explicitToJson: true, createToJson: false)
+@MovieDateTimeConverter()
 class Person extends Media {
   @JsonKey(name: 'also_known_as')
   List<String> aliases;

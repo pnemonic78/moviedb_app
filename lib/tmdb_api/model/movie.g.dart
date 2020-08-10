@@ -16,7 +16,8 @@ Movie _$MovieFromJson(Map<String, dynamic> json) {
     originalTitle: json['original_title'] as String,
     overview: json['overview'] as String,
     posterPath: json['poster_path'] as String,
-    releaseDate: parseDateTime(json['release_date']),
+    releaseDate:
+        const MovieDateTimeConverter().fromJson(json['release_date'] as String),
     title: json['title'] as String,
     video: json['video'] as bool,
     voteAverage: (json['vote_average'] as num)?.toDouble(),

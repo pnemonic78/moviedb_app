@@ -3,6 +3,8 @@
 * flutter_bloc
 * equatable
 * dependency injection
+  * Dio
+  * tmdb_api/api
 * paging
 * parallax
 * repository pattern

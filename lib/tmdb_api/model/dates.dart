@@ -3,11 +3,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'dates.g.dart';
 
-DateTime parseDateTime(String s) {
-  if ((s == null) || s.isEmpty) return null;
-  return DateTime.parse(s);
-}
-
 @JsonSerializable(explicitToJson: true, createToJson: false)
 class Dates {
   @JsonKey(name: "maximum")

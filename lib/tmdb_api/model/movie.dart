@@ -1,13 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'dates.dart';
+import 'date_converter.dart';
 import 'media.dart';
 import 'media_type.dart';
 
 part 'movie.g.dart';
 
 @JsonSerializable(explicitToJson: true, createToJson: false)
+@MovieDateTimeConverter()
 class Movie extends Media {
   @JsonKey(name: 'backdrop_path')
   String backdropPath;

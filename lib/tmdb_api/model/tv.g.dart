@@ -9,7 +9,8 @@ part of 'tv.dart';
 Television _$TelevisionFromJson(Map<String, dynamic> json) {
   return Television(
     episodeCount: json['episode_count'] as int,
-    firstAirDate: parseDateTime(json['first_air_date']),
+    firstAirDate: const MovieDateTimeConverter()
+        .fromJson(json['first_air_date'] as String),
   )
     ..adult = json['adult'] as bool
     ..id = json['id'] as int

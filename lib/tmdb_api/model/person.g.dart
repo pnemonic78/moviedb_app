@@ -10,13 +10,15 @@ Person _$PersonFromJson(Map<String, dynamic> json) {
   return Person(
     aliases: (json['also_known_as'] as List)?.map((e) => e as String)?.toList(),
     biography: json['biography'] as String,
-    birthday: parseDateTime(json['birthday']),
+    birthday:
+        const MovieDateTimeConverter().fromJson(json['birthday'] as String),
     birthplace: json['place_of_birth'] as String,
     credits: json['combined_credits'] == null
         ? null
         : PersonCreditsResponse.fromJson(
             json['combined_credits'] as Map<String, dynamic>),
-    deathday: parseDateTime(json['deathday']),
+    deathday:
+        const MovieDateTimeConverter().fromJson(json['deathday'] as String),
     externalIds: json['external_ids'] == null
         ? null
         : PersonExternalIds.fromJson(
