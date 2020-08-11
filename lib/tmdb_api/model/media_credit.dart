@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:tmdb/tmdb_api/model/media.dart';
 import 'package:tmdb/tmdb_api/person_credits_response.dart';
 
 import 'external_ids.dart';
 import 'gender.dart';
+import 'media.dart';
 import 'media_type.dart';
 import 'person.dart';
 

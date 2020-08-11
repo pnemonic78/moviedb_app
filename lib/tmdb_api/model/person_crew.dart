@@ -1,20 +1,27 @@
 import 'package:flutter/foundation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+import 'media.dart';
+import 'person.dart';
 import 'person_credit.dart';
 
+part 'person_crew.g.dart';
+
+@JsonSerializable(explicitToJson: true, createToJson: false)
 class PersonCrew extends PersonCredit {
+  @JsonKey(name: 'department')
   String department;
+  @JsonKey(name: 'job')
   String job;
 
   PersonCrew({
     @required PersonCredit credit,
     this.department,
     @required this.job,
-  })  : assert(job != null),
-        super(
-          creditId: credit.creditId,
-          media: credit.media,
-          person: credit.person,
+  }) : super(
+          creditId: credit?.creditId,
+          media: credit?.media,
+          person: credit?.person,
         );
 
   @override
@@ -23,11 +30,8 @@ class PersonCrew extends PersonCredit {
   }
 
   /// Creates a [PersonCrew] from a JSON object.
-  factory PersonCrew.fromJson(Map<String, dynamic> json) => (json == null)
-      ? null
-      : PersonCrew(
-          credit: PersonCredit.fromJson(json),
-          department: json['department'],
-          job: json['job'],
-        );
+  factory PersonCrew.fromJson(Map<String, dynamic> json) =>
+      (json == null) ? null : _$PersonCrewFromJson(json)
+        ..media = Media.fromJsonType(json)
+        ..person = Person.fromJson(json);
 }
