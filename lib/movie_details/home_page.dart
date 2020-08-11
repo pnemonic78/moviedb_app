@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:tmdb/movie_details/poster_page.dart';
 import 'package:tmdb/person/person_page.dart';
+import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/media_cast.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
@@ -51,16 +52,24 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
       stream: _fetchMovie(),
       builder: (BuildContext context, AsyncSnapshot<MovieDetails> snapshot) {
         Widget content;
-        if ((snapshot.connectionState == ConnectionState.done) &&
-            snapshot.hasData) {
-          final MovieDetails movie = snapshot.data;
-          widget.movie = movie;
-          content = MovieDetailsWidget(
-            movie: movie,
-            onPosterTap: _onPosterTap,
-            onVideoTap: _onVideoTap,
-            onCastTap: _onCastTap,
-          );
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasData) {
+            final MovieDetails movie = snapshot.data;
+            widget.movie = movie;
+            content = MovieDetailsWidget(
+              movie: movie,
+              onPosterTap: _onPosterTap,
+              onVideoTap: _onVideoTap,
+              onCastTap: _onCastTap,
+            );
+          } else {
+            content = Center(
+              child: Icon(
+                Icons.error_outline,
+                size: errorIconSize,
+              ),
+            );
+          }
         } else {
           content = Center(child: CircularProgressIndicator());
         }

@@ -37,3 +37,5 @@ const personDetailsHeight = 300.0;
 const personDetailsWidth = personDetailsHeight / 1.5;
 
 const personIconSize = personDetailsWidth / 6;
+
+const errorIconSize = 100.0;

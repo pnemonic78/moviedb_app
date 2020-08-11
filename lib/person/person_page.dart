@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tmdb/movie_details/home_page.dart';
 import 'package:tmdb/person/poster_page.dart';
+import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/media_type.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
@@ -42,18 +43,26 @@ class _PersonPageState extends State<PersonPage> {
       stream: _fetchPerson(),
       builder: (BuildContext context, AsyncSnapshot<Person> snapshot) {
         Widget content;
-        if ((snapshot.connectionState == ConnectionState.done) &&
-            snapshot.hasData) {
-          final Person person = snapshot.data;
-          widget.person = person;
-          content = SingleChildScrollView(
-            child: PersonDetailsWidget(
-              person: person,
-              onPosterTap: _onPosterTap,
-              onCastTap: _onCastTap,
-              onCrewTap: _onCrewTap,
-            ),
-          );
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasData) {
+            final Person person = snapshot.data;
+            widget.person = person;
+            content = SingleChildScrollView(
+              child: PersonDetailsWidget(
+                person: person,
+                onPosterTap: _onPosterTap,
+                onCastTap: _onCastTap,
+                onCrewTap: _onCrewTap,
+              ),
+            );
+          } else {
+            content = Center(
+              child: Icon(
+                Icons.error_outline,
+                size: errorIconSize,
+              ),
+            );
+          }
         } else {
           content = Center(child: CircularProgressIndicator());
         }
