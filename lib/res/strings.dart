@@ -36,5 +36,14 @@ class R {
     "person_crew_label": "Production",
     "person_crew_format": "<b>%s</b> as %s",
     "person_crew_format_none": "<b>%s</b>",
+
+    // Popular
+    "popular": "Popular Movies",
+
+    // Upcoming
+    "upcoming": "Upcoming Movies",
+
+    // Top Rated
+    "top_rated": "Top Rated Movies",
   };
 }

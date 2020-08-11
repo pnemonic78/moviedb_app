@@ -141,6 +141,18 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]["person_crew_format_none"];
   }
 
+  String get popular {
+    return _localizedValues[locale.languageCode]["popular"];
+  }
+
+  String get upcoming {
+    return _localizedValues[locale.languageCode]["upcoming"];
+  }
+
+  String get top_rated {
+    return _localizedValues[locale.languageCode]["top_rated"];
+  }
+
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

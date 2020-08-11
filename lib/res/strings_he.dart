@@ -3,7 +3,7 @@ class R_he {
     "title": "הדגמת מאגר הסרטים",
 
     // Now Playing
-    "now_playing": "סרטים שמוקרנים עכשיו",
+    "now_playing": "סרטים המוקרנים כיום",
 
     // Movie Details
     "budget_label": "תקציב",
@@ -36,5 +36,14 @@ class R_he {
     "person_crew_label": "הפקה",
     "person_crew_format": "<b>%s</b> בתור %s",
     "person_crew_format_none": "<b>%s</b>",
+
+    // Popular
+    "popular": "סרטים פופולריים",
+
+    // Upcoming
+    "upcoming": "סרטים עתידיים",
+
+    // Top Rated
+    "top_rated": "סרטים בראש הדירוג",
   };
 }
