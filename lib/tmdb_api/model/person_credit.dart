@@ -24,15 +24,13 @@ class PersonCredit {
   }
 
   /// Creates a [PersonCredit] from a JSON object.
-  factory PersonCredit.fromJson(Map<String, dynamic> json) {
-    if (json == null) return null;
-
-    return PersonCredit(
-      creditId: json['credit_id'],
-      media: Media.fromJsonType(json),
-      person: Person.fromJson(json),
-    );
-  }
+  factory PersonCredit.fromJson(Map<String, dynamic> json) => (json == null)
+      ? null
+      : PersonCredit(
+          creditId: json['credit_id'],
+          media: Media.fromJsonType(json),
+          person: Person.fromJson(json),
+        );
 
   String title() {
     return media.getTitle() ?? person.getTitle();

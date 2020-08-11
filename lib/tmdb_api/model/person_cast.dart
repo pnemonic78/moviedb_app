@@ -8,9 +8,9 @@ class PersonCast extends PersonCredit {
   int order;
 
   PersonCast({
+    @required PersonCredit credit,
     this.castId,
     this.character,
-    @required PersonCredit credit,
     this.order,
   }) : super(
           creditId: credit.creditId,
@@ -24,14 +24,12 @@ class PersonCast extends PersonCredit {
   }
 
   /// Creates a [PersonCast] from a JSON object.
-  factory PersonCast.fromJson(Map<String, dynamic> json) {
-    if (json == null) return null;
-
-    return PersonCast(
-      castId: json['cast_id'],
-      character: json['character'],
-      credit: PersonCredit.fromJson(json),
-      order: json['order'],
-    );
-  }
+  factory PersonCast.fromJson(Map<String, dynamic> json) => (json == null)
+      ? null
+      : PersonCast(
+          castId: json['cast_id'],
+          character: json['character'],
+          credit: PersonCredit.fromJson(json),
+          order: json['order'],
+        );
 }

@@ -16,9 +16,9 @@ class Television extends Media {
   DateTime firstAirDate;
 
   Television({
+    @required Media media,
     this.episodeCount,
     this.firstAirDate,
-    @required Media media,
   })  : super(
           adult: media?.adult,
           id: media?.id,

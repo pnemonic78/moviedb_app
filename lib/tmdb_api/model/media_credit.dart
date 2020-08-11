@@ -19,9 +19,9 @@ class MediaCredit extends Person {
   Media media;
 
   MediaCredit({
+    @required Person person,
     @required this.creditId,
     @required this.media,
-    @required Person person,
   })  : super(
           aliases: person?.aliases,
           biography: person?.biography,

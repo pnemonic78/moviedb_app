@@ -23,13 +23,11 @@ class PersonCrew extends PersonCredit {
   }
 
   /// Creates a [PersonCrew] from a JSON object.
-  factory PersonCrew.fromJson(Map<String, dynamic> json) {
-    if (json == null) return null;
-
-    return PersonCrew(
-      credit: PersonCredit.fromJson(json),
-      department: json['department'],
-      job: json['job'],
-    );
-  }
+  factory PersonCrew.fromJson(Map<String, dynamic> json) => (json == null)
+      ? null
+      : PersonCrew(
+          credit: PersonCredit.fromJson(json),
+          department: json['department'],
+          job: json['job'],
+        );
 }

@@ -36,9 +36,9 @@ class Movie extends Media {
   int voteCount;
 
   Movie({
+    @required Media media,
     this.backdropPath,
     this.genreIds,
-    @required Media media,
     this.originCountry,
     this.originalLanguage,
     @required this.originalTitle,

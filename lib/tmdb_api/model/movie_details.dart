@@ -43,11 +43,11 @@ class MovieDetails extends Movie {
   String tagline;
 
   MovieDetails({
+    @required Movie movie,
     this.budget,
     this.genres,
     this.homepage,
     this.imdbId,
-    @required Movie movie,
     this.productionCompanies,
     this.productionCountries,
     this.revenue,

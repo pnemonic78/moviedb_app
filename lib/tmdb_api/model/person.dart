@@ -43,6 +43,7 @@ class Person extends Media {
   String profilePath;
 
   Person({
+    @required Media media,
     this.aliases,
     this.biography,
     this.birthday,
@@ -54,7 +55,6 @@ class Person extends Media {
     this.homepage,
     this.imdbId,
     this.knownDepartment,
-    @required Media media,
     this.name,
     this.originalName,
     this.profilePath,

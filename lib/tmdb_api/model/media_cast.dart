@@ -18,9 +18,9 @@ class MediaCast extends MediaCredit {
   int order;
 
   MediaCast({
+    MediaCredit credit,
     this.castId,
     this.character,
-    MediaCredit credit,
     this.order,
   }) : super(
           creditId: credit?.creditId,
