@@ -16,10 +16,9 @@ import 'package:tmdb/videos/video_page.dart';
 import 'movie_screen.dart';
 
 class MovieDetailsHomePage extends StatefulWidget {
-  final String title;
   Movie movie;
 
-  MovieDetailsHomePage({Key key, this.title, this.movie})
+  MovieDetailsHomePage({Key key, this.movie})
       : assert(movie != null),
         super(key: key);
 
@@ -107,7 +106,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
         final textTheme = Theme.of(context).textTheme;
         // Beware fo white text on light backdrop!
         final titleWidget = Text(
-          movie.title ?? movie.originalTitle ?? "",
+          movie.getTitle() ?? "",
           maxLines: 2,
           style: textTheme.headline5,
           overflow: TextOverflow.ellipsis,
@@ -167,7 +166,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
         context,
         MaterialPageRoute(
             builder: (context) => VideoPlayerPage(
-                  title: widget.title,
+                  title: _movie.getTitle(),
                   video: video,
                 )));
   }
