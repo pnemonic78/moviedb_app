@@ -16,7 +16,7 @@ class NowPlayingHomePage extends StatefulWidget {
 }
 
 class _NowPlayingHomePageState extends State<NowPlayingHomePage> {
-  final _api = TMDBApi();
+  final TMDBApi _api = TMDBApi();
 
   //TODO can add listener to controller to load next page
   ScrollController _scrollController;
@@ -69,7 +69,7 @@ class _NowPlayingHomePageState extends State<NowPlayingHomePage> {
     );
 
     return FutureBuilder<MoviesResponse>(
-      future: _api.getNowPlaying(context),
+      future: _fetchMovies(context),
       builder: (BuildContext context,
           AsyncSnapshot<MoviesResponse> snapshot) {
         Widget content;
@@ -110,5 +110,9 @@ class _NowPlayingHomePageState extends State<NowPlayingHomePage> {
         );
       },
     );
+  }
+
+  Future<MoviesResponse> _fetchMovies(BuildContext context) async {
+    return _api.getNowPlaying(context);
   }
 }

@@ -25,10 +25,10 @@ class PersonPage extends StatefulWidget {
 }
 
 class _PersonPageState extends State<PersonPage> {
-  final _api = TMDBApi();
+  final TMDBApi _api = TMDBApi();
   Person _person;
 
-  Stream<Person> _fetchPerson() async* {
+  Stream<Person> _fetchPerson(BuildContext context) async* {
     if (_person != null) {
       yield _person;
       return;
@@ -40,7 +40,7 @@ class _PersonPageState extends State<PersonPage> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<Person>(
-      stream: _fetchPerson(),
+      stream: _fetchPerson(context),
       builder: (BuildContext context, AsyncSnapshot<Person> snapshot) {
         Widget content;
         if (snapshot.connectionState == ConnectionState.done) {

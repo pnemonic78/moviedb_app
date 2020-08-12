@@ -28,18 +28,18 @@ class MovieDetailsHomePage extends StatefulWidget {
 }
 
 class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
-  final _api = TMDBApi();
+  final TMDBApi _api = TMDBApi();
   MovieDetails _movie;
 
-  Stream<MovieDetails> _fetchMovie() async* {
+  Stream<MovieDetails> _fetchMovie(BuildContext context) async* {
     if (_movie != null) {
       yield _movie;
       return;
     }
-    yield* _fetchMovieDetails(widget.movie);
+    yield* _fetchMovieDetails(context, widget.movie);
   }
 
-  Stream<MovieDetails> _fetchMovieDetails(Movie movie) async* {
+  Stream<MovieDetails> _fetchMovieDetails(BuildContext context, Movie movie) async* {
     _movie = MovieDetails.of(movie);
     yield _movie;
     _movie = await _api.getMovieDetails(context, movie);
@@ -49,7 +49,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<MovieDetails>(
-      stream: _fetchMovie(),
+      stream: _fetchMovie(context),
       builder: (BuildContext context, AsyncSnapshot<MovieDetails> snapshot) {
         Widget content;
         if (snapshot.connectionState == ConnectionState.done) {
