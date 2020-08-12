@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:tmdb/tmdb_api/model/movie_details.dart';
-import 'package:tmdb/tmdb_api/now_playing_response.dart';
+import 'package:tmdb/tmdb_api/movies_response.dart';
 import 'package:tmdb/tmdb_api/videos_response.dart';
 
 import 'model/movie.dart';
@@ -18,7 +18,7 @@ class Movies {
     return _movies;
   }
 
-  static Future<MoviesNowPlayingResponse> getNowPlaying(
+  static Future<MoviesResponse> getNowPlaying(
       BuildContext context) async {
     final text = DefaultAssetBundle.of(context)
         .loadString('assets/raw/200/now_playing.json');
@@ -26,7 +26,7 @@ class Movies {
     if (json is! Map) {
       throw ('Data retrieved from API is not a Map');
     }
-    return MoviesNowPlayingResponse.fromJson(json);
+    return MoviesResponse.fromJson(json);
   }
 
   static Future<MovieDetails> getMovieDetails(

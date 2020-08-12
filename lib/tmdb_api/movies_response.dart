@@ -4,10 +4,10 @@ import 'package:json_annotation/json_annotation.dart';
 import 'model/dates.dart';
 import 'model/movie.dart';
 
-part 'now_playing_response.g.dart';
+part 'movies_response.g.dart';
 
 @JsonSerializable(explicitToJson: true, createToJson: false)
-class MoviesNowPlayingResponse {
+class MoviesResponse {
   @JsonKey(name: 'results')
   List<Movie> results;
   @JsonKey(name: 'dates')
@@ -19,7 +19,7 @@ class MoviesNowPlayingResponse {
   @JsonKey(name: 'total_results')
   int totalResults;
 
-  MoviesNowPlayingResponse({
+  MoviesResponse({
     @required this.results,
     this.dates,
     @required this.page,
@@ -27,7 +27,7 @@ class MoviesNowPlayingResponse {
     this.totalResults,
   });
 
-  /// Creates a [MoviesNowPlayingResponse] from a JSON object.
-  factory MoviesNowPlayingResponse.fromJson(Map<String, dynamic> json) =>
-      (json == null) ? null : _$MoviesNowPlayingResponseFromJson(json);
+  /// Creates a [MoviesResponse] from a JSON object.
+  factory MoviesResponse.fromJson(Map<String, dynamic> json) =>
+      (json == null) ? null : _$MoviesResponseFromJson(json);
 }

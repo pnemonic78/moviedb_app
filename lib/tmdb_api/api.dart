@@ -11,12 +11,12 @@ import 'package:tmdb/tmdb_api/credits_response.dart';
 import 'package:tmdb/tmdb_api/model/movie_details.dart';
 import 'package:tmdb/tmdb_api/model/person.dart';
 import 'package:tmdb/tmdb_api/model/video.dart';
-import 'package:tmdb/tmdb_api/now_playing_response.dart';
+import 'package:tmdb/tmdb_api/movies_response.dart';
 import 'package:tmdb/tmdb_api/videos_response.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
 import 'model/movie.dart';
-import 'now_playing_response.dart';
+import 'movies_response.dart';
 import 'rest_client.dart';
 
 class TMDBApi {
@@ -139,7 +139,7 @@ class TMDBApi {
     _client = RestClient(dio, baseUrl: api_url);
   }
 
-  Future<MoviesNowPlayingResponse> getNowPlaying(BuildContext context) async {
+  Future<MoviesResponse> getNowPlaying(BuildContext context) async {
     final Locale locale = Localizations.localeOf(context);
     return _client.getMoviesNowPlaying(
       apiKey: _apiKey,

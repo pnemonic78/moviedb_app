@@ -5,7 +5,7 @@ import 'package:tmdb/tmdb_api/model/person.dart';
 
 import 'images_response.dart';
 import 'model/movie_details.dart';
-import 'now_playing_response.dart';
+import 'movies_response.dart';
 import 'videos_response.dart';
 
 part 'rest_client.g.dart';
@@ -16,7 +16,7 @@ abstract class RestClient {
   factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
 
   @GET("/movie/now_playing")
-  Future<MoviesNowPlayingResponse> getMoviesNowPlaying({
+  Future<MoviesResponse> getMoviesNowPlaying({
     @Query("api_key") String apiKey,
     @Query("language") String language = "en-US",
     @Query("page") int page = 1,

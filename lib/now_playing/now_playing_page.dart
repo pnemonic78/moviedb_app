@@ -4,7 +4,7 @@ import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
-import 'package:tmdb/tmdb_api/now_playing_response.dart';
+import 'package:tmdb/tmdb_api/movies_response.dart';
 
 import 'movie_tile.dart';
 
@@ -68,10 +68,10 @@ class _NowPlayingHomePageState extends State<NowPlayingHomePage> {
       style: theme.textTheme.headline6,
     );
 
-    return FutureBuilder<MoviesNowPlayingResponse>(
+    return FutureBuilder<MoviesResponse>(
       future: _api.getNowPlaying(context),
       builder: (BuildContext context,
-          AsyncSnapshot<MoviesNowPlayingResponse> snapshot) {
+          AsyncSnapshot<MoviesResponse> snapshot) {
         Widget content;
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {

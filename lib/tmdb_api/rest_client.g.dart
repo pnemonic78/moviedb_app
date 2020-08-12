@@ -36,7 +36,7 @@ class _RestClient implements RestClient {
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);
-    final value = MoviesNowPlayingResponse.fromJson(_result.data);
+    final value = MoviesResponse.fromJson(_result.data);
     return value;
   }
 
