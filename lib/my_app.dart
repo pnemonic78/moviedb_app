@@ -10,7 +10,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       onGenerateTitle: (BuildContext context) => AppLocalizations.of(context).title,
-      theme: ThemeData.dark(),
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
       home: NowPlayingListPage(),
       localizationsDelegates: [
         const AppLocalizationsDelegate(),
