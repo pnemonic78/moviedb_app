@@ -6,7 +6,7 @@ import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
 import 'package:tmdb/tmdb_api/movies_response.dart';
 
-import '../movies/movie_tile.dart';
+import 'movie_list_tile.dart';
 
 abstract class MoviesListPage extends StatefulWidget {
   final String title;
@@ -29,7 +29,7 @@ abstract class MoviesListState<P extends MoviesListPage> extends State<P> {
   Widget _buildListWidgets(List<Movie> movies) {
     return ListView.builder(
       controller: _scrollController,
-      itemBuilder: (BuildContext context, int index) => MovieTile(
+      itemBuilder: (BuildContext context, int index) => MovieListTile(
         movie: movies[index],
         onTap: _onMovieTap,
       ),
