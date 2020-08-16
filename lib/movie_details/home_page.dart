@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:bordered_text/bordered_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:tmdb/movie_details/poster_page.dart';
@@ -38,7 +39,8 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
     yield* _fetchMovieDetails(context, widget.movie);
   }
 
-  Stream<MovieDetails> _fetchMovieDetails(BuildContext context, Movie movie) async* {
+  Stream<MovieDetails> _fetchMovieDetails(
+      BuildContext context, Movie movie) async* {
     _movie = MovieDetails.of(movie);
     yield _movie;
     _movie = await _api.getMovieDetails(context, movie);
@@ -104,12 +106,17 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
               );
 
         final textTheme = Theme.of(context).textTheme;
-        // Beware fo white text on light backdrop!
-        final titleWidget = Text(
-          movie.getTitle() ?? "",
-          maxLines: 2,
-          style: textTheme.headline5,
-          overflow: TextOverflow.ellipsis,
+        final titleStyle = textTheme.headline5;
+        final luminance = titleStyle.color.computeLuminance();
+        final titleWidget = BorderedText(
+          child: Text(
+            movie.getTitle() ?? "",
+            maxLines: 2,
+            style: titleStyle,
+            overflow: TextOverflow.ellipsis,
+          ),
+          strokeWidth: 2.0,
+          strokeColor: (luminance > 0.5 ? Colors.black26 : Colors.white24),
         );
 
         final bodySlivers = CustomScrollView(
