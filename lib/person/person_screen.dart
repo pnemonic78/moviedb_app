@@ -183,23 +183,12 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
     final summaryText = Text(
       person.biography ?? "",
       maxLines: (_summaryLinesExpanded ? _summaryLinesMax : _summaryLinesMin),
-      overflow: TextOverflow.ellipsis,
+      overflow: TextOverflow.fade,
       style: textStyle,
     );
-    final summaryTextGradient = _summaryLinesExpanded
-        ? summaryText
-        : ShaderMask(
-            shaderCallback: (bounds) => LinearGradient(
-              colors: [textStyle.color, textStyle.color, Colors.grey[700]],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ).createShader(
-              Rect.fromLTWH(0, 0, 0, bounds.height),
-            ),
-            child: summaryText,
-          );
+
     final summaryWidget = InkWell(
-      child: summaryTextGradient,
+      child: summaryText,
       onTap: () {
         setState(() {
           _summaryLinesExpanded = !_summaryLinesExpanded;
