@@ -204,13 +204,27 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
       style: labelStyle,
     );
 
+    final summaryText = Text(
+      movie.overview ?? "",
+      maxLines: (_summaryLinesExpanded ? _summaryLinesMax : _summaryLinesMin),
+      overflow: TextOverflow.ellipsis,
+      style: textStyle,
+    );
+    final summaryTextGradient = _summaryLinesExpanded
+        ? summaryText
+        : ShaderMask(
+            shaderCallback: (bounds) => LinearGradient(
+              colors: [textStyle.color, textStyle.color, Colors.grey[700]],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ).createShader(
+              Rect.fromLTWH(0, 0, 0, bounds.height),
+            ),
+            child: summaryText,
+          );
+
     final summaryWidget = InkWell(
-      child: Text(
-        movie.overview ?? "",
-        maxLines: (_summaryLinesExpanded ? _summaryLinesMax : _summaryLinesMin),
-        overflow: TextOverflow.ellipsis,
-        style: textStyle,
-      ),
+      child: summaryTextGradient,
       onTap: () {
         setState(() {
           _summaryLinesExpanded = !_summaryLinesExpanded;

@@ -17,8 +17,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 final _dateFormat = DateFormat.yMMMd();
 
-final _biographyLinesMin = 5;
-final _biographyLinesMax = 1000;
+final _summaryLinesMin = 5;
+final _summaryLinesMax = 1000;
 
 class PersonDetailsWidget extends StatefulWidget {
   final Person person;
@@ -40,12 +40,12 @@ class PersonDetailsWidget extends StatefulWidget {
 }
 
 class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
-  bool _biographyLinesExpanded;
+  bool _summaryLinesExpanded;
 
   @override
   void initState() {
     super.initState();
-    _biographyLinesExpanded = false;
+    _summaryLinesExpanded = false;
   }
 
   @override
@@ -173,24 +173,36 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
     final aliasesValue =
         hasAliases ? Text(person.aliases.join(", "), style: textStyle) : gone;
 
-    final biographyMargin = SizedBox(height: padding_8);
+    final summaryMargin = SizedBox(height: padding_8);
 
-    final biographyLabel = Text(
-      string.biography_label,
+    final summaryLabel = Text(
+      string.summary_label,
       style: labelStyle,
     );
 
-    final biographyWidget = InkWell(
-      child: Text(
-        person.biography ?? "",
-        maxLines:
-            (_biographyLinesExpanded ? _biographyLinesMax : _biographyLinesMin),
-        overflow: TextOverflow.ellipsis,
-        style: textStyle,
-      ),
+    final summaryText = Text(
+      person.biography ?? "",
+      maxLines: (_summaryLinesExpanded ? _summaryLinesMax : _summaryLinesMin),
+      overflow: TextOverflow.ellipsis,
+      style: textStyle,
+    );
+    final summaryTextGradient = _summaryLinesExpanded
+        ? summaryText
+        : ShaderMask(
+            shaderCallback: (bounds) => LinearGradient(
+              colors: [textStyle.color, textStyle.color, Colors.grey[700]],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ).createShader(
+              Rect.fromLTWH(0, 0, 0, bounds.height),
+            ),
+            child: summaryText,
+          );
+    final summaryWidget = InkWell(
+      child: summaryTextGradient,
       onTap: () {
         setState(() {
-          _biographyLinesExpanded = !_biographyLinesExpanded;
+          _summaryLinesExpanded = !_summaryLinesExpanded;
         });
       },
     );
@@ -343,9 +355,9 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
               ),
             ],
           ),
-          biographyMargin,
-          biographyLabel,
-          biographyWidget,
+          summaryMargin,
+          summaryLabel,
+          summaryWidget,
           creditsMargin,
           creditsLabel,
           creditsWidget,
