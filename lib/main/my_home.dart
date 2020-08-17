@@ -27,7 +27,6 @@ class _MyHomeState extends State<MyHome> {
   }
 
   _onGridIconTap(MoviesListPage page) {
-    print('±!@ _onGridIconTap');
     setState(() {
       _page = NowPlayingGridPage(onListIconTap: _onListIconTap);
     });
@@ -35,7 +34,7 @@ class _MyHomeState extends State<MyHome> {
 
   _onListIconTap(MoviesGridPage page) {
     setState(() {
-      _page = NowPlayingListPage();
+      _page = NowPlayingListPage(onGridIconTap: _onGridIconTap);
     });
   }
 }

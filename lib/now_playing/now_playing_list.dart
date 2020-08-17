@@ -5,7 +5,10 @@ import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movies_response.dart';
 
 class NowPlayingListPage extends MoviesListPage {
-  NowPlayingListPage({Key key}) : super(key: key);
+  NowPlayingListPage({
+    Key key,
+    ValueChanged<MoviesListPage> onGridIconTap,
+  }) : super(key: key, onGridIconTap: onGridIconTap);
 
   @override
   _NowPlayingListPageState createState() => _NowPlayingListPageState();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:tmdb/movie_details/home_page.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
@@ -10,8 +11,9 @@ import 'movie_list_tile.dart';
 
 abstract class MoviesListPage extends StatefulWidget {
   final String title;
+  final ValueChanged<MoviesListPage> onGridIconTap;
 
-  MoviesListPage({Key key, this.title}) : super(key: key);
+  MoviesListPage({Key key, this.title, this.onGridIconTap}) : super(key: key);
 }
 
 abstract class MoviesListState<P extends MoviesListPage> extends State<P> {
@@ -98,9 +100,20 @@ abstract class MoviesListState<P extends MoviesListPage> extends State<P> {
           ),
         );
 
+        var actions = <Widget>[];
+
+        if (widget.onGridIconTap != null) {
+          final iconToList = IconButton(
+            icon: Icon(MdiIcons.viewGrid),
+            onPressed: () => widget.onGridIconTap(widget),
+          );
+          actions.add(iconToList);
+        }
+
         return Scaffold(
           appBar: AppBar(
             title: Text(string.title),
+            actions: actions,
           ),
           body: body,
         );
