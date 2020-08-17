@@ -26,14 +26,14 @@ class MovieListTile extends StatelessWidget {
     final media = MediaQuery.of(context);
     final imageWidth = posterListWidth;
     final imageHeight = posterListHeight;
-    final posterUrl = TMDBApi.generatePosterUrl(
+    final thumbnailUrl = TMDBApi.generatePosterUrl(
       movie.posterPath,
       imageWidth,
       imageHeight,
       devicePixelRatio: media.devicePixelRatio,
     );
-    final posterImage = CachedNetworkImage(
-      imageUrl: posterUrl,
+    final thumbnail = CachedNetworkImage(
+      imageUrl: thumbnailUrl,
       placeholder: (context, url) => Icon(
         Icons.image,
         size: min(imageWidth, imageHeight),
@@ -42,9 +42,9 @@ class MovieListTile extends StatelessWidget {
       height: imageHeight,
       fit: BoxFit.fitHeight,
     );
-    final poster = ClipRRect(
+    final thumbnailWidget = ClipRRect(
       borderRadius: borderCircular_8,
-      child: posterImage,
+      child: thumbnail,
     );
 
     final textTheme = Theme.of(context).textTheme;
@@ -84,7 +84,7 @@ class MovieListTile extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              poster,
+              thumbnailWidget,
               SizedBox(width: padding_8),
               Expanded(
                 child: Column(

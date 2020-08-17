@@ -53,7 +53,7 @@ class CastTile extends StatelessWidget {
       // rounded rectangle crop for top side only.
       shape: RoundedRectangleBorder(
         side: BorderSide(color: Colors.blue),
-        borderRadius: BorderRadius.vertical(top: Radius.circular(8.0)),
+        borderRadius: BorderRadius.vertical(top: cardRadius),
       ),
       child: thumbnail,
     );

@@ -13,27 +13,29 @@ final _dateFormat = DateFormat.yMMMd();
 class MovieGridTile extends StatelessWidget {
   final Movie movie;
   final ValueChanged<Movie> onTap;
+  final double width;
 
   const MovieGridTile({
     Key key,
     @required this.movie,
     @required this.onTap,
+    this.width = posterGridWidth,
   })  : assert(movie != null),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context);
-    final imageWidth = posterGridWidth;
-    final imageHeight = posterGridHeight;
-    final posterUrl = TMDBApi.generatePosterUrl(
+    final imageWidth = width;
+    final imageHeight = imageWidth * 1.5;
+    final thumbnailUrl = TMDBApi.generatePosterUrl(
       movie.posterPath,
       imageWidth,
       imageHeight,
       devicePixelRatio: media.devicePixelRatio,
     );
-    final posterImage = CachedNetworkImage(
-      imageUrl: posterUrl,
+    final thumbnail = CachedNetworkImage(
+      imageUrl: thumbnailUrl,
       placeholder: (context, url) => Icon(
         Icons.image,
         size: min(imageWidth, imageHeight),
@@ -42,9 +44,13 @@ class MovieGridTile extends StatelessWidget {
       height: imageHeight,
       fit: BoxFit.fitHeight,
     );
-    final poster = ClipRRect(
-      borderRadius: borderCircular_8,
-      child: posterImage,
+    final thumbnailWidget = ClipPath.shape(
+      // rounded rectangle crop for top side only.
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: Colors.blue),
+        borderRadius: BorderRadius.vertical(top: cardRadius),
+      ),
+      child: thumbnail,
     );
 
     final textTheme = Theme.of(context).textTheme;
@@ -71,17 +77,15 @@ class MovieGridTile extends StatelessWidget {
     final card = Card(
       child: InkWell(
         onTap: onTap == null ? null : () => onTap(movie),
-        child: Padding(
-          padding: paddingAll_8,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              poster,
-              voteAverageWidget,
-              titleWidget,
-              dateWidget,
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            thumbnailWidget,
+            Padding(padding: paddingHorizontal_8, child: voteAverageWidget),
+            Padding(padding: paddingHorizontal_8, child: titleWidget),
+            Padding(padding: paddingHorizontal_8, child: dateWidget),
+          ],
         ),
       ),
     );
