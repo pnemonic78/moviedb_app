@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:tmdb/now_playing/now_playing_list.dart';
+import 'package:tmdb/now_playing/now_playing_grid.dart';
 
-import 'now_playing/now_playing_list.dart';
 import 'res/i18n.dart';
 
 class MyApp extends StatelessWidget {
@@ -12,7 +11,7 @@ class MyApp extends StatelessWidget {
       onGenerateTitle: (BuildContext context) => AppLocalizations.of(context).title,
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
-      home: NowPlayingListPage(),
+      home: NowPlayingGridPage(),
       localizationsDelegates: [
         const AppLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,

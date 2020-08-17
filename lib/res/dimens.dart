@@ -18,8 +18,11 @@ const paddingLeft_16 = const EdgeInsets.only(left: padding_16);
 const paddingTop_16 = const EdgeInsets.only(top: padding_16);
 const paddingVertical_16 = const EdgeInsets.symmetric(vertical: padding_16);
 
-const posterHeight = 150.0;
-const posterWidth = posterHeight * 0.665;
+const posterListHeight = 150.0;
+const posterListWidth = posterListHeight * 0.665;
+
+const posterGridHeight = 200.0;
+const posterGridWidth = posterGridHeight * 0.665;
 
 const posterDetailsHeight = 300.0;
 const posterDetailsWidth = posterDetailsHeight / 1.5;

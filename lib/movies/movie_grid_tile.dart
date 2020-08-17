@@ -10,11 +10,11 @@ import 'package:tmdb/tmdb_api/model/movie.dart';
 
 final _dateFormat = DateFormat.yMMMd();
 
-class MovieListTile extends StatelessWidget {
+class MovieGridTile extends StatelessWidget {
   final Movie movie;
   final ValueChanged<Movie> onTap;
 
-  const MovieListTile({
+  const MovieGridTile({
     Key key,
     @required this.movie,
     @required this.onTap,
@@ -24,8 +24,8 @@ class MovieListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context);
-    final imageWidth = posterListWidth;
-    final imageHeight = posterListHeight;
+    final imageWidth = posterGridWidth;
+    final imageHeight = posterGridHeight;
     final posterUrl = TMDBApi.generatePosterUrl(
       movie.posterPath,
       imageWidth,
@@ -51,7 +51,7 @@ class MovieListTile extends StatelessWidget {
 
     final titleWidget = Text(
       movie.title,
-      maxLines: 2,
+      maxLines: 1,
       style: textTheme.headline6,
       overflow: TextOverflow.ellipsis,
     );
@@ -68,39 +68,18 @@ class MovieListTile extends StatelessWidget {
       maxLines: 1,
     );
 
-    final summaryWidget = Text(
-      movie.overview,
-      maxLines: 3,
-      overflow: TextOverflow.ellipsis,
-    );
-
-    final marginTop = SizedBox(height: padding_8);
-
     final card = Card(
       child: InkWell(
         onTap: onTap == null ? null : () => onTap(movie),
         child: Padding(
           padding: paddingAll_8,
-          child: Row(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               poster,
-              SizedBox(width: padding_8),
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    titleWidget,
-                    marginTop,
-                    voteAverageWidget,
-                    marginTop,
-                    dateWidget,
-                    marginTop,
-                    summaryWidget,
-                  ],
-                ),
-              ),
+              voteAverageWidget,
+              titleWidget,
+              dateWidget,
             ],
           ),
         ),
