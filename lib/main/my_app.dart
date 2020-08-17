@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:tmdb/now_playing/now_playing_grid.dart';
+import 'package:tmdb/main/my_home.dart';
 
-import 'res/dimens.dart';
-import 'res/i18n.dart';
+import '../res/dimens.dart';
+import '../res/i18n.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData.dark().copyWith(
         cardTheme: cardTheme,
       ),
-      home: NowPlayingGridPage(),
+      home: MyHome(),
       localizationsDelegates: [
         const AppLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
