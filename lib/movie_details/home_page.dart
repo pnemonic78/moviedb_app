@@ -111,7 +111,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
         final titleWidget = BorderedText(
           child: Text(
             movie.getTitle() ?? "",
-            maxLines: 2,
+            maxLines: 3,
             style: titleStyle,
             overflow: TextOverflow.ellipsis,
           ),
@@ -126,6 +126,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
                 title: titleWidget,
+                centerTitle: true,
                 background: backdrop,
               ),
             ),
