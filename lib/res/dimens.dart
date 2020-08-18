@@ -20,7 +20,7 @@ const paddingVertical_16 = const EdgeInsets.symmetric(vertical: padding_16);
 
 const cardRadius = Radius.circular(16.0);
 
-const posterListHeight = 150.0;
+const posterListHeight = 200.0;
 const posterListWidth = posterListHeight * 0.665;
 
 const posterGridHeight = 200.0;

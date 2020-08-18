@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_parallax/flutter_parallax.dart';
 import 'package:intl/intl.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:tmdb/res/dimens.dart';
@@ -9,6 +10,7 @@ import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
 
 final _dateFormat = DateFormat.yMMMd();
+const _parallaxFactor = 0.85;
 
 class MovieListTile extends StatelessWidget {
   final Movie movie;
@@ -26,6 +28,9 @@ class MovieListTile extends StatelessWidget {
     final media = MediaQuery.of(context);
     final imageWidth = posterListWidth;
     final imageHeight = posterListHeight;
+    final thumbnailWidth = imageWidth;
+    final thumbnailHeight = imageHeight / _parallaxFactor;
+
     final thumbnailUrl = TMDBApi.generatePosterUrl(
       movie.posterPath,
       imageWidth,
@@ -38,13 +43,20 @@ class MovieListTile extends StatelessWidget {
         Icons.image,
         size: min(imageWidth, imageHeight),
       ),
-      width: imageWidth,
-      height: imageHeight,
+      width: thumbnailWidth,
+      height: thumbnailHeight,
       fit: BoxFit.fitHeight,
     );
-    final thumbnailWidget = ClipRRect(
-      borderRadius: borderCircular_8,
-      child: thumbnail,
+    final thumbnailWidget = Container(
+      height: thumbnailHeight * _parallaxFactor,
+      width: thumbnailWidth,
+      child: ClipRRect(
+        borderRadius: borderCircular_8,
+        child: Parallax.inside(
+          child: thumbnail,
+          mainAxisExtent: thumbnailHeight * _parallaxFactor,
+        ),
+      ),
     );
 
     final textTheme = Theme.of(context).textTheme;
@@ -70,7 +82,7 @@ class MovieListTile extends StatelessWidget {
 
     final summaryWidget = Text(
       movie.overview,
-      maxLines: 3,
+      maxLines: 4,
       overflow: TextOverflow.ellipsis,
     );
 
@@ -83,6 +95,7 @@ class MovieListTile extends StatelessWidget {
           padding: paddingAll_8,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               thumbnailWidget,
               SizedBox(width: padding_8),
