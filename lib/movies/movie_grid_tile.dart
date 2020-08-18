@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_parallax/flutter_parallax.dart';
 import 'package:intl/intl.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:tmdb/res/dimens.dart';
@@ -47,10 +48,12 @@ class MovieGridTile extends StatelessWidget {
     final thumbnailWidget = ClipPath.shape(
       // rounded rectangle crop for top side only.
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: Colors.blue),
         borderRadius: BorderRadius.vertical(top: cardRadius),
       ),
-      child: thumbnail,
+      child: Parallax.inside(
+        child: thumbnail,
+        mainAxisExtent: imageHeight * 0.85,
+      ),
     );
 
     final textTheme = Theme.of(context).textTheme;

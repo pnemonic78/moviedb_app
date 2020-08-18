@@ -45,7 +45,7 @@ class _MoviesGridState<P extends MoviesGridPage> extends State<P> {
       itemCount: movies.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: columnCount,
-        childAspectRatio: 0.485,
+        childAspectRatio: 0.55,
       ),
     );
   }

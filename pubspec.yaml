@@ -28,6 +28,7 @@ dependencies:
 
   # Images
   cached_network_image: 2.2.0+1
+  flutter_parallax: 0.1.2
   material_design_icons_flutter: 4.0.5345
   pinch_zoom_image_updated: 0.2.6
 

@@ -52,7 +52,6 @@ class CastTile extends StatelessWidget {
     final thumbnailWidget = ClipPath.shape(
       // rounded rectangle crop for top side only.
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: Colors.blue),
         borderRadius: BorderRadius.vertical(top: cardRadius),
       ),
       child: thumbnail,
