@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tmdb/movies/movies_grid_page.dart';
+import 'package:tmdb/movies/movies_list_page.dart';
 import 'package:tmdb/movies/movies_page.dart';
-import 'package:tmdb/now_playing/now_playing_grid.dart';
-import 'package:tmdb/now_playing/now_playing_list.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
@@ -30,7 +30,7 @@ class _NowPlayingPageState extends MoviesState<NowPlayingPage> {
   Widget buildList(
       List<Movie> movies, bool showAsList, ValueChanged<Movie> onMovieTap) {
     return showAsList
-        ? NowPlayingListPage(movies: movies, onMovieTap: onMovieTap)
-        : NowPlayingGridPage(movies: movies, onMovieTap: onMovieTap);
+        ? MoviesListPage(movies: movies, onMovieTap: onMovieTap)
+        : MoviesGridPage(movies: movies, onMovieTap: onMovieTap);
   }
 }

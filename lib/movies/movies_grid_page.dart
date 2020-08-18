@@ -4,16 +4,19 @@ import 'package:tmdb/tmdb_api/model/movie.dart';
 
 import 'movie_grid_tile.dart';
 
-abstract class MoviesGridPage extends StatefulWidget {
+class MoviesGridPage extends StatefulWidget {
   final String title;
   final List<Movie> movies;
   final ValueChanged<Movie> onMovieTap;
 
   MoviesGridPage({Key key, this.title, this.movies, this.onMovieTap})
       : super(key: key);
+
+  @override
+  _MoviesGridState createState() => _MoviesGridState();
 }
 
-abstract class MoviesGridState<P extends MoviesGridPage> extends State<P> {
+class _MoviesGridState<P extends MoviesGridPage> extends State<P> {
   //TODO can add listener to controller to load next page
   ScrollController _scrollController;
 
