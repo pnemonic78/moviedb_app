@@ -9,9 +9,8 @@ import 'package:tmdb/tmdb_api/movies_response.dart';
 
 abstract class MoviesPage extends StatefulWidget {
   final String title;
-  final ValueChanged<MoviesPage> onViewIconTap;
 
-  MoviesPage({Key key, this.title, this.onViewIconTap}) : super(key: key);
+  MoviesPage({Key key, this.title}) : super(key: key);
 }
 
 abstract class MoviesState<P extends MoviesPage> extends State<P> {
