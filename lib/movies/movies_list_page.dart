@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:tmdb/movie_details/home_page.dart';
-import 'package:tmdb/res/dimens.dart';
-import 'package:tmdb/res/i18n.dart';
-import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
-import 'package:tmdb/tmdb_api/movies_response.dart';
 
 import 'movie_list_tile.dart';
 
 abstract class MoviesListPage extends StatefulWidget {
   final String title;
-  final ValueChanged<MoviesListPage> onGridIconTap;
+  final List<Movie> movies;
+  final ValueChanged<Movie> onMovieTap;
 
-  MoviesListPage({Key key, this.title, this.onGridIconTap}) : super(key: key);
+  MoviesListPage({Key key, this.title, this.movies, this.onMovieTap})
+      : super(key: key);
 }
 
 abstract class MoviesListState<P extends MoviesListPage> extends State<P> {
-  final TMDBApi _api = TMDBApi();
-
   //TODO can add listener to controller to load next page
   ScrollController _scrollController;
 
@@ -28,106 +22,19 @@ abstract class MoviesListState<P extends MoviesListPage> extends State<P> {
     _scrollController = ScrollController();
   }
 
-  Widget _buildListWidgets(List<Movie> movies) {
+  Widget _buildList(List<Movie> movies, ValueChanged<Movie> onMovieTap) {
     return ListView.builder(
       controller: _scrollController,
       itemBuilder: (BuildContext context, int index) => MovieListTile(
         movie: movies[index],
-        onTap: _onMovieTap,
+        onTap: onMovieTap,
       ),
       itemCount: movies.length,
     );
   }
 
-  /// Function to call when a [Movie] is tapped.
-  void _onMovieTap(Movie movie) {
-    setState(() {
-      _navigateToDetails(movie);
-    });
-  }
-
-  /// Navigates to the movie details.
-  void _navigateToDetails(Movie movie) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => MovieDetailsHomePage(
-                  movie: movie,
-                )));
-  }
-
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final string = AppLocalizations.of(context);
-    final title = getTitle(context);
-
-    final header = Text(
-      title,
-      style: theme.textTheme.headline6,
-    );
-
-    return FutureBuilder<MoviesResponse>(
-      future: _fetchMovies(context),
-      builder: (BuildContext context, AsyncSnapshot<MoviesResponse> snapshot) {
-        Widget content;
-        if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.hasData) {
-            content = _buildListWidgets(snapshot.data.results);
-          } else {
-            content = Center(
-              child: Icon(
-                Icons.error_outline,
-                size: errorIconSize,
-              ),
-            );
-          }
-        } else {
-          content = Center(child: CircularProgressIndicator());
-        }
-
-        final body = Padding(
-          padding: paddingAll_8,
-          child: Container(
-            child: Column(
-              children: <Widget>[
-                header,
-                Expanded(
-                  child: content,
-                ),
-              ],
-            ),
-          ),
-        );
-
-        var actions = <Widget>[];
-
-        if (widget.onGridIconTap != null) {
-          final iconToList = IconButton(
-            icon: Icon(MdiIcons.viewGrid),
-            onPressed: () => widget.onGridIconTap(widget),
-          );
-          actions.add(iconToList);
-        }
-
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(string.title),
-            actions: actions,
-          ),
-          body: body,
-        );
-      },
-    );
+    return _buildList(widget.movies, widget.onMovieTap);
   }
-
-  String getTitle(BuildContext context) {
-    return "";
-  }
-
-  Future<MoviesResponse> _fetchMovies(BuildContext context) async {
-    return fetchMovies(context, _api);
-  }
-
-  Future<MoviesResponse> fetchMovies(BuildContext context, TMDBApi api);
 }

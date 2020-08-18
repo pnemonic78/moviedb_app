@@ -1,14 +1,14 @@
 # To Do
 
-* flutter_bloc
-* equatable
 * dependency injection
   * Dio
   * tmdb_api/api
+* flutter_bloc
+* equatable
 * paging
 * parallax
 * repository pattern
-* transition poster from list tile to details
+* transition poster from tile to details
 
 * fimber
 * rxdart
