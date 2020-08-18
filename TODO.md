@@ -6,7 +6,6 @@
 * flutter_bloc
 * equatable
 * paging
-* parallax
 * repository pattern
 * transition poster from tile to details
 
