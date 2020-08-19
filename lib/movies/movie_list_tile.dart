@@ -26,10 +26,10 @@ class MovieListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context);
-    final imageWidth = posterListWidth;
-    final imageHeight = posterListHeight;
-    final thumbnailWidth = imageWidth;
-    final thumbnailHeight = imageHeight / _parallaxFactor;
+    final thumbnailWidth = posterListWidth;
+    final thumbnailHeight = posterListHeight;
+    final imageWidth = thumbnailWidth;
+    final imageHeight = thumbnailHeight / _parallaxFactor;
 
     final thumbnailUrl = TMDBApi.generatePosterUrl(
       movie.posterPath,
@@ -43,18 +43,18 @@ class MovieListTile extends StatelessWidget {
         Icons.image,
         size: min(imageWidth, imageHeight),
       ),
-      width: thumbnailWidth,
-      height: thumbnailHeight,
+      width: imageWidth,
+      height: imageHeight,
       fit: BoxFit.fitHeight,
     );
-    final thumbnailWidget = Container(
-      height: thumbnailHeight * _parallaxFactor,
-      width: thumbnailWidth,
-      child: ClipRRect(
-        borderRadius: borderCircular_8,
+    final thumbnailWidget = ClipRRect(
+      borderRadius: borderCircular_8,
+      child: Container(
+        width: thumbnailWidth,
+        height: thumbnailHeight,
         child: Parallax.inside(
           child: thumbnail,
-          mainAxisExtent: thumbnailHeight * _parallaxFactor,
+          mainAxisExtent: thumbnailHeight,
         ),
       ),
     );

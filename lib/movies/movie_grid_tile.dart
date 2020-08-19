@@ -10,6 +10,7 @@ import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
 
 final _dateFormat = DateFormat.yMMMd();
+const _parallaxFactor = 0.85;
 
 class MovieGridTile extends StatelessWidget {
   final Movie movie;
@@ -27,8 +28,11 @@ class MovieGridTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context);
-    final imageWidth = width;
-    final imageHeight = imageWidth * 1.5;
+    final thumbnailWidth = width;
+    final thumbnailHeight = thumbnailWidth * 1.5;
+    final imageWidth = thumbnailWidth;
+    final imageHeight = thumbnailHeight / _parallaxFactor;
+
     final thumbnailUrl = TMDBApi.generatePosterUrl(
       movie.posterPath,
       imageWidth,
@@ -50,9 +54,13 @@ class MovieGridTile extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: cardRadius),
       ),
-      child: Parallax.inside(
-        child: thumbnail,
-        mainAxisExtent: imageHeight * 0.85,
+      child: Container(
+        width: thumbnailWidth,
+        height: thumbnailHeight,
+        child: Parallax.inside(
+          child: thumbnail,
+          mainAxisExtent: thumbnailHeight,
+        ),
       ),
     );
 
