@@ -73,11 +73,13 @@ class MovieGridTile extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
     );
 
+    final voteAverageWidgetPadding = paddingHorizontal_8.horizontal * 2;
     final voteAverageWidget = SmoothStarRating(
       rating: movie.voteAverage / 2.0,
       isReadOnly: true,
       color: Colors.yellow,
       borderColor: Colors.yellow,
+      size: (width - voteAverageWidgetPadding) / 5.5,
     );
 
     final dateWidget = Text(

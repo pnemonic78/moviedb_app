@@ -26,14 +26,18 @@ class _MoviesGridState<P extends MoviesGridPage> extends State<P> {
     _scrollController = ScrollController();
   }
 
-  Widget _buildGrid(BuildContext context, List<Movie> movies,
-      ValueChanged<Movie> onMovieTap) {
+  Widget _buildGrid(
+    BuildContext context,
+    List<Movie> movies,
+    ValueChanged<Movie> onMovieTap,
+  ) {
     final media = MediaQuery.of(context);
     final screenSize = media.size;
     final screenWidth = screenSize.width;
     final cellWidth = padding_8 + posterGridWidth + padding_8;
     final columnCount = screenWidth ~/ cellWidth;
     final columnWidth = screenWidth / columnCount;
+    final cellRatio = 0.49 + (-0.02 * screenSize.aspectRatio);
 
     return GridView.builder(
       controller: _scrollController,
@@ -45,7 +49,7 @@ class _MoviesGridState<P extends MoviesGridPage> extends State<P> {
       itemCount: movies.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: columnCount,
-        childAspectRatio: 0.55,
+        childAspectRatio: cellRatio,
       ),
     );
   }
