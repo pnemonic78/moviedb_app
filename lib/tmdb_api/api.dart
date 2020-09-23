@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:inject/inject.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:tmdb/keys.dart';
@@ -19,6 +20,9 @@ import 'model/movie.dart';
 import 'movies_response.dart';
 import 'rest_client.dart';
 
+@provide
+@singleton
+// `flutter pub run build_runner build`
 class TMDBApi {
   static const api_url = "https://api.themoviedb.org/3/";
   static const image_url = "https://image.tmdb.org/t/p/%s%s";

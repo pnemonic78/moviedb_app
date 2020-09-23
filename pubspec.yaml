@@ -55,11 +55,17 @@ dependencies:
   # Widgets
   smooth_star_rating: 1.1.1
 
+  # Dependency Injection
+  inject:
+    path: ./inject.dart/package/inject
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   build_runner: 1.10.2
+  inject_generator:
+    path: ./inject.dart/package/inject_generator
   json_serializable: 3.5.0
   retrofit_generator: 1.3.8
 
