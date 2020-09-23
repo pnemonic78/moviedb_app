@@ -314,7 +314,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        taglineWidget,
+        Padding(padding: paddingAll_8, child: taglineWidget),
         details,
       ],
     );
