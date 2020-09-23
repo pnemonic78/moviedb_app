@@ -116,7 +116,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
             overflow: TextOverflow.ellipsis,
           ),
           strokeWidth: 2.0,
-          strokeColor: (luminance > 0.5 ? Colors.black26 : Colors.white24),
+          strokeColor: (luminance > 0.5 ? Colors.black54 : Colors.white54),
         );
 
         final bodySlivers = CustomScrollView(
