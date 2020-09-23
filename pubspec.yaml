@@ -48,9 +48,9 @@ dependencies:
   styled_text: 1.0.1+1
 
   # Video
-  video_player: 0.10.11+1
+  video_player: 0.10.12+4
   video_thumbnail: 0.2.2
-  youtube_player_flutter: 7.0.0+6
+  youtube_player_flutter: 7.0.0+7
 
   # Widgets
   smooth_star_rating: 1.1.1
