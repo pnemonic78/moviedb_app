@@ -43,9 +43,9 @@ dependencies:
   # Texts
   bordered_text: 1.0.0
   intl: 0.16.1
-  path_provider: 1.6.11
-  sprintf: 4.0.2
-  styled_text: 1.0.1+1
+  path_provider: 1.6.18
+  sprintf: 4.1.0
+  styled_text: 1.0.1+3
 
   # Video
   video_player: 0.10.12+4
