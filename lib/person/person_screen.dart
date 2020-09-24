@@ -4,7 +4,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:sprintf/sprintf.dart';
 import 'package:tmdb/credits/credits_table.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
@@ -358,8 +357,7 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
   }
 
   void _gotoFacebook() async {
-    final url =
-        sprintf(TMDBApi.facebook_url, [widget.person.externalIds.facebookId]);
+    final url = TMDBApi.generateFacebookUrl(widget.person.externalIds.facebookId);
     _goto(url);
   }
 
@@ -369,19 +367,17 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
   }
 
   void _gotoImdb() async {
-    final url = sprintf(TMDBApi.imdb_url, [widget.person.imdbId]);
+    final url = TMDBApi.generateImdbUrl(widget.person.imdbId);
     _goto(url);
   }
 
   void _gotoInstagram() async {
-    final url =
-        sprintf(TMDBApi.instagram_url, [widget.person.externalIds.instagramId]);
+    final url = TMDBApi.generateInstagramUrl(widget.person.externalIds.instagramId);
     _goto(url);
   }
 
   void _gotoTwitter() async {
-    final url =
-        sprintf(TMDBApi.twitter_url, [widget.person.externalIds.twitterId]);
+    final url = TMDBApi.generateTwitterUrl(widget.person.externalIds.twitterId);
     _goto(url);
   }
 

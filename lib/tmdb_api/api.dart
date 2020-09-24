@@ -18,14 +18,13 @@ import 'movies_response.dart';
 
 // `flutter pub run build_runner build`
 abstract class TMDBApi {
-  static const api_url = "https://api.themoviedb.org/3/";
-  static const image_url = "https://image.tmdb.org/t/p/%s%s";
-  static const youtube_url = "https://www.youtube.com/watch?v=%s";
-  static const youtube_thumbnail = "https://img.youtube.com/vi/%s/0.jpg";
-  static const facebook_url = "https://facebook.com/%s";
-  static const imdb_url = "https://imdb.com/name/%s";
-  static const instagram_url = "https://instagram.com/%s";
-  static const twitter_url = "https://twitter.com/%s";
+  static const _image_url = "https://image.tmdb.org/t/p/%s%s";
+  static const _youtube_url = "https://www.youtube.com/watch?v=%s";
+  static const _youtube_thumbnail_url = "https://img.youtube.com/vi/%s/0.jpg";
+  static const _facebook_url = "https://facebook.com/%s";
+  static const _imdb_url = "https://imdb.com/name/%s";
+  static const _instagram_url = "https://instagram.com/%s";
+  static const _twitter_url = "https://twitter.com/%s";
 
   static const _original = "original";
   static const backdrop_sizes = [
@@ -72,7 +71,7 @@ abstract class TMDBApi {
     }
     final size = findSize(width, height, poster_sizes);
 
-    return sprintf(image_url, [size, path]);
+    return sprintf(_image_url, [size, path]);
   }
 
   static String generateBackdropUrl(String path, double width, double height,
@@ -82,7 +81,7 @@ abstract class TMDBApi {
     }
     final size = findSize(width, height, backdrop_sizes);
 
-    return sprintf(image_url, [size, path]);
+    return sprintf(_image_url, [size, path]);
   }
 
   static String generateProfileThumbnail(
@@ -93,7 +92,7 @@ abstract class TMDBApi {
     }
     final size = findSize(width, height, profile_sizes);
 
-    return sprintf(image_url, [size, path]);
+    return sprintf(_image_url, [size, path]);
   }
 
   static String findSize(double width, double height, List<String> sizes,
@@ -131,7 +130,8 @@ abstract class TMDBApi {
 
   Future<MoviesResponse> getNowPlaying(BuildContext context);
 
-  Future<CreditsResponse> getMovieCreditsById(BuildContext context, int movieId);
+  Future<CreditsResponse> getMovieCreditsById(
+      BuildContext context, int movieId);
 
   Future<CreditsResponse> getMovieCredits(
       BuildContext context, Movie movie) async {
@@ -186,7 +186,7 @@ abstract class TMDBApi {
 
   static Future<Widget> _generateYouTubeThumbnail(
       String videoId, double width, double height) async {
-    final url = sprintf(youtube_thumbnail, [videoId]);
+    final url = sprintf(_youtube_thumbnail_url, [videoId]);
     return CachedNetworkImage(
       imageUrl: url,
       placeholder: (context, url) => Icon(
@@ -203,8 +203,24 @@ abstract class TMDBApi {
       return null;
     }
     if (video.site == "YouTube") {
-      return sprintf(youtube_url, [video.key]);
+      return sprintf(_youtube_url, [video.key]);
     }
     return null;
+  }
+
+  static String generateFacebookUrl(String id) {
+    return sprintf(_facebook_url, [id]);
+  }
+
+  static String generateImdbUrl(String id) {
+    return sprintf(_imdb_url, [id]);
+  }
+
+  static String generateInstagramUrl(String id) {
+    return sprintf(_instagram_url, [id]);
+  }
+
+  static String generateTwitterUrl(String id) {
+    return sprintf(_twitter_url, [id]);
   }
 }

@@ -13,13 +13,14 @@ import 'movies_response.dart';
 import 'rest_client.dart';
 
 class TMDBApiImpl extends TMDBApi {
+  static const _api_url = "https://api.themoviedb.org/3/";
   static const _apiKey = Keys.apiKey;
 
   RestClient _client;
 
   TMDBApiImpl() {
     final dio = Dio();
-    _client = RestClient(dio, baseUrl: TMDBApi.api_url);
+    _client = RestClient(dio, baseUrl: _api_url);
   }
 
   Future<MoviesResponse> getNowPlaying(BuildContext context) async {
