@@ -6,8 +6,7 @@ part of 'movies_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-MoviesResponse _$MoviesResponseFromJson(
-    Map<String, dynamic> json) {
+MoviesResponse _$MoviesResponseFromJson(Map<String, dynamic> json) {
   return MoviesResponse(
     results: (json['results'] as List)
         ?.map(

@@ -16,7 +16,7 @@ import 'package:video_thumbnail/video_thumbnail.dart';
 import 'model/movie.dart';
 import 'movies_response.dart';
 
-// `flutter pub run build_runner build`
+// `flutter pub run build_runner build --delete-conflicting-outputs`
 abstract class TMDBApi {
   static const _image_url = "https://image.tmdb.org/t/p/%s%s";
   static const _youtube_url = "https://www.youtube.com/watch?v=%s";
