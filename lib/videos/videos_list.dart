@@ -26,7 +26,7 @@ class VideosList extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
             content = Container(
-              height: thumbnailHeight + 55,
+              height: thumbnailHeight + 62,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: _buildVideoList(context, snapshot.data.results),

@@ -83,7 +83,7 @@ class VideoTile extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     content,
-                    titleWidget,
+                    Padding(padding: paddingTop_8, child: titleWidget),
                   ],
                 ),
               ),
