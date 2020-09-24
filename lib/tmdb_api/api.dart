@@ -27,13 +27,13 @@ abstract class TMDBApi {
   static const _twitter_url = "https://twitter.com/%s";
 
   static const _original = "original";
-  static const backdrop_sizes = [
+  static const _backdrop_sizes = [
     "w300",
     "w780",
     "w1280",
     _original,
   ];
-  static const logo_sizes = [
+  static const _logo_sizes = [
     "w45",
     "w92",
     "w154",
@@ -42,7 +42,7 @@ abstract class TMDBApi {
     "w500",
     _original,
   ];
-  static const poster_sizes = [
+  static const _poster_sizes = [
     "w92",
     "w154",
     "w185",
@@ -51,13 +51,13 @@ abstract class TMDBApi {
     "w780",
     _original,
   ];
-  static const profile_sizes = [
+  static const _profile_sizes = [
     "w45",
     "w185",
     "h632",
     _original,
   ];
-  static const still_sizes = [
+  static const _still_sizes = [
     "w92",
     "w185",
     "w300",
@@ -69,7 +69,7 @@ abstract class TMDBApi {
     if ((path == null) || (width <= 0) || (height <= 0)) {
       return null;
     }
-    final size = findSize(width, height, poster_sizes);
+    final size = findSize(width, height, _poster_sizes);
 
     return sprintf(_image_url, [size, path]);
   }
@@ -79,7 +79,7 @@ abstract class TMDBApi {
     if ((path == null) || (width <= 0) || (height <= 0)) {
       return null;
     }
-    final size = findSize(width, height, backdrop_sizes);
+    final size = findSize(width, height, _backdrop_sizes);
 
     return sprintf(_image_url, [size, path]);
   }
@@ -90,7 +90,7 @@ abstract class TMDBApi {
     if ((path == null) || (width <= 0) || (height <= 0)) {
       return null;
     }
-    final size = findSize(width, height, profile_sizes);
+    final size = findSize(width, height, _profile_sizes);
 
     return sprintf(_image_url, [size, path]);
   }
