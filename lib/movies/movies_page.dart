@@ -4,6 +4,7 @@ import 'package:tmdb/movie_details/home_page.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
+import 'package:tmdb/tmdb_api/api_impl.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
 import 'package:tmdb/tmdb_api/movies_response.dart';
 
@@ -14,7 +15,7 @@ abstract class MoviesPage extends StatefulWidget {
 }
 
 abstract class MoviesState<P extends MoviesPage> extends State<P> {
-  final TMDBApi _api = TMDBApi();
+  final TMDBApi _api = TMDBApiImpl();
   MoviesResponse _movies;
   bool _showAsList = false;
 

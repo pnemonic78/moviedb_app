@@ -2,12 +2,9 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:inject/inject.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sprintf/sprintf.dart';
-import 'package:tmdb/keys.dart';
 import 'package:tmdb/tmdb_api/credits_response.dart';
 import 'package:tmdb/tmdb_api/model/movie_details.dart';
 import 'package:tmdb/tmdb_api/model/person.dart';
@@ -18,12 +15,9 @@ import 'package:video_thumbnail/video_thumbnail.dart';
 
 import 'model/movie.dart';
 import 'movies_response.dart';
-import 'rest_client.dart';
 
-@provide
-@singleton
 // `flutter pub run build_runner build`
-class TMDBApi {
+abstract class TMDBApi {
   static const api_url = "https://api.themoviedb.org/3/";
   static const image_url = "https://image.tmdb.org/t/p/%s%s";
   static const youtube_url = "https://www.youtube.com/watch?v=%s";
@@ -32,7 +26,6 @@ class TMDBApi {
   static const imdb_url = "https://imdb.com/name/%s";
   static const instagram_url = "https://instagram.com/%s";
   static const twitter_url = "https://twitter.com/%s";
-  static const _apiKey = Keys.apiKey;
 
   static const _original = "original";
   static const backdrop_sizes = [
@@ -136,44 +129,16 @@ class TMDBApi {
     return result;
   }
 
-  RestClient _client;
+  Future<MoviesResponse> getNowPlaying(BuildContext context);
 
-  TMDBApi() {
-    final dio = Dio();
-    _client = RestClient(dio, baseUrl: api_url);
-  }
-
-  Future<MoviesResponse> getNowPlaying(BuildContext context) async {
-    final Locale locale = Localizations.localeOf(context);
-    return _client.getMoviesNowPlaying(
-      apiKey: _apiKey,
-      language: locale.languageCode,
-    );
-  }
-
-  Future<CreditsResponse> getMovieCreditsById(
-      BuildContext context, int movieId) async {
-    return _client.getMovieCredits(
-      apiKey: _apiKey,
-      moveId: movieId,
-    );
-  }
+  Future<CreditsResponse> getMovieCreditsById(BuildContext context, int movieId);
 
   Future<CreditsResponse> getMovieCredits(
       BuildContext context, Movie movie) async {
     return getMovieCreditsById(context, movie.id);
   }
 
-  Future<MovieDetails> getMovieDetailsById(
-      BuildContext context, int movieId) async {
-    final Locale locale = Localizations.localeOf(context);
-    return _client.getMovieDetails(
-      apiKey: _apiKey,
-      moveId: movieId,
-      language: locale.languageCode,
-      append: "credits",
-    );
-  }
+  Future<MovieDetails> getMovieDetailsById(BuildContext context, int movieId);
 
   Future<MovieDetails> getMovieDetails(
       BuildContext context, Movie movie) async {
@@ -182,21 +147,12 @@ class TMDBApi {
 
   Future<VideosResponse> getMovieVideos(
       BuildContext context, Movie movie) async {
-    return _client.getMovieVideos(
-      apiKey: _apiKey,
-      moveId: movie.id,
-    );
+    return getMovieVideosById(context, movie.id);
   }
 
-  Future<Person> getPersonById(BuildContext context, int personId) async {
-    final Locale locale = Localizations.localeOf(context);
-    return _client.getPerson(
-      apiKey: _apiKey,
-      personId: personId,
-      language: locale.languageCode,
-      append: "external_ids,combined_credits",
-    );
-  }
+  Future<VideosResponse> getMovieVideosById(BuildContext context, int movieId);
+
+  Future<Person> getPersonById(BuildContext context, int personId);
 
   Future<Person> getPerson(BuildContext context, Person person) async {
     return getPersonById(context, person.id);

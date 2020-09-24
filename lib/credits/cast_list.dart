@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
+import 'package:tmdb/tmdb_api/api_impl.dart';
 import 'package:tmdb/tmdb_api/credits_response.dart';
 import 'package:tmdb/tmdb_api/model/media_cast.dart';
 import 'package:tmdb/tmdb_api/model/movie_details.dart';
@@ -10,7 +11,7 @@ import 'cast_tile.dart';
 class CastList extends StatelessWidget {
   final MovieDetails movie;
   final ValueChanged<MediaCast> onTap;
-  final TMDBApi _api = TMDBApi();
+  final TMDBApi _api = TMDBApiImpl();
 
   CastList({Key key, @required this.movie, this.onTap})
       : assert(movie != null),

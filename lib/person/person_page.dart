@@ -3,6 +3,7 @@ import 'package:tmdb/movie_details/home_page.dart';
 import 'package:tmdb/person/poster_page.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
+import 'package:tmdb/tmdb_api/api_impl.dart';
 import 'package:tmdb/tmdb_api/model/media_type.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
 import 'package:tmdb/tmdb_api/model/person.dart';
@@ -25,7 +26,7 @@ class PersonPage extends StatefulWidget {
 }
 
 class _PersonPageState extends State<PersonPage> {
-  final TMDBApi _api = TMDBApi();
+  final TMDBApi _api = TMDBApiImpl();
   Person _person;
 
   Stream<Person> _fetchPerson(BuildContext context) async* {
