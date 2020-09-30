@@ -16,7 +16,6 @@ import 'package:video_thumbnail/video_thumbnail.dart';
 import 'model/movie.dart';
 import 'movies_response.dart';
 
-// `flutter pub run build_runner build --delete-conflicting-outputs`
 abstract class TMDBApi {
   static const _image_url = "https://image.tmdb.org/t/p/%s%s";
   static const _youtube_url = "https://www.youtube.com/watch?v=%s";
@@ -33,15 +32,15 @@ abstract class TMDBApi {
     "w1280",
     _original,
   ];
-  static const _logo_sizes = [
-    "w45",
-    "w92",
-    "w154",
-    "w185",
-    "w300",
-    "w500",
-    _original,
-  ];
+  // static const _logo_sizes = [
+  //   "w45",
+  //   "w92",
+  //   "w154",
+  //   "w185",
+  //   "w300",
+  //   "w500",
+  //   _original,
+  // ];
   static const _poster_sizes = [
     "w92",
     "w154",
@@ -57,12 +56,12 @@ abstract class TMDBApi {
     "h632",
     _original,
   ];
-  static const _still_sizes = [
-    "w92",
-    "w185",
-    "w300",
-    _original,
-  ];
+  // static const _still_sizes = [
+  //   "w92",
+  //   "w185",
+  //   "w300",
+  //   _original,
+  // ];
 
   static String generatePosterUrl(String path, double width, double height,
       {double devicePixelRatio = 1.0}) {

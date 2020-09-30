@@ -10,7 +10,7 @@ import 'videos_response.dart';
 
 part 'rest_client.g.dart';
 
-// `flutter pub run build_runner build`
+// `flutter pub run build_runner build --delete-conflicting-outputs`
 @RestApi(baseUrl: "https://api.themoviedb.org/3")
 abstract class RestClient {
   factory RestClient(Dio dio, {String baseUrl}) = _RestClient;

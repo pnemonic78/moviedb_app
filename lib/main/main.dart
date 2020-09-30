@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
-import 'my_app.dart';
+import 'package:tmdb/di/api_injector.dart';
+import 'package:tmdb/di/api_injector_module.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  final container = await AppInjector.create(new AppInjectorModule());
+  runApp(container.app);
+}
