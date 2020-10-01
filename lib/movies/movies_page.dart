@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:tmdb/di/api_injector_module.dart';
 import 'package:tmdb/movie_details/home_page.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
-import 'package:tmdb/tmdb_api/api_impl.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
 import 'package:tmdb/tmdb_api/movies_response.dart';
 
@@ -15,7 +15,7 @@ abstract class MoviesPage extends StatefulWidget {
 }
 
 abstract class MoviesState<P extends MoviesPage> extends State<P> {
-  final TMDBApi _api = TMDBApiImpl();
+  final TMDBApi _api = AppInjectorModule.createApi();
   MoviesResponse _movies;
   bool _showAsList = false;
 

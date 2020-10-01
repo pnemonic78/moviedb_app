@@ -17,6 +17,7 @@ import 'model/movie.dart';
 import 'movies_response.dart';
 
 abstract class TMDBApi {
+  static const api_url = "https://api.themoviedb.org/3/";
   static const _image_url = "https://image.tmdb.org/t/p/%s%s";
   static const _youtube_url = "https://www.youtube.com/watch?v=%s";
   static const _youtube_thumbnail_url = "https://img.youtube.com/vi/%s/0.jpg";

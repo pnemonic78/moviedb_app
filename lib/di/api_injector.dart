@@ -5,6 +5,7 @@ import 'api_injector.inject.dart' as i;
 import 'api_injector_module.dart';
 
 // `flutter pub run build_runner build --delete-conflicting-outputs`
+// Generated files can be found at ".dart_tool/build/generated".
 @Injector(const [AppInjectorModule])
 abstract class AppInjector {
   /// A generated `async` static function, which takes a [AppInjectorModule] and

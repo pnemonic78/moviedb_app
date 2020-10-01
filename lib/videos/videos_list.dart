@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tmdb/di/api_injector_module.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
-import 'package:tmdb/tmdb_api/api_impl.dart';
 import 'package:tmdb/tmdb_api/model/movie_details.dart';
 import 'package:tmdb/tmdb_api/model/video.dart';
 import 'package:tmdb/tmdb_api/videos_response.dart';
@@ -11,7 +11,7 @@ import 'video_tile.dart';
 class VideosList extends StatelessWidget {
   final MovieDetails movie;
   final ValueChanged<MovieVideo> onTap;
-  final TMDBApi _api = TMDBApiImpl();
+  final TMDBApi _api = AppInjectorModule.createApi();
 
   VideosList({Key key, @required this.movie, this.onTap})
       : assert(movie != null),

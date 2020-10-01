@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:tmdb/keys.dart';
 import 'package:tmdb/tmdb_api/credits_response.dart';
@@ -12,15 +11,11 @@ import 'movies_response.dart';
 import 'rest_client.dart';
 
 class TMDBApiImpl extends TMDBApi {
-  static const _api_url = "https://api.themoviedb.org/3/";
   static const _apiKey = Keys.apiKey;
 
-  RestClient _client;
+  final RestClient _client;
 
-  TMDBApiImpl() {
-    final dio = Dio();
-    _client = RestClient(dio, baseUrl: _api_url);
-  }
+  TMDBApiImpl(this._client) : assert(_client != null);
 
   Future<MoviesResponse> getNowPlaying(BuildContext context) async {
     final Locale locale = Localizations.localeOf(context);

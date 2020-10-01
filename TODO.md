@@ -1,8 +1,5 @@
 # To Do
 
-* dependency injection
-  * Dio
-  * tmdb_api/api
 * flutter_bloc
 * equatable
 * paging
