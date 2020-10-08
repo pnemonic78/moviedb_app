@@ -1,5 +1,5 @@
-import 'api_injector.dart' as _i1;
-import 'api_injector_module.dart' as _i2;
+import 'app_injector.dart' as _i1;
+import 'app_injector_module.dart' as _i2;
 import 'package:dio/src/dio.dart' as _i3;
 import '../tmdb_api/rest_client.dart' as _i4;
 import '../tmdb_api/api.dart' as _i5;

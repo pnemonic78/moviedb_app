@@ -1,8 +1,8 @@
 import 'package:inject/inject.dart';
 import 'package:tmdb/main/my_app.dart';
 
-import 'api_injector.inject.dart' as i;
-import 'api_injector_module.dart';
+import 'app_injector.inject.dart' as i;
+import 'app_injector_module.dart';
 
 // `flutter pub run build_runner build --delete-conflicting-outputs`
 // Generated files can be found at ".dart_tool/build/generated".
