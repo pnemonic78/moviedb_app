@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:bordered_text/bordered_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:tmdb/di/api_injector_module.dart';
 import 'package:tmdb/movie_details/poster_page.dart';
 import 'package:tmdb/person/person_page.dart';
 import 'package:tmdb/res/dimens.dart';
@@ -19,17 +18,18 @@ import 'movie_screen.dart';
 
 class MovieDetailsHomePage extends StatefulWidget {
   Movie movie;
+  final TMDBApi api;
 
-  MovieDetailsHomePage({Key key, this.movie})
+  MovieDetailsHomePage({@required this.movie, @required this.api})
       : assert(movie != null),
-        super(key: key);
+        assert(api != null),
+        super();
 
   @override
   _MovieDetailsHomePageState createState() => _MovieDetailsHomePageState();
 }
 
 class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
-  final TMDBApi _api = AppInjectorModule.createApi();
   MovieDetails _movie;
 
   Stream<MovieDetails> _fetchMovie(BuildContext context) async* {
@@ -44,7 +44,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
       BuildContext context, Movie movie) async* {
     _movie = MovieDetails.of(movie);
     yield _movie;
-    _movie = await _api.getMovieDetails(context, movie);
+    _movie = await widget.api.getMovieDetails(context, movie);
     yield _movie;
   }
 
@@ -60,6 +60,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
             widget.movie = movie;
             content = MovieDetailsWidget(
               movie: movie,
+              api: widget.api,
               onPosterTap: _onPosterTap,
               onVideoTap: _onVideoTap,
               onCastTap: _onCastTap,
@@ -193,8 +194,9 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
         context,
         MaterialPageRoute(
             builder: (context) => PersonPage(
-                  title: person.name,
+                  title: person.getTitle(),
                   person: person,
+                  api: widget.api,
                 )));
   }
 }

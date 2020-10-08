@@ -10,7 +10,9 @@ import 'package:tmdb/tmdb_api/movies_response.dart';
 abstract class MoviesPage extends StatefulWidget {
   final TMDBApi api;
 
-  MoviesPage(this.api) : super();
+  MoviesPage(this.api)
+      : assert(api != null),
+        super();
 }
 
 abstract class MoviesState<P extends MoviesPage> extends State<P> {
@@ -37,6 +39,7 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
         MaterialPageRoute(
             builder: (context) => MovieDetailsHomePage(
                   movie: movie,
+                  api: widget.api,
                 )));
   }
 

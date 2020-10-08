@@ -10,7 +10,7 @@ import 'package:tmdb/tmdb_api/api.dart';
 class MyApp extends StatelessWidget {
   final TMDBApi api;
 
-  MyApp(this.api);
+  MyApp(this.api) : assert(api != null);
 
   @override
   Widget build(BuildContext context) {

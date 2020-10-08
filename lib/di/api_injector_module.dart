@@ -22,10 +22,4 @@ class AppInjectorModule {
   @provide
   @singleton
   TMDBApi provideApi(RestClient client) => new TMDBApiImpl(client);
-
-  static TMDBApi createApi() {
-    final dio = new Dio();
-    final client = new RestClient(dio);
-    return new TMDBApiImpl(client);
-  }
 }

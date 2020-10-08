@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tmdb/di/api_injector_module.dart';
 import 'package:tmdb/movie_details/home_page.dart';
 import 'package:tmdb/person/poster_page.dart';
 import 'package:tmdb/res/dimens.dart';
@@ -16,17 +15,18 @@ import 'person_screen.dart';
 class PersonPage extends StatefulWidget {
   final String title;
   Person person;
+  final TMDBApi api;
 
-  PersonPage({Key key, this.title, this.person})
+  PersonPage({this.title, @required this.person, @required this.api})
       : assert(person != null),
-        super(key: key);
+        assert(api != null),
+        super();
 
   @override
   _PersonPageState createState() => _PersonPageState();
 }
 
 class _PersonPageState extends State<PersonPage> {
-  final TMDBApi _api = AppInjectorModule.createApi();
   Person _person;
 
   Stream<Person> _fetchPerson(BuildContext context) async* {
@@ -34,7 +34,7 @@ class _PersonPageState extends State<PersonPage> {
       yield _person;
       return;
     }
-    _person = await _api.getPerson(context, widget.person);
+    _person = await widget.api.getPerson(context, widget.person);
     yield _person;
   }
 
@@ -123,6 +123,7 @@ class _PersonPageState extends State<PersonPage> {
         MaterialPageRoute(
             builder: (context) => MovieDetailsHomePage(
                   movie: movie,
+                  api: widget.api,
                 )));
   }
 }
