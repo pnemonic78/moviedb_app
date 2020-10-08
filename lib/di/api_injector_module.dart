@@ -9,7 +9,7 @@ import 'package:tmdb/tmdb_api/rest_client.dart';
 class AppInjectorModule {
   @provide
   @singleton
-  MyApp provideApp() => new MyApp();
+  MyApp provideApp(TMDBApi api) => new MyApp(api);
 
   @provide
   @singleton

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inject/inject.dart';
 import 'package:tmdb/movies/movies_grid_page.dart';
 import 'package:tmdb/movies/movies_list_page.dart';
 import 'package:tmdb/movies/movies_page.dart';
@@ -7,8 +8,9 @@ import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
 import 'package:tmdb/tmdb_api/movies_response.dart';
 
+@provide
 class NowPlayingPage extends MoviesPage {
-  NowPlayingPage({Key key}) : super(key: key);
+  NowPlayingPage(TMDBApi api) : super(api);
 
   @override
   _NowPlayingPageState createState() => _NowPlayingPageState();
