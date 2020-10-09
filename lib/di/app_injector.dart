@@ -1,5 +1,6 @@
 import 'package:inject/inject.dart';
 import 'package:tmdb/main/my_app.dart';
+import 'package:tmdb/tmdb_api/api.dart';
 
 import 'app_injector.inject.dart' as i;
 import 'app_injector_module.dart';
@@ -14,4 +15,7 @@ abstract class AppInjector {
 
   @provide
   MyApp get app;
+
+  @provide
+  TMDBApi get api;
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:inject/inject.dart';
+import 'package:tmdb/di/injector_inherited.dart';
 import 'package:tmdb/now_playing/now_playing.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
@@ -8,10 +9,6 @@ import 'package:tmdb/tmdb_api/api.dart';
 
 @provide
 class MyApp extends StatelessWidget {
-  final TMDBApi api;
-
-  MyApp(this.api) : assert(api != null);
-
   @override
   Widget build(BuildContext context) {
     final cardTheme = CardTheme.of(context).copyWith(
@@ -19,6 +16,8 @@ class MyApp extends StatelessWidget {
         borderRadius: BorderRadius.all(cardRadius),
       ),
     );
+
+    final TMDBApi api = InjectorWidget.of(context).api;
 
     return MaterialApp(
       onGenerateTitle: (BuildContext context) =>
