@@ -10,7 +10,7 @@ import 'package:tmdb/tmdb_api/movies_response.dart';
 
 @provide
 class NowPlayingPage extends MoviesPage {
-  NowPlayingPage(TMDBApi api) : super(api);
+  NowPlayingPage() : super();
 
   @override
   _NowPlayingPageState createState() => _NowPlayingPageState();

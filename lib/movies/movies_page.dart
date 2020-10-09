@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:tmdb/di/injector_inherited.dart';
 import 'package:tmdb/movie_details/home_page.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
@@ -8,11 +9,7 @@ import 'package:tmdb/tmdb_api/model/movie.dart';
 import 'package:tmdb/tmdb_api/movies_response.dart';
 
 abstract class MoviesPage extends StatefulWidget {
-  final TMDBApi api;
-
-  MoviesPage(this.api)
-      : assert(api != null),
-        super();
+  MoviesPage() : super();
 }
 
 abstract class MoviesState<P extends MoviesPage> extends State<P> {
@@ -39,7 +36,6 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
         MaterialPageRoute(
             builder: (context) => MovieDetailsHomePage(
                   movie: movie,
-                  api: widget.api,
                 )));
   }
 
@@ -115,7 +111,8 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
 
   Future<MoviesResponse> _fetchMovies(BuildContext context) async {
     if (_movies == null) {
-      _movies = await fetchMovies(context, widget.api);
+      final TMDBApi api = InjectorWidget.of(context).api;
+      _movies = await fetchMovies(context, api);
     }
     return _movies;
   }

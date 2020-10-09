@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tmdb/di/injector_inherited.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/movie_details.dart';
@@ -10,11 +11,9 @@ import 'video_tile.dart';
 class VideosList extends StatelessWidget {
   final MovieDetails movie;
   final ValueChanged<MovieVideo> onTap;
-  final TMDBApi api;
 
-  VideosList({Key key, @required this.movie, @required this.api, this.onTap})
+  VideosList({Key key, @required this.movie, this.onTap})
       : assert(movie != null),
-        assert(api != null),
         super(key: key);
 
   @override
@@ -45,6 +44,7 @@ class VideosList extends StatelessWidget {
   }
 
   Future<VideosResponse> _fetchVideos(BuildContext context) async {
+    final TMDBApi api = InjectorWidget.of(context).api;
     return api.getMovieVideos(context, movie);
   }
 

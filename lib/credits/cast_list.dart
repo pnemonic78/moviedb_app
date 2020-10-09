@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tmdb/di/injector_inherited.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/credits_response.dart';
@@ -10,11 +11,9 @@ import 'cast_tile.dart';
 class CastList extends StatelessWidget {
   final MovieDetails movie;
   final ValueChanged<MediaCast> onTap;
-  final TMDBApi api;
 
-  CastList({Key key, @required this.movie, @required this.api, this.onTap})
+  CastList({Key key, @required this.movie, this.onTap})
       : assert(movie != null),
-        assert(api != null),
         super(key: key);
 
   @override
@@ -45,6 +44,7 @@ class CastList extends StatelessWidget {
   }
 
   Future<CreditsResponse> _fetchCast(BuildContext context) async {
+    final TMDBApi api = InjectorWidget.of(context).api;
     return movie.credits ?? api.getMovieCredits(context, movie);
   }
 

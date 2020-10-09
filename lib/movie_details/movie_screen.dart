@@ -25,17 +25,14 @@ class MovieDetailsWidget extends StatefulWidget {
   final ValueChanged<MovieDetails> onPosterTap;
   final ValueChanged<MovieVideo> onVideoTap;
   final ValueChanged<MediaCast> onCastTap;
-  final TMDBApi api;
 
   const MovieDetailsWidget({
     Key key,
     @required this.movie,
-    @required this.api,
     this.onPosterTap,
     this.onVideoTap,
     this.onCastTap,
   })  : assert(movie != null),
-        assert(api != null),
         super(key: key);
 
   @override
@@ -57,7 +54,6 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     if (_videoList == null) {
       _videoList = VideosList(
         movie: movie,
-        api: widget.api,
         onTap: widget.onVideoTap,
       );
     }
@@ -68,7 +64,6 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     if (_castList == null) {
       _castList = CastList(
         movie: movie,
-        api: widget.api,
         onTap: widget.onCastTap,
       );
     }

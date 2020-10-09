@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:bordered_text/bordered_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:tmdb/di/injector_inherited.dart';
 import 'package:tmdb/movie_details/poster_page.dart';
 import 'package:tmdb/person/person_page.dart';
 import 'package:tmdb/res/dimens.dart';
@@ -18,11 +19,9 @@ import 'movie_screen.dart';
 
 class MovieDetailsHomePage extends StatefulWidget {
   Movie movie;
-  final TMDBApi api;
 
-  MovieDetailsHomePage({@required this.movie, @required this.api})
+  MovieDetailsHomePage({@required this.movie})
       : assert(movie != null),
-        assert(api != null),
         super();
 
   @override
@@ -44,7 +43,9 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
       BuildContext context, Movie movie) async* {
     _movie = MovieDetails.of(movie);
     yield _movie;
-    _movie = await widget.api.getMovieDetails(context, movie);
+
+    final TMDBApi api = InjectorWidget.of(context).api;
+    _movie = await api.getMovieDetails(context, movie);
     yield _movie;
   }
 
@@ -60,7 +61,6 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
             widget.movie = movie;
             content = MovieDetailsWidget(
               movie: movie,
-              api: widget.api,
               onPosterTap: _onPosterTap,
               onVideoTap: _onVideoTap,
               onCastTap: _onCastTap,
@@ -196,7 +196,6 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
             builder: (context) => PersonPage(
                   title: person.getTitle(),
                   person: person,
-                  api: widget.api,
                 )));
   }
 }

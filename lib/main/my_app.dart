@@ -17,8 +17,6 @@ class MyApp extends StatelessWidget {
       ),
     );
 
-    final TMDBApi api = InjectorWidget.of(context).api;
-
     return MaterialApp(
       onGenerateTitle: (BuildContext context) =>
           AppLocalizations.of(context).title,
@@ -28,7 +26,7 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData.dark().copyWith(
         cardTheme: cardTheme,
       ),
-      home: NowPlayingPage(api),
+      home: NowPlayingPage(),
       localizationsDelegates: [
         const AppLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
