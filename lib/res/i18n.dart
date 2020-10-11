@@ -152,13 +152,17 @@ class AppLocalizations {
   String get top_rated {
     return _localizedValues[locale.languageCode]["top_rated"];
   }
-
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const AppLocalizationsDelegate();
 
   static const _languages = ['en', 'he'];
+
+  static const locales = [
+    const Locale('en', ''), // English, no country code
+    const Locale('he', ''), // Hebrew, no country code
+  ];
 
   @override
   bool isSupported(Locale locale) => _languages.contains(locale.languageCode);
