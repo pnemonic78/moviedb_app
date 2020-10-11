@@ -10,19 +10,25 @@ import 'package:tmdb/tmdb_api/model/movie.dart';
 import 'package:tmdb/tmdb_api/movies_response.dart';
 
 import 'movie_bloc.dart';
+import 'movies_grid_page.dart';
+import 'movies_list_page.dart';
 
 abstract class MoviesPage extends StatefulWidget {
   MoviesPage() : super();
 }
 
 abstract class MoviesState<P extends MoviesPage> extends State<P> {
-  MoviesResponse _movies;
+  final Duration _fetchTimeout = Duration(seconds: 30);
 
   Widget buildList(
     List<Movie> movies,
     bool showAsList,
     ValueChanged<Movie> onMovieTap,
-  );
+  ) {
+    return showAsList
+        ? MoviesListPage(movies: movies, onMovieTap: onMovieTap)
+        : MoviesGridPage(movies: movies, onMovieTap: onMovieTap);
+  }
 
   /// Function to call when a [Movie] is tapped.
   void _onMovieTap(Movie movie) {
@@ -51,63 +57,62 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
       style: theme.textTheme.headline6,
     );
 
-    return FutureBuilder<MoviesResponse>(
-      future: _fetchMovies(context),
-      builder: (BuildContext context, AsyncSnapshot<MoviesResponse> snapshot) {
-        // ignore: close_sinks
-        final mainBloc = context.bloc<MovieBloc>();
+    final movies = getMovies(state);
 
-        Widget content;
-        if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.hasData) {
-            content = buildList(
-              snapshot.data.results,
-              state.showAsList,
-              _onMovieTap,
-            );
-          } else {
-            content = Center(
-              child: Icon(
-                Icons.error_outline,
-                size: errorIconSize,
-              ),
-            );
-          }
-        } else {
-          content = Center(child: CircularProgressIndicator());
-        }
+    Widget content;
 
-        final body = Padding(
-          padding: paddingAll_8,
-          child: Container(
-            child: Column(
-              children: <Widget>[
-                header,
-                Expanded(
-                  child: content,
-                ),
-              ],
+    if (movies != null) {
+      if (movies.results != null) {
+        content = buildList(
+          movies.results,
+          state.showAsList,
+          _onMovieTap,
+        );
+      } else {
+        content = Center(
+          child: Icon(
+            Icons.error_outline,
+            size: errorIconSize,
+          ),
+        );
+      }
+    } else {
+      _fetchMovies(context);
+
+      content = Center(child: CircularProgressIndicator());
+    }
+
+    final body = Padding(
+      padding: paddingAll_8,
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            header,
+            Expanded(
+              child: content,
             ),
-          ),
-        );
+          ],
+        ),
+      ),
+    );
 
-        final iconViewStyle = IconButton(
-          icon: state.showAsList
-              ? Icon(MdiIcons.viewGrid)
-              : Icon(MdiIcons.viewList),
-          onPressed: () => mainBloc.add(new ToggleViewStyleEvent()),
-        );
+    // ignore: close_sinks
+    final moviesBloc = context.bloc<MovieBloc>();
 
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(string.title),
-            actions: [
-              iconViewStyle,
-            ],
-          ),
-          body: body,
-        );
-      },
+    final iconViewStyle = IconButton(
+      icon:
+          state.showAsList ? Icon(MdiIcons.viewGrid) : Icon(MdiIcons.viewList),
+      onPressed: () => moviesBloc.add(new ToggleViewStyleEvent()),
+    );
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(string.title),
+        actions: [
+          iconViewStyle,
+        ],
+      ),
+      body: body,
     );
   }
 
@@ -127,19 +132,20 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
     return "";
   }
 
-  Future<MoviesResponse> _fetchMovies(BuildContext context) async {
-    if (_movies == null) {
-      final TMDBApi api = InjectorWidget.of(context).api;
-      _movies = await fetchMovies(context, api);
-    }
-    return _movies;
+  void _fetchMovies(BuildContext context) {
+    // ignore: close_sinks
+    final moviesBloc = context.bloc<MovieBloc>();
+
+    final api = InjectorWidget.of(context).api;
+
+    fetchMovies(context, api)
+        .timeout(_fetchTimeout)
+        .then((value) => moviesBloc.add(MoviesResponseEvent(value)))
+        .catchError((e) => moviesBloc.add(MoviesResponseEvent(
+            MoviesResponse(results: null, page: 0, totalPages: 0))));
   }
 
-  Future<MoviesResponse> fetchMovies(BuildContext context, TMDBApi api);
+  MoviesResponse getMovies(MovieState state);
 
-// void _onIconViewStylePressed() {
-// setState(() {
-//   _showAsList = !_showAsList;
-// });
-// }
+  Future<MoviesResponse> fetchMovies(BuildContext context, TMDBApi api);
 }

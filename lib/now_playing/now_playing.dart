@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
-import 'package:tmdb/movies/movies_grid_page.dart';
-import 'package:tmdb/movies/movies_list_page.dart';
+import 'package:tmdb/movies/movie_bloc.dart';
 import 'package:tmdb/movies/movies_page.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
-import 'package:tmdb/tmdb_api/model/movie.dart';
 import 'package:tmdb/tmdb_api/movies_response.dart';
 
 @provide
@@ -24,15 +22,12 @@ class _NowPlayingPageState extends MoviesState<NowPlayingPage> {
   }
 
   @override
-  Future<MoviesResponse> fetchMovies(BuildContext context, TMDBApi api) async {
-    return api.getNowPlaying(context);
+  MoviesResponse getMovies(MovieState state) {
+    return state.moviesNowPlaying;
   }
 
   @override
-  Widget buildList(
-      List<Movie> movies, bool showAsList, ValueChanged<Movie> onMovieTap) {
-    return showAsList
-        ? MoviesListPage(movies: movies, onMovieTap: onMovieTap)
-        : MoviesGridPage(movies: movies, onMovieTap: onMovieTap);
+  Future<MoviesResponse> fetchMovies(BuildContext context, TMDBApi api) async {
+    return api.getNowPlaying(context);
   }
 }
