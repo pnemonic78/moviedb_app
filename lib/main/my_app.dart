@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:inject/inject.dart';
 import 'package:tmdb/now_playing/now_playing.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
-
-import 'main_bloc.dart';
 
 @provide
 class MyApp extends StatelessWidget {
@@ -18,7 +15,7 @@ class MyApp extends StatelessWidget {
       ),
     );
 
-    final app = MaterialApp(
+    return MaterialApp(
       onGenerateTitle: (BuildContext context) =>
           AppLocalizations.of(context).title,
       theme: ThemeData.light().copyWith(
@@ -27,10 +24,7 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData.dark().copyWith(
         cardTheme: cardTheme,
       ),
-      home: BlocProvider(
-        create: (_) => MainBloc(),
-        child: NowPlayingPage(),
-      ),
+      home: NowPlayingPage(),
       localizationsDelegates: [
         const AppLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
@@ -38,15 +32,6 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: AppLocalizationsDelegate.locales,
-    );
-
-    return BlocProvider(
-      create: (_) => MainBloc(),
-      child: BlocBuilder<MainBloc, MainState>(
-        builder: (context, state) {
-          return app;
-        },
-      ),
     );
   }
 }

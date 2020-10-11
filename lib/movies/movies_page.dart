@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:tmdb/di/injector_inherited.dart';
+import 'package:tmdb/main/main_bloc.dart';
 import 'package:tmdb/movie_details/home_page.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
@@ -14,7 +16,6 @@ abstract class MoviesPage extends StatefulWidget {
 
 abstract class MoviesState<P extends MoviesPage> extends State<P> {
   MoviesResponse _movies;
-  bool _showAsList = false;
 
   Widget buildList(
     List<Movie> movies,
@@ -39,8 +40,7 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
                 )));
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildPage(BuildContext context, MainState state) {
     final theme = Theme.of(context);
     final string = AppLocalizations.of(context);
     final title = getTitle(context);
@@ -53,12 +53,15 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
     return FutureBuilder<MoviesResponse>(
       future: _fetchMovies(context),
       builder: (BuildContext context, AsyncSnapshot<MoviesResponse> snapshot) {
+        // ignore: close_sinks
+        final mainBloc = context.bloc<MainBloc>();
+
         Widget content;
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
             content = buildList(
               snapshot.data.results,
-              _showAsList,
+              state.showAsList,
               _onMovieTap,
             );
           } else {
@@ -88,8 +91,10 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
         );
 
         final iconViewStyle = IconButton(
-          icon: _showAsList ? Icon(MdiIcons.viewGrid) : Icon(MdiIcons.viewList),
-          onPressed: () => _onIconViewStylePressed(),
+          icon: state.showAsList
+              ? Icon(MdiIcons.viewGrid)
+              : Icon(MdiIcons.viewList),
+          onPressed: () => mainBloc.add(new ToggleViewStyleEvent()),
         );
 
         return Scaffold(
@@ -102,6 +107,18 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
           body: body,
         );
       },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => MainBloc(),
+      child: BlocBuilder<MainBloc, MainState>(
+        builder: (context, state) {
+          return _buildPage(context, state);
+        },
+      ),
     );
   }
 
@@ -119,9 +136,9 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
 
   Future<MoviesResponse> fetchMovies(BuildContext context, TMDBApi api);
 
-  void _onIconViewStylePressed() {
-    setState(() {
-      _showAsList = !_showAsList;
-    });
-  }
+// void _onIconViewStylePressed() {
+// setState(() {
+//   _showAsList = !_showAsList;
+// });
+// }
 }

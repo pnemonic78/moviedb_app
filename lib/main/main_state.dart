@@ -1,6 +1,14 @@
 part of 'main_bloc.dart';
 
 @immutable
-abstract class MainState {}
+class MainState {
+  final bool showAsList;
 
-class MainInitial extends MainState {}
+  const MainState({
+    this.showAsList = false,
+  });
+}
+
+class MainInitial extends MainState {
+  const MainInitial() : super(showAsList: false);
+}
