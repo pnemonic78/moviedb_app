@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:tmdb/di/injector_inherited.dart';
-import 'package:tmdb/main/main_bloc.dart';
 import 'package:tmdb/movie_details/home_page.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
 import 'package:tmdb/tmdb_api/movies_response.dart';
+
+import 'movie_bloc.dart';
 
 abstract class MoviesPage extends StatefulWidget {
   MoviesPage() : super();
@@ -40,7 +41,7 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
                 )));
   }
 
-  Widget _buildPage(BuildContext context, MainState state) {
+  Widget _buildPage(BuildContext context, MovieState state) {
     final theme = Theme.of(context);
     final string = AppLocalizations.of(context);
     final title = getTitle(context);
@@ -54,7 +55,7 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
       future: _fetchMovies(context),
       builder: (BuildContext context, AsyncSnapshot<MoviesResponse> snapshot) {
         // ignore: close_sinks
-        final mainBloc = context.bloc<MainBloc>();
+        final mainBloc = context.bloc<MovieBloc>();
 
         Widget content;
         if (snapshot.connectionState == ConnectionState.done) {
@@ -113,8 +114,8 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => MainBloc(),
-      child: BlocBuilder<MainBloc, MainState>(
+      create: (_) => MovieBloc(),
+      child: BlocBuilder<MovieBloc, MovieState>(
         builder: (context, state) {
           return _buildPage(context, state);
         },

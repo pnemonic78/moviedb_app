@@ -11,10 +11,6 @@ class MainBloc extends Bloc<MainEvent, MainState> {
 
   @override
   Stream<MainState> mapEventToState(MainEvent event) async* {
-    if (event is ToggleViewStyleEvent) {
-      yield state.toggleViewStyle();
-      return;
-    }
     addError(Exception('unsupported event'));
   }
 }
