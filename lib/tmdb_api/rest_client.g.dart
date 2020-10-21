@@ -17,7 +17,7 @@ class _RestClient implements RestClient {
   String baseUrl;
 
   @override
-  getMoviesNowPlaying({apiKey, language = "en-US", page = 1, region}) async {
+  getMoviesNowPlaying({apiKey, language, page = 1, region}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'api_key': apiKey,
@@ -29,6 +29,78 @@ class _RestClient implements RestClient {
     final _data = <String, dynamic>{};
     final Response<Map<String, dynamic>> _result = await _dio.request(
         '/movie/now_playing',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = MoviesResponse.fromJson(_result.data);
+    return value;
+  }
+
+  @override
+  getMoviesPopular({apiKey, language, page = 1, region}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'api_key': apiKey,
+      r'language': language,
+      r'page': page,
+      r'region': region
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    final Response<Map<String, dynamic>> _result = await _dio.request(
+        '/movie/popular',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = MoviesResponse.fromJson(_result.data);
+    return value;
+  }
+
+  @override
+  getMoviesTopRated({apiKey, language, page = 1, region}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'api_key': apiKey,
+      r'language': language,
+      r'page': page,
+      r'region': region
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    final Response<Map<String, dynamic>> _result = await _dio.request(
+        '/movie/top_rated',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = MoviesResponse.fromJson(_result.data);
+    return value;
+  }
+
+  @override
+  getMoviesUpcoming({apiKey, language, page = 1, region}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'api_key': apiKey,
+      r'language': language,
+      r'page': page,
+      r'region': region
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    final Response<Map<String, dynamic>> _result = await _dio.request(
+        '/movie/upcoming',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'GET',

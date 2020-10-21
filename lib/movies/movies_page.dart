@@ -140,12 +140,13 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
 
     fetchMovies(context, api)
         .timeout(_fetchTimeout)
-        .then((value) => moviesBloc.add(MoviesResponseEvent(value)))
-        .catchError((e) => moviesBloc.add(MoviesResponseEvent(
-            MoviesResponse(results: null, page: 0, totalPages: 0))));
+        .then((value) => moviesBloc.add(createResponseEvent(value)))
+        .catchError((e) => moviesBloc.addError(e));
   }
 
   MoviesResponse getMovies(MovieState state);
 
   Future<MoviesResponse> fetchMovies(BuildContext context, TMDBApi api);
+
+  MoviesResponseEvent createResponseEvent(MoviesResponse response);
 }

@@ -130,6 +130,12 @@ abstract class TMDBApi {
 
   Future<MoviesResponse> getNowPlaying(BuildContext context);
 
+  Future<MoviesResponse> getPopular(BuildContext context);
+
+  Future<MoviesResponse> getTopRated(BuildContext context);
+
+  Future<MoviesResponse> getUpcoming(BuildContext context);
+
   Future<CreditsResponse> getMovieCreditsById(
       BuildContext context, int movieId);
 

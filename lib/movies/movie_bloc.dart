@@ -12,8 +12,20 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
 
   @override
   Stream<MovieState> mapEventToState(MovieEvent event) async* {
-    if (event is MoviesResponseEvent) {
+    if (event is NowPlayingResponseEvent) {
       yield state.copy(moviesNowPlaying: event.response);
+      return;
+    }
+    if (event is PopularResponseEvent) {
+      yield state.copy(moviesPopular: event.response);
+      return;
+    }
+    if (event is TopRatedResponseEvent) {
+      yield state.copy(moviesTopRated: event.response);
+      return;
+    }
+    if (event is UpcomingResponseEvent) {
+      yield state.copy(moviesUpcoming: event.response);
       return;
     }
     if (event is ToggleViewStyleEvent) {

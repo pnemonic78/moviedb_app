@@ -18,7 +18,31 @@ abstract class RestClient {
   @GET("/movie/now_playing")
   Future<MoviesResponse> getMoviesNowPlaying({
     @Query("api_key") String apiKey,
-    @Query("language") String language = "en-US",
+    @Query("language") String language,
+    @Query("page") int page = 1,
+    @Query("region") String region,
+  });
+
+  @GET("/movie/popular")
+  Future<MoviesResponse> getMoviesPopular({
+    @Query("api_key") String apiKey,
+    @Query("language") String language,
+    @Query("page") int page = 1,
+    @Query("region") String region,
+  });
+
+  @GET("/movie/top_rated")
+  Future<MoviesResponse> getMoviesTopRated({
+    @Query("api_key") String apiKey,
+    @Query("language") String language,
+    @Query("page") int page = 1,
+    @Query("region") String region,
+  });
+
+  @GET("/movie/upcoming")
+  Future<MoviesResponse> getMoviesUpcoming({
+    @Query("api_key") String apiKey,
+    @Query("language") String language,
     @Query("page") int page = 1,
     @Query("region") String region,
   });

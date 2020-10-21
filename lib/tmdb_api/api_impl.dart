@@ -25,6 +25,30 @@ class TMDBApiImpl extends TMDBApi {
     );
   }
 
+  Future<MoviesResponse> getPopular(BuildContext context) async {
+    final Locale locale = Localizations.localeOf(context);
+    return _client.getMoviesPopular(
+      apiKey: _apiKey,
+      language: locale.languageCode,
+    );
+  }
+
+  Future<MoviesResponse> getTopRated(BuildContext context) async {
+    final Locale locale = Localizations.localeOf(context);
+    return _client.getMoviesTopRated(
+      apiKey: _apiKey,
+      language: locale.languageCode,
+    );
+  }
+
+  Future<MoviesResponse> getUpcoming(BuildContext context) async {
+    final Locale locale = Localizations.localeOf(context);
+    return _client.getMoviesUpcoming(
+      apiKey: _apiKey,
+      language: locale.languageCode,
+    );
+  }
+
   Future<CreditsResponse> getMovieCreditsById(
       BuildContext context, int movieId) async {
     return _client.getMovieCredits(
