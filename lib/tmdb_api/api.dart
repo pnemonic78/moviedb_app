@@ -16,6 +16,8 @@ import 'package:video_thumbnail/video_thumbnail.dart';
 import 'model/movie.dart';
 import 'movies_response.dart';
 
+final Duration fetchTimeout = Duration(seconds: 30);
+
 abstract class TMDBApi {
   static const api_url = "https://api.themoviedb.org/3/";
   static const _image_url = "https://image.tmdb.org/t/p/%s%s";

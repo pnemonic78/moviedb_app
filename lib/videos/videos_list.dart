@@ -28,7 +28,7 @@ class VideosList extends StatelessWidget {
               height: thumbnailHeight + 62,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                children: _buildVideoList(context, snapshot.data.results),
+                children: _buildList(context, snapshot.data.results),
               ),
             );
           } else {
@@ -48,7 +48,7 @@ class VideosList extends StatelessWidget {
     return api.getMovieVideos(context, movie);
   }
 
-  List<Widget> _buildVideoList(BuildContext context, List<MovieVideo> videos) {
+  List<Widget> _buildList(BuildContext context, List<MovieVideo> videos) {
     final list = <Widget>[];
 
     for (var video in videos) {

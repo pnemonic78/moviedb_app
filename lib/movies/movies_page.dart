@@ -18,8 +18,6 @@ abstract class MoviesPage extends StatefulWidget {
 }
 
 abstract class MoviesState<P extends MoviesPage> extends State<P> {
-  final Duration _fetchTimeout = Duration(seconds: 30);
-
   Widget buildList(
     List<Movie> movies,
     bool showAsList,
@@ -139,8 +137,8 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
     final api = InjectorWidget.of(context).api;
 
     fetchMovies(context, api)
-        .timeout(_fetchTimeout)
-        .then((value) => moviesBloc.add(createResponseEvent(value)))
+        .timeout(fetchTimeout)
+        .then((response) => moviesBloc.add(createResponseEvent(response)))
         .catchError((e) => moviesBloc.addError(e));
   }
 

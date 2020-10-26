@@ -90,15 +90,18 @@ class MovieGridTile extends StatelessWidget {
     final card = Card(
       child: InkWell(
         onTap: onTap == null ? null : () => onTap(movie),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            thumbnailWidget,
-            Padding(padding: paddingHorizontal_8, child: voteAverageWidget),
-            Padding(padding: paddingHorizontal_8, child: titleWidget),
-            Padding(padding: paddingHorizontal_8, child: dateWidget),
-          ],
+        child: Container(
+          width: width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              thumbnailWidget,
+              Padding(padding: paddingHorizontal_8, child: voteAverageWidget),
+              Padding(padding: paddingHorizontal_8, child: titleWidget),
+              Padding(padding: paddingHorizontal_8, child: dateWidget),
+            ],
+          ),
         ),
       ),
     );
