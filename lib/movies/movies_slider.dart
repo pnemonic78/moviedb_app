@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:tmdb/movies/movie_grid_tile.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
+
+import 'movies_all_tile.dart';
 
 class MoviesSlider extends StatelessWidget {
   final List<Movie> movies;
@@ -13,14 +15,12 @@ class MoviesSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final media = MediaQuery.of(context);
-    final screenSize = media.size;
-    final cellRatio = 0.49 + (-0.02 * screenSize.aspectRatio);
-    final cellWidth = posterGridWidth;
-    final cellHeight = cellWidth / cellRatio;
+    final textTheme = Theme.of(context).textTheme;
+    final titleHeight = textTheme.headline6.fontSize;
+    final tileHeight = paddingVertical_8.top + posterGridHeight + titleHeight + paddingVertical_8.bottom;
 
     return Container(
-      height: cellHeight,
+      height: tileHeight,
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: _buildList(context, movies),
@@ -32,7 +32,7 @@ class MoviesSlider extends StatelessWidget {
     final list = <Widget>[];
 
     for (var movie in movies) {
-      list.add(MovieGridTile(
+      list.add(MoviesAllTile(
         movie: movie,
         onTap: onTap,
       ));
