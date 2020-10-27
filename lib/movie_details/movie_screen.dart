@@ -22,14 +22,14 @@ final _summaryLinesMax = 1000;
 
 class MovieDetailsWidget extends StatefulWidget {
   final MovieDetails movie;
-  final ValueChanged<MovieDetails> onPosterTap;
+  final ValueChanged<MovieDetails> onTapPoster;
   final ValueChanged<MovieVideo> onVideoTap;
   final ValueChanged<MediaCast> onCastTap;
 
   const MovieDetailsWidget({
     Key key,
     @required this.movie,
-    this.onPosterTap,
+    this.onTapPoster,
     this.onVideoTap,
     this.onCastTap,
   })  : assert(movie != null),
@@ -109,7 +109,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
         borderRadius: borderCircular_8,
         child: poster,
       ),
-      onTap: () => widget.onPosterTap(movie),
+      onTap: () => widget.onTapPoster(movie),
     );
 
     final taglineWidget = Text(

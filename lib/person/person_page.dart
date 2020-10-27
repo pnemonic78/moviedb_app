@@ -51,9 +51,9 @@ class _PersonPageState extends State<PersonPage> {
             content = SingleChildScrollView(
               child: PersonDetailsWidget(
                 person: person,
-                onPosterTap: _onPosterTap,
-                onCastTap: _onCastTap,
-                onCrewTap: _onCrewTap,
+                onTapPoster: _onTapPoster,
+                onCastTap: _onTapCast,
+                onCrewTap: _onTapCrew,
               ),
             );
           } else {
@@ -81,7 +81,7 @@ class _PersonPageState extends State<PersonPage> {
   }
 
   /// Function to call when a poster [Image] is tapped.
-  void _onPosterTap(Person person) {
+  void _onTapPoster(Person person) {
     setState(() {
       _navigateToPoster(person);
     });
@@ -98,14 +98,14 @@ class _PersonPageState extends State<PersonPage> {
   }
 
   /// Function to call when a cast item is tapped.
-  void _onCastTap(PersonCast item) {
+  void _onTapCast(PersonCast item) {
     setState(() {
       _navigateToMovie(item);
     });
   }
 
   /// Function to call when a crew item is tapped.
-  void _onCrewTap(PersonCrew item) {
+  void _onTapCrew(PersonCrew item) {
     setState(() {
       _navigateToMovie(item);
     });

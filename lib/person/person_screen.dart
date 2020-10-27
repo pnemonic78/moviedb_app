@@ -21,14 +21,14 @@ final _summaryLinesMax = 1000;
 
 class PersonDetailsWidget extends StatefulWidget {
   final Person person;
-  final ValueChanged<Person> onPosterTap;
+  final ValueChanged<Person> onTapPoster;
   final ValueChanged<PersonCast> onCastTap;
   final ValueChanged<PersonCrew> onCrewTap;
 
   const PersonDetailsWidget({
     Key key,
     @required this.person,
-    this.onPosterTap,
+    this.onTapPoster,
     this.onCastTap,
     this.onCrewTap,
   })  : assert(person != null),
@@ -74,7 +74,7 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
         borderRadius: borderCircular_8,
         child: poster,
       ),
-      onTap: () => widget.onPosterTap(person),
+      onTap: () => widget.onTapPoster(person),
     );
 
     final textTheme = Theme.of(context).textTheme;

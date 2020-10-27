@@ -61,9 +61,9 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
             widget.movie = movie;
             content = MovieDetailsWidget(
               movie: movie,
-              onPosterTap: _onPosterTap,
-              onVideoTap: _onVideoTap,
-              onCastTap: _onCastTap,
+              onTapPoster: _onTapPoster,
+              onVideoTap: _onTapVideo,
+              onCastTap: _onTapCast,
             );
           } else {
             content = Center(
@@ -147,7 +147,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
   }
 
   /// Function to call when a poster [Image] is tapped.
-  void _onPosterTap(MovieDetails movie) {
+  void _onTapPoster(MovieDetails movie) {
     setState(() {
       _navigateToPoster(movie);
     });
@@ -164,7 +164,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
   }
 
   /// Function to call when a [MovieVideo] is tapped.
-  void _onVideoTap(MovieVideo video) {
+  void _onTapVideo(MovieVideo video) {
     setState(() {
       _navigateToVideo(video);
     });
@@ -182,7 +182,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
   }
 
   /// Function to call when a [MediaCast] is tapped.
-  void _onCastTap(MediaCast cast) {
+  void _onTapCast(MediaCast cast) {
     setState(() {
       _navigateToPerson(cast);
     });

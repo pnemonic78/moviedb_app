@@ -29,7 +29,7 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
   }
 
   /// Function to call when a [Movie] is tapped.
-  void _onMovieTap(Movie movie) {
+  void _onTapMovie(Movie movie) {
     setState(() {
       _navigateToDetails(movie);
     });
@@ -64,7 +64,7 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
         content = buildList(
           movies.results,
           state.showAsList,
-          _onMovieTap,
+          _onTapMovie,
         );
       } else {
         content = Center(

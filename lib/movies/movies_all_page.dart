@@ -3,13 +3,18 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tmdb/di/injector_inherited.dart';
 import 'package:tmdb/movie_details/home_page.dart';
+import 'package:tmdb/movies/now_playing_page.dart';
+import 'package:tmdb/movies/popular_page.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
 
 import 'movie_bloc.dart';
+import 'movies_page.dart';
 import 'movies_slider.dart';
+import 'top_rated_page.dart';
+import 'upcoming_page.dart';
 
 class MoviesAllPage extends StatefulWidget {
   MoviesAllPage() : super();
@@ -35,30 +40,34 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
     final theme = Theme.of(context);
     final string = AppLocalizations.of(context);
 
-    final popularTitle = Text(
+    final popularTitle = _buildTitle(
+      context,
       string.popular,
-      style: theme.textTheme.headline5,
+      _onTapPopular,
     );
 
     final popularList = _buildPopularList(context);
 
-    final nowPlayingTitle = Text(
+    final nowPlayingTitle = _buildTitle(
+      context,
       string.now_playing,
-      style: theme.textTheme.headline5,
+      _onTapNowPlaying,
     );
 
     final nowPlayingList = _buildNowPlayingList(context);
 
-    final upcomingTitle = Text(
+    final upcomingTitle = _buildTitle(
+      context,
       string.upcoming,
-      style: theme.textTheme.headline5,
+      _onTapUpcoming,
     );
 
     final upcomingList = _buildUpcomingList(context);
 
-    final topRatedTitle = Text(
+    final topRatedTitle = _buildTitle(
+      context,
       string.top_rated,
-      style: theme.textTheme.headline5,
+      _onTapTopRated,
     );
 
     final topRatedList = _buildTopRatedList(context);
@@ -90,31 +99,51 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
     );
   }
 
+  Widget _buildTitle(
+      BuildContext context, String title, ValueChanged<String> onTap) {
+    final theme = Theme.of(context);
+    final text = Text(
+      title,
+      style: theme.textTheme.headline5,
+    );
+
+    return InkWell(
+      onTap: onTap == null ? null : () => onTap(title),
+      child: Container(
+        width: double.infinity,
+        child: Padding(
+          padding: paddingAll_8,
+          child: text,
+        ),
+      ),
+    );
+  }
+
   Widget _buildNowPlayingList(BuildContext context) {
     return MoviesSlider(
       movies: getMoviesNowPlaying(context),
-      onTap: _onMovieTap,
+      onTap: _onTapMovie,
     );
   }
 
   Widget _buildPopularList(BuildContext context) {
     return MoviesSlider(
       movies: getMoviesPopular(context),
-      onTap: _onMovieTap,
+      onTap: _onTapMovie,
     );
   }
 
   Widget _buildTopRatedList(BuildContext context) {
     return MoviesSlider(
       movies: getMoviesTopRated(context),
-      onTap: _onMovieTap,
+      onTap: _onTapMovie,
     );
   }
 
   Widget _buildUpcomingList(BuildContext context) {
     return MoviesSlider(
       movies: getMoviesUpcoming(context),
-      onTap: _onMovieTap,
+      onTap: _onTapMovie,
     );
   }
 
@@ -190,7 +219,28 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
     return blocMovies.results;
   }
 
-  void _onMovieTap(Movie movie) {
+  /// Navigates to the movies page.
+  void _navigateToPage(MoviesPage page) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => page));
+  }
+
+  void _onTapNowPlaying(String title) {
+    _navigateToPage(NowPlayingPage());
+  }
+
+  void _onTapPopular(String title) {
+    _navigateToPage(PopularPage());
+  }
+
+  void _onTapTopRated(String title) {
+    _navigateToPage(TopRatedPage());
+  }
+
+  void _onTapUpcoming(String title) {
+    _navigateToPage(UpcomingPage());
+  }
+
+  void _onTapMovie(Movie movie) {
     _navigateToMovie(movie);
   }
 

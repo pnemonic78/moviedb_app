@@ -19,7 +19,7 @@ class CastTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final onCastTap = onTap == null ? null : () => onTap(cast);
+    final onTapCast = onTap == null ? null : () => onTap(cast);
 
     final media = MediaQuery.of(context);
     final imageWidth = castTileWidth;
@@ -75,7 +75,7 @@ class CastTile extends StatelessWidget {
 
     return Card(
       child: InkWell(
-        onTap: onCastTap,
+        onTap: onTapCast,
         child: Container(
           width: imageWidth,
           child: Column(

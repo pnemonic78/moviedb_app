@@ -11,7 +11,7 @@ class CreditsCrewRow {
     PersonCrew item,
     ValueChanged<PersonCrew> onTap,
   ) {
-    final onItemTap = onTap == null ? null : () => onTap(item);
+    final onTapItem = onTap == null ? null : () => onTap(item);
 
     final string = AppLocalizations.of(context);
 
@@ -37,11 +37,11 @@ class CreditsCrewRow {
     return [
       TableRowInkWell(
         child: Padding(padding: paddingAll_8, child: yearWidget),
-        onTap: onItemTap,
+        onTap: onTapItem,
       ),
       TableRowInkWell(
         child: Padding(padding: paddingAll_8, child: jobWidget),
-        onTap: onItemTap,
+        onTap: onTapItem,
       ),
     ];
   }
