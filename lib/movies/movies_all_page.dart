@@ -26,18 +26,10 @@ class MoviesAllPage extends StatefulWidget {
 class _MoviesAllPageState extends State<MoviesAllPage> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => MovieBloc(),
-      child: BlocBuilder<MovieBloc, MovieState>(
-        builder: (context, state) {
-          return _buildPage(context);
-        },
-      ),
-    );
+    return _buildPage(context);
   }
 
   Widget _buildPage(BuildContext context) {
-    final theme = Theme.of(context);
     final string = AppLocalizations.of(context);
 
     final popularTitle = _buildTitle(
@@ -100,7 +92,10 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
   }
 
   Widget _buildTitle(
-      BuildContext context, String title, ValueChanged<String> onTap) {
+    BuildContext context,
+    String title,
+    ValueChanged<String> onTap,
+  ) {
     final theme = Theme.of(context);
     final text = Text(
       title,
@@ -149,16 +144,16 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
 
   List<Movie> getMoviesNowPlaying(BuildContext context) {
     // ignore: close_sinks
-    final moviesBloc = context.bloc<MovieBloc>();
-    final blocMovies = moviesBloc.state.moviesNowPlaying;
+    final movieBloc = context.bloc<MovieBloc>();
+    final blocMovies = movieBloc.state.moviesNowPlaying;
     if (blocMovies == null) {
       final api = InjectorWidget.of(context).api;
 
       api
           .getNowPlaying(context)
           .timeout(fetchTimeout)
-          .then((response) => moviesBloc.add(NowPlayingResponseEvent(response)))
-          .catchError((e) => moviesBloc.addError(e));
+          .then((response) => movieBloc.add(NowPlayingResponseEvent(response)))
+          .catchError((e) => movieBloc.addError(e));
 
       return List<Movie>();
     }
@@ -167,34 +162,34 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
 
   List<Movie> getMoviesPopular(BuildContext context) {
     // ignore: close_sinks
-    final moviesBloc = context.bloc<MovieBloc>();
-    final blocMovies = moviesBloc.state.moviesPopular;
+    final movieBloc = context.bloc<MovieBloc>();
+    final blocMovies = movieBloc.state.moviesPopular;
     if (blocMovies == null) {
       final api = InjectorWidget.of(context).api;
 
       api
           .getPopular(context)
           .timeout(fetchTimeout)
-          .then((response) => moviesBloc.add(PopularResponseEvent(response)))
-          .catchError((e) => moviesBloc.addError(e));
+          .then((response) => movieBloc.add(PopularResponseEvent(response)))
+          .catchError((e) => movieBloc.addError(e));
 
-      return List<Movie>();
+      return null;
     }
     return blocMovies.results;
   }
 
   List<Movie> getMoviesTopRated(BuildContext context) {
     // ignore: close_sinks
-    final moviesBloc = context.bloc<MovieBloc>();
-    final blocMovies = moviesBloc.state.moviesTopRated;
+    final movieBloc = context.bloc<MovieBloc>();
+    final blocMovies = movieBloc.state.moviesTopRated;
     if (blocMovies == null) {
       final api = InjectorWidget.of(context).api;
 
       api
           .getTopRated(context)
           .timeout(fetchTimeout)
-          .then((response) => moviesBloc.add(TopRatedResponseEvent(response)))
-          .catchError((e) => moviesBloc.addError(e));
+          .then((response) => movieBloc.add(TopRatedResponseEvent(response)))
+          .catchError((e) => movieBloc.addError(e));
 
       return List<Movie>();
     }
@@ -203,16 +198,16 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
 
   List<Movie> getMoviesUpcoming(BuildContext context) {
     // ignore: close_sinks
-    final moviesBloc = context.bloc<MovieBloc>();
-    final blocMovies = moviesBloc.state.moviesUpcoming;
+    final movieBloc = context.bloc<MovieBloc>();
+    final blocMovies = movieBloc.state.moviesUpcoming;
     if (blocMovies == null) {
       final api = InjectorWidget.of(context).api;
 
       api
           .getUpcoming(context)
           .timeout(fetchTimeout)
-          .then((response) => moviesBloc.add(UpcomingResponseEvent(response)))
-          .catchError((e) => moviesBloc.addError(e));
+          .then((response) => movieBloc.add(UpcomingResponseEvent(response)))
+          .catchError((e) => movieBloc.addError(e));
 
       return List<Movie>();
     }

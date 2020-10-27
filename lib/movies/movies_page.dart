@@ -95,12 +95,12 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
     );
 
     // ignore: close_sinks
-    final moviesBloc = context.bloc<MovieBloc>();
+    final movieBloc = context.bloc<MovieBloc>();
 
     final iconViewStyle = IconButton(
       icon:
           state.showAsList ? Icon(MdiIcons.viewGrid) : Icon(MdiIcons.viewList),
-      onPressed: () => moviesBloc.add(new ToggleViewStyleEvent()),
+      onPressed: () => movieBloc.add(new ToggleViewStyleEvent()),
     );
 
     return Scaffold(
@@ -116,6 +116,12 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: close_sinks
+    final movieBloc = context.bloc<MovieBloc>();
+    if (movieBloc != null) {
+      return _buildPage(context, movieBloc.state);
+    }
+
     return BlocProvider(
       create: (_) => MovieBloc(),
       child: BlocBuilder<MovieBloc, MovieState>(
@@ -132,14 +138,14 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
 
   void _fetchMovies(BuildContext context) {
     // ignore: close_sinks
-    final moviesBloc = context.bloc<MovieBloc>();
+    final movieBloc = context.bloc<MovieBloc>();
 
     final api = InjectorWidget.of(context).api;
 
     fetchMovies(context, api)
         .timeout(fetchTimeout)
-        .then((response) => moviesBloc.add(createResponseEvent(response)))
-        .catchError((e) => moviesBloc.addError(e));
+        .then((response) => movieBloc.add(createResponseEvent(response)))
+        .catchError((e) => movieBloc.addError(e));
   }
 
   MoviesResponse getMovies(MovieState state);

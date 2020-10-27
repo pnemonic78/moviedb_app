@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:inject/inject.dart';
+import 'package:tmdb/movies/movie_bloc.dart';
 import 'package:tmdb/movies/movies_all_page.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/res/i18n.dart';
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
       ),
     );
 
-    return MaterialApp(
+    final app = MaterialApp(
       onGenerateTitle: (BuildContext context) =>
           AppLocalizations.of(context).title,
       theme: ThemeData.light().copyWith(
@@ -32,6 +34,13 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: AppLocalizationsDelegate.locales,
+    );
+
+    return BlocProvider(
+      create: (_) => MovieBloc(),
+      child: BlocBuilder<MovieBloc, MovieState>(
+        builder: (context, state) => app,
+      ),
     );
   }
 }

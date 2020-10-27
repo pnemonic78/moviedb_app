@@ -9,22 +9,26 @@ class MoviesSlider extends StatelessWidget {
   final List<Movie> movies;
   final ValueChanged<Movie> onTap;
 
-  MoviesSlider({Key key, @required this.movies, this.onTap})
-      : assert(movies != null),
-        super(key: key);
+  MoviesSlider({Key key, @required this.movies, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final titleHeight = textTheme.headline6.fontSize;
-    final tileHeight = paddingVertical_8.top + posterGridHeight + titleHeight + paddingVertical_8.bottom;
+    final tileHeight = paddingVertical_8.top +
+        posterGridHeight +
+        titleHeight +
+        paddingVertical_8.bottom;
 
     return Container(
       height: tileHeight,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: _buildList(context, movies),
-      ),
+      width: double.infinity,
+      child: (movies == null)
+          ? Center(child: CircularProgressIndicator())
+          : ListView(
+              scrollDirection: Axis.horizontal,
+              children: _buildList(context, movies),
+            ),
     );
   }
 
