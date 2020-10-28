@@ -26,7 +26,17 @@ class MoviesAllPage extends StatefulWidget {
 class _MoviesAllPageState extends State<MoviesAllPage> {
   @override
   Widget build(BuildContext context) {
-    return _buildPage(context);
+    // ignore: close_sinks
+    final movieBloc = context.bloc<MovieBloc>();
+
+    return BlocProvider(
+      create: (_) => movieBloc,
+      child: BlocBuilder<MovieBloc, MovieState>(
+        builder: (context, state) {
+          return _buildPage(context);
+        },
+      ),
+    );
   }
 
   Widget _buildPage(BuildContext context) {

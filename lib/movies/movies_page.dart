@@ -118,12 +118,9 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
   Widget build(BuildContext context) {
     // ignore: close_sinks
     final movieBloc = context.bloc<MovieBloc>();
-    if (movieBloc != null) {
-      return _buildPage(context, movieBloc.state);
-    }
 
     return BlocProvider(
-      create: (_) => MovieBloc(),
+      create: (_) => movieBloc,
       child: BlocBuilder<MovieBloc, MovieState>(
         builder: (context, state) {
           return _buildPage(context, state);
