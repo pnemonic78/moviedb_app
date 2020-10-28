@@ -10,7 +10,7 @@ import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
 
-import 'movie_bloc.dart';
+import 'bloc/movie_bloc.dart';
 import 'movies_page.dart';
 import 'movies_slider.dart';
 import 'top_rated_page.dart';

@@ -9,7 +9,7 @@ import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
 import 'package:tmdb/tmdb_api/movies_response.dart';
 
-import 'movie_bloc.dart';
+import 'bloc/movie_bloc.dart';
 import 'movies_grid_page.dart';
 import 'movies_list_page.dart';
 

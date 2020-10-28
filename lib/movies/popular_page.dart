@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tmdb/movies/movie_bloc.dart';
+import 'package:tmdb/movies/bloc/movie_bloc.dart';
 import 'package:tmdb/movies/movies_page.dart';
 import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
