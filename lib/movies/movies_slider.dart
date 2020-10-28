@@ -24,11 +24,17 @@ class MoviesSlider extends StatelessWidget {
       height: tileHeight,
       width: double.infinity,
       child: (movies == null)
-          ? Center(child: CircularProgressIndicator())
-          : ListView(
-              scrollDirection: Axis.horizontal,
-              children: _buildList(context, movies),
-            ),
+          ? Center(
+              child: Icon(
+              Icons.error_outline,
+              size: errorIconSize,
+            ))
+          : (movies.isEmpty
+              ? Center(child: CircularProgressIndicator())
+              : ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: _buildList(context, movies),
+                )),
     );
   }
 

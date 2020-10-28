@@ -32,6 +32,10 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
       yield state.toggleViewStyle();
       return;
     }
+    if (event is MovieError) {
+      yield state.copy(error: event.error);
+      return;
+    }
     addError(Exception('unsupported event'));
   }
 }

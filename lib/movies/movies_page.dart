@@ -45,7 +45,7 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
                 )));
   }
 
-  Widget _buildPage(BuildContext context, MovieState state) {
+  Widget _buildPage(BuildContext context, MovieBloc movieBloc) {
     final theme = Theme.of(context);
     final string = AppLocalizations.of(context);
     final title = getTitle(context);
@@ -55,29 +55,28 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
       style: theme.textTheme.headline6,
     );
 
+    final state = movieBloc.state;
     final movies = getMovies(state);
 
     Widget content;
 
     if (movies != null) {
-      if (movies.results != null) {
-        content = buildList(
-          movies.results,
-          state.showAsList,
-          _onTapMovie,
-        );
-      } else {
-        content = Center(
-          child: Icon(
-            Icons.error_outline,
-            size: errorIconSize,
-          ),
-        );
-      }
-    } else {
-      _fetchMovies(context);
+      content = buildList(
+        movies.results,
+        state.showAsList,
+        _onTapMovie,
+      );
+    } else if (state.error == null) {
+      _fetchMovies(context, movieBloc);
 
       content = Center(child: CircularProgressIndicator());
+    } else {
+      content = Center(
+        child: Icon(
+          Icons.error_outline,
+          size: errorIconSize,
+        ),
+      );
     }
 
     final body = Padding(
@@ -93,9 +92,6 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
         ),
       ),
     );
-
-    // ignore: close_sinks
-    final movieBloc = context.bloc<MovieBloc>();
 
     final iconViewStyle = IconButton(
       icon:
@@ -123,7 +119,9 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
       create: (_) => movieBloc,
       child: BlocBuilder<MovieBloc, MovieState>(
         builder: (context, state) {
-          return _buildPage(context, state);
+          // ignore: close_sinks
+          final movieBloc = context.bloc<MovieBloc>();
+          return _buildPage(context, movieBloc);
         },
       ),
     );
@@ -133,16 +131,13 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
     return "";
   }
 
-  void _fetchMovies(BuildContext context) {
-    // ignore: close_sinks
-    final movieBloc = context.bloc<MovieBloc>();
-
+  void _fetchMovies(BuildContext context, MovieBloc movieBloc) {
     final api = InjectorWidget.of(context).api;
 
     fetchMovies(context, api)
         .timeout(fetchTimeout)
         .then((response) => movieBloc.add(createResponseEvent(response)))
-        .catchError((e) => movieBloc.addError(e));
+        .catchError((e) => movieBloc.add(MovieError(e)));
   }
 
   MoviesResponse getMovies(MovieState state);

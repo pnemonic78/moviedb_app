@@ -1,29 +1,39 @@
 part of 'movie_bloc.dart';
 
 @immutable
-abstract class MovieEvent {}
+abstract class MovieEvent {
+  const MovieEvent();
+}
 
 @immutable
-class ToggleViewStyleEvent extends MovieEvent {}
+class ToggleViewStyleEvent extends MovieEvent {
+  const ToggleViewStyleEvent() : super();
+}
 
 abstract class MoviesResponseEvent extends MovieEvent {
   final MoviesResponse response;
 
-  MoviesResponseEvent(this.response) : super();
+  const MoviesResponseEvent(this.response) : super();
 }
 
 class NowPlayingResponseEvent extends MoviesResponseEvent {
-  NowPlayingResponseEvent(response) : super(response);
+  const NowPlayingResponseEvent(response) : super(response);
 }
 
 class PopularResponseEvent extends MoviesResponseEvent {
-  PopularResponseEvent(response) : super(response);
+  const PopularResponseEvent(response) : super(response);
 }
 
 class TopRatedResponseEvent extends MoviesResponseEvent {
-  TopRatedResponseEvent(response) : super(response);
+  const TopRatedResponseEvent(response) : super(response);
 }
 
 class UpcomingResponseEvent extends MoviesResponseEvent {
-  UpcomingResponseEvent(response) : super(response);
+  const UpcomingResponseEvent(response) : super(response);
+}
+
+class MovieError extends MovieEvent {
+  final Exception error;
+
+  const MovieError(this.error) : super();
 }

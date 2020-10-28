@@ -157,13 +157,17 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
     final movieBloc = context.bloc<MovieBloc>();
     final blocMovies = movieBloc.state.moviesNowPlaying;
     if (blocMovies == null) {
+      if (movieBloc.state.error != null) {
+        return null;
+      }
+
       final api = InjectorWidget.of(context).api;
 
       api
           .getNowPlaying(context)
           .timeout(fetchTimeout)
           .then((response) => movieBloc.add(NowPlayingResponseEvent(response)))
-          .catchError((e) => movieBloc.addError(e));
+          .catchError((e) => movieBloc.add(MovieError(e)));
 
       return List<Movie>();
     }
@@ -175,16 +179,20 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
     final movieBloc = context.bloc<MovieBloc>();
     final blocMovies = movieBloc.state.moviesPopular;
     if (blocMovies == null) {
-      final api = InjectorWidget.of(context).api;
+      if (movieBloc.state.error != null) {
+        return null;
+      }
 
+      final api = InjectorWidget.of(context).api;
       api
           .getPopular(context)
           .timeout(fetchTimeout)
           .then((response) => movieBloc.add(PopularResponseEvent(response)))
-          .catchError((e) => movieBloc.addError(e));
+          .catchError((e) => movieBloc.add(MovieError(e)));
 
-      return null;
+      return List<Movie>();
     }
+
     return blocMovies.results;
   }
 
@@ -193,13 +201,16 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
     final movieBloc = context.bloc<MovieBloc>();
     final blocMovies = movieBloc.state.moviesTopRated;
     if (blocMovies == null) {
-      final api = InjectorWidget.of(context).api;
+      if (movieBloc.state.error != null) {
+        return null;
+      }
 
+      final api = InjectorWidget.of(context).api;
       api
           .getTopRated(context)
           .timeout(fetchTimeout)
           .then((response) => movieBloc.add(TopRatedResponseEvent(response)))
-          .catchError((e) => movieBloc.addError(e));
+          .catchError((e) => movieBloc.add(MovieError(e)));
 
       return List<Movie>();
     }
@@ -211,13 +222,16 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
     final movieBloc = context.bloc<MovieBloc>();
     final blocMovies = movieBloc.state.moviesUpcoming;
     if (blocMovies == null) {
-      final api = InjectorWidget.of(context).api;
+      if (movieBloc.state.error != null) {
+        return null;
+      }
 
+      final api = InjectorWidget.of(context).api;
       api
           .getUpcoming(context)
           .timeout(fetchTimeout)
           .then((response) => movieBloc.add(UpcomingResponseEvent(response)))
-          .catchError((e) => movieBloc.addError(e));
+          .catchError((e) => movieBloc.add(MovieError(e)));
 
       return List<Movie>();
     }

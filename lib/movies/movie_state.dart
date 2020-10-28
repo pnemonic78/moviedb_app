@@ -8,12 +8,15 @@ class MovieState {
   final MoviesResponse moviesTopRated;
   final MoviesResponse moviesUpcoming;
 
+  final Exception error;
+
   const MovieState({
     this.showAsList = false,
     this.moviesNowPlaying,
     this.moviesPopular,
     this.moviesTopRated,
     this.moviesUpcoming,
+    this.error,
   });
 
   MovieState copy({
@@ -22,6 +25,7 @@ class MovieState {
     MoviesResponse moviesPopular,
     MoviesResponse moviesTopRated,
     MoviesResponse moviesUpcoming,
+    Exception error,
   }) =>
       new MovieState(
         showAsList: showAsList ?? this.showAsList,
@@ -29,6 +33,7 @@ class MovieState {
         moviesPopular: moviesPopular ?? this.moviesPopular,
         moviesTopRated: moviesTopRated ?? this.moviesTopRated,
         moviesUpcoming: moviesUpcoming ?? this.moviesUpcoming,
+        error: error ?? this.error,
       );
 
   MovieState toggleViewStyle() => copy(showAsList: !this.showAsList);
