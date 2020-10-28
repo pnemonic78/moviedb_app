@@ -1,8 +1,11 @@
 part of 'movie_bloc.dart';
 
 @immutable
-abstract class MovieEvent {
+abstract class MovieEvent extends Equatable {
   const MovieEvent();
+
+  @override
+  List<Object> get props => [];
 }
 
 @immutable
@@ -14,6 +17,9 @@ abstract class MoviesResponseEvent extends MovieEvent {
   final MoviesResponse response;
 
   const MoviesResponseEvent(this.response) : super();
+
+  @override
+  List<Object> get props => [response];
 }
 
 class NowPlayingResponseEvent extends MoviesResponseEvent {
@@ -36,4 +42,7 @@ class MovieError extends MovieEvent {
   final Exception error;
 
   const MovieError(this.error) : super();
+
+  @override
+  List<Object> get props => [error];
 }

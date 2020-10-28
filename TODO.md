@@ -6,4 +6,3 @@
   * Hero
 
 * fimber
-* rxdart

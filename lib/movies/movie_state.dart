@@ -1,7 +1,7 @@
 part of 'movie_bloc.dart';
 
 @immutable
-class MovieState {
+class MovieState extends Equatable {
   final bool showAsList;
   final MoviesResponse moviesNowPlaying;
   final MoviesResponse moviesPopular;
@@ -37,6 +37,16 @@ class MovieState {
       );
 
   MovieState toggleViewStyle() => copy(showAsList: !this.showAsList);
+
+  @override
+  List<Object> get props => [
+        showAsList,
+        moviesNowPlaying,
+        moviesPopular,
+        moviesTopRated,
+        moviesUpcoming,
+        error,
+      ];
 }
 
 class MovieInitial extends MovieState {
