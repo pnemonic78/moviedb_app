@@ -1,3 +1,4 @@
+rootProject.name = "The Movie Db"
 include ':app'
 
 def flutterProjectRoot = rootProject.projectDir.parentFile.toPath()

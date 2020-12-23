@@ -18,7 +18,6 @@ allprojects {
     }
 }
 
-rootProject.name = "The Movie Db"
 rootProject.buildDir = '../build'
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
