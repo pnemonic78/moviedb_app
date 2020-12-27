@@ -3,7 +3,7 @@
 Demonstration of multi-platform applications that use The Movie Database API.
 
 - [Flutter app](./flutter/)
-- [React Native app](./react_native/)
+- [React Native app](./react-native/)
 
 ## The Movie Database API
 
