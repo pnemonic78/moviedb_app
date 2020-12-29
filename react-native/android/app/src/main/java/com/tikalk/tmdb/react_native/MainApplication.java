@@ -1,4 +1,4 @@
-package com.moviedb;
+package com.tikalk.tmdb.react_native;
 
 import android.app.Application;
 import android.content.Context;

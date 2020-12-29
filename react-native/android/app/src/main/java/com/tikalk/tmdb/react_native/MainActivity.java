@@ -1,4 +1,4 @@
-package com.moviedb;
+package com.tikalk.tmdb.react_native;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "moviedb";
+    return "tmdb";
   }
 }

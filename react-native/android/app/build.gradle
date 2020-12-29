@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.moviedb"
+        applicationId "com.tikalk.tmdb.react_native"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
