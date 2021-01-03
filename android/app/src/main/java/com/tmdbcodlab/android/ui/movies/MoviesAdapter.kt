@@ -1,6 +1,5 @@
 package com.tmdbcodlab.android.ui.movies
 
-import android.support.v7.widget.RecyclerView
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.tmdbcodlab.android.R
 import com.tmdbcodlab.android.api.TmdbApi
 import com.tmdbcodlab.android.model.Movie

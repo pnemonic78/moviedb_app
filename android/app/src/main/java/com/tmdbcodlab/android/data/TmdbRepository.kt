@@ -1,6 +1,6 @@
 package com.tmdbcodlab.android.data
 
-import android.support.v4.util.LruCache
+import androidx.collection.LruCache
 import com.tmdbcodlab.android.data.source.TmdbDataSource
 import com.tmdbcodlab.android.data.source.local.TmdbLocalDataSource
 import com.tmdbcodlab.android.data.source.remote.TmdbRemoteDataSource

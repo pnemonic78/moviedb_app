@@ -2,7 +2,7 @@ package com.tmdbcodlab.android.ui.movies
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.tmdbcodlab.android.R
 import com.tmdbcodlab.android.model.Movie
 import com.tmdbcodlab.android.ui.moviedetails.MovieDetailActivity

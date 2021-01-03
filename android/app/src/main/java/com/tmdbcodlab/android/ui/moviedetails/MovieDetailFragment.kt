@@ -1,8 +1,6 @@
 package com.tmdbcodlab.android.ui.moviedetails
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.widget.ContentLoadingProgressBar
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +9,8 @@ import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.widget.ContentLoadingProgressBar
+import androidx.fragment.app.Fragment
 import com.tmdbcodlab.android.MyApplication
 import com.tmdbcodlab.android.R
 import com.tmdbcodlab.android.api.TmdbApi

@@ -11,12 +11,12 @@
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="8dp">
 
-            <android.support.constraint.Guideline
+            <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_v40"
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
@@ -113,12 +113,12 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/summary_label"
                 app:layout_constraintTop_toBottomOf="@+id/summary_label"
-                tools:text="@string/dummy_summary"/>
+                tools:text="@tools:sample/lorem/random"/>
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <android.support.v4.widget.ContentLoadingProgressBar
+    <androidx.core.widget.ContentLoadingProgressBar
         android:id="@android:id/progress"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
