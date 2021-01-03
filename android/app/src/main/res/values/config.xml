@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="backdrop_sizes" translatable="false">
+        <item>w300</item>
+        <item>w780</item>
+        <item>w1280</item>
+        <item>original</item>
+    </string-array>
+    <string-array name="logo_sizes" translatable="false">
+        <item>w45</item>
+        <item>w92</item>
+        <item>w154</item>
+        <item>w185</item>
+        <item>w300</item>
+        <item>w500</item>
+        <item>original</item>
+    </string-array>
+    <string-array name="poster_sizes" translatable="false">
+        <item>w92</item>
+        <item>w154</item>
+        <item>w185</item>
+        <item>w342</item>
+        <item>w500</item>
+        <item>w780</item>
+        <item>original</item>
+    </string-array>
+    <string-array name="profile_sizes" translatable="false">
+        <item>w45</item>
+        <item>w185</item>
+        <item>h632</item>
+        <item>original</item>
+    </string-array>
+    <string-array name="still_sizes" translatable="false">
+        <item>w92</item>
+        <item>w185</item>
+        <item>w300</item>
+        <item>original</item>
+    </string-array>
+</resources>
