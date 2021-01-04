@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Text, View } from 'react-native';
 
 import AppStyles from './AppStyles';
+import MoviesAllPage from '../movies/MoviesAllPage';
 import MoviesPage from '../movies/MoviesPage';
 
 const App: () => React$Node = () => {
@@ -12,6 +13,7 @@ const App: () => React$Node = () => {
   return (
     <NavigationContainer>
       <stack.Navigator>
+        <stack.Screen name="MoviesAllPage" component={ MoviesAllPage } />
         <stack.Screen name="MoviesPage" component={ MoviesPage } />
       </stack.Navigator>
     </NavigationContainer>
