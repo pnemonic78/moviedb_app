@@ -3,51 +3,43 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 const MoviesAllPage = ({ navigation }) => {
 
-    const _buildTitle = (title) => {
-        return <Text style={styles.headline5}>{ title }</Text>;
+    const Title = (props) => {
+        return <Text style={styles.headline5}>{ props.title }</Text>;
     }
 
-    const _buildPopularList = () => {
-        return <View></View>;
+    function _buildPopularList() {
+        return <Text>PopularList</Text>;
     }
 
-    const _buildNowPlayingList = () => {
-        return <View></View>;
+    function _buildNowPlayingList() {
+        return <Text>NowPlayingList</Text>;
     }
 
-    const _buildUpcomingList = () => {
-        return <View></View>;
+    function _buildUpcomingList() {
+        return <Text>UpcomingList</Text>;
     }
 
-    const _buildTopRatedList = () => {
-        return <View></View>;
+    function _buildTopRatedList() {
+        return <Text>TopRatedList</Text>;
     }
-
-    const popularTitle = _buildTitle("Popular");
 
     const popularList = _buildPopularList();
 
-    const nowPlayingTitle = _buildTitle("Now Playing");
-
     const nowPlayingList = _buildNowPlayingList();
 
-    const upcomingTitle = _buildTitle("Upcoming");
-
     const upcomingList = _buildUpcomingList();
-
-    const topRatedTitle = _buildTitle("Top Rated");
 
     const topRatedList = _buildTopRatedList();
 
     return (
         <ScrollView>
-            { popularTitle }
+            <Title title="Popular"/>
             { popularList }
-            { nowPlayingTitle }
+            <Title title="Now Playing"/>
             { nowPlayingList }
-            { upcomingTitle }
+            <Title title="Upcoming"/>
             { upcomingList }
-            { topRatedTitle }
+            <Title title="Top Rated"/>
             { topRatedList }
         </ScrollView>
     );
@@ -56,6 +48,7 @@ const MoviesAllPage = ({ navigation }) => {
 const styles = StyleSheet.create({
     headline5: {
       fontSize: 25,
+      padding: 8,
     }
 });
   

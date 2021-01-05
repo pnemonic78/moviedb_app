@@ -53,6 +53,9 @@ const AppStyles = StyleSheet.create({
       paddingRight: 12,
       textAlign: 'right',
     },
+    header: {
+      backgroundColor: '#f4511e',
+    },
 });
 
 export default AppStyles;

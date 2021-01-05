@@ -9,12 +9,24 @@ import MoviesPage from '../movies/MoviesPage';
 
 const App: () => React$Node = () => {
   const stack = createStackNavigator();
+  const styles = AppStyles;
 
   return (
     <NavigationContainer>
       <stack.Navigator>
-        <stack.Screen name="MoviesAllPage" component={ MoviesAllPage } />
-        <stack.Screen name="MoviesPage" component={ MoviesPage } />
+        <stack.Screen
+          name="MoviesAllPage"
+          component={ MoviesAllPage }
+          options={{
+            title: "The Movies Database Demo",
+            headerStyle: styles.header,
+          }} />
+        <stack.Screen
+          name="MoviesPage"
+          component={ MoviesPage }
+          options={{
+            headerStyle: styles.header,
+          }} />
       </stack.Navigator>
     </NavigationContainer>
   );
