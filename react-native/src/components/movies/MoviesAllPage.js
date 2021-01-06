@@ -1,55 +1,35 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text } from 'react-native';
+import MoviesSlider from "./MoviesSlider";
 
 const MoviesAllPage = ({ navigation }) => {
 
-    const Title = (props) => {
-        return <Text style={styles.headline5}>{ props.title }</Text>;
+    const Section = (props) => {
+        return <Text style={styles.headline5}>{ props.label }</Text>;
     }
-
-    function _buildPopularList() {
-        return <Text>PopularList</Text>;
-    }
-
-    function _buildNowPlayingList() {
-        return <Text>NowPlayingList</Text>;
-    }
-
-    function _buildUpcomingList() {
-        return <Text>UpcomingList</Text>;
-    }
-
-    function _buildTopRatedList() {
-        return <Text>TopRatedList</Text>;
-    }
-
-    const popularList = _buildPopularList();
-
-    const nowPlayingList = _buildNowPlayingList();
-
-    const upcomingList = _buildUpcomingList();
-
-    const topRatedList = _buildTopRatedList();
 
     return (
-        <ScrollView>
-            <Title title="Popular"/>
-            { popularList }
-            <Title title="Now Playing"/>
-            { nowPlayingList }
-            <Title title="Upcoming"/>
-            { upcomingList }
-            <Title title="Top Rated"/>
-            { topRatedList }
+        <ScrollView style={styles.scroller}>
+            <Section label="Popular"/>
+            <MoviesSlider/>
+            <Section label="Now Playing"/>
+            <MoviesSlider/>
+            <Section label="Upcoming"/>
+            <MoviesSlider/>
+            <Section label="Top Rated"/>
+            <MoviesSlider/>
         </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     headline5: {
-      fontSize: 25,
-      padding: 8,
-    }
-});
-  
+        fontSize: 25,
+        padding: 8,
+    },
+    scroller: {
+        padding: 8,
+    },
+  });
+
 export default MoviesAllPage;
