@@ -56,6 +56,9 @@ const AppStyles = StyleSheet.create({
     header: {
       backgroundColor: '#f4511e',
     },
+    headerTitleStyle: {
+      color: Colors.lighter,
+    },
 });
 
 export default AppStyles;

@@ -20,6 +20,7 @@ const App: () => React$Node = () => {
           options={{
             title: "The Movies Database Demo",
             headerStyle: styles.header,
+            headerTitleStyle: styles.headerTitleStyle,
           }} />
         <stack.Screen
           name="MoviesPage"
