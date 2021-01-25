@@ -32,6 +32,7 @@
 pubspec.lock
 Flutter-Generated.xcconfig
 GeneratedPluginRegistrant.swift
+.gradle
 
 # Web related
 lib/generated_plugin_registrant.dart

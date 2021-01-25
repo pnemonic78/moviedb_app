@@ -6,7 +6,8 @@ const MoviesPage = ({ navigation }) => {
     const [movies, setMovies] = useState([]);
 
     useEffect(() => {
-        setMovies(["A", "B", "C"]);
+        let data = require('./data.json');
+        setMovies(data.results);
     }, []);
 
     const renderItem = ({ item }) => {

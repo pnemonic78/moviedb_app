@@ -1,13 +1,38 @@
-import React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-
-const MoviesSlider = (props) => {
-    return <Text style={styles.slider}>MoviesSlider</Text>;
-}
+import React, { Component } from 'react';
+import { FlatList, StyleSheet, View } from 'react-native';
+import MovieAllTile from './MovieAllTile';
 
 const styles = StyleSheet.create({
     slider: {
-    }
+        backgroundColor: 'red',
+    },
+    separator: {
+        width: 8,
+    },
 });
 
-export default MoviesSlider;
+export default class MoviesSlider extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            movies: require('./data.json').results,
+        };
+    }
+
+    renderMovie({ item }) {
+        return <MovieAllTile movie={item}/>;
+    }
+
+    render() {
+        let movies = this.state.movies;
+
+        return <FlatList
+            style={styles.slider}
+            data={movies}
+            horizontal={true}
+            renderItem={this.renderMovie}
+            keyExtractor={(item, i) => item.id.toString()}
+            ItemSeparatorComponent={() => <View style={styles.separator} />}
+            />;
+    }
+}
