@@ -65,8 +65,8 @@ class MoviesAllTile extends MovieGridTile {
 
     final titleWidget = Text(
       movie.title,
-      maxLines: 1,
-      style: textTheme.headline6,
+      maxLines: 2,
+      style: textTheme.subtitle1,
       overflow: TextOverflow.ellipsis,
     );
 
