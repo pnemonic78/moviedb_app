@@ -1,7 +1,9 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import MovieGridTile from './MovieGridTile';
 import TMBDApi from '../../tmdb_api/TMDBApi';
+import R from '../../res/R';
+import LoadingImage from "../LoadingImage";
 
 export default class MovieAllTile extends MovieGridTile {
     constructor(props) {
@@ -16,16 +18,16 @@ export default class MovieAllTile extends MovieGridTile {
         let imageWidth = styles.thumbnail.width;
         let imageHeight = styles.thumbnail.height;
         let thumbnailUrl = api.generatePosterUrl(movie.poster_path, imageWidth, imageHeight);
-        let thumbnailWidget = <Image source={{ uri: thumbnailUrl }} style={styles.thumbnail}></Image>;
+        let thumbnailWidget = <LoadingImage
+            defaultSource={R.images.outline_image}
+            source={{ uri: thumbnailUrl }}
+            style={styles.thumbnail} />;
 
-        let titleWidget = <Text style={styles.title}>{movie.title}</Text>;
-
-        let dateWidget = <Text style={styles.date}>{movie.release_date}</Text>
+        let titleWidget = <Text style={styles.title} numberOfLines={2}>{movie.title}</Text>;
 
         return <View style={styles.tile}>
             {thumbnailWidget}
             {titleWidget}
-            {dateWidget}
         </View>;
     }
 }
