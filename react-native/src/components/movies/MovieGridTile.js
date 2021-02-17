@@ -7,21 +7,20 @@ const posterGridHeight = posterGridWidth * 1.5;
 
 const stylesMovieGridTile = StyleSheet.create({
     date: {
-        backgroundColor: 'blue',
         padding: 8,
     },
     thumbnail: {
-        backgroundColor: 'cyan',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
         height: posterGridHeight,
         width: posterGridWidth,
     },
     tile: {
-        backgroundColor: 'yellow',
         width: posterGridWidth,
     },
     title: {
-        backgroundColor: 'green',
-        color: 'black',
+        fontSize: 18,
+        fontWeight: 'bold',
         padding: 8,
     },
 });
@@ -38,7 +37,7 @@ export default class MovieGridTile extends Component {
 
         let thumbnailWidget = <Image style={styles.thumbnail}></Image>;
         let titleWidget = <Text style={styles.title}>{movie.title}</Text>;
-        let dateWidget = <Text style={styles.date}>{movie.release_date}</Text>
+        let dateWidget = <Text style={styles.date}>{movie.release_date}</Text>;
 
         return <View style={styles.tile}>
             {thumbnailWidget}

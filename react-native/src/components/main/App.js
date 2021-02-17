@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
-import { Text, View } from 'react-native';
 
 import AppStyles from './AppStyles';
 import MoviesAllPage from '../movies/MoviesAllPage';
 import MoviesPage from '../movies/MoviesPage';
+import R from '../../res/R';
 
 const App: () => React$Node = () => {
   const stack = createStackNavigator();
@@ -18,7 +18,7 @@ const App: () => React$Node = () => {
           name="MoviesAllPage"
           component={ MoviesAllPage }
           options={{
-            title: "The Movies Database Demo",
+            title: R.strings.title,
             headerStyle: styles.header,
             headerTitleStyle: styles.headerTitleStyle,
           }} />

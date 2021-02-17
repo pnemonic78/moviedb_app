@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import MoviesAllSection from './MoviesAllSection';
 import MoviesSlider from "./MoviesSlider";
+import R from '../../res/R';
 
 const styles = StyleSheet.create({
     scroller: {
@@ -13,13 +14,13 @@ const MoviesAllPage = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.scroller}>
-            <MoviesAllSection label="Popular"/>
+            <MoviesAllSection label={ R.strings.popular }/>
             <MoviesSlider/>
-            <MoviesAllSection label="Now Playing"/>
+            <MoviesAllSection label={R.strings.now_playing}/>
             <MoviesSlider/>
-            <MoviesAllSection label="Upcoming"/>
+            <MoviesAllSection label={R.strings.upcoming}/>
             <MoviesSlider/>
-            <MoviesAllSection label="Top Rated"/>
+            <MoviesAllSection label={R.strings.top_rated}/>
             <MoviesSlider/>
         </ScrollView>
     );

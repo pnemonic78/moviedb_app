@@ -4,7 +4,6 @@ import MovieAllTile from './MovieAllTile';
 
 const styles = StyleSheet.create({
     slider: {
-        backgroundColor: 'red',
     },
     separator: {
         width: 8,
