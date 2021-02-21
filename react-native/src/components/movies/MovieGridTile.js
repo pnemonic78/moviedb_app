@@ -16,12 +16,16 @@ const stylesMovieGridTile = StyleSheet.create({
         width: posterGridWidth,
     },
     tile: {
-        width: posterGridWidth,
+        borderRadius: 20,
+        paddingLeft: 0,
+        paddingRight: 0,
+        paddingTop: 0,
     },
     title: {
         fontSize: 18,
-        fontWeight: 'bold',
+        fontWeight: "bold",
         padding: 8,
+        width: posterGridWidth,
     },
 });
 

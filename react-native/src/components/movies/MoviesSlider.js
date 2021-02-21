@@ -5,9 +5,6 @@ import MovieAllTile from './MovieAllTile';
 const styles = StyleSheet.create({
     slider: {
     },
-    separator: {
-        width: 8,
-    },
 });
 
 export default class MoviesSlider extends Component {
@@ -31,7 +28,6 @@ export default class MoviesSlider extends Component {
             horizontal={true}
             renderItem={this.renderMovie}
             keyExtractor={(item, i) => item.id.toString()}
-            ItemSeparatorComponent={() => <View style={styles.separator} />}
             />;
     }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { Card } from 'react-native-elements';
 import MovieGridTile from './MovieGridTile';
 import TMBDApi from '../../tmdb_api/TMDBApi';
 import R from '../../res/R';
@@ -25,9 +26,9 @@ export default class MovieAllTile extends MovieGridTile {
 
         let titleWidget = <Text style={styles.title} numberOfLines={2}>{movie.title}</Text>;
 
-        return <View style={styles.tile}>
+        return <Card containerStyle={styles.tile}>
             {thumbnailWidget}
             {titleWidget}
-        </View>;
+        </Card>;
     }
 }
