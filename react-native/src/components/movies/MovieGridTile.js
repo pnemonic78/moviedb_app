@@ -17,6 +17,7 @@ const stylesMovieGridTile = StyleSheet.create({
     },
     tile: {
         borderRadius: 20,
+        marginStart: 0,
         paddingLeft: 0,
         paddingRight: 0,
         paddingTop: 0,
