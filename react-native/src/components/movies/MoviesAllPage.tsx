@@ -9,6 +9,8 @@ import Movie from '../../tmdb_api/model/Movie';
 
 const styleSheet = StyleSheet.create({
     scroller: {
+    },
+    scrollerContainer: {
         padding: 8,
     },
 });
@@ -40,7 +42,7 @@ export default class MoviesAllPage extends Component<MoviesAllPageProps, MoviesA
         var movies = this.state.moviesNowPlaying;
         if (!movies?.length) {
             this.api.getNowPlaying()
-                .then(data => this.setState({ moviesNowPlaying: data}))
+                .then(data => this.setState({ moviesNowPlaying: data }));
         }
         return movies;
     }
@@ -49,7 +51,7 @@ export default class MoviesAllPage extends Component<MoviesAllPageProps, MoviesA
         var movies = this.state.moviesPopular;
         if (!movies?.length) {
             this.api.getPopular()
-                .then(data => this.setState({ moviesPopular: data }))
+                .then(data => this.setState({ moviesPopular: data }));
         }
         return movies;
     }
@@ -58,7 +60,7 @@ export default class MoviesAllPage extends Component<MoviesAllPageProps, MoviesA
         var movies = this.state.moviesTopRated;
         if (!movies?.length) {
             this.api.getTopRated()
-                .then(data => this.setState({ moviesTopRated: data }))
+                .then(data => this.setState({ moviesTopRated: data }));
         }
         return movies;
     }
@@ -67,14 +69,14 @@ export default class MoviesAllPage extends Component<MoviesAllPageProps, MoviesA
         var movies = this.state.moviesUpcoming;
         if (!movies?.length) {
             this.api.getUpcoming()
-                .then(data => this.setState({ moviesUpcoming: data }))
+                .then(data => this.setState({ moviesUpcoming: data }));
         }
         return movies;
     }
 
     render() {
         return (
-            <ScrollView style={styleSheet.scroller}>
+            <ScrollView style={styleSheet.scroller} contentContainerStyle={styleSheet.scrollerContainer}>
                 <MoviesAllSection label={ R.strings.popular }/>
                 <MoviesSlider movies={ this._getMoviesPopular() }/>
                 <MoviesAllSection label={ R.strings.now_playing }/>
@@ -82,7 +84,7 @@ export default class MoviesAllPage extends Component<MoviesAllPageProps, MoviesA
                 <MoviesAllSection label={R.strings.upcoming }/>
                 <MoviesSlider movies={ this._getMoviesUpcoming() }/>
                 <MoviesAllSection label={ R.strings.top_rated }/>
-                <MoviesSlider movies={ this._getMoviesTopRated() }/>
+                <MoviesSlider movies={ this._getMoviesTopRated() } />
             </ScrollView>
         );
     }
