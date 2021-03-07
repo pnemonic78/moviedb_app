@@ -4,7 +4,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import AppStyles from './AppStyles';
 import MoviesAllPage from '../movies/MoviesAllPage';
-import MoviesPage from '../movies/MoviesPage';
 import R from '../../res/R';
 
 const App: () => React$Node = () => {
@@ -22,12 +21,12 @@ const App: () => React$Node = () => {
             headerStyle: styles.header,
             headerTitleStyle: styles.headerTitleStyle,
           }} />
-        <stack.Screen
+        {/* <stack.Screen
           name="MoviesPage"
           component={ MoviesPage }
           options={{
             headerStyle: styles.header,
-          }} />
+          }} /> */}
       </stack.Navigator>
     </NavigationContainer>
   );
