@@ -1,4 +1,6 @@
-export default class TMBDApi {
+import Movie from './model/Movie';
+
+export default abstract class TMBDApi {
     static api_url = "https://api.themoviedb.org/3/";
     static _image_url = "https://image.tmdb.org/t/p/{size}{path}";
     static _youtube_url = "https://www.youtube.com/watch?v={id}";
@@ -8,11 +10,19 @@ export default class TMBDApi {
     static _instagram_url = "https://instagram.com/{id}";
     static _twitter_url = "https://twitter.com/{id}";
 
-    static generatePosterUrl(path: string, width: number, height: number) {
+    static generatePosterUrl(path: string | null, width: number | string, height: number | string) {
         if ((path == null) || (width <= 0) || (height <= 0)) {
             return "";
         }
         const size = "w92";
         return TMBDApi._image_url.replace("{size}", size).replace("{path}", path);
     }
+
+    abstract getNowPlaying(): Promise<Movie[]>;
+
+    abstract getPopular(): Promise<Movie[]>;
+
+    abstract getTopRated(): Promise<Movie[]>;
+
+    abstract getUpcoming(): Promise<Movie[]>;
 }
