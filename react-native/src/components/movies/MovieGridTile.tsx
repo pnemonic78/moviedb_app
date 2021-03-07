@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
-import { TMBDApi } from './../../tmdb_api/TMDBApi';
+import { ImageStyle, StyleSheet, Text, View } from 'react-native';
+import Movie from '../../tmdb_api/model/Movie';
+import LoadingImage from '../LoadingImage';
 
 const posterGridWidth = 150.0;
 const posterGridHeight = posterGridWidth * 1.5;
 
-const stylesMovieGridTile = StyleSheet.create({
+const styleSheet = StyleSheet.create({
     date: {
         padding: 8,
     },
@@ -30,17 +31,23 @@ const stylesMovieGridTile = StyleSheet.create({
     },
 });
 
-export default class MovieGridTile extends Component {
-    constructor(props) {
+interface MovieGridTileProps {
+    movie: Movie,
+}
+
+export default class MovieGridTile extends Component<MovieGridTileProps> {
+    constructor(props: MovieGridTileProps) {
         super(props);
-        this.styles = stylesMovieGridTile;
+        this.styles = styleSheet;
     }
+
+    styles: StyleSheet.NamedStyles<any>;
 
     render() {
         let movie = this.props.movie;
         let styles = this.styles;
 
-        let thumbnailWidget = <Image style={styles.thumbnail}></Image>;
+        let thumbnailWidget = <LoadingImage source={0} style={styles.thumbnail as ImageStyle}></LoadingImage>;
         let titleWidget = <Text style={styles.title}>{movie.title}</Text>;
         let dateWidget = <Text style={styles.date}>{movie.release_date}</Text>;
 

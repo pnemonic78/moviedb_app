@@ -1,32 +1,34 @@
-import React, { Component } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import React, { Component, ReactElement } from 'react';
+import { FlatList, ListRenderItemInfo, StyleSheet } from 'react-native';
+import Movie from '../../tmdb_api/model/Movie';
 import MovieAllTile from './MovieAllTile';
 
-const styles = StyleSheet.create({
+const styleSheet = StyleSheet.create({
     slider: {
     },
 });
 
-export default class MoviesSlider extends Component {
-    constructor(props) {
+interface MoviesSliderProps {
+    movies: Movie[],
+}
+
+export default class MoviesSlider extends Component<MoviesSliderProps> {
+    constructor(props: MoviesSliderProps) {
         super(props);
-        this.state = {
-            movies: require('./data.json').results,
-        };
     }
 
-    renderMovie({ item }) {
-        return <MovieAllTile movie={item}/>;
+    _renderItem(info: ListRenderItemInfo<Movie>): ReactElement<Movie> {
+        return <MovieAllTile movie={info.item} />;
     }
 
     render() {
-        let movies = this.state.movies;
+        let movies = this.props.movies;
 
         return <FlatList
-            style={styles.slider}
+            style={styleSheet.slider}
             data={movies}
             horizontal={true}
-            renderItem={this.renderMovie}
+            renderItem={this._renderItem}
             keyExtractor={(item, i) => item.id.toString()}
             />;
     }

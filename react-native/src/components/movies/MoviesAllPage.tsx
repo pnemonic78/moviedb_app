@@ -1,29 +1,89 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import MoviesAllSection from './MoviesAllSection';
 import MoviesSlider from "./MoviesSlider";
 import R from '../../res/R';
+import TMDBApiImpl from '../../tmdb_api/TMDBApiImpl';
+import TMDBApi from '../../tmdb_api/TMDBApi';
+import Movie from '../../tmdb_api/model/Movie';
 
-const styles = StyleSheet.create({
+const styleSheet = StyleSheet.create({
     scroller: {
         padding: 8,
     },
 });
 
-const MoviesAllPage = ({ navigation }) => {
+interface MoviesAllPageProps {
+}
 
-    return (
-        <ScrollView style={styles.scroller}>
-            <MoviesAllSection label={ R.strings.popular }/>
-            <MoviesSlider/>
-            <MoviesAllSection label={R.strings.now_playing}/>
-            <MoviesSlider/>
-            <MoviesAllSection label={R.strings.upcoming}/>
-            <MoviesSlider/>
-            <MoviesAllSection label={R.strings.top_rated}/>
-            <MoviesSlider/>
-        </ScrollView>
-    );
-};
+interface MoviesAllPageState {
+    moviesNowPlaying: Movie[],
+    moviesPopular: Movie[],
+    moviesTopRated: Movie[],
+    moviesUpcoming: Movie[],
+}
 
-export default MoviesAllPage;
+export default class MoviesAllPage extends Component<MoviesAllPageProps, MoviesAllPageState> {
+    constructor(props: MoviesAllPageProps) {
+        super(props);
+        this.state = {
+            moviesNowPlaying: [],
+            moviesPopular: [],
+            moviesTopRated: [],
+            moviesUpcoming: [],
+        };
+    }
+
+    api: TMDBApi = new TMDBApiImpl();
+
+    _getMoviesNowPlaying(): Movie[] {
+        var movies = this.state.moviesNowPlaying;
+        if (!movies?.length) {
+            this.api.getNowPlaying()
+                .then(data => this.setState({ moviesNowPlaying: data}))
+        }
+        return movies;
+    }
+
+    _getMoviesPopular(): Movie[] {
+        var movies = this.state.moviesPopular;
+        if (!movies?.length) {
+            this.api.getPopular()
+                .then(data => this.setState({ moviesPopular: data }))
+        }
+        return movies;
+    }
+
+    _getMoviesTopRated(): Movie[] {
+        var movies = this.state.moviesTopRated;
+        if (!movies?.length) {
+            this.api.getTopRated()
+                .then(data => this.setState({ moviesTopRated: data }))
+        }
+        return movies;
+    }
+
+    _getMoviesUpcoming(): Movie[] {
+        var movies = this.state.moviesUpcoming;
+        if (!movies?.length) {
+            this.api.getUpcoming()
+                .then(data => this.setState({ moviesUpcoming: data }))
+        }
+        return movies;
+    }
+
+    render() {
+        return (
+            <ScrollView style={styleSheet.scroller}>
+                <MoviesAllSection label={ R.strings.popular }/>
+                <MoviesSlider movies={ this._getMoviesPopular() }/>
+                <MoviesAllSection label={ R.strings.now_playing }/>
+                <MoviesSlider movies={ this._getMoviesNowPlaying() }/>
+                <MoviesAllSection label={R.strings.upcoming }/>
+                <MoviesSlider movies={ this._getMoviesUpcoming() }/>
+                <MoviesAllSection label={ R.strings.top_rated }/>
+                <MoviesSlider movies={ this._getMoviesTopRated() }/>
+            </ScrollView>
+        );
+    }
+}

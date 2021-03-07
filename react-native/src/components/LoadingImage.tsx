@@ -1,16 +1,19 @@
-import React, { Component } from 'react';
-import { Image, ImageBackground, Text } from 'react-native';
+import React, { Component, ReactNode } from 'react';
+import { Image, ImageBackground, ImageProps, ImageSourcePropType, ImageStyle } from 'react-native';
 
-export default class LoadingImage extends Component {
-    constructor(props) {
+export interface LoadingImageProps extends ImageProps {
+    style: ImageStyle,
+}
+
+export default class LoadingImage extends Component<LoadingImageProps> {
+    constructor(props: LoadingImageProps) {
         super(props);
     }
 
-    render() {
+    render(): ReactNode {
         return <ImageBackground
-            source={this.props.defaultSource}
-            style={this.props.style}
-        >
+            source={this.props.defaultSource as ImageSourcePropType}
+            style={this.props.style}>
             <Image source={this.props.source} style={this.props.style} />
         </ImageBackground>;
     }

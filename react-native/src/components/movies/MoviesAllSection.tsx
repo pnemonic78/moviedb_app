@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text } from 'react-native';
 
-const styles = StyleSheet.create({
+const styleSheet = StyleSheet.create({
     headline5: {
         fontSize: 25,
         padding: 8,
     },
 });
 
-export default class MoviesAllSection extends Component {
-    constructor(props) {
+interface MoviesAllSectionProps {
+    label: string,
+}
+
+export default class MoviesAllSection extends Component<MoviesAllSectionProps> {
+    constructor(props: MoviesAllSectionProps) {
         super(props);
     }
 
     render() {
-        return <Text style={styles.headline5}>{this.props.label}</Text>;
+        return <Text style={styleSheet.headline5}>{this.props.label}</Text>;
     }
 }
