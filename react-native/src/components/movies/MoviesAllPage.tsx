@@ -36,9 +36,9 @@ export default class MoviesAllPage extends Component<MoviesAllPageProps, MoviesA
         };
     }
 
-    api: TMDBApi = new TMDBApiImpl();
+    private api: TMDBApi = new TMDBApiImpl();
 
-    _getMoviesNowPlaying(): Movie[] {
+    private getMoviesNowPlaying(): Movie[] {
         var movies = this.state.moviesNowPlaying;
         if (!movies?.length) {
             this.api.getNowPlaying()
@@ -47,7 +47,7 @@ export default class MoviesAllPage extends Component<MoviesAllPageProps, MoviesA
         return movies;
     }
 
-    _getMoviesPopular(): Movie[] {
+    private getMoviesPopular(): Movie[] {
         var movies = this.state.moviesPopular;
         if (!movies?.length) {
             this.api.getPopular()
@@ -56,7 +56,7 @@ export default class MoviesAllPage extends Component<MoviesAllPageProps, MoviesA
         return movies;
     }
 
-    _getMoviesTopRated(): Movie[] {
+    private getMoviesTopRated(): Movie[] {
         var movies = this.state.moviesTopRated;
         if (!movies?.length) {
             this.api.getTopRated()
@@ -65,7 +65,7 @@ export default class MoviesAllPage extends Component<MoviesAllPageProps, MoviesA
         return movies;
     }
 
-    _getMoviesUpcoming(): Movie[] {
+    private getMoviesUpcoming(): Movie[] {
         var movies = this.state.moviesUpcoming;
         if (!movies?.length) {
             this.api.getUpcoming()
@@ -78,13 +78,13 @@ export default class MoviesAllPage extends Component<MoviesAllPageProps, MoviesA
         return (
             <ScrollView style={styleSheet.scroller} contentContainerStyle={styleSheet.scrollerContainer}>
                 <MoviesAllSection label={ R.strings.popular }/>
-                <MoviesSlider movies={ this._getMoviesPopular() }/>
+                <MoviesSlider movies={ this.getMoviesPopular() }/>
                 <MoviesAllSection label={ R.strings.now_playing }/>
-                <MoviesSlider movies={ this._getMoviesNowPlaying() }/>
+                <MoviesSlider movies={ this.getMoviesNowPlaying() }/>
                 <MoviesAllSection label={R.strings.upcoming }/>
-                <MoviesSlider movies={ this._getMoviesUpcoming() }/>
+                <MoviesSlider movies={ this.getMoviesUpcoming() }/>
                 <MoviesAllSection label={ R.strings.top_rated }/>
-                <MoviesSlider movies={ this._getMoviesTopRated() } />
+                <MoviesSlider movies={ this.getMoviesTopRated() } />
             </ScrollView>
         );
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ImageStyle, StyleSheet, Text } from 'react-native';
+import { GestureResponderEvent, ImageStyle, Pressable, StyleSheet, Text } from 'react-native';
 import { Card } from 'react-native-elements';
 import TMBDApi from '../../tmdb_api/TMDBApi';
 import R from '../../res/R';
@@ -42,26 +42,33 @@ export default class MovieAllTile extends Component<MovieAllTileProps> {
         this.styles = styleSheet;
     }
 
-    styles: StyleSheet.NamedStyles<any>;
+    private styles: StyleSheet.NamedStyles<any>;
+
+    private onPress(event: GestureResponderEvent) {
+        // let movie = this.props.movie;
+        // TODO show the movie details.
+    }
 
     render() {
         let movie = this.props.movie;
         let styles = this.styles;
         let api = TMBDApi;
 
-        let imageWidth = styles.thumbnail.width || 0;
-        let imageHeight = styles.thumbnail.height || 0;
+        let imageWidth = styles.thumbnail.width as number;
+        let imageHeight = styles.thumbnail.height as number;
         let thumbnailUrl = api.generatePosterUrl(movie.poster_path, imageWidth, imageHeight);
         let thumbnailWidget = <LoadingImage
             defaultSource={R.images.outline_image}
             source={{ uri: thumbnailUrl }}
             style={styles.thumbnail as ImageStyle} />;
 
-        let titleWidget = <Text style={styles.title} numberOfLines={2}>{movie.title}</Text>;
+        let titleWidget = <Text style={styles.title} numberOfLines={2}>{movie.title + "\n"}</Text>;
 
-        return <Card containerStyle={styles.tile}>
-            {thumbnailWidget}
-            {titleWidget}
-        </Card>;
+        return <Pressable onPress={this.onPress}>
+            <Card containerStyle={styles.tile}>
+                {thumbnailWidget}
+                {titleWidget}
+            </Card>
+        </Pressable>;
     }
 }

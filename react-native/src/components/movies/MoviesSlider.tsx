@@ -17,7 +17,7 @@ export default class MoviesSlider extends Component<MoviesSliderProps> {
         super(props);
     }
 
-    _renderItem(info: ListRenderItemInfo<Movie>): ReactElement<Movie> {
+    private renderItem(info: ListRenderItemInfo<Movie>): ReactElement<Movie> {
         return <MovieAllTile movie={info.item} />;
     }
 
@@ -28,7 +28,7 @@ export default class MoviesSlider extends Component<MoviesSliderProps> {
             style={styleSheet.slider}
             data={movies}
             horizontal={true}
-            renderItem={this._renderItem}
+            renderItem={this.renderItem}
             keyExtractor={(item, i) => item.id.toString()}
             />;
     }

@@ -41,7 +41,7 @@ export default class MovieGridTile extends Component<MovieGridTileProps> {
         this.styles = styleSheet;
     }
 
-    styles: StyleSheet.NamedStyles<any>;
+    private styles: StyleSheet.NamedStyles<any>;
 
     render() {
         let movie = this.props.movie;
