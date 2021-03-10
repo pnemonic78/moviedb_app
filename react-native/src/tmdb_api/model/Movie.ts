@@ -1,6 +1,22 @@
-export default class Movie {
-    id: number = 0;
+export class Movie {
+    backdrop_path: string = "";
+    genre_ids: number[] = [];
+    origin_country: string = "";
+    original_language: string = "";
+    original_title: string = "";
+    overview: string = "";
+    poster_path: string = "";
+    release_date: Date | null = null;
     title: string = "";
-    release_date: string | null = null;
-    poster_path: string | null = null;
+    video: boolean = false;
+    vote_average: number = 0;
+    vote_count: number = 0;
+
+    date(): Date | null {
+        return this.release_date;
+    }
+
+    getTitle(): string | null {
+        return this.title ?? this.original_title;
+    }
 }
