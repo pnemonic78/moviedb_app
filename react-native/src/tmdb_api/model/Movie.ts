@@ -1,4 +1,6 @@
-export class Movie {
+import { Media } from "./Media";
+
+export class Movie extends Media {
     backdrop_path: string = "";
     genre_ids: number[] = [];
     origin_country: string = "";

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import MoviesAllSection from './MoviesAllSection';
-import MoviesSlider from "./MoviesSlider";
+import { MoviesSlider } from "./MoviesSlider";
 import R from '../../res/R';
 import TMDBApiImpl from '../../tmdb_api/TMDBApiImpl';
 import TMDBApi from '../../tmdb_api/TMDBApi';
-import Movie from '../../tmdb_api/model/Movie';
+import { Movie } from '../../tmdb_api/model/Movie';
+import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
 
 const styleSheet = StyleSheet.create({
     scroller: {
@@ -15,17 +16,17 @@ const styleSheet = StyleSheet.create({
     },
 });
 
-interface MoviesAllPageProps {
+interface MoviesAllPageProps extends StackScreenProps<any> {
 }
 
 interface MoviesAllPageState {
-    moviesNowPlaying: Movie[],
-    moviesPopular: Movie[],
-    moviesTopRated: Movie[],
-    moviesUpcoming: Movie[],
+    moviesNowPlaying: Movie[];
+    moviesPopular: Movie[];
+    moviesTopRated: Movie[];
+    moviesUpcoming: Movie[];
 }
 
-export default class MoviesAllPage extends Component<MoviesAllPageProps, MoviesAllPageState> {
+export class MoviesAllPage extends Component<MoviesAllPageProps, MoviesAllPageState> {
     constructor(props: MoviesAllPageProps) {
         super(props);
         this.state = {
@@ -74,17 +75,53 @@ export default class MoviesAllPage extends Component<MoviesAllPageProps, MoviesA
         return movies;
     }
 
+    /// Navigates to the movies page.
+    private navigateToPage(pageId: string, movies: Movie[]) {
+        let navigation = this.props.navigation;
+        navigation.navigate(pageId, { movies });
+    }
+
+    /// Navigates to the movie details.
+    private navigateToMovie(movie: Movie) {
+        let navigation = this.props.navigation;
+        navigation.navigate("MovieDetails", { movie });
+    }
+
+    private onTapNowPlaying() {
+        let movies = this.getMoviesNowPlaying();
+        this.navigateToPage("NowPlayingPage", movies);
+    }
+
+    private onTapPopular() {
+        let movies = this.getMoviesPopular();
+        this.navigateToPage("PopularPage", movies);
+    }
+
+    private onTapTopRated() {
+        let movies = this.getMoviesTopRated();
+        this.navigateToPage("TopRatedPage", movies);
+    }
+
+    private onTapUpcoming() {
+        let movies = this.getMoviesUpcoming();
+        this.navigateToPage("UpcomingPage", movies);
+    }
+
+    private onTapMovie(movie: Movie) {
+        this.navigateToMovie(movie);
+    }
+
     render() {
         return (
             <ScrollView style={styleSheet.scroller} contentContainerStyle={styleSheet.scrollerContainer}>
-                <MoviesAllSection label={ R.strings.popular }/>
-                <MoviesSlider movies={ this.getMoviesPopular() }/>
-                <MoviesAllSection label={ R.strings.now_playing }/>
-                <MoviesSlider movies={ this.getMoviesNowPlaying() }/>
-                <MoviesAllSection label={R.strings.upcoming }/>
-                <MoviesSlider movies={ this.getMoviesUpcoming() }/>
-                <MoviesAllSection label={ R.strings.top_rated }/>
-                <MoviesSlider movies={ this.getMoviesTopRated() } />
+                <MoviesAllSection label={R.strings.popular} onPress={this.onTapPopular.bind(this)}/>
+                <MoviesSlider movies={this.getMoviesPopular()} onPress={this.navigateToMovie.bind(this)}/>
+                <MoviesAllSection label={R.strings.now_playing} onPress={this.onTapNowPlaying.bind(this)}/>
+                <MoviesSlider movies={this.getMoviesNowPlaying()} onPress={this.navigateToMovie.bind(this)}/>
+                <MoviesAllSection label={R.strings.upcoming} onPress={this.onTapUpcoming.bind(this)}/>
+                <MoviesSlider movies={this.getMoviesUpcoming()} onPress={this.navigateToMovie.bind(this)}/>
+                <MoviesAllSection label={R.strings.top_rated} onPress={this.onTapTopRated.bind(this)}/>
+                <MoviesSlider movies={this.getMoviesTopRated()} onPress={this.navigateToMovie.bind(this)} />
             </ScrollView>
         );
     }

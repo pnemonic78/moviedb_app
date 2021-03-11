@@ -3,8 +3,8 @@ import { GestureResponderEvent, ImageStyle, Pressable, StyleSheet, Text } from '
 import { Card } from 'react-native-elements';
 import TMBDApi from '../../tmdb_api/TMDBApi';
 import R from '../../res/R';
-import LoadingImage from "../LoadingImage";
-import Movie from '../../tmdb_api/model/Movie';
+import { LoadingImage } from "../LoadingImage";
+import { Movie } from '../../tmdb_api/model/Movie';
 
 const posterGridWidth = 150.0;
 const posterGridHeight = posterGridWidth * 1.5;
@@ -33,10 +33,11 @@ const styleSheet = StyleSheet.create({
 });
 
 interface MovieAllTileProps {
-    movie: Movie,
+    movie: Movie;
+    onPress?: null | ((movie: Movie) => void);
 }
 
-export default class MovieAllTile extends Component<MovieAllTileProps> {
+export class MovieAllTile extends Component<MovieAllTileProps> {
     constructor(props: MovieAllTileProps) {
         super(props);
         this.styles = styleSheet;
@@ -45,8 +46,8 @@ export default class MovieAllTile extends Component<MovieAllTileProps> {
     private styles: StyleSheet.NamedStyles<any>;
 
     private onPress(event: GestureResponderEvent) {
-        // let movie = this.props.movie;
-        // TODO show the movie details.
+        let movie = this.props.movie;
+        this.props.onPress?.(movie);
     }
 
     render() {
@@ -64,7 +65,7 @@ export default class MovieAllTile extends Component<MovieAllTileProps> {
 
         let titleWidget = <Text style={styles.title} numberOfLines={2}>{movie.title + "\n"}</Text>;
 
-        return <Pressable onPress={this.onPress}>
+        return <Pressable onPress={this.onPress.bind(this)}>
             <Card containerStyle={styles.tile}>
                 {thumbnailWidget}
                 {titleWidget}

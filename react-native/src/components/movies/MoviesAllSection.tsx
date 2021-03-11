@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { GestureResponderEvent, Pressable, StyleSheet, Text } from 'react-native';
 
 const styleSheet = StyleSheet.create({
     headline5: {
@@ -9,7 +9,8 @@ const styleSheet = StyleSheet.create({
 });
 
 interface MoviesAllSectionProps {
-    label: string,
+    label: string;
+    onPress?: null | ((event: GestureResponderEvent) => void);
 }
 
 export default class MoviesAllSection extends Component<MoviesAllSectionProps> {
@@ -18,6 +19,8 @@ export default class MoviesAllSection extends Component<MoviesAllSectionProps> {
     }
 
     render() {
-        return <Text style={styleSheet.headline5}>{this.props.label}</Text>;
+        return <Pressable onPress={this.props.onPress || null}>
+            <Text style={styleSheet.headline5}>{this.props.label}</Text>
+        </Pressable>;
     }
 }
