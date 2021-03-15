@@ -65,7 +65,7 @@ export class MovieAllTile extends Component<MovieAllTileProps> {
 
         let titleWidget = <Text style={styles.title} numberOfLines={2}>{movie.title + "\n"}</Text>;
 
-        return <Pressable onPress={this.onPress.bind(this)}>
+        return <Pressable onPress={this.onPress?.bind(this)}>
             <Card containerStyle={styles.tile}>
                 {thumbnailWidget}
                 {titleWidget}

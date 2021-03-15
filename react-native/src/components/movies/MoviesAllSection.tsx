@@ -19,7 +19,7 @@ export default class MoviesAllSection extends Component<MoviesAllSectionProps> {
     }
 
     render() {
-        return <Pressable onPress={this.props.onPress || null}>
+        return <Pressable onPress={this.props.onPress?.bind(this)}>
             <Text style={styleSheet.headline5}>{this.props.label}</Text>
         </Pressable>;
     }
