@@ -5,6 +5,7 @@ import TMBDApi from '../../tmdb_api/TMDBApi';
 import R from '../../res/R';
 import { LoadingImage } from "../LoadingImage";
 import { Movie } from '../../tmdb_api/model/Movie';
+import { OnMoviePress } from './MovieClickListener';
 
 const posterGridWidth = 150.0;
 const posterGridHeight = posterGridWidth * 1.5;
@@ -34,7 +35,7 @@ const styleSheet = StyleSheet.create({
 
 interface MovieAllTileProps {
     movie: Movie;
-    onPress?: null | ((movie: Movie) => void);
+    onMoviePress?: OnMoviePress;
 }
 
 export class MovieAllTile extends Component<MovieAllTileProps> {
@@ -47,17 +48,16 @@ export class MovieAllTile extends Component<MovieAllTileProps> {
 
     private onPress(event: GestureResponderEvent) {
         let movie = this.props.movie;
-        this.props.onPress?.(movie);
+        this.props.onMoviePress?.(movie);
     }
 
     render() {
         let movie = this.props.movie;
         let styles = this.styles;
-        let api = TMBDApi;
 
         let imageWidth = styles.thumbnail.width as number;
         let imageHeight = styles.thumbnail.height as number;
-        let thumbnailUrl = api.generatePosterUrl(movie.poster_path, imageWidth, imageHeight);
+        let thumbnailUrl = TMBDApi.generatePosterUrl(movie.poster_path, imageWidth, imageHeight);
         let thumbnailWidget = <LoadingImage
             defaultSource={R.images.outline_image}
             source={{ uri: thumbnailUrl }}

@@ -2,6 +2,7 @@ import React, { Component, ReactElement } from 'react';
 import { FlatList, ListRenderItemInfo, StyleSheet } from 'react-native';
 import { Movie } from '../../tmdb_api/model/Movie';
 import { MovieAllTile } from './MovieAllTile';
+import { OnMoviePress } from './MovieClickListener';
 
 const styleSheet = StyleSheet.create({
     slider: {
@@ -10,7 +11,7 @@ const styleSheet = StyleSheet.create({
 
 interface MoviesSliderProps {
     movies: Movie[];
-    onPress?: null | ((movie: Movie) => void);
+    onMoviePress?: OnMoviePress;
 }
 
 export class MoviesSlider extends Component<MoviesSliderProps> {
@@ -19,7 +20,7 @@ export class MoviesSlider extends Component<MoviesSliderProps> {
     }
 
     private renderItem(info: ListRenderItemInfo<Movie>): ReactElement<Movie> {
-        return <MovieAllTile movie={info.item} onPress={this.props.onPress} />;
+        return <MovieAllTile movie={info.item} onMoviePress={this.props.onMoviePress?.bind(this)} />;
     }
 
     render() {

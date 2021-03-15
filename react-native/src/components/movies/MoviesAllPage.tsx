@@ -6,7 +6,8 @@ import R from '../../res/R';
 import TMDBApiImpl from '../../tmdb_api/TMDBApiImpl';
 import TMDBApi from '../../tmdb_api/TMDBApi';
 import { Movie } from '../../tmdb_api/model/Movie';
-import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
+import { StackScreenProps } from '@react-navigation/stack';
+import { OnMoviePressObject } from './MovieClickListener';
 
 const styleSheet = StyleSheet.create({
     scroller: {
@@ -76,9 +77,9 @@ export class MoviesAllPage extends Component<MoviesAllPageProps, MoviesAllPageSt
     }
 
     /// Navigates to the movies page.
-    private navigateToPage(pageId: string, movies: Movie[]) {
+    private navigateToPage(pageId: string, movies: Movie[], showAsList: boolean) {
         let navigation = this.props.navigation;
-        navigation.navigate(pageId, { movies });
+        navigation.navigate(pageId, { movies, showAsList });
     }
 
     /// Navigates to the movie details.
@@ -89,22 +90,22 @@ export class MoviesAllPage extends Component<MoviesAllPageProps, MoviesAllPageSt
 
     private onTapNowPlaying() {
         let movies = this.getMoviesNowPlaying();
-        this.navigateToPage("NowPlayingPage", movies);
+        this.navigateToPage("NowPlayingPage", movies, false);
     }
 
     private onTapPopular() {
         let movies = this.getMoviesPopular();
-        this.navigateToPage("PopularPage", movies);
+        this.navigateToPage("PopularPage", movies, true);
     }
 
     private onTapTopRated() {
         let movies = this.getMoviesTopRated();
-        this.navigateToPage("TopRatedPage", movies);
+        this.navigateToPage("TopRatedPage", movies, false);
     }
 
     private onTapUpcoming() {
         let movies = this.getMoviesUpcoming();
-        this.navigateToPage("UpcomingPage", movies);
+        this.navigateToPage("UpcomingPage", movies, false);
     }
 
     private onTapMovie(movie: Movie) {
@@ -113,15 +114,33 @@ export class MoviesAllPage extends Component<MoviesAllPageProps, MoviesAllPageSt
 
     render() {
         return (
-            <ScrollView style={styleSheet.scroller} contentContainerStyle={styleSheet.scrollerContainer}>
-                <MoviesAllSection label={R.strings.popular} onPress={this.onTapPopular.bind(this)}/>
-                <MoviesSlider movies={this.getMoviesPopular()} onPress={this.navigateToMovie.bind(this)}/>
-                <MoviesAllSection label={R.strings.now_playing} onPress={this.onTapNowPlaying.bind(this)}/>
-                <MoviesSlider movies={this.getMoviesNowPlaying()} onPress={this.navigateToMovie.bind(this)}/>
-                <MoviesAllSection label={R.strings.upcoming} onPress={this.onTapUpcoming.bind(this)}/>
-                <MoviesSlider movies={this.getMoviesUpcoming()} onPress={this.navigateToMovie.bind(this)}/>
-                <MoviesAllSection label={R.strings.top_rated} onPress={this.onTapTopRated.bind(this)}/>
-                <MoviesSlider movies={this.getMoviesTopRated()} onPress={this.navigateToMovie.bind(this)} />
+            <ScrollView
+                style={styleSheet.scroller}
+                contentContainerStyle={styleSheet.scrollerContainer}>
+                <MoviesAllSection
+                    label={R.strings.popular}
+                    onPress={this.onTapPopular.bind(this)} />
+                <MoviesSlider
+                    movies={this.getMoviesPopular()}
+                    onMoviePress={this.navigateToMovie.bind(this)} />
+                <MoviesAllSection
+                    label={R.strings.now_playing}
+                    onPress={this.onTapNowPlaying.bind(this)} />
+                <MoviesSlider
+                    movies={this.getMoviesNowPlaying()}
+                    onMoviePress={this.navigateToMovie.bind(this)} />
+                <MoviesAllSection
+                    label={R.strings.upcoming}
+                    onPress={this.onTapUpcoming.bind(this)} />
+                <MoviesSlider
+                    movies={this.getMoviesUpcoming()}
+                    onMoviePress={this.navigateToMovie.bind(this)} />
+                <MoviesAllSection
+                    label={R.strings.top_rated}
+                    onPress={this.onTapTopRated.bind(this)} />
+                <MoviesSlider
+                    movies={this.getMoviesTopRated()}
+                    onMoviePress={this.navigateToMovie.bind(this)} />
             </ScrollView>
         );
     }

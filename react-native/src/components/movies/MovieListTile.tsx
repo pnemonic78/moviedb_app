@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { GestureResponderEvent, ImageStyle, Pressable, StyleSheet, Text, TextStyle } from 'react-native';
-import { Card, Rating } from 'react-native-elements';
+import { GestureResponderEvent, ImageStyle, Pressable, StyleSheet, Text } from 'react-native';
+import { Card } from 'react-native-elements';
 import TMBDApi from '../../tmdb_api/TMDBApi';
 import R from '../../res/R';
 import { LoadingImage } from "../LoadingImage";
@@ -11,10 +11,6 @@ const posterGridWidth = 150.0;
 const posterGridHeight = posterGridWidth * 1.5;
 
 const styleSheet = StyleSheet.create({
-    date: {
-        paddingStart: 8,
-        paddingEnd: 8,
-    },
     thumbnail: {
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
@@ -24,7 +20,7 @@ const styleSheet = StyleSheet.create({
     tile: {
         borderRadius: 20,
         marginStart: 0,
-        paddingBottom: 8,
+        paddingBottom: 0,
         paddingLeft: 0,
         paddingRight: 0,
         paddingTop: 0,
@@ -32,25 +28,18 @@ const styleSheet = StyleSheet.create({
     title: {
         fontSize: 18,
         fontWeight: "bold",
-        paddingStart: 8,
-        paddingEnd: 8,
-        width: posterGridWidth,
-    },
-    vote: {
-        paddingStart: 8,
-        paddingEnd: 8,
-        paddingTop: 4,
+        padding: 8,
         width: posterGridWidth,
     },
 });
 
-interface MovieGridTileProps {
+interface MovieListTileProps {
     movie: Movie;
     onMoviePress?: OnMoviePress;
 }
 
-export class MovieGridTile extends Component<MovieGridTileProps> {
-    constructor(props: MovieGridTileProps) {
+export class MovieListTile extends Component<MovieListTileProps> {
+    constructor(props: MovieListTileProps) {
         super(props);
         this.styles = styleSheet;
     }
@@ -73,26 +62,13 @@ export class MovieGridTile extends Component<MovieGridTileProps> {
             defaultSource={R.images.outline_image}
             source={{ uri: thumbnailUrl }}
             style={styles.thumbnail as ImageStyle} />;
-        
-        let voteAverageWidget = <Rating
-            type="custom"
-            ratingCount={5}
-            imageSize={20}
-            readonly={true}
-            ratingColor={"#FFEB3B"}
-            startingValue={movie.vote_average / 2.0}
-            style={styles.vote} />;
 
         let titleWidget = <Text style={styles.title} numberOfLines={2}>{movie.title + "\n"}</Text>;
-
-        let dateWidget = <Text style={styles.date}>{movie.release_date}</Text>;
 
         return <Pressable onPress={this.onPress?.bind(this)}>
             <Card containerStyle={styles.tile}>
                 {thumbnailWidget}
-                {voteAverageWidget}
                 {titleWidget}
-                {dateWidget}
             </Card>
         </Pressable>;
     }
