@@ -77,9 +77,9 @@ export class MoviesAllPage extends Component<MoviesAllPageProps, MoviesAllPageSt
     }
 
     /// Navigates to the movies page.
-    private navigateToPage(pageId: string, movies: Movie[], showAsList: boolean) {
+    private navigateToPage(pageId: string, movies: Movie[]) {
         let navigation = this.props.navigation;
-        navigation.navigate(pageId, { movies, showAsList });
+        navigation.navigate(pageId, { movies });
     }
 
     /// Navigates to the movie details.
@@ -90,22 +90,22 @@ export class MoviesAllPage extends Component<MoviesAllPageProps, MoviesAllPageSt
 
     private onTapNowPlaying() {
         let movies = this.getMoviesNowPlaying();
-        this.navigateToPage("NowPlayingPage", movies, false);
+        this.navigateToPage("NowPlayingPage", movies);
     }
 
     private onTapPopular() {
         let movies = this.getMoviesPopular();
-        this.navigateToPage("PopularPage", movies, true);
+        this.navigateToPage("PopularPage", movies);
     }
 
     private onTapTopRated() {
         let movies = this.getMoviesTopRated();
-        this.navigateToPage("TopRatedPage", movies, false);
+        this.navigateToPage("TopRatedPage", movies);
     }
 
     private onTapUpcoming() {
         let movies = this.getMoviesUpcoming();
-        this.navigateToPage("UpcomingPage", movies, false);
+        this.navigateToPage("UpcomingPage", movies);
     }
 
     private onTapMovie(movie: Movie) {

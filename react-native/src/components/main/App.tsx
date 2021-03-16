@@ -10,7 +10,6 @@ import { NowPlayingPage } from '../movies/NowPlayingPage';
 import { UpcomingPage } from '../movies/UpcomingPage';
 import { TopRatedPage } from '../movies/TopRatedPage';
 import { PopularPage } from '../movies/PopularPage';
-import { MoviesPage } from '../movies/MoviesPage';
 
 const App: () => React.ReactElement = () => {
   const stack = createStackNavigator();
