@@ -32,7 +32,7 @@ export abstract class MoviesPage extends Component<MoviesPageProps, MoviesPageSt
         return <ImageButton
             source={this.state.showAsList ? R.images.outline_grid : R.images.outline_list}
             onPress={this.toggleViewStyle.bind(this)}
-            style={{ padding: 16 }}
+            style={{ height: 32, margin: 8, width: 32 }}
             />;
     }
 

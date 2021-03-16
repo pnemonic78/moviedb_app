@@ -73,7 +73,7 @@ export class MovieGridTile extends Component<MovieGridTileProps> {
             defaultSource={R.images.outline_image}
             source={{ uri: thumbnailUrl }}
             style={styles.thumbnail as ImageStyle} />;
-        
+
         let voteAverageWidget = <Rating
             type="custom"
             ratingCount={5}
