@@ -20,7 +20,9 @@ export class MoviesListPage extends Component<MoviesListPageProps> {
     }
 
     private renderItem(info: ListRenderItemInfo<Movie>): ReactElement<Movie> {
-        return <MovieListTile movie={info.item} onMoviePress={this.props.onMoviePress?.bind(this)} />;
+        return <MovieListTile
+            movie={info.item}
+            onMoviePress={this.props.onMoviePress?.bind(this)} />;
     }
 
     render() {

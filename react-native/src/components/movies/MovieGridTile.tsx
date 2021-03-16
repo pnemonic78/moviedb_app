@@ -8,23 +8,22 @@ import { Movie } from '../../tmdb_api/model/Movie';
 import { OnMoviePress } from './MovieClickListener';
 
 const posterGridWidth = 150.0;
-const posterGridHeight = posterGridWidth * 1.5;
+const posterGridHeightRatio = 1.5;
 
 const styleSheet = StyleSheet.create({
     date: {
         paddingStart: 8,
         paddingEnd: 8,
+        paddingTop: 4,
     },
     thumbnail: {
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
-        height: posterGridHeight,
+        height: posterGridWidth * posterGridHeightRatio,
         width: posterGridWidth,
     },
     tile: {
         borderRadius: 20,
-        marginStart: 0,
-        paddingBottom: 8,
         paddingLeft: 0,
         paddingRight: 0,
         paddingTop: 0,
@@ -34,12 +33,13 @@ const styleSheet = StyleSheet.create({
         fontWeight: "bold",
         paddingStart: 8,
         paddingEnd: 8,
+        paddingTop: 4,
         width: posterGridWidth,
     },
     vote: {
         paddingStart: 8,
         paddingEnd: 8,
-        paddingTop: 4,
+        paddingTop: 8,
         width: posterGridWidth,
     },
 });
@@ -47,6 +47,7 @@ const styleSheet = StyleSheet.create({
 interface MovieGridTileProps {
     movie: Movie;
     onMoviePress?: OnMoviePress;
+    width?: number | null;
 }
 
 export class MovieGridTile extends Component<MovieGridTileProps> {
@@ -66,13 +67,15 @@ export class MovieGridTile extends Component<MovieGridTileProps> {
         let movie = this.props.movie;
         let styles = this.styles;
 
-        let imageWidth = styles.thumbnail.width as number;
-        let imageHeight = styles.thumbnail.height as number;
+        let imageWidth = this.props.width ?? (styles.thumbnail.width as number);
+        let imageHeight = (styles.thumbnail.height as number) * posterGridHeightRatio;
         let thumbnailUrl = TMBDApi.generatePosterUrl(movie.poster_path, imageWidth, imageHeight);
         let thumbnailWidget = <LoadingImage
             defaultSource={R.images.outline_image}
             source={{ uri: thumbnailUrl }}
-            style={styles.thumbnail as ImageStyle} />;
+            style={styles.thumbnail as ImageStyle}
+            width={imageWidth}
+            height={imageHeight} />;
 
         let voteAverageWidget = <Rating
             type="custom"

@@ -1,5 +1,5 @@
 import React, { Component, ReactNode } from 'react';
-import { Image, ImageBackground, ImageProps, ImageSourcePropType, ImageStyle } from 'react-native';
+import { Image, ImageBackground, ImageProps, ImageSourcePropType, ImageStyle, StyleProp } from 'react-native';
 
 export interface LoadingImageProps extends ImageProps {
     style?: ImageStyle;
@@ -11,10 +11,19 @@ export class LoadingImage extends Component<LoadingImageProps> {
     }
 
     render(): ReactNode {
+        let props = { ...this.props };
+        let width = props.width ?? props.style?.width;
+        let height = props.height ?? props.style?.height;
+
         return <ImageBackground
-            source={this.props.defaultSource as ImageSourcePropType}
-            style={this.props.style}>
-            <Image source={this.props.source} style={this.props.style} />
+            {...props}
+            source={props.defaultSource as ImageSourcePropType}
+            style={[props.style, { height: height, width: width }]}
+        >
+            <Image
+                {...props}
+                style={[props.style, { height: height, width: width }]}
+            />
         </ImageBackground>;
     }
 }
