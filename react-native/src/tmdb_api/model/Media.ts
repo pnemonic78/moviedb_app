@@ -10,7 +10,7 @@ export class Media {
 // factory Media.fromJsonType(Map < String, dynamic > json) {
 //     if (json == null) return null;
 
-//     final mediaType = _$enumDecodeNullable(_$MediaTypeEnumMap, json['media_type']) ?? MediaType.all;
+//     final mediaType = media_type ?? MediaType.all;
 
 //     switch (mediaType) {
 //         case MediaType.movie:
@@ -28,7 +28,7 @@ export class Media {
         return null;
     }
 
-    getTitle(): string | null {
-        return null;
+    displayTitle(): string {
+        return "";
     }
 }

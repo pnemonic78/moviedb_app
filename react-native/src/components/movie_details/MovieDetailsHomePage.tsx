@@ -1,12 +1,13 @@
 import React, { Component } from "react";
+import { Dimensions, ImageBackground, Platform, StyleSheet, Text } from "react-native";
+import { ParamListBase } from "@react-navigation/routers";
 import { HeaderBackButton, StackScreenProps } from "@react-navigation/stack";
 import { Movie } from "../../tmdb_api/model/Movie";
 import { MovieDetailsWidget } from "./MovieDetailsWidget";
-import { ParamListBase } from "@react-navigation/routers";
 import { CollapsibleHeaderScrollView } from "react-native-collapsible-header-views";
-import { Dimensions, ImageBackground, Platform, StyleSheet, Text } from "react-native";
 import TMDBApi from "../../tmdb_api/TMDBApi";
 import R from "../../res/R";
+import { MovieDetails } from "../../tmdb_api/model/MovieDetails";
 
 interface MovieDetailsHomePageParams extends ParamListBase {
     movie: Movie;
@@ -16,19 +17,27 @@ interface MovieDetailsHomePageProps extends StackScreenProps<MovieDetailsHomePag
     movie?: Movie;
 }
 
-export class MovieDetailsHomePage extends Component<MovieDetailsHomePageProps> {
+interface MovieDetailsHomePageState {
+    movie: MovieDetails;
+}
+
+export class MovieDetailsHomePage extends Component<MovieDetailsHomePageProps, MovieDetailsHomePageState> {
     constructor(props: MovieDetailsHomePageProps) {
         super(props);
+
+        let routeParams = props.route.params as MovieDetailsHomePageParams;
+        this.state = {
+            movie: MovieDetails.of(props.movie ?? routeParams?.movie),
+        };
     }
 
     render() {
         let navigation = this.props.navigation;
-        let routeParams = this.props.route.params as MovieDetailsHomePageParams;
-        let movie = this.props.movie ?? routeParams?.movie;
+        let movie = this.state.movie;
         let styles = styleSheet;
 
         let backButtonWidget = <HeaderBackButton
-            style={{width: 40, height: 40,}}
+            style={{width: 40, height: 40}}
             tintColor={'white'}
             onPress={() => navigation.goBack()} />;
 
@@ -41,7 +50,7 @@ export class MovieDetailsHomePage extends Component<MovieDetailsHomePageProps> {
             backdropHeight,
         );
 
-        let title = movie.title ?? movie.original_title;//movie.getTitle() ?? "";
+        let title = movie.displayTitle();
         let titleWidget = <Text numberOfLines={3} style={styles.title}>{title}</Text>;
 
         let headerWidget = <ImageBackground

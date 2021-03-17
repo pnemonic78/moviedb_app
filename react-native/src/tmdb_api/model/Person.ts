@@ -6,8 +6,7 @@ export class Person extends Media {
     also_known_as: string[] = [];
     biography: string = "";
     birthday: Date | null = null;
-    //@JsonKey(name: 'combined_credits')
-    //PersonCreditsResponse credits;
+    //PersonCreditsResponse combined_credits;
     place_of_birth: string = "";
     deathday: Date | null = null;
     external_ids: PersonExternalIds | null = null;
@@ -27,7 +26,7 @@ export class Person extends Media {
         return this.birthday;
     }
 
-    getTitle(): string | null {
+    displayTitle(): string {
         return this.name ?? this.original_name;
     }
 }

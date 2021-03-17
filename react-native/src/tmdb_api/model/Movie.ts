@@ -15,10 +15,17 @@ export class Movie extends Media {
     vote_count: number = 0;
 
     date(): Date | null {
-        return this.release_date ?? null;
+        return this.release_date;
     }
 
-    getTitle(): string | null {
-        return this.title ?? this.original_title ?? null;
+    displayTitle(): string {
+        return this.title ?? this.original_title;
+    }
+
+    // Map the POJO to object with methods.
+    static fromJson(json: any): Movie {
+        let result = new Movie();
+        Object.assign(result, json);
+        return result;
     }
 }
