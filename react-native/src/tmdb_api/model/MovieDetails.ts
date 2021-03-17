@@ -17,4 +17,10 @@ export class MovieDetails extends Movie {
     spoken_languages: SpokenLanguage[] = [];
     status: string = "";
     tagline: string = "";
+
+    static of(movie: Movie): MovieDetails {
+        let result = new MovieDetails();
+        Object.assign(result, movie);
+        return result;
+    }
 }

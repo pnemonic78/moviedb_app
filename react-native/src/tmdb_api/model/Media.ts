@@ -7,14 +7,6 @@ export class Media {
     media_type: MediaType = 0;
     popularity: number = 0;
 
-    constructor(id: number) {
-        this.id = id;
-    }
-
-// /// Creates a [Media] from a JSON object.
-// factory Media.fromJson(Map < String, dynamic > json) =>
-// (json == null) ? null : _$MediaFromJson(json);
-
 // factory Media.fromJsonType(Map < String, dynamic > json) {
 //     if (json == null) return null;
 

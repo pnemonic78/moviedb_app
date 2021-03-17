@@ -15,10 +15,10 @@ export class Movie extends Media {
     vote_count: number = 0;
 
     date(): Date | null {
-        return this.release_date;
+        return this.release_date ?? null;
     }
 
     getTitle(): string | null {
-        return this.title ?? this.original_title;
+        return this.title ?? this.original_title ?? null;
     }
 }

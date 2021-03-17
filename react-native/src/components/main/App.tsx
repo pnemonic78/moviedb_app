@@ -62,9 +62,7 @@ const App: () => React.ReactElement = () => {
           name="MovieDetails"
           component={MovieDetailsHomePage}
           options={{
-            headerStyle: styles.header,
-            headerTitleStyle: styles.headerTitleStyle,
-            title: R.strings.title,
+            headerShown: false,
           }} />
       </stack.Navigator>
     </NavigationContainer>
