@@ -212,7 +212,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
 
     final summaryText = Text(
       movie.overview ?? "",
-      maxLines: (_summaryLinesExpanded ? _summaryLinesMax : _summaryLinesMin),
+      maxLines: (_summaryLinesExpanded ? _summaryLinesMin : _summaryLinesMin),
       overflow: TextOverflow.fade,
       style: textStyle,
     );

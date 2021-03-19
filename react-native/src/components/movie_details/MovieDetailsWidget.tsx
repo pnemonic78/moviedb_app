@@ -11,6 +11,9 @@ import { Utils } from "../main/Utils";
 const posterDetailsWidth = R.dimen.posterDetailsWidth;
 const posterDetailsHeight = R.dimen.posterDetailsHeight;
 
+const _summaryLinesMin = 5;
+const _summaryLinesMax = 1000;
+
 interface MovieDetailsWidgetProps {
     movie: MovieDetails;
 // final ValueChanged < MovieDetails > onTapPoster;
@@ -101,7 +104,14 @@ export class MovieDetailsWidget extends Component<MovieDetailsWidgetProps, Movie
 
         let summaryLabel = <Text style={styles.label}>{R.string.summary_label}</Text>
 
-        let summaryWidget = <Text style={styles.text}>{movie.overview ?? ""}</Text>
+        let summaryLinesExpanded = this.state.summaryLinesExpanded;
+        let summaryWidget = <Pressable onPress={() => this.setState({ summaryLinesExpanded: !summaryLinesExpanded})}>
+            <Text
+                style={styles.text}
+                numberOfLines={summaryLinesExpanded ? _summaryLinesMax : _summaryLinesMin}>
+                {movie.overview ?? ""}
+            </Text>
+        </Pressable>
 
         return <View style={styles.details}>
             {taglineWidget}
