@@ -8,6 +8,7 @@ import { CollapsibleHeaderScrollView } from "react-native-collapsible-header-vie
 import TMDBApi from "../../tmdb_api/TMDBApi";
 import R from "../../res/R";
 import { MovieDetails } from "../../tmdb_api/model/MovieDetails";
+import TMBDApiImpl from "../../tmdb_api/TMDBApiImpl";
 
 interface MovieDetailsHomePageParams extends ParamListBase {
     movie: Movie;
@@ -26,10 +27,18 @@ export class MovieDetailsHomePage extends Component<MovieDetailsHomePageProps, M
         super(props);
 
         let routeParams = props.route.params as MovieDetailsHomePageParams;
+        let movie = props.movie ?? routeParams?.movie;
         this.state = {
             // TODO fetch the movie details from api.
-            movie: MovieDetails.of(props.movie ?? routeParams?.movie),
+            movie: MovieDetails.of(movie),
         };
+        this.fetchMovieDetails(movie)
+            .then(data => this.setState({ movie: data }));
+    }
+
+    private async fetchMovieDetails(movie: Movie): Promise<MovieDetails> {
+        let api: TMDBApi = new TMBDApiImpl();
+        return api.getMovieDetails(movie);
     }
 
     render() {

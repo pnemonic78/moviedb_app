@@ -23,4 +23,11 @@ export class MovieDetails extends Movie {
         Object.assign(result, movie);
         return result;
     }
+
+    // Map the POJO to object with methods.
+    static fromJson(json: any): MovieDetails {
+        let result = new MovieDetails();
+        Object.assign(result, json);
+        return result;
+    }
 }

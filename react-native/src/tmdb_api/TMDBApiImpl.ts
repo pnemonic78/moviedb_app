@@ -2,6 +2,7 @@ import { Movie } from "./model/Movie";
 import TMBDApi from "./TMDBApi";
 import axios from 'axios';
 import Keys from '../../keys';
+import { MovieDetails } from "./model/MovieDetails";
 
 export default class TMBDApiImpl extends TMBDApi {
     readonly _apiKey: string = Keys.apiKey;
@@ -34,5 +35,13 @@ export default class TMBDApiImpl extends TMBDApi {
     async getUpcoming(): Promise<Movie[]> {
         let url = TMBDApi.api_url + "movie/upcoming?api_key=" + this._apiKey + "&language=" + this._languageCode + "&page=1";
         return this.getMovies(url);
+    }
+
+    async getMovieDetailsById(movieId: number): Promise<MovieDetails> {
+        let url = TMBDApi.api_url + "movie/" + movieId + "?api_key=" + this._apiKey + "&language=" + this._languageCode;
+        let result = await axios.get(url);
+        let data = result.data;
+        let movie = MovieDetails.fromJson(data);
+        return movie;
     }
 }

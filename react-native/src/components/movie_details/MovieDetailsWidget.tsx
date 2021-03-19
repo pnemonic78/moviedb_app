@@ -100,7 +100,7 @@ export class MovieDetailsWidget extends Component<MovieDetailsWidgetProps, Movie
 
         let genresLabel = hasGenres ? <Text style={styles.label}>{R.string.genres_label}</Text> : gone;
 
-        let genresWidget = hasGenres ? <Text style={styles.text}>{movie.genres.join(", ")}</Text> : gone;
+        let genresWidget = hasGenres ? <Text style={styles.text}>{movie.genres.map(genre => genre.name).join(", ")}</Text> : gone;
 
         let summaryLabel = <Text style={styles.label}>{R.string.summary_label}</Text>
 
