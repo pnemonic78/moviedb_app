@@ -6,9 +6,10 @@ import R from '../../res/R';
 import { LoadingImage } from "../LoadingImage";
 import { Movie } from '../../tmdb_api/model/Movie';
 import { OnMoviePress } from './MovieClickListener';
+import { Utils } from '../main/Utils';
 
-const posterGridWidth = 150.0;
-const posterGridHeight = posterGridWidth * 1.5;
+const posterGridWidth = R.dimen.posterGridWidth;
+const posterGridHeight = R.dimen.posterGridHeight;
 
 const styleSheet = StyleSheet.create({
     column: {
@@ -26,13 +27,13 @@ const styleSheet = StyleSheet.create({
         paddingTop: 8,
     },
     thumbnail: {
-        borderRadius: 20,
+        borderRadius: R.dimen.cardRadius,
         marginEnd: 8,
         height: posterGridHeight,
         width: posterGridWidth,
     },
     tile: {
-        borderRadius: 20,
+        borderRadius: R.dimen.cardRadius,
         padding: 8,
     },
     title: {
@@ -75,7 +76,7 @@ export class MovieListTile extends Component<MovieListTileProps> {
         let imageHeight = styles.thumbnail.height as number;
         let thumbnailUrl = TMBDApi.generatePosterUrl(movie.poster_path, imageWidth, imageHeight);
         let thumbnailWidget = <LoadingImage
-            defaultSource={R.images.outline_image}
+            defaultSource={R.drawable.outline_image}
             source={{ uri: thumbnailUrl }}
             style={styles.thumbnail as ImageStyle} />;
 
@@ -86,11 +87,12 @@ export class MovieListTile extends Component<MovieListTileProps> {
             ratingCount={5}
             imageSize={20}
             readonly={true}
-            ratingColor={"#FFEB3B"}
+            ratingColor={R.color.ratingColor}
             startingValue={movie.vote_average / 2.0}
             style={styles.vote} />;
 
-        let dateWidget = <Text style={styles.date}>{movie.release_date}</Text>;
+        let dateValue = Utils.formatDate(movie.release_date);
+        let dateWidget = <Text style={styles.date}>{dateValue}</Text>;
 
         let summaryWidget = <Text numberOfLines={4} style={styles.summary}>{movie.overview}</Text>;
 

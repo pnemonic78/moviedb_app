@@ -118,25 +118,25 @@ export class MoviesAllPage extends Component<MoviesAllPageProps, MoviesAllPageSt
                 style={styleSheet.scroller}
                 contentContainerStyle={styleSheet.scrollerContainer}>
                 <MoviesAllSection
-                    label={R.strings.popular}
+                    label={R.string.popular}
                     onPress={this.onTapPopular.bind(this)} />
                 <MoviesSlider
                     movies={this.getMoviesPopular()}
                     onMoviePress={this.navigateToMovie.bind(this)} />
                 <MoviesAllSection
-                    label={R.strings.now_playing}
+                    label={R.string.now_playing}
                     onPress={this.onTapNowPlaying.bind(this)} />
                 <MoviesSlider
                     movies={this.getMoviesNowPlaying()}
                     onMoviePress={this.navigateToMovie.bind(this)} />
                 <MoviesAllSection
-                    label={R.strings.upcoming}
+                    label={R.string.upcoming}
                     onPress={this.onTapUpcoming.bind(this)} />
                 <MoviesSlider
                     movies={this.getMoviesUpcoming()}
                     onMoviePress={this.navigateToMovie.bind(this)} />
                 <MoviesAllSection
-                    label={R.strings.top_rated}
+                    label={R.string.top_rated}
                     onPress={this.onTapTopRated.bind(this)} />
                 <MoviesSlider
                     movies={this.getMoviesTopRated()}

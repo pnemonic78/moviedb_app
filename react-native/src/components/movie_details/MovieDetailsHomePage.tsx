@@ -27,6 +27,7 @@ export class MovieDetailsHomePage extends Component<MovieDetailsHomePageProps, M
 
         let routeParams = props.route.params as MovieDetailsHomePageParams;
         this.state = {
+            // TODO fetch the movie details from api.
             movie: MovieDetails.of(props.movie ?? routeParams?.movie),
         };
     }
@@ -55,7 +56,7 @@ export class MovieDetailsHomePage extends Component<MovieDetailsHomePageProps, M
 
         let headerWidget = <ImageBackground
             source={{ uri: backdropUrl }}
-            defaultSource={R.images.outline_image}
+            defaultSource={R.drawable.outline_image}
             style={{ width: backdropWidth, height: backdropHeight, }}
         >
             {backButtonWidget}

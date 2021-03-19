@@ -24,7 +24,7 @@ const App: () => React.ReactElement = () => {
           options={{
             headerStyle: styles.header,
             headerTitleStyle: styles.headerTitleStyle,
-            title: R.strings.title,
+            title: R.string.title,
           }} />
         <stack.Screen
           name="NowPlayingPage"
@@ -32,7 +32,7 @@ const App: () => React.ReactElement = () => {
           options={{
             headerStyle: styles.header,
             headerTitleStyle: styles.headerTitleStyle,
-            title: R.strings.now_playing,
+            title: R.string.now_playing,
           }} />
         <stack.Screen
           name="PopularPage"
@@ -40,7 +40,7 @@ const App: () => React.ReactElement = () => {
           options={{
             headerStyle: styles.header,
             headerTitleStyle: styles.headerTitleStyle,
-            title: R.strings.popular,
+            title: R.string.popular,
           }} />
         <stack.Screen
           name="TopRatedPage"
@@ -48,7 +48,7 @@ const App: () => React.ReactElement = () => {
           options={{
             headerStyle: styles.header,
             headerTitleStyle: styles.headerTitleStyle,
-            title: R.strings.top_rated,
+            title: R.string.top_rated,
           }} />
         <stack.Screen
           name="UpcomingPage"
@@ -56,7 +56,7 @@ const App: () => React.ReactElement = () => {
           options={{
             headerStyle: styles.header,
             headerTitleStyle: styles.headerTitleStyle,
-            title: R.strings.upcoming,
+            title: R.string.upcoming,
           }} />
         <stack.Screen
           name="MovieDetails"

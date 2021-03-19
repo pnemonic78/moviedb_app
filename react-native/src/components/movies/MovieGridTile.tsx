@@ -6,9 +6,10 @@ import R from '../../res/R';
 import { LoadingImage } from "../LoadingImage";
 import { Movie } from '../../tmdb_api/model/Movie';
 import { OnMoviePress } from './MovieClickListener';
+import { Utils } from '../main/Utils';
 
-const posterGridWidth = 150.0;
-const posterGridHeightRatio = 1.5;
+const posterGridWidth = R.dimen.posterGridWidth;
+const posterGridRatio = R.dimen.posterGridRatio;
 
 const styleSheet = StyleSheet.create({
     date: {
@@ -17,13 +18,13 @@ const styleSheet = StyleSheet.create({
         paddingTop: 4,
     },
     thumbnail: {
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-        height: posterGridWidth * posterGridHeightRatio,
+        borderTopLeftRadius: R.dimen.cardRadius,
+        borderTopRightRadius: R.dimen.cardRadius,
+        height: posterGridWidth * posterGridRatio,
         width: posterGridWidth,
     },
     tile: {
-        borderRadius: 20,
+        borderRadius: R.dimen.cardRadius,
         paddingLeft: 0,
         paddingRight: 0,
         paddingTop: 0,
@@ -68,10 +69,10 @@ export class MovieGridTile extends Component<MovieGridTileProps> {
         let styles = this.styles;
 
         let imageWidth = this.props.width ?? (styles.thumbnail.width as number);
-        let imageHeight = (styles.thumbnail.height as number) * posterGridHeightRatio;
+        let imageHeight = (styles.thumbnail.height as number) * posterGridRatio;
         let thumbnailUrl = TMBDApi.generatePosterUrl(movie.poster_path, imageWidth, imageHeight);
         let thumbnailWidget = <LoadingImage
-            defaultSource={R.images.outline_image}
+            defaultSource={R.drawable.outline_image}
             source={{ uri: thumbnailUrl }}
             style={styles.thumbnail as ImageStyle}
             width={imageWidth}
@@ -82,13 +83,14 @@ export class MovieGridTile extends Component<MovieGridTileProps> {
             ratingCount={5}
             imageSize={20}
             readonly={true}
-            ratingColor={"#FFEB3B"}
+            ratingColor={R.color.ratingColor}
             startingValue={movie.vote_average / 2.0}
             style={styles.vote} />;
 
         let titleWidget = <Text style={styles.title} numberOfLines={2}>{movie.title + "\n"}</Text>;
 
-        let dateWidget = <Text style={styles.date}>{movie.release_date}</Text>;
+        let dateValue = Utils.formatDate(movie.release_date);
+        let dateWidget = <Text style={styles.date}>{dateValue}</Text>;
 
         return <Pressable onPress={this.onPress?.bind(this)}>
             <Card containerStyle={styles.tile}>

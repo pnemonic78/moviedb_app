@@ -6,4 +6,8 @@ export class Genre {
         this.id = id;
         this.name = name;
     }
+
+    toString(): string {
+        return this.name;
+    }
 }

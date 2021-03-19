@@ -3,8 +3,9 @@ import { Dimensions, FlatList, ListRenderItemInfo, StyleSheet } from "react-nati
 import { Movie } from "../../tmdb_api/model/Movie";
 import { MovieGridTile } from "./MovieGridTile";
 import { OnMoviePress } from "./MovieClickListener";
+import R from "../../res/R";
 
-const posterGridWidth = 150.0;
+const posterGridWidth = R.dimen.posterGridWidth;
 
 const styleSheet = StyleSheet.create({
     slider: {

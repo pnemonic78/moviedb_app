@@ -7,18 +7,18 @@ import { LoadingImage } from "../LoadingImage";
 import { Movie } from '../../tmdb_api/model/Movie';
 import { OnMoviePress } from './MovieClickListener';
 
-const posterGridWidth = 150.0;
-const posterGridHeight = posterGridWidth * 1.5;
+const posterGridWidth = R.dimen.posterGridWidth;
+const posterGridHeight = R.dimen.posterGridHeight;
 
 const styleSheet = StyleSheet.create({
     thumbnail: {
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
+        borderTopLeftRadius: R.dimen.cardRadius,
+        borderTopRightRadius: R.dimen.cardRadius,
         height: posterGridHeight,
         width: posterGridWidth,
     },
     tile: {
-        borderRadius: 20,
+        borderRadius: R.dimen.cardRadius,
         marginStart: 0,
         paddingBottom: 0,
         paddingLeft: 0,
@@ -59,7 +59,7 @@ export class MovieAllTile extends Component<MovieAllTileProps> {
         let imageHeight = styles.thumbnail.height as number;
         let thumbnailUrl = TMBDApi.generatePosterUrl(movie.poster_path, imageWidth, imageHeight);
         let thumbnailWidget = <LoadingImage
-            defaultSource={R.images.outline_image}
+            defaultSource={R.drawable.outline_image}
             source={{ uri: thumbnailUrl }}
             style={styles.thumbnail as ImageStyle} />;
 
