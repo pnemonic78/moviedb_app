@@ -1,4 +1,4 @@
 export interface Dates {
-    maximum: Date | null;
-    minimum: Date | null;
+    maximum: Date | null
+    minimum: Date | null
 }

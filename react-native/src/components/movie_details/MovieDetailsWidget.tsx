@@ -1,65 +1,71 @@
-import React, { Component } from "react";
-import { ImageStyle, Pressable, StyleSheet, Text, View } from "react-native";
-import { Rating } from "react-native-ratings";
-import R from "../../res/R";
-import { Genre } from "../../tmdb_api/model/Genre";
-import { MovieDetails } from "../../tmdb_api/model/MovieDetails";
-import TMDBApi from "../../tmdb_api/TMDBApi";
-import { LoadingImage } from "../LoadingImage";
-import { Utils } from "../main/Utils";
+import { StackScreenProps } from "@react-navigation/stack"
+import React, { Component } from "react"
+import { ImageStyle, Pressable, StyleSheet, Text, View } from "react-native"
+import { Rating } from "react-native-ratings"
+import R from "../../res/R"
+import { MovieDetails } from "../../tmdb_api/model/MovieDetails"
+import TMDBApi from "../../tmdb_api/TMDBApi"
+import { LoadingImage } from "../LoadingImage"
+import { ScreenName } from "../main/ScreenName"
+import { Utils } from "../main/Utils"
 
-const posterDetailsWidth = R.dimen.posterDetailsWidth;
-const posterDetailsHeight = R.dimen.posterDetailsHeight;
+const posterDetailsWidth = R.dimen.posterDetailsWidth
+const posterDetailsHeight = R.dimen.posterDetailsHeight
 
-const _summaryLinesMin = 5;
-const _summaryLinesMax = 1000;
+const _summaryLinesMin = 5
+const _summaryLinesMax = 1000
 
-interface MovieDetailsWidgetProps {
-    movie: MovieDetails;
-// final ValueChanged < MovieDetails > onTapPoster;
-// final ValueChanged < MovieVideo > onVideoTap;
-// final ValueChanged < MediaCast > onCastTap;
+interface MovieDetailsWidgetProps extends StackScreenProps<any> {
+    movie: MovieDetails
+// final ValueChanged < MovieDetails > onTapPoster
+// final ValueChanged < MovieVideo > onVideoTap
+// final ValueChanged < MediaCast > onCastTap
 }
 
 interface MovieDetailsWidgetState {
-    summaryLinesExpanded: boolean;
-// VideosList _videoList;
-// CastList _castList;
+    summaryLinesExpanded: boolean
+// VideosList _videoList
+// CastList _castList
 }
 
 export class MovieDetailsWidget extends Component<MovieDetailsWidgetProps, MovieDetailsWidgetState> {
     constructor(props: MovieDetailsWidgetProps) {
-        super(props);
+        super(props)
         this.state = {
             summaryLinesExpanded: false,
-        };
+        }
+    }
+
+    private onTapPoster() {
+        let movie = this.props.movie
+        let navigation = this.props.navigation
+        navigation.navigate(ScreenName.MOVIE_POSTER, { movie })
     }
 
     render() {
-        let movie = this.props.movie;
-        let styles = styleSheet;
+        let movie = this.props.movie
+        let styles = styleSheet
 
         let gone = <View />
 
-        // final media = MediaQuery.of(context);
-        let imageWidth = posterDetailsWidth;
-        let imageHeight = posterDetailsHeight;
+        let imageWidth = posterDetailsWidth
+        let imageHeight = posterDetailsHeight
         let posterUrl = TMDBApi.generatePosterUrl(
             movie.poster_path,
             imageWidth,
             imageHeight
-        );
+        )
         let poster = <LoadingImage
             defaultSource={R.drawable.outline_image}
             source={{ uri: posterUrl }}
-            style={styles.poster as ImageStyle} />;
-        let posterWidget = <Pressable>
+            style={styles.poster as ImageStyle} />
+        let posterWidget = <Pressable onPress={this.onTapPoster.bind(this)}>
             {poster}
         </Pressable>
 
-        let hasTagline = movie.tagline?.length;
+        let hasTagline = movie.tagline?.length
 
-        let taglineWidget = hasTagline ? <Text style={styles.tagline} numberOfLines={2}>{movie.tagline ?? ""}</Text> : gone;
+        let taglineWidget = hasTagline ? <Text style={styles.tagline} numberOfLines={2}>{movie.tagline ?? ""}</Text> : gone
 
         let voteAverageLabel = <Text style={styles.label}>{R.string.vote_average_label}</Text>
 
@@ -74,39 +80,39 @@ export class MovieDetailsWidget extends Component<MovieDetailsWidgetProps, Movie
 
         let voteAverageValue = <Text style={[styles.text, { paddingStart: 8 }]}>{Utils.formatPercent(movie.vote_average * 10)}</Text>
 
-        let hasRuntime = (movie.runtime != null) && (movie.runtime > 0);
+        let hasRuntime = (movie.runtime != null) && (movie.runtime > 0)
 
-        let runtimeLabel = hasRuntime ? <Text style={styles.label}>{R.string.runtime_label}</Text> : gone;
+        let runtimeLabel = hasRuntime ? <Text style={styles.label}>{R.string.runtime_label}</Text> : gone
 
-        let runtimeWidget = hasRuntime ? <Text style={styles.text}>{Utils.formatDuration(movie.runtime)}</Text> : gone;
+        let runtimeWidget = hasRuntime ? <Text style={styles.text}>{Utils.formatDuration(movie.runtime)}</Text> : gone
 
-        let hasBudget = (movie.budget != null) && (movie.budget > 0);
+        let hasBudget = (movie.budget != null) && (movie.budget > 0)
 
-        let budgetLabel = hasBudget ? <Text style={styles.label}>{R.string.budget_label}</Text> : gone;
+        let budgetLabel = hasBudget ? <Text style={styles.label}>{R.string.budget_label}</Text> : gone
 
-        let budgetWidget = hasBudget ? <Text style={styles.text}>{Utils.formatCurrency(movie.budget)}</Text> : gone;
+        let budgetWidget = hasBudget ? <Text style={styles.text}>{Utils.formatCurrency(movie.budget)}</Text> : gone
 
-        let hasRevenue = (movie.revenue != null) && (movie.revenue > 0);
+        let hasRevenue = (movie.revenue != null) && (movie.revenue > 0)
 
-        let revenueLabel = hasRevenue ? <Text style={styles.label}>{R.string.revenue_label}</Text> : gone;
+        let revenueLabel = hasRevenue ? <Text style={styles.label}>{R.string.revenue_label}</Text> : gone
 
-        let revenueWidget = hasRevenue ? <Text style={styles.text}>{Utils.formatCurrency(movie.revenue)}</Text> : gone;
+        let revenueWidget = hasRevenue ? <Text style={styles.text}>{Utils.formatCurrency(movie.revenue)}</Text> : gone
 
-        let hasDate = (movie.release_date != null);
+        let hasDate = (movie.release_date != null)
 
-        let dateLabel = hasDate ? <Text style={styles.label}>{R.string.release_date_label}</Text> : gone;
+        let dateLabel = hasDate ? <Text style={styles.label}>{R.string.release_date_label}</Text> : gone
 
-        let dateWidget = hasDate ? <Text style={styles.text}>{Utils.formatDate(movie.release_date!)}</Text> : gone;
+        let dateWidget = hasDate ? <Text style={styles.text}>{Utils.formatDate(movie.release_date!)}</Text> : gone
 
-        let hasGenres = movie.genres?.length;
+        let hasGenres = movie.genres?.length
 
-        let genresLabel = hasGenres ? <Text style={styles.label}>{R.string.genres_label}</Text> : gone;
+        let genresLabel = hasGenres ? <Text style={styles.label}>{R.string.genres_label}</Text> : gone
 
-        let genresWidget = hasGenres ? <Text style={styles.text}>{movie.genres.map(genre => genre.name).join(", ")}</Text> : gone;
+        let genresWidget = hasGenres ? <Text style={styles.text}>{movie.genres.map(genre => genre.name).join(", ")}</Text> : gone
 
         let summaryLabel = <Text style={styles.label}>{R.string.summary_label}</Text>
 
-        let summaryLinesExpanded = this.state.summaryLinesExpanded;
+        let summaryLinesExpanded = this.state.summaryLinesExpanded
         let summaryWidget = <Pressable onPress={() => this.setState({ summaryLinesExpanded: !summaryLinesExpanded})}>
             <Text
                 style={styles.text}
@@ -170,4 +176,4 @@ const styleSheet = StyleSheet.create({
     vote: {
         width: 100, // 5 * 20
     },
-});
+})

@@ -45,4 +45,4 @@ const strings = {
     // Top Rated
     top_rated: "Top Rated Movies",
 }
-export default strings;
+export default strings

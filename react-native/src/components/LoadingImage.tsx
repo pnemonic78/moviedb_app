@@ -1,19 +1,19 @@
-import React, { Component, ReactNode } from 'react';
-import { Image, ImageBackground, ImageProps, ImageSourcePropType, ImageStyle, StyleProp } from 'react-native';
+import React, { Component, ReactNode } from 'react'
+import { Image, ImageBackground, ImageProps, ImageSourcePropType, ImageStyle, StyleProp } from 'react-native'
 
 export interface LoadingImageProps extends ImageProps {
-    style?: ImageStyle;
+    style?: ImageStyle
 }
 
 export class LoadingImage extends Component<LoadingImageProps> {
     constructor(props: LoadingImageProps) {
-        super(props);
+        super(props)
     }
 
     render(): ReactNode {
-        let props = { ...this.props };
-        let width = props.width ?? props.style?.width;
-        let height = props.height ?? props.style?.height;
+        let props = { ...this.props }
+        let width = props.width ?? props.style?.width
+        let height = props.height ?? props.style?.height
 
         return <ImageBackground
             {...props}
@@ -24,6 +24,6 @@ export class LoadingImage extends Component<LoadingImageProps> {
                 {...props}
                 style={[props.style, { height: height, width: width }]}
             />
-        </ImageBackground>;
+        </ImageBackground>
     }
 }

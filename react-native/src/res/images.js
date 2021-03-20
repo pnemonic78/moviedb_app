@@ -14,4 +14,4 @@ const images = {
   outline_moviedb: require('./images/outline_storage_black.png'),
   outline_web: require('./images/outline_web_black.png'),
 }
-export default images;
+export default images

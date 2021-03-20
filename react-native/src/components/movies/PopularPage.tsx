@@ -1,7 +1,7 @@
-import { MoviesPage, MoviesPageProps } from "./MoviesPage";
+import { MoviesPage, MoviesPageProps } from "./MoviesPage"
 
 export class PopularPage extends MoviesPage {
     constructor(props: MoviesPageProps) {
-        super(props);
+        super(props)
     }
 }

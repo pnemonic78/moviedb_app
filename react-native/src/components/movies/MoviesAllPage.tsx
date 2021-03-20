@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import MoviesAllSection from './MoviesAllSection';
-import { MoviesSlider } from "./MoviesSlider";
-import R from '../../res/R';
-import TMDBApiImpl from '../../tmdb_api/TMDBApiImpl';
-import TMDBApi from '../../tmdb_api/TMDBApi';
-import { Movie } from '../../tmdb_api/model/Movie';
-import { StackScreenProps } from '@react-navigation/stack';
-import { OnMoviePressObject } from './MovieClickListener';
+import React, { Component } from 'react'
+import { ScrollView, StyleSheet } from 'react-native'
+import MoviesAllSection from './MoviesAllSection'
+import { MoviesSlider } from "./MoviesSlider"
+import R from '../../res/R'
+import TMDBApiImpl from '../../tmdb_api/TMDBApiImpl'
+import TMDBApi from '../../tmdb_api/TMDBApi'
+import { Movie } from '../../tmdb_api/model/Movie'
+import { StackScreenProps } from '@react-navigation/stack'
+import { ScreenName } from '../main/ScreenName'
 
 const styleSheet = StyleSheet.create({
     scroller: {
@@ -15,101 +15,101 @@ const styleSheet = StyleSheet.create({
     scrollerContainer: {
         padding: 8,
     },
-});
+})
 
 interface MoviesAllPageProps extends StackScreenProps<any> {
 }
 
 interface MoviesAllPageState {
-    moviesNowPlaying: Movie[];
-    moviesPopular: Movie[];
-    moviesTopRated: Movie[];
-    moviesUpcoming: Movie[];
+    moviesNowPlaying: Movie[]
+    moviesPopular: Movie[]
+    moviesTopRated: Movie[]
+    moviesUpcoming: Movie[]
 }
 
 export class MoviesAllPage extends Component<MoviesAllPageProps, MoviesAllPageState> {
     constructor(props: MoviesAllPageProps) {
-        super(props);
+        super(props)
         this.state = {
             moviesNowPlaying: [],
             moviesPopular: [],
             moviesTopRated: [],
             moviesUpcoming: [],
-        };
+        }
     }
 
-    private api: TMDBApi = new TMDBApiImpl();
+    private api: TMDBApi = new TMDBApiImpl()
 
     private getMoviesNowPlaying(): Movie[] {
-        var movies = this.state.moviesNowPlaying;
+        var movies = this.state.moviesNowPlaying
         if (!movies?.length) {
             this.api.getNowPlaying()
-                .then(data => this.setState({ moviesNowPlaying: data.results }));
+                .then(data => this.setState({ moviesNowPlaying: data.results }))
         }
-        return movies;
+        return movies
     }
 
     private getMoviesPopular(): Movie[] {
-        var movies = this.state.moviesPopular;
+        var movies = this.state.moviesPopular
         if (!movies?.length) {
             this.api.getPopular()
-                .then(data => this.setState({ moviesPopular: data.results }));
+                .then(data => this.setState({ moviesPopular: data.results }))
         }
-        return movies;
+        return movies
     }
 
     private getMoviesTopRated(): Movie[] {
-        var movies = this.state.moviesTopRated;
+        var movies = this.state.moviesTopRated
         if (!movies?.length) {
             this.api.getTopRated()
-                .then(data => this.setState({ moviesTopRated: data.results }));
+                .then(data => this.setState({ moviesTopRated: data.results }))
         }
-        return movies;
+        return movies
     }
 
     private getMoviesUpcoming(): Movie[] {
-        var movies = this.state.moviesUpcoming;
+        var movies = this.state.moviesUpcoming
         if (!movies?.length) {
             this.api.getUpcoming()
-                .then(data => this.setState({ moviesUpcoming: data.results }));
+                .then(data => this.setState({ moviesUpcoming: data.results }))
         }
-        return movies;
+        return movies
     }
 
     /// Navigates to the movies page.
     private navigateToPage(pageId: string, movies: Movie[]) {
-        let navigation = this.props.navigation;
-        navigation.navigate(pageId, { movies });
+        let navigation = this.props.navigation
+        navigation.navigate(pageId, { movies })
     }
 
     /// Navigates to the movie details.
     private navigateToMovie(movie: Movie) {
-        let navigation = this.props.navigation;
-        navigation.navigate("MovieDetails", { movie });
+        let navigation = this.props.navigation
+        navigation.navigate(ScreenName.MOVIE_DETAILS, { movie })
     }
 
     private onTapNowPlaying() {
-        let movies = this.getMoviesNowPlaying();
-        this.navigateToPage("NowPlayingPage", movies);
+        let movies = this.getMoviesNowPlaying()
+        this.navigateToPage(ScreenName.MOVIES_NOW_PLAYING, movies)
     }
 
     private onTapPopular() {
-        let movies = this.getMoviesPopular();
-        this.navigateToPage("PopularPage", movies);
+        let movies = this.getMoviesPopular()
+        this.navigateToPage(ScreenName.MOVIES_POPULAR, movies)
     }
 
     private onTapTopRated() {
-        let movies = this.getMoviesTopRated();
-        this.navigateToPage("TopRatedPage", movies);
+        let movies = this.getMoviesTopRated()
+        this.navigateToPage(ScreenName.MOVIES_TOP_RATED, movies)
     }
 
     private onTapUpcoming() {
-        let movies = this.getMoviesUpcoming();
-        this.navigateToPage("UpcomingPage", movies);
+        let movies = this.getMoviesUpcoming()
+        this.navigateToPage(ScreenName.MOVIES_UPCOMING, movies)
     }
 
     private onTapMovie(movie: Movie) {
-        this.navigateToMovie(movie);
+        this.navigateToMovie(movie)
     }
 
     render() {
@@ -142,6 +142,6 @@ export class MoviesAllPage extends Component<MoviesAllPageProps, MoviesAllPageSt
                     movies={this.getMoviesTopRated()}
                     onMoviePress={this.navigateToMovie.bind(this)} />
             </ScrollView>
-        );
+        )
     }
 }

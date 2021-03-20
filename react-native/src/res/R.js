@@ -1,7 +1,7 @@
-import colors from './colors';
-import dimens from './dimens';
-import images from './images';
-import strings from './strings';
+import colors from './colors'
+import dimens from './dimens'
+import images from './images'
+import strings from './strings'
 
 const R = {
   color: colors,
@@ -10,4 +10,4 @@ const R = {
   string: strings,
 }
 
-export default R;
+export default R
