@@ -1,31 +1,26 @@
-import { Media } from "./Media";
+import { Media, MediaClass } from "./Media";
 
-export class Movie extends Media {
-    backdrop_path: string = "";
-    genre_ids: number[] = [];
-    origin_country: string = "";
-    original_language: string = "";
-    original_title: string = "";
-    overview: string = "";
-    poster_path: string = "";
-    release_date: Date | null = null;
-    title: string = "";
-    video: boolean = false;
-    vote_average: number = 0;
-    vote_count: number = 0;
+export interface Movie extends Media {
+    backdrop_path: string;
+    genre_ids: number[];
+    origin_country: string;
+    original_language: string;
+    original_title: string;
+    overview: string;
+    poster_path: string;
+    release_date?: Date;
+    title: string;
+    video: boolean;
+    vote_average: number;
+    vote_count: number;
+}
 
-    date(): Date | null {
-        return this.release_date;
+export class MovieClass extends MediaClass {
+    static date(movie: Movie): Date | null {
+        return movie.release_date ?? null;
     }
 
-    displayTitle(): string {
-        return this.title ?? this.original_title;
-    }
-
-    // Map the POJO to object with methods.
-    static fromJson(json: any): Movie {
-        let result = new Movie();
-        Object.assign(result, json);
-        return result;
+    static displayTitle(movie: Movie): string {
+        return movie.title ?? movie.original_title;
     }
 }

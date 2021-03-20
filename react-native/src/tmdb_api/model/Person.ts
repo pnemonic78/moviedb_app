@@ -1,32 +1,30 @@
 import { Gender } from "./Gender";
-import { Media } from "./Media";
+import { Media, MediaClass } from "./Media";
 import { PersonExternalIds } from "./PersonExternalIds";
 
-export class Person extends Media {
-    also_known_as: string[] = [];
-    biography: string = "";
-    birthday: Date | null = null;
-    //PersonCreditsResponse combined_credits;
-    place_of_birth: string = "";
-    deathday: Date | null = null;
-    external_ids: PersonExternalIds | null = null;
-    gender: Gender  = Gender.unknown;
-    homepage: string = "";
-    imdb_id: string = "";
-    known_for_department: string = "";
-    name: string = "";
-    original_name: string = "";
-    profile_path: string = "";
+export interface Person extends Media {
+    also_known_as: string[];
+    biography: string;
+    birthday?: Date;
+    //combined_credits: PersonCreditsResponse;
+    place_of_birth?: string;
+    deathday?: Date
+    external_ids?: PersonExternalIds;
+    gender: Gender;
+    homepage?: string;
+    imdb_id?: string;
+    known_for_department: string;
+    name: string;
+    original_name: string;
+    profile_path: string;
+}
 
-    public toString(): string {
-        return `{id: ${this.id}, name: "${this.name}"}`;
+export class PersonClass extends MediaClass {
+    static date(person: Person): Date | null {
+        return person.birthday ?? null;
     }
 
-    date(): Date | null {
-        return this.birthday;
-    }
-
-    displayTitle(): string {
-        return this.name ?? this.original_name;
+    static displayTitle(person: Person): string {
+        return person.name ?? person.original_name;
     }
 }

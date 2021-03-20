@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Dimensions, ImageBackground, Platform, StyleSheet, Text } from "react-native";
 import { ParamListBase } from "@react-navigation/routers";
 import { HeaderBackButton, StackScreenProps } from "@react-navigation/stack";
-import { Movie } from "../../tmdb_api/model/Movie";
+import { Movie, MovieClass } from "../../tmdb_api/model/Movie";
 import { MovieDetailsWidget } from "./MovieDetailsWidget";
 import { CollapsibleHeaderScrollView } from "react-native-collapsible-header-views";
 import TMDBApi from "../../tmdb_api/TMDBApi";
@@ -29,11 +29,12 @@ export class MovieDetailsHomePage extends Component<MovieDetailsHomePageProps, M
         let routeParams = props.route.params as MovieDetailsHomePageParams;
         let movie = props.movie ?? routeParams?.movie;
         this.state = {
-            // TODO fetch the movie details from api.
-            movie: MovieDetails.of(movie),
+            movie: movie as MovieDetails,
         };
-        this.fetchMovieDetails(movie)
-            .then(data => this.setState({ movie: data }));
+        if ((movie as MovieDetails).runtime === undefined) {
+            this.fetchMovieDetails(movie)
+                .then(data => this.setState({ movie: data }));
+        }
     }
 
     private async fetchMovieDetails(movie: Movie): Promise<MovieDetails> {
@@ -60,7 +61,7 @@ export class MovieDetailsHomePage extends Component<MovieDetailsHomePageProps, M
             backdropHeight,
         );
 
-        let title = movie.displayTitle();
+        let title = MovieClass.displayTitle(movie);
         let titleWidget = <Text numberOfLines={3} style={styles.title}>{title}</Text>;
 
         let headerWidget = <ImageBackground

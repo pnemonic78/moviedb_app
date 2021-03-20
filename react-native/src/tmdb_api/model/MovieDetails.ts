@@ -1,33 +1,31 @@
 import { Genre } from "./Genre";
-import { Movie } from "./Movie";
+import { Media } from "./Media";
+import { Movie, MovieClass } from "./Movie";
 import { ProductionCompany } from "./ProductionCompany";
 import { ProductionCountry } from "./ProductionCountry";
 import { SpokenLanguage } from "./SpokenLanguage";
 
-export class MovieDetails extends Movie {
-    budget: number = 0;
-    credits: any;
-    genres: Genre[] = [];
-    homepage: string = "";
-    imdb_id: string = "";
-    production_companies: ProductionCompany[] = [];
-    production_countries: ProductionCountry[] = [];
-    revenue: number = 0;
-    runtime: number = 0;
-    spoken_languages: SpokenLanguage[] = [];
-    status: string = "";
-    tagline: string = "";
+export interface MovieDetails extends Movie {
+    budget: number;
+    //credits: CreditsResponse;
+    genres: Genre[];
+    homepage: string;
+    imdb_id?: string;
+    production_companies: ProductionCompany[];
+    production_countries: ProductionCountry[];
+    revenue: number;
+    runtime: number;
+    spoken_languages: SpokenLanguage[];
+    status: string;
+    tagline?: string;
+}
 
-    static of(movie: Movie): MovieDetails {
-        let result = new MovieDetails();
-        Object.assign(result, movie);
-        return result;
+export class MovieDetailsClass extends MovieClass {
+    static date(movie: MovieDetails): Date | null {
+        return MovieClass.date(movie);
     }
 
-    // Map the POJO to object with methods.
-    static fromJson(json: any): MovieDetails {
-        let result = new MovieDetails();
-        Object.assign(result, json);
-        return result;
+    static displayTitle(movie: MovieDetails): string {
+        return MovieClass.displayTitle(movie);
     }
 }

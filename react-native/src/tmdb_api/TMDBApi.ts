@@ -1,5 +1,6 @@
 import Movie from './model/Movie';
 import { MovieDetails } from './model/MovieDetails';
+import { MoviesResponse } from './MoviesResponse';
 
 export default abstract class TMBDApi {
     static api_url = "https://api.themoviedb.org/3/";
@@ -105,13 +106,13 @@ export default abstract class TMBDApi {
         return result;
     }
 
-    abstract getNowPlaying(): Promise<Movie[]>;
+    abstract getNowPlaying(): Promise<MoviesResponse>;
 
-    abstract getPopular(): Promise<Movie[]>;
+    abstract getPopular(): Promise<MoviesResponse>;
 
-    abstract getTopRated(): Promise<Movie[]>;
+    abstract getTopRated(): Promise<MoviesResponse>;
 
-    abstract getUpcoming(): Promise<Movie[]>;
+    abstract getUpcoming(): Promise<MoviesResponse>;
 
     abstract getMovieDetailsById(movieId: number): Promise<MovieDetails>;
 

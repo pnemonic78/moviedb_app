@@ -1,10 +1,10 @@
-export class MovieImage {
-    id: string = "";
-    iso_639_1: string = "";
-    width: number = 0;
-    height: number = 0;
-    aspect_ratio: number = 0;
-    file_path: string = "";
-    vote_average: number = 0;
-    vote_count: number = 0;
+export interface MovieImage {
+    id: string;
+    iso_639_1: string;
+    width: number;
+    height: number;
+    aspect_ratio: number;
+    file_path: string;
+    vote_average: number;
+    vote_count: number;
 }

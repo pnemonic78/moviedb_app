@@ -1,10 +1,16 @@
-import { Media } from "./Media";
+import { Media, MediaClass } from "./Media";
 
-export class Television extends Media {
-    episode_count: number = 0;
-    first_air_date: Date | null = null;
+export interface Television extends Media {
+    episode_count: number;
+    first_air_date: Date | null;
+}
 
-    date(): Date | null {
-        return this.first_air_date;
+export class TelevisionClass extends MediaClass {
+    static date(tv: Television): Date | null {
+        return tv.first_air_date;
+    }
+
+    static displayTitle(tv: Television): string {
+        return "";
     }
 }

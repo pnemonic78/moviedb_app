@@ -92,9 +92,11 @@ export class MovieDetailsWidget extends Component<MovieDetailsWidgetProps, Movie
 
         let revenueWidget = hasRevenue ? <Text style={styles.text}>{Utils.formatCurrency(movie.revenue)}</Text> : gone;
 
-        let dateLabel = <Text style={styles.label}>{R.string.release_date_label}</Text>;
+        let hasDate = (movie.release_date != null);
 
-        let dateWidget = <Text style={styles.text}>{Utils.formatDate(movie.release_date)}</Text>;
+        let dateLabel = hasDate ? <Text style={styles.label}>{R.string.release_date_label}</Text> : gone;
+
+        let dateWidget = hasDate ? <Text style={styles.text}>{Utils.formatDate(movie.release_date!)}</Text> : gone;
 
         let hasGenres = movie.genres?.length;
 
@@ -159,14 +161,13 @@ const styleSheet = StyleSheet.create({
     },
     tagline: {
         fontSize: 18,
-        padding: 8,
+        paddingBottom: 8,
     },
     text: {
         fontSize: 18,
-        paddingBottom: 8,
+        paddingBottom: 4,
     },
     vote: {
-        paddingTop: 8,
         width: 100, // 5 * 20
     },
 });

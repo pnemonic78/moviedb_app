@@ -1,16 +1,16 @@
 import { MediaType } from "./MediaType";
 
-export class Media {
+export interface Media {
  
-    adult: boolean = false;
-    id: number = 0;
-    media_type: MediaType = 0;
-    popularity: number = 0;
+    adult: boolean;
+    id: number;
+    media_type: MediaType;
+    popularity: number;
 
 // factory Media.fromJsonType(Map < String, dynamic > json) {
 //     if (json == null) return null;
 
-//     final mediaType = media_type ?? MediaType.all;
+//     let mediaType = media_type ?? MediaType.all;
 
 //     switch (mediaType) {
 //         case MediaType.movie:
@@ -24,11 +24,17 @@ export class Media {
 //     }
 // }
 
-    date(): Date | null {
+    // date(): Date | null;
+
+    // displayTitle(): string;
+}
+
+export abstract class MediaClass {
+    static date(media: Media): Date | null {
         return null;
     }
 
-    displayTitle(): string {
+    static displayTitle(media: Media): string {
         return "";
     }
 }

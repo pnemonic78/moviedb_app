@@ -1,4 +1,4 @@
-export class Dates {
-    maximum: Date | null = null;
-    minimum: Date | null = null;
+export interface Dates {
+    maximum: Date | null;
+    minimum: Date | null;
 }

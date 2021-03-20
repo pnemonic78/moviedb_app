@@ -44,7 +44,7 @@ export class MoviesAllPage extends Component<MoviesAllPageProps, MoviesAllPageSt
         var movies = this.state.moviesNowPlaying;
         if (!movies?.length) {
             this.api.getNowPlaying()
-                .then(data => this.setState({ moviesNowPlaying: data }));
+                .then(data => this.setState({ moviesNowPlaying: data.results }));
         }
         return movies;
     }
@@ -53,7 +53,7 @@ export class MoviesAllPage extends Component<MoviesAllPageProps, MoviesAllPageSt
         var movies = this.state.moviesPopular;
         if (!movies?.length) {
             this.api.getPopular()
-                .then(data => this.setState({ moviesPopular: data }));
+                .then(data => this.setState({ moviesPopular: data.results }));
         }
         return movies;
     }
@@ -62,7 +62,7 @@ export class MoviesAllPage extends Component<MoviesAllPageProps, MoviesAllPageSt
         var movies = this.state.moviesTopRated;
         if (!movies?.length) {
             this.api.getTopRated()
-                .then(data => this.setState({ moviesTopRated: data }));
+                .then(data => this.setState({ moviesTopRated: data.results }));
         }
         return movies;
     }
@@ -71,7 +71,7 @@ export class MoviesAllPage extends Component<MoviesAllPageProps, MoviesAllPageSt
         var movies = this.state.moviesUpcoming;
         if (!movies?.length) {
             this.api.getUpcoming()
-                .then(data => this.setState({ moviesUpcoming: data }));
+                .then(data => this.setState({ moviesUpcoming: data.results }));
         }
         return movies;
     }

@@ -4,7 +4,7 @@ import { Card, Rating } from 'react-native-elements';
 import TMBDApi from '../../tmdb_api/TMDBApi';
 import R from '../../res/R';
 import { LoadingImage } from "../LoadingImage";
-import { Movie } from '../../tmdb_api/model/Movie';
+import { Movie, MovieClass } from '../../tmdb_api/model/Movie';
 import { OnMoviePress } from './MovieClickListener';
 import { Utils } from '../main/Utils';
 
@@ -80,7 +80,8 @@ export class MovieListTile extends Component<MovieListTileProps> {
             source={{ uri: thumbnailUrl }}
             style={styles.thumbnail as ImageStyle} />;
 
-        let titleWidget = <Text style={styles.title} numberOfLines={2}>{movie.title + "\n"}</Text>;
+        let title = MovieClass.displayTitle(movie);
+        let titleWidget = <Text style={styles.title} numberOfLines={2}>{title + "\n"}</Text>;
 
         let voteAverageWidget = <Rating
             type="custom"
@@ -91,7 +92,7 @@ export class MovieListTile extends Component<MovieListTileProps> {
             startingValue={movie.vote_average / 2.0}
             style={styles.vote} />;
 
-        let dateValue = Utils.formatDate(movie.release_date);
+        let dateValue = Utils.formatDate(MovieClass.date(movie));
         let dateWidget = <Text style={styles.date}>{dateValue}</Text>;
 
         let summaryWidget = <Text numberOfLines={4} style={styles.summary}>{movie.overview}</Text>;
