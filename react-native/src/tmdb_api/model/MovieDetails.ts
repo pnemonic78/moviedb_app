@@ -1,3 +1,4 @@
+import { CreditsResponse } from "../CreditsResponse"
 import { Genre } from "./Genre"
 import { Media } from "./Media"
 import { Movie, MovieClass } from "./Movie"
@@ -7,7 +8,7 @@ import { SpokenLanguage } from "./SpokenLanguage"
 
 export interface MovieDetails extends Movie {
     budget: number
-    //credits: CreditsResponse
+    credits?: CreditsResponse
     genres: Genre[]
     homepage: string
     imdb_id?: string

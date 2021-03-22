@@ -34,7 +34,7 @@ export default class TMBDApiImpl extends TMBDApi {
     }
 
     async getMovieDetailsById(movieId: number): Promise<MovieDetails> {
-        let url = TMBDApi.api_url + "movie/" + movieId + "?api_key=" + this._apiKey + "&language=" + this._languageCode
+        let url = TMBDApi.api_url + "movie/" + movieId + "?api_key=" + this._apiKey + "&language=" + this._languageCode + "&append_to_response=credits"
         let result = await axios.get(url)
         return result.data as MovieDetails
     }

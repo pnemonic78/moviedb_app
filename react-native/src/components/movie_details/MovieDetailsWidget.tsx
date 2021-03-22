@@ -1,10 +1,11 @@
-import { StackScreenProps } from "@react-navigation/stack"
 import React, { Component } from "react"
 import { ImageStyle, Pressable, StyleSheet, Text, View } from "react-native"
+import { StackScreenProps } from "@react-navigation/stack"
 import { Rating } from "react-native-ratings"
 import R from "../../res/R"
 import { MovieDetails } from "../../tmdb_api/model/MovieDetails"
 import TMDBApi from "../../tmdb_api/TMDBApi"
+import { CastSlider } from "../cast/CastSlider"
 import { LoadingImage } from "../LoadingImage"
 import { ScreenName } from "../main/ScreenName"
 import { Utils } from "../main/Utils"
@@ -119,6 +120,13 @@ export class MovieDetailsWidget extends Component<MovieDetailsWidgetProps, Movie
             </Text>
         </Pressable>
 
+        let cast = movie.credits?.cast
+        let hasCast = cast;
+
+        let castLabel = hasCast ? <Text style={styles.label}>{R.string.cast_label}</Text> : gone
+
+        let castWidget = hasCast ? <CastSlider cast={cast!} /> : gone;
+
         return <View style={styles.details}>
             {taglineWidget}
             <View style={{ flexDirection: "row" }}>
@@ -143,6 +151,8 @@ export class MovieDetailsWidget extends Component<MovieDetailsWidgetProps, Movie
             </View>
             {summaryLabel}
             {summaryWidget}
+            {castLabel}
+            {castWidget}
         </View>
     }
 }
@@ -156,7 +166,6 @@ const styleSheet = StyleSheet.create({
         flexWrap: "wrap",
         fontSize: 18,
         fontWeight: "bold",
-        paddingBottom: 4,
     },
     poster: {
         borderRadius: R.dimen.cardRadius,
@@ -172,8 +181,10 @@ const styleSheet = StyleSheet.create({
         flexWrap: "wrap",
         fontSize: 18,
         paddingBottom: 4,
+        paddingTop: 4,
     },
     vote: {
+        paddingTop: 8,
         width: 100, // 5 * 20
     },
 })
