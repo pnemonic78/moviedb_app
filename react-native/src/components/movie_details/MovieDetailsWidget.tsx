@@ -24,8 +24,6 @@ interface MovieDetailsWidgetProps extends StackScreenProps<any> {
 
 interface MovieDetailsWidgetState {
     summaryLinesExpanded: boolean
-// VideosList _videoList
-// CastList _castList
 }
 
 export class MovieDetailsWidget extends Component<MovieDetailsWidgetProps, MovieDetailsWidgetState> {
@@ -125,7 +123,7 @@ export class MovieDetailsWidget extends Component<MovieDetailsWidgetProps, Movie
             {taglineWidget}
             <View style={{ flexDirection: "row" }}>
                 {posterWidget}
-                <View style={{ flexDirection: "column" }}>
+                <View style={{ flex: 1, flexDirection: "column", }}>
                     {voteAverageLabel}
                     <View style={{ flexDirection: "row" }}>
                         {voteAverageWidget}
@@ -155,6 +153,7 @@ const styleSheet = StyleSheet.create({
         padding: 8,
     },
     label: {
+        flexWrap: "wrap",
         fontSize: 18,
         fontWeight: "bold",
         paddingBottom: 4,
@@ -170,6 +169,7 @@ const styleSheet = StyleSheet.create({
         paddingBottom: 8,
     },
     text: {
+        flexWrap: "wrap",
         fontSize: 18,
         paddingBottom: 4,
     },

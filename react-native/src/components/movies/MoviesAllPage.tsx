@@ -9,9 +9,7 @@ import { Movie } from '../../tmdb_api/model/Movie'
 import { StackScreenProps } from '@react-navigation/stack'
 import { ScreenName } from '../main/ScreenName'
 import { fetchedMoviesNowPlaying, fetchedMoviesPopular, fetchedMoviesTopRated, fetchedMoviesUpcoming, MoviesAction } from '../../redux/actions/MoviesAction'
-import MoviesReducerState from '../../redux/reducers/MoviesReducerState'
 import { connect, DispatchProp } from 'react-redux'
-import MoviesReducerProps from '../../redux/reducers/MoviesReducerProps'
 import { AppReducersState } from '../../redux/reducers/AppReducer'
 
 const styleSheet = StyleSheet.create({
@@ -23,10 +21,10 @@ const styleSheet = StyleSheet.create({
 })
 
 interface MoviesAllPageProps extends StackScreenProps<any>, DispatchProp<MoviesAction> {
-    moviesNowPlaying: Movie[],
-    moviesPopular: Movie[],
-    moviesTopRated: Movie[],
-    moviesUpcoming: Movie[],
+    moviesNowPlaying: Movie[]
+    moviesPopular: Movie[]
+    moviesTopRated: Movie[]
+    moviesUpcoming: Movie[]
 }
 
 interface MoviesAllPageState {
@@ -159,5 +157,4 @@ function mapStateToProps(state: AppReducersState): object {
     }
 }
 
-const MoviesAllPage = connect(mapStateToProps)(MoviesAllPageComponent)
-export default MoviesAllPage
+export const MoviesAllPage = connect(mapStateToProps)(MoviesAllPageComponent)

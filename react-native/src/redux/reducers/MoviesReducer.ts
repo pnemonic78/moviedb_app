@@ -13,7 +13,7 @@ const initialState: MoviesReducerState = {
 
 const defaultAction: MoviesAction = {
     type: MoviesActionType.None,
-    payload: null,
+    payload: null
 }
 
 export const moviesReducer: Reducer<MoviesReducerState, MoviesAction> = (

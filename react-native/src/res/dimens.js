@@ -26,6 +26,9 @@ const personIconSize = personDetailsWidth / 6
 
 const errorIconSize = 100.0
 
+const actionBarButtonMargin = 8
+const actionBarButtonSize = 32
+
 const dimens = {
     cardRadius: cardRadius,
 
@@ -54,5 +57,8 @@ const dimens = {
     personIconSize: personIconSize,
 
     errorIconSize: errorIconSize,
+
+    actionBarButtonMargin: actionBarButtonMargin,
+    actionBarButtonSize: actionBarButtonSize,
 }
 export default dimens

@@ -8,47 +8,53 @@ import { CollapsibleHeaderScrollView } from "react-native-collapsible-header-vie
 import TMDBApi from "../../tmdb_api/TMDBApi"
 import R from "../../res/R"
 import { MovieDetails } from "../../tmdb_api/model/MovieDetails"
-import TMBDApiImpl from "../../tmdb_api/TMDBApiImpl"
+import { connect, DispatchProp } from "react-redux"
+import { MoviesAction } from "../../redux/actions/MoviesAction"
+import { AppReducersState } from "../../redux/reducers/AppReducer"
+import TMDBApiImpl from "../../tmdb_api/TMDBApiImpl"
+import { fetchedMovieDetails } from "../../redux/actions/MovieDetailsAction"
 
 interface MovieDetailsHomePageParams extends ParamListBase {
     movie: Movie
 }
 
-interface MovieDetailsHomePageProps extends StackScreenProps<MovieDetailsHomePageParams> {
+interface MovieDetailsHomePageProps extends StackScreenProps<MovieDetailsHomePageParams>, DispatchProp<MoviesAction> {
     movie?: Movie
+    movies: Map<number, MovieDetails>
 }
 
-interface MovieDetailsHomePageState {
-    movie: MovieDetails
-}
-
-export class MovieDetailsHomePage extends Component<MovieDetailsHomePageProps, MovieDetailsHomePageState> {
+export class MovieDetailsHomePageComponent extends Component<MovieDetailsHomePageProps> {
     constructor(props: MovieDetailsHomePageProps) {
         super(props)
 
         let routeParams = props.route.params as MovieDetailsHomePageParams
         let movie = props.movie ?? routeParams?.movie
-        this.state = {
-            movie: movie as MovieDetails,
-        }
-        if ((movie as MovieDetails).runtime === undefined) {
-            this.fetchMovieDetails(movie)
-                .then(data => this.setState({ movie: data }))
-        }
+        this.fetchMovieDetails(movie)
     }
 
-    private async fetchMovieDetails(movie: Movie): Promise<MovieDetails> {
-        let api: TMDBApi = new TMBDApiImpl()
-        return api.getMovieDetails(movie)
+    private api: TMDBApi = new TMDBApiImpl()
+
+    private async fetchMovieDetails(movie: Movie) {
+        let dispatch = this.props.dispatch;
+        let movies = this.props.movies
+        if (!movies.has(movie.id)) {
+            this.api.getMovieDetails(movie)
+                .then(data => dispatch(fetchedMovieDetails(data)))
+        }
     }
 
     render() {
         let navigation = this.props.navigation
-        let movie = this.state.movie
+        let routeParams = this.props.route.params as MovieDetailsHomePageParams
+        let movieProp = this.props.movie ?? routeParams?.movie
+        let movieId = movieProp?.id ?? 0
+        let movie = this.props.movies.get(movieId) ?? (movieProp as MovieDetails)
         let styles = styleSheet
 
+        let actionBarButtonMargin = R.dimen.actionBarButtonMargin
+        let actionBarButtonSize = R.dimen.actionBarButtonSize
         let backButtonWidget = <HeaderBackButton
-            style={{width: 40, height: 40}}
+            style={{ margin: actionBarButtonMargin, width: actionBarButtonSize, height: actionBarButtonSize}}
             tintColor={'white'}
             onPress={() => navigation.goBack()} />
 
@@ -82,6 +88,15 @@ export class MovieDetailsHomePage extends Component<MovieDetailsHomePageProps, M
         </CollapsibleHeaderScrollView>
     }
 }
+
+function mapStateToProps(state: AppReducersState): object {
+    const stateReducer = state.movieDetailsReducer;
+    return {
+        movies: stateReducer.movies,
+    }
+}
+
+export const MovieDetailsHomePage = connect(mapStateToProps)(MovieDetailsHomePageComponent)
 
 const styleSheet = StyleSheet.create({
     title: {

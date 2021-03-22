@@ -4,8 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { Provider } from 'react-redux'
 
 import AppStyles from './AppStyles'
-import MoviesAllPage from '../movies/MoviesAllPage'
-import R from '../../res/R'
+import { MoviesAllPage } from '../movies/MoviesAllPage'
 import { MovieDetailsHomePage } from '../movie_details/MovieDetailsHomePage'
 import { NowPlayingPage } from '../movies/NowPlayingPage'
 import { UpcomingPage } from '../movies/UpcomingPage'
@@ -14,6 +13,7 @@ import { PopularPage } from '../movies/PopularPage'
 import { MoviePosterPage } from '../movies/MoviePosterPage'
 import { ScreenName } from './ScreenName'
 import store from '../../redux/reducers/AppReducer'
+import R from '../../res/R'
 
 const App: () => React.ReactElement = () => {
   const stack = createStackNavigator()
