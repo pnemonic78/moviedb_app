@@ -8,6 +8,11 @@ import TMDBApi from '../../tmdb_api/TMDBApi'
 import { Movie } from '../../tmdb_api/model/Movie'
 import { StackScreenProps } from '@react-navigation/stack'
 import { ScreenName } from '../main/ScreenName'
+import { fetchedMoviesNowPlaying, fetchedMoviesPopular, fetchedMoviesTopRated, fetchedMoviesUpcoming, MoviesAction } from '../../redux/actions/MoviesAction'
+import MoviesReducerState from '../../redux/reducers/MoviesReducerState'
+import { connect, DispatchProp } from 'react-redux'
+import MoviesReducerProps from '../../redux/reducers/MoviesReducerProps'
+import { AppReducersState } from '../../redux/reducers/AppReducer'
 
 const styleSheet = StyleSheet.create({
     scroller: {
@@ -17,61 +22,59 @@ const styleSheet = StyleSheet.create({
     },
 })
 
-interface MoviesAllPageProps extends StackScreenProps<any> {
+interface MoviesAllPageProps extends StackScreenProps<any>, DispatchProp<MoviesAction> {
+    moviesNowPlaying: Movie[],
+    moviesPopular: Movie[],
+    moviesTopRated: Movie[],
+    moviesUpcoming: Movie[],
 }
 
 interface MoviesAllPageState {
-    moviesNowPlaying: Movie[]
-    moviesPopular: Movie[]
-    moviesTopRated: Movie[]
-    moviesUpcoming: Movie[]
 }
 
-export class MoviesAllPage extends Component<MoviesAllPageProps, MoviesAllPageState> {
+export class MoviesAllPageComponent extends Component<MoviesAllPageProps, MoviesAllPageState> {
     constructor(props: MoviesAllPageProps) {
         super(props)
-        this.state = {
-            moviesNowPlaying: [],
-            moviesPopular: [],
-            moviesTopRated: [],
-            moviesUpcoming: [],
-        }
     }
 
     private api: TMDBApi = new TMDBApiImpl()
 
     private getMoviesNowPlaying(): Movie[] {
-        var movies = this.state.moviesNowPlaying
+        var movies = this.props.moviesNowPlaying
         if (!movies?.length) {
+            let dispatch = this.props.dispatch;
             this.api.getNowPlaying()
-                .then(data => this.setState({ moviesNowPlaying: data.results }))
+                .then(data => dispatch(fetchedMoviesNowPlaying(data.results)))
         }
         return movies
     }
 
     private getMoviesPopular(): Movie[] {
-        var movies = this.state.moviesPopular
+        var movies = this.props.moviesPopular
         if (!movies?.length) {
+            let dispatch = this.props.dispatch;
             this.api.getPopular()
-                .then(data => this.setState({ moviesPopular: data.results }))
+                .then(data => dispatch(fetchedMoviesPopular(data.results)))
         }
         return movies
     }
 
     private getMoviesTopRated(): Movie[] {
-        var movies = this.state.moviesTopRated
+        var movies = this.props.moviesTopRated
         if (!movies?.length) {
+            let dispatch = this.props.dispatch;
             this.api.getTopRated()
-                .then(data => this.setState({ moviesTopRated: data.results }))
+                .then(data => dispatch(fetchedMoviesTopRated(data.results)))
         }
         return movies
     }
 
     private getMoviesUpcoming(): Movie[] {
-        var movies = this.state.moviesUpcoming
+        var movies = this.props.moviesUpcoming
         if (!movies?.length) {
+            let dispatch = this.props.dispatch;
             this.api.getUpcoming()
-                .then(data => this.setState({ moviesUpcoming: data.results }))
+                .then(data => dispatch(fetchedMoviesUpcoming(data.results)))
         }
         return movies
     }
@@ -122,26 +125,39 @@ export class MoviesAllPage extends Component<MoviesAllPageProps, MoviesAllPageSt
                     onPress={this.onTapPopular.bind(this)} />
                 <MoviesSlider
                     movies={this.getMoviesPopular()}
-                    onMoviePress={this.navigateToMovie.bind(this)} />
+                    onMoviePress={this.onTapMovie.bind(this)} />
                 <MoviesAllSection
                     label={R.string.now_playing}
                     onPress={this.onTapNowPlaying.bind(this)} />
                 <MoviesSlider
                     movies={this.getMoviesNowPlaying()}
-                    onMoviePress={this.navigateToMovie.bind(this)} />
+                    onMoviePress={this.onTapMovie.bind(this)} />
                 <MoviesAllSection
                     label={R.string.upcoming}
                     onPress={this.onTapUpcoming.bind(this)} />
                 <MoviesSlider
                     movies={this.getMoviesUpcoming()}
-                    onMoviePress={this.navigateToMovie.bind(this)} />
+                    onMoviePress={this.onTapMovie.bind(this)} />
                 <MoviesAllSection
                     label={R.string.top_rated}
                     onPress={this.onTapTopRated.bind(this)} />
                 <MoviesSlider
                     movies={this.getMoviesTopRated()}
-                    onMoviePress={this.navigateToMovie.bind(this)} />
+                    onMoviePress={this.onTapMovie.bind(this)} />
             </ScrollView>
         )
     }
 }
+
+function mapStateToProps(state: AppReducersState): object {
+    const stateReducer = state.moviesReducer;
+    return {
+        moviesNowPlaying: stateReducer.moviesNowPlaying,
+        moviesPopular: stateReducer.moviesPopular,
+        moviesTopRated: stateReducer.moviesTopRated,
+        moviesUpcoming: stateReducer.moviesUpcoming,
+    }
+}
+
+const MoviesAllPage = connect(mapStateToProps)(MoviesAllPageComponent)
+export default MoviesAllPage
