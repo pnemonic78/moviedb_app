@@ -54,7 +54,11 @@ export class MovieDetailsHomePageComponent extends Component<MovieDetailsHomePag
         let actionBarButtonMargin = R.dimen.actionBarButtonMargin
         let actionBarButtonSize = R.dimen.actionBarButtonSize
         let backButtonWidget = <HeaderBackButton
-            style={{ margin: actionBarButtonMargin, width: actionBarButtonSize, height: actionBarButtonSize}}
+            style={{
+                marginTop: actionBarButtonMargin,
+                width: actionBarButtonSize,
+                height: actionBarButtonSize
+            }}
             tintColor={'white'}
             onPress={() => navigation.goBack()} />
 
