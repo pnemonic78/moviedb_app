@@ -18,7 +18,7 @@ export class CastTile extends Component<CastTileProps> {
         super(props)
     }
 
-    private onPress(event: GestureResponderEvent) {
+    private onPress(_event: GestureResponderEvent) {
         let cast = this.props.cast
         this.props.onCastPress?.(cast)
     }
@@ -37,7 +37,7 @@ export class CastTile extends Component<CastTileProps> {
         let thumbnailWidget = <LoadingImage
             defaultSource={R.drawable.outline_image}
             source={{ uri: thumbnailUrl }}
-            style={styles.thumbnail as ImageStyle} />
+            style={styles.thumbnail} />
 
         let titleWidget = <Text style={styles.title} numberOfLines={2}>{cast.name + "\n"}</Text>
 

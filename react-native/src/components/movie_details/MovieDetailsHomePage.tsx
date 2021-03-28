@@ -13,6 +13,8 @@ import { MoviesAction } from "../../redux/actions/MoviesAction"
 import { AppReducersState } from "../../redux/reducers/AppReducer"
 import TMDBApiImpl from "../../tmdb_api/TMDBApiImpl"
 import { fetchedMovieDetails } from "../../redux/actions/MovieDetailsAction"
+import { ScreenName } from "../main/ScreenName"
+import { MediaCast } from "../../tmdb_api/model/MediaCast"
 
 interface MovieDetailsHomePageParams extends ParamListBase {
     movie: Movie
@@ -41,6 +43,16 @@ export class MovieDetailsHomePageComponent extends Component<MovieDetailsHomePag
             this.api.getMovieDetails(movie)
                 .then(data => dispatch(fetchedMovieDetails(data)))
         }
+    }
+
+    private onTapPoster(movie: Movie) {
+        let navigation = this.props.navigation
+        navigation.navigate(ScreenName.MOVIE_POSTER, { movie: movie })
+    }
+
+    private onTapCast(cast: MediaCast) {
+        let navigation = this.props.navigation
+        navigation.navigate(ScreenName.PERSON_DETAILS, { person: cast })
     }
 
     render() {
@@ -83,12 +95,18 @@ export class MovieDetailsHomePageComponent extends Component<MovieDetailsHomePag
             {titleWidget}
         </ImageBackground>
 
+        let content = <MovieDetailsWidget
+            movie={movie}
+            onPosterPress={this.onTapPoster.bind(this)}
+            onCastPress={this.onTapCast.bind(this)}    
+        />
+
         return <CollapsibleHeaderScrollView
             CollapsibleHeaderComponent={headerWidget}
             headerHeight={backdropHeight}
             statusBarHeight={Platform.OS === 'ios' ? 20 : 0}
         >
-            <MovieDetailsWidget movie={movie} navigation={navigation} route={this.props.route} />
+            {content}   
         </CollapsibleHeaderScrollView>
     }
 }

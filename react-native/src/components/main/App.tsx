@@ -14,6 +14,8 @@ import { MoviePosterPage } from '../movies/MoviePosterPage'
 import { ScreenName } from './ScreenName'
 import store from '../../redux/reducers/AppReducer'
 import R from '../../res/R'
+import { PersonPage } from '../person/PersonPage'
+import { PersonPosterPage } from '../person/PersonPosterPage'
 
 const App: () => React.ReactElement = () => {
   const stack = createStackNavigator()
@@ -72,6 +74,22 @@ const App: () => React.ReactElement = () => {
           <stack.Screen
             name={ScreenName.MOVIE_POSTER}
             component={MoviePosterPage}
+            options={{
+              headerStyle: styles.header,
+              headerTitleStyle: styles.headerTitleStyle,
+              title: R.string.title,
+            }} />
+          <stack.Screen
+            name={ScreenName.PERSON_DETAILS}
+            component={PersonPage}
+            options={{
+              headerStyle: styles.header,
+              headerTitleStyle: styles.headerTitleStyle,
+              title: R.string.title,
+            }} />
+          <stack.Screen
+            name={ScreenName.PERSON_POSTER}
+            component={PersonPosterPage}
             options={{
               headerStyle: styles.header,
               headerTitleStyle: styles.headerTitleStyle,

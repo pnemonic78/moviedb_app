@@ -15,6 +15,7 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen'
+import R from '../../res/R'
 
 const AppStyles = StyleSheet.create({
     scrollView: {
@@ -54,7 +55,7 @@ const AppStyles = StyleSheet.create({
       textAlign: 'right',
     },
     header: {
-      backgroundColor: '#f4511e',
+      backgroundColor: R.color.backgroundColor,
     },
     headerTitleStyle: {
       color: Colors.lighter,

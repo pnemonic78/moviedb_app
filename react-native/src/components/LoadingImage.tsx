@@ -19,6 +19,7 @@ export class LoadingImage extends Component<LoadingImageProps> {
             {...props}
             source={props.defaultSource as ImageSourcePropType}
             style={[props.style, { height: height, width: width }]}
+            resizeMode={'contain'}
         >
             <Image
                 {...props}

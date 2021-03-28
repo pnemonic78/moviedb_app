@@ -6,4 +6,6 @@ export enum ScreenName {
     MOVIES_UPCOMING = "MoviesUpcoming",
     MOVIE_DETAILS = "MovieDetails",
     MOVIE_POSTER = "MoviePoster",
+    PERSON_DETAILS = "PersonDetails",
+    PERSON_POSTER = "PersonPoster",
 }

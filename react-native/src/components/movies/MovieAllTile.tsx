@@ -46,7 +46,7 @@ export class MovieAllTile extends Component<MovieAllTileProps> {
 
     private styles: StyleSheet.NamedStyles<any>
 
-    private onPress(event: GestureResponderEvent) {
+    private onPress(_event: GestureResponderEvent) {
         let movie = this.props.movie
         this.props.onMoviePress?.(movie)
     }

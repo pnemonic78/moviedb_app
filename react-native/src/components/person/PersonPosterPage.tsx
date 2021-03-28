@@ -4,32 +4,32 @@ import { ParamListBase } from "@react-navigation/routers"
 import { StackScreenProps } from "@react-navigation/stack"
 import { PinchGestureHandler, PinchGestureHandlerStateChangeEvent, State } from "react-native-gesture-handler"
 import R from "../../res/R"
-import { Movie, MovieClass } from "../../tmdb_api/model/Movie"
+import { Person, PersonClass } from "../../tmdb_api/model/Person"
 import TMDBApi from "../../tmdb_api/TMDBApi"
 
-interface MoviePosterPageParams extends ParamListBase {
-    movie: Movie
+interface PersonPosterPageParams extends ParamListBase {
+    person: Person
 }
 
-interface MoviePosterPageProps extends StackScreenProps<MoviePosterPageParams> {
-    movie: Movie
+interface PersonPosterPageProps extends StackScreenProps<PersonPosterPageParams> {
+    person: Person
 }
 
-export class MoviePosterPage extends Component<MoviePosterPageProps> {
-    constructor(props: MoviePosterPageProps) {
+export class PersonPosterPage extends Component<PersonPosterPageProps> {
+    constructor(props: PersonPosterPageProps) {
         super(props)
     }
 
-    private getMovie(): Movie {
-        let routeParams = this.props.route.params as MoviePosterPageParams
-        return this.props.movie ?? routeParams?.movie
+    private getPerson(): Person {
+        let routeParams = this.props.route.params as PersonPosterPageParams
+        return this.props.person ?? routeParams?.person
     }
 
     private setHeaderTitle() {
         let navigation = this.props.navigation
-        let movie = this.getMovie()
+        let person = this.getPerson()
         navigation.setOptions({
-            headerTitle: MovieClass.displayTitle(movie),
+            headerTitle: PersonClass.displayTitle(person),
         })
     }
 
@@ -54,7 +54,7 @@ export class MoviePosterPage extends Component<MoviePosterPageProps> {
     }
 
     render() {
-        let movie = this.getMovie()
+        let person = this.getPerson()
 
         let size = Dimensions.get("window")
         let screenWidth = size.width
@@ -62,8 +62,8 @@ export class MoviePosterPage extends Component<MoviePosterPageProps> {
         let imageWidth = screenWidth
         let imageHeight = screenHeight
 
-        let imagePath = movie.poster_path
-        let imageUrl = TMDBApi.generatePosterUrl(imagePath, Infinity, Infinity)
+        let imagePath = person.profile_path
+        let imageUrl = TMDBApi.generateProfileThumbnail(imagePath, Infinity, Infinity)
         let poster = <Animated.Image
             defaultSource={R.drawable.outline_image}
             source={{ uri: imageUrl }}            
@@ -74,7 +74,7 @@ export class MoviePosterPage extends Component<MoviePosterPageProps> {
                 transform: [{ scale: this.scale }],
             }}
         />
-        
+
         let posterWidget = <PinchGestureHandler
             onGestureEvent={this.onPinchEvent}
             onHandlerStateChange={this.onPinchStateChange.bind(this)}>

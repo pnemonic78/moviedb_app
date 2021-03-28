@@ -1,14 +1,15 @@
 import React, { Component } from "react"
-import { ImageStyle, Pressable, StyleSheet, Text, View } from "react-native"
-import { StackScreenProps } from "@react-navigation/stack"
+import { GestureResponderEvent, ImageStyle, Pressable, StyleSheet, Text, View } from "react-native"
 import { Rating } from "react-native-ratings"
 import R from "../../res/R"
 import { MovieDetails } from "../../tmdb_api/model/MovieDetails"
 import TMDBApi from "../../tmdb_api/TMDBApi"
 import { CastSlider } from "../cast/CastSlider"
 import { LoadingImage } from "../LoadingImage"
-import { ScreenName } from "../main/ScreenName"
 import { Utils } from "../main/Utils"
+import { OnCastPress } from "../cast/CastClickListener"
+import { OnMoviePress } from "../movies/MovieClickListener"
+import { MediaCast } from "../../tmdb_api/model/MediaCast"
 
 const posterDetailsWidth = R.dimen.posterDetailsWidth
 const posterDetailsHeight = R.dimen.posterDetailsHeight
@@ -16,11 +17,11 @@ const posterDetailsHeight = R.dimen.posterDetailsHeight
 const _summaryLinesMin = 5
 const _summaryLinesMax = 1000
 
-interface MovieDetailsWidgetProps extends StackScreenProps<any> {
+interface MovieDetailsWidgetProps {
     movie: MovieDetails
-// final ValueChanged < MovieDetails > onTapPoster
-// final ValueChanged < MovieVideo > onVideoTap
-// final ValueChanged < MediaCast > onCastTap
+    onPosterPress?: OnMoviePress
+    // final ValueChanged < MovieVideo > onVideoTap
+    onCastPress?: OnCastPress
 }
 
 interface MovieDetailsWidgetState {
@@ -35,10 +36,13 @@ export class MovieDetailsWidget extends Component<MovieDetailsWidgetProps, Movie
         }
     }
 
-    private onTapPoster() {
+    private onTapPoster(_event: GestureResponderEvent) {
         let movie = this.props.movie
-        let navigation = this.props.navigation
-        navigation.navigate(ScreenName.MOVIE_POSTER, { movie })
+        this.props.onPosterPress?.(movie)
+    }
+
+    private onTapCast(cast: MediaCast) {
+        this.props.onCastPress?.(cast)
     }
 
     render() {
@@ -57,7 +61,7 @@ export class MovieDetailsWidget extends Component<MovieDetailsWidgetProps, Movie
         let poster = <LoadingImage
             defaultSource={R.drawable.outline_image}
             source={{ uri: posterUrl }}
-            style={styles.poster as ImageStyle} />
+            style={styles.poster} />
         let posterWidget = <Pressable onPress={this.onTapPoster.bind(this)}>
             {poster}
         </Pressable>
@@ -125,7 +129,7 @@ export class MovieDetailsWidget extends Component<MovieDetailsWidgetProps, Movie
 
         let castLabel = hasCast ? <Text style={styles.label}>{R.string.cast_label}</Text> : gone
 
-        let castWidget = hasCast ? <CastSlider cast={cast!} /> : gone;
+        let castWidget = hasCast ? <CastSlider cast={cast!} onCastPress={this.onTapCast.bind(this)} /> : gone;
 
         return <View style={styles.details}>
             {taglineWidget}
