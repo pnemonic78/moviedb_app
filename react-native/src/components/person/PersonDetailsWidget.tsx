@@ -8,7 +8,7 @@ import TMDBApi from "../../tmdb_api/TMDBApi"
 import { CreditsTable } from "../cast/CreditsTable"
 import { LoadingIcon } from "../LoadingIcon"
 import { Utils } from "../main/Utils"
-import { OnPersonPress } from "./PersonClickListener"
+import { OnPersonPress, OnPersonSocialPress } from "./PersonClickListener"
 
 const posterDetailsWidth = R.dimen.personDetailsWidth
 const posterDetailsHeight = R.dimen.personDetailsHeight
@@ -21,6 +21,7 @@ const iconColor = R.color.iconColor
 interface PersonDetailsWidgetProps {
     person: Person
     onPosterPress?: OnPersonPress
+    onSocialPress?: OnPersonSocialPress
 }
 
 interface PersonDetailsWidgetState {
@@ -40,24 +41,34 @@ export class PersonDetailsWidget extends Component<PersonDetailsWidgetProps, Per
         this.props.onPosterPress?.(person)
     }
 
-    private gotoHomepage() {
-        console.log("go to home")
+    private onTapHomepage() {
+        let person = this.props.person
+        let url = person.homepage ?? ""
+        this.props.onSocialPress?.(person, url)
     }
 
-    private gotoFacebook() {
-        console.log("go to fb")
+    private onTapFacebook() {
+        let person = this.props.person
+        let url = TMDBApi.generateFacebookUrl(person.external_ids?.facebook_id)
+        this.props.onSocialPress?.(person, url)
     }
 
-    private gotoImdb() {
-        console.log("go to imdb")
+    private onTapImdb() {
+        let person = this.props.person
+        let url = TMDBApi.generateImdbUrl(person.imdb_id ?? person.external_ids?.imdb_id)
+        this.props.onSocialPress?.(person, url)
     }
 
-    private gotoInstagram() {
-        console.log("go to insta")
+    private onTapInstagram() {
+        let person = this.props.person
+        let url = TMDBApi.generateInstagramUrl(person.external_ids?.instagram_id)
+        this.props.onSocialPress?.(person, url)
     }
 
-    private gotoTwitter() {
-        console.log("go to twitter")
+    private onTapTwitter() {
+        let person = this.props.person
+        let url = TMDBApi.generateTwitterUrl(person.external_ids?.twitter_id)
+        this.props.onSocialPress?.(person, url)
     }
 
     render() {
@@ -111,7 +122,7 @@ export class PersonDetailsWidget extends Component<PersonDetailsWidgetProps, Per
         let birthdayLabel = hasBirthday ? <Text style={styles.label}>{R.string.birthday_label}</Text> : gone
         let birthdayValue = hasBirthday ? <Text style={styles.text}>{Utils.formatDate(person.birthday!)}</Text> : gone
 
-        let hasBirthplace = (person.place_of_birth != null)
+        let hasBirthplace = (person.place_of_birth?.length)
         let birthplaceLabel = hasBirthplace ? <Text style={styles.label}>{R.string.place_of_birth_label}</Text> : gone
         let birthplaceValue = hasBirthplace ? <Text style={styles.text}>{person.place_of_birth}</Text> : gone
 
@@ -133,7 +144,7 @@ export class PersonDetailsWidget extends Component<PersonDetailsWidgetProps, Per
             </Text>
         </Pressable>
 
-        let hasHomepage = (person.homepage != null)
+        let hasHomepage = (person.homepage?.length)
         let homepageWidget = hasHomepage ? <Icon
             raised={true}
             reverse={true}
@@ -142,10 +153,10 @@ export class PersonDetailsWidget extends Component<PersonDetailsWidgetProps, Per
             color={iconColor}
             size={personIconSize}
             containerStyle={styles.icon}
-            onPress={this.gotoHomepage.bind(this)}
+            onPress={this.onTapHomepage.bind(this)}
         /> : gone
 
-        let hasFacebook = (person.external_ids?.facebook_id != null)
+        let hasFacebook = (person.external_ids?.facebook_id?.length)
         let facebookWidget = hasFacebook ? <Icon
             raised={true}
             reverse={true}
@@ -154,10 +165,10 @@ export class PersonDetailsWidget extends Component<PersonDetailsWidgetProps, Per
             color={iconColor}
             size={personIconSize}
             containerStyle={styles.icon}
-            onPress={this.gotoFacebook.bind(this)}
+            onPress={this.onTapFacebook.bind(this)}
         /> : gone
 
-        let hasImdb = (person.imdb_id != null) || (person.external_ids?.imdb_id != null)
+        let hasImdb = (person.imdb_id?.length) || (person.external_ids?.imdb_id?.length)
         let imdbWidget = hasImdb ? <Icon
             raised={true}
             reverse={true}
@@ -166,10 +177,10 @@ export class PersonDetailsWidget extends Component<PersonDetailsWidgetProps, Per
             color={iconColor}
             size={personIconSize}
             containerStyle={styles.icon}
-            onPress={this.gotoImdb.bind(this)}
+            onPress={this.onTapImdb.bind(this)}
         /> : gone
 
-        let hasInstagram = (person.external_ids?.instagram_id != null)
+        let hasInstagram = (person.external_ids?.instagram_id?.length)
         let instagramWidget = hasInstagram ? <Icon
             raised={true}
             reverse={true}
@@ -178,10 +189,10 @@ export class PersonDetailsWidget extends Component<PersonDetailsWidgetProps, Per
             color={iconColor}
             size={personIconSize}
             containerStyle={styles.icon}
-            onPress={this.gotoInstagram.bind(this)}
+            onPress={this.onTapInstagram.bind(this)}
         /> : gone
 
-        let hasTwitter = (person.external_ids?.twitter_id != null)
+        let hasTwitter = (person.external_ids?.twitter_id?.length)
         let twitterWidget = hasTwitter ? <Icon
             raised={true}
             reverse={true}
@@ -190,10 +201,10 @@ export class PersonDetailsWidget extends Component<PersonDetailsWidgetProps, Per
             color={iconColor}
             size={personIconSize}
             containerStyle={styles.icon}
-            onPress={this.gotoTwitter.bind(this)}
+            onPress={this.onTapTwitter.bind(this)}
         /> : gone
 
-        let hasCredits = (person.combined_credits != null)
+        let hasCredits = (person.combined_credits?.cast?.length || person.combined_credits?.crew?.length)
         let creditsLabel = hasCredits ? <Text style={styles.label}>{R.string.known_credits_label}</Text> : gone
         let creditsWidget = hasCredits ? <CreditsTable/> : gone
 

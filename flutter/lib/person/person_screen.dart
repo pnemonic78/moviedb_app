@@ -367,7 +367,7 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
   }
 
   void _gotoImdb() async {
-    final url = TMDBApi.generateImdbUrl(widget.person.imdbId);
+    final url = TMDBApi.generateImdbUrl(widget.person.imdbId ?? widget.person.externalIds.imdbId);
     _goto(url);
   }
 

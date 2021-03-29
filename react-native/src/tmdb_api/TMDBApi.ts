@@ -126,4 +126,20 @@ export default abstract class TMBDApi {
     async getPerson(person: Person): Promise<Person> {
         return this.getPersonById(person.id)
     }
+
+    static generateFacebookUrl(id: string | undefined): string {
+        return (id) ? TMBDApi._facebook_url.replace("{id}", id) : ""
+    }
+
+    static generateImdbUrl(id: string | undefined): string {
+        return (id) ? TMBDApi._imdb_url.replace("{id}", id) : ""
+    }
+
+    static generateInstagramUrl(id: string | undefined): string {
+        return (id) ? TMBDApi._instagram_url.replace("{id}", id) : ""
+    }
+
+    static generateTwitterUrl(id: string | undefined): string {
+        return (id) ? TMBDApi._twitter_url.replace("{id}", id) : ""
+    }
 }

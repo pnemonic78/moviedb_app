@@ -11,6 +11,8 @@ import { AppReducersState } from "../../redux/reducers/AppReducer"
 import TMDBApi from "../../tmdb_api/TMDBApi"
 import TMDBApiImpl from "../../tmdb_api/TMDBApiImpl"
 import { fetchedPersonDetails } from "../../redux/actions/PersonDetailsAction"
+import { SocialIcon, SocialMediaType } from "react-native-elements"
+import { Linking } from "react-native"
 
 interface PersonPageParams extends ParamListBase {
     person: Person
@@ -65,12 +67,17 @@ export class PersonPageComponent extends Component<PersonPageProps> {
         navigation.navigate(ScreenName.PERSON_POSTER, { person })
     }
 
+    private onTapSocial(person: Person, url: string) {
+        Linking.openURL(url)
+    }
+
     render() {
         let person = this.getPerson()
 
         let content = <PersonDetailsWidget
             person={person}
             onPosterPress={this.onTapPoster.bind(this)}
+            onSocialPress={this.onTapSocial.bind(this)}
         />
 
         return <ScrollView>
