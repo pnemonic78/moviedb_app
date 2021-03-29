@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Dimensions, ImageBackground, Platform, StyleSheet, Text } from "react-native"
+import { Dimensions, ImageBackground, Platform, StyleSheet, Text, View } from "react-native"
 import { ParamListBase } from "@react-navigation/routers"
 import { HeaderBackButton, StackScreenProps } from "@react-navigation/stack"
 import { Movie, MovieClass } from "../../tmdb_api/model/Movie"
@@ -15,6 +15,7 @@ import TMDBApiImpl from "../../tmdb_api/TMDBApiImpl"
 import { fetchedMovieDetails } from "../../redux/actions/MovieDetailsAction"
 import { ScreenName } from "../main/ScreenName"
 import { MediaCast } from "../../tmdb_api/model/MediaCast"
+import { LoadingIcon } from "../LoadingIcon"
 
 interface MovieDetailsHomePageParams extends ParamListBase {
     movie: Movie
@@ -29,12 +30,19 @@ export class MovieDetailsHomePageComponent extends Component<MovieDetailsHomePag
     constructor(props: MovieDetailsHomePageProps) {
         super(props)
 
-        let routeParams = props.route.params as MovieDetailsHomePageParams
-        let movie = props.movie ?? routeParams?.movie
+        let movie = this.getMovie()
         this.fetchMovieDetails(movie)
     }
 
     private api: TMDBApi = new TMDBApiImpl()
+
+    private getMovie(): MovieDetails {
+        let routeParams = this.props.route.params as MovieDetailsHomePageParams
+        let movieProp = this.props.movie ?? routeParams?.movie
+        let movieId = movieProp?.id ?? 0
+        let movie = this.props.movies.get(movieId) ?? (movieProp as MovieDetails)
+        return movie
+    }
 
     private async fetchMovieDetails(movie: Movie) {
         let dispatch = this.props.dispatch;
@@ -57,20 +65,11 @@ export class MovieDetailsHomePageComponent extends Component<MovieDetailsHomePag
 
     render() {
         let navigation = this.props.navigation
-        let routeParams = this.props.route.params as MovieDetailsHomePageParams
-        let movieProp = this.props.movie ?? routeParams?.movie
-        let movieId = movieProp?.id ?? 0
-        let movie = this.props.movies.get(movieId) ?? (movieProp as MovieDetails)
+        let movie = this.getMovie()
         let styles = styleSheet
 
-        let actionBarButtonMargin = R.dimen.actionBarButtonMargin
-        let actionBarButtonSize = R.dimen.actionBarButtonSize
         let backButtonWidget = <HeaderBackButton
-            style={{
-                marginTop: actionBarButtonMargin,
-                width: actionBarButtonSize,
-                height: actionBarButtonSize
-            }}
+            style={styles.backButton}
             tintColor={'white'}
             onPress={() => navigation.goBack()} />
 
@@ -86,14 +85,17 @@ export class MovieDetailsHomePageComponent extends Component<MovieDetailsHomePag
         let title = MovieClass.displayTitle(movie)
         let titleWidget = <Text numberOfLines={3} style={styles.title}>{title}</Text>
 
-        let headerWidget = <ImageBackground
-            source={{ uri: backdropUrl }}
-            defaultSource={R.drawable.outline_image}
-            style={{ width: backdropWidth, height: backdropHeight, }}
-        >
-            {backButtonWidget}
-            {titleWidget}
-        </ImageBackground>
+        let headerWidget = <View style={styles.header}>
+            <LoadingIcon
+                placeholder={R.icon.image}
+                source={{ uri: backdropUrl }}
+                style={{ width: backdropWidth, height: backdropHeight, position: "absolute", }}
+            />
+            <View style={[styles.overlay, { height: backdropHeight }]}>
+                {backButtonWidget}
+                {titleWidget}
+            </View>
+        </View>
 
         let content = <MovieDetailsWidget
             movie={movie}
@@ -121,12 +123,25 @@ function mapStateToProps(state: AppReducersState): object {
 export const MovieDetailsHomePage = connect(mapStateToProps)(MovieDetailsHomePageComponent)
 
 const styleSheet = StyleSheet.create({
+    backButton: {
+        flex: 0,
+        marginVertical: R.dimen.actionBarButtonMargin,
+        width: R.dimen.actionBarButtonSize,
+        height: R.dimen.actionBarButtonSize,
+    },
+    header: {
+    },
+    overlay: {
+        display: "flex",
+        flexDirection: "column",
+        position: "absolute",
+    },
     title: {
         color: 'white',
         flex: 1,
-        textAlignVertical: "bottom",
         fontSize: 32,
         padding: 8,
+        textAlignVertical: "bottom",
         textShadowColor: 'black',
         textShadowOffset: { width: 0, height: 0 },
         textShadowRadius: 10,

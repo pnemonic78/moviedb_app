@@ -1,5 +1,6 @@
 import Movie from './model/Movie'
 import { MovieDetails } from './model/MovieDetails'
+import { Person } from './model/Person'
 import { MoviesResponse } from './MoviesResponse'
 
 export default abstract class TMBDApi {
@@ -118,5 +119,11 @@ export default abstract class TMBDApi {
 
     async getMovieDetails(movie: Movie): Promise<MovieDetails> {
         return this.getMovieDetailsById(movie.id)
+    }
+
+    abstract getPersonById(personId: number): Promise<Person>
+
+    async getPerson(person: Person): Promise<Person> {
+        return this.getPersonById(person.id)
     }
 }

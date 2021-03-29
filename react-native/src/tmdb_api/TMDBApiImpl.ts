@@ -3,6 +3,7 @@ import axios from 'axios'
 import Keys from '../../keys'
 import { MovieDetails } from "./model/MovieDetails"
 import { MoviesResponse } from "./MoviesResponse"
+import { Person } from "./model/Person"
 
 export default class TMBDApiImpl extends TMBDApi {
     readonly _apiKey: string = Keys.apiKey
@@ -37,5 +38,11 @@ export default class TMBDApiImpl extends TMBDApi {
         let url = TMBDApi.api_url + "movie/" + movieId + "?api_key=" + this._apiKey + "&language=" + this._languageCode + "&append_to_response=credits"
         let result = await axios.get(url)
         return result.data as MovieDetails
+    }
+
+    async getPersonById(personId: number): Promise<Person> {
+        let url = TMBDApi.api_url + "person/" + personId + "?api_key=" + this._apiKey + "&language=" + this._languageCode + "&append_to_response=external_ids,combined_credits"
+        let result = await axios.get(url)
+        return result.data as Person
     }
 }

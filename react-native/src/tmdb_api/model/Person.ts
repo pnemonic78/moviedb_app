@@ -1,3 +1,4 @@
+import { PersonCreditsResponse } from "../PersonCreditsResponse"
 import { Gender } from "./Gender"
 import { Media, MediaClass } from "./Media"
 import { PersonExternalIds } from "./PersonExternalIds"
@@ -6,7 +7,7 @@ export interface Person extends Media {
     also_known_as: string[]
     biography: string
     birthday?: Date
-    //combined_credits: PersonCreditsResponse
+    combined_credits: PersonCreditsResponse
     place_of_birth?: string
     deathday?: Date
     external_ids?: PersonExternalIds

@@ -6,4 +6,5 @@ export enum MoviesActionType {
     PopularResponse,
     TopRatedResponse,
     UpcomingResponse,
+    PersonResponse,
 }

@@ -5,7 +5,9 @@ import R from "../../res/R"
 import { Gender, toGender } from "../../tmdb_api/model/Gender"
 import { Person, PersonClass } from "../../tmdb_api/model/Person"
 import TMDBApi from "../../tmdb_api/TMDBApi"
+import { CreditsTable } from "../cast/CreditsTable"
 import { LoadingIcon } from "../LoadingIcon"
+import { Utils } from "../main/Utils"
 import { OnPersonPress } from "./PersonClickListener"
 
 const posterDetailsWidth = R.dimen.personDetailsWidth
@@ -61,7 +63,7 @@ export class PersonDetailsWidget extends Component<PersonDetailsWidgetProps, Per
     render() {
         let person = this.props.person
         let styles = styleSheet
-        let personIconSize = R.dimen.personIconSize / 2
+        let personIconSize = R.dimen.personIconSize / 1.2
 
         let gone = <View />
 
@@ -105,64 +107,74 @@ export class PersonDetailsWidget extends Component<PersonDetailsWidgetProps, Per
         let genderLabel = hasGender ? <Text style={styles.label}>{R.string.gender_label}</Text> : gone
         let genderValue = hasGender ? <Text style={styles.text}>{genderText}</Text> : gone
 
-        let birthdayLabel = gone
-        let birthdayValue = gone
-            
-        let birthplaceLabel = gone
-        let birthplaceValue = gone
-            
-        let deathdayLabel = gone
-        let deathdayValue = gone
-            
-        let aliasesLabel = gone
-        let aliasesValue = gone
+        let hasBirthday = (person.birthday != null)
+        let birthdayLabel = hasBirthday ? <Text style={styles.label}>{R.string.birthday_label}</Text> : gone
+        let birthdayValue = hasBirthday ? <Text style={styles.text}>{Utils.formatDate(person.birthday!)}</Text> : gone
+
+        let hasBirthplace = (person.place_of_birth != null)
+        let birthplaceLabel = hasBirthplace ? <Text style={styles.label}>{R.string.place_of_birth_label}</Text> : gone
+        let birthplaceValue = hasBirthplace ? <Text style={styles.text}>{person.place_of_birth}</Text> : gone
+
+        let hasDeathday = (person.deathday != null)
+        let deathdayLabel = hasDeathday ? <Text style={styles.label}>{R.string.deathday_label}</Text> : gone
+        let deathdayValue = hasDeathday ? <Text style={styles.text}>{Utils.formatDate(person.deathday!)}</Text> : gone
+
+        let hasAliases = (person.also_known_as?.length)
+        let aliasesLabel = hasAliases ? <Text style={styles.label}>{R.string.also_known_as_label}</Text> : gone
+        let aliasesValue = hasAliases ? <Text style={styles.text}>{person.also_known_as.join(", ")}</Text> : gone
+
+        let summaryLinesExpanded = this.state.summaryLinesExpanded
+        let summaryLabel = <Text style={styles.label}>{R.string.summary_label}</Text>
+        let summaryWidget = <Pressable onPress={() => this.setState({ summaryLinesExpanded: !summaryLinesExpanded })}>
+            <Text
+                style={styles.text}
+                numberOfLines={summaryLinesExpanded ? _summaryLinesMax : _summaryLinesMin}>
+                {person.biography ?? ""}
+            </Text>
+        </Pressable>
 
         let hasHomepage = (person.homepage != null)
-
         let homepageWidget = hasHomepage ? <Icon
             raised={true}
             reverse={true}
-            name="home"
-            type="simple-line-icon"
+            name={R.icon.homepage.name}
+            type={R.icon.homepage.type}
             color={iconColor}
             size={personIconSize}
             containerStyle={styles.icon}
             onPress={this.gotoHomepage.bind(this)}
         /> : gone
 
-        let hasImdb = (person.imdb_id != null) || (person.external_ids?.imdb_id != null)
-
-        let imdbWidget = hasImdb ? <Icon
-            raised={true}
-            reverse={true}
-            name="storage"
-            type="material"
-            color={iconColor}
-            size={personIconSize}
-            containerStyle={styles.icon}
-            onPress={this.gotoImdb.bind(this)}
-        /> : gone
-
         let hasFacebook = (person.external_ids?.facebook_id != null)
-
         let facebookWidget = hasFacebook ? <Icon
             raised={true}
             reverse={true}
-            name="social-facebook"
-            type="simple-line-icon"
+            name={R.icon.facebook.name}
+            type={R.icon.facebook.type}
             color={iconColor}
             size={personIconSize}
             containerStyle={styles.icon}
             onPress={this.gotoFacebook.bind(this)}
         /> : gone
 
-        let hasInstagram = (person.external_ids?.instagram_id != null)
+        let hasImdb = (person.imdb_id != null) || (person.external_ids?.imdb_id != null)
+        let imdbWidget = hasImdb ? <Icon
+            raised={true}
+            reverse={true}
+            name={R.icon.imdb.name}
+            type={R.icon.imdb.type}
+            color={iconColor}
+            size={personIconSize}
+            containerStyle={styles.icon}
+            onPress={this.gotoImdb.bind(this)}
+        /> : gone
 
+        let hasInstagram = (person.external_ids?.instagram_id != null)
         let instagramWidget = hasInstagram ? <Icon
             raised={true}
             reverse={true}
-            name="social-instagram"
-            type="simple-line-icon"
+            name={R.icon.instagram.name}
+            type={R.icon.instagram.type}
             color={iconColor}
             size={personIconSize}
             containerStyle={styles.icon}
@@ -170,27 +182,30 @@ export class PersonDetailsWidget extends Component<PersonDetailsWidgetProps, Per
         /> : gone
 
         let hasTwitter = (person.external_ids?.twitter_id != null)
-
         let twitterWidget = hasTwitter ? <Icon
             raised={true}
             reverse={true}
-            name="social-twitter"
-            type="simple-line-icon"
+            name={R.icon.twitter.name}
+            type={R.icon.twitter.type}
             color={iconColor}
             size={personIconSize}
             containerStyle={styles.icon}
             onPress={this.gotoTwitter.bind(this)}
         /> : gone
 
+        let hasCredits = (person.combined_credits != null)
+        let creditsLabel = hasCredits ? <Text style={styles.label}>{R.string.known_credits_label}</Text> : gone
+        let creditsWidget = hasCredits ? <CreditsTable/> : gone
+
         return <View style={styles.details}>
             {nameWidget}
             <View style={{ flexDirection: "row" }}>
                 <View>
                     {posterWidget}
-                    <View style={{ flexDirection: "row" }}>
+                    <View style={{ flexDirection: "row", flexWrap: "wrap", width: imageWidth, }}>
                         {homepageWidget}
-                        {imdbWidget}
                         {facebookWidget}
+                        {imdbWidget}
                         {instagramWidget}
                         {twitterWidget}
                     </View>
@@ -211,6 +226,10 @@ export class PersonDetailsWidget extends Component<PersonDetailsWidgetProps, Per
                     {aliasesValue}
                 </View>
             </View>
+            {summaryLabel}
+            {summaryWidget}
+            {creditsLabel}
+            {creditsWidget}
         </View>
     }
 }

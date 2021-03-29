@@ -1,11 +1,12 @@
 import React, { Component } from "react"
-import { Animated, Dimensions } from "react-native"
+import { Animated, Dimensions, StyleSheet, View } from "react-native"
 import { ParamListBase } from "@react-navigation/routers"
 import { StackScreenProps } from "@react-navigation/stack"
 import { PinchGestureHandler, PinchGestureHandlerStateChangeEvent, State } from "react-native-gesture-handler"
 import R from "../../res/R"
 import { Person, PersonClass } from "../../tmdb_api/model/Person"
 import TMDBApi from "../../tmdb_api/TMDBApi"
+import { Icon } from "react-native-elements"
 
 interface PersonPosterPageParams extends ParamListBase {
     person: Person
@@ -55,6 +56,7 @@ export class PersonPosterPage extends Component<PersonPosterPageProps> {
 
     render() {
         let person = this.getPerson()
+        let styles = styleSheet
 
         let size = Dimensions.get("window")
         let screenWidth = size.width
@@ -65,14 +67,13 @@ export class PersonPosterPage extends Component<PersonPosterPageProps> {
         let imagePath = person.profile_path
         let imageUrl = TMDBApi.generateProfileThumbnail(imagePath, Infinity, Infinity)
         let poster = <Animated.Image
-            defaultSource={R.drawable.outline_image}
-            source={{ uri: imageUrl }}            
+            source={{ uri: imageUrl }}
             resizeMode='contain'
-            style={{
+            style={[styles.poster, {
                 height: imageHeight,
                 width: imageWidth,
                 transform: [{ scale: this.scale }],
-            }}
+            }]}
         />
 
         let posterWidget = <PinchGestureHandler
@@ -81,6 +82,27 @@ export class PersonPosterPage extends Component<PersonPosterPageProps> {
             {poster}
         </PinchGestureHandler>
 
-        return posterWidget
+        let loadingSize = Math.min(imageWidth, imageHeight)
+        let loadingWidget = <Icon
+            name={R.icon.image.name}
+            type={R.icon.image.type}
+            size={loadingSize}
+            containerStyle={[styles.loading, { width: imageWidth, height: imageHeight, }]}
+        />
+
+        return <View>
+            {loadingWidget}
+            {posterWidget}
+        </View>
     }
 }
+
+const styleSheet = StyleSheet.create({
+    loading: {
+        alignContent: 'center',
+        justifyContent: 'center',
+    },
+    poster: {
+        position: "absolute",
+    }
+})
