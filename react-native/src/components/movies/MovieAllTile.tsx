@@ -3,7 +3,7 @@ import { GestureResponderEvent, ImageStyle, Pressable, StyleSheet, Text } from '
 import { Card } from 'react-native-elements'
 import TMBDApi from '../../tmdb_api/TMDBApi'
 import R from '../../res/R'
-import { LoadingImage } from "../LoadingImage"
+import { LoadingIcon } from '../LoadingIcon'
 import { Movie, MovieClass } from '../../tmdb_api/model/Movie'
 import { OnMoviePress } from './MovieClickListener'
 
@@ -58,8 +58,8 @@ export class MovieAllTile extends Component<MovieAllTileProps> {
         let imageWidth = styles.thumbnail.width as number
         let imageHeight = styles.thumbnail.height as number
         let thumbnailUrl = TMBDApi.generatePosterUrl(movie.poster_path, imageWidth, imageHeight)
-        let thumbnailWidget = <LoadingImage
-            defaultSource={R.drawable.outline_image}
+        let thumbnailWidget = <LoadingIcon
+            placeholder={R.icon.image}
             source={{ uri: thumbnailUrl }}
             style={styles.thumbnail as ImageStyle} />
 

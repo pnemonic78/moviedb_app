@@ -5,7 +5,7 @@ import R from "../../res/R"
 import { MovieDetails } from "../../tmdb_api/model/MovieDetails"
 import TMDBApi from "../../tmdb_api/TMDBApi"
 import { CastSlider } from "../cast/CastSlider"
-import { LoadingImage } from "../LoadingImage"
+import { LoadingIcon } from "../LoadingIcon"
 import { Utils } from "../main/Utils"
 import { OnCastPress } from "../cast/CastClickListener"
 import { OnMoviePress } from "../movies/MovieClickListener"
@@ -58,8 +58,8 @@ export class MovieDetailsWidget extends Component<MovieDetailsWidgetProps, Movie
             imageWidth,
             imageHeight
         )
-        let poster = <LoadingImage
-            defaultSource={R.drawable.outline_image}
+        let poster = <LoadingIcon
+            placeholder={R.icon.image}
             source={{ uri: posterUrl }}
             style={styles.poster} />
         let posterWidget = <Pressable onPress={this.onTapPoster.bind(this)}>

@@ -3,8 +3,8 @@ import React, { Component } from "react"
 import R from "../../res/R"
 import { MediaCast } from "../../tmdb_api/model/MediaCast"
 import TMDBApi from "../../tmdb_api/TMDBApi"
-import { LoadingImage } from "../LoadingImage"
-import { GestureResponderEvent, ImageStyle, Pressable, StyleSheet, Text } from "react-native"
+import { LoadingIcon } from "../LoadingIcon"
+import { GestureResponderEvent, Pressable, StyleSheet, Text } from "react-native"
 import { Card } from "react-native-elements"
 import { OnCastPress } from "./CastClickListener"
 
@@ -34,8 +34,8 @@ export class CastTile extends Component<CastTileProps> {
             imageWidth,
             imageHeight,
         )
-        let thumbnailWidget = <LoadingImage
-            defaultSource={R.drawable.outline_image}
+        let thumbnailWidget = <LoadingIcon
+            placeholder={R.icon.face}
             source={{ uri: thumbnailUrl }}
             style={styles.thumbnail} />
 

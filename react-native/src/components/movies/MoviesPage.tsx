@@ -1,5 +1,6 @@
 import React, { Component } from "react"
-import { GestureResponderEvent, Pressable } from "react-native"
+import { GestureResponderEvent } from "react-native"
+import { Icon } from "react-native-elements"
 import { ParamListBase } from "@react-navigation/routers"
 import { StackScreenProps } from "@react-navigation/stack"
 import { Movie } from "../../tmdb_api/model/Movie"
@@ -7,7 +8,6 @@ import { MoviesListPage } from "./MoviesListPage"
 import { OnMoviePress } from "./MovieClickListener"
 import { MoviesGridPage } from "./MoviesGridPage"
 import { ScreenName } from "../main/ScreenName"
-import { Image } from "react-native-elements"
 import R from "../../res/R"
 
 export interface MoviesPageParams extends ParamListBase {
@@ -30,19 +30,20 @@ export abstract class MoviesPage extends Component<MoviesPageProps, MoviesPageSt
     }
 
     private getIconViewStyle(): React.ReactNode {
-        return <Pressable
+        let icon = this.state.showAsList ? R.icon.grid : R.icon.list
+
+        return <Icon
+            color={'white'}
+            name={icon.name}
+            type={icon.type}
+            size={R.dimen.actionBarButtonSize}
+            containerStyle={{
+                height: R.dimen.actionBarButtonSize,
+                width: R.dimen.actionBarButtonSize,
+                margin: R.dimen.actionBarButtonMargin,
+            }}
             onPress={this.toggleViewStyle.bind(this)}
-            android_ripple={{ color: 'black' }}
-        >
-            <Image
-                source={this.state.showAsList ? R.drawable.outline_grid : R.drawable.outline_list}
-                style={{
-                    height: R.dimen.actionBarButtonSize,
-                    width: R.dimen.actionBarButtonSize,
-                    margin: R.dimen.actionBarButtonMargin,
-                }}
-            />
-        </Pressable>
+        />
     }
 
     private toggleViewStyle(event: GestureResponderEvent) {

@@ -1,11 +1,11 @@
 import React, { Component } from "react"
-import { GestureResponderEvent, ImageStyle, Pressable, StyleSheet, Text, View } from "react-native"
+import { GestureResponderEvent, Pressable, StyleSheet, Text, View } from "react-native"
 import { Icon } from "react-native-elements"
 import R from "../../res/R"
 import { Gender, toGender } from "../../tmdb_api/model/Gender"
 import { Person, PersonClass } from "../../tmdb_api/model/Person"
 import TMDBApi from "../../tmdb_api/TMDBApi"
-import { LoadingImage } from "../LoadingImage"
+import { LoadingIcon } from "../LoadingIcon"
 import { OnPersonPress } from "./PersonClickListener"
 
 const posterDetailsWidth = R.dimen.personDetailsWidth
@@ -75,8 +75,8 @@ export class PersonDetailsWidget extends Component<PersonDetailsWidgetProps, Per
             imageWidth,
             imageHeight
         )
-        let poster = <LoadingImage
-            defaultSource={R.drawable.outline_face}
+        let poster = <LoadingIcon
+            placeholder={R.icon.face}
             source={{ uri: posterUrl }}
             style={styles.poster} />
         let posterWidget = <Pressable onPress={this.onTapPoster.bind(this)}>

@@ -3,7 +3,7 @@ import { GestureResponderEvent, ImageStyle, Pressable, StyleSheet, Text, TextSty
 import { Card, Rating } from 'react-native-elements'
 import TMBDApi from '../../tmdb_api/TMDBApi'
 import R from '../../res/R'
-import { LoadingImage } from "../LoadingImage"
+import { LoadingIcon } from '../LoadingIcon'
 import { Movie, MovieClass } from '../../tmdb_api/model/Movie'
 import { OnMoviePress } from './MovieClickListener'
 import { Utils } from '../main/Utils'
@@ -71,8 +71,8 @@ export class MovieGridTile extends Component<MovieGridTileProps> {
         let imageWidth = this.props.width ?? (styles.thumbnail.width as number)
         let imageHeight = (styles.thumbnail.height as number) * posterGridRatio
         let thumbnailUrl = TMBDApi.generatePosterUrl(movie.poster_path, imageWidth, imageHeight)
-        let thumbnailWidget = <LoadingImage
-            defaultSource={R.drawable.outline_image}
+        let thumbnailWidget = <LoadingIcon
+            placeholder={R.icon.image}
             source={{ uri: thumbnailUrl }}
             style={styles.thumbnail as ImageStyle}
             width={imageWidth}
