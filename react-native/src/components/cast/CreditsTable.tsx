@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Pressable, StyleProp, StyleSheet, Text, ViewStyle } from "react-native"
+import { Pressable, StyleProp, StyleSheet, Text, TextStyle, ViewStyle } from "react-native"
 import { Card } from "react-native-elements"
 import { Rows, Table } from "react-native-table-component"
 import { MediaClass } from "../../tmdb_api/model/Media"
@@ -73,6 +73,23 @@ export abstract class CreditsTable<C extends PersonCredit, P extends CreditsTabl
 
     private getDate(credit: C): Date | null {
         return MediaClass.date(credit)
+    }
+
+    protected boldDescription(s: string, style: TextStyle): JSX.Element {
+        let indexStart = s.indexOf("<b>")
+        let indexEnd = s.indexOf("</b>")
+        if ((indexStart >= 0) && (indexStart < indexEnd)) {
+            let s1 = s.substring(0, indexStart)
+            let s2 = s.substring(indexStart + 3, indexEnd)
+            let s3 = s.substring(indexEnd + 4)
+
+            return <Text>
+                <Text style={style}>{s1}</Text>
+                <Text style={{fontWeight: "bold"}}>{s2}</Text>
+                <Text style={style}>{s3}</Text>
+            </Text>
+        }
+        return <Text style={style}>{s}</Text>
     }
 }
 

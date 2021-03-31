@@ -20,7 +20,6 @@ export class CrewTable extends CreditsTable<PersonCrew, CrewTableProps> {
         let format = job.length ? R.string.person_cast_format : R.string.person_cast_format_none
         let description = format.replace("%s", title).replace("%s", job)
 
-        return <Text style={styles.description}>{description ?? "?"}</Text>
-
+        return this.boldDescription(description ?? "?", styles.description)
     }
 }

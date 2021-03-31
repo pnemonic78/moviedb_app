@@ -21,6 +21,6 @@ export class CastTable extends CreditsTable<PersonCast, CastTableProps> {
         let format = character.length ? R.string.person_cast_format : R.string.person_cast_format_none
         let description = format.replace("%s", title).replace("%s", character)
 
-        return <Text style={styles.description}>{description ?? "?"}</Text>
+        return this.boldDescription(description ?? "?", styles.description)
     }
 }
