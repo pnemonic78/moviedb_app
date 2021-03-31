@@ -22,7 +22,19 @@ export interface Person extends Media {
 
 export class PersonClass extends MediaClass {
     static date(person: Person): Date | null {
-        return person.birthday ?? null
+        let date = person.birthday
+        if (date) {
+            if (typeof date === 'string' || date instanceof String) {
+                if (date.length) {
+                    date = new Date(date)
+                    person.birthday = date
+                } else {
+                    return null
+                }
+            }
+            return date
+        }
+        return null
     }
 
     static displayTitle(person: Person): string {

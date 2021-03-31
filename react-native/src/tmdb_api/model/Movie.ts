@@ -17,7 +17,19 @@ export interface Movie extends Media {
 
 export class MovieClass extends MediaClass {
     static date(movie: Movie): Date | null {
-        return movie.release_date ?? null
+        let date = movie.release_date
+        if (date) {
+            if (typeof date === 'string' || date instanceof String) {
+                if (date.length) {
+                    date = new Date(date)
+                    movie.release_date = date
+                } else {
+                    return null
+                }
+            }
+            return date
+        }
+        return null
     }
 
     static displayTitle(movie: Movie): string {

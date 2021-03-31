@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-
 import R from "../../res/R"
 import { MediaCast } from "../../tmdb_api/model/MediaCast"
 import TMDBApi from "../../tmdb_api/TMDBApi"

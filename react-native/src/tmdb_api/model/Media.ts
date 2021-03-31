@@ -1,4 +1,7 @@
 import { MediaType } from "./MediaType"
+import { Movie, MovieClass } from "./Movie"
+import { Person, PersonClass } from "./Person"
+import { Television, TelevisionClass } from "./Television"
 
 export interface Media {
  
@@ -23,18 +26,34 @@ export interface Media {
 //             return Media.fromJson(json)
 //     }
 // }
-
-    // date(): Date | null
-
-    // displayTitle(): string
 }
 
 export abstract class MediaClass {
     static date(media: Media): Date | null {
-        return null
+        let mediaType = media.media_type
+        switch (mediaType) {
+            case MediaType.movie:
+                return MovieClass.date(media as Movie)
+            case MediaType.person:
+                return PersonClass.date(media as Person)
+            case MediaType.tv:
+                return TelevisionClass.date(media as Television)
+            default:
+                return null
+        }
     }
 
     static displayTitle(media: Media): string {
-        return ""
+        let mediaType = media.media_type
+        switch (mediaType) {
+            case MediaType.movie:
+                return MovieClass.displayTitle(media as Movie)
+            case MediaType.person:
+                return PersonClass.displayTitle(media as Person)
+            case MediaType.tv:
+                return TelevisionClass.displayTitle(media as Television)
+            default:
+                return ""
+        }
     }
 }

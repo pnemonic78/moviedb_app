@@ -5,7 +5,8 @@ import R from "../../res/R"
 import { Gender, toGender } from "../../tmdb_api/model/Gender"
 import { Person, PersonClass } from "../../tmdb_api/model/Person"
 import TMDBApi from "../../tmdb_api/TMDBApi"
-import { CreditsTable } from "../cast/CreditsTable"
+import { CastTable } from "../cast/CastTable"
+import { CrewTable } from "../cast/CrewTable"
 import { LoadingIcon } from "../LoadingIcon"
 import { Utils } from "../main/Utils"
 import { OnPersonPress, OnPersonSocialPress } from "./PersonClickListener"
@@ -204,9 +205,22 @@ export class PersonDetailsWidget extends Component<PersonDetailsWidgetProps, Per
             onPress={this.onTapTwitter.bind(this)}
         /> : gone
 
-        let hasCredits = (person.combined_credits?.cast?.length || person.combined_credits?.crew?.length)
-        let creditsLabel = hasCredits ? <Text style={styles.label}>{R.string.known_credits_label}</Text> : gone
-        let creditsWidget = hasCredits ? <CreditsTable/> : gone
+        let hasCast = (person.combined_credits?.cast?.length)
+        let hasCrew = (person.combined_credits?.crew?.length)
+        let hasCredits = hasCast || hasCrew
+        let creditsLabel = hasCredits ? <Text style={styles.group}>{R.string.known_credits_label}</Text> : gone
+
+        let castLabel = hasCast ? <Text style={styles.label}>{R.string.cast_label}</Text> : gone
+        let castWidget = hasCast ? <CastTable
+            credits={person.combined_credits.cast!}
+            style={styles.table}
+        /> : gone
+
+        let crewLabel = hasCrew ? <Text style={styles.label}>{R.string.person_crew_label}</Text> : gone
+        let crewWidget = hasCrew ? <CrewTable
+            credits={person.combined_credits.crew}
+            style={styles.table}
+        /> : gone
 
         return <View style={styles.details}>
             {nameWidget}
@@ -240,7 +254,10 @@ export class PersonDetailsWidget extends Component<PersonDetailsWidgetProps, Per
             {summaryLabel}
             {summaryWidget}
             {creditsLabel}
-            {creditsWidget}
+            {castLabel}
+            {castWidget}
+            {crewLabel}
+            {crewWidget}
         </View>
     }
 }
@@ -254,6 +271,7 @@ const styleSheet = StyleSheet.create({
         flexWrap: "wrap",
         fontSize: 24,
         fontWeight: "bold",
+        paddingBottom: 4,
     },
     icon: {
         marginBottom: 8,
@@ -265,6 +283,11 @@ const styleSheet = StyleSheet.create({
         flexWrap: "wrap",
         fontSize: 18,
         fontWeight: "bold",
+        paddingBottom: 4,
+    },
+    name: {
+        fontSize: 32,
+        paddingBottom: 8,
     },
     poster: {
         borderRadius: R.dimen.cardRadius,
@@ -272,14 +295,12 @@ const styleSheet = StyleSheet.create({
         height: posterDetailsHeight,
         width: posterDetailsWidth,
     },
-    name: {
-        fontSize: 32,
-        paddingBottom: 8,
+    table: {
+        marginBottom: 14,
     },
     text: {
         flexWrap: "wrap",
         fontSize: 18,
         paddingBottom: 4,
-        paddingTop: 4,
     },
 })
