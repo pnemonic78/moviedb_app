@@ -1,3 +1,4 @@
+import { Utils } from "../../components/main/Utils"
 import { Media, MediaClass } from "./Media"
 
 export interface Movie extends Media {
@@ -19,9 +20,10 @@ export class MovieClass extends MediaClass {
     static date(movie: Movie): Date | null {
         let date = movie.release_date
         if (date) {
-            if (typeof date === 'string' || date instanceof String) {
-                if (date.length) {
-                    date = new Date(date)
+            if (Utils.isString(date)) {
+                let s = date as unknown as string
+                if (s.length) {
+                    date = new Date(s)
                     movie.release_date = date
                 } else {
                     return null

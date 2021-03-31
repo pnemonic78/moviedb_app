@@ -1,3 +1,4 @@
+import { Utils } from "../../components/main/Utils"
 import { PersonCreditsResponse } from "../PersonCreditsResponse"
 import { Gender } from "./Gender"
 import { Media, MediaClass } from "./Media"
@@ -20,13 +21,14 @@ export interface Person extends Media {
     profile_path: string
 }
 
-export class PersonClass extends MediaClass {
+export class PersonClass {
     static date(person: Person): Date | null {
         let date = person.birthday
         if (date) {
-            if (typeof date === 'string' || date instanceof String) {
-                if (date.length) {
-                    date = new Date(date)
+            if (Utils.isString(date)) {
+                let s = date as unknown as string
+                if (s.length) {
+                    date = new Date(s)
                     person.birthday = date
                 } else {
                     return null

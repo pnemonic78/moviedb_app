@@ -28,7 +28,7 @@ export interface Media {
 // }
 }
 
-export abstract class MediaClass {
+export class MediaClass {
     static date(media: Media): Date | null {
         let mediaType = media.media_type
         switch (mediaType) {

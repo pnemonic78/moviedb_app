@@ -89,23 +89,23 @@ export class MovieDetailsWidget extends Component<MovieDetailsWidgetProps, Movie
 
         let runtimeWidget = hasRuntime ? <Text style={styles.text}>{Utils.formatDuration(movie.runtime)}</Text> : gone
 
-        let hasBudget = (movie.budget != null) && (movie.budget > 0)
+        let hasBudget = (movie.budget) && (movie.budget > 0)
 
         let budgetLabel = hasBudget ? <Text style={styles.label}>{R.string.budget_label}</Text> : gone
 
         let budgetWidget = hasBudget ? <Text style={styles.text}>{Utils.formatCurrency(movie.budget)}</Text> : gone
 
-        let hasRevenue = (movie.revenue != null) && (movie.revenue > 0)
+        let hasRevenue = (movie.revenue) && (movie.revenue > 0)
 
         let revenueLabel = hasRevenue ? <Text style={styles.label}>{R.string.revenue_label}</Text> : gone
 
         let revenueWidget = hasRevenue ? <Text style={styles.text}>{Utils.formatCurrency(movie.revenue)}</Text> : gone
 
-        let hasDate = (movie.release_date != null)
+        let hasDate = (movie.release_date)
 
         let dateLabel = hasDate ? <Text style={styles.label}>{R.string.release_date_label}</Text> : gone
 
-        let dateWidget = hasDate ? <Text style={styles.text}>{Utils.formatDate(movie.release_date!)}</Text> : gone
+        let dateWidget = hasDate ? <Text style={styles.text}>{Utils.formatDate(movie.release_date)}</Text> : gone
 
         let hasGenres = movie.genres?.length
 

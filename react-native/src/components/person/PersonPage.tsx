@@ -40,7 +40,7 @@ export class PersonPageComponent extends Component<PersonPageProps> {
         let routeParams = this.props.route.params as PersonPageParams
         let personProp = this.props.person ?? routeParams?.person
         let personId = personProp?.id ?? 0
-        let person = this.props.people.get(personId) ?? (personProp as Person)
+        let person = this.props.people.get(personId) ?? personProp
         return person
     }
 
@@ -78,6 +78,7 @@ export class PersonPageComponent extends Component<PersonPageProps> {
         let navigation = this.props.navigation
         if (cast.media_type == MediaType.movie) {
             let movie = cast as unknown as Movie
+            // TODO fetch movie details
             navigation.navigate(ScreenName.MOVIE_DETAILS, { movie })
         }
     }
@@ -86,6 +87,7 @@ export class PersonPageComponent extends Component<PersonPageProps> {
         let navigation = this.props.navigation
         if (crew.media_type == MediaType.movie) {
             let movie = crew as unknown as Movie
+            // TODO fetch movie details
             navigation.navigate(ScreenName.MOVIE_DETAILS, { movie })
         }
     }
