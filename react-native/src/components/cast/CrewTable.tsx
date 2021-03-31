@@ -1,7 +1,5 @@
-import React from "react"
 import { PersonCrew } from "../../tmdb_api/model/PersonCrew"
 import { CreditsTable, CreditsTableProps, CreditsTableStyles } from "./CreditsTable"
-import { Text } from "react-native-elements"
 import { MediaClass } from "../../tmdb_api/model/Media"
 import R from "../../res/R"
 

@@ -1,13 +1,20 @@
+import { StackScreenProps } from "@react-navigation/stack"
 import React, { Component } from "react"
 import { GestureResponderEvent, Pressable, StyleSheet, Text, View } from "react-native"
 import { Icon } from "react-native-elements"
 import R from "../../res/R"
 import { Gender, toGender } from "../../tmdb_api/model/Gender"
+import { MediaType } from "../../tmdb_api/model/MediaType"
+import { Movie } from "../../tmdb_api/model/Movie"
 import { Person, PersonClass } from "../../tmdb_api/model/Person"
+import { PersonCast } from "../../tmdb_api/model/PersonCast"
+import { PersonCrew } from "../../tmdb_api/model/PersonCrew"
 import TMDBApi from "../../tmdb_api/TMDBApi"
+import { OnCastPress, OnCrewPress, OnPersonCrewPress } from "../cast/CastClickListener"
 import { CastTable } from "../cast/CastTable"
 import { CrewTable } from "../cast/CrewTable"
 import { LoadingIcon } from "../LoadingIcon"
+import { ScreenName } from "../main/ScreenName"
 import { Utils } from "../main/Utils"
 import { OnPersonPress, OnPersonSocialPress } from "./PersonClickListener"
 
@@ -23,6 +30,8 @@ interface PersonDetailsWidgetProps {
     person: Person
     onPosterPress?: OnPersonPress
     onSocialPress?: OnPersonSocialPress
+    onCastPress?: OnCastPress
+    onCrewPress?: OnCrewPress
 }
 
 interface PersonDetailsWidgetState {
@@ -70,6 +79,14 @@ export class PersonDetailsWidget extends Component<PersonDetailsWidgetProps, Per
         let person = this.props.person
         let url = TMDBApi.generateTwitterUrl(person.external_ids?.twitter_id)
         this.props.onSocialPress?.(person, url)
+    }
+
+    private onTapCast(cast: PersonCast) {
+        this.props.onCastPress?.(cast)
+    }
+
+    private onTapCrew(crew: PersonCrew) {
+        this.props.onCrewPress?.(crew)
     }
 
     render() {
@@ -212,13 +229,15 @@ export class PersonDetailsWidget extends Component<PersonDetailsWidgetProps, Per
 
         let castLabel = hasCast ? <Text style={styles.label}>{R.string.cast_label}</Text> : gone
         let castWidget = hasCast ? <CastTable
-            credits={person.combined_credits.cast!}
+            credits={person.combined_credits.cast}
+            onCreditPress={this.onTapCast.bind(this)}
             style={styles.table}
         /> : gone
 
         let crewLabel = hasCrew ? <Text style={styles.label}>{R.string.person_crew_label}</Text> : gone
         let crewWidget = hasCrew ? <CrewTable
             credits={person.combined_credits.crew}
+            onCreditPress={this.onTapCrew.bind(this)}
             style={styles.table}
         /> : gone
 

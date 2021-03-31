@@ -40,12 +40,16 @@ export abstract class CreditsTable<C extends PersonCredit, P extends CreditsTabl
         let date = MediaClass.date(credit)
         let year = date?.getFullYear()?.toString() ?? "—"
 
-        return <Pressable onPress={() => console.log("1")}>
-            <Text style={styles.year}>{year}</Text>
-        </Pressable>
+        return <Text style={styles.year}>{year}</Text>
     }
 
     protected abstract renderDescriptionCell(credit: C): JSX.Element
+
+    private renderCell(credit: C, cell: JSX.Element): JSX.Element {
+        return <Pressable onPress={() => this.onTapCredit(credit)}>
+            {cell}
+        </Pressable>
+    }
 
     private buildData(): any[][] {
         let credits = this.props.credits
@@ -56,19 +60,19 @@ export abstract class CreditsTable<C extends PersonCredit, P extends CreditsTabl
             let credit = c as unknown as C
             let yearWidget = this.renderYearCell(credit)
             let descWidget = this.renderDescriptionCell(credit)
-            data.push([yearWidget, descWidget])
+            data.push([
+                this.renderCell(credit, yearWidget),
+                this.renderCell(credit, descWidget)
+            ])
         }
 
         return data
     }
 
     private compareTo(a: C, b: C): number {
-        let d1 = this.getDate(a)
-        let d2 = this.getDate(b)
-        if (d1 === d2) return 0
-        if (d1 == null) return -1
-        if (d2 == null) return -1
-        return d2.getTime() - d1.getTime()
+        let t1 = this.getDate(a)?.getTime() ?? Number.MAX_VALUE
+        let t2 = this.getDate(b)?.getTime() ?? Number.MAX_VALUE
+        return t2 - t1
     }
 
     private getDate(credit: C): Date | null {
@@ -90,6 +94,10 @@ export abstract class CreditsTable<C extends PersonCredit, P extends CreditsTabl
             </Text>
         }
         return <Text style={style}>{s}</Text>
+    }
+
+    private onTapCredit(credit: C) {
+        this.props.onCreditPress?.(credit)
     }
 }
 

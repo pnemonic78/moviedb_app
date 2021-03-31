@@ -1,9 +1,6 @@
-import React from "react"
 import { PersonCast } from "../../tmdb_api/model/PersonCast"
 import { CreditsTable, CreditsTableProps, CreditsTableStyles } from "./CreditsTable"
-import { Text } from "react-native-elements"
 import R from "../../res/R"
-import { MovieClass } from "../../tmdb_api/model/Movie"
 import { MediaClass } from "../../tmdb_api/model/Media"
 
 interface CastTableProps extends CreditsTableProps<PersonCast> {

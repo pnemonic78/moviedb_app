@@ -11,8 +11,11 @@ import { AppReducersState } from "../../redux/reducers/AppReducer"
 import TMDBApi from "../../tmdb_api/TMDBApi"
 import TMDBApiImpl from "../../tmdb_api/TMDBApiImpl"
 import { fetchedPersonDetails } from "../../redux/actions/PersonDetailsAction"
-import { SocialIcon, SocialMediaType } from "react-native-elements"
 import { Linking } from "react-native"
+import { PersonCast } from "../../tmdb_api/model/PersonCast"
+import { MediaType } from "../../tmdb_api/model/MediaType"
+import { Movie } from "../../tmdb_api/model/Movie"
+import { PersonCrew } from "../../tmdb_api/model/PersonCrew"
 
 interface PersonPageParams extends ParamListBase {
     person: Person
@@ -71,6 +74,22 @@ export class PersonPageComponent extends Component<PersonPageProps> {
         Linking.openURL(url)
     }
 
+    private onTapCast(cast: PersonCast) {
+        let navigation = this.props.navigation
+        if (cast.media_type == MediaType.movie) {
+            let movie = cast as unknown as Movie
+            navigation.navigate(ScreenName.MOVIE_DETAILS, { movie })
+        }
+    }
+
+    private onTapCrew(crew: PersonCrew) {
+        let navigation = this.props.navigation
+        if (crew.media_type == MediaType.movie) {
+            let movie = crew as unknown as Movie
+            navigation.navigate(ScreenName.MOVIE_DETAILS, { movie })
+        }
+    }
+
     render() {
         let person = this.getPerson()
 
@@ -78,6 +97,8 @@ export class PersonPageComponent extends Component<PersonPageProps> {
             person={person}
             onPosterPress={this.onTapPoster.bind(this)}
             onSocialPress={this.onTapSocial.bind(this)}
+            onCastPress={this.onTapCast.bind(this)}
+            onCrewPress={this.onTapCrew.bind(this)}
         />
 
         return <ScrollView>
