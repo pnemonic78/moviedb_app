@@ -1,5 +1,5 @@
 import React, { Component, ReactNode } from 'react'
-import { Image, ImageProps, ImageStyle, View } from 'react-native'
+import { Image, ImageProps, ImageStyle, ImageURISource, View } from 'react-native'
 import { Icon } from 'react-native-elements'
 import { IconResource } from '../res/icons'
 
@@ -19,14 +19,20 @@ export class LoadingIcon extends Component<LoadingIconProps> {
         let height = (props.height ?? props.style?.height) as number
         let size = Math.min(width, height)
 
-        let image = <Image
-            {...props}
-            style={[props.style, {
-                height: height,
-                width: width,
-                position: 'absolute',
-            }]}
-        />
+        var image = null;
+        let uri = (props.source as ImageURISource)?.uri;
+        if (uri?.length) {
+            image = <Image
+                {...props}
+                style={[props.style, {
+                    height: height,
+                    width: width,
+                    position: 'absolute',
+                }]}
+            />
+        } else {
+            image = <View/>
+        }
 
         return <View>
             <Icon

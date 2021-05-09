@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Dimensions, ImageBackground, Platform, StyleSheet, Text, View } from "react-native"
+import { Dimensions, Platform, StyleSheet, Text, View } from "react-native"
 import { ParamListBase } from "@react-navigation/routers"
 import { HeaderBackButton, StackScreenProps } from "@react-navigation/stack"
 import { Movie, MovieClass } from "../../tmdb_api/model/Movie"

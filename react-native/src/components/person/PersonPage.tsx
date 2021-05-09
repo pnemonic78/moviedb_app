@@ -78,7 +78,6 @@ export class PersonPageComponent extends Component<PersonPageProps> {
         let navigation = this.props.navigation
         if (cast.media_type == MediaType.movie) {
             let movie = cast as unknown as Movie
-            // TODO fetch movie details
             navigation.navigate(ScreenName.MOVIE_DETAILS, { movie })
         }
     }
@@ -87,7 +86,6 @@ export class PersonPageComponent extends Component<PersonPageProps> {
         let navigation = this.props.navigation
         if (crew.media_type == MediaType.movie) {
             let movie = crew as unknown as Movie
-            // TODO fetch movie details
             navigation.navigate(ScreenName.MOVIE_DETAILS, { movie })
         }
     }

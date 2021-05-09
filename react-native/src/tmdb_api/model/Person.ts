@@ -1,7 +1,7 @@
 import { Utils } from "../../components/main/Utils"
 import { PersonCreditsResponse } from "../PersonCreditsResponse"
 import { Gender } from "./Gender"
-import { Media, MediaClass } from "./Media"
+import { Media } from "./Media"
 import { PersonExternalIds } from "./PersonExternalIds"
 
 export interface Person extends Media {
