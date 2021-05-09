@@ -9,7 +9,7 @@ export interface Movie extends Media {
     original_title: string
     overview: string
     poster_path: string
-    release_date?: Date
+    release_date?: string  // date
     title: string
     video: boolean
     vote_average: number
@@ -18,18 +18,9 @@ export interface Movie extends Media {
 
 export class MovieClass extends MediaClass {
     static date(movie: Movie): Date | null {
-        let date = movie.release_date
-        if (date) {
-            if (Utils.isString(date)) {
-                let s = date as unknown as string
-                if (s.length) {
-                    date = new Date(s)
-                    movie.release_date = date
-                } else {
-                    return null
-                }
-            }
-            return date
+        let s = movie.release_date
+        if (s?.length) {
+            return new Date(s)
         }
         return null
     }

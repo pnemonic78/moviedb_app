@@ -6,7 +6,7 @@ import { Media, MediaClass } from "./Media"
 export interface Television extends Media {
     backdrop_path?: string
     episode_count: number
-    first_air_date: Date | null
+    first_air_date: string | null // Date
     genres: Genre[]
     name: string
     origin_country: string
@@ -20,18 +20,9 @@ export interface Television extends Media {
 
 export class TelevisionClass {
     static date(tv: Television): Date | null {
-        let date = tv.first_air_date
-        if (date) {
-            if (Utils.isString(date)) {
-                let s = date as unknown as string
-                if (s.length) {
-                    date = new Date(s)
-                    tv.first_air_date = date
-                } else {
-                    return null
-                }
-            }
-            return date
+        let s = tv.first_air_date
+        if (s?.length) {
+            return new Date(s)
         }
         return null
     }
