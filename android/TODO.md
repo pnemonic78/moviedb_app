@@ -1,0 +1,12 @@
+# TO DO
+- migrate Dagger to Hilt
+- migrate Activities to Activity+Fragments
+- navigation
+- migrate Presenter to ViewModel
+- migrate Gson to Kotlin Serialization
+- migrate XML layouts to Composable
+- add movie categories screen
+- add movies grid screen
+- add movies details
+- add person screen
+- add image zoom screen
