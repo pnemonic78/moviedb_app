@@ -1,5 +1,4 @@
 # To Do
-- refactor `tmdbcodlab` package to `tmdb`
 - migrate Activities to Activity+Fragments
 - navigation
 - migrate RxJava to Kotlin Flow

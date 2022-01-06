@@ -1,0 +1,27 @@
+package com.tikal.tmdb.ui.movies
+
+import android.content.Intent
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.tikal.tmdb.R
+import com.tikal.tmdb.model.Movie
+import com.tikal.tmdb.ui.moviedetails.MovieDetailActivity
+import dagger.hilt.android.AndroidEntryPoint
+
+/**
+ * Created by ronelg on 12/19/17.
+ */
+@AndroidEntryPoint
+class MoviesActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_movies)
+    }
+
+    fun showMovieDetails(movie: Movie) {
+        val intent = Intent(this, MovieDetailActivity::class.java)
+        intent.putExtra(MovieDetailActivity.EXTRA_MOVIE_ID, movie.id)
+        startActivity(intent)
+    }
+
+}
