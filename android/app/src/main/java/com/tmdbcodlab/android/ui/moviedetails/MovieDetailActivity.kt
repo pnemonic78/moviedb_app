@@ -5,14 +5,16 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NavUtils
 import com.tmdbcodlab.android.R
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Created by ronelg on 12/19/17.
  */
+@AndroidEntryPoint
 class MovieDetailActivity : AppCompatActivity() {
 
     companion object {
-        val EXTRA_MOVIE_ID = "movie_id"
+        const val EXTRA_MOVIE_ID = "movie_id"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +25,8 @@ class MovieDetailActivity : AppCompatActivity() {
 
         val movieId = intent.getLongExtra(EXTRA_MOVIE_ID, 0L)
 
-        val fragment = supportFragmentManager.findFragmentById(R.id.movie_details) as MovieDetailFragment
+        val fragment =
+            supportFragmentManager.findFragmentById(R.id.movie_details) as MovieDetailFragment
         fragment.setMovieId(movieId)
     }
 

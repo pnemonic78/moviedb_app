@@ -11,16 +11,17 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.Fragment
-import com.tmdbcodlab.android.MyApplication
 import com.tmdbcodlab.android.R
 import com.tmdbcodlab.android.api.TmdbApi
 import com.tmdbcodlab.android.data.TmdbRepository
 import com.tmdbcodlab.android.model.MovieDetails
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 /**
  * Created by ronelg on 12/19/17.
  */
+@AndroidEntryPoint
 class MovieDetailFragment : Fragment(), MovieDetailsContract.View {
 
     @Inject
@@ -37,11 +38,14 @@ class MovieDetailFragment : Fragment(), MovieDetailsContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MyApplication.appComponent.inject(this)
         presenter = MovieDetailsPresenter(repository, this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         return inflater.inflate(R.layout.fragment_details, container, false)
     }
 
@@ -92,7 +96,8 @@ class MovieDetailFragment : Fragment(), MovieDetailsContract.View {
         title!!.text = movie.title
         summary!!.text = movie.overview
         popularity!!.progress = (movie.voteAverage * 10f).toInt()
-        date!!.text = DateUtils.formatDateTime(context, movie.releaseDate.time, DateUtils.FORMAT_SHOW_DATE)
+        date!!.text =
+            DateUtils.formatDateTime(context, movie.releaseDate.time, DateUtils.FORMAT_SHOW_DATE)
 
         val imageView = poster!!
         if (imageView.measuredWidth > 0) {
@@ -105,14 +110,6 @@ class MovieDetailFragment : Fragment(), MovieDetailsContract.View {
                 }
             }
             imageView.viewTreeObserver.addOnGlobalLayoutListener(listener)
-        }
-    }
-
-    companion object {
-        fun newInstance(movieId: Long): MovieDetailFragment {
-            val instance = MovieDetailFragment()
-            instance.setMovieId(movieId)
-            return instance
         }
     }
 }

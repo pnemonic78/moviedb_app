@@ -5,16 +5,17 @@ import com.tmdbcodlab.android.data.source.TmdbDataSource
 import com.tmdbcodlab.android.model.Movie
 import com.tmdbcodlab.android.model.MovieDetails
 import io.reactivex.Observable
+import javax.inject.Inject
 
 /**
  * Created by ronelg on 12/19/17.
  */
-class TmdbRemoteDataSource(val service: TmdbService) : TmdbDataSource {
+class TmdbRemoteDataSource @Inject constructor(private val service: TmdbService) : TmdbDataSource {
 
     override fun getMoviesNowPlaying(): Observable<List<Movie>> {
         return service.getMoviesNowPlaying()
-                .map { it.results }
-                .cache()
+            .map { it.results }
+            .cache()
     }
 
     override fun getMovieDetails(movieId: Long): Observable<MovieDetails> {

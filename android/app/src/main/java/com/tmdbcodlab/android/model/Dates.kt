@@ -7,5 +7,6 @@ import java.util.Date
  * Dates.
  */
 class Dates(
-        @SerializedName("maximum") val maximum: Date,
-        @SerializedName("minimum") val minimum: Date)
+    @SerializedName("maximum") val maximum: Date,
+    @SerializedName("minimum") val minimum: Date
+)

@@ -7,16 +7,15 @@ import com.tmdbcodlab.android.data.source.remote.TmdbRemoteDataSource
 import com.tmdbcodlab.android.model.Movie
 import com.tmdbcodlab.android.model.MovieDetails
 import io.reactivex.Observable
+import javax.inject.Inject
 
 /**
  * Created by ronelg on 12/19/17.
  */
-class TmdbRepository(private val localRepository: TmdbLocalDataSource,
-                     private val remoteRepository: TmdbRemoteDataSource)
-    : TmdbDataSource {
-
-    private val CACHE_PREFIX_MOVIE_NOW_PLAYING = "getMoviesNowPlaying/"
-    private val CACHE_PREFIX_MOVIE_DETAILS = "getMovieDetails/"
+class TmdbRepository @Inject constructor(
+    private val localRepository: TmdbLocalDataSource,
+    private val remoteRepository: TmdbRemoteDataSource
+) : TmdbDataSource {
 
     private val cache = LruCache<String, Observable<*>>(100)
 
@@ -46,5 +45,10 @@ class TmdbRepository(private val localRepository: TmdbLocalDataSource,
         }
         cache.put(key, observable)
         return observable
+    }
+
+    companion object {
+        private const val CACHE_PREFIX_MOVIE_NOW_PLAYING = "getMoviesNowPlaying/"
+        private const val CACHE_PREFIX_MOVIE_DETAILS = "getMovieDetails/"
     }
 }

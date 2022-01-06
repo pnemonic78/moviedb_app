@@ -1,13 +1,10 @@
 package com.tmdbcodlab.android.model
 
-import com.google.gson.annotations.SerializedName
-
 /**
  * Created by ronelg on 12/19/17.
  */
 interface MovieBase {
-//    @SerializedName("id")  var id: Long
-//
+//    @SerializedName("id")  var id: Long,
 //                         open var adult: Boolean,
 //                         @SerializedName("backdrop_path") open var backdropPath: String?,
 //                         @SerializedName("genre_ids") open var genreIds: List<Long>,

@@ -7,15 +7,16 @@ import android.view.ViewGroup
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.tmdbcodlab.android.MyApplication
 import com.tmdbcodlab.android.R
 import com.tmdbcodlab.android.data.TmdbRepository
 import com.tmdbcodlab.android.model.Movie
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 /**
  * Created by ronelg on 12/19/17.
  */
+@AndroidEntryPoint
 class MoviesFragment : Fragment(), MoviesContract.View, MoviesAdapter.MovieListener {
 
     @Inject
@@ -27,11 +28,14 @@ class MoviesFragment : Fragment(), MoviesContract.View, MoviesAdapter.MovieListe
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MyApplication.appComponent.inject(this)
         presenter = MoviesPresenter(repository, this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         return inflater.inflate(R.layout.fragment_movies, container, false)
     }
 
@@ -73,11 +77,5 @@ class MoviesFragment : Fragment(), MoviesContract.View, MoviesAdapter.MovieListe
 
     override fun showMovieDetails(movie: Movie) {
         (activity as MoviesActivity).showMovieDetails(movie)
-    }
-
-    companion object {
-        fun newInstance(): MoviesFragment {
-            return MoviesFragment()
-        }
     }
 }

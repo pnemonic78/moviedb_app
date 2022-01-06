@@ -9,8 +9,10 @@ import io.reactivex.schedulers.Schedulers
 /**
  * Created by ronelg on 12/19/17.
  */
-class MovieDetailsPresenter(private val repository: TmdbDataSource,
-                            private val view: MovieDetailsContract.View) : MovieDetailsContract.Presenter {
+class MovieDetailsPresenter(
+    private val repository: TmdbDataSource,
+    private val view: MovieDetailsContract.View
+) : MovieDetailsContract.Presenter {
 
     private val TAG = "MovieDetailsPresenter"
 
@@ -31,15 +33,15 @@ class MovieDetailsPresenter(private val repository: TmdbDataSource,
         view.showLoadingIndicator(true)
 
         val disposable = repository.getMovieDetails(movieId)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe({ res ->
-                    view.showMovie(res)
-                    view.showLoadingIndicator(false)
-                }, { t ->
-                    Log.e(TAG, "loadMovie($movieId) error: $t")
-                    view.showLoadingIndicator(false)
-                })
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe({ res ->
+                view.showMovie(res)
+                view.showLoadingIndicator(false)
+            }, { t ->
+                Log.e(TAG, "loadMovie($movieId) error: $t")
+                view.showLoadingIndicator(false)
+            })
 
         disposables.add(disposable)
     }

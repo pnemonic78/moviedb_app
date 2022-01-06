@@ -15,7 +15,8 @@ import com.tmdbcodlab.android.model.Movie
 /**
  * @author moshe on 2018/02/11.
  */
-class MoviesAdapter(var listener: MovieListener? = null) : RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
+class MoviesAdapter(var listener: MovieListener? = null) :
+    RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
 
     var data: List<Movie> = emptyList()
 
@@ -47,7 +48,8 @@ class MoviesAdapter(var listener: MovieListener? = null) : RecyclerView.Adapter<
         fun onMovieClicked(movie: Movie)
     }
 
-    inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener {
 
         private val title: TextView = itemView.findViewById(android.R.id.title)
         private val summary: TextView = itemView.findViewById(android.R.id.summary)
@@ -64,7 +66,11 @@ class MoviesAdapter(var listener: MovieListener? = null) : RecyclerView.Adapter<
             title.text = movie.title
             summary.text = movie.overview
             popularity.progress = (movie.voteAverage * 10f).toInt()
-            date.text = DateUtils.formatDateTime(context, movie.releaseDate.time, DateUtils.FORMAT_SHOW_DATE)
+            date.text = DateUtils.formatDateTime(
+                context,
+                movie.releaseDate.time,
+                DateUtils.FORMAT_SHOW_DATE
+            )
 
             TmdbApi.showPoster(movie, poster)
 

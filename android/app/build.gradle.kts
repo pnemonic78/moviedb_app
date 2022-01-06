@@ -1,7 +1,8 @@
 plugins {
     id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
+    kotlin("android")
+    kotlin("kapt")
 }
 
 android {
@@ -33,59 +34,55 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
-        useIR = true
+        // useIR = true
     }
     buildFeatures {
         compose = true
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.1.0-rc01"
+    }
+}
+
+kapt {
+    correctErrorTypes = true
 }
 
 dependencies {
     // Jetpack
     implementation("androidx.appcompat:appcompat:1.4.0")
     implementation("androidx.cardview:cardview:1.0.0")
-    implementation("androidx.compose.ui:ui:${rootProject.extra["composeVersion"]}")
-    implementation("androidx.compose.material:material:${rootProject.extra["composeVersion"]}")
-    implementation("androidx.compose.ui:ui-tooling:${rootProject.extra["composeVersion"]}")
+    implementation("androidx.compose.ui:ui:1.1.0-rc01")
+    implementation("androidx.compose.material:material:1.1.0-rc01")
+    implementation("androidx.compose.ui:ui-tooling:1.1.0-rc01")
     implementation("androidx.constraintlayout:constraintlayout:2.1.2")
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
 
-    // Kotlin
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${rootProject.extra["kotlinVersion"]}")
-
     // Rx
-    implementation("io.reactivex.rxjava2:rxandroid:${rootProject.extra["rxandroid2Version"]}")
-    implementation("io.reactivex.rxjava2:rxkotlin:${rootProject.extra["rxkotlin2Version"]}")
-    implementation("com.jakewharton.rxbinding2:rxbinding-kotlin:${rootProject.extra["rxkbinding2Version"]}")
+    implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
+    implementation("io.reactivex.rxjava2:rxkotlin:2.4.0")
 
     // DI
-    implementation("com.google.dagger:dagger:${rootProject.extra["dagger2Version"]}")
-    implementation("com.google.dagger:dagger-android:${rootProject.extra["dagger2Version"]}")
-    implementation("com.google.dagger:dagger-android-support:${rootProject.extra["dagger2Version"]}")
-    kapt("com.google.dagger:dagger-android-processor:${rootProject.extra["dagger2Version"]}")
-    kapt("com.google.dagger:dagger-compiler:${rootProject.extra["dagger2Version"]}")
-
-    // SQL
-    implementation("com.squareup.sqlbrite2:sqlbrite-kotlin:${rootProject.extra["sqlbrite2Version"]}")
+    implementation("com.google.dagger:hilt-android:2.38.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.38.1")
 
     // Logging
-    implementation("com.jakewharton.timber:timber:${rootProject.extra["timberVersion"]}")
+    implementation("com.jakewharton.timber:timber:4.7.1")
 
     // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:${rootProject.extra["retrofit2Version"]}")
-    implementation("com.squareup.retrofit2:converter-gson:${rootProject.extra["retrofit2Version"]}")
-    implementation("com.squareup.retrofit2:adapter-rxjava2:${rootProject.extra["retrofit2Version"]}")
-    implementation("com.squareup.okhttp3:okhttp:${rootProject.extra["okhttp3Version"]}")
-    implementation("com.squareup.okhttp3:logging-interceptor:${rootProject.extra["okhttp3Version"]}")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
 
     // Images
-    implementation("com.github.bumptech.glide:glide:${rootProject.extra["glideVersion"]}")
+    implementation("com.github.bumptech.glide:glide:4.12.0")
 
     // Test
-    androidTestImplementation("androidx.test.espresso:espresso-core:${rootProject.extra["espressoVersion"]}")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
     androidTestImplementation("androidx.test:runner:1.4.0")
     androidTestImplementation("androidx.test:rules:1.4.0")
-    testImplementation("junit:junit:${rootProject.extra["junitVersion"]}")
+    testImplementation("junit:junit:4.13.2")
 }

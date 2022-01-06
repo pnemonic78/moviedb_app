@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.tmdbcodlab.android.R
 import com.tmdbcodlab.android.model.Movie
 import com.tmdbcodlab.android.ui.moviedetails.MovieDetailActivity
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Created by ronelg on 12/19/17.
  */
+@AndroidEntryPoint
 class MoviesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

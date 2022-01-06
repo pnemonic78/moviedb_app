@@ -1,9 +1,10 @@
-# TO DO
-- migrate Dagger to Hilt
+# To Do
+- refactor `tmdbcodlab` package to `tmdb`
 - migrate Activities to Activity+Fragments
 - navigation
-- migrate Presenter to ViewModel
+- migrate RxJava to Kotlin Flow
 - migrate Gson to Kotlin Serialization
+- migrate Presenter to ViewModel
 - migrate XML layouts to Composable
 - add movie categories screen
 - add movies grid screen

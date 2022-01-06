@@ -1,6 +1,6 @@
 package com.tmdbcodlab.android
 
-interface BaseView<P: BasePresenter> {
+interface BaseView<P : BasePresenter> {
 
     var presenter: P?
 
