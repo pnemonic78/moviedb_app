@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.tikal.tmdb.R
 import com.tikal.tmdb.data.TmdbRepository
@@ -77,15 +78,9 @@ class MoviesFragment : Fragment(), MoviesContract.View, MoviesAdapter.MovieListe
     }
 
     override fun showMovieDetails(movie: Movie) {
-        val fm = parentFragmentManager
-        val fragment = MovieDetailFragment().apply {
-            arguments = Bundle().apply {
-                putLong(MovieDetailFragment.EXTRA_MOVIE_ID, movie.id)
-            }
+        val args = Bundle().apply {
+            putLong(MovieDetailFragment.EXTRA_MOVIE_ID, movie.id)
         }
-        fm.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .addToBackStack("details")
-            .commit()
+        findNavController().navigate(R.id.movieDetailFragment, args)
     }
 }

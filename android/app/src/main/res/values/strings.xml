@@ -4,4 +4,7 @@
     <string name="popularity_label">User Score</string>
     <string name="date_label">Release Date</string>
     <string name="dummy_title" translatable="false">Title that is long and wraps to few lines</string>
+
+    <string name="movies_title">TMDB Movies</string>
+    <string name="movies_details_title">TMDB Movie Details</string>
 </resources>

@@ -1,5 +1,4 @@
 # To Do
-- navigation
 - migrate RxJava to Kotlin Flow
 - migrate Gson to Kotlin Serialization
 - migrate MVP to MVVM
