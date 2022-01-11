@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tikal.tmdb.R
 import com.tikal.tmdb.data.TmdbRepository
 import com.tikal.tmdb.model.Movie
+import com.tikal.tmdb.ui.moviedetails.MovieDetailFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -76,6 +77,15 @@ class MoviesFragment : Fragment(), MoviesContract.View, MoviesAdapter.MovieListe
     }
 
     override fun showMovieDetails(movie: Movie) {
-        //TODO (activity as MoviesActivity).showMovieDetails(movie)
+        val fm = parentFragmentManager
+        val fragment = MovieDetailFragment().apply {
+            arguments = Bundle().apply {
+                putLong(MovieDetailFragment.EXTRA_MOVIE_ID, movie.id)
+            }
+        }
+        fm.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack("details")
+            .commit()
     }
 }

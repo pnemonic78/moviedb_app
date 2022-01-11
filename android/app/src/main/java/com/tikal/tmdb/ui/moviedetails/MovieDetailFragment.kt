@@ -39,6 +39,9 @@ class MovieDetailFragment : Fragment(), MovieDetailsContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter = MovieDetailsPresenter(repository, this)
+
+        val movieId = arguments?.getLong(EXTRA_MOVIE_ID, 0L) ?: 0L
+        setMovieId(movieId)
     }
 
     override fun onCreateView(
@@ -111,5 +114,9 @@ class MovieDetailFragment : Fragment(), MovieDetailsContract.View {
             }
             imageView.viewTreeObserver.addOnGlobalLayoutListener(listener)
         }
+    }
+
+    companion object {
+        const val EXTRA_MOVIE_ID = "movie_id"
     }
 }

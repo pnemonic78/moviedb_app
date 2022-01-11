@@ -1,9 +1,8 @@
 # To Do
-- migrate Activities to Activity+Fragments
 - navigation
 - migrate RxJava to Kotlin Flow
 - migrate Gson to Kotlin Serialization
-- migrate Presenter to ViewModel
+- migrate MVP to MVVM
 - migrate XML layouts to Composable
 - add movie categories screen
 - add movies grid screen

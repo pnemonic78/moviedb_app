@@ -19,7 +19,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.tikal.tmdb.ui.moviedetails.MovieDetailActivity" />
     </application>
 
 </manifest>
