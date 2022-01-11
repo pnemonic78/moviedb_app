@@ -19,14 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.tikal.tmdb.ui.movies.MoviesActivity" />
-        <activity
-            android:name="com.tikal.tmdb.ui.moviedetails.MovieDetailActivity"
-            android:parentActivityName="com.tikal.tmdb.ui.movies.MoviesActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.tikal.tmdb.ui.movies.MoviesActivity" />
-        </activity>
+        <activity android:name="com.tikal.tmdb.ui.moviedetails.MovieDetailActivity" />
     </application>
 
 </manifest>

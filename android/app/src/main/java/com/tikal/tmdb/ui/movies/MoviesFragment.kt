@@ -22,7 +22,7 @@ class MoviesFragment : Fragment(), MoviesContract.View, MoviesAdapter.MovieListe
     @Inject
     lateinit var repository: TmdbRepository
 
-    override var presenter: MoviesContract.Presenter? = null
+    override lateinit var presenter: MoviesContract.Presenter
     private var progressBar: ContentLoadingProgressBar? = null
     private val adapter: MoviesAdapter = MoviesAdapter(this)
 
@@ -47,12 +47,12 @@ class MoviesFragment : Fragment(), MoviesContract.View, MoviesAdapter.MovieListe
 
     override fun onStart() {
         super.onStart()
-        presenter?.subscribe()
+        presenter.subscribe()
     }
 
     override fun onStop() {
         super.onStop()
-        presenter?.unsubscribe()
+        presenter.unsubscribe()
     }
 
     override fun showLoadingIndicator(active: Boolean) {
@@ -72,10 +72,10 @@ class MoviesFragment : Fragment(), MoviesContract.View, MoviesAdapter.MovieListe
     }
 
     override fun onMovieClicked(movie: Movie) {
-        presenter?.onMovieClicked(movie)
+        presenter.onMovieClicked(movie)
     }
 
     override fun showMovieDetails(movie: Movie) {
-        (activity as MoviesActivity).showMovieDetails(movie)
+        //TODO (activity as MoviesActivity).showMovieDetails(movie)
     }
 }

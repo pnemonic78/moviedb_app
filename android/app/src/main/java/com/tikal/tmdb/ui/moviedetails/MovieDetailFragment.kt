@@ -27,7 +27,7 @@ class MovieDetailFragment : Fragment(), MovieDetailsContract.View {
     @Inject
     lateinit var repository: TmdbRepository
 
-    override var presenter: MovieDetailsContract.Presenter? = null
+    override lateinit var presenter: MovieDetailsContract.Presenter
     private var movieId: Long? = null
     private var progressBar: ContentLoadingProgressBar? = null
     private var title: TextView? = null
@@ -62,24 +62,24 @@ class MovieDetailFragment : Fragment(), MovieDetailsContract.View {
 
     override fun onStart() {
         super.onStart()
-        presenter?.subscribe()
+        presenter.subscribe()
     }
 
     override fun onStop() {
         super.onStop()
-        presenter?.unsubscribe()
+        presenter.unsubscribe()
     }
 
     override fun onResume() {
         super.onResume()
         if (movieId != null) {
-            presenter?.loadMovie(movieId!!)
+            presenter.loadMovie(movieId!!)
         }
     }
 
     fun setMovieId(movieId: Long) {
         this.movieId = movieId
-        presenter?.loadMovie(movieId)
+        presenter.loadMovie(movieId)
     }
 
     override fun showLoadingIndicator(active: Boolean) {
