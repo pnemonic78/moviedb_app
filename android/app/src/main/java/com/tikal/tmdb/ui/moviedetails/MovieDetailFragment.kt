@@ -18,9 +18,6 @@ import com.tikal.tmdb.model.MovieDetails
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-/**
- * Created by ronelg on 12/19/17.
- */
 @AndroidEntryPoint
 class MovieDetailFragment : Fragment(), MovieDetailsContract.View {
 

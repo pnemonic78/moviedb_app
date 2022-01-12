@@ -2,14 +2,14 @@ package com.tikal.tmdb.data.source
 
 import com.tikal.tmdb.model.Movie
 import com.tikal.tmdb.model.MovieDetails
-import io.reactivex.Observable
+import kotlinx.coroutines.flow.Flow
 
 /**
- * Created by ronelg on 12/19/17.
+ * TMDB data source.
  */
 interface TmdbDataSource {
 
-    fun getMoviesNowPlaying(): Observable<List<Movie>>
+    suspend fun getMoviesNowPlaying(): Flow<List<Movie>>
 
-    fun getMovieDetails(movieId: Long): Observable<MovieDetails>
+    suspend fun getMovieDetails(movieId: Long): Flow<MovieDetails>
 }

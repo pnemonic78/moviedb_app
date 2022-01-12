@@ -4,21 +4,20 @@ import com.tikal.tmdb.api.TmdbService
 import com.tikal.tmdb.data.source.TmdbDataSource
 import com.tikal.tmdb.model.Movie
 import com.tikal.tmdb.model.MovieDetails
-import io.reactivex.Observable
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
 /**
- * Created by ronelg on 12/19/17.
+ * TMDB remote data source.
  */
 class TmdbRemoteDataSource @Inject constructor(private val service: TmdbService) : TmdbDataSource {
 
-    override fun getMoviesNowPlaying(): Observable<List<Movie>> {
-        return service.getMoviesNowPlaying()
-            .map { it.results }
-            .cache()
+    override suspend fun getMoviesNowPlaying(): Flow<List<Movie>> {
+        return flowOf(service.getMoviesNowPlaying().results)
     }
 
-    override fun getMovieDetails(movieId: Long): Observable<MovieDetails> {
-        return service.getMovieDetails(movieId).cache()
+    override suspend fun getMovieDetails(movieId: Long): Flow<MovieDetails> {
+        return flowOf(service.getMovieDetails(movieId))
     }
 }

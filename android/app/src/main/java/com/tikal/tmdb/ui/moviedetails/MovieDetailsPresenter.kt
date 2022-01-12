@@ -1,49 +1,48 @@
 package com.tikal.tmdb.ui.moviedetails
 
-import android.util.Log
 import com.tikal.tmdb.data.source.TmdbDataSource
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
-/**
- * Created by ronelg on 12/19/17.
- */
 class MovieDetailsPresenter(
     private val repository: TmdbDataSource,
     private val view: MovieDetailsContract.View
 ) : MovieDetailsContract.Presenter {
 
-    private val TAG = "MovieDetailsPresenter"
-
     init {
         view.presenter = this
     }
 
-    private val disposables: CompositeDisposable = CompositeDisposable()
+    private var loadMovieJob: Job? = null
 
-    override fun subscribe() {
-    }
+    override fun subscribe() = Unit
 
     override fun unsubscribe() {
-        disposables.clear()
+        loadMovieJob?.cancel()
+        loadMovieJob = null
     }
 
     override fun loadMovie(movieId: Long) {
         view.showLoadingIndicator(true)
 
-        val disposable = repository.getMovieDetails(movieId)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .subscribe({ res ->
-                view.showMovie(res)
+        loadMovieJob?.cancel()
+        loadMovieJob = CoroutineScope(Dispatchers.Main).launch {
+            try {
+                repository.getMovieDetails(movieId)
+                    .flowOn(Dispatchers.IO)
+                    .collect { res ->
+                        view.showMovie(res)
+                        view.showLoadingIndicator(false)
+                    }
+            } catch (e: Exception) {
+                Timber.e(e, "loadMovie($movieId) error: $e")
                 view.showLoadingIndicator(false)
-            }, { t ->
-                Log.e(TAG, "loadMovie($movieId) error: $t")
-                view.showLoadingIndicator(false)
-            })
-
-        disposables.add(disposable)
+            }
+        }
     }
-
 }

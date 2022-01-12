@@ -4,9 +4,6 @@ import com.tikal.tmdb.BasePresenter
 import com.tikal.tmdb.BaseView
 import com.tikal.tmdb.model.Movie
 
-/**
- * Created by ronelg on 12/19/17.
- */
 interface MoviesContract {
 
     interface View : BaseView<Presenter> {

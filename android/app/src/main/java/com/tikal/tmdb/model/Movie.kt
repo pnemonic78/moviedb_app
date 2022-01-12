@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import java.util.Date
 
 /**
- * Created by ronelg on 12/19/17.
+ * Movie POJO.
  */
 data class Movie(
     @SerializedName("id") var id: Long,

@@ -1,51 +1,52 @@
 package com.tikal.tmdb.ui.movies
 
-import android.util.Log
 import com.tikal.tmdb.data.source.TmdbDataSource
 import com.tikal.tmdb.model.Movie
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
-/**
- * Created by ronelg on 12/19/17.
- */
 class MoviesPresenter(
     private val repository: TmdbDataSource,
     private val view: MoviesContract.View
 ) : MoviesContract.Presenter {
 
-    private val TAG = "MoviesPresenter"
-
     init {
         view.presenter = this
     }
 
-    private val disposables: CompositeDisposable = CompositeDisposable()
+    private var loadMoviesJob: Job? = null
 
     override fun subscribe() {
         loadMovies(false)
     }
 
     override fun unsubscribe() {
-        disposables.clear()
+        loadMoviesJob?.cancel()
+        loadMoviesJob = null
     }
 
     override fun loadMovies(forceUpdate: Boolean) {
         view.showLoadingIndicator(true)
 
-        val disposable = repository.getMoviesNowPlaying()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .subscribe({ res ->
-                view.showMovies(res)
+        loadMoviesJob?.cancel()
+        loadMoviesJob = CoroutineScope(Dispatchers.Main).launch {
+            try {
+                repository.getMoviesNowPlaying()
+                    .flowOn(Dispatchers.IO)
+                    .collect { res ->
+                        view.showMovies(res)
+                        view.showLoadingIndicator(false)
+                    }
+            } catch (e: Exception) {
+                Timber.e(e, "loadMovies error: $e")
                 view.showLoadingIndicator(false)
-            }, { t ->
-                Log.e(TAG, "loadMovies error: $t")
-                view.showLoadingIndicator(false)
-            })
-
-        disposables.add(disposable)
+            }
+        }
     }
 
     override fun onMovieClicked(movie: Movie) {

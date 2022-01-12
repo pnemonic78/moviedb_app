@@ -15,9 +15,6 @@ import com.tikal.tmdb.ui.moviedetails.MovieDetailFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-/**
- * Created by ronelg on 12/19/17.
- */
 @AndroidEntryPoint
 class MoviesFragment : Fragment(), MoviesContract.View, MoviesAdapter.MovieListener {
 

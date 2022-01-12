@@ -11,13 +11,13 @@ import com.tikal.tmdb.model.MovieDetails
 import java.util.Locale
 
 /**
- * Created by ronelg on 12/19/17.
+ * TMDB API.
  */
 object TmdbApi {
 
     internal const val API_KEY = BuildConfig.MDB_API_KEY
 
-    private val IMAGE_URL = "https://image.tmdb.org/t/p/%s%s"
+    private const val IMAGE_URL = "https://image.tmdb.org/t/p/%s%s"
 
     private var posterSizes: Array<String> = emptyArray()
 

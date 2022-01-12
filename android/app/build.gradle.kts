@@ -61,10 +61,6 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
 
-    // Rx
-    implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
-    implementation("io.reactivex.rxjava2:rxkotlin:2.4.0")
-
     // DI
     implementation("com.google.dagger:hilt-android:2.38.1")
     kapt("com.google.dagger:hilt-android-compiler:2.38.1")
@@ -75,7 +71,6 @@ dependencies {
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
 
