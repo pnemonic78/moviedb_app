@@ -66,11 +66,17 @@ class MoviesAdapter(var listener: MovieListener? = null) :
             title.text = movie.title
             summary.text = movie.overview
             popularity.progress = (movie.voteAverage * 10f).toInt()
-            date.text = DateUtils.formatDateTime(
-                context,
-                movie.releaseDate.time,
-                DateUtils.FORMAT_SHOW_DATE
-            )
+
+            val releaseDate = movie.releaseDate
+            if (releaseDate != null) {
+                date.text = DateUtils.formatDateTime(
+                    context,
+                    releaseDate.timeInMillis,
+                    DateUtils.FORMAT_SHOW_DATE
+                )
+            } else {
+                date.text = null
+            }
 
             TmdbApi.showPoster(movie, poster)
 

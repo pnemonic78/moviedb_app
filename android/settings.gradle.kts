@@ -1,2 +1,2 @@
-rootProject.name = "Movie DB"
+rootProject.name = "Movie DB - Android"
 include(":app")

@@ -3,10 +3,8 @@ package com.tikal.tmdb.model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-/**
- * Trailer POJO.
- */
 @Serializable
-data class Trailer(
-    @SerialName("id") val id: String
+data class ProductionCountry(
+    @SerialName("iso_3166_1") var id: String,
+    @SerialName("name") var name: String
 )

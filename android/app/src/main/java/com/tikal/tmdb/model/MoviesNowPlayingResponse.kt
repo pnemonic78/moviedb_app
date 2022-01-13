@@ -1,14 +1,16 @@
 package com.tikal.tmdb.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * Response for Movies that are Now Playing.
  */
+@Serializable
 class MoviesNowPlayingResponse(
-    @SerializedName("results") val results: List<Movie>,
-    @SerializedName("dates") val dates: Dates,
-    @SerializedName("page") val page: Int,
-    @SerializedName("total_pages") val totalPages: Int,
-    @SerializedName("total_results") val totalResult: Int
+    @SerialName("results") val results: List<Movie>,
+    @SerialName("dates") val dates: Dates,
+    @SerialName("page") val page: Int,
+    @SerialName("total_pages") val totalPages: Int,
+    @SerialName("total_results") val totalResult: Int
 )

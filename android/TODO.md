@@ -1,5 +1,4 @@
 # To Do
-- migrate Gson to Kotlin Serialization
 - migrate MVP to MVVM
 - migrate XML layouts to Composable
 - add movie categories screen

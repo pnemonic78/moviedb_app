@@ -1,16 +1,16 @@
 package com.tikal.tmdb.inject.modules
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.tikal.tmdb.api.TmdbService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 /**
@@ -22,11 +22,12 @@ object NetworkModule {
 
     private const val BASE_URL = "https://api.themoviedb.org/3/"
 
+    private val JsonMediaType = "application/json".toMediaType()
+
     @Provides
-    fun provideGson(): Gson {
-        return GsonBuilder()
-            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
-            .create()
+    @Singleton
+    fun provideJson(): Json {
+        return Json { ignoreUnknownKeys = true }
     }
 
     @Provides
@@ -41,11 +42,11 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(gson: Gson, client: OkHttpClient): Retrofit {
+    fun provideRetrofit(json: Json, client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(client)
-            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(json.asConverterFactory(JsonMediaType))
             .build()
     }
 

@@ -3,6 +3,7 @@ plugins {
     id("dagger.hilt.android.plugin")
     kotlin("android")
     kotlin("kapt")
+    kotlin("plugin.serialization") version "1.6.10"
 }
 
 android {
@@ -33,8 +34,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
-        // useIR = true
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
     buildFeatures {
         compose = true
@@ -49,6 +49,13 @@ kapt {
 }
 
 dependencies {
+    // DI
+    implementation("com.google.dagger:hilt-android:2.38.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.38.1")
+
+    // Images
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+
     // Jetpack
     implementation("androidx.appcompat:appcompat:1.4.0")
     implementation("androidx.cardview:cardview:1.0.0")
@@ -61,21 +68,17 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
 
-    // DI
-    implementation("com.google.dagger:hilt-android:2.38.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.38.1")
+    // JSON
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
 
     // Logging
     implementation("com.jakewharton.timber:timber:4.7.1")
 
-    // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+    // Network
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
-
-    // Images
-    implementation("com.github.bumptech.glide:glide:4.12.0")
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
 
     // Test
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")

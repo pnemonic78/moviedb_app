@@ -96,8 +96,16 @@ class MovieDetailFragment : Fragment(), MovieDetailsContract.View {
         title!!.text = movie.title
         summary!!.text = movie.overview
         popularity!!.progress = (movie.voteAverage * 10f).toInt()
-        date!!.text =
-            DateUtils.formatDateTime(context, movie.releaseDate.time, DateUtils.FORMAT_SHOW_DATE)
+        val releaseDate = movie.releaseDate
+        if (releaseDate != null) {
+            date!!.text = DateUtils.formatDateTime(
+                context,
+                releaseDate.timeInMillis,
+                DateUtils.FORMAT_SHOW_DATE
+            )
+        } else {
+            date!!.text = null
+        }
 
         val imageView = poster!!
         if (imageView.measuredWidth > 0) {
