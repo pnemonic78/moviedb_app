@@ -1,5 +1,4 @@
 # To Do
-- migrate MVP to MVVM
 - migrate XML layouts to Composable
 - add movie categories screen
 - add movies grid screen
