@@ -40,7 +40,6 @@ class MovieDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         progressBar = view.findViewById(android.R.id.progress)
-
         title = view.findViewById(android.R.id.title)
         summary = view.findViewById(android.R.id.summary)
         popularity = view.findViewById(R.id.popularity)
