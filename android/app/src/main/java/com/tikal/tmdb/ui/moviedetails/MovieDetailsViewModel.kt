@@ -16,13 +16,14 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class MovieDetailsViewModel @Inject constructor(private val repository: TmdbDataSource) : ViewModel() {
+class MovieDetailsViewModel @Inject constructor(private val repository: TmdbDataSource) :
+    ViewModel(), MovieDetailsUiState {
 
-    private val _isLoading = MutableLiveData<Boolean>(false)
-    val isLoading: LiveData<Boolean> = _isLoading
+    private val _isLoading = MutableLiveData(false)
+    override val isLoading: LiveData<Boolean> = _isLoading
 
     private val _movieDetails = MutableLiveData<MovieDetails?>()
-    val movieDetails: LiveData<MovieDetails?> = _movieDetails
+    override val movieDetails: LiveData<MovieDetails?> = _movieDetails
 
     private var loadMovieJob: Job? = null
 
@@ -32,7 +33,7 @@ class MovieDetailsViewModel @Inject constructor(private val repository: TmdbData
         loadMovieJob = null
     }
 
-     fun loadMovie(movieId: Long) {
+    fun loadMovie(movieId: Long) {
         showLoadingIndicator(true)
 
         loadMovieJob?.cancel()

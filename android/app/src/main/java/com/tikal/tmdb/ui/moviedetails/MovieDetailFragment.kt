@@ -9,6 +9,7 @@ import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.compose.ui.platform.ComposeView
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -45,6 +46,11 @@ class MovieDetailFragment : Fragment() {
         popularity = view.findViewById(R.id.popularity)
         poster = view.findViewById(R.id.poster)
         date = view.findViewById(R.id.date)
+
+        val composeView = view.findViewById<ComposeView>(R.id.compose_view)
+        composeView.setContent {
+            MovieDetailsView(viewModel)
+        }
 
         val owner: LifecycleOwner = viewLifecycleOwner
         viewModel.isLoading.observe(owner) { isLoading ->

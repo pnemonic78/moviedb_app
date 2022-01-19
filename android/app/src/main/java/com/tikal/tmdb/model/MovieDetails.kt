@@ -22,8 +22,8 @@ data class MovieDetails(
     @SerialName("overview") var overview: String?,
     @SerialName("popularity") var popularity: Float,
     @SerialName("poster_path") var posterPath: String?,
-    @SerialName("production_companies") var productionCompanies: List<ProductionCompany>,
-    @SerialName("production_countries") var productionCountries: List<ProductionCountry>,
+    @SerialName("production_companies") var productionCompanies: List<ProductionCompany>?,
+    @SerialName("production_countries") var productionCountries: List<ProductionCountry>?,
     @SerialName("release_date")
     @Serializable(with = DateCalendarSerializer::class)
     var releaseDate: Calendar?,

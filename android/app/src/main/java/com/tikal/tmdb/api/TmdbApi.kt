@@ -1,6 +1,7 @@
 package com.tikal.tmdb.api
 
 import android.content.Context
+import android.content.res.Resources
 import android.text.TextUtils
 import android.widget.ImageView
 import com.bumptech.glide.Glide
@@ -65,11 +66,15 @@ object TmdbApi {
     }
 
     fun generatePosterUrl(context: Context, path: String?, width: Int, height: Int): String? {
-        if ((path == null) || (width <= 0) || (height <= 0)) {
+        return generatePosterUrl(context.resources, path, width, height)
+    }
+
+    fun generatePosterUrl(resources: Resources, path: String?, width: Int, height: Int): String? {
+        if ((path.isNullOrEmpty()) || (width <= 0) || (height <= 0)) {
             return null
         }
         if (posterSizes.isEmpty()) {
-            posterSizes = context.resources.getStringArray(R.array.poster_sizes)
+            posterSizes = resources.getStringArray(R.array.poster_sizes)
         }
         val size = findSize(width, height, posterSizes)
 
