@@ -55,7 +55,7 @@ class MoviesViewModel @Inject constructor(private val repository: TmdbDataSource
         }
     }
 
-    fun onMovieClicked(movie: Movie) {
+    override fun onMovieClicked(movie: Movie) {
         showMovieDetails(movie)
     }
 

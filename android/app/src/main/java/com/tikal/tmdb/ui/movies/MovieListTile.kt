@@ -1,7 +1,9 @@
 package com.tikal.tmdb.ui.movies
 
-import android.content.res.Resources
+import android.content.Context
+import android.text.format.DateUtils
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
@@ -10,19 +12,21 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.Card
+import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
@@ -33,17 +37,22 @@ import com.tikal.tmdb.model.Movie
 import java.util.Calendar
 
 @Composable
-fun MovieListTile(movie: Movie, modifier: Modifier = Modifier) {
+fun MovieListTile(
+    movie: Movie,
+    modifier: Modifier = Modifier,
+    onMovieClicked: ((movie: Movie) -> Unit)
+) {
+    val context = LocalContext.current
     val posterSize = remember { mutableStateOf(IntSize.Zero) }
 
     Card(
         modifier = modifier
-            .padding(8.dp)
+            .padding(6.dp)
             .wrapContentHeight()
-            .alpha(0.5f)
+            .clickable { onMovieClicked(movie) }
     ) {
-        Row(modifier = Modifier.fillMaxWidth()) {
-            val posterPath = getPosterPath(movie.posterPath, posterSize.value)
+        Row(modifier = Modifier) {
+            val posterPath = getPosterPath(context, movie.posterPath, posterSize.value)
             val posterPainter: Painter = if (posterPath.isNullOrBlank()) {
                 painterResource(id = R.drawable.ic_launcher_foreground)
             } else {
@@ -51,7 +60,7 @@ fun MovieListTile(movie: Movie, modifier: Modifier = Modifier) {
             }
 
             Image(
-                painter = posterPainter,//rememberImagePainter(posterPath),
+                painter = posterPainter,
                 contentDescription = "poster",
                 contentScale = ContentScale.FillWidth,
                 modifier = Modifier
@@ -62,13 +71,41 @@ fun MovieListTile(movie: Movie, modifier: Modifier = Modifier) {
             Column(
                 modifier = Modifier
                     .weight(0.6f)
-                    .padding(start = 8.dp)
+                    .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp)
             ) {
                 Text(
                     text = movie.title,
                     style = MaterialTheme.typography.subtitle1
                         .copy(fontWeight = FontWeight.Medium),
+                    maxLines = 2,
                     modifier = Modifier
+                        .fillMaxWidth()
+
+                )
+                LinearProgressIndicator(
+                    modifier = Modifier
+                        .padding(top = 4.dp)
+                        .fillMaxWidth(),
+                    progress = movie.voteAverage / 10f
+                )
+                Text(
+                    text = movie.releaseDate?.let {
+                        DateUtils.formatDateTime(
+                            context,
+                            it.timeInMillis,
+                            DateUtils.FORMAT_SHOW_DATE
+                        )
+                    }.orEmpty(),
+                    modifier = Modifier
+                        .padding(top = 4.dp)
+                        .fillMaxWidth()
+                )
+                Text(
+                    text = movie.overview.orEmpty(),
+                    maxLines = 3,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier
+                        .padding(top = 10.dp)
                         .fillMaxWidth()
                 )
             }
@@ -76,9 +113,9 @@ fun MovieListTile(movie: Movie, modifier: Modifier = Modifier) {
     }
 }
 
-private fun getPosterPath(path: String?, size: IntSize): String? {
+private fun getPosterPath(context: Context, path: String?, size: IntSize): String? {
     return TmdbApi.generatePosterUrl(
-        Resources.getSystem(),
+        context,
         path,
         size.width,
         size.height
@@ -89,7 +126,7 @@ private fun getPosterPath(path: String?, size: IntSize): String? {
 @Composable
 private fun MovieListTilePreview() {
     MaterialTheme {
-        MovieListTile(movie = movie550)
+        MovieListTile(movie = movie550) {}
     }
 }
 

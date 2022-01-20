@@ -7,4 +7,6 @@ interface MoviesUiState {
     val isLoading: LiveData<Boolean>
     val movieDetails: LiveData<Movie?>
     val movies: LiveData<List<Movie>?>
+
+    fun onMovieClicked(movie: Movie)
 }

@@ -18,7 +18,7 @@ fun MoviesView(uiState: MoviesUiState) {
     MaterialTheme {
         LazyColumn {
             items(items = movies.orEmpty()) { movie ->
-                MovieListTile(movie)
+                MovieListTile(movie, onMovieClicked = uiState::onMovieClicked)
             }
         }
     }
@@ -31,6 +31,7 @@ private fun MoviesViewPreview() {
         override val isLoading: LiveData<Boolean> = MutableLiveData(false)
         override val movieDetails: LiveData<Movie?> = MutableLiveData(null)
         override val movies: LiveData<List<Movie>?> = MutableLiveData(listOf(movie550, movie550))
+        override fun onMovieClicked(movie: Movie) = Unit
     }
     MoviesView(uiState)
 }
