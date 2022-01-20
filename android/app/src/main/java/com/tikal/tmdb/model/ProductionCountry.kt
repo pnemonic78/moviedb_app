@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ProductionCountry(
-    @SerialName("iso_3166_1") var id: String,
-    @SerialName("name") var name: String
+    @SerialName("iso_3166_1") val id: String,
+    @SerialName("name") val name: String
 )

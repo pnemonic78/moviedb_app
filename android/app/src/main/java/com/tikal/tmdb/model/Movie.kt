@@ -10,20 +10,19 @@ import java.util.Calendar
  */
 @Serializable
 data class Movie(
-    @SerialName("id") var id: Long,
-    @SerialName("adult") var adult: Boolean,
-    @SerialName("backdrop_path") var backdropPath: String?,
-    @SerialName("genre_ids") var genreIds: List<Long>,
-    @SerialName("original_language") var originalLanguage: String,
-    @SerialName("original_title") var originalTitle: String,
-    @SerialName("overview") var overview: String?,
-    @SerialName("popularity") var popularity: Float,
-    @SerialName("poster_path") var posterPath: String?,
-    @SerialName("release_date")
+    @SerialName("id") val id: Long,
+    @SerialName("adult") val adult: Boolean,
+    @SerialName("backdrop_path") val backdropPath: String?,
+    @SerialName("genre_ids") val genreIds: List<Long>,
+    @SerialName("original_language") val originalLanguage: String,
+    @SerialName("original_title") val originalTitle: String,
+    @SerialName("overview") val overview: String?,
+    @SerialName("popularity") val popularity: Float,
+    @SerialName("poster_path") val posterPath: String?,
     @Serializable(with = DateCalendarSerializer::class)
-    var releaseDate: Calendar?,
-    @SerialName("title") var title: String,
-    @SerialName("video") var video: Boolean,
-    @SerialName("vote_average") var voteAverage: Float,
-    @SerialName("vote_count") var voteCount: Int
+    @SerialName("release_date") val releaseDate: Calendar?,
+    @SerialName("title") val title: String,
+    @SerialName("video") val video: Boolean,
+    @SerialName("vote_average") val voteAverage: Float,
+    @SerialName("vote_count") val voteCount: Int
 )

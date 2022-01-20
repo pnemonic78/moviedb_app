@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.ui.platform.ComposeView
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -34,6 +35,11 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieListener {
         super.onViewCreated(view, savedInstanceState)
         progressBar = view.findViewById(android.R.id.progress)
         initList(view.findViewById(android.R.id.list))
+
+        val composeView = view.findViewById<ComposeView>(R.id.compose_view)
+        composeView.setContent {
+            MoviesView(viewModel)
+        }
 
         val owner: LifecycleOwner = viewLifecycleOwner
         viewModel.isLoading.observe(owner) { isLoading ->
