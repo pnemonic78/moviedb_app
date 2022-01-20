@@ -6,6 +6,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -47,7 +48,7 @@ fun MovieListTile(
 
     Card(
         modifier = modifier
-            .padding(6.dp)
+            .padding(8.dp)
             .wrapContentHeight()
             .clickable { onMovieClicked(movie) }
     ) {
@@ -77,17 +78,14 @@ fun MovieListTile(
                     text = movie.title,
                     style = MaterialTheme.typography.subtitle1
                         .copy(fontWeight = FontWeight.Medium),
-                    maxLines = 2,
-                    modifier = Modifier
-                        .fillMaxWidth()
-
+                    maxLines = 2
                 )
+                Spacer(modifier = Modifier.height(8.dp))
                 LinearProgressIndicator(
-                    modifier = Modifier
-                        .padding(top = 4.dp)
-                        .fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(),
                     progress = movie.voteAverage / 10f
                 )
+                Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = movie.releaseDate?.let {
                         DateUtils.formatDateTime(
@@ -95,18 +93,13 @@ fun MovieListTile(
                             it.timeInMillis,
                             DateUtils.FORMAT_SHOW_DATE
                         )
-                    }.orEmpty(),
-                    modifier = Modifier
-                        .padding(top = 4.dp)
-                        .fillMaxWidth()
+                    }.orEmpty()
                 )
+                Spacer(modifier = Modifier.height(12.dp))
                 Text(
                     text = movie.overview.orEmpty(),
                     maxLines = 3,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier
-                        .padding(top = 10.dp)
-                        .fillMaxWidth()
+                    overflow = TextOverflow.Ellipsis
                 )
             }
         }
