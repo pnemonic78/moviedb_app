@@ -35,7 +35,7 @@ class MoviesFragment : Fragment() {
 
         val composeView = view.findViewById<ComposeView>(R.id.compose_view)
         composeView.setContent {
-            MoviesView(viewModel)
+            MoviesListPage(viewModel)
         }
 
         val owner: LifecycleOwner = viewLifecycleOwner

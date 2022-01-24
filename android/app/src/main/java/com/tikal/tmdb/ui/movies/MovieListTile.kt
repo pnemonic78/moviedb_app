@@ -7,10 +7,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.Card
 import androidx.compose.material.LinearProgressIndicator
@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
@@ -37,70 +38,106 @@ import com.tikal.tmdb.api.TmdbApi
 import com.tikal.tmdb.model.Movie
 import java.util.Calendar
 
+private const val parallaxFactor = 0.85f
+private const val posterAspectRatio = 1f / 1.5f
+
+@Composable
+private fun ThumbnailWidget(movie: Movie) {
+    val context = LocalContext.current
+    val thumbnailSize = remember { mutableStateOf(IntSize.Zero) }
+
+    val thumbnailHeight = dimensionResource(id = R.dimen.poster_height)
+    val thumbnailWidth = thumbnailHeight * posterAspectRatio
+    val imageWidth = thumbnailWidth * 1f
+    val imageHeight = thumbnailHeight / parallaxFactor
+    val thumbnailUrl = getPosterPath(context, movie.posterPath, thumbnailSize.value)
+    val thumbnailPainter: Painter = if (thumbnailUrl.isNullOrBlank()) {
+        painterResource(id = R.drawable.ic_launcher_foreground)
+    } else {
+        rememberImagePainter(data = thumbnailUrl)
+    }
+
+    Image(
+        painter = thumbnailPainter,
+        contentDescription = "poster",
+        contentScale = ContentScale.FillHeight,
+        modifier = Modifier
+            .width(imageWidth)
+            .height(imageHeight)
+            .onSizeChanged { size -> thumbnailSize.value = size }
+    )
+}
+
+@Composable
+fun TitleWidget(movie: Movie) {
+    Text(
+        text = movie.title,
+        style = MaterialTheme.typography.subtitle1
+            .copy(fontWeight = FontWeight.Medium),
+        maxLines = 2
+    )
+}
+
+@Composable
+fun VoteAverageWidget(movie: Movie) {
+    LinearProgressIndicator(
+        modifier = Modifier.fillMaxWidth(),
+        progress = movie.voteAverage / 10f,
+        color = Color.Yellow,
+        backgroundColor = Color.White
+    )
+}
+
+@Composable
+fun ReleaseDateWidget(movie: Movie) {
+    val context = LocalContext.current
+
+    Text(
+        text = movie.releaseDate?.let {
+            DateUtils.formatDateTime(
+                context,
+                it.timeInMillis,
+                DateUtils.FORMAT_SHOW_DATE
+            )
+        }.orEmpty()
+    )
+}
+
+@Composable
+fun SummaryWidget(movie: Movie) {
+    Text(
+        text = movie.overview.orEmpty(),
+        maxLines = 3,
+        overflow = TextOverflow.Ellipsis
+    )
+}
+
 @Composable
 fun MovieListTile(
     movie: Movie,
     modifier: Modifier = Modifier,
     onMovieClicked: ((movie: Movie) -> Unit)
 ) {
-    val context = LocalContext.current
-    val posterSize = remember { mutableStateOf(IntSize.Zero) }
-
     Card(
         modifier = modifier
             .padding(8.dp)
             .wrapContentHeight()
             .clickable { onMovieClicked(movie) }
     ) {
-        Row(modifier = Modifier) {
-            val posterPath = getPosterPath(context, movie.posterPath, posterSize.value)
-            val posterPainter: Painter = if (posterPath.isNullOrBlank()) {
-                painterResource(id = R.drawable.ic_launcher_foreground)
-            } else {
-                rememberImagePainter(data = posterPath)
-            }
-
-            Image(
-                painter = posterPainter,
-                contentDescription = "poster",
-                contentScale = ContentScale.FillWidth,
-                modifier = Modifier
-                    .height(dimensionResource(id = R.dimen.poster_height))
-                    .aspectRatio(1f / 1.5f, true)
-                    .onSizeChanged { size -> posterSize.value = size }
-            )
+        Row(modifier = Modifier.fillMaxWidth()) {
+            ThumbnailWidget(movie)
             Column(
                 modifier = Modifier
                     .weight(0.6f)
                     .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp)
             ) {
-                Text(
-                    text = movie.title,
-                    style = MaterialTheme.typography.subtitle1
-                        .copy(fontWeight = FontWeight.Medium),
-                    maxLines = 2
-                )
+                TitleWidget(movie)
                 Spacer(modifier = Modifier.height(8.dp))
-                LinearProgressIndicator(
-                    modifier = Modifier.fillMaxWidth(),
-                    progress = movie.voteAverage / 10f
-                )
+                VoteAverageWidget(movie)
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = movie.releaseDate?.let {
-                        DateUtils.formatDateTime(
-                            context,
-                            it.timeInMillis,
-                            DateUtils.FORMAT_SHOW_DATE
-                        )
-                    }.orEmpty()
-                )
+                ReleaseDateWidget(movie)
                 Spacer(modifier = Modifier.height(12.dp))
-                Text(
-                    text = movie.overview.orEmpty(),
-                    maxLines = 3,
-                    overflow = TextOverflow.Ellipsis
-                )
+                SummaryWidget(movie)
             }
         }
     }
