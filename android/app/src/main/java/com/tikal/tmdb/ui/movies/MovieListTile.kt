@@ -42,10 +42,14 @@ private const val parallaxFactor = 0.85f
 private const val posterAspectRatio = 1f / 1.5f
 
 @Composable
-private fun ThumbnailWidget(movie: Movie) {
+fun MovieListTile(
+    movie: Movie,
+    modifier: Modifier = Modifier,
+    onMovieClicked: ((movie: Movie) -> Unit)
+) {
     val context = LocalContext.current
-    val thumbnailSize = remember { mutableStateOf(IntSize.Zero) }
 
+    val thumbnailSize = remember { mutableStateOf(IntSize.Zero) }
     val thumbnailHeight = dimensionResource(id = R.dimen.poster_height)
     val thumbnailWidth = thumbnailHeight * posterAspectRatio
     val imageWidth = thumbnailWidth * 1f
@@ -57,67 +61,8 @@ private fun ThumbnailWidget(movie: Movie) {
         rememberImagePainter(data = thumbnailUrl)
     }
 
-    Image(
-        painter = thumbnailPainter,
-        contentDescription = "poster",
-        contentScale = ContentScale.FillHeight,
-        modifier = Modifier
-            .width(imageWidth)
-            .height(imageHeight)
-            .onSizeChanged { size -> thumbnailSize.value = size }
-    )
-}
+    val textTheme = MaterialTheme.typography
 
-@Composable
-fun TitleWidget(movie: Movie) {
-    Text(
-        text = movie.title,
-        style = MaterialTheme.typography.subtitle1
-            .copy(fontWeight = FontWeight.Medium),
-        maxLines = 2
-    )
-}
-
-@Composable
-fun VoteAverageWidget(movie: Movie) {
-    LinearProgressIndicator(
-        modifier = Modifier.fillMaxWidth(),
-        progress = movie.voteAverage / 10f,
-        color = Color.Yellow,
-        backgroundColor = Color.White
-    )
-}
-
-@Composable
-fun ReleaseDateWidget(movie: Movie) {
-    val context = LocalContext.current
-
-    Text(
-        text = movie.releaseDate?.let {
-            DateUtils.formatDateTime(
-                context,
-                it.timeInMillis,
-                DateUtils.FORMAT_SHOW_DATE
-            )
-        }.orEmpty()
-    )
-}
-
-@Composable
-fun SummaryWidget(movie: Movie) {
-    Text(
-        text = movie.overview.orEmpty(),
-        maxLines = 3,
-        overflow = TextOverflow.Ellipsis
-    )
-}
-
-@Composable
-fun MovieListTile(
-    movie: Movie,
-    modifier: Modifier = Modifier,
-    onMovieClicked: ((movie: Movie) -> Unit)
-) {
     Card(
         modifier = modifier
             .padding(8.dp)
@@ -125,19 +70,48 @@ fun MovieListTile(
             .clickable { onMovieClicked(movie) }
     ) {
         Row(modifier = Modifier.fillMaxWidth()) {
-            ThumbnailWidget(movie)
+            Image(
+                painter = thumbnailPainter,
+                contentDescription = "poster",
+                contentScale = ContentScale.FillHeight,
+                modifier = Modifier
+                    .width(imageWidth)
+                    .height(imageHeight)
+                    .onSizeChanged { size -> thumbnailSize.value = size }
+            )
             Column(
                 modifier = Modifier
                     .weight(0.6f)
                     .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp)
             ) {
-                TitleWidget(movie)
+                Text(
+                    text = movie.title,
+                    style = textTheme.subtitle1.copy(fontWeight = FontWeight.Medium),
+                    maxLines = 2
+                )
                 Spacer(modifier = Modifier.height(8.dp))
-                VoteAverageWidget(movie)
+                LinearProgressIndicator(
+                    modifier = Modifier.fillMaxWidth(),
+                    progress = movie.voteAverage / 10f,
+                    color = Color.Yellow,
+                    backgroundColor = Color.White
+                )
                 Spacer(modifier = Modifier.height(8.dp))
-                ReleaseDateWidget(movie)
+                Text(
+                    text = movie.releaseDate?.let {
+                        DateUtils.formatDateTime(
+                            context,
+                            it.timeInMillis,
+                            DateUtils.FORMAT_SHOW_DATE
+                        )
+                    }.orEmpty()
+                )
                 Spacer(modifier = Modifier.height(12.dp))
-                SummaryWidget(movie)
+                Text(
+                    text = movie.overview.orEmpty(),
+                    maxLines = 3,
+                    overflow = TextOverflow.Ellipsis
+                )
             }
         }
     }
