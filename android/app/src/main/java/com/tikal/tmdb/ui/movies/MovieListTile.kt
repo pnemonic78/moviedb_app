@@ -41,6 +41,8 @@ import java.util.Calendar
 private const val parallaxFactor = 0.85f
 private const val posterAspectRatio = 1f / 1.5f
 
+private val LightYellow = Color(0x20FFFF00)
+
 @Composable
 fun MovieListTile(
     movie: Movie,
@@ -94,7 +96,7 @@ fun MovieListTile(
                     modifier = Modifier.fillMaxWidth(),
                     progress = movie.voteAverage / 10f,
                     color = Color.Yellow,
-                    backgroundColor = Color.White
+                    backgroundColor = LightYellow
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(

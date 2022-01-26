@@ -21,19 +21,38 @@ class TmdbLocalDataSource @Inject constructor(
     private val json: Json
 ) : TmdbDataSource {
 
+    private val cacheMovies = mutableMapOf<Long, Movie>()
+    private val cacheMovieDetails = mutableMapOf<Long, MovieDetails>()
+
     override suspend fun getMoviesNowPlaying(): Flow<List<Movie>> {
         val raw = context.resources.openRawResource(R.raw.movie_now_playing)
-        val results = raw.use { stream ->
+        val result = raw.use { stream ->
             json.decodeFromStream<MoviesNowPlayingResponse>(stream).results
         }
-        return flowOf(results)
+        cacheMovies(result)
+        return flowOf(result)
     }
 
     override suspend fun getMovieDetails(movieId: Long): Flow<MovieDetails> {
+        val movieDetailsCached = cacheMovieDetails[movieId]
+        if (movieDetailsCached != null) return flowOf(movieDetailsCached)
+
+        val movieCached = cacheMovies[movieId]
+        if (movieCached != null) return flowOf(MovieDetails.of(movieCached))
+
         val raw = context.resources.openRawResource(R.raw.movie_550)
-        val results = raw.use { stream ->
+        val result = raw.use { stream ->
             json.decodeFromStream<MovieDetails>(stream)
         }
-        return flowOf(results)
+        cacheMovieDetails(result)
+        return flowOf(result)
+    }
+
+    private fun cacheMovies(movies: List<Movie>) {
+        movies.forEach { movie -> cacheMovies[movie.id] = movie }
+    }
+
+    private fun cacheMovieDetails(movie: MovieDetails) {
+        cacheMovieDetails[movie.id] = movie
     }
 }

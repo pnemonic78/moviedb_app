@@ -1,6 +1,6 @@
 package com.tikal.tmdb.ui.moviedetails
 
-import android.content.res.Resources
+import android.content.Context
 import android.text.format.DateUtils
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
@@ -36,11 +37,24 @@ import com.tikal.tmdb.model.MovieDetails
 import com.tikal.tmdb.model.SpokenLanguage
 import java.util.Calendar
 
+private const val posterAspectRatio = 1f / 1.5f
+
+private val LightYellow = Color(0x20FFFF00)
+
 @Composable
 fun MovieDetailsContent(movie: MovieDetails, modifier: Modifier = Modifier) {
     val context = LocalContext.current
-    val posterSize = remember { mutableStateOf(IntSize.Zero) }
     val scrollState = rememberScrollState()
+
+    val posterSize = remember { mutableStateOf(IntSize.Zero) }
+    val posterPath = getPosterPath(context, movie.posterPath, posterSize.value)
+    val posterPainter: Painter = if (posterPath.isNullOrBlank()) {
+        painterResource(id = R.drawable.ic_launcher_foreground)
+    } else {
+        rememberImagePainter(data = posterPath)
+    }
+
+    val textTheme = MaterialTheme.typography
 
     Column(
         modifier = modifier
@@ -48,21 +62,14 @@ fun MovieDetailsContent(movie: MovieDetails, modifier: Modifier = Modifier) {
             .verticalScroll(state = scrollState)
     ) {
         Row(modifier = Modifier.fillMaxWidth()) {
-            val posterPath = getPosterPath(movie.posterPath, posterSize.value)
-            val posterPainter: Painter = if (posterPath.isNullOrBlank()) {
-                painterResource(id = R.drawable.ic_launcher_foreground)
-            } else {
-                rememberImagePainter(data = posterPath)
-            }
-
             Image(
-                painter = posterPainter,//rememberImagePainter(posterPath),
+                painter = posterPainter,
                 contentDescription = "poster",
-                contentScale = ContentScale.FillWidth,
+                contentScale = ContentScale.FillHeight,
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(0.4f)
-                    .aspectRatio(1f / 1.5f, true)
+                    .aspectRatio(posterAspectRatio, true)
                     .onSizeChanged { size -> posterSize.value = size }
             )
             Column(
@@ -72,21 +79,23 @@ fun MovieDetailsContent(movie: MovieDetails, modifier: Modifier = Modifier) {
             ) {
                 Text(
                     text = movie.title,
-                    style = MaterialTheme.typography.h5
+                    style = textTheme.h5
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
                     text = stringResource(id = R.string.popularity_label),
-                    style = MaterialTheme.typography.h6
+                    style = textTheme.h6
                 )
                 LinearProgressIndicator(
                     modifier = Modifier.fillMaxWidth(),
-                    progress = movie.voteAverage / 10f
+                    progress = movie.voteAverage / 10f,
+                    color = Color.Yellow,
+                    backgroundColor = LightYellow
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
                     text = stringResource(id = R.string.date_label),
-                    style = MaterialTheme.typography.h6
+                    style = textTheme.h6
                 )
                 Text(
                     text = movie.releaseDate?.let {
@@ -102,7 +111,7 @@ fun MovieDetailsContent(movie: MovieDetails, modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = stringResource(id = R.string.summary_label),
-            style = MaterialTheme.typography.h6
+            style = textTheme.h6
         )
         Text(
             text = movie.overview.orEmpty()
@@ -110,9 +119,9 @@ fun MovieDetailsContent(movie: MovieDetails, modifier: Modifier = Modifier) {
     }
 }
 
-private fun getPosterPath(path: String?, size: IntSize): String? {
+private fun getPosterPath(context: Context, path: String?, size: IntSize): String? {
     return TmdbApi.generatePosterUrl(
-        Resources.getSystem(),
+        context,
         path,
         size.width,
         size.height
