@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/moviesFragment"
         android:name="com.tikal.tmdb.ui.movies.MoviesFragment"
-        android:label="@string/movies_title"
-        tools:layout="@layout/fragment_movies">
+        android:label="@string/now_playing"
+        tools:layout="@layout/fragment_compose">
         <action
             android:id="@+id/action_moviesFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
@@ -17,10 +17,10 @@
     <fragment
         android:id="@+id/movieDetailFragment"
         android:name="com.tikal.tmdb.ui.moviedetails.MovieDetailFragment"
-        android:label="@string/movies_details_title"
-        tools:layout="@layout/fragment_details">
+        android:label="@string/title"
+        tools:layout="@layout/fragment_compose">
         <argument
-            android:name="movei_id"
+            android:name="movie_id"
             app:argType="long" />
     </fragment>
 </navigation>

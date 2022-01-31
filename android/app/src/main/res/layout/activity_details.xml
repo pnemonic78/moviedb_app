@@ -1,7 +1,0 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/movie_details"
-    android:name="com.tikal.tmdb.ui.moviedetails.MovieDetailFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.tikal.tmdb.ui.moviedetails.MovieDetailActivity"/>

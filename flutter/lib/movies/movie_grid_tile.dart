@@ -57,10 +57,10 @@ class MovieGridTile extends StatelessWidget {
       child: Container(
         width: thumbnailWidth,
         height: thumbnailHeight,
-        child: Parallax.inside(
+        // child: Parallax.inside(
           child: thumbnail,
-          mainAxisExtent: thumbnailHeight,
-        ),
+          // mainAxisExtent: thumbnailHeight,
+        // ),
       ),
     );
 

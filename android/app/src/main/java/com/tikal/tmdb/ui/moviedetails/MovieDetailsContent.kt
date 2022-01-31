@@ -94,7 +94,7 @@ fun MovieDetailsContent(movie: MovieDetails, modifier: Modifier = Modifier) {
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = stringResource(id = R.string.date_label),
+                    text = stringResource(id = R.string.release_date_label),
                     style = textTheme.h6
                 )
                 Text(
