@@ -56,10 +56,10 @@ dependencies {
     // Images
     implementation("com.github.bumptech.glide:glide:4.12.0")
     implementation("io.coil-kt:coil-compose:1.3.2")
+    implementation("io.github.a914-gowtham:compose-ratingbar:1.2.2")
 
     // Jetpack
     implementation("androidx.appcompat:appcompat:1.4.1")
-    implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.compose.material:material:1.2.0-alpha02")
     implementation("androidx.compose.runtime:runtime-livedata:1.0.5")
     implementation("androidx.compose.ui:ui-tooling:1.2.0-alpha02")
@@ -68,7 +68,6 @@ dependencies {
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.4.0")
     implementation("androidx.navigation:navigation-ui-ktx:2.4.0")
-    implementation("androidx.recyclerview:recyclerview:1.2.1")
 
     // JSON
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")

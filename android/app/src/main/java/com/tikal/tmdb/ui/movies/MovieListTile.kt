@@ -13,14 +13,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.Card
-import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
@@ -33,6 +31,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
+import com.gowtham.ratingbar.RatingBar
+import com.gowtham.ratingbar.RatingBarConfig
+import com.gowtham.ratingbar.RatingBarStyle
+import com.gowtham.ratingbar.StepSize
 import com.tikal.tmdb.R
 import com.tikal.tmdb.api.TmdbApi
 import com.tikal.tmdb.model.Movie
@@ -40,8 +42,6 @@ import java.util.Calendar
 
 private const val parallaxFactor = 0.85f
 private const val posterAspectRatio = 1f / 1.5f
-
-private val LightYellow = Color(0x20FFFF00)
 
 @Composable
 fun MovieListTile(
@@ -92,11 +92,16 @@ fun MovieListTile(
                     maxLines = 2
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                LinearProgressIndicator(
-                    modifier = Modifier.fillMaxWidth(),
-                    progress = movie.voteAverage / 10f,
-                    color = Color.Yellow,
-                    backgroundColor = LightYellow
+                RatingBar(
+                    value = movie.voteAverage / 2,
+                    config = RatingBarConfig()
+                        .isIndicator(true)
+                        .numStars(5)
+                        .size(24.dp)
+                        .stepSize(StepSize.HALF)
+                        .style(RatingBarStyle.HighLighted),
+                    onValueChange = {},
+                    onRatingChanged = {}
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
