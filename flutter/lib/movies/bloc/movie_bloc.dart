@@ -13,7 +13,6 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
 
   @override
   Stream<MovieState> mapEventToState(MovieEvent event) async* {
-    print('~!@ mapEventToState event=$event');
     if (event is NowPlayingResponseEvent) {
       yield state.copy(moviesNowPlaying: event.response);
       return;

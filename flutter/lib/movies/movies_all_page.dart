@@ -27,7 +27,7 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
   @override
   Widget build(BuildContext context) {
     // ignore: close_sinks
-    final movieBloc = context.bloc<MovieBloc>();
+    final movieBloc = context.read<MovieBloc>();
 
     return BlocProvider(
       create: (_) => movieBloc,
@@ -154,7 +154,7 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
 
   List<Movie> getMoviesNowPlaying(BuildContext context) {
     // ignore: close_sinks
-    final movieBloc = context.bloc<MovieBloc>();
+    final movieBloc = context.read<MovieBloc>();
     final blocMovies = movieBloc.state.moviesNowPlaying;
     if (blocMovies == null) {
       if (movieBloc.state.error != null) {
@@ -176,7 +176,7 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
 
   List<Movie> getMoviesPopular(BuildContext context) {
     // ignore: close_sinks
-    final movieBloc = context.bloc<MovieBloc>();
+    final movieBloc = context.read<MovieBloc>();
     final blocMovies = movieBloc.state.moviesPopular;
     if (blocMovies == null) {
       if (movieBloc.state.error != null) {
@@ -198,7 +198,7 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
 
   List<Movie> getMoviesTopRated(BuildContext context) {
     // ignore: close_sinks
-    final movieBloc = context.bloc<MovieBloc>();
+    final movieBloc = context.read<MovieBloc>();
     final blocMovies = movieBloc.state.moviesTopRated;
     if (blocMovies == null) {
       if (movieBloc.state.error != null) {
@@ -219,7 +219,7 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
 
   List<Movie> getMoviesUpcoming(BuildContext context) {
     // ignore: close_sinks
-    final movieBloc = context.bloc<MovieBloc>();
+    final movieBloc = context.read<MovieBloc>();
     final blocMovies = movieBloc.state.moviesUpcoming;
     if (blocMovies == null) {
       if (movieBloc.state.error != null) {

@@ -12,7 +12,7 @@ class InjectorWidget extends InheritedWidget {
         assert(api != null),
         super(key: key, child: child);
 
-  static InjectorWidget of(BuildContext context) {
+  factory InjectorWidget.of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<InjectorWidget>();
   }
 

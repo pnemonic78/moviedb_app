@@ -113,14 +113,14 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
   @override
   Widget build(BuildContext context) {
     // ignore: close_sinks
-    final movieBloc = context.bloc<MovieBloc>();
+    final movieBloc = context.read<MovieBloc>();
 
     return BlocProvider(
       create: (_) => movieBloc,
       child: BlocBuilder<MovieBloc, MovieState>(
         builder: (context, state) {
           // ignore: close_sinks
-          final movieBloc = context.bloc<MovieBloc>();
+          final movieBloc = context.read<MovieBloc>();
           return _buildPage(context, movieBloc);
         },
       ),

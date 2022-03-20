@@ -7,24 +7,31 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:tmdb/main/my_app.dart';
+import 'package:tmdb/di/app_injector.dart';
+import 'package:tmdb/di/app_injector_module.dart';
+import 'package:tmdb/di/injector_inherited.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('Movie categories smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+    final container = await AppInjector.create(new AppInjectorModule());
+    final app = new InjectorWidget(
+      child: container.app,
+      api: container.api,
+    );
+    await tester.pumpWidget(app);
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Verify that our main page is loaded.
+    expect(find.text('Popular Movies'), findsOneWidget);
+    expect(find.text('Movies Now Playing'), findsOneWidget);
+    expect(find.text('No Movies'), findsNothing);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    // Tap the title bar and trigger a navigation.
+    await tester.tap(find.text('Popular Movies'));
+    await tester.pumpAndSettle();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Verify that page has shown.
+    expect(find.text('Popular Movies'), findsOneWidget);
+    expect(find.text('Movies Now Playing'), findsNothing);
   });
 }
