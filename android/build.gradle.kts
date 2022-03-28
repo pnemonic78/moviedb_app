@@ -2,10 +2,10 @@
 
 buildscript {
     // SDK and tools
-    val kotlinVersion by extra("1.6.0")
+    val kotlinVersion by extra("1.6.10")
     val minSdkVersion by extra(21)
-    val targetSdkVersion by extra(30)
-    val compileSdkVersion by extra(31)
+    val targetSdkVersion by extra(32)
+    val compileSdkVersion by extra(32)
 
     repositories {
         google()
