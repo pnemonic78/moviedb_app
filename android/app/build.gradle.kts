@@ -7,14 +7,13 @@ plugins {
 }
 
 android {
-    compileSdk = rootProject.extra["compileSdkVersion"] as Int
+    compileSdk = Depends.compileSdk
     defaultConfig {
         applicationId = "com.tikalk.tmdb.app"
-        minSdk = rootProject.extra["minSdkVersion"] as Int
-        targetSdk = rootProject.extra["targetSdkVersion"] as Int
+        minSdk = Depends.minSdk
+        targetSdk = Depends.targetSdk
         versionCode = 1
         versionName = "1.0"
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "MDB_API_KEY", "\"${project.properties["MDB_API_KEY"]}\"")
     }

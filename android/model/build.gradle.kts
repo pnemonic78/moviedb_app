@@ -1,16 +1,16 @@
 plugins {
     id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    kotlin("android")
+    kotlin("plugin.serialization") version "1.6.10"
 }
 
 android {
-    compileSdk = 32
+    compileSdk = Depends.compileSdk
 
     defaultConfig {
-        minSdk = 24
-        targetSdk = 32
+        minSdk = Depends.minSdk
+        targetSdk = Depends.targetSdk
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
 
@@ -28,15 +28,16 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 
 dependencies {
-
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.appcompat:appcompat:1.4.1")
-    implementation("com.google.android.material:material:1.4.0")
+    implementation("com.google.android.material:material:1.5.0")
+
+    // Test
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
