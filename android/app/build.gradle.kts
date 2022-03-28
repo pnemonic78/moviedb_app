@@ -39,7 +39,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.1.0-rc01"
+        kotlinCompilerExtensionVersion = "1.1.1"
     }
 }
 
@@ -48,6 +48,8 @@ kapt {
 }
 
 dependencies {
+    implementation(project(":model"))
+
     // DI
     implementation("com.google.dagger:hilt-android:2.38.1")
     kapt("com.google.dagger:hilt-android-compiler:2.38.1")

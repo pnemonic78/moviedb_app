@@ -33,9 +33,11 @@ android {
 }
 
 dependencies {
+    // Jetpack
     implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.4.1")
-    implementation("com.google.android.material:material:1.5.0")
+
+    // JSON
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
 
     // Test
     testImplementation("junit:junit:4.13.2")
