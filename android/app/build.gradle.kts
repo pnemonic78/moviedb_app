@@ -39,7 +39,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.1.1"
+        kotlinCompilerExtensionVersion = Depends.compose
     }
 }
 
@@ -61,10 +61,10 @@ dependencies {
 
     // Jetpack
     implementation("androidx.appcompat:appcompat:1.4.1")
-    implementation("androidx.compose.material:material:1.2.0-alpha06")
-    implementation("androidx.compose.runtime:runtime-livedata:1.2.0-alpha06")
-    implementation("androidx.compose.ui:ui-tooling:1.2.0-alpha06")
-    implementation("androidx.compose.ui:ui:1.2.0-alpha06")
+    implementation("androidx.compose.material:material:${Depends.compose}")
+    implementation("androidx.compose.runtime:runtime-livedata:${Depends.compose}")
+    implementation("androidx.compose.ui:ui-tooling:${Depends.compose}")
+    implementation("androidx.compose.ui:ui:${Depends.compose}")
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.4.1")
