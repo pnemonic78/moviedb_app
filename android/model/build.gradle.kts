@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    compileSdk = Depends.compileSdk
+    compileSdk = Android.Version.compileSdk
 
     defaultConfig {
-        minSdk = Depends.minSdk
-        targetSdk = Depends.targetSdk
+        minSdk = Android.Version.minSdk
+        targetSdk = Android.Version.targetSdk
 
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -34,13 +34,13 @@ android {
 
 dependencies {
     // Jetpack
-    implementation("androidx.core:core-ktx:1.7.0")
+    implementation(Android.Dependency.core)
 
     // JSON
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
+    implementation(Kotlin.Dependency.json)
 
     // Test
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    testImplementation(Android.Dependency.junit)
+    androidTestImplementation(Android.Dependency.junit_ext)
+    androidTestImplementation(Android.Dependency.espresso_core)
 }

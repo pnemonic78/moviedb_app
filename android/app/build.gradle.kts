@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    compileSdk = Depends.compileSdk
+    compileSdk = Android.Version.compileSdk
     defaultConfig {
         applicationId = "com.tikalk.tmdb.app"
-        minSdk = Depends.minSdk
-        targetSdk = Depends.targetSdk
+        minSdk = Android.Version.minSdk
+        targetSdk = Android.Version.targetSdk
         versionCode = 1
         versionName = "1.0"
 
@@ -39,7 +39,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Depends.compose
+        kotlinCompilerExtensionVersion = Android.Version.compose
     }
 }
 
@@ -61,17 +61,17 @@ dependencies {
 
     // Jetpack
     implementation("androidx.appcompat:appcompat:1.4.1")
-    implementation("androidx.compose.material:material:${Depends.compose}")
-    implementation("androidx.compose.runtime:runtime-livedata:${Depends.compose}")
-    implementation("androidx.compose.ui:ui-tooling:${Depends.compose}")
-    implementation("androidx.compose.ui:ui:${Depends.compose}")
+    implementation("androidx.compose.material:material:${Android.Version.compose}")
+    implementation("androidx.compose.runtime:runtime-livedata:${Android.Version.compose}")
+    implementation("androidx.compose.ui:ui-tooling:${Android.Version.compose}")
+    implementation("androidx.compose.ui:ui:${Android.Version.compose}")
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.4.1")
-    implementation("androidx.navigation:navigation-ui-ktx:2.4.1")
+    implementation(Android.Dependency.core)
+    implementation("androidx.navigation:navigation-fragment-ktx:2.4.2")
+    implementation("androidx.navigation:navigation-ui-ktx:2.4.2")
 
     // JSON
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
+    implementation(Kotlin.Dependency.json)
     implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
 
     // Logging
@@ -83,8 +83,8 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
 
     // Test
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    androidTestImplementation(Android.Dependency.espresso_core)
     androidTestImplementation("androidx.test:runner:1.4.0")
     androidTestImplementation("androidx.test:rules:1.4.0")
-    testImplementation("junit:junit:4.13.2")
+    testImplementation(Android.Dependency.junit)
 }
