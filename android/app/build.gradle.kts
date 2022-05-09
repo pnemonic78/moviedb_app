@@ -24,7 +24,8 @@ android {
         }
         getByName("release") {
             isMinifyEnabled = false
-            // proguardFiles (getDefaultProguardFile ("proguard-android.txt"), "proguard-rules.pro")
+            proguardFile(getDefaultProguardFile("proguard-android.txt"))
+            proguardFile("proguard-rules.pro")
         }
     }
 
@@ -50,41 +51,34 @@ kapt {
 dependencies {
     implementation(project(":model"))
 
-    // DI
-    implementation("com.google.dagger:hilt-android:2.38.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.38.1")
+    implementation(Android.Inject.hilt)
+    kapt(Android.Inject.hiltCompiler)
 
-    // Images
-    implementation("com.github.bumptech.glide:glide:4.12.0")
-    implementation("io.coil-kt:coil-compose:1.3.2")
-    implementation("io.github.a914-gowtham:compose-ratingbar:1.2.2")
+    implementation(Android.Image.glide)
+    implementation(Android.Image.coil)
+    implementation(Android.Image.ratingbar)
 
-    // Jetpack
-    implementation("androidx.appcompat:appcompat:1.4.1")
-    implementation("androidx.compose.material:material:${Android.Version.compose}")
-    implementation("androidx.compose.runtime:runtime-livedata:${Android.Version.compose}")
-    implementation("androidx.compose.ui:ui-tooling:${Android.Version.compose}")
-    implementation("androidx.compose.ui:ui:${Android.Version.compose}")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.3")
-    implementation(Android.Dependency.core)
-    implementation("androidx.navigation:navigation-fragment-ktx:2.4.2")
-    implementation("androidx.navigation:navigation-ui-ktx:2.4.2")
+    implementation(Android.Jetpack.appcompat)
+    implementation(Android.Jetpack.material)
+    implementation(Android.Jetpack.livedata)
+    implementation(Android.Jetpack.composeTooling)
+    implementation(Android.Jetpack.compose)
+    implementation(Android.Jetpack.constraint_layout)
+    implementation(Android.Jetpack.core)
+    implementation(Android.Jetpack.navigation)
+    implementation(Android.Jetpack.navigationUI)
 
-    // JSON
-    implementation(Kotlin.Dependency.json)
-    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
+    implementation(Android.JSON.kotlin)
+    implementation(Android.JSON.retrofit)
 
-    // Logging
-    implementation("com.jakewharton.timber:timber:5.0.1")
+    implementation(Android.Logging.timber)
 
-    // Network
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
-    implementation("com.squareup.okhttp3:okhttp:4.9.3")
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation(Android.Network.logging)
+    implementation(Android.Network.okhttp)
+    implementation(Android.Network.retrofit)
 
-    // Test
-    androidTestImplementation(Android.Dependency.espresso_core)
-    androidTestImplementation("androidx.test:runner:1.4.0")
-    androidTestImplementation("androidx.test:rules:1.4.0")
-    testImplementation(Android.Dependency.junit)
+    androidTestImplementation(Android.Test.espresso_core)
+    androidTestImplementation(Android.Test.runner)
+    androidTestImplementation(Android.Test.rules)
+    testImplementation(Android.Test.junit)
 }

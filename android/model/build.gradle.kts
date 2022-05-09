@@ -17,10 +17,8 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            proguardFile(getDefaultProguardFile("proguard-android-optimize.txt"))
+            proguardFile("proguard-rules.pro")
         }
     }
     compileOptions {
@@ -33,14 +31,10 @@ android {
 }
 
 dependencies {
-    // Jetpack
-    implementation(Android.Dependency.core)
+    implementation(Android.Jetpack.core)
+    implementation(Android.JSON.kotlin)
 
-    // JSON
-    implementation(Kotlin.Dependency.json)
-
-    // Test
-    testImplementation(Android.Dependency.junit)
-    androidTestImplementation(Android.Dependency.junit_ext)
-    androidTestImplementation(Android.Dependency.espresso_core)
+    testImplementation(Android.Test.junit)
+    androidTestImplementation(Android.Test.junit_ext)
+    androidTestImplementation(Android.Test.espresso_core)
 }
