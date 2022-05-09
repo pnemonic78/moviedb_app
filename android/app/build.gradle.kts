@@ -3,7 +3,7 @@ plugins {
     id("dagger.hilt.android.plugin")
     kotlin("android")
     kotlin("kapt")
-    kotlin("plugin.serialization") version "1.6.10"
+    kotlin("plugin.serialization") version Kotlin.Version.kotlin
 }
 
 android {

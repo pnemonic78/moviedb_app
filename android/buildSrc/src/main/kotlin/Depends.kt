@@ -4,7 +4,7 @@ object Android {
         const val minSdk = 21
         const val targetSdk = 32
 
-        const val compose = "1.2.0-alpha06"
+        const val compose = "1.2.0-alpha08"
     }
 
     object Dependency {
