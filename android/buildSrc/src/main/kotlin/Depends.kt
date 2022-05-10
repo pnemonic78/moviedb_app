@@ -6,6 +6,9 @@ object Android {
 
         const val compose = "1.2.0-alpha08"
         const val hilt = "2.38.1"
+        const val navigation = "2.4.2"
+        const val okhttp = "4.9.3"
+        const val test = "1.4.0"
     }
 
     // Dependency Injection
@@ -22,8 +25,8 @@ object Android {
         const val compose = "androidx.compose.ui:ui:${Version.compose}"
         const val constraint_layout = "androidx.constraintlayout:constraintlayout:2.1.3"
         const val core = "androidx.core:core-ktx:1.7.0"
-        const val navigation = "androidx.navigation:navigation-fragment-ktx:2.4.2"
-        const val navigationUI = "androidx.navigation:navigation-ui-ktx:2.4.2"
+        const val navigation = "androidx.navigation:navigation-fragment-ktx:${Version.navigation}"
+        const val navigationUI = "androidx.navigation:navigation-ui-ktx:${Version.navigation}"
     }
 
     object Image {
@@ -33,7 +36,7 @@ object Android {
     }
 
     object JSON {
-        const val kotlin = Kotlin.Dependency.json
+        const val kotlin = Kotlin.JSON.serialization
         const val retrofit = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
     }
 
@@ -42,8 +45,8 @@ object Android {
     }
 
     object Network {
-        const val logging = "com.squareup.okhttp3:logging-interceptor:4.9.3"
-        const val okhttp = "com.squareup.okhttp3:okhttp:4.9.3"
+        const val logging = "com.squareup.okhttp3:logging-interceptor:${Version.okhttp}"
+        const val okhttp = "com.squareup.okhttp3:okhttp:${Version.okhttp}"
         const val retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
     }
 
@@ -51,18 +54,17 @@ object Android {
         const val junit = "junit:junit:4.13.2"
         const val junit_ext = "androidx.test.ext:junit:1.1.3"
         const val espresso_core = "androidx.test.espresso:espresso-core:3.4.0"
-        const val runner = "androidx.test:runner:1.4.0"
-        const val rules = "androidx.test:rules:1.4.0"
+        const val runner = "androidx.test:runner:${Version.test}"
+        const val rules = "androidx.test:rules:${Version.test}"
     }
 }
 
 object Kotlin {
     object Version {
-        const val kotlin = "1.6.10"
+        const val kotlin = "1.6.20"
     }
 
-    object Dependency {
-        // JSON
-        const val json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0"
+    object JSON {
+        const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0"
     }
 }
