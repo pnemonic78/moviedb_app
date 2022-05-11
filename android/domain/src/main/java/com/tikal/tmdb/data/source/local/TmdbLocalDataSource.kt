@@ -1,8 +1,8 @@
 package com.tikal.tmdb.data.source.local
 
 import android.content.Context
-import com.tikal.tmdb.R
 import com.tikal.tmdb.data.source.TmdbDataSource
+import com.tikal.tmdb.domain.R
 import com.tikal.tmdb.model.Movie
 import com.tikal.tmdb.model.MovieDetails
 import com.tikal.tmdb.model.MoviesNowPlayingResponse

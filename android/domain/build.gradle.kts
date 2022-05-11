@@ -34,6 +34,12 @@ android {
 dependencies {
     implementation(project(":model"))
 
+    implementation(Android.Inject.hilt)
+
+    implementation(Android.Jetpack.material)
+
+    implementation(Android.JSON.kotlin)
+
     implementation(Android.Network.logging)
     implementation(Android.Network.okhttp)
     implementation(Android.Network.retrofit)
