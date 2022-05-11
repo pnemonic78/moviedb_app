@@ -1,4 +1,4 @@
-package com.tikalk.tmdb.model
+package com.tikal.tmdb.model
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

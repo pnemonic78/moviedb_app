@@ -1,4 +1,4 @@
-package com.tikalk.tmdb.model
+package com.tikal.tmdb.model
 
 import org.junit.Test
 

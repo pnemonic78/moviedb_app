@@ -5,7 +5,6 @@ import android.content.res.Resources
 import android.text.TextUtils
 import android.widget.ImageView
 import com.bumptech.glide.Glide
-import com.tikal.tmdb.BuildConfig
 import com.tikal.tmdb.R
 import com.tikal.tmdb.model.Movie
 import com.tikal.tmdb.model.MovieDetails
@@ -15,8 +14,6 @@ import java.util.Locale
  * TMDB API.
  */
 object TmdbApi {
-
-    internal const val API_KEY = BuildConfig.MDB_API_KEY
 
     private const val IMAGE_URL = "https://image.tmdb.org/t/p/%s%s"
 

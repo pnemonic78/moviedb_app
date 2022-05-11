@@ -14,8 +14,6 @@ android {
         targetSdk = Android.Version.targetSdk
         versionCode = 1
         versionName = "1.0"
-
-        buildConfigField("String", "MDB_API_KEY", "\"${project.properties["MDB_API_KEY"]}\"")
     }
 
     buildTypes {

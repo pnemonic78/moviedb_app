@@ -1,9 +1,9 @@
 package com.tikal.tmdb.data
 
+import com.tikal.flow.concat
 import com.tikal.tmdb.data.source.TmdbDataSource
 import com.tikal.tmdb.data.source.local.TmdbLocalDataSource
 import com.tikal.tmdb.data.source.remote.TmdbRemoteDataSource
-import com.tikal.tmdb.flow.concat
 import com.tikal.tmdb.model.Movie
 import com.tikal.tmdb.model.MovieDetails
 import kotlinx.coroutines.flow.Flow

@@ -11,6 +11,8 @@ android {
         targetSdk = Android.Version.targetSdk
 
         consumerProguardFiles("consumer-rules.pro")
+
+        buildConfigField("String", "TMDB_API_KEY", "\"${project.properties["TMDB_API_KEY"]}\"")
     }
 
     buildTypes {
@@ -31,6 +33,10 @@ android {
 
 dependencies {
     implementation(project(":model"))
+
+    implementation(Android.Network.logging)
+    implementation(Android.Network.okhttp)
+    implementation(Android.Network.retrofit)
 
     testImplementation(Android.Test.junit)
     androidTestImplementation(Android.Test.junit_ext)
