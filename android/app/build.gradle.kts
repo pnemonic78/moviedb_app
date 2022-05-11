@@ -49,6 +49,7 @@ kapt {
 }
 
 dependencies {
+    implementation(project(":domain"))
     implementation(project(":model"))
 
     implementation(Android.Inject.hilt)
