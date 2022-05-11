@@ -1,4 +1,4 @@
-package com.tikal.tmdb.flow
+package com.tikal.flow
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emitAll
