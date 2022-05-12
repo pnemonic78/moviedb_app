@@ -1,6 +1,5 @@
 # To Do
-- Flow
-- domain module
+
 - ui feature modules
   - common
   - now_playing

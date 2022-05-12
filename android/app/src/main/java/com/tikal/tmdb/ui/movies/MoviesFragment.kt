@@ -8,12 +8,13 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.tikal.tmdb.R
 import com.tikal.tmdb.model.Movie
 import com.tikal.tmdb.ui.moviedetails.MovieDetailFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MoviesFragment : Fragment() {
@@ -38,12 +39,15 @@ class MoviesFragment : Fragment() {
             MoviesListPage(viewModel)
         }
 
-        val owner: LifecycleOwner = viewLifecycleOwner
-        viewModel.isLoading.observe(owner) { isLoading ->
-            showLoadingIndicator(isLoading)
+        lifecycleScope.launch {
+            viewModel.isLoading.collect { isLoading ->
+                showLoadingIndicator(isLoading)
+            }
         }
-        viewModel.movieDetails.observe(owner) { movie ->
-            if (movie != null) showMovieDetails(movie)
+        lifecycleScope.launch {
+            viewModel.movieDetails.collect { movie ->
+                if (movie != null) showMovieDetails(movie)
+            }
         }
     }
 

@@ -1,7 +1,5 @@
 package com.tikal.tmdb.ui.movies
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tikal.tmdb.data.source.TmdbDataSource
 import com.tikal.tmdb.model.Movie
@@ -9,7 +7,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -19,14 +18,14 @@ import javax.inject.Inject
 class MoviesViewModel @Inject constructor(private val repository: TmdbDataSource) : ViewModel(),
     MoviesUiState {
 
-    private val _isLoading = MutableLiveData<Boolean>(false)
-    override val isLoading: LiveData<Boolean> = _isLoading
+    private val _isLoading = MutableStateFlow<Boolean>(false)
+    override val isLoading: StateFlow<Boolean> = _isLoading
 
-    private val _movies = MutableLiveData<List<Movie>?>()
-    override val movies: LiveData<List<Movie>?> = _movies
+    private val _movies = MutableStateFlow<List<Movie>?>(null)
+    override val movies: StateFlow<List<Movie>?> = _movies
 
-    private val _movieDetails = MutableLiveData<Movie?>()
-    override val movieDetails: LiveData<Movie?> = _movieDetails
+    private val _movieDetails = MutableStateFlow<Movie?>(null)
+    override val movieDetails: StateFlow<Movie?> = _movieDetails
 
     private var loadMoviesJob: Job? = null
 
@@ -37,15 +36,15 @@ class MoviesViewModel @Inject constructor(private val repository: TmdbDataSource
     }
 
     fun loadMovies(forceUpdate: Boolean) {
-        showLoadingIndicator(true)
-
         loadMoviesJob?.cancel()
         loadMoviesJob = CoroutineScope(Dispatchers.Main).launch {
+            showLoadingIndicator(true)
+
             try {
                 repository.getMoviesNowPlaying()
                     .flowOn(Dispatchers.IO)
                     .collect { movies ->
-                        _movies.postValue(movies)
+                        _movies.emit(movies)
                         showLoadingIndicator(false)
                     }
             } catch (e: Exception) {
@@ -56,15 +55,17 @@ class MoviesViewModel @Inject constructor(private val repository: TmdbDataSource
     }
 
     override fun onMovieClicked(movie: Movie) {
-        showMovieDetails(movie)
+        CoroutineScope(Dispatchers.Main).launch {
+            showMovieDetails(movie)
+        }
     }
 
-    private fun showLoadingIndicator(active: Boolean) {
-        _isLoading.postValue(active)
+    private suspend fun showLoadingIndicator(active: Boolean) {
+        _isLoading.emit(active)
     }
 
-    private fun showMovieDetails(movie: Movie) {
-        _movieDetails.postValue(movie)
+    private suspend fun showMovieDetails(movie: Movie) {
+        _movieDetails.emit(movie)
     }
 
     fun onMovieDetailsShown(movie: Movie) {

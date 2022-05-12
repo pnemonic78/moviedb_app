@@ -8,9 +8,10 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import com.tikal.tmdb.R
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MovieDetailFragment : Fragment() {
@@ -35,9 +36,10 @@ class MovieDetailFragment : Fragment() {
             MovieDetailsView(viewModel)
         }
 
-        val owner: LifecycleOwner = viewLifecycleOwner
-        viewModel.isLoading.observe(owner) { isLoading ->
-            showLoadingIndicator(isLoading)
+        lifecycleScope.launch {
+            viewModel.isLoading.collect { isLoading ->
+                showLoadingIndicator(isLoading)
+            }
         }
     }
 

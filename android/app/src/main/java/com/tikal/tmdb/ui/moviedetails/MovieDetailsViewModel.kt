@@ -1,7 +1,5 @@
 package com.tikal.tmdb.ui.moviedetails
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tikal.tmdb.data.source.TmdbDataSource
 import com.tikal.tmdb.model.MovieDetails
@@ -9,7 +7,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -19,11 +18,11 @@ import javax.inject.Inject
 class MovieDetailsViewModel @Inject constructor(private val repository: TmdbDataSource) :
     ViewModel(), MovieDetailsUiState {
 
-    private val _isLoading = MutableLiveData(false)
-    override val isLoading: LiveData<Boolean> = _isLoading
+    private val _isLoading = MutableStateFlow(false)
+    override val isLoading: StateFlow<Boolean> = _isLoading
 
-    private val _movieDetails = MutableLiveData<MovieDetails?>()
-    override val movieDetails: LiveData<MovieDetails?> = _movieDetails
+    private val _movieDetails = MutableStateFlow<MovieDetails?>(null)
+    override val movieDetails: StateFlow<MovieDetails?> = _movieDetails
 
     private var loadMovieJob: Job? = null
 
@@ -34,15 +33,15 @@ class MovieDetailsViewModel @Inject constructor(private val repository: TmdbData
     }
 
     fun loadMovie(movieId: Long) {
-        showLoadingIndicator(true)
-
         loadMovieJob?.cancel()
         loadMovieJob = CoroutineScope(Dispatchers.Main).launch {
+            showLoadingIndicator(true)
+
             try {
                 repository.getMovieDetails(movieId)
                     .flowOn(Dispatchers.IO)
                     .collect { movie ->
-                        _movieDetails.postValue(movie)
+                        _movieDetails.emit(movie)
                         showLoadingIndicator(false)
                     }
             } catch (e: Exception) {
@@ -52,7 +51,7 @@ class MovieDetailsViewModel @Inject constructor(private val repository: TmdbData
         }
     }
 
-    private fun showLoadingIndicator(active: Boolean) {
-        _isLoading.postValue(active)
+    private suspend fun showLoadingIndicator(active: Boolean) {
+        _isLoading.emit(active)
     }
 }

@@ -1,9 +1,9 @@
 package com.tikal.tmdb.ui.moviedetails
 
-import androidx.lifecycle.LiveData
 import com.tikal.tmdb.model.MovieDetails
+import kotlinx.coroutines.flow.StateFlow
 
 interface MovieDetailsUiState {
-    val isLoading: LiveData<Boolean>
-    val movieDetails: LiveData<MovieDetails?>
+    val isLoading: StateFlow<Boolean>
+    val movieDetails: StateFlow<MovieDetails?>
 }
