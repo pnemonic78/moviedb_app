@@ -49,11 +49,11 @@ kapt {
 dependencies {
     implementation(project(":domain"))
     implementation(project(":model"))
+    implementation(project(":ui-common"))
 
     implementation(Android.Inject.hilt)
     kapt(Android.Inject.hiltCompiler)
 
-    implementation(Android.Image.glide)
     implementation(Android.Image.coil)
     implementation(Android.Image.ratingbar)
 

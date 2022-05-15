@@ -30,7 +30,6 @@ object Android {
     }
 
     object Image {
-        const val glide = "com.github.bumptech.glide:glide:4.12.0"
         const val coil = "io.coil-kt:coil-compose:1.3.2"
         const val ratingbar = "io.github.a914-gowtham:compose-ratingbar:1.2.2"
     }

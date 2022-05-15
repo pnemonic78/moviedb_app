@@ -2,12 +2,9 @@ package com.tikal.tmdb.api
 
 import android.content.Context
 import android.content.res.Resources
-import android.text.TextUtils
 import android.widget.ImageView
-import com.bumptech.glide.Glide
 import com.tikal.tmdb.R
 import com.tikal.tmdb.model.Movie
-import com.tikal.tmdb.model.MovieDetails
 import java.util.Locale
 
 /**
@@ -19,33 +16,7 @@ object TmdbApi {
 
     private var posterSizes: Array<String> = emptyArray()
 
-    fun showPoster(movie: Movie, target: ImageView) {
-        val path = generatePosterUrl(movie, target)
-        if (!TextUtils.isEmpty(path)) {
-            Glide.with(target.context)
-                .load(path)
-                .into(target)
-        } else {
-            target.setImageDrawable(null)
-        }
-    }
-
-    fun showPoster(movie: MovieDetails, target: ImageView) {
-        val path = generatePosterUrl(movie, target)
-        if (!TextUtils.isEmpty(path)) {
-            Glide.with(target.context)
-                .load(path)
-                .into(target)
-        } else {
-            target.setImageDrawable(null)
-        }
-    }
-
     fun generatePosterUrl(movie: Movie, target: ImageView): String? {
-        return generatePosterUrl(movie.posterPath, target)
-    }
-
-    fun generatePosterUrl(movie: MovieDetails, target: ImageView): String? {
         return generatePosterUrl(movie.posterPath, target)
     }
 
