@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
-        android:name="com.tikal.tmdb.ui.moviedetails.MovieDetailFragment"
+        android:name="com.tikal.tmdb.moviedetails.MovieDetailFragment"
         android:label="@string/title"
         tools:layout="@layout/fragment_compose">
         <argument

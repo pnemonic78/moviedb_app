@@ -1,4 +1,4 @@
-package com.tikal.tmdb.ui.moviedetails
+package com.tikal.tmdb.moviedetails
 
 import android.content.Context
 import android.text.format.DateUtils
@@ -32,7 +32,7 @@ import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarConfig
 import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize
-import com.tikal.tmdb.R
+import com.tikal.tmdb.ui.common.R
 import com.tikal.tmdb.api.TmdbApi
 import com.tikal.tmdb.model.Genre
 import com.tikal.tmdb.model.MovieDetails
@@ -49,7 +49,7 @@ fun MovieDetailsContent(movie: MovieDetails, modifier: Modifier = Modifier) {
     val posterSize = remember { mutableStateOf(IntSize.Zero) }
     val posterPath = getPosterPath(context, movie.posterPath, posterSize.value)
     val posterPainter: Painter = if (posterPath.isNullOrBlank()) {
-        painterResource(id = R.drawable.ic_launcher_foreground)
+        painterResource(id = R.drawable.ic_movie_black)
     } else {
         rememberImagePainter(data = posterPath)
     }

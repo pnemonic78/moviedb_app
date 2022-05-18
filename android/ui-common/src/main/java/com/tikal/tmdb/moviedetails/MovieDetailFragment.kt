@@ -1,4 +1,4 @@
-package com.tikal.tmdb.ui.moviedetails
+package com.tikal.tmdb.moviedetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.tikal.tmdb.R
+import com.tikal.tmdb.ui.common.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

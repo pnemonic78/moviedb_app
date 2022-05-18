@@ -1,4 +1,4 @@
-package com.tikal.tmdb.ui.moviedetails
+package com.tikal.tmdb.moviedetails
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable

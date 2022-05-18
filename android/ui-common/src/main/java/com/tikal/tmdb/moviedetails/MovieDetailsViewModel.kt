@@ -1,4 +1,4 @@
-package com.tikal.tmdb.ui.moviedetails
+package com.tikal.tmdb.moviedetails
 
 import androidx.lifecycle.ViewModel
 import com.tikal.tmdb.data.source.TmdbDataSource

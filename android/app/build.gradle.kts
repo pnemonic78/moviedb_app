@@ -8,6 +8,7 @@ plugins {
 
 android {
     compileSdk = Android.Version.compileSdk
+
     defaultConfig {
         applicationId = "com.tikalk.tmdb.app"
         minSdk = Android.Version.minSdk
@@ -26,7 +27,6 @@ android {
             proguardFile("proguard-rules.pro")
         }
     }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -58,12 +58,10 @@ dependencies {
     implementation(Android.Image.ratingbar)
 
     implementation(Android.Jetpack.appcompat)
-    implementation(Android.Jetpack.material)
-    implementation(Android.Jetpack.livedata)
-    implementation(Android.Jetpack.composeTooling)
     implementation(Android.Jetpack.compose)
-    implementation(Android.Jetpack.constraint_layout)
+    implementation(Android.Jetpack.composeTooling)
     implementation(Android.Jetpack.core)
+    implementation(Android.Jetpack.material)
     implementation(Android.Jetpack.navigation)
     implementation(Android.Jetpack.navigationUI)
 

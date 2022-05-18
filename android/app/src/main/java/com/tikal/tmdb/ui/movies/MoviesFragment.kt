@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.tikal.tmdb.R
 import com.tikal.tmdb.model.Movie
-import com.tikal.tmdb.ui.moviedetails.MovieDetailFragment
+import com.tikal.tmdb.moviedetails.MovieDetailFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

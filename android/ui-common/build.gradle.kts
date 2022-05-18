@@ -1,6 +1,8 @@
 plugins {
     id("com.android.library")
+    id("dagger.hilt.android.plugin")
     kotlin("android")
+    kotlin("kapt")
 }
 
 android {
@@ -14,7 +16,7 @@ android {
     }
 
     buildTypes {
-        release {
+        getByName("release") {
             isMinifyEnabled = false
             proguardFile(getDefaultProguardFile("proguard-android-optimize.txt"))
             proguardFile("proguard-rules.pro")
@@ -27,16 +29,36 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = Android.Version.compose
+    }
 }
 
 dependencies {
+    implementation(project(":domain"))
     implementation(project(":model"))
 
     implementation(Android.Inject.hilt)
+    kapt(Android.Inject.hiltCompiler)
 
+    implementation(Android.Image.coil)
+    implementation(Android.Image.ratingbar)
+
+    implementation(Android.Jetpack.appcompat)
+    implementation(Android.Jetpack.compose)
+    implementation(Android.Jetpack.composeTooling)
+    implementation(Android.Jetpack.core)
     implementation(Android.Jetpack.material)
+    implementation(Android.Jetpack.navigation)
+    implementation(Android.Jetpack.navigationUI)
 
-    testImplementation(Android.Test.junit)
-    androidTestImplementation(Android.Test.junit_ext)
+    implementation(Android.Logging.timber)
+
     androidTestImplementation(Android.Test.espresso_core)
+    androidTestImplementation(Android.Test.runner)
+    androidTestImplementation(Android.Test.rules)
+    testImplementation(Android.Test.junit)
 }

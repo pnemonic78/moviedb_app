@@ -58,7 +58,7 @@ fun MovieListTile(
     val imageHeight = thumbnailHeight / parallaxFactor
     val thumbnailUrl = getPosterPath(context, movie.posterPath, thumbnailSize.value)
     val thumbnailPainter: Painter = if (thumbnailUrl.isNullOrBlank()) {
-        painterResource(id = R.drawable.ic_launcher_foreground)
+        painterResource(id = R.drawable.ic_movie_black)
     } else {
         rememberImagePainter(data = thumbnailUrl)
     }

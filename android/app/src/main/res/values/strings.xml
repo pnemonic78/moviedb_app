@@ -1,48 +1,4 @@
 <resources>
     <string name="app_name">TMDB</string>
     <string name="title">"The Movie Database Demo"</string>
-
-    <!-- Now Playing -->
-    <string name="now_playing">"Movies Now Playing"</string>
-
-    <!-- Movie Details -->
-    <string name="budget_label">"Budget"</string>
-    <string name="cast_label">"Credited Cast"</string>
-    <string name="genres_label">"Genres"</string>
-    <string name="movie_details">"Movie Details"</string>
-    <string name="popularity_label">"Popularity"</string>
-    <string name="release_date_label">"Release Date"</string>
-    <string name="revenue_label">"Revenue"</string>
-    <string name="runtime_label">"Runtime"</string>
-    <string name="summary_label">"Overview"</string>
-    <string name="videos_label">"Videos"</string>
-    <string name="vote_average_label">"User Score"</string>
-
-    <!-- Person -->
-    <string name="personal_info_label">"Personal Info"</string>
-    <string name="known_for_label">"Known For"</string>
-    <string name="known_credits_label">"Known Credits"</string>
-    <string name="gender_label">"Gender"</string>
-    <string name="birthday_label">"Birthday"</string>
-    <string name="place_of_birth_label">"Place of Birth"</string>
-    <string name="deathday_label">"Date of Death"</string>
-    <string name="also_known_as_label">"Also Known As"</string>
-    <string name="biography_label">"Biography"</string>
-    <string name="gender_female">"Female"</string>
-    <string name="gender_male">"Male"</string>
-    <string name="person_cast_label">"Acting"</string>
-    <string name="person_cast_format">"<b>%s</b> as %s"</string>
-    <string name="person_cast_format_none">"<b>%s</b>"</string>
-    <string name="person_crew_label">"Production"</string>
-    <string name="person_crew_format">"<b>%s</b> as %s"</string>
-    <string name="person_crew_format_none">"<b>%s</b>"</string>
-
-    <!-- Popular -->
-    <string name="popular">"Popular Movies"</string>
-
-    <!-- Upcoming -->
-    <string name="upcoming">"Upcoming Movies"</string>
-
-    <!-- Top Rated -->
-    <string name="top_rated">"Top Rated Movies"</string>
 </resources>

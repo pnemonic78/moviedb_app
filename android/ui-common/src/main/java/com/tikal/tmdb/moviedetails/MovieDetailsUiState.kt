@@ -1,4 +1,4 @@
-package com.tikal.tmdb.ui.moviedetails
+package com.tikal.tmdb.moviedetails
 
 import com.tikal.tmdb.model.MovieDetails
 import kotlinx.coroutines.flow.StateFlow
