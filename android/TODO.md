@@ -1,11 +1,11 @@
 # To Do
 
+- navigation for compose
+
 - ui feature modules
-  - now_playing
   - popular
   - top_rated
   - upcoming
-- navigation for compose
 - Room db
 
 - add movie categories screen

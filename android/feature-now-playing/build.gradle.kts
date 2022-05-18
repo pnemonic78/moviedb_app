@@ -1,29 +1,24 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("dagger.hilt.android.plugin")
     kotlin("android")
     kotlin("kapt")
-    kotlin("plugin.serialization") version Kotlin.Version.kotlin
 }
 
 android {
     compileSdk = Android.Version.compileSdk
 
     defaultConfig {
-        applicationId = "com.tikalk.tmdb.app"
         minSdk = Android.Version.minSdk
         targetSdk = Android.Version.targetSdk
-        versionCode = 1
-        versionName = "1.0"
+
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
-        getByName("debug") {
-            applicationIdSuffix = ".debug"
-        }
         getByName("release") {
             isMinifyEnabled = false
-            proguardFile(getDefaultProguardFile("proguard-android.txt"))
+            proguardFile(getDefaultProguardFile("proguard-android-optimize.txt"))
             proguardFile("proguard-rules.pro")
         }
     }
@@ -42,15 +37,10 @@ android {
     }
 }
 
-kapt {
-    correctErrorTypes = true
-}
-
 dependencies {
     implementation(project(":domain"))
     implementation(project(":model"))
     implementation(project(":ui-common"))
-    implementation(project(":feature-now-playing"))
 
     implementation(Android.Inject.hilt)
     kapt(Android.Inject.hiltCompiler)
@@ -66,14 +56,7 @@ dependencies {
     implementation(Android.Jetpack.navigation)
     implementation(Android.Jetpack.navigationUI)
 
-    implementation(Android.JSON.kotlin)
-    implementation(Android.JSON.retrofit)
-
     implementation(Android.Logging.timber)
-
-    implementation(Android.Network.logging)
-    implementation(Android.Network.okhttp)
-    implementation(Android.Network.retrofit)
 
     androidTestImplementation(Android.Test.espresso_core)
     androidTestImplementation(Android.Test.runner)

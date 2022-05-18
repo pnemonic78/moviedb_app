@@ -1,7 +1,4 @@
 <resources>
-    <!-- Now Playing -->
-    <string name="now_playing">"Movies Now Playing"</string>
-
     <!-- Movie Details -->
     <string name="budget_label">"Budget"</string>
     <string name="cast_label">"Credited Cast"</string>

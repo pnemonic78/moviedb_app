@@ -1,7 +1,4 @@
 <resources>
-    <!-- Now Playing -->
-    <string name="now_playing">"סרטים המוקרנים כיום"</string>
-
     <!-- Movie Details -->
     <string name="budget_label">"תקציב"</string>
     <string name="cast_label">"שחקנים עיקריים"</string>
