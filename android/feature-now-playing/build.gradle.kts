@@ -1,8 +1,6 @@
 plugins {
     id("com.android.library")
-    id("dagger.hilt.android.plugin")
     kotlin("android")
-    kotlin("kapt")
 }
 
 android {
@@ -41,9 +39,6 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":model"))
     implementation(project(":ui-common"))
-
-    implementation(Android.Inject.hilt)
-    kapt(Android.Inject.hiltCompiler)
 
     implementation(Android.Logging.timber)
 
