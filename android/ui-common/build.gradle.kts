@@ -1,8 +1,6 @@
 plugins {
     id("com.android.library")
-    id("dagger.hilt.android.plugin")
     kotlin("android")
-    kotlin("kapt")
 }
 
 android {
@@ -42,18 +40,16 @@ dependencies {
     implementation(project(":model"))
 
     implementation(Android.Inject.hilt)
-    kapt(Android.Inject.hiltCompiler)
 
-    implementation(Android.Image.coil)
-    implementation(Android.Image.ratingbar)
+    api(Android.Image.coil)
+    api(Android.Image.ratingbar)
 
-    implementation(Android.Jetpack.appcompat)
-    implementation(Android.Jetpack.compose)
-    implementation(Android.Jetpack.composeTooling)
-    implementation(Android.Jetpack.core)
-    implementation(Android.Jetpack.material)
-    implementation(Android.Jetpack.navigation)
-    implementation(Android.Jetpack.navigationUI)
+    api(Android.Jetpack.appcompat)
+    api(Android.Jetpack.compose)
+    api(Android.Jetpack.composeTooling)
+    api(Android.Jetpack.core)
+    api(Android.Jetpack.navigation)
+    api(Android.Jetpack.navigationUI)
 
     implementation(Android.Logging.timber)
 

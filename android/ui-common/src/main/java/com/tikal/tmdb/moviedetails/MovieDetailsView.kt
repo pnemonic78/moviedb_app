@@ -1,9 +1,11 @@
 package com.tikal.tmdb.moviedetails
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.tikal.tmdb.model.MovieDetails
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,8 +15,10 @@ import kotlinx.coroutines.flow.StateFlow
 fun MovieDetailsView(uiState: MovieDetailsUiState) {
     val movie by uiState.movieDetails.collectAsState()
 
-    MaterialTheme {
-        movie?.let { MovieDetailsContent(it) }
+    if (movie != null) {
+        MovieDetailsContent(movie!!)
+    } else {
+        Box(modifier = Modifier)
     }
 }
 
@@ -25,5 +29,7 @@ private fun MovieDetailsViewPreview() {
         override val isLoading: StateFlow<Boolean> = MutableStateFlow<Boolean>(false)
         override val movieDetails: StateFlow<MovieDetails?> = MutableStateFlow(movie550)
     }
-    MovieDetailsView(uiState)
+    MaterialTheme {
+        MovieDetailsView(uiState)
+    }
 }

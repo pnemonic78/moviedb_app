@@ -17,25 +17,25 @@ fun MoviesListPage(uiState: MoviesUiState) {
     val movies by uiState.movies.collectAsState()
     val scrollState = rememberLazyListState()
 
-    MaterialTheme {
-        LazyColumn(
-            state = scrollState
-        ) {
-            items(items = movies.orEmpty()) { movie ->
-                MovieListTile(movie, onMovieClicked = uiState::onMovieClicked)
-            }
+    LazyColumn(
+        state = scrollState
+    ) {
+        items(items = movies.orEmpty()) { movie ->
+            MovieListTile(movie, onMovieClicked = uiState::onMovieClicked)
         }
     }
 }
 
 @Preview
 @Composable
-private fun MoviesViewPreview() {
+private fun MoviesListPagePreview() {
     val uiState = object : MoviesUiState {
         override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
         override val movieDetails: StateFlow<Movie?> = MutableStateFlow(null)
         override val movies: StateFlow<List<Movie>?> = MutableStateFlow(listOf(movie550, movie550))
         override fun onMovieClicked(movie: Movie) = Unit
     }
-    MoviesListPage(uiState)
+    MaterialTheme {
+        MoviesListPage(uiState)
+    }
 }

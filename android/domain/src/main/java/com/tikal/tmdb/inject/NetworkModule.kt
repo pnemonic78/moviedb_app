@@ -1,4 +1,4 @@
-package com.tikal.tmdb.inject.modules
+package com.tikal.tmdb.inject
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.tikal.tmdb.api.TmdbService

@@ -1,4 +1,4 @@
-package com.tikal.tmdb.inject.modules
+package com.tikal.tmdb.inject
 
 import android.content.Context
 import com.tikal.tmdb.api.TmdbService

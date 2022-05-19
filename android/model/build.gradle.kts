@@ -31,7 +31,7 @@ android {
 }
 
 dependencies {
-    implementation(Android.Jetpack.material)
+    api(Android.Jetpack.material)
 
     implementation(Android.JSON.kotlin)
 

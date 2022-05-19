@@ -45,17 +45,6 @@ dependencies {
     implementation(Android.Inject.hilt)
     kapt(Android.Inject.hiltCompiler)
 
-    implementation(Android.Image.coil)
-    implementation(Android.Image.ratingbar)
-
-    implementation(Android.Jetpack.appcompat)
-    implementation(Android.Jetpack.compose)
-    implementation(Android.Jetpack.composeTooling)
-    implementation(Android.Jetpack.core)
-    implementation(Android.Jetpack.material)
-    implementation(Android.Jetpack.navigation)
-    implementation(Android.Jetpack.navigationUI)
-
     implementation(Android.Logging.timber)
 
     androidTestImplementation(Android.Test.espresso_core)

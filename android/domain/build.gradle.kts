@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     kotlin("android")
+    kotlin("kapt")
 }
 
 android {
@@ -31,14 +32,18 @@ android {
     }
 }
 
+kapt {
+    correctErrorTypes = true
+}
+
 dependencies {
     implementation(project(":model"))
 
     implementation(Android.Inject.hilt)
-
-    implementation(Android.Jetpack.material)
+    kapt(Android.Inject.hiltCompiler)
 
     implementation(Android.JSON.kotlin)
+    implementation(Android.JSON.retrofit)
 
     implementation(Android.Network.logging)
     implementation(Android.Network.okhttp)
