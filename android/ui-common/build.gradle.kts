@@ -1,6 +1,8 @@
 plugins {
     id("com.android.library")
+    id("dagger.hilt.android.plugin")
     kotlin("android")
+    kotlin("kapt")
 }
 
 android {
@@ -40,6 +42,7 @@ dependencies {
     implementation(project(":model"))
 
     implementation(Android.Inject.hilt)
+    kapt(Android.Inject.hiltCompiler)
 
     api(Android.Image.coil)
     api(Android.Image.ratingbar)
@@ -54,8 +57,9 @@ dependencies {
 
     implementation(Android.Logging.timber)
 
+    testImplementation(Android.Test.junit)
+    androidTestImplementation(Android.Test.junit_ext)
     androidTestImplementation(Android.Test.espresso_core)
     androidTestImplementation(Android.Test.runner)
     androidTestImplementation(Android.Test.rules)
-    testImplementation(Android.Test.junit)
 }

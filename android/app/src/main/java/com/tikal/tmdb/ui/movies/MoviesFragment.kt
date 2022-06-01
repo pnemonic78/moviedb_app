@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.tikal.tmdb.R
 import com.tikal.tmdb.model.Movie
 import com.tikal.tmdb.moviedetails.MovieDetailsFragment
+import com.tikal.tmdb.moviedetails.MovieDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -21,6 +22,7 @@ import kotlinx.coroutines.launch
 class MoviesFragment : Fragment() {
 
     private val viewModel by viewModels<MoviesViewModel>()
+    private val viewModelDetails by viewModels<MovieDetailsViewModel>()
     private var progressBar: ContentLoadingProgressBar? = null
 
     override fun onCreateView(
@@ -38,7 +40,7 @@ class MoviesFragment : Fragment() {
         val composeView = view.findViewById<ComposeView>(R.id.compose_view)
         composeView.setContent {
             MaterialTheme {
-                MoviesListPage(viewModel)
+                MoviesMainPage(viewModel, viewModelDetails)
             }
         }
 

@@ -4,9 +4,9 @@ object Android {
         const val minSdk = 21
         const val targetSdk = 32
 
-        const val compose = "1.2.0-alpha08"
-        const val hilt = "2.38.1"
-        const val navigation = "2.4.2"
+        const val compose = "1.2.0-beta02"
+        const val hilt = "2.42"
+        const val navigation = "2.5.0-rc01"
         const val okhttp = "4.9.3"
         const val test = "1.4.0"
     }
@@ -61,10 +61,10 @@ object Android {
 
 object Kotlin {
     object Version {
-        const val kotlin = "1.6.20"
+        const val kotlin = "1.6.21"
     }
 
     object JSON {
-        const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0"
+        const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2"
     }
 }

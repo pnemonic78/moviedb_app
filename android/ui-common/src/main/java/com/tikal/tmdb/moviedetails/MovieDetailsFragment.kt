@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.platform.ComposeView
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.Fragment
@@ -33,7 +34,9 @@ class MovieDetailsFragment : Fragment() {
 
         val composeView = view.findViewById<ComposeView>(R.id.compose_view)
         composeView.setContent {
-            MovieDetailsPage(viewModel)
+            MaterialTheme {
+                MovieDetailsPage(viewModel)
+            }
         }
 
         lifecycleScope.launch {
