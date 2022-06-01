@@ -10,10 +10,7 @@ import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.tikal.tmdb.R
-import com.tikal.tmdb.model.Movie
-import com.tikal.tmdb.moviedetails.MovieDetailsFragment
 import com.tikal.tmdb.moviedetails.MovieDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -49,11 +46,6 @@ class MoviesFragment : Fragment() {
                 showLoadingIndicator(isLoading)
             }
         }
-        lifecycleScope.launch {
-            viewModel.movieDetails.collect { movie ->
-                if (movie != null) showMovieDetails(movie)
-            }
-        }
     }
 
     override fun onStart() {
@@ -67,13 +59,5 @@ class MoviesFragment : Fragment() {
         } else {
             progressBar?.hide()
         }
-    }
-
-    private fun showMovieDetails(movie: Movie) {
-        val args = Bundle().apply {
-            putLong(MovieDetailsFragment.EXTRA_MOVIE_ID, movie.id)
-        }
-        findNavController().navigate(R.id.movieDetailFragment, args)
-        viewModel.onMovieDetailsShown(movie)
     }
 }

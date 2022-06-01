@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.StateFlow
 
 interface MovieDetailsUiState {
     val isLoading: StateFlow<Boolean>
-    val movieDetails: StateFlow<MovieDetails?>
+    fun movieDetails(movieId: Long): StateFlow<MovieDetails?>
 }

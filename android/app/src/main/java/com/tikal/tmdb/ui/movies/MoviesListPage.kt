@@ -30,7 +30,7 @@ fun MoviesListPage(uiState: MoviesUiState, navController: NavController) {
         state = scrollState
     ) {
         items(items = movies.orEmpty()) { movie ->
-            MovieListTile(movie, onMovieClicked = uiState::onMovieClicked)
+            MovieListTile(movie, onMovieClicked = { uiState.onMovieClicked(movie, navController) })
         }
     }
 }
@@ -40,9 +40,8 @@ fun MoviesListPage(uiState: MoviesUiState, navController: NavController) {
 private fun MoviesListPagePreview() {
     val uiState = object : MoviesUiState {
         override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
-        override val movieDetails: StateFlow<Movie?> = MutableStateFlow(null)
         override val movies: StateFlow<List<Movie>?> = MutableStateFlow(listOf(movie550, movie550))
-        override fun onMovieClicked(movie: Movie) = Unit
+        override fun onMovieClicked(movie: Movie, navController: NavController) = Unit
     }
     val navController = rememberNavController()
     MaterialTheme {

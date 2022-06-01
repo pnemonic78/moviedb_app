@@ -1,6 +1,7 @@
 package com.tikal.tmdb.ui.movies
 
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavController
 import com.tikal.tmdb.data.source.TmdbDataSource
 import com.tikal.tmdb.model.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,9 +25,6 @@ class MoviesViewModel @Inject constructor(private val repository: TmdbDataSource
 
     private val _movies = MutableStateFlow<List<Movie>>(emptyList())
     override val movies: StateFlow<List<Movie>> = _movies
-
-    private val _movieDetails = MutableStateFlow<Movie?>(null)
-    override val movieDetails: StateFlow<Movie?> = _movieDetails
 
     private var loadMoviesJob: Job? = null
 
@@ -55,21 +53,15 @@ class MoviesViewModel @Inject constructor(private val repository: TmdbDataSource
         }
     }
 
-    override fun onMovieClicked(movie: Movie) {
-        CoroutineScope(Dispatchers.Main).launch {
-            showMovieDetails(movie)
-        }
+    override fun onMovieClicked(movie: Movie, navController: NavController) {
+        showMovieDetails(movie, navController)
     }
 
     private suspend fun showLoadingIndicator(active: Boolean) {
         _isLoading.emit(active)
     }
 
-    private suspend fun showMovieDetails(movie: Movie) {
-        _movieDetails.emit(movie)
-    }
-
-    fun onMovieDetailsShown(movie: Movie) {
-        _movieDetails.value = null
+    private fun showMovieDetails(movie: Movie, navController: NavController) {
+        navController.navigate("${MoviesScreen.Details.route}/${movie.id}")
     }
 }

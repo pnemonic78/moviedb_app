@@ -23,7 +23,6 @@ class MovieDetailsViewModel @Inject constructor(private val repository: TmdbData
     override val isLoading: StateFlow<Boolean> = _isLoading
 
     private val _movieDetails = MutableStateFlow<MovieDetails?>(null)
-    override val movieDetails: StateFlow<MovieDetails?> = _movieDetails
 
     private var loadMovieJob: Job? = null
 
@@ -33,7 +32,10 @@ class MovieDetailsViewModel @Inject constructor(private val repository: TmdbData
         loadMovieJob = null
     }
 
-    fun loadMovie(movieId: Long) {
+    override fun movieDetails(movieId: Long): StateFlow<MovieDetails?> {
+        val movie = _movieDetails.value
+        if (movie?.id == movieId) return _movieDetails
+
         loadMovieJob?.cancel()
         loadMovieJob = CoroutineScope(Dispatchers.Main).launch {
             showLoadingIndicator(true)
@@ -46,10 +48,12 @@ class MovieDetailsViewModel @Inject constructor(private val repository: TmdbData
                         showLoadingIndicator(false)
                     }
             } catch (e: Exception) {
-                Timber.e(e, "loadMovie($movieId) error: $e")
+                Timber.e(e, "movieDetails($movieId) error: $e")
+                _movieDetails.emit(null)
                 showLoadingIndicator(false)
             }
         }
+        return _movieDetails
     }
 
     private suspend fun showLoadingIndicator(active: Boolean) {
