@@ -13,7 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.tikal.tmdb.R
 import com.tikal.tmdb.model.Movie
-import com.tikal.tmdb.moviedetails.MovieDetailFragment
+import com.tikal.tmdb.moviedetails.MovieDetailsFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -56,7 +56,7 @@ class MoviesFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.loadMovies(false)
+        viewModel.loadMovies()
     }
 
     private fun showLoadingIndicator(isLoading: Boolean) {
@@ -69,7 +69,7 @@ class MoviesFragment : Fragment() {
 
     private fun showMovieDetails(movie: Movie) {
         val args = Bundle().apply {
-            putLong(MovieDetailFragment.EXTRA_MOVIE_ID, movie.id)
+            putLong(MovieDetailsFragment.EXTRA_MOVIE_ID, movie.id)
         }
         findNavController().navigate(R.id.movieDetailFragment, args)
         viewModel.onMovieDetailsShown(movie)

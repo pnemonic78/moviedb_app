@@ -15,14 +15,15 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class MoviesViewModel @Inject constructor(private val repository: TmdbDataSource) : ViewModel(),
+class MoviesViewModel @Inject constructor(private val repository: TmdbDataSource) :
+    ViewModel(),
     MoviesUiState {
 
     private val _isLoading = MutableStateFlow<Boolean>(false)
     override val isLoading: StateFlow<Boolean> = _isLoading
 
-    private val _movies = MutableStateFlow<List<Movie>?>(null)
-    override val movies: StateFlow<List<Movie>?> = _movies
+    private val _movies = MutableStateFlow<List<Movie>>(emptyList())
+    override val movies: StateFlow<List<Movie>> = _movies
 
     private val _movieDetails = MutableStateFlow<Movie?>(null)
     override val movieDetails: StateFlow<Movie?> = _movieDetails
@@ -35,7 +36,7 @@ class MoviesViewModel @Inject constructor(private val repository: TmdbDataSource
         loadMoviesJob = null
     }
 
-    fun loadMovies(forceUpdate: Boolean) {
+    fun loadMovies() {
         loadMoviesJob?.cancel()
         loadMoviesJob = CoroutineScope(Dispatchers.Main).launch {
             showLoadingIndicator(true)

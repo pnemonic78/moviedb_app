@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MovieDetailFragment : Fragment() {
+class MovieDetailsFragment : Fragment() {
 
     private val viewModel by viewModels<MovieDetailsViewModel>()
     private var progressBar: ContentLoadingProgressBar? = null
@@ -33,7 +33,7 @@ class MovieDetailFragment : Fragment() {
 
         val composeView = view.findViewById<ComposeView>(R.id.compose_view)
         composeView.setContent {
-            MovieDetailsView(viewModel)
+            MovieDetailsPage(viewModel)
         }
 
         lifecycleScope.launch {

@@ -137,11 +137,11 @@ private fun getPosterPath(context: Context, path: String?, size: IntSize): Strin
 @Composable
 private fun MovieDetailsContentPreview() {
     MaterialTheme {
-        MovieDetailsContent(movie = movie550)
+        MovieDetailsContent(movie = movie550Details)
     }
 }
 
-internal val movie550 = MovieDetails(
+val movie550Details = MovieDetails(
     adult = false,
     backdropPath = "/87hTDiay2N2qWyX4Ds7ybXi9h8I.jpg",
 //  belongs_to_collection= null,

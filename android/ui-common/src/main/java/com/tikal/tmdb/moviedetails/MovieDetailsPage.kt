@@ -7,12 +7,21 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.tikal.tmdb.model.MovieDetails
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
-fun MovieDetailsView(uiState: MovieDetailsUiState) {
+@Deprecated("needs nav")
+fun MovieDetailsPage(uiState: MovieDetailsUiState) {
+    val navController = rememberNavController()
+    MovieDetailsPage(uiState, navController)
+}
+
+@Composable
+fun MovieDetailsPage(uiState: MovieDetailsUiState, navController: NavController) {
     val movie by uiState.movieDetails.collectAsState()
 
     if (movie != null) {
@@ -24,12 +33,13 @@ fun MovieDetailsView(uiState: MovieDetailsUiState) {
 
 @Preview
 @Composable
-private fun MovieDetailsViewPreview() {
+private fun MovieDetailsPagePreview() {
     val uiState = object : MovieDetailsUiState {
         override val isLoading: StateFlow<Boolean> = MutableStateFlow<Boolean>(false)
-        override val movieDetails: StateFlow<MovieDetails?> = MutableStateFlow(movie550)
+        override val movieDetails: StateFlow<MovieDetails?> = MutableStateFlow(movie550Details)
     }
+    val navController = rememberNavController()
     MaterialTheme {
-        MovieDetailsView(uiState)
+        MovieDetailsPage(uiState, navController)
     }
 }

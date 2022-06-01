@@ -16,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MovieDetailsViewModel @Inject constructor(private val repository: TmdbDataSource) :
-    ViewModel(), MovieDetailsUiState {
+    ViewModel(),
+    MovieDetailsUiState {
 
     private val _isLoading = MutableStateFlow(false)
     override val isLoading: StateFlow<Boolean> = _isLoading

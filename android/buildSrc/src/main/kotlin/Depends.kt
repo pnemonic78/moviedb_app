@@ -25,7 +25,8 @@ object Android {
         const val compose = "androidx.compose.ui:ui:${Version.compose}"
         const val constraint_layout = "androidx.constraintlayout:constraintlayout:2.1.3"
         const val core = "androidx.core:core-ktx:1.7.0"
-        const val navigation = "androidx.navigation:navigation-fragment-ktx:${Version.navigation}"
+        const val navigationCompose = "androidx.navigation:navigation-compose:${Version.navigation}"
+        const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Version.navigation}"
         const val navigationUI = "androidx.navigation:navigation-ui-ktx:${Version.navigation}"
     }
 

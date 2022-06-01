@@ -48,7 +48,8 @@ dependencies {
     api(Android.Jetpack.compose)
     api(Android.Jetpack.composeTooling)
     api(Android.Jetpack.core)
-    api(Android.Jetpack.navigation)
+    api(Android.Jetpack.navigationCompose)
+    api(Android.Jetpack.navigationFragment)
     api(Android.Jetpack.navigationUI)
 
     implementation(Android.Logging.timber)
