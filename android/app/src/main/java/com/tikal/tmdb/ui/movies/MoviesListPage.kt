@@ -5,26 +5,30 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.tikal.tmdb.R
+import com.tikal.tmdb.UiState
 import com.tikal.tmdb.model.Movie
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
-@Deprecated("use nav")
-fun MoviesListPage(uiState: MoviesUiState) {
-    val navController = rememberNavController()
-    MoviesListPage(uiState, navController)
-}
-
-@Composable
-fun MoviesListPage(uiState: MoviesUiState, navController: NavController) {
+fun MoviesListPage(mainState: UiState, uiState: MoviesListState, navController: NavController) {
     val movies by uiState.movies.collectAsState()
     val scrollState = rememberLazyListState()
+    val coroutineScope = rememberCoroutineScope()
+
+    val title = stringResource(id = R.string.now_playing)
+    LaunchedEffect(coroutineScope) {
+        mainState.title.emit(title)
+    }
 
     LazyColumn(
         state = scrollState
@@ -38,13 +42,18 @@ fun MoviesListPage(uiState: MoviesUiState, navController: NavController) {
 @Preview
 @Composable
 private fun MoviesListPagePreview() {
-    val uiState = object : MoviesUiState {
+    val mainState = object : UiState {
         override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
+        override val title: MutableStateFlow<String> = MutableStateFlow("Main")
+    }
+    val listState = object : MoviesListState {
+        override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
+        override val title: MutableStateFlow<String> = MutableStateFlow("Movies List")
         override val movies: StateFlow<List<Movie>?> = MutableStateFlow(listOf(movie550, movie550))
         override fun onMovieClicked(movie: Movie, navController: NavController) = Unit
     }
     val navController = rememberNavController()
     MaterialTheme {
-        MoviesListPage(uiState, navController)
+        MoviesListPage(mainState, listState, navController)
     }
 }

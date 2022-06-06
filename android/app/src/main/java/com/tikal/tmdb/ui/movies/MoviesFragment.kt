@@ -18,8 +18,9 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MoviesFragment : Fragment() {
 
-    private val viewModel by viewModels<MoviesViewModel>()
-    private val viewModelDetails by viewModels<MovieDetailsViewModel>()
+    private val mainViewModel by viewModels<MainViewModel>()
+    private val listViewModel by viewModels<MoviesViewModel>()
+    private val detailsViewModel by viewModels<MovieDetailsViewModel>()
     private var progressBar: ContentLoadingProgressBar? = null
 
     override fun onCreateView(
@@ -37,12 +38,12 @@ class MoviesFragment : Fragment() {
         val composeView = view.findViewById<ComposeView>(R.id.compose_view)
         composeView.setContent {
             MaterialTheme {
-                MoviesMainPage(viewModel, viewModelDetails)
+                MoviesMainPage(mainViewModel, listViewModel, detailsViewModel)
             }
         }
 
         lifecycleScope.launch {
-            viewModel.isLoading.collect { isLoading ->
+            listViewModel.isLoading.collect { isLoading ->
                 showLoadingIndicator(isLoading)
             }
         }
@@ -50,7 +51,7 @@ class MoviesFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.loadMovies()
+        listViewModel.loadMovies()
     }
 
     private fun showLoadingIndicator(isLoading: Boolean) {
