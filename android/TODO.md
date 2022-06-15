@@ -1,7 +1,5 @@
 # To Do
 
-- navigation for compose
-
 - ui feature modules
   - popular
   - top_rated

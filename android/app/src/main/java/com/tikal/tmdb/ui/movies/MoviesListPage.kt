@@ -14,20 +14,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.tikal.tmdb.R
-import com.tikal.tmdb.UiState
 import com.tikal.tmdb.model.Movie
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
-fun MoviesListPage(mainState: UiState, uiState: MoviesListState, navController: NavController) {
+fun MoviesListPage(uiState: MoviesListState, navController: NavController) {
     val movies by uiState.movies.collectAsState()
     val scrollState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
 
     val title = stringResource(id = R.string.now_playing)
     LaunchedEffect(coroutineScope) {
-        mainState.title.emit(title)
+        uiState.title.emit(title)
     }
 
     LazyColumn(
@@ -42,10 +41,6 @@ fun MoviesListPage(mainState: UiState, uiState: MoviesListState, navController: 
 @Preview
 @Composable
 private fun MoviesListPagePreview() {
-    val mainState = object : UiState {
-        override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
-        override val title: MutableStateFlow<String> = MutableStateFlow("Main")
-    }
     val listState = object : MoviesListState {
         override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
         override val title: MutableStateFlow<String> = MutableStateFlow("Movies List")
@@ -54,6 +49,6 @@ private fun MoviesListPagePreview() {
     }
     val navController = rememberNavController()
     MaterialTheme {
-        MoviesListPage(mainState, listState, navController)
+        MoviesListPage(listState, navController)
     }
 }

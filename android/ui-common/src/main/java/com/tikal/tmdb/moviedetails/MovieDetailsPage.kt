@@ -10,28 +10,29 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.tikal.tmdb.UiState
 import com.tikal.tmdb.model.MovieDetails
+import com.tikal.tmdb.ui.common.R
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 fun MovieDetailsPage(
-    mainState: UiState,
     uiState: MovieDetailsUiState,
     navController: NavController,
     movieId: Long
 ) {
     val movie by uiState.movieDetails(movieId).collectAsState()
     val coroutineScope = rememberCoroutineScope()
+    val title = stringResource(id = R.string.movie_details)
+    LaunchedEffect(coroutineScope) {
+        uiState.title.emit(title)
+    }
 
     if (movie != null) {
-        LaunchedEffect(coroutineScope) {
-            mainState.title.emit(movie!!.title)
-        }
         MovieDetailsContent(movie!!)
     } else {
         Box(modifier = Modifier.background(color = Color.Red))
@@ -41,11 +42,7 @@ fun MovieDetailsPage(
 @Preview
 @Composable
 private fun MovieDetailsPagePreview() {
-    val mainState = object : UiState {
-        override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
-        override val title: MutableStateFlow<String> = MutableStateFlow("Main")
-    }
-    val detailsState = object : MovieDetailsUiState {
+    val uiState = object : MovieDetailsUiState {
         override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
         override val title: MutableStateFlow<String> = MutableStateFlow("Movie Details")
         override fun movieDetails(movieId: Long): StateFlow<MovieDetails?> =
@@ -53,6 +50,6 @@ private fun MovieDetailsPagePreview() {
     }
     val navController = rememberNavController()
     MaterialTheme {
-        MovieDetailsPage(mainState, detailsState, navController, movie550Details.id)
+        MovieDetailsPage(uiState, navController, movie550Details.id)
     }
 }

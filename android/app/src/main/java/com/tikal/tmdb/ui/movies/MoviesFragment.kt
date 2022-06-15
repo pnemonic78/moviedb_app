@@ -11,16 +11,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.tikal.tmdb.R
-import com.tikal.tmdb.moviedetails.MovieDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MoviesFragment : Fragment() {
 
-    private val mainViewModel by viewModels<MainViewModel>()
-    private val listViewModel by viewModels<MoviesViewModel>()
-    private val detailsViewModel by viewModels<MovieDetailsViewModel>()
+    private val viewModel by viewModels<MainViewModel>()
     private var progressBar: ContentLoadingProgressBar? = null
 
     override fun onCreateView(
@@ -38,12 +35,12 @@ class MoviesFragment : Fragment() {
         val composeView = view.findViewById<ComposeView>(R.id.compose_view)
         composeView.setContent {
             MaterialTheme {
-                MoviesMainPage(mainViewModel, listViewModel, detailsViewModel)
+                MoviesMainPage(viewModel)
             }
         }
 
         lifecycleScope.launch {
-            listViewModel.isLoading.collect { isLoading ->
+            viewModel.isLoading.collect { isLoading ->
                 showLoadingIndicator(isLoading)
             }
         }
@@ -51,7 +48,7 @@ class MoviesFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        listViewModel.loadMovies()
+        viewModel.loadMovies()
     }
 
     private fun showLoadingIndicator(isLoading: Boolean) {
