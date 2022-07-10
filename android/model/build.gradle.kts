@@ -33,10 +33,13 @@ android {
 dependencies {
     api(Android.Jetpack.material)
 
+    // JSON
     implementation(Android.JSON.kotlin)
 
+    // Logging
     implementation(Android.Logging.timber)
 
+    // Testing
     testImplementation(Android.Test.junit)
     androidTestImplementation(Android.Test.junit_ext)
     androidTestImplementation(Android.Test.espresso_core)

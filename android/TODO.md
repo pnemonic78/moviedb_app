@@ -1,10 +1,10 @@
 # To Do
 
+- Room db
 - ui feature modules
   - popular
   - top_rated
   - upcoming
-- Room db
 
 - add movie categories screen
 - add movies grid screen

@@ -16,7 +16,7 @@ android {
     }
 
     buildTypes {
-        getByName("release") {
+        release {
             isMinifyEnabled = false
             proguardFile(getDefaultProguardFile("proguard-android-optimize.txt"))
             proguardFile("proguard-rules.pro")
@@ -41,12 +41,15 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":model"))
 
+    // Dependency Injection
     implementation(Android.Inject.hilt)
     kapt(Android.Inject.hiltCompiler)
 
+    // UI
     api(Android.Image.coil)
     api(Android.Image.ratingbar)
 
+    // Jetpack
     api(Android.Jetpack.appcompat)
     api(Android.Jetpack.compose)
     api(Android.Jetpack.composeTooling)
@@ -54,8 +57,10 @@ dependencies {
     api(Android.Jetpack.navigationCompose)
     api(Android.Jetpack.navigationFragment)
 
+    // Logging
     implementation(Android.Logging.timber)
 
+    // Testing
     testImplementation(Android.Test.junit)
     androidTestImplementation(Android.Test.junit_ext)
     androidTestImplementation(Android.Test.espresso_core)

@@ -39,16 +39,23 @@ kapt {
 dependencies {
     implementation(project(":model"))
 
+    // Dependency Injection
     implementation(Android.Inject.hilt)
     kapt(Android.Inject.hiltCompiler)
 
+    // JSON
     implementation(Android.JSON.kotlin)
     implementation(Android.JSON.retrofit)
 
+    // Logging
+    implementation(Android.Logging.timber)
+
+    // Networking
     implementation(Android.Network.logging)
     implementation(Android.Network.okhttp)
     implementation(Android.Network.retrofit)
 
+    // Testing
     testImplementation(Android.Test.junit)
     androidTestImplementation(Android.Test.junit_ext)
     androidTestImplementation(Android.Test.espresso_core)

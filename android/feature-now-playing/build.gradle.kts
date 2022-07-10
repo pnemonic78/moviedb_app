@@ -14,7 +14,7 @@ android {
     }
 
     buildTypes {
-        getByName("release") {
+        release {
             isMinifyEnabled = false
             proguardFile(getDefaultProguardFile("proguard-android-optimize.txt"))
             proguardFile("proguard-rules.pro")
@@ -40,10 +40,12 @@ dependencies {
     implementation(project(":model"))
     implementation(project(":ui-common"))
 
+    // Logging
     implementation(Android.Logging.timber)
 
+    // Testing
+    testImplementation(Android.Test.junit)
     androidTestImplementation(Android.Test.espresso_core)
     androidTestImplementation(Android.Test.runner)
     androidTestImplementation(Android.Test.rules)
-    testImplementation(Android.Test.junit)
 }

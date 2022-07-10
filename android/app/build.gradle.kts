@@ -18,10 +18,10 @@ android {
     }
 
     buildTypes {
-        getByName("debug") {
+        debug {
             applicationIdSuffix = ".debug"
         }
-        getByName("release") {
+        release {
             isMinifyEnabled = false
             proguardFile(getDefaultProguardFile("proguard-android.txt"))
             proguardFile("proguard-rules.pro")
@@ -52,19 +52,24 @@ dependencies {
     implementation(project(":ui-common"))
     implementation(project(":feature-now-playing"))
 
+    // Dependency Injection
     implementation(Android.Inject.hilt)
     kapt(Android.Inject.hiltCompiler)
 
+    // JSON
     implementation(Android.JSON.kotlin)
 
+    // Logging
     implementation(Android.Logging.timber)
 
+    // Networking
     implementation(Android.Network.logging)
     implementation(Android.Network.okhttp)
     implementation(Android.Network.retrofit)
 
+    // Testing
+    testImplementation(Android.Test.junit)
     androidTestImplementation(Android.Test.espresso_core)
     androidTestImplementation(Android.Test.runner)
     androidTestImplementation(Android.Test.rules)
-    testImplementation(Android.Test.junit)
 }

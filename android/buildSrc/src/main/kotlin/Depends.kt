@@ -6,7 +6,7 @@ object Android {
 
         const val compose = "1.2.0-beta02"
         const val hilt = "2.42"
-        const val navigation = "2.5.0-rc01"
+        const val navigation = "2.5.0"
         const val okhttp = "4.9.3"
         const val test = "1.4.0"
     }
