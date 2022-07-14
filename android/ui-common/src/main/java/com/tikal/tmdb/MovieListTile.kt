@@ -1,4 +1,4 @@
-package com.tikal.tmdb.ui.movies
+package com.tikal.tmdb
 
 import android.content.Context
 import android.text.format.DateUtils
@@ -144,7 +144,6 @@ private fun MovieListTilePreview() {
 val movie550 = Movie(
     adult = false,
     backdropPath = "/87hTDiay2N2qWyX4Ds7ybXi9h8I.jpg",
-//    genreIds = emptyList(),
     id = 550,
     originalLanguage = "en",
     originalTitle = "Fight Club",

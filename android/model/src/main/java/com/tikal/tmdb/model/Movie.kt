@@ -20,9 +20,8 @@ open class Movie(
     open val adult: Boolean,
     @SerialName("backdrop_path")
     open val backdropPath: String? = null,
-//    @SerialName("genre_ids")
-//    @Embedded
-//    open val genreIds: ListOfLong = emptyList(),
+    @SerialName("genre_ids")
+    open val genreIds: LongArray = longArrayOf(),
     @SerialName("original_language")
     open val originalLanguage: String,
     @SerialName("original_title")

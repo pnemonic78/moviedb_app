@@ -13,8 +13,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.tikal.tmdb.MovieListTile
 import com.tikal.tmdb.R
 import com.tikal.tmdb.model.Movie
+import com.tikal.tmdb.movie550
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

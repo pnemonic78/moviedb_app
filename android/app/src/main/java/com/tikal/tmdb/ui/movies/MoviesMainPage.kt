@@ -21,6 +21,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.tikal.tmdb.model.Movie
 import com.tikal.tmdb.model.MovieDetails
+import com.tikal.tmdb.movie550
 import com.tikal.tmdb.moviedetails.MovieDetailsPage
 import com.tikal.tmdb.moviedetails.movie550Details
 import kotlinx.coroutines.flow.MutableStateFlow

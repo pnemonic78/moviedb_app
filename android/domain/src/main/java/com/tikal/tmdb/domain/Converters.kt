@@ -41,34 +41,54 @@ import java.util.Date
 
 open class Converters {
 
-    @TypeConverter
-    fun fromCalendar(value: Calendar?): Long? = value?.timeInMillis
+    fun fromCalendar(value: Calendar): Long = value.timeInMillis
 
     @TypeConverter
-    fun toCalendar(value: Long?): Calendar? =
-        value?.let { Calendar.getInstance().apply { timeInMillis = it } }
+    fun fromNullableCalendar(value: Calendar?): Long? = value?.let { fromCalendar(it) }
+
+    fun toCalendar(value: Long): Calendar = Calendar.getInstance().apply { timeInMillis = value }
 
     @TypeConverter
-    fun fromDate(value: Long?): Date? = value?.let { Date(it) }
+    fun toNullableCalendar(value: Long?): Calendar? = value?.let { toCalendar(it) }
+
+    fun fromDate(value: Long): Date = Date(value)
 
     @TypeConverter
-    fun toDate(value: Date?): Long? = value?.time
+    fun fromNullableDate(value: Long?): Date? = value?.let { fromDate(it) }
+
+    fun toDate(value: Date): Long = value.time
 
     @TypeConverter
-    fun fromTimestamp(value: Long?): Timestamp? = value?.let { Timestamp(it) }
+    fun toNullableDate(value: Date?): Long? = value?.let { toDate(it) }
+
+    fun fromTimestamp(value: Long): Timestamp = Timestamp(value)
 
     @TypeConverter
-    fun toTimestamp(value: Timestamp?): Long? = value?.time
+    fun fromNullableTimestamp(value: Long?): Timestamp? = value?.let { fromTimestamp(it) }
+
+    fun toTimestamp(value: Timestamp): Long = value.time
 
     @TypeConverter
-    fun fromUri(value: Uri?): String? = value?.toString()
+    fun toNullableTimestamp(value: Timestamp?): Long? = value?.let { toTimestamp(it) }
+
+    fun fromUri(value: Uri): String = value.toString()
 
     @TypeConverter
-    fun toUri(value: String?): Uri? = value?.toUri()
+    fun fromNullableUri(value: Uri?): String? = value?.let { fromUri(it) }
+
+    fun toUri(value: String): Uri = value.toUri()
 
     @TypeConverter
-    fun fromListOfLong(value: LongArray?): String? = value?.contentToString()
+    fun toNullableUri(value: String?): Uri? = value?.let { toUri(it) }
+
+    fun fromLongArray(value: LongArray): String = value.contentToString()
 
     @TypeConverter
-    fun toListOfLong(value: String?): LongArray? = value?.split(",")?.map { it.toLong() }?.toLongArray()
+    fun fromNullableLongArray(value: LongArray?): String? = value?.let { fromLongArray(it) }
+
+    fun toLongArray(value: String): LongArray =
+        value.split(",").map { it.toLong() }.toLongArray()
+
+    @TypeConverter
+    fun toNullableLongArray(value: String?): LongArray? = value?.let { toLongArray(it) }
 }
