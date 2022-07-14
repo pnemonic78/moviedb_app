@@ -36,6 +36,9 @@ dependencies {
     // JSON
     implementation(Android.JSON.kotlin)
 
+    // Database
+    implementation(Android.Database.roomKtx)
+
     // Logging
     implementation(Android.Logging.timber)
 

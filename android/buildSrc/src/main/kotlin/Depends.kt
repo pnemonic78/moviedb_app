@@ -8,7 +8,18 @@ object Android {
         const val hilt = "2.42"
         const val navigation = "2.5.0"
         const val okhttp = "4.9.3"
+        const val room = "2.4.2"
         const val test = "1.4.0"
+    }
+
+    object Database {
+        const val roomCompiler = "androidx.room:room-compiler:${Version.room}"
+        const val roomKtx = "androidx.room:room-ktx:${Version.room}"
+    }
+
+    object Image {
+        const val coil = "io.coil-kt:coil-compose:1.3.2"
+        const val ratingbar = "io.github.a914-gowtham:compose-ratingbar:1.2.2"
     }
 
     // Dependency Injection
@@ -28,11 +39,6 @@ object Android {
         const val navigationCompose = "androidx.navigation:navigation-compose:${Version.navigation}"
         const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Version.navigation}"
         const val navigationUI = "androidx.navigation:navigation-ui-ktx:${Version.navigation}"
-    }
-
-    object Image {
-        const val coil = "io.coil-kt:coil-compose:1.3.2"
-        const val ratingbar = "io.github.a914-gowtham:compose-ratingbar:1.2.2"
     }
 
     object JSON {

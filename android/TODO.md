@@ -1,6 +1,5 @@
 # To Do
 
-- Room db
 - ui feature modules
   - popular
   - top_rated

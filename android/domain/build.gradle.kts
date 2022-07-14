@@ -43,6 +43,9 @@ dependencies {
     implementation(Android.Inject.hilt)
     kapt(Android.Inject.hiltCompiler)
 
+    // Jetpack
+    implementation(Android.Jetpack.core)
+
     // JSON
     implementation(Android.JSON.kotlin)
     implementation(Android.JSON.retrofit)
@@ -54,6 +57,10 @@ dependencies {
     implementation(Android.Network.logging)
     implementation(Android.Network.okhttp)
     implementation(Android.Network.retrofit)
+
+    // Database
+    kapt(Android.Database.roomCompiler)
+    implementation(Android.Database.roomKtx)
 
     // Testing
     testImplementation(Android.Test.junit)

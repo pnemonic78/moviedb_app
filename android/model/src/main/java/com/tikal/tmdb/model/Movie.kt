@@ -1,5 +1,7 @@
 package com.tikal.tmdb.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.tikal.tmdb.json.DateCalendarSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -9,20 +11,37 @@ import java.util.Calendar
  * Movie POJO.
  */
 @Serializable
+@Entity(tableName = "movie")
 open class Movie(
-    @SerialName("id") val id: Long,
-    @SerialName("adult") val adult: Boolean,
-    @SerialName("backdrop_path") val backdropPath: String? = null,
-    @SerialName("genre_ids") val genreIds: List<Long> = emptyList(),
-    @SerialName("original_language") val originalLanguage: String,
-    @SerialName("original_title") val originalTitle: String,
-    @SerialName("overview") val overview: String?,
-    @SerialName("popularity") val popularity: Float,
-    @SerialName("poster_path") val posterPath: String? = null,
+    @SerialName("id")
+    @PrimaryKey
+    open val id: Long,
+    @SerialName("adult")
+    open val adult: Boolean,
+    @SerialName("backdrop_path")
+    open val backdropPath: String? = null,
+//    @SerialName("genre_ids")
+//    @Embedded
+//    open val genreIds: ListOfLong = emptyList(),
+    @SerialName("original_language")
+    open val originalLanguage: String,
+    @SerialName("original_title")
+    open val originalTitle: String,
+    @SerialName("overview")
+    open val overview: String?,
+    @SerialName("popularity")
+    open val popularity: Float,
+    @SerialName("poster_path")
+    open val posterPath: String? = null,
     @Serializable(with = DateCalendarSerializer::class)
-    @SerialName("release_date") val releaseDate: Calendar? = null,
-    @SerialName("title") val title: String,
-    @SerialName("video") val video: Boolean = false,
-    @SerialName("vote_average") val voteAverage: Float,
-    @SerialName("vote_count") val voteCount: Int
+    @SerialName("release_date")
+    open val releaseDate: Calendar? = null,
+    @SerialName("title")
+    open val title: String,
+    @SerialName("video")
+    open val video: Boolean = false,
+    @SerialName("vote_average")
+    open val voteAverage: Float,
+    @SerialName("vote_count")
+    open val voteCount: Int
 )
