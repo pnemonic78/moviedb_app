@@ -1,7 +1,6 @@
 package com.tikal.tmdb.data.source
 
-import com.tikal.tmdb.model.Movie
-import com.tikal.tmdb.model.MovieDetails
+import com.tikal.tmdb.data.model.MovieEntity
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -9,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
  */
 interface TmdbDataSource {
 
-    suspend fun getMoviesNowPlaying(): Flow<List<Movie>>
+    suspend fun getMoviesNowPlaying(): Flow<List<MovieEntity>>
 
-    suspend fun getMovieDetails(movieId: Long): Flow<MovieDetails>
+    suspend fun getMovie(movieId: Long): Flow<MovieEntity>
 }

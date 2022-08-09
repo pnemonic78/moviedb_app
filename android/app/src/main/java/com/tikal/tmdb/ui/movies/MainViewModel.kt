@@ -2,9 +2,8 @@ package com.tikal.tmdb.ui.movies
 
 import androidx.navigation.NavController
 import com.tikal.tmdb.BaseViewModel
+import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.data.source.TmdbDataSource
-import com.tikal.tmdb.model.Movie
-import com.tikal.tmdb.model.MovieDetails
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,8 +20,8 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) :
     BaseViewModel(repository),
     MainState {
 
-    private val _movies = MutableStateFlow<List<Movie>>(emptyList())
-    override val movies: StateFlow<List<Movie>> = _movies
+    private val _movies = MutableStateFlow<List<MovieEntity>>(emptyList())
+    override val movies: StateFlow<List<MovieEntity>> = _movies
 
     private var loadMoviesJob: Job? = null
     private var loadMovieJob: Job? = null
@@ -54,17 +53,17 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) :
         }
     }
 
-    override fun onMovieClicked(movie: Movie, navController: NavController) {
+    override fun onMovieClicked(movie: MovieEntity, navController: NavController) {
         showMovieDetails(movie, navController)
     }
 
-    private fun showMovieDetails(movie: Movie, navController: NavController) {
+    private fun showMovieDetails(movie: MovieEntity, navController: NavController) {
         navController.navigate("${MoviesScreen.Details.route}/${movie.id}")
     }
 
-    private val _movieDetails = MutableStateFlow<MovieDetails?>(null)
+    private val _movieDetails = MutableStateFlow<MovieEntity?>(null)
 
-    override fun movieDetails(movieId: Long): StateFlow<MovieDetails?> {
+    override fun movieDetails(movieId: Long): StateFlow<MovieEntity?> {
         val movie = _movieDetails.value
         if (movie?.id == movieId) return _movieDetails
 
@@ -73,7 +72,7 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) :
             showLoadingIndicator(true)
 
             try {
-                repository.getMovieDetails(movieId)
+                repository.getMovie(movieId)
                     .flowOn(Dispatchers.IO)
                     .collect { movie ->
                         _movieDetails.emit(movie)

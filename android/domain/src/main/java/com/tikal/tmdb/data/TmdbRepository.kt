@@ -1,11 +1,10 @@
 package com.tikal.tmdb.data
 
 import com.tikal.flow.concat
+import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.data.source.TmdbDataSource
 import com.tikal.tmdb.data.source.local.TmdbLocalDataSource
 import com.tikal.tmdb.data.source.remote.TmdbRemoteDataSource
-import com.tikal.tmdb.model.Movie
-import com.tikal.tmdb.model.MovieDetails
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -17,17 +16,17 @@ class TmdbRepository @Inject constructor(
     private val remoteRepository: TmdbRemoteDataSource
 ) : TmdbDataSource {
 
-    override suspend fun getMoviesNowPlaying(): Flow<List<Movie>> {
+    override suspend fun getMoviesNowPlaying(): Flow<List<MovieEntity>> {
         return concat(
             localRepository.getMoviesNowPlaying(),
             remoteRepository.getMoviesNowPlaying()
         )
     }
 
-    override suspend fun getMovieDetails(movieId: Long): Flow<MovieDetails> {
+    override suspend fun getMovie(movieId: Long): Flow<MovieEntity> {
         return concat(
-            localRepository.getMovieDetails(movieId),
-            remoteRepository.getMovieDetails(movieId)
+            localRepository.getMovie(movieId),
+            remoteRepository.getMovie(movieId)
         )
     }
 }

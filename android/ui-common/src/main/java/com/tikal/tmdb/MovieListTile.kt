@@ -36,7 +36,7 @@ import com.gowtham.ratingbar.RatingBarConfig
 import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize
 import com.tikal.tmdb.api.TmdbApi
-import com.tikal.tmdb.model.Movie
+import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.ui.common.R
 import java.util.Calendar
 
@@ -45,9 +45,9 @@ private const val posterAspectRatio = 1f / 1.5f
 
 @Composable
 fun MovieListTile(
-    movie: Movie,
+    movie: MovieEntity,
     modifier: Modifier = Modifier,
-    onMovieClicked: ((movie: Movie) -> Unit)
+    onMovieClicked: ((movie: MovieEntity) -> Unit)
 ) {
     val context = LocalContext.current
 
@@ -141,7 +141,7 @@ private fun MovieListTilePreview() {
     }
 }
 
-val movie550 = Movie(
+val movie550 = MovieEntity(
     adult = false,
     backdropPath = "/87hTDiay2N2qWyX4Ds7ybXi9h8I.jpg",
     id = 550,

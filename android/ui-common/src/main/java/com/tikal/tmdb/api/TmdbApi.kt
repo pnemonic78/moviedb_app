@@ -3,7 +3,7 @@ package com.tikal.tmdb.api
 import android.content.Context
 import android.content.res.Resources
 import android.widget.ImageView
-import com.tikal.tmdb.model.Movie
+import com.tikal.tmdb.json.model.Movie
 import com.tikal.tmdb.ui.common.R
 import java.util.Locale
 

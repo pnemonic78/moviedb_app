@@ -4,20 +4,20 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.tikal.tmdb.model.Movie
+import com.tikal.tmdb.data.model.MovieEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MovieDao {
     @get:Query("SELECT * FROM movie")
-    val all: Flow<List<Movie>>
+    val all: Flow<List<MovieEntity>>
 
     @Query("SELECT * FROM movie WHERE id  = :id")
-    fun getById(id: Long): Flow<Movie>
+    fun getById(id: Long): Flow<MovieEntity>
 
     @Insert
-    fun insertAll(vararg movies: Movie)
+    fun insertAll(vararg movies: MovieEntity)
 
     @Delete
-    fun delete(movie: Movie)
+    fun delete(movie: MovieEntity)
 }

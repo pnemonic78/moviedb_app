@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     kotlin("android")
+    kotlin("kapt")
     kotlin("plugin.serialization") version Kotlin.Version.kotlin
 }
 
@@ -33,14 +34,20 @@ android {
 dependencies {
     api(Android.Jetpack.material)
 
+    // Dependency Injection
+    implementation(Android.Inject.hilt)
+    kapt(Android.Inject.hiltCompiler)
+
     // JSON
     implementation(Android.JSON.kotlin)
 
-    // Database
-    implementation(Android.Database.roomKtx)
-
     // Logging
     implementation(Android.Logging.timber)
+
+    // Networking
+    implementation(Android.Network.logging)
+    implementation(Android.Network.okhttp)
+    implementation(Android.Network.retrofit)
 
     // Testing
     testImplementation(Android.Test.junit)

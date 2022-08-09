@@ -1,4 +1,4 @@
-package com.tikal.tmdb.model
+package com.tikal.tmdb.json.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -8,5 +8,6 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class Trailer(
-    @SerialName("id") val id: String
+    @SerialName("id")
+    val id: String
 )

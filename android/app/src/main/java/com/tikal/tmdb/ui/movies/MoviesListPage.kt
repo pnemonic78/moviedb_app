@@ -15,7 +15,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.tikal.tmdb.MovieListTile
 import com.tikal.tmdb.R
-import com.tikal.tmdb.model.Movie
+import com.tikal.tmdb.data.model.MovieEntity
+import com.tikal.tmdb.json.model.Movie
 import com.tikal.tmdb.movie550
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -34,7 +35,7 @@ fun MoviesListPage(uiState: MoviesListState, navController: NavController) {
     LazyColumn(
         state = scrollState
     ) {
-        items(items = movies.orEmpty()) { movie ->
+        items(items = movies) { movie ->
             MovieListTile(movie, onMovieClicked = { uiState.onMovieClicked(movie, navController) })
         }
     }
@@ -46,8 +47,8 @@ private fun MoviesListPagePreview() {
     val listState = object : MoviesListState {
         override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
         override val title: MutableStateFlow<String> = MutableStateFlow("Movies List")
-        override val movies: StateFlow<List<Movie>?> = MutableStateFlow(listOf(movie550, movie550))
-        override fun onMovieClicked(movie: Movie, navController: NavController) = Unit
+        override val movies: StateFlow<List<MovieEntity>> = MutableStateFlow(listOf(movie550, movie550))
+        override fun onMovieClicked(movie: MovieEntity, navController: NavController) = Unit
     }
     val navController = rememberNavController()
     MaterialTheme {

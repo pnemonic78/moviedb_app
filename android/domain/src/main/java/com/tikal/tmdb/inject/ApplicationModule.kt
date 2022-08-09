@@ -11,7 +11,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import kotlinx.serialization.json.Json
 import javax.inject.Singleton
 
 @Module(includes = [NetworkModule::class])
@@ -21,9 +20,8 @@ object ApplicationModule {
     @Provides
     @Singleton
     fun provideLocalDataSource(
-        @ApplicationContext context: Context,
-        json: Json
-    ): TmdbLocalDataSource = TmdbLocalDataSource(context, json)
+        @ApplicationContext context: Context
+    ): TmdbLocalDataSource = TmdbLocalDataSource(context)
 
     @Provides
     @Singleton

@@ -32,17 +32,17 @@ import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarConfig
 import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize
-import com.tikal.tmdb.ui.common.R
 import com.tikal.tmdb.api.TmdbApi
-import com.tikal.tmdb.model.Genre
-import com.tikal.tmdb.model.MovieDetails
-import com.tikal.tmdb.model.SpokenLanguage
+import com.tikal.tmdb.data.model.MovieEntity
+import com.tikal.tmdb.json.model.Genre
+import com.tikal.tmdb.json.model.SpokenLanguage
+import com.tikal.tmdb.ui.common.R
 import java.util.Calendar
 
 private const val posterAspectRatio = 1f / 1.5f
 
 @Composable
-fun MovieDetailsContent(movie: MovieDetails, modifier: Modifier = Modifier) {
+fun MovieDetailsContent(movie: MovieEntity, modifier: Modifier = Modifier) {
     val context = LocalContext.current
     val scrollState = rememberScrollState()
 
@@ -141,12 +141,12 @@ private fun MovieDetailsContentPreview() {
     }
 }
 
-val movie550Details = MovieDetails(
+val movie550Details = MovieEntity(
     adult = false,
     backdropPath = "/87hTDiay2N2qWyX4Ds7ybXi9h8I.jpg",
 //  belongs_to_collection= null,
     budget = 63000000,
-    genres = listOf(Genre(id = 18, name = "Drama")),
+//    genres = listOf(Genre(id = 18, name = "Drama")),
     homepage = "http=//www.foxmovies.com/movies/fight-club",
     id = 550,
     imdbId = "tt0137523",
@@ -155,8 +155,8 @@ val movie550Details = MovieDetails(
     overview = "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.",
     popularity = 46.747329f,
     posterPath = "/adw6Lq9FiC9zjYEpOqfq03ituwp.jpg",
-    productionCompanies = null,
-    productionCountries = null,
+//    productionCompanies = null,
+//    productionCountries = null,
 //  productionCompanies= [{ "name= "Twentieth Century Fox Film Corporation", "id= 306 }, {
 //      name= "Regency Enterprises", "id= 508
 //    }, { "name= "Fox 2000 Pictures", "id= 711 }, {
@@ -174,7 +174,7 @@ val movie550Details = MovieDetails(
     },
     revenue = 100853753,
     runtime = 139,
-    spokenLanguages = listOf(SpokenLanguage(id = "en", name = "English")),
+//    spokenLanguages = listOf(SpokenLanguage(id = "en", name = "English")),
     status = "Released",
     tagline = "Mischief. Mayhem. Soap.",
     title = "Fight Club",
