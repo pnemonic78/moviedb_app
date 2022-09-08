@@ -1,16 +1,14 @@
 package com.tikal.tmdb.ui.movies
 
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.tikal.tmdb.BaseViewModel
 import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.data.source.TmdbDataSource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -36,12 +34,11 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) :
 
     fun loadMovies() {
         loadMoviesJob?.cancel()
-        loadMoviesJob = CoroutineScope(Dispatchers.Main).launch {
+        loadMoviesJob = viewModelScope.launch {
             showLoadingIndicator(true)
 
             try {
                 repository.getMoviesNowPlaying()
-                    .flowOn(Dispatchers.IO)
                     .collect { movies ->
                         _movies.emit(movies)
                         showLoadingIndicator(false)
@@ -68,12 +65,11 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) :
         if (movie?.id == movieId) return _movieDetails
 
         loadMovieJob?.cancel()
-        loadMovieJob = CoroutineScope(Dispatchers.Main).launch {
+        loadMovieJob = viewModelScope.launch {
             showLoadingIndicator(true)
 
             try {
                 repository.getMovie(movieId)
-                    .flowOn(Dispatchers.IO)
                     .collect { movie ->
                         _movieDetails.emit(movie)
                         showLoadingIndicator(false)

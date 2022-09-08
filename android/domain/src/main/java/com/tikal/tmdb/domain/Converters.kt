@@ -35,6 +35,8 @@ package com.tikal.tmdb.domain
 import android.net.Uri
 import androidx.core.net.toUri
 import androidx.room.TypeConverter
+import com.tikal.tmdb.util.toCalendar
+import com.tikal.tmdb.util.toLongArray
 import java.sql.Timestamp
 import java.util.Calendar
 import java.util.Date
@@ -46,7 +48,7 @@ open class Converters {
     @TypeConverter
     fun fromNullableCalendar(value: Calendar?): Long? = value?.let { fromCalendar(it) }
 
-    fun toCalendar(value: Long): Calendar = Calendar.getInstance().apply { timeInMillis = value }
+    fun toCalendar(value: Long): Calendar = value.toCalendar()
 
     @TypeConverter
     fun toNullableCalendar(value: Long?): Calendar? = value?.let { toCalendar(it) }
@@ -86,8 +88,7 @@ open class Converters {
     @TypeConverter
     fun fromNullableLongArray(value: LongArray?): String? = value?.let { fromLongArray(it) }
 
-    fun toLongArray(value: String): LongArray =
-        value.split(",").map { it.toLong() }.toLongArray()
+    fun toLongArray(value: String): LongArray = value.toLongArray()
 
     @TypeConverter
     fun toNullableLongArray(value: String?): LongArray? = value?.let { toLongArray(it) }
