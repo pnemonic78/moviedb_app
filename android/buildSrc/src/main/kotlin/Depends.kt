@@ -1,14 +1,14 @@
 object Android {
     object Version {
-        const val compileSdk = 32
+        const val compileSdk = 33
         const val minSdk = 21
         const val targetSdk = 32
 
-        const val compose = "1.2.0-beta02"
-        const val hilt = "2.42"
+        const val compose = "1.3.0-beta01"
+        const val hilt = "2.43.2"
         const val navigation = "2.5.0"
         const val okhttp = "4.9.3"
-        const val room = "2.4.2"
+        const val room = "2.4.3"
         const val test = "1.4.0"
     }
 
@@ -31,14 +31,11 @@ object Android {
     object Jetpack {
         const val appcompat = "androidx.appcompat:appcompat:1.4.1"
         const val material = "androidx.compose.material:material:${Version.compose}"
-        const val livedata = "androidx.compose.runtime:runtime-livedata:${Version.compose}"
         const val composeTooling = "androidx.compose.ui:ui-tooling:${Version.compose}"
         const val compose = "androidx.compose.ui:ui:${Version.compose}"
-        const val constraint_layout = "androidx.constraintlayout:constraintlayout:2.1.3"
         const val core = "androidx.core:core-ktx:1.7.0"
         const val navigationCompose = "androidx.navigation:navigation-compose:${Version.navigation}"
         const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Version.navigation}"
-        const val navigationUI = "androidx.navigation:navigation-ui-ktx:${Version.navigation}"
     }
 
     object JSON {
@@ -67,10 +64,10 @@ object Android {
 
 object Kotlin {
     object Version {
-        const val kotlin = "1.6.21"
+        const val kotlin = "1.7.10"
     }
 
     object JSON {
-        const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2"
+        const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0"
     }
 }

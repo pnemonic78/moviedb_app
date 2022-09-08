@@ -43,7 +43,7 @@ fun MoviesListPage(uiState: MoviesListState, navController: NavController) {
 
 @Preview
 @Composable
-private fun MoviesListPagePreview() {
+private fun ThisPreview() {
     val listState = object : MoviesListState {
         override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
         override val title: MutableStateFlow<String> = MutableStateFlow("Movies List")

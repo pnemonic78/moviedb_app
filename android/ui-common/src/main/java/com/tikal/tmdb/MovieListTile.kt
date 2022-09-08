@@ -135,7 +135,7 @@ private fun getPosterPath(context: Context, path: String?, size: IntSize): Strin
 
 @Preview
 @Composable
-private fun MovieListTilePreview() {
+private fun ThisPreview() {
     MaterialTheme {
         MovieListTile(movie = movie550) {}
     }

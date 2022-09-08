@@ -41,7 +41,7 @@ fun MovieDetailsPage(
 
 @Preview
 @Composable
-private fun MovieDetailsPagePreview() {
+private fun ThisPreview() {
     val uiState = object : MovieDetailsUiState {
         override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
         override val title: MutableStateFlow<String> = MutableStateFlow("Movie Details")

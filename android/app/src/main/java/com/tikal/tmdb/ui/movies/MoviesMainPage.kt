@@ -74,7 +74,7 @@ fun MoviesMainPage(
 
 @Preview
 @Composable
-private fun MoviesMainPagePreview() {
+private fun ThisPreview() {
     val mainState = object : MainState {
         override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
         override val title: MutableStateFlow<String> = MutableStateFlow("Main")
