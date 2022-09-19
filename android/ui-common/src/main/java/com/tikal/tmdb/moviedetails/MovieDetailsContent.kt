@@ -67,7 +67,7 @@ fun MovieDetailsContent(
         Row(modifier = Modifier.fillMaxWidth()) {
             Image(
                 painter = posterPainter,
-                contentDescription = "poster",
+                contentDescription = movie.title,
                 contentScale = ContentScale.FillHeight,
                 modifier = Modifier
                     .fillMaxWidth()
