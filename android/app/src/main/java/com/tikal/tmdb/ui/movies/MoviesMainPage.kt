@@ -22,6 +22,7 @@ import androidx.navigation.navArgument
 import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.movie550
 import com.tikal.tmdb.moviedetails.MovieDetailsPage
+import com.tikal.tmdb.moviedetails.MoviePosterPage
 import com.tikal.tmdb.moviedetails.movie550Details
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -68,6 +69,15 @@ fun MoviesMainPage(
             composable(MoviesScreen.NowPlaying.route) {
                 MoviesListPage(uiState, navController)
             }
+            composable(
+                "${MoviesScreen.Poster.route}/{id}",
+                arguments = listOf(navArgument("id") { type = NavType.LongType })
+            ) {
+                MoviePosterPage(
+                    uiState,
+                    it.arguments?.getLong("id") ?: 0L
+                )
+            }
         }
     }
 }
@@ -78,10 +88,14 @@ private fun ThisPreview() {
     val mainState = object : MainState {
         override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
         override val title: MutableStateFlow<String> = MutableStateFlow("Main")
-        override val movies: StateFlow<List<MovieEntity>> = MutableStateFlow(listOf(movie550, movie550))
+        override val movies: StateFlow<List<MovieEntity>> =
+            MutableStateFlow(listOf(movie550, movie550))
+
         override fun onMovieClicked(movie: MovieEntity, navController: NavController) = Unit
         override fun movieDetails(movieId: Long): StateFlow<MovieEntity?> =
             MutableStateFlow(movie550Details)
+
+        override fun onPosterClicked(movie: MovieEntity, navController: NavController) = Unit
     }
     MaterialTheme {
         MoviesMainPage(mainState)

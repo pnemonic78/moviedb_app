@@ -13,31 +13,29 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.ui.common.R
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
 @Composable
-fun MovieDetailsPage(
+fun MoviePosterPage(
     uiState: MovieDetailsUiState,
-    navController: NavController,
     movieId: Long
 ) {
     val movieState by uiState.movieDetails(movieId).collectAsState()
     val coroutineScope = rememberCoroutineScope()
-    val title = stringResource(id = R.string.movie_details)
+    var title = stringResource(id = R.string.movie_details)
     LaunchedEffect(coroutineScope) {
         uiState.title.emit(title)
     }
 
     if (movieState != null) {
         val movie = movieState!!
-        MovieDetailsContent(
-            movie = movie,
-            onPosterClick = { uiState.onPosterClicked(movie, navController) }
-        )
+        title = movie.title
+        coroutineScope.launch { uiState.title.emit(title) }
+        MoviePosterContent(movie = movie)
     } else {
         Box(modifier = Modifier.background(color = Color.Red))
     }
@@ -52,12 +50,9 @@ private fun ThisPreview() {
         override fun movieDetails(movieId: Long): StateFlow<MovieEntity?> =
             MutableStateFlow(movie550Details)
 
-        override fun onPosterClicked(movie: MovieEntity, navController: NavController) {
-            println("Poster clicked")
-        }
+        override fun onPosterClicked(movie: MovieEntity, navController: NavController) = Unit
     }
-    val navController = rememberNavController()
     MaterialTheme {
-        MovieDetailsPage(uiState, navController, movie550Details.id)
+        MoviePosterPage(uiState, movie550Details.id)
     }
 }

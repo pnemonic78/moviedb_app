@@ -82,4 +82,12 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) :
         }
         return _movieDetails
     }
+
+    override fun onPosterClicked(movie: MovieEntity, navController: NavController) {
+        showMoviePoster(movie, navController)
+    }
+
+    private fun showMoviePoster(movie: MovieEntity, navController: NavController) {
+        navController.navigate("${MoviesScreen.Poster.route}/${movie.id}")
+    }
 }

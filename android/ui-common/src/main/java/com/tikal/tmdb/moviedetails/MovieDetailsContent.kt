@@ -3,6 +3,7 @@ package com.tikal.tmdb.moviedetails
 import android.content.Context
 import android.text.format.DateUtils
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -34,15 +35,17 @@ import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize
 import com.tikal.tmdb.api.TmdbApi
 import com.tikal.tmdb.data.model.MovieEntity
-import com.tikal.tmdb.json.model.Genre
-import com.tikal.tmdb.json.model.SpokenLanguage
 import com.tikal.tmdb.ui.common.R
 import java.util.Calendar
 
 private const val posterAspectRatio = 1f / 1.5f
 
 @Composable
-fun MovieDetailsContent(movie: MovieEntity, modifier: Modifier = Modifier) {
+fun MovieDetailsContent(
+    movie: MovieEntity,
+    modifier: Modifier = Modifier,
+    onPosterClick: (() -> Unit)?
+) {
     val context = LocalContext.current
     val scrollState = rememberScrollState()
 
@@ -71,6 +74,9 @@ fun MovieDetailsContent(movie: MovieEntity, modifier: Modifier = Modifier) {
                     .weight(0.4f)
                     .aspectRatio(posterAspectRatio, true)
                     .onSizeChanged { size -> posterSize.value = size }
+                    .clickable(
+                        enabled = (onPosterClick != null),
+                        onClick = { onPosterClick?.invoke() })
             )
             Column(
                 modifier = Modifier
@@ -136,8 +142,9 @@ private fun getPosterPath(context: Context, path: String?, size: IntSize): Strin
 @Preview
 @Composable
 private fun ThisPreview() {
+    val onPosterClick = { println("Clicked poster") }
     MaterialTheme {
-        MovieDetailsContent(movie = movie550Details)
+        MovieDetailsContent(movie = movie550Details, onPosterClick = onPosterClick)
     }
 }
 
