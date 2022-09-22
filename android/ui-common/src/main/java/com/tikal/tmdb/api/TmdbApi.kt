@@ -49,15 +49,15 @@ object TmdbApi {
         return String.format(Locale.US, IMAGE_URL, size, path)
     }
 
-    fun findSize(width: Int, height: Int, sizes: Array<String>): String {
+    private fun findSize(width: Int, height: Int, sizes: Array<String>): String {
         for (size in sizes) {
             if (size.startsWith("w")) {
-                var posterWidth = size.substring(1).toInt()
+                val posterWidth = size.substring(1).toInt()
                 if (width <= (posterWidth + (posterWidth shr 2))) {
                     return size
                 }
             } else if (size.startsWith("h")) {
-                var posterHeight = size.substring(1).toInt()
+                val posterHeight = size.substring(1).toInt()
                 if (height <= (posterHeight + (posterHeight shr 2))) {
                     return size
                 }

@@ -3,15 +3,11 @@ package com.tikal.tmdb
 import android.content.Context
 import android.text.format.DateUtils
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -19,17 +15,17 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
@@ -41,22 +37,25 @@ import com.gowtham.ratingbar.StepSize
 import com.tikal.tmdb.api.TmdbApi
 import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.ui.common.R
+import kotlin.math.max
 
 private const val parallaxFactor = 0.85f
 private const val posterAspectRatio = 1.5f
 
 @Composable
-fun MovieListTile(
+fun MovieGridTile(
     movie: MovieEntity,
     modifier: Modifier = Modifier,
     onMovieClicked: ((movie: MovieEntity) -> Unit)
 ) {
     val context = LocalContext.current
 
+    val posterWidth = dimensionResource(id = R.dimen.posterWidth)
+    val posterWidthPx = with(LocalDensity.current) { posterWidth.toPx() }
     val thumbnailSize = remember { mutableStateOf(IntSize.Zero) }
-    val thumbnailWidth = dimensionResource(id = R.dimen.posterWidth)
+    val thumbnailWidthPx = max(posterWidthPx, thumbnailSize.value.width.toFloat())
+    val thumbnailWidth = with(LocalDensity.current) { thumbnailWidthPx.toDp() }
     val thumbnailHeight = thumbnailWidth * posterAspectRatio
-    val imageWidth = thumbnailWidth * 1f
     val imageHeight = thumbnailHeight * parallaxFactor
     val thumbnailUrl = getPosterPath(context, movie.posterPath, thumbnailSize.value)
     val thumbnailPainter: Painter = if (thumbnailUrl.isNullOrBlank()) {
@@ -64,70 +63,60 @@ fun MovieListTile(
     } else {
         rememberImagePainter(data = thumbnailUrl)
     }
+    val cornerRadius = dimensionResource(id = R.dimen.cornerRadius)
 
     val textTheme = MaterialTheme.typography
 
     Card(
         modifier = modifier
-            .wrapContentHeight()
             .clickable { onMovieClicked(movie) },
         shape = RoundedCornerShape(size = dimensionResource(id = R.dimen.cornerRadius))
     ) {
-        Row(
-            modifier = Modifier
+        Column(
+            modifier = modifier
                 .fillMaxWidth()
-                .height(imageHeight)
+                .padding(bottom = 4.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
                 painter = thumbnailPainter,
                 contentDescription = "poster",
                 contentScale = ContentScale.FillWidth,
                 modifier = Modifier
-                    .width(imageWidth)
+                    .fillMaxWidth()
                     .height(imageHeight)
-                    .clip(RoundedCornerShape(size = dimensionResource(id = R.dimen.cornerRadius)))
+                    .clip(RoundedCornerShape(topStart = cornerRadius, topEnd = cornerRadius))
                     .onSizeChanged { size -> thumbnailSize.value = size }
             )
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp)
-            ) {
-                Text(
-                    text = movie.title,
-                    style = textTheme.subtitle1.copy(fontWeight = FontWeight.Medium),
-                    maxLines = 2
-                )
-                RatingBar(
-                    modifier = Modifier.padding(top = 8.dp),
-                    value = movie.voteAverage / 2,
-                    config = RatingBarConfig()
-                        .isIndicator(true)
-                        .numStars(5)
-                        .size(24.dp)
-                        .stepSize(StepSize.HALF)
-                        .style(RatingBarStyle.HighLighted),
-                    onValueChange = {},
-                    onRatingChanged = {}
-                )
-                Text(
-                    modifier = Modifier.padding(top = 8.dp),
-                    text = movie.releaseDate?.let {
-                        DateUtils.formatDateTime(
-                            context,
-                            it.timeInMillis,
-                            DateUtils.FORMAT_SHOW_DATE
-                        )
-                    }.orEmpty()
-                )
-                Text(
-                    modifier = Modifier
-                        .padding(top = 12.dp)
-                        .weight(1f),
-                    text = movie.overview.orEmpty(),
-                    overflow = TextOverflow.Ellipsis
-                )
-            }
+            Text(
+                modifier = Modifier.padding(top = 4.dp),
+                text = movie.title,
+                style = textTheme.subtitle1.copy(fontWeight = FontWeight.Medium),
+                maxLines = 1
+            )
+            RatingBar(
+                modifier = Modifier.padding(top = 8.dp),
+                value = movie.voteAverage / 2,
+                config = RatingBarConfig()
+                    .isIndicator(true)
+                    .numStars(5)
+                    .size(24.dp)
+                    .stepSize(StepSize.HALF)
+                    .style(RatingBarStyle.HighLighted),
+                onValueChange = {},
+                onRatingChanged = {}
+            )
+            Text(
+                modifier = Modifier.padding(top = 8.dp),
+                text = movie.releaseDate?.let {
+                    DateUtils.formatDateTime(
+                        context,
+                        it.timeInMillis,
+                        DateUtils.FORMAT_SHOW_DATE
+                    )
+                }.orEmpty(),
+                maxLines = 1
+            )
         }
     }
 }
@@ -141,10 +130,10 @@ private fun getPosterPath(context: Context, path: String?, size: IntSize): Strin
     )
 }
 
-@Preview(backgroundColor = 0xFFCCCCCC)
+@Preview(backgroundColor = 0xFFCCCCCC, widthDp = 200)
 @Composable
 private fun ThisPreview() {
     MaterialTheme {
-        MovieListTile(movie = movie550) {}
+        MovieGridTile(movie = movie550) {}
     }
 }
