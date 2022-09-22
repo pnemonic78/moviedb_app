@@ -24,6 +24,7 @@ import com.tikal.tmdb.movie550
 import com.tikal.tmdb.moviedetails.MovieDetailsPage
 import com.tikal.tmdb.moviedetails.MoviePosterPage
 import com.tikal.tmdb.moviedetails.movie550Details
+import com.tikal.tmdb.now.MoviesNowPlayingPage
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -67,7 +68,7 @@ fun MoviesMainPage(
                 )
             }
             composable(MoviesScreen.NowPlaying.route) {
-                MoviesListPage(uiState, navController)
+                MoviesNowPlayingPage(uiState, navController)
             }
             composable(
                 "${MoviesScreen.Poster.route}/{id}",

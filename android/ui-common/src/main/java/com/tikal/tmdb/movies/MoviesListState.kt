@@ -1,4 +1,4 @@
-package com.tikal.tmdb.ui.movies
+package com.tikal.tmdb.movies
 
 import androidx.navigation.NavController
 import com.tikal.tmdb.UiState
