@@ -55,10 +55,12 @@ private fun ThisPreview() {
     val listState = object : MoviesPageState {
         override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
         override val title: MutableStateFlow<String> = MutableStateFlow("Movies Grid")
+        override val isGridPage: StateFlow<Boolean> = MutableStateFlow(true)
         override val movies: StateFlow<List<MovieEntity>> =
             MutableStateFlow(listOf(movie550, movie550, movie550, movie550))
 
         override fun onMovieClicked(movie: MovieEntity, navController: NavController) = Unit
+        override fun onToggleGridPage() = Unit
     }
     val navController = rememberNavController()
     MaterialTheme {

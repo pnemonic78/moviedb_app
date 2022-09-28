@@ -21,6 +21,9 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) :
     private val _movies = MutableStateFlow<List<MovieEntity>>(emptyList())
     override val movies: StateFlow<List<MovieEntity>> = _movies
 
+    private val _isGridPage = MutableStateFlow(false)
+    override val isGridPage: StateFlow<Boolean> = _isGridPage
+
     private var loadMoviesJob: Job? = null
     private var loadMovieJob: Job? = null
 
@@ -89,5 +92,11 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) :
 
     private fun showMoviePoster(movie: MovieEntity, navController: NavController) {
         navController.navigate("${MoviesScreen.Poster.route}/${movie.id}")
+    }
+
+    override fun onToggleGridPage() {
+        viewModelScope.launch {
+            _isGridPage.emit(_isGridPage.value.not())
+        }
     }
 }

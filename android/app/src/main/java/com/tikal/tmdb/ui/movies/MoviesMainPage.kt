@@ -9,8 +9,11 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.List
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.NavType
@@ -19,6 +22,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.tikal.tmdb.R
 import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.movie550
 import com.tikal.tmdb.moviedetails.MovieDetailsPage
@@ -36,6 +40,7 @@ fun MoviesMainPage(
     val navController = rememberNavController()
     val navBackStackEntry = navController.currentBackStackEntryAsState()
     val title = uiState.title.collectAsState()
+    val isGrid = uiState.isGridPage.collectAsState()
 
     Scaffold(
         topBar = {
@@ -49,6 +54,23 @@ fun MoviesMainPage(
                             Icon(
                                 imageVector = Icons.Filled.ArrowBack,
                                 contentDescription = "Back"
+                            )
+                        }
+                    }
+                },
+                actions = {
+                    if (isGrid.value) {
+                        IconButton(onClick = uiState::onToggleGridPage) {
+                            Icon(
+                                imageVector = Icons.Default.List,
+                                contentDescription = null
+                            )
+                        }
+                    } else {
+                        IconButton(onClick = uiState::onToggleGridPage) {
+                            Icon(
+                                imageVector = ImageVector.vectorResource(id = R.drawable.ic_grid_on),
+                                contentDescription = null
                             )
                         }
                     }
@@ -89,10 +111,13 @@ private fun ThisPreview() {
     val mainState = object : MainState {
         override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
         override val title: MutableStateFlow<String> = MutableStateFlow("Main")
+        override val isGridPage: StateFlow<Boolean> = MutableStateFlow(false)
         override val movies: StateFlow<List<MovieEntity>> =
             MutableStateFlow(listOf(movie550, movie550))
 
         override fun onMovieClicked(movie: MovieEntity, navController: NavController) = Unit
+        override fun onToggleGridPage() = Unit
+
         override fun movieDetails(movieId: Long): StateFlow<MovieEntity?> =
             MutableStateFlow(movie550Details)
 
