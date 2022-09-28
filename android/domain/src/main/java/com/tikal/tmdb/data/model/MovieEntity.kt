@@ -56,7 +56,7 @@ data class MovieEntity(
     val voteCount: Int,
 
     @ColumnInfo(name = "budget")
-    val budget: Int = 0,
+    val budget: Long = 0,
 
     // TODO @JsonKey(name: 'credits')
     // TODO val credits: CreditsResponseEntity? =null,
@@ -75,7 +75,7 @@ data class MovieEntity(
 //    val productionCountries: List<ProductionCountryEntity>? = null,
 
     @ColumnInfo(name = "revenue")
-    val revenue: Int? = null,
+    val revenue: Long? = null,
 
     @ColumnInfo(name = "runtime")
     val runtime: Int? = null,

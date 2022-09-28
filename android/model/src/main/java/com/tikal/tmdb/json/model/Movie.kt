@@ -54,7 +54,7 @@ data class Movie(
     val voteCount: Int,
 
     @SerialName("budget")
-    val budget: Int = 0,
+    val budget: Long = 0,
 
     //TODO @SerialName("credits")
     //TODO val credits: CreditsResponse? = null,
@@ -75,7 +75,7 @@ data class Movie(
     val productionCountries: List<ProductionCountry>? = null,
 
     @SerialName("revenue")
-    val revenue: Int? = null,
+    val revenue: Long? = null,
 
     @SerialName("runtime")
     val runtime: Int? = null,
