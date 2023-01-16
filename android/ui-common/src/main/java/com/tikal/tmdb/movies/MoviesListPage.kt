@@ -21,13 +21,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
-fun MoviesListPage(title: String, uiState: MoviesPageState, navController: NavController) {
-    val movies by uiState.movies.collectAsState()
+fun MoviesListPage(title: String, viewState: MoviesPageState, navController: NavController) {
+    val movies by viewState.movies.collectAsState()
     val scrollState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
 
     LaunchedEffect(coroutineScope) {
-        uiState.title.emit(title)
+        viewState.title.emit(title)
     }
 
     LazyColumn(
@@ -37,7 +37,7 @@ fun MoviesListPage(title: String, uiState: MoviesPageState, navController: NavCo
     ) {
         items(count = movies.size) { index ->
             val movie = movies[index]
-            MovieListTile(movie, onMovieClicked = { uiState.onMovieClicked(movie, navController) })
+            MovieListTile(movie, onMovieClicked = { viewState.onMovieClicked(movie, navController) })
         }
     }
 }

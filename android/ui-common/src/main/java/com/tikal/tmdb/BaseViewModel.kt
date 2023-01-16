@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 
 open class BaseViewModel(protected val repository: TmdbDataSource) :
     ViewModel(),
-    UiState {
+    ViewState {
 
     private val _isLoading = MutableStateFlow(false)
     override val isLoading: StateFlow<Boolean> = _isLoading

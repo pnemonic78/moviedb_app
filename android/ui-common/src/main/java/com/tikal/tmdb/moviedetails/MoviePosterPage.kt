@@ -21,20 +21,20 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun MoviePosterPage(
-    uiState: MovieDetailsUiState,
+    viewState: MovieDetailsViewState,
     movieId: Long
 ) {
-    val movieState by uiState.movieDetails(movieId).collectAsState()
+    val movieState by viewState.movieDetails(movieId).collectAsState()
     val coroutineScope = rememberCoroutineScope()
     var title = stringResource(id = R.string.movie_details)
     LaunchedEffect(coroutineScope) {
-        uiState.title.emit(title)
+        viewState.title.emit(title)
     }
 
     if (movieState != null) {
         val movie = movieState!!
         title = movie.title
-        coroutineScope.launch { uiState.title.emit(title) }
+        coroutineScope.launch { viewState.title.emit(title) }
         MoviePosterContent(movie = movie)
     } else {
         Box(modifier = Modifier.background(color = Color.Red))
@@ -44,7 +44,7 @@ fun MoviePosterPage(
 @Preview
 @Composable
 private fun ThisPreview() {
-    val uiState = object : MovieDetailsUiState {
+    val viewState = object : MovieDetailsViewState {
         override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
         override val title: MutableStateFlow<String> = MutableStateFlow("Movie Details")
         override fun movieDetails(movieId: Long): StateFlow<MovieEntity?> =
@@ -53,6 +53,6 @@ private fun ThisPreview() {
         override fun onPosterClicked(movie: MovieEntity, navController: NavController) = Unit
     }
     MaterialTheme {
-        MoviePosterPage(uiState, movie550Details.id)
+        MoviePosterPage(viewState, movie550Details.id)
     }
 }

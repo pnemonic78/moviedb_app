@@ -25,13 +25,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
-fun MoviesGridPage(title: String, uiState: MoviesPageState, navController: NavController) {
-    val movies by uiState.movies.collectAsState()
+fun MoviesGridPage(title: String, viewState: MoviesPageState, navController: NavController) {
+    val movies by viewState.movies.collectAsState()
     val scrollState = rememberLazyGridState()
     val coroutineScope = rememberCoroutineScope()
 
     LaunchedEffect(coroutineScope) {
-        uiState.title.emit(title)
+        viewState.title.emit(title)
     }
 
     LazyVerticalGrid(
@@ -43,7 +43,7 @@ fun MoviesGridPage(title: String, uiState: MoviesPageState, navController: NavCo
     ) {
         items(movies.size) { index ->
             val movie = movies[index]
-            MovieGridTile(movie, onMovieClicked = { uiState.onMovieClicked(movie, navController) })
+            MovieGridTile(movie, onMovieClicked = { viewState.onMovieClicked(movie, navController) })
         }
     }
 }
