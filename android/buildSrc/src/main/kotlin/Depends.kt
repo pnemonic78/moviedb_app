@@ -1,10 +1,10 @@
 object Android {
     object Version {
         const val compileSdk = 33
-        const val minSdk = 21
-        const val targetSdk = 32
+        const val minSdk = 24
+        const val targetSdk = 33
 
-        const val compose = "1.3.0-beta01"
+        const val compose = "1.3.1"
         const val hilt = "2.43.2"
         const val navigation = "2.5.0"
         const val okhttp = "4.9.3"
