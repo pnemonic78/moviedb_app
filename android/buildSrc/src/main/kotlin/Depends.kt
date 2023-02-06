@@ -5,6 +5,7 @@ object Android {
         const val targetSdk = 33
 
         const val compose = "1.3.1"
+        const val composeCompiler = "1.3.1"
         const val hilt = "2.43.2"
         const val navigation = "2.5.0"
         const val okhttp = "4.9.3"
