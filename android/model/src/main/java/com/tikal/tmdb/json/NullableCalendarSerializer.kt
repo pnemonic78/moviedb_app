@@ -1,6 +1,7 @@
 package com.tikal.tmdb.json
 
 import androidx.annotation.Keep
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
@@ -20,6 +21,7 @@ open class NullableCalendarSerializer(private val formatter: DateFormat = Simple
 
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("Date", PrimitiveKind.STRING)
 
+    @OptIn(ExperimentalSerializationApi::class)
     override fun deserialize(decoder: Decoder): Calendar? {
         if (decoder.decodeNotNullMark()) {
             val value = decoder.decodeString()
@@ -31,6 +33,7 @@ open class NullableCalendarSerializer(private val formatter: DateFormat = Simple
         return decoder.decodeNull()
     }
 
+    @OptIn(ExperimentalSerializationApi::class)
     override fun serialize(encoder: Encoder, value: Calendar?) {
         if (value == null) {
             encoder.encodeNull()

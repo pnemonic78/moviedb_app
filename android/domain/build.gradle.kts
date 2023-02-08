@@ -1,7 +1,8 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("com.android.library")
-    kotlin("android")
-    kotlin("kapt")
+    aliasWV(androidCatalog.plugins.lib)
+    aliasWV(kotlinCatalog.plugins.android)
+    aliasWV(kotlinCatalog.plugins.kapt)
 }
 
 android {
@@ -9,7 +10,6 @@ android {
 
     defaultConfig {
         minSdk = Android.Version.minSdk
-        targetSdk = Android.Version.targetSdk
 
         consumerProguardFiles("consumer-rules.pro")
 
@@ -39,31 +39,27 @@ kapt {
 dependencies {
     implementation(project(":model"))
 
-    // Dependency Injection
-    implementation(Android.Inject.hilt)
-    kapt(Android.Inject.hiltCompiler)
+    implementation(androidCatalog.di.hilt)
+    kapt(androidCatalog.di.hiltCompiler)
 
-    // Jetpack
-    implementation(Android.Jetpack.core)
+    implementation(androidCatalog.jetpack.core)
 
-    // JSON
-    implementation(Android.JSON.kotlin)
-    implementation(Android.JSON.retrofit)
+    implementation(kotlinCatalog.json.serialization)
+    implementation(androidCatalog.json.retrofit)
 
-    // Logging
-    implementation(Android.Logging.timber)
+    implementation(androidCatalog.log.timber)
 
     // Networking
-    implementation(Android.Network.logging)
-    implementation(Android.Network.okhttp)
-    implementation(Android.Network.retrofit)
+    implementation(androidCatalog.net.logging)
+    implementation(androidCatalog.net.okhttp)
+    implementation(androidCatalog.net.retrofit)
 
     // Database
-    kapt(Android.Database.roomCompiler)
-    implementation(Android.Database.roomKtx)
+    implementation(androidCatalog.db.roomKtx)
+    kapt(androidCatalog.db.roomCompiler)
 
     // Testing
-    testImplementation(Android.Test.junit)
-    androidTestImplementation(Android.Test.junit_ext)
-    androidTestImplementation(Android.Test.espresso_core)
+    testImplementation(androidCatalog.test.junit)
+    androidTestImplementation(androidCatalog.test.junitExt)
+    androidTestImplementation(androidCatalog.test.espresso)
 }

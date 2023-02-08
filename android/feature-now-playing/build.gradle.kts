@@ -1,6 +1,7 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("com.android.library")
-    kotlin("android")
+    aliasWV(androidCatalog.plugins.lib)
+    aliasWV(kotlinCatalog.plugins.android)
 }
 
 android {
@@ -8,7 +9,6 @@ android {
 
     defaultConfig {
         minSdk = Android.Version.minSdk
-        targetSdk = Android.Version.targetSdk
 
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -31,7 +31,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Android.Version.composeCompiler
+        kotlinCompilerExtensionVersion = androidCatalog.versions.composeCompiler.get()
     }
 }
 
@@ -40,12 +40,11 @@ dependencies {
     implementation(project(":model"))
     implementation(project(":ui-common"))
 
-    // Logging
-    implementation(Android.Logging.timber)
+    implementation(androidCatalog.log.timber)
 
     // Testing
-    testImplementation(Android.Test.junit)
-    androidTestImplementation(Android.Test.espresso_core)
-    androidTestImplementation(Android.Test.runner)
-    androidTestImplementation(Android.Test.rules)
+    testImplementation(androidCatalog.test.junit)
+    androidTestImplementation(androidCatalog.test.espresso)
+    androidTestImplementation(androidCatalog.test.runner)
+    androidTestImplementation(androidCatalog.test.rules)
 }

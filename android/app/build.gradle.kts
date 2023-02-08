@@ -1,9 +1,10 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("com.android.application")
-    id("dagger.hilt.android.plugin")
-    kotlin("android")
-    kotlin("kapt")
-    kotlin("plugin.serialization") version Kotlin.Version.kotlin
+    aliasWV(androidCatalog.plugins.app)
+    aliasWV(androidCatalog.plugins.hilt)
+    aliasWV(kotlinCatalog.plugins.android)
+    aliasWV(kotlinCatalog.plugins.kapt)
+    alias(kotlinCatalog.plugins.serialization)
 }
 
 android {
@@ -13,7 +14,7 @@ android {
         applicationId = "com.tikalk.tmdb.app"
         minSdk = Android.Version.minSdk
         targetSdk = Android.Version.targetSdk
-        versionCode = 1
+        versionCode = 2
         versionName = "1.0"
     }
 
@@ -38,7 +39,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Android.Version.composeCompiler
+        kotlinCompilerExtensionVersion = androidCatalog.versions.composeCompiler.get()
     }
 }
 
@@ -52,24 +53,14 @@ dependencies {
     implementation(project(":ui-common"))
     implementation(project(":feature-now-playing"))
 
-    // Dependency Injection
-    implementation(Android.Inject.hilt)
-    kapt(Android.Inject.hiltCompiler)
+    implementation(androidCatalog.di.hilt)
+    kapt(androidCatalog.di.hiltCompiler)
 
-    // JSON
-    implementation(Android.JSON.kotlin)
-
-    // Logging
-    implementation(Android.Logging.timber)
-
-    // Networking
-    implementation(Android.Network.logging)
-    implementation(Android.Network.okhttp)
-    implementation(Android.Network.retrofit)
+    implementation(androidCatalog.log.timber)
 
     // Testing
-    testImplementation(Android.Test.junit)
-    androidTestImplementation(Android.Test.espresso_core)
-    androidTestImplementation(Android.Test.runner)
-    androidTestImplementation(Android.Test.rules)
+    testImplementation(androidCatalog.test.junit)
+    androidTestImplementation(androidCatalog.test.espresso)
+    androidTestImplementation(androidCatalog.test.runner)
+    androidTestImplementation(androidCatalog.test.rules)
 }

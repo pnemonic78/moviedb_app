@@ -1,9 +1,8 @@
 # To Do
 
-- gradle catalog
-- migrate retrofit to ktor
 - db foreign keys
 - pagination
+- migrate retrofit to ktor
 
 - ui feature modules
   - popular

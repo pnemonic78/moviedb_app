@@ -1,8 +1,9 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("com.android.library")
-    id("dagger.hilt.android.plugin")
-    kotlin("android")
-    kotlin("kapt")
+    aliasWV(androidCatalog.plugins.lib)
+    aliasWV(androidCatalog.plugins.hilt)
+    aliasWV(kotlinCatalog.plugins.android)
+    aliasWV(kotlinCatalog.plugins.kapt)
 }
 
 android {
@@ -10,7 +11,6 @@ android {
 
     defaultConfig {
         minSdk = Android.Version.minSdk
-        targetSdk = Android.Version.targetSdk
 
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -33,7 +33,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Android.Version.composeCompiler
+        kotlinCompilerExtensionVersion = androidCatalog.versions.composeCompiler.get()
     }
 }
 
@@ -41,29 +41,25 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":model"))
 
-    // Dependency Injection
-    implementation(Android.Inject.hilt)
-    kapt(Android.Inject.hiltCompiler)
+    implementation(androidCatalog.di.hilt)
+    kapt(androidCatalog.di.hiltCompiler)
 
-    // UI
-    api(Android.Image.coil)
-    api(Android.Image.ratingbar)
+    api(androidCatalog.image.coil)
+    api(androidCatalog.image.ratingbar)
 
-    // Jetpack
-    api(Android.Jetpack.appcompat)
-    api(Android.Jetpack.compose)
-    api(Android.Jetpack.composeTooling)
-    api(Android.Jetpack.core)
-    api(Android.Jetpack.navigationCompose)
-    api(Android.Jetpack.navigationFragment)
+    api(androidCatalog.jetpack.appcompat)
+    api(androidCatalog.jetpack.compose)
+    api(androidCatalog.jetpack.composeTooling)
+    api(androidCatalog.jetpack.core)
+    api(androidCatalog.jetpack.navigationCompose)
+    api(androidCatalog.jetpack.navigationFragment)
 
-    // Logging
-    implementation(Android.Logging.timber)
+    implementation(androidCatalog.log.timber)
 
     // Testing
-    testImplementation(Android.Test.junit)
-    androidTestImplementation(Android.Test.junit_ext)
-    androidTestImplementation(Android.Test.espresso_core)
-    androidTestImplementation(Android.Test.runner)
-    androidTestImplementation(Android.Test.rules)
+    testImplementation(androidCatalog.test.junit)
+    androidTestImplementation(androidCatalog.test.junitExt)
+    androidTestImplementation(androidCatalog.test.espresso)
+    androidTestImplementation(androidCatalog.test.runner)
+    androidTestImplementation(androidCatalog.test.rules)
 }
