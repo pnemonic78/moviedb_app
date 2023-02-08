@@ -1,6 +1,5 @@
 # To Do
 
-- inject coroutine dispatchers
 - gradle catalog
 - migrate retrofit to ktor
 - db foreign keys

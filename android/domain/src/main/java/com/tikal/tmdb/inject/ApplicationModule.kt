@@ -13,6 +13,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 @Module(includes = [NetworkModule::class])
@@ -31,13 +33,17 @@ object ApplicationModule {
     @Provides
     @Singleton
     fun provideLocalDataSource(
-        db: TmdbDb
-    ): TmdbLocalDataSource = TmdbLocalDataSource(db)
+        db: TmdbDb,
+        ioDispatcher: CoroutineDispatcher
+    ): TmdbLocalDataSource = TmdbLocalDataSource(db, ioDispatcher)
 
     @Provides
     @Singleton
-    fun provideRemoteDataSource(service: TmdbService, db: TmdbDb): TmdbRemoteDataSource =
-        TmdbRemoteDataSource(service, db)
+    fun provideRemoteDataSource(
+        service: TmdbService,
+        db: TmdbDb,
+        ioDispatcher: CoroutineDispatcher
+    ): TmdbRemoteDataSource = TmdbRemoteDataSource(service, db, ioDispatcher)
 
     @Provides
     @Singleton
@@ -45,4 +51,8 @@ object ApplicationModule {
         local: TmdbLocalDataSource,
         remote: TmdbRemoteDataSource
     ): TmdbDataSource = TmdbRepository(local, remote)
+
+    @Provides
+    @Singleton
+    fun provideIODispatcher(): CoroutineDispatcher = Dispatchers.IO
 }

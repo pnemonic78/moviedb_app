@@ -4,8 +4,9 @@ object Android {
         const val minSdk = 24
         const val targetSdk = 33
 
-        const val compose = "1.3.1"
+        const val compose = "1.3.3"
         const val composeCompiler = "1.3.1"
+        const val composeMaterial = "1.3.1"
         const val hilt = "2.43.2"
         const val navigation = "2.5.0"
         const val okhttp = "4.9.3"
@@ -31,7 +32,7 @@ object Android {
 
     object Jetpack {
         const val appcompat = "androidx.appcompat:appcompat:1.4.1"
-        const val material = "androidx.compose.material:material:${Version.compose}"
+        const val material = "androidx.compose.material:material:${Version.composeMaterial}"
         const val composeTooling = "androidx.compose.ui:ui-tooling:${Version.compose}"
         const val compose = "androidx.compose.ui:ui:${Version.compose}"
         const val core = "androidx.core:core-ktx:1.7.0"
@@ -65,7 +66,7 @@ object Android {
 
 object Kotlin {
     object Version {
-        const val kotlin = "1.7.20"
+        const val kotlin = "1.7.10"
     }
 
     object JSON {

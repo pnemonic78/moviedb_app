@@ -4,7 +4,7 @@ import com.tikal.tmdb.api.TmdbService
 import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.data.source.TmdbDataSource
 import com.tikal.tmdb.domain.TmdbDb
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
@@ -16,14 +16,15 @@ import javax.inject.Inject
  */
 class TmdbRemoteDataSource @Inject constructor(
     private val service: TmdbService,
-    private val db: TmdbDb
+    private val db: TmdbDb,
+    private val ioDispatcher: CoroutineDispatcher
 ) : TmdbDataSource {
 
     private val cacheMovies = mutableMapOf<Long, MovieEntity>()
     private val cacheMovieDetails = mutableMapOf<Long, MovieEntity>()
 
     override suspend fun getMoviesNowPlaying(): Flow<List<MovieEntity>> =
-        withContext(Dispatchers.IO) {
+        withContext(ioDispatcher) {
             val cached = cacheMovies.values.sortedBy { it.id }
             if (cached.isNotEmpty()) return@withContext flowOf(cached)
 
@@ -33,19 +34,20 @@ class TmdbRemoteDataSource @Inject constructor(
             flowOf(movies)
         }
 
-    override suspend fun getMovie(movieId: Long): Flow<MovieEntity> = withContext(Dispatchers.IO) {
-        val movieDetailsCached = cacheMovieDetails[movieId]
-        if (movieDetailsCached != null) return@withContext flowOf(movieDetailsCached)
+    override suspend fun getMovie(movieId: Long): Flow<MovieEntity> =
+        withContext(ioDispatcher) {
+            val movieDetailsCached = cacheMovieDetails[movieId]
+            if (movieDetailsCached != null) return@withContext flowOf(movieDetailsCached)
 
-        flow {
-            val movieCached = cacheMovies[movieId]
-            if (movieCached != null) emit(movieCached)
+            flow {
+                val movieCached = cacheMovies[movieId]
+                if (movieCached != null) emit(movieCached)
 
-            val movies = service.getMovieDetails(movieId).toEntity()
-            cacheMovieDetails(movies)
-            emit(movies)
+                val movies = service.getMovieDetails(movieId).toEntity()
+                cacheMovieDetails(movies)
+                emit(movies)
+            }
         }
-    }
 
     private fun cacheMovies(movies: List<MovieEntity>) {
         movies.forEach { movie -> cacheMovies[movie.id] = movie }
