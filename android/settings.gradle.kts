@@ -33,17 +33,27 @@ dependencyResolutionManagement {
 
             // Jetpack
             library("jetpack-appcompat", "androidx.appcompat:appcompat:1.4.1")
-            library("jetpack-material", "androidx.compose.material", "material")
+            library("jetpack-composeMaterial", "androidx.compose.material", "material")
                 .versionRef("composeMaterial")
             library("jetpack-composeTooling", "androidx.compose.ui", "ui-tooling")
                 .versionRef("compose")
-            library("jetpack-compose", "androidx.compose.ui", "ui")
+            library("jetpack-composeNavigation", "androidx.navigation", "navigation-compose")
+                .versionRef("navigation")
+            library("jetpack-composeUI", "androidx.compose.ui", "ui")
                 .versionRef("compose")
             library("jetpack-core", "androidx.core:core-ktx:1.7.0")
-            library("jetpack-navigationCompose", "androidx.navigation", "navigation-compose")
-                .versionRef("navigation")
             library("jetpack-navigationFragment", "androidx.navigation", "navigation-fragment-ktx")
                 .versionRef("navigation")
+
+            bundle(
+                "jetpack-compose",
+                listOf(
+                    "jetpack-composeMaterial",
+                    "jetpack-composeNavigation",
+                    "jetpack-composeTooling",
+                    "jetpack-composeUI"
+                )
+            )
 
             // JSON
             library(
@@ -82,7 +92,8 @@ dependencyResolutionManagement {
 
             plugin("android", "org.jetbrains.kotlin.android").versionRef("kotlin")
             plugin("kapt", "org.jetbrains.kotlin.kapt").versionRef("kotlin")
-            plugin("serialization", "org.jetbrains.kotlin.plugin.serialization").versionRef("kotlin")
+            plugin("serialization", "org.jetbrains.kotlin.plugin.serialization")
+                .versionRef("kotlin")
         }
     }
 }

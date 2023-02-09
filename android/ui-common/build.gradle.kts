@@ -48,10 +48,7 @@ dependencies {
     api(androidCatalog.image.ratingbar)
 
     api(androidCatalog.jetpack.appcompat)
-    api(androidCatalog.jetpack.compose)
-    api(androidCatalog.jetpack.composeTooling)
-    api(androidCatalog.jetpack.core)
-    api(androidCatalog.jetpack.navigationCompose)
+    api(androidCatalog.bundles.jetpack.compose)
     api(androidCatalog.jetpack.navigationFragment)
 
     implementation(androidCatalog.log.timber)

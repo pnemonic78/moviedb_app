@@ -32,8 +32,6 @@ android {
 }
 
 dependencies {
-    api(androidCatalog.jetpack.material)
-
     implementation(androidCatalog.di.hilt)
     kapt(androidCatalog.di.hiltCompiler)
 
