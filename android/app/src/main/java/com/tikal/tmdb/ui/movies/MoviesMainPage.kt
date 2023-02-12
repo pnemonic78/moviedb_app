@@ -15,6 +15,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -39,6 +40,7 @@ fun MoviesMainPage(
 ) {
     val navController = rememberNavController()
     val navBackStackEntry = navController.currentBackStackEntryAsState()
+    val navBackStackEntryValue = navBackStackEntry.value
     val title = uiState.title.collectAsState()
     val isGrid = uiState.isGridPage.collectAsState()
 
@@ -47,33 +49,10 @@ fun MoviesMainPage(
             TopAppBar(
                 title = { Text(title.value) },
                 navigationIcon = {
-                    val currentEntry = navBackStackEntry.value
-                    val previousEntry = navController.previousBackStackEntry
-                    if ((currentEntry != null) && (previousEntry != null)) {
-                        IconButton(onClick = { navController.navigateUp() }) {
-                            Icon(
-                                imageVector = Icons.Filled.ArrowBack,
-                                contentDescription = "Back"
-                            )
-                        }
-                    }
+                    BackButton(navController, navBackStackEntryValue)
                 },
                 actions = {
-                    if (isGrid.value) {
-                        IconButton(onClick = uiState::onToggleGridPage) {
-                            Icon(
-                                imageVector = Icons.Default.List,
-                                contentDescription = null
-                            )
-                        }
-                    } else {
-                        IconButton(onClick = uiState::onToggleGridPage) {
-                            Icon(
-                                imageVector = ImageVector.vectorResource(id = R.drawable.ic_grid_on),
-                                contentDescription = null
-                            )
-                        }
-                    }
+                    ToggleGridButton(uiState, navBackStackEntryValue, isGrid.value)
                 }
             )
         }
@@ -99,6 +78,46 @@ fun MoviesMainPage(
                 MoviePosterPage(
                     uiState,
                     it.arguments?.getLong("id") ?: 0L
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun BackButton(navController: NavController, currentEntry: NavBackStackEntry?) {
+    val previousEntry = navController.previousBackStackEntry
+    if ((currentEntry != null) && (previousEntry != null)) {
+        IconButton(onClick = { navController.navigateUp() }) {
+            Icon(
+                imageVector = Icons.Filled.ArrowBack,
+                contentDescription = "Back"
+            )
+        }
+    }
+}
+
+@Composable
+private fun ToggleGridButton(
+    uiState: MainState,
+    currentEntry: NavBackStackEntry?,
+    isGrid: Boolean
+) {
+    val isNowPlaying = currentEntry?.destination?.route == MoviesScreen.NowPlaying.route
+
+    if (isNowPlaying) {
+        if (isGrid) {
+            IconButton(onClick = uiState::onToggleGridPage) {
+                Icon(
+                    imageVector = Icons.Default.List,
+                    contentDescription = null
+                )
+            }
+        } else {
+            IconButton(onClick = uiState::onToggleGridPage) {
+                Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_grid_on),
+                    contentDescription = null
                 )
             }
         }
