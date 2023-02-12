@@ -6,10 +6,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
@@ -25,21 +23,21 @@ fun MovieDetailsPage(
     navController: NavController,
     movieId: Long
 ) {
-    val movieState by viewState.movieDetails(movieId).collectAsState()
+    val movieState = viewState.movieDetails(movieId).collectAsState()
     val coroutineScope = rememberCoroutineScope()
     val title = stringResource(id = R.string.movie_details)
     LaunchedEffect(coroutineScope) {
         viewState.title.emit(title)
     }
 
-    if (movieState != null) {
-        val movie = movieState!!
+    val movie = movieState.value
+    if (movie != null) {
         MovieDetailsContent(
             movie = movie,
             onPosterClick = { viewState.onPosterClicked(movie, navController) }
         )
     } else {
-        Box(modifier = Modifier.background(color = Color.Red))
+        Box(modifier = Modifier.background(color = MaterialTheme.colors.error))
     }
 }
 

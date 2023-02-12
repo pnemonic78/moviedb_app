@@ -36,7 +36,9 @@ import com.gowtham.ratingbar.StepSize
 import com.tikal.tmdb.api.TmdbApi
 import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.ui.common.R
+import java.text.NumberFormat
 import java.util.Calendar
+import java.util.Locale
 
 private const val posterAspectRatio = 1f / 1.5f
 
@@ -59,11 +61,20 @@ fun MovieDetailsContent(
 
     val textTheme = MaterialTheme.typography
 
+    val currencyFormatter = NumberFormat.getCurrencyInstance(Locale.US).apply {
+        maximumFractionDigits = 0
+    }
+
     Column(
         modifier = modifier
             .padding(8.dp)
             .verticalScroll(state = scrollState)
     ) {
+        Text(
+            text = movie.title,
+            style = textTheme.h5
+        )
+        Spacer(modifier = Modifier.height(12.dp))
         Row(modifier = Modifier.fillMaxWidth()) {
             Image(
                 painter = posterPainter,
@@ -71,7 +82,7 @@ fun MovieDetailsContent(
                 contentScale = ContentScale.FillHeight,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(0.4f)
+                    .weight(0.5f)
                     .aspectRatio(posterAspectRatio, true)
                     .onSizeChanged { size -> posterSize.value = size }
                     .clickable(
@@ -80,14 +91,9 @@ fun MovieDetailsContent(
             )
             Column(
                 modifier = Modifier
-                    .weight(0.6f)
+                    .weight(0.5f)
                     .padding(start = 8.dp)
             ) {
-                Text(
-                    text = movie.title,
-                    style = textTheme.h5
-                )
-                Spacer(modifier = Modifier.height(16.dp))
                 Text(
                     text = stringResource(id = R.string.popularity_label),
                     style = textTheme.h6
@@ -103,30 +109,67 @@ fun MovieDetailsContent(
                     onValueChange = {},
                     onRatingChanged = {}
                 )
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = stringResource(id = R.string.release_date_label),
-                    style = textTheme.h6
-                )
-                Text(
-                    text = movie.releaseDate?.let {
-                        DateUtils.formatDateTime(
+                movie.releaseDate?.let {
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Text(
+                        text = stringResource(id = R.string.release_date_label),
+                        style = textTheme.h6
+                    )
+                    Text(
+                        text = DateUtils.formatDateTime(
                             context,
                             it.timeInMillis,
                             DateUtils.FORMAT_SHOW_DATE
                         )
-                    }.orEmpty()
-                )
+                    )
+                }
+                movie.runtime?.let {
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Text(
+                        text = stringResource(id = R.string.runtime_label),
+                        style = textTheme.h6
+                    )
+                    Text(
+                        text = DateUtils.formatElapsedTime(
+                            it * 60L
+                        )
+                    )
+                }
+                if (movie.budget > 0) {
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Text(
+                        text = stringResource(id = R.string.budget_label),
+                        style = textTheme.h6
+                    )
+                    Text(
+                        text = currencyFormatter.format(movie.budget)
+                    )
+                }
+                movie.revenue?.let {
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Text(
+                        text = stringResource(id = R.string.revenue_label),
+                        style = textTheme.h6
+                    )
+                    Text(
+                        text = currencyFormatter.format(it)
+                    )
+                }
+                // TODO genres
             }
         }
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(
-            text = stringResource(id = R.string.summary_label),
-            style = textTheme.h6
-        )
-        Text(
-            text = movie.overview.orEmpty()
-        )
+        movie.overview?.let {
+            Spacer(modifier = Modifier.height(12.dp))
+            Text(
+                text = stringResource(id = R.string.summary_label),
+                style = textTheme.h6
+            )
+            Text(
+                text = it
+            )
+        }
+        // TODO carousel videos
+        // TODO carousel cast members
     }
 }
 

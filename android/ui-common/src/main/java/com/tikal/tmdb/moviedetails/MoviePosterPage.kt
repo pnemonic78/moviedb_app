@@ -37,7 +37,7 @@ fun MoviePosterPage(
         coroutineScope.launch { viewState.title.emit(title) }
         MoviePosterContent(movie = movie)
     } else {
-        Box(modifier = Modifier.background(color = Color.Red))
+        Box(modifier = Modifier.background(color = MaterialTheme.colors.error))
     }
 }
 

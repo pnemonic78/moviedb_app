@@ -56,10 +56,10 @@ data class MovieEntity(
     @ColumnInfo(name = "budget")
     val budget: Long = 0,
 
-    // TODO @JsonKey(name: 'credits')
+    // TODO @ColumnInfo(name: 'credits')
     // TODO val credits: CreditsResponseEntity? =null,
 
-    //TODO @JsonKey(name: 'genres')
+    //TODO @ColumnInfo(name: 'genres')
     //TODO val genres: List<GenreEntity>?= null,
 
     @ColumnInfo(name = "homepage")
