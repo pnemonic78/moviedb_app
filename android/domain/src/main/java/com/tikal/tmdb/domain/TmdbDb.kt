@@ -14,7 +14,6 @@ import com.tikal.tmdb.domain.dao.MovieDao
 
 @Database(
     entities = [
-//        DatesEntity::class,
         GenreEntity::class,
 //        MovieDetails::class,
         MovieEntity::class,
@@ -28,7 +27,7 @@ import com.tikal.tmdb.domain.dao.MovieDao
         TrailerEntity::class
     ],
     exportSchema = false,
-    version = 1
+    version = 3
 )
 @TypeConverters(Converters::class)
 abstract class TmdbDb : RoomDatabase() {

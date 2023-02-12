@@ -27,8 +27,11 @@ object ApplicationModule {
         @ApplicationContext context: Context
     ): TmdbDb = Room.databaseBuilder(
         context,
-        TmdbDb::class.java, "tmdb"
-    ).build()
+        TmdbDb::class.java,
+        "tmdb"
+    )
+        .fallbackToDestructiveMigration()
+        .build()
 
     @Provides
     @Singleton

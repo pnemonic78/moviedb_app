@@ -18,7 +18,6 @@ import com.tikal.tmdb.json.model.SpokenLanguage
 import com.tikal.tmdb.json.model.Trailer
 
 fun Dates.toEntity() = DatesEntity(
-    id = 0L,
     maximum = maximum,
     minimum = minimum
 )

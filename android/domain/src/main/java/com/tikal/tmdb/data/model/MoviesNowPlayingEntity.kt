@@ -4,19 +4,18 @@ import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.Ignore
-import androidx.room.Junction
 import androidx.room.PrimaryKey
-import androidx.room.Relation
+import androidx.room.RoomWarnings
 
 /**
  * Response for Movies that are Now Playing.
  */
 @Entity(tableName = "movies_now_playing")
+@SuppressWarnings(RoomWarnings.PRIMARY_KEY_FROM_EMBEDDED_IS_DROPPED)
 data class MoviesNowPlayingEntity(
 //    @ColumnInfo(name = "results")
     @Ignore
     var results: List<MovieEntity>,
-//    @ColumnInfo(name = "dates")
     @Embedded(prefix = "dates_")
     var dates: DatesEntity,
     @ColumnInfo(name = "page")
@@ -27,16 +26,13 @@ data class MoviesNowPlayingEntity(
     @ColumnInfo(name = "total_results")
     var totalResult: Int
 ) {
-    constructor(
-        dates: DatesEntity,
-        page: Int,
-        totalPages: Int,
-        totalResult: Int
-    ) : this(
+    @SuppressWarnings("unused")
+    // Default constructor for room.
+    constructor() : this(
         results = emptyList(),
-        dates = dates,
-        page = page,
-        totalPages = totalPages,
-        totalResult = totalResult
+        dates = DatesEntity(),
+        page = 0,
+        totalPages = 0,
+        totalResult = 0
     )
 }
