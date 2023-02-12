@@ -34,6 +34,7 @@ import com.gowtham.ratingbar.RatingBarConfig
 import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize
 import com.tikal.tmdb.api.TmdbApi
+import com.tikal.tmdb.data.model.GenreEntity
 import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.ui.common.R
 import java.text.NumberFormat
@@ -74,7 +75,7 @@ fun MovieDetailsContent(
             text = movie.title,
             style = textTheme.h5
         )
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(8.dp))
         Row(modifier = Modifier.fillMaxWidth()) {
             Image(
                 painter = posterPainter,
@@ -110,7 +111,7 @@ fun MovieDetailsContent(
                     onRatingChanged = {}
                 )
                 movie.releaseDate?.let {
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = stringResource(id = R.string.release_date_label),
                         style = textTheme.h6
@@ -124,7 +125,7 @@ fun MovieDetailsContent(
                     )
                 }
                 movie.runtime?.let {
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = stringResource(id = R.string.runtime_label),
                         style = textTheme.h6
@@ -136,7 +137,7 @@ fun MovieDetailsContent(
                     )
                 }
                 if (movie.budget > 0) {
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = stringResource(id = R.string.budget_label),
                         style = textTheme.h6
@@ -146,7 +147,7 @@ fun MovieDetailsContent(
                     )
                 }
                 movie.revenue?.let {
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = stringResource(id = R.string.revenue_label),
                         style = textTheme.h6
@@ -155,11 +156,20 @@ fun MovieDetailsContent(
                         text = currencyFormatter.format(it)
                     )
                 }
-                // TODO genres
+                movie.genres?.let {
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = stringResource(id = R.string.genres_label),
+                        style = textTheme.h6
+                    )
+                    Text(
+                        text = it.joinToString(separator = ", ") { it.name }
+                    )
+                }
             }
         }
         movie.overview?.let {
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = stringResource(id = R.string.summary_label),
                 style = textTheme.h6
@@ -196,7 +206,6 @@ val movie550Details = MovieEntity(
     backdropPath = "/87hTDiay2N2qWyX4Ds7ybXi9h8I.jpg",
 //  belongs_to_collection= null,
     budget = 63000000,
-//    genres = listOf(Genre(id = 18, name = "Drama")),
     homepage = "http=//www.foxmovies.com/movies/fight-club",
     id = 550,
     imdbId = "tt0137523",
@@ -231,4 +240,6 @@ val movie550Details = MovieEntity(
     video = false,
     voteAverage = 8.3f,
     voteCount = 11400
-)
+).apply {
+    genres = listOf(GenreEntity(id = 18, name = "Drama"))
+}

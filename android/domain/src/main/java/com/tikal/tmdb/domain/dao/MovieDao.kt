@@ -11,8 +11,8 @@ interface MovieDao : BaseDao<MovieEntity> {
     @get:Query("SELECT * FROM movie")
     val all: Flow<List<MovieEntity>>
 
-    @Query("SELECT * FROM movie WHERE id = :id")
-    fun getById(id: Long): Flow<MovieEntity>
+    @Query("SELECT * FROM movie WHERE (id = :id)")
+    fun getById(id: Long): MovieEntity
 
     /**
      * Delete all records.

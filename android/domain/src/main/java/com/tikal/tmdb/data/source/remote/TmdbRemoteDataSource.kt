@@ -1,6 +1,7 @@
 package com.tikal.tmdb.data.source.remote
 
 import com.tikal.tmdb.api.TmdbService
+import com.tikal.tmdb.data.model.GenreEntity
 import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.data.source.TmdbDataSource
 import com.tikal.tmdb.domain.TmdbDb
@@ -37,10 +38,27 @@ class TmdbRemoteDataSource @Inject constructor(
         val dao = db.movieDao()
         dao.deleteAll()
         dao.insert(movies)
+
+        saveMoviesGenres(movies)
     }
 
     private fun saveMovie(movie: MovieEntity) {
         val dao = db.movieDao()
         dao.insert(movie)
+
+        saveMovieGenres(movie)
+    }
+
+    private fun saveMoviesGenres(movies: List<MovieEntity>) {
+        movies.forEach { saveMovieGenres(it) }
+    }
+
+    private fun saveMovieGenres(movie: MovieEntity) {
+        movie.genres?.let { saveGenres(it) }
+    }
+
+    private fun saveGenres(genres: List<GenreEntity>) {
+        val dao = db.genreDao()
+        dao.insert(genres)
     }
 }

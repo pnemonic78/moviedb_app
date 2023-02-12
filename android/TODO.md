@@ -1,6 +1,5 @@
 # To Do
 
-- db foreign keys
 - pagination
 - migrate retrofit to ktor
 

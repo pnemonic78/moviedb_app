@@ -10,17 +10,14 @@ import com.tikal.tmdb.data.model.ProductionCompanyEntity
 import com.tikal.tmdb.data.model.ProductionCountryEntity
 import com.tikal.tmdb.data.model.SpokenLanguageEntity
 import com.tikal.tmdb.data.model.TrailerEntity
+import com.tikal.tmdb.domain.dao.GenreDao
 import com.tikal.tmdb.domain.dao.MovieDao
 
 @Database(
     entities = [
         GenreEntity::class,
-//        MovieDetails::class,
         MovieEntity::class,
-//        MovieProductionCompanyJoin::class,
-//        MovieProductionCountryJoin::class,
         MoviesNowPlayingEntity::class,
-//        MovieSpokenLanguageJoin::class,
         ProductionCompanyEntity::class,
         ProductionCountryEntity::class,
         SpokenLanguageEntity::class,
@@ -31,5 +28,6 @@ import com.tikal.tmdb.domain.dao.MovieDao
 )
 @TypeConverters(Converters::class)
 abstract class TmdbDb : RoomDatabase() {
+    abstract fun genreDao(): GenreDao
     abstract fun movieDao(): MovieDao
 }

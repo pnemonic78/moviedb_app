@@ -24,9 +24,9 @@ class TmdbRepository @Inject constructor(
     }
 
     override suspend fun getMovie(movieId: Long): Flow<MovieEntity> {
-        return merge(
-            localRepository.getMovie(movieId),
-            remoteRepository.getMovie(movieId)
-        )
+        // Fetch from server and save to database.
+        remoteRepository.getMovie(movieId)
+
+        return localRepository.getMovie(movieId)
     }
 }

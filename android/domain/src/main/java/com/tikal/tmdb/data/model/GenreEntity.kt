@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "genre")
 data class GenreEntity(
-    @ColumnInfo(name = "adult")
+    @ColumnInfo(name = "id")
     @PrimaryKey
     val id: Long,
     @ColumnInfo(name = "name")

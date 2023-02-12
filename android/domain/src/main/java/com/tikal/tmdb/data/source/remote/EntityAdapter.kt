@@ -27,36 +27,38 @@ fun Genre.toEntity() = GenreEntity(
     name = name
 )
 
-fun Movie.toEntity() = MovieEntity(
-    adult = adult,
-    backdropPath = backdropPath,
-    budget = budget,
-    genreIds = genreIds,
-    homepage = homepage,
-    id = id,
-    imdbId = imdbId,
-    originalLanguage = originalLanguage,
-    originalTitle = originalTitle,
-    overview = overview,
-    popularity = popularity,
-    posterPath = posterPath,
-    releaseDate = releaseDate,
-    revenue = revenue,
-    runtime = runtime,
-    status = status,
-    tagline = tagline,
-    title = title,
-    video = video,
-    voteAverage = voteAverage,
-    voteCount = voteCount
-)
+fun Movie.toEntity(): MovieEntity {
+    val movie = this
 
-//fun Movie.toDetails() = MovieDetails(
-//    movie = this.toEntity(),
+    return  MovieEntity(
+        adult = adult,
+        backdropPath = backdropPath,
+        budget = budget,
+        genreIds = genreIds,
+        homepage = homepage,
+        id = id,
+        imdbId = imdbId,
+        originalLanguage = originalLanguage,
+        originalTitle = originalTitle,
+        overview = overview,
+        popularity = popularity,
+        posterPath = posterPath,
+        releaseDate = releaseDate,
+        revenue = revenue,
+        runtime = runtime,
+        status = status,
+        tagline = tagline,
+        title = title,
+        video = video,
+        voteAverage = voteAverage,
+        voteCount = voteCount
+    ).apply {
+        genres = movie.genres?.map { it.toEntity() }
 //    productionCompanies = productionCompanies?.map { it.toEntity() },
 //    productionCountries = productionCountries?.map { it.toEntity() },
 //    spokenLanguages = spokenLanguages?.map { it.toEntity() },
-//)
+    }
+}
 
 fun MoviesNowPlayingResponse.toEntity() = MoviesNowPlayingEntity(
     results = results.map { it.toEntity() },
