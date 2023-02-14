@@ -4,10 +4,10 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * Response for Movies that are Now Playing.
+ * Response for a page of movies.
  */
 @Serializable
-data class MoviesNowPlayingResponse(
+data class MoviesPageResponse(
     @SerialName("results")
     val results: List<Movie>,
 

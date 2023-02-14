@@ -12,14 +12,14 @@ interface GenreDao : BaseDao<GenreEntity> {
     val all: Flow<List<GenreEntity>>
 
     @Query("SELECT * FROM genre WHERE (id = :id)")
-    fun getById(id: Long): GenreEntity
+    suspend fun getById(id: Long): GenreEntity
 
     @Query("SELECT * FROM genre WHERE (id IN (:ids))")
-    fun getByIds(ids: LongArray): List<GenreEntity>
+    suspend fun getByIds(ids: LongArray): List<GenreEntity>
 
     /**
      * Delete all records.
      */
     @Query("DELETE FROM genre")
-    fun deleteAll(): Int
+    suspend fun deleteAll(): Int
 }

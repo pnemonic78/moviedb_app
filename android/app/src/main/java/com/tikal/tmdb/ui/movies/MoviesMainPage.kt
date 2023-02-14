@@ -36,13 +36,13 @@ import kotlinx.coroutines.flow.StateFlow
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MoviesMainPage(
-    uiState: MainState
+    viewState: MainViewState
 ) {
     val navController = rememberNavController()
     val navBackStackEntry = navController.currentBackStackEntryAsState()
     val navBackStackEntryValue = navBackStackEntry.value
-    val title = uiState.title.collectAsState()
-    val isGrid = uiState.isGridPage.collectAsState()
+    val title = viewState.title.collectAsState()
+    val isGrid = viewState.isGridPage.collectAsState()
 
     Scaffold(
         topBar = {
@@ -52,7 +52,7 @@ fun MoviesMainPage(
                     BackButton(navController, navBackStackEntryValue)
                 },
                 actions = {
-                    ToggleGridButton(uiState, navBackStackEntryValue, isGrid.value)
+                    ToggleGridButton(viewState, navBackStackEntryValue, isGrid.value)
                 }
             )
         }
@@ -63,20 +63,20 @@ fun MoviesMainPage(
                 arguments = listOf(navArgument("id") { type = NavType.LongType })
             ) {
                 MovieDetailsPage(
-                    uiState,
+                    viewState,
                     navController,
                     it.arguments?.getLong("id") ?: 0L
                 )
             }
             composable(MoviesScreen.NowPlaying.route) {
-                MoviesNowPlayingPage(uiState, navController)
+                MoviesNowPlayingPage(viewState, navController)
             }
             composable(
                 "${MoviesScreen.Poster.route}/{id}",
                 arguments = listOf(navArgument("id") { type = NavType.LongType })
             ) {
                 MoviePosterPage(
-                    uiState,
+                    viewState,
                     it.arguments?.getLong("id") ?: 0L
                 )
             }
@@ -99,7 +99,7 @@ private fun BackButton(navController: NavController, currentEntry: NavBackStackE
 
 @Composable
 private fun ToggleGridButton(
-    uiState: MainState,
+    viewState: MainViewState,
     currentEntry: NavBackStackEntry?,
     isGrid: Boolean
 ) {
@@ -107,14 +107,14 @@ private fun ToggleGridButton(
 
     if (isNowPlaying) {
         if (isGrid) {
-            IconButton(onClick = uiState::onToggleGridPage) {
+            IconButton(onClick = viewState::onToggleGridPage) {
                 Icon(
                     imageVector = Icons.Default.List,
                     contentDescription = null
                 )
             }
         } else {
-            IconButton(onClick = uiState::onToggleGridPage) {
+            IconButton(onClick = viewState::onToggleGridPage) {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.ic_grid_on),
                     contentDescription = null
@@ -127,7 +127,7 @@ private fun ToggleGridButton(
 @Preview
 @Composable
 private fun ThisPreview() {
-    val mainState = object : MainState {
+    val mainState = object : MainViewState {
         override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
         override val title: MutableStateFlow<String> = MutableStateFlow("Main")
         override val isGridPage: StateFlow<Boolean> = MutableStateFlow(false)

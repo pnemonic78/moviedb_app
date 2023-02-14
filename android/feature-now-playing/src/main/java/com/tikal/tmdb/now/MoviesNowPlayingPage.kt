@@ -6,17 +6,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.tikal.tmdb.movies.MoviesGridPage
 import com.tikal.tmdb.movies.MoviesListPage
-import com.tikal.tmdb.movies.MoviesPageState
+import com.tikal.tmdb.movies.MoviesPageViewState
 import com.tikal.tmdb.now_playing.R
 
 @Composable
-fun MoviesNowPlayingPage(uiState: MoviesPageState, navController: NavController) {
+fun MoviesNowPlayingPage(viewState: MoviesPageViewState, navController: NavController) {
     val title = stringResource(id = R.string.now_playing)
-    val isGridPage = uiState.isGridPage.collectAsState()
+    val isGridPage = viewState.isGridPage.collectAsState()
 
     if (isGridPage.value) {
-        MoviesGridPage(title, uiState, navController)
+        MoviesGridPage(title, viewState, navController)
     } else {
-        MoviesListPage(title, uiState, navController)
+        MoviesListPage(title, viewState, navController)
     }
 }

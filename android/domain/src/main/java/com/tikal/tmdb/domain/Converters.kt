@@ -41,54 +41,54 @@ import java.sql.Timestamp
 import java.util.Calendar
 import java.util.Date
 
-open class Converters {
+class Converters {
 
     fun fromCalendar(value: Calendar): Long = value.timeInMillis
 
+    fun toCalendar(value: Long): Calendar = value.toCalendar()
+
     @TypeConverter
     fun fromNullableCalendar(value: Calendar?): Long? = value?.let { fromCalendar(it) }
-
-    fun toCalendar(value: Long): Calendar = value.toCalendar()
 
     @TypeConverter
     fun toNullableCalendar(value: Long?): Calendar? = value?.let { toCalendar(it) }
 
     fun fromDate(value: Long): Date = Date(value)
 
+    fun toDate(value: Date): Long = value.time
+
     @TypeConverter
     fun fromNullableDate(value: Long?): Date? = value?.let { fromDate(it) }
-
-    fun toDate(value: Date): Long = value.time
 
     @TypeConverter
     fun toNullableDate(value: Date?): Long? = value?.let { toDate(it) }
 
     fun fromTimestamp(value: Long): Timestamp = Timestamp(value)
 
+    fun toTimestamp(value: Timestamp): Long = value.time
+
     @TypeConverter
     fun fromNullableTimestamp(value: Long?): Timestamp? = value?.let { fromTimestamp(it) }
-
-    fun toTimestamp(value: Timestamp): Long = value.time
 
     @TypeConverter
     fun toNullableTimestamp(value: Timestamp?): Long? = value?.let { toTimestamp(it) }
 
     fun fromUri(value: Uri): String = value.toString()
 
+    fun toUri(value: String): Uri = value.toUri()
+
     @TypeConverter
     fun fromNullableUri(value: Uri?): String? = value?.let { fromUri(it) }
-
-    fun toUri(value: String): Uri = value.toUri()
 
     @TypeConverter
     fun toNullableUri(value: String?): Uri? = value?.let { toUri(it) }
 
     fun fromLongArray(value: LongArray): String = value.contentToString()
 
+    fun toLongArray(value: String): LongArray = value.toLongArray()
+
     @TypeConverter
     fun fromNullableLongArray(value: LongArray?): String? = value?.let { fromLongArray(it) }
-
-    fun toLongArray(value: String): LongArray = value.toLongArray()
 
     @TypeConverter
     fun toNullableLongArray(value: String?): LongArray? = value?.let { toLongArray(it) }

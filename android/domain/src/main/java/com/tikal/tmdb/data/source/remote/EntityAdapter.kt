@@ -3,7 +3,9 @@ package com.tikal.tmdb.data.source.remote
 import com.tikal.tmdb.data.model.DatesEntity
 import com.tikal.tmdb.data.model.GenreEntity
 import com.tikal.tmdb.data.model.MovieEntity
-import com.tikal.tmdb.data.model.MoviesNowPlayingEntity
+import com.tikal.tmdb.data.model.MoviesPage
+import com.tikal.tmdb.data.model.MoviesPageEntity
+import com.tikal.tmdb.data.model.MoviesPageType
 import com.tikal.tmdb.data.model.ProductionCompanyEntity
 import com.tikal.tmdb.data.model.ProductionCountryEntity
 import com.tikal.tmdb.data.model.SpokenLanguageEntity
@@ -11,7 +13,7 @@ import com.tikal.tmdb.data.model.TrailerEntity
 import com.tikal.tmdb.json.model.Dates
 import com.tikal.tmdb.json.model.Genre
 import com.tikal.tmdb.json.model.Movie
-import com.tikal.tmdb.json.model.MoviesNowPlayingResponse
+import com.tikal.tmdb.json.model.MoviesPageResponse
 import com.tikal.tmdb.json.model.ProductionCompany
 import com.tikal.tmdb.json.model.ProductionCountry
 import com.tikal.tmdb.json.model.SpokenLanguage
@@ -30,7 +32,7 @@ fun Genre.toEntity() = GenreEntity(
 fun Movie.toEntity(): MovieEntity {
     val movie = this
 
-    return  MovieEntity(
+    return MovieEntity(
         adult = adult,
         backdropPath = backdropPath,
         budget = budget,
@@ -60,12 +62,15 @@ fun Movie.toEntity(): MovieEntity {
     }
 }
 
-fun MoviesNowPlayingResponse.toEntity() = MoviesNowPlayingEntity(
-    results = results.map { it.toEntity() },
-    dates = dates.toEntity(),
-    page = page,
-    totalPages = totalPages,
-    totalResult = totalResult
+fun MoviesPageResponse.toEntity(type: MoviesPageType) = MoviesPage(
+    page = MoviesPageEntity(
+        dates = dates.toEntity(),
+        page = page,
+        totalPages = totalPages,
+        totalResult = totalResult,
+        type = type
+    ),
+    movies = results.map { it.toEntity() }
 )
 
 fun ProductionCompany.toEntity() = ProductionCompanyEntity(

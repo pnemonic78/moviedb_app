@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.tikal.tmdb.BaseViewModel
 import com.tikal.tmdb.data.model.MovieEntity
+import com.tikal.tmdb.data.model.MoviesPage
 import com.tikal.tmdb.data.source.TmdbDataSource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -16,10 +17,13 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(repository: TmdbDataSource) :
     BaseViewModel(repository),
-    MainState {
+    MainViewState {
 
     private val _movies = MutableStateFlow<List<MovieEntity>>(emptyList())
     override val movies: StateFlow<List<MovieEntity>> = _movies
+
+    private val _moviesNowPlaying = MutableStateFlow<List<MoviesPage>>(emptyList())
+    val moviesNowPlaying: StateFlow<List<MoviesPage>> = _moviesNowPlaying
 
     private val _isGridPage = MutableStateFlow(false)
     override val isGridPage: StateFlow<Boolean> = _isGridPage
@@ -42,8 +46,9 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) :
 
             try {
                 repository.getMoviesNowPlaying()
-                    .collect { movies ->
-                        _movies.emit(movies)
+                    .collect { pages ->
+                        _movies.emit(pages.flatMap { it.movies })
+                        _moviesNowPlaying.emit(pages)
                         showLoadingIndicator(false)
                     }
             } catch (e: Exception) {

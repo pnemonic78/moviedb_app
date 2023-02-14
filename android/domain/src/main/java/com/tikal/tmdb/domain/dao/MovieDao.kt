@@ -12,11 +12,11 @@ interface MovieDao : BaseDao<MovieEntity> {
     val all: Flow<List<MovieEntity>>
 
     @Query("SELECT * FROM movie WHERE (id = :id)")
-    fun getById(id: Long): MovieEntity
+    suspend fun getById(id: Long): MovieEntity
 
     /**
      * Delete all records.
      */
     @Query("DELETE FROM movie")
-    fun deleteAll(): Int
+    suspend fun deleteAll(): Int
 }

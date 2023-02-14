@@ -21,7 +21,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
-fun MoviesListPage(title: String, viewState: MoviesPageState, navController: NavController) {
+fun MoviesListPage(title: String, viewState: MoviesPageViewState, navController: NavController) {
     val movies by viewState.movies.collectAsState()
     val scrollState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
@@ -46,7 +46,7 @@ fun MoviesListPage(title: String, viewState: MoviesPageState, navController: Nav
 @Composable
 private fun ThisPreview() {
     val title = "List Page"
-    val listState = object : MoviesPageState {
+    val listState = object : MoviesPageViewState {
         override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
         override val title: MutableStateFlow<String> = MutableStateFlow("Movies List")
         override val isGridPage: StateFlow<Boolean> = MutableStateFlow(false)

@@ -2,7 +2,7 @@ package com.tikal.tmdb.api
 
 import com.tikal.tmdb.domain.BuildConfig
 import com.tikal.tmdb.json.model.Movie
-import com.tikal.tmdb.json.model.MoviesNowPlayingResponse
+import com.tikal.tmdb.json.model.MoviesPageResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -19,7 +19,7 @@ interface TmdbService {
             @Query("language") language: String = Locale.getDefault().language,
             @Query("page") page: Int = 1,
             @Query("region") region: String? = null
-    ): MoviesNowPlayingResponse
+    ): MoviesPageResponse
 
     @GET("movie/{movie_id}")
     suspend fun getMovieDetails(
