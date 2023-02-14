@@ -1,5 +1,7 @@
 package com.tikal.tmdb.ui.movies
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import com.tikal.tmdb.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MoviesFragment : Fragment() {
@@ -44,6 +47,9 @@ class MoviesFragment : Fragment() {
                 showLoadingIndicator(isLoading)
             }
         }
+        viewModel.launchUri.observe(viewLifecycleOwner) { uri ->
+            if (uri != null) launchUri(uri)
+        }
     }
 
     override fun onStart() {
@@ -56,6 +62,15 @@ class MoviesFragment : Fragment() {
             progressBar?.show()
         } else {
             progressBar?.hide()
+        }
+    }
+
+    private fun launchUri(uri: Uri) {
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(intent)
+        } catch (e: Exception) {
+            Timber.e(e, "launch intent failed")
         }
     }
 }

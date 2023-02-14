@@ -1,5 +1,9 @@
 package com.tikal.tmdb.ui.movies
 
+import android.content.Intent
+import android.net.Uri
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.tikal.tmdb.BaseViewModel
@@ -30,6 +34,9 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) :
 
     private var loadMoviesJob: Job? = null
     private var loadMovieJob: Job? = null
+
+    private val _launchUri = MutableLiveData<Uri>(null)
+    val launchUri: LiveData<Uri> = _launchUri
 
     override fun onCleared() {
         super.onCleared()
@@ -92,11 +99,19 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) :
     }
 
     override fun onPosterClicked(movie: MovieEntity, navController: NavController) {
-        showMoviePoster(movie, navController)
+        navigateMoviePoster(movie, navController)
     }
 
-    private fun showMoviePoster(movie: MovieEntity, navController: NavController) {
+    override fun onLinkClicked(movie: MovieEntity, uri: Uri) {
+        navigateMovieLink(movie, uri)
+    }
+
+    private fun navigateMoviePoster(movie: MovieEntity, navController: NavController) {
         navController.navigate("${MoviesScreen.Poster.route}/${movie.id}")
+    }
+
+    private fun navigateMovieLink(movie: MovieEntity, uri: Uri) {
+        _launchUri.postValue(uri)
     }
 
     override fun onToggleGridPage() {

@@ -12,7 +12,14 @@ import java.util.Locale
  */
 object TmdbApi {
 
-    private const val IMAGE_URL = "https://image.tmdb.org/t/p/%s%s"
+    private const val _image_url = "https://image.tmdb.org/t/p/%s%s"
+    private const val _youtube_url = "https://www.youtube.com/watch?v=%s"
+    private const val _youtube_thumbnail_url = "https://img.youtube.com/vi/%s/0.jpg"
+    private const val _facebook_url = "https://facebook.com/%s"
+    private const val _imdb_person_url = "https://imdb.com/name/%s"
+    private const val _imdb_title_url = "https://imdb.com/title/%s"
+    private const val _instagram_url = "https://instagram.com/%s"
+    private const val _twitter_url = "https://twitter.com/%s"
 
     private var posterSizes: Array<String> = emptyArray()
 
@@ -46,7 +53,7 @@ object TmdbApi {
         }
         val size = findSize(width, height, posterSizes)
 
-        return String.format(Locale.US, IMAGE_URL, size, path)
+        return String.format(Locale.US, _image_url, size, path)
     }
 
     private fun findSize(width: Int, height: Int, sizes: Array<String>): String {
@@ -64,5 +71,25 @@ object TmdbApi {
             }
         }
         return "original"
+    }
+
+    fun generateFacebookUrl(id: String): String {
+        return String.format(_facebook_url, id)
+    }
+
+    fun generateImdbPersonUrl(id: String): String {
+        return String.format(_imdb_person_url, id)
+    }
+
+    fun generateImdbMovieUrl(id: String): String {
+        return String.format(_imdb_title_url, id)
+    }
+
+    fun generateInstagramUrl(id: String): String {
+        return String.format(_instagram_url, id)
+    }
+
+    fun generateTwitterUrl(id: String): String {
+        return String.format(_twitter_url, id)
     }
 }

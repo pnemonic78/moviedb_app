@@ -35,6 +35,8 @@ dependencyResolutionManagement {
             library("jetpack-appcompat", "androidx.appcompat:appcompat:1.4.1")
             library("jetpack-composeMaterial", "androidx.compose.material", "material")
                 .versionRef("composeMaterial")
+            library("jetpack-composeMaterialIcons", "androidx.compose.material", "material-icons-extended")
+                .versionRef("composeMaterial")
             library("jetpack-composeTooling", "androidx.compose.ui", "ui-tooling")
                 .versionRef("compose")
             library("jetpack-composeNavigation", "androidx.navigation", "navigation-compose")
@@ -49,6 +51,7 @@ dependencyResolutionManagement {
                 "jetpack-compose",
                 listOf(
                     "jetpack-composeMaterial",
+                    "jetpack-composeMaterialIcons",
                     "jetpack-composeNavigation",
                     "jetpack-composeTooling",
                     "jetpack-composeUI"

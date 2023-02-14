@@ -1,6 +1,7 @@
 package com.tikal.tmdb.ui.movies
 
 import android.annotation.SuppressLint
+import android.net.Uri
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -141,6 +142,7 @@ private fun ThisPreview() {
             MutableStateFlow(movie550Details)
 
         override fun onPosterClicked(movie: MovieEntity, navController: NavController) = Unit
+        override fun onLinkClicked(movie: MovieEntity, uri: Uri) = Unit
     }
     MaterialTheme {
         MoviesMainPage(mainState)

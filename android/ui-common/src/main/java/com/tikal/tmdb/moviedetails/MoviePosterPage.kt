@@ -1,5 +1,6 @@
 package com.tikal.tmdb.moviedetails
 
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material.MaterialTheme
@@ -9,7 +10,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
@@ -51,6 +51,7 @@ private fun ThisPreview() {
             MutableStateFlow(movie550Details)
 
         override fun onPosterClicked(movie: MovieEntity, navController: NavController) = Unit
+        override fun onLinkClicked(movie: MovieEntity, uri: Uri) = Unit
     }
     MaterialTheme {
         MoviePosterPage(viewState, movie550Details.id)

@@ -1,5 +1,6 @@
 package com.tikal.tmdb.moviedetails
 
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material.MaterialTheme
@@ -34,7 +35,8 @@ fun MovieDetailsPage(
     if (movie != null) {
         MovieDetailsContent(
             movie = movie,
-            onPosterClick = { viewState.onPosterClicked(movie, navController) }
+            onPosterClick = { viewState.onPosterClicked(movie, navController) },
+            onLinkClick = { viewState.onLinkClicked(movie, it) }
         )
     } else {
         Box(modifier = Modifier.background(color = MaterialTheme.colors.error))
@@ -52,6 +54,9 @@ private fun ThisPreview() {
 
         override fun onPosterClicked(movie: MovieEntity, navController: NavController) {
             println("Poster clicked")
+        }
+        override fun onLinkClicked(movie: MovieEntity, uri: Uri) {
+            println("Link clicked $uri")
         }
     }
     val navController = rememberNavController()

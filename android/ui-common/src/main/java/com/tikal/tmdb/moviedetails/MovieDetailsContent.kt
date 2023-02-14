@@ -1,9 +1,11 @@
 package com.tikal.tmdb.moviedetails
 
 import android.content.Context
+import android.net.Uri
 import android.text.format.DateUtils
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,10 +13,19 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.DataArray
+import androidx.compose.material.icons.outlined.DataObject
+import androidx.compose.material.icons.outlined.Dataset
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Storage
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,6 +44,8 @@ import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarConfig
 import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize
+import com.tikal.tmdb.OnClickCallback
+import com.tikal.tmdb.OnLinkCallback
 import com.tikal.tmdb.api.TmdbApi
 import com.tikal.tmdb.data.model.GenreEntity
 import com.tikal.tmdb.data.model.MovieEntity
@@ -47,7 +60,8 @@ private const val posterAspectRatio = 1f / 1.5f
 fun MovieDetailsContent(
     movie: MovieEntity,
     modifier: Modifier = Modifier,
-    onPosterClick: (() -> Unit)?
+    onPosterClick: OnClickCallback?,
+    onLinkClick: OnLinkCallback?
 ) {
     val context = LocalContext.current
     val scrollState = rememberScrollState()
@@ -77,19 +91,57 @@ fun MovieDetailsContent(
         )
         Spacer(modifier = Modifier.height(8.dp))
         Row(modifier = Modifier.fillMaxWidth()) {
-            Image(
-                painter = posterPainter,
-                contentDescription = movie.title,
-                contentScale = ContentScale.FillHeight,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(0.5f)
-                    .aspectRatio(posterAspectRatio, true)
-                    .onSizeChanged { size -> posterSize.value = size }
-                    .clickable(
-                        enabled = (onPosterClick != null),
-                        onClick = { onPosterClick?.invoke() })
-            )
+            Column(modifier = Modifier.weight(0.5f)) {
+                Image(
+                    painter = posterPainter,
+                    contentDescription = movie.title,
+                    contentScale = ContentScale.FillHeight,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(posterAspectRatio, true)
+                        .onSizeChanged { size -> posterSize.value = size }
+                        .clickable(
+                            enabled = (onPosterClick != null),
+                            onClick = { onPosterClick?.invoke() })
+                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    var iconCount = 0
+
+                    movie.homepage?.let {
+                        if (iconCount > 0) {
+                            Spacer(modifier = Modifier.width(8.dp))
+                        }
+                        iconCount++
+
+                        val url = it
+                        val uri = Uri.parse(url)
+                        IconButton(onClick = { onLinkClick?.invoke(uri) }) {
+                            Icon(
+                                imageVector = Icons.Outlined.Home,
+                                contentDescription = url
+                            )
+                        }
+                    }
+                    movie.imdbId?.let {
+                        if (iconCount > 0) {
+                            Spacer(modifier = Modifier.width(8.dp))
+                        }
+                        iconCount++
+
+                        val url = TmdbApi.generateImdbMovieUrl(it)
+                        val uri = Uri.parse(url)
+                        IconButton(onClick = { onLinkClick?.invoke(uri) }) {
+                            Icon(
+                                imageVector = Icons.Outlined.Storage,
+                                contentDescription = url
+                            )
+                        }
+                    }
+                }
+            }
             Column(
                 modifier = Modifier
                     .weight(0.5f)
@@ -196,8 +248,13 @@ private fun getPosterPath(context: Context, path: String?, size: IntSize): Strin
 @Composable
 private fun ThisPreview() {
     val onPosterClick = { println("Clicked poster") }
+    val onLinkClick: OnLinkCallback = { println("Clicked link $it") }
     MaterialTheme {
-        MovieDetailsContent(movie = movie550Details, onPosterClick = onPosterClick)
+        MovieDetailsContent(
+            movie = movie550Details,
+            onPosterClick = onPosterClick,
+            onLinkClick = onLinkClick
+        )
     }
 }
 
