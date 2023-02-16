@@ -38,7 +38,7 @@ class MoviesFragment : Fragment() {
         val composeView = view.findViewById<ComposeView>(R.id.compose_view)
         composeView.setContent {
             MaterialTheme {
-                MoviesMainPage(viewModel)
+                MoviesMainScreen(viewModel)
             }
         }
 

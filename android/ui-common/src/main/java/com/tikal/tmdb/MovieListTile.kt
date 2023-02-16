@@ -1,9 +1,7 @@
 package com.tikal.tmdb
 
-import android.content.Context
 import android.text.format.DateUtils
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,24 +19,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberImagePainter
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarConfig
 import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize
-import com.tikal.tmdb.api.TmdbApi
 import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.ui.common.R
 
@@ -49,7 +42,7 @@ private const val posterAspectRatio = 1.5f
 fun MovieListTile(
     movie: MovieEntity,
     modifier: Modifier = Modifier,
-    onMovieClicked: ((movie: MovieEntity) -> Unit)
+    onMovieClicked: OnMovieClickCallback
 ) {
     val context = LocalContext.current
 
@@ -58,20 +51,16 @@ fun MovieListTile(
     val thumbnailHeight = thumbnailWidth * posterAspectRatio
     val imageWidth = thumbnailWidth * 1f
     val imageHeight = thumbnailHeight * parallaxFactor
-    val thumbnailUrl = getPosterPath(context, movie.posterPath, thumbnailSize.value)
-    val thumbnailPainter: Painter = if (thumbnailUrl.isNullOrBlank()) {
-        painterResource(id = R.drawable.ic_movie_black)
-    } else {
-        rememberImagePainter(data = thumbnailUrl)
-    }
+    val thumbnailPainter = movie.thumbnailPainter(context = context, size = thumbnailSize.value)
 
     val textTheme = MaterialTheme.typography
+    val cornerRadius = dimensionResource(id = R.dimen.cornerRadius)
 
     Card(
         modifier = modifier
             .wrapContentHeight()
             .clickable { onMovieClicked(movie) },
-        shape = RoundedCornerShape(size = dimensionResource(id = R.dimen.cornerRadius))
+        shape = RoundedCornerShape(size = cornerRadius)
     ) {
         Row(
             modifier = Modifier
@@ -85,7 +74,7 @@ fun MovieListTile(
                 modifier = Modifier
                     .width(imageWidth)
                     .height(imageHeight)
-                    .clip(RoundedCornerShape(size = dimensionResource(id = R.dimen.cornerRadius)))
+                    .clip(RoundedCornerShape(size = cornerRadius))
                     .onSizeChanged { size -> thumbnailSize.value = size }
             )
             Column(
@@ -132,16 +121,7 @@ fun MovieListTile(
     }
 }
 
-private fun getPosterPath(context: Context, path: String?, size: IntSize): String? {
-    return TmdbApi.generatePosterUrl(
-        context,
-        path,
-        size.width,
-        size.height
-    )
-}
-
-@Preview(backgroundColor = 0xFFCCCCCC)
+@Preview(showBackground = true, backgroundColor = 0xFFCC00CC)
 @Composable
 private fun ThisPreview() {
     MaterialTheme {

@@ -24,13 +24,12 @@ fun MovieDetailsPage(
     navController: NavController,
     movieId: Long
 ) {
-    val movieState = viewState.movieDetails(movieId).collectAsState()
-    val coroutineScope = rememberCoroutineScope()
     val title = stringResource(id = R.string.movie_details)
-    LaunchedEffect(coroutineScope) {
+    LaunchedEffect(title) {
         viewState.title.emit(title)
     }
 
+    val movieState = viewState.movieDetails(movieId).collectAsState()
     val movie = movieState.value
     if (movie != null) {
         MovieDetailsContent(

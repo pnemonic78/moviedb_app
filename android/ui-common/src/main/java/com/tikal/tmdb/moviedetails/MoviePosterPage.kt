@@ -1,5 +1,6 @@
 package com.tikal.tmdb.moviedetails
 
+import android.annotation.SuppressLint
 import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -19,18 +20,19 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
+@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun MoviePosterPage(
     viewState: MovieDetailsViewState,
     movieId: Long
 ) {
-    val movieState by viewState.movieDetails(movieId).collectAsState()
     val coroutineScope = rememberCoroutineScope()
     var title = stringResource(id = R.string.movie_details)
-    LaunchedEffect(coroutineScope) {
+    LaunchedEffect(title) {
         viewState.title.emit(title)
     }
 
+    val movieState by viewState.movieDetails(movieId).collectAsState()
     if (movieState != null) {
         val movie = movieState!!
         title = movie.title

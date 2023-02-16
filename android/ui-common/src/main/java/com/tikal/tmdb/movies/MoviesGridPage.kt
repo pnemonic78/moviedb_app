@@ -1,7 +1,7 @@
 package com.tikal.tmdb.movies
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
@@ -10,8 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -26,24 +24,26 @@ import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 fun MoviesGridPage(title: String, viewState: MoviesPageViewState, navController: NavController) {
-    val movies by viewState.movies.collectAsState()
-    val scrollState = rememberLazyGridState()
-    val coroutineScope = rememberCoroutineScope()
-
-    LaunchedEffect(coroutineScope) {
+    LaunchedEffect(title) {
         viewState.title.emit(title)
     }
 
+    val movies by viewState.movies.collectAsState()
+    val scrollState = rememberLazyGridState()
+
     LazyVerticalGrid(
-        modifier = Modifier.padding(8.dp),
         state = scrollState,
         columns = GridCells.Adaptive(dimensionResource(id = R.dimen.posterWidth)),
+        contentPadding = PaddingValues(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(movies.size) { index ->
+        items(count = movies.size) { index ->
             val movie = movies[index]
-            MovieGridTile(movie, onMovieClicked = { viewState.onMovieClicked(movie, navController) })
+            MovieGridTile(
+                movie = movie,
+                onMovieClicked = { viewState.onMovieClicked(movie, navController) }
+            )
         }
     }
 }
