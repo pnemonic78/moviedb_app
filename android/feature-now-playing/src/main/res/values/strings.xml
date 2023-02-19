@@ -1,4 +1,3 @@
 <resources>
-    <!-- Now Playing -->
-    <string name="now_playing">"Movies Now Playing"</string>
+    <string name="now_playing">"Now Playing"</string>
 </resources>

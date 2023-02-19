@@ -31,6 +31,13 @@ class TmdbRemoteDataSource @Inject constructor(
             flowOf(listOf(entity))
         }
 
+    override suspend fun getMoviesPopular(): Flow<List<MoviesPage>> =
+        withContext(ioDispatcher) {
+            val entity = service.getMoviesPopular().toEntity(MoviesPageType.POPULAR)
+            savePage(entity)
+            flowOf(listOf(entity))
+        }
+
     override suspend fun getMovie(movieId: Long): Flow<MovieEntity> =
         withContext(ioDispatcher) {
             val movie = service.getMovieDetails(movieId).toEntity()

@@ -32,12 +32,9 @@
     <string name="person_crew_format">"<b>%s</b> בתור %s"</string>
     <string name="person_crew_format_none">"<b>%s</b>"</string>
 
-    <!-- Popular -->
-    <string name="popular">"סרטים פופולריים"</string>
-
     <!-- Upcoming -->
-    <string name="upcoming">"סרטים עתידיים"</string>
+    <string name="upcoming">"עתידיים"</string>
 
     <!-- Top Rated -->
-    <string name="top_rated">"סרטים בראש הדירוג"</string>
+    <string name="top_rated">"בראש הדירוג"</string>
 </resources>

@@ -16,6 +16,7 @@ import com.tikal.tmdb.compose.SimpleScreen
 import com.tikal.tmdb.moviedetails.MovieDetailsScreen
 import com.tikal.tmdb.moviedetails.MoviePosterScreen
 import com.tikal.tmdb.now.MoviesNowPlayingScreen
+import com.tikal.tmdb.popular.MoviesPopularScreen
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -45,7 +46,16 @@ fun MoviesMainScreen(
             )
         }
         composable(route = MoviesScreen.NowPlaying.route) {
-            MoviesNowPlayingScreen(viewState.moviesPageViewState, navController)
+            MoviesNowPlayingScreen(
+                viewState.moviesMainViewState.moviesNowPlayingViewState.pageViewState,
+                navController
+            )
+        }
+        composable(route = MoviesScreen.Popular.route) {
+            MoviesPopularScreen(
+                viewState.moviesMainViewState.moviesPopularViewState.pageViewState,
+                navController
+            )
         }
         composable(
             route = "${MoviesScreen.Poster.route}/{id}",

@@ -4,6 +4,7 @@ include(":model")
 include(":domain")
 include(":ui-common")
 include(":feature-now-playing")
+include(":feature-popular")
 
 dependencyResolutionManagement {
     versionCatalogs {

@@ -12,7 +12,7 @@ data class MoviesPageResponse(
     val results: List<Movie>,
 
     @SerialName("dates")
-    val dates: Dates,
+    val dates: Dates? = null,
 
     @SerialName("page")
     val page: Int,

@@ -32,12 +32,9 @@
     <string name="person_crew_format">"<b>%s</b> as %s"</string>
     <string name="person_crew_format_none">"<b>%s</b>"</string>
 
-    <!-- Popular -->
-    <string name="popular">"Popular Movies"</string>
-
     <!-- Upcoming -->
-    <string name="upcoming">"Upcoming Movies"</string>
+    <string name="upcoming">"Upcoming"</string>
 
     <!-- Top Rated -->
-    <string name="top_rated">"Top Rated Movies"</string>
+    <string name="top_rated">"Top Rated"</string>
 </resources>

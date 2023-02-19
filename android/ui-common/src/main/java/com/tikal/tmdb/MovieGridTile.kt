@@ -91,9 +91,9 @@ fun MovieGridTile(
             )
             Text(
                 modifier = Modifier.padding(top = 4.dp),
-                text = movie.title,
+                text = movie.title + "\n",
                 style = textTheme.subtitle1.copy(fontWeight = FontWeight.Medium),
-                maxLines = 1
+                maxLines = 2
             )
             RatingBar(
                 modifier = Modifier.padding(top = 8.dp),

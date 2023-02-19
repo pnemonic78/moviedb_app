@@ -8,18 +8,16 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.tikal.tmdb.MovieGridTile
-import com.tikal.tmdb.data.model.DatesEntity
 import com.tikal.tmdb.data.model.MoviesPage
-import com.tikal.tmdb.data.model.MoviesPageEntity
-import com.tikal.tmdb.data.model.MoviesPageType
-import com.tikal.tmdb.movie550
 import com.tikal.tmdb.movies.OnMovieClickCallback
+import com.tikal.tmdb.page550
 import com.tikal.tmdb.ui.common.R
 
 @Composable
@@ -28,11 +26,11 @@ fun MoviesCarousel(
     viewState: MoviesCarouselViewState,
     navController: NavHostController
 ) {
-    val movies = viewState.movies.collectAsState(initial = emptyList())
+    val pages by viewState.pages.collectAsState()
 
     MoviesCarousel(
         modifier = modifier,
-        pages = movies.value,
+        pages = pages,
         onMovieClicked = { viewState.onMovieClicked(it, navController) }
     )
 }
@@ -67,17 +65,7 @@ fun MoviesCarousel(
 @Preview(showBackground = true, backgroundColor = 0xFFCC00CC, widthDp = 400)
 @Composable
 private fun ThisPreview() {
-    val moviesList = listOf(movie550, movie550)
-    val page = MoviesPage(
-        page = MoviesPageEntity(
-            dates = DatesEntity(),
-            page = 1,
-            totalPages = 1,
-            totalResult = moviesList.size,
-            type = MoviesPageType.NOW_PLAYING
-        ),
-        movies = moviesList
-    )
+    val page = page550
     val onMovieClicked: OnMovieClickCallback = { println("movie clicked $it") }
 
     MaterialTheme {

@@ -26,6 +26,12 @@ class TmdbLocalDataSource @Inject constructor(
             dao.getByType(MoviesPageType.NOW_PLAYING)
         }
 
+    override suspend fun getMoviesPopular(): Flow<List<MoviesPage>> =
+        withContext(ioDispatcher) {
+            val dao = db.moviePagesDao()
+            dao.getByType(MoviesPageType.POPULAR)
+        }
+
     override suspend fun getMovie(movieId: Long): Flow<MovieEntity> =
         withContext(ioDispatcher) {
             val dao = db.movieDao()

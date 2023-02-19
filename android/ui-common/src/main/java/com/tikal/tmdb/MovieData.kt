@@ -1,6 +1,10 @@
 package com.tikal.tmdb
 
+import com.tikal.tmdb.data.model.DatesEntity
 import com.tikal.tmdb.data.model.MovieEntity
+import com.tikal.tmdb.data.model.MoviesPage
+import com.tikal.tmdb.data.model.MoviesPageEntity
+import com.tikal.tmdb.data.model.MoviesPageType
 import java.util.Calendar
 
 val movie550 = MovieEntity(
@@ -21,4 +25,17 @@ val movie550 = MovieEntity(
     video = false,
     voteAverage = 8.3f,
     voteCount = 11400
+)
+
+private val moviesList = listOf(movie550, movie550, movie550)
+
+val page550 = MoviesPage(
+    page = MoviesPageEntity(
+        dates = DatesEntity(),
+        page = 1,
+        totalPages = 1,
+        totalResult = moviesList.size,
+        type = MoviesPageType.NOW_PLAYING
+    ),
+    movies = moviesList
 )

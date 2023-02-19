@@ -5,7 +5,6 @@ import com.tikal.tmdb.ViewState
 import com.tikal.tmdb.data.model.MoviesPageType
 
 interface MoviesMainViewState : ViewState {
-    fun onTitleClicked(type: MoviesPageType, navController: NavHostController)
-
-    val nowPlayingViewState: MoviesCarouselViewState
+    val moviesNowPlayingViewState: MoviesCarouselViewState
+    val moviesPopularViewState: MoviesCarouselViewState
 }

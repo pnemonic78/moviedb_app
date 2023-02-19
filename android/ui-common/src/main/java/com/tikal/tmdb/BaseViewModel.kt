@@ -15,7 +15,4 @@ open class BaseViewModel(protected val repository: TmdbDataSource) :
     protected suspend fun showLoadingIndicator(active: Boolean) {
         _isLoading.emit(active)
     }
-
-    private val _title = MutableStateFlow("")
-    override val title: MutableStateFlow<String> = _title
 }

@@ -52,6 +52,7 @@ dependencies {
     implementation(project(":model"))
     implementation(project(":ui-common"))
     implementation(project(":feature-now-playing"))
+    implementation(project(":feature-popular"))
 
     implementation(androidCatalog.di.hilt)
     kapt(androidCatalog.di.hiltCompiler)

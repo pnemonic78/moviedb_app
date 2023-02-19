@@ -64,7 +64,7 @@ fun Movie.toEntity(): MovieEntity {
 
 fun MoviesPageResponse.toEntity(type: MoviesPageType) = MoviesPage(
     page = MoviesPageEntity(
-        dates = dates.toEntity(),
+        dates = dates?.toEntity(),
         page = page,
         totalPages = totalPages,
         totalResult = totalResult,

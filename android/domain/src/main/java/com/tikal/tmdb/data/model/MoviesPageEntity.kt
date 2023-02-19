@@ -10,7 +10,7 @@ import androidx.room.RoomWarnings
 @SuppressWarnings(RoomWarnings.PRIMARY_KEY_FROM_EMBEDDED_IS_DROPPED)
 data class MoviesPageEntity(
     @Embedded(prefix = "dates_")
-    val dates: DatesEntity,
+    val dates: DatesEntity?,
     @PrimaryKey
     var id: Long,
     @ColumnInfo(name = "page")
@@ -24,7 +24,7 @@ data class MoviesPageEntity(
 ) {
 
     constructor(
-        dates: DatesEntity,
+        dates: DatesEntity?,
         page: Int,
         totalPages: Int,
         totalResult: Int,

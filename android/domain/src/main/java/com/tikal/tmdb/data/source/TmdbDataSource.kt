@@ -11,5 +11,7 @@ interface TmdbDataSource {
 
     suspend fun getMoviesNowPlaying(): Flow<List<MoviesPage>>
 
+    suspend fun getMoviesPopular(): Flow<List<MoviesPage>>
+
     suspend fun getMovie(movieId: Long): Flow<MovieEntity>
 }

@@ -46,7 +46,6 @@ fun PosterPage(
 private fun ThisPreview() {
     val viewState = object : MovieDetailsViewState {
         override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
-        override val title: MutableStateFlow<String> = MutableStateFlow("Movie Details")
         override fun movieDetails(movieId: Long): StateFlow<MovieEntity?> =
             MutableStateFlow(movie550Details)
 

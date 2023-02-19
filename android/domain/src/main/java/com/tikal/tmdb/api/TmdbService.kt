@@ -21,6 +21,30 @@ interface TmdbService {
             @Query("region") region: String? = null
     ): MoviesPageResponse
 
+    @GET("movie/popular")
+    suspend fun getMoviesPopular(
+        @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
+        @Query("language") language: String = Locale.getDefault().language,
+        @Query("page") page: Int = 1,
+        @Query("region") region: String? = null
+    ): MoviesPageResponse
+
+    @GET("movie/top_rated")
+    suspend fun getMoviesTopRated(
+        @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
+        @Query("language") language: String = Locale.getDefault().language,
+        @Query("page") page: Int = 1,
+        @Query("region") region: String? = null
+    ): MoviesPageResponse
+
+    @GET("movie/upcoming")
+    suspend fun getMoviesUpcoming(
+        @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
+        @Query("language") language: String = Locale.getDefault().language,
+        @Query("page") page: Int = 1,
+        @Query("region") region: String? = null
+    ): MoviesPageResponse
+
     @GET("movie/{movie_id}")
     suspend fun getMovieDetails(
             @Path("movie_id") moveId: Long,

@@ -23,6 +23,13 @@ class TmdbRepository @Inject constructor(
         return localRepository.getMoviesNowPlaying()
     }
 
+    override suspend fun getMoviesPopular(): Flow<List<MoviesPage>> {
+        // Fetch from server and save to database.
+        remoteRepository.getMoviesPopular()
+
+        return localRepository.getMoviesPopular()
+    }
+
     override suspend fun getMovie(movieId: Long): Flow<MovieEntity> {
         // Fetch from server and save to database.
         remoteRepository.getMovie(movieId)
