@@ -2,7 +2,6 @@ package com.tikal.tmdb.moviedetails
 
 import android.net.Uri
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
@@ -10,6 +9,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.tikal.tmdb.compose.AppTheme
 import com.tikal.tmdb.compose.SimpleErrorContent
 import com.tikal.tmdb.compose.SimpleScreen
 import com.tikal.tmdb.data.model.MovieEntity
@@ -76,7 +76,7 @@ private fun ThisPreview() {
         }
     }
     val navController = rememberNavController()
-    MaterialTheme {
+    AppTheme {
         MovieDetailsScreen(
             viewState = viewState,
             navController = navController,

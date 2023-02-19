@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -16,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.tikal.tmdb.MovieGridTile
+import com.tikal.tmdb.compose.AppTheme
 import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.data.model.MoviesPage
 import com.tikal.tmdb.page550
@@ -63,7 +63,7 @@ private fun ThisPreview() {
         override fun onToggleLayout() = Unit
     }
     val navController = rememberNavController()
-    MaterialTheme {
+    AppTheme {
         MoviesGridPage(viewState = viewState, navController = navController)
     }
 }

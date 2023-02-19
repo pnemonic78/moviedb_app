@@ -1,14 +1,14 @@
 # To Do
 
-- pagination
-- migrate retrofit to ktor
-
 - ui feature modules
-  - popular
   - top_rated
   - upcoming
 
-- add movie categories screen
+- pagination
+- migrate retrofit to ktor
+
 - add movies details
-- add person screen
+  - cast
+  - videos
+- add person details screen
 - add TV screens

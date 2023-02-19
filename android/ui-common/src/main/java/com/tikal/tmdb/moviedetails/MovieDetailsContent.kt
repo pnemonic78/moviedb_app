@@ -41,9 +41,10 @@ import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarConfig
 import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize
+import com.tikal.tmdb.api.TmdbApi
+import com.tikal.tmdb.compose.AppTheme
 import com.tikal.tmdb.compose.OnClickCallback
 import com.tikal.tmdb.compose.OnLinkCallback
-import com.tikal.tmdb.api.TmdbApi
 import com.tikal.tmdb.data.model.GenreEntity
 import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.ui.common.R
@@ -246,7 +247,7 @@ private fun getPosterPath(context: Context, path: String?, size: IntSize): Strin
 private fun ThisPreview() {
     val onPosterClick = { println("Clicked poster") }
     val onLinkClick: OnLinkCallback = { println("Clicked link $it") }
-    MaterialTheme {
+    AppTheme {
         MovieDetailsContent(
             movie = movie550Details,
             onPosterClick = onPosterClick,

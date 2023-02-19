@@ -1,7 +1,6 @@
 package com.tikal.tmdb.moviedetails
 
 import android.net.Uri
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -9,6 +8,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.tikal.tmdb.compose.AppTheme
 import com.tikal.tmdb.compose.SimpleErrorScreen
 import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.ui.common.R
@@ -52,7 +52,7 @@ private fun ThisPreview() {
         override fun onLinkClicked(movie: MovieEntity, uri: Uri) = Unit
     }
     val navController = rememberNavController()
-    MaterialTheme {
+    AppTheme {
         MoviePosterScreen(
             viewState = viewState,
             navController = navController,

@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -15,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.tikal.tmdb.MovieGridTile
+import com.tikal.tmdb.compose.AppTheme
 import com.tikal.tmdb.data.model.MoviesPage
 import com.tikal.tmdb.movies.OnMovieClickCallback
 import com.tikal.tmdb.page550
@@ -68,7 +68,7 @@ private fun ThisPreview() {
     val page = page550
     val onMovieClicked: OnMovieClickCallback = { println("movie clicked $it") }
 
-    MaterialTheme {
+    AppTheme {
         MoviesCarousel(
             pages = listOf(page),
             onMovieClicked = onMovieClicked

@@ -3,7 +3,6 @@ package com.tikal.tmdb.movies
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -18,9 +17,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.tikal.tmdb.BackButton
+import com.tikal.tmdb.compose.AppTheme
 import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.data.model.MoviesPage
-import com.tikal.tmdb.movie550
 import com.tikal.tmdb.page550
 import com.tikal.tmdb.ui.common.R
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -86,7 +85,7 @@ private fun ThisPreview() {
     }
     val navController = rememberNavController()
 
-    MaterialTheme {
+    AppTheme {
         MoviesScreen(title, viewState, navController)
     }
 }
