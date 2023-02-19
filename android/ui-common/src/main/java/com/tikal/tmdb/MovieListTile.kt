@@ -32,7 +32,9 @@ import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarConfig
 import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize
+import com.tikal.tmdb.compose.thumbnailPainter
 import com.tikal.tmdb.data.model.MovieEntity
+import com.tikal.tmdb.movies.OnMovieClickCallback
 import com.tikal.tmdb.ui.common.R
 
 private const val parallaxFactor = 0.85f

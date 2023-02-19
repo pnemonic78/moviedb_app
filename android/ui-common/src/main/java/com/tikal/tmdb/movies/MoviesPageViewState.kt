@@ -10,5 +10,5 @@ interface MoviesPageViewState : ViewState {
     val movies: StateFlow<List<MovieEntity>>
 
     fun onMovieClicked(movie: MovieEntity, navController: NavController)
-    fun onToggleGridPage()
+    fun onToggleLayout()
 }

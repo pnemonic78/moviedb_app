@@ -21,9 +21,6 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.DataArray
-import androidx.compose.material.icons.outlined.DataObject
-import androidx.compose.material.icons.outlined.Dataset
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Storage
 import androidx.compose.runtime.Composable
@@ -44,8 +41,8 @@ import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarConfig
 import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize
-import com.tikal.tmdb.OnClickCallback
-import com.tikal.tmdb.OnLinkCallback
+import com.tikal.tmdb.compose.OnClickCallback
+import com.tikal.tmdb.compose.OnLinkCallback
 import com.tikal.tmdb.api.TmdbApi
 import com.tikal.tmdb.data.model.GenreEntity
 import com.tikal.tmdb.data.model.MovieEntity
@@ -58,8 +55,8 @@ private const val posterAspectRatio = 1f / 1.5f
 
 @Composable
 fun MovieDetailsContent(
-    movie: MovieEntity,
     modifier: Modifier = Modifier,
+    movie: MovieEntity,
     onPosterClick: OnClickCallback?,
     onLinkClick: OnLinkCallback?
 ) {

@@ -14,12 +14,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.tikal.tmdb.MovieGridTile
-import com.tikal.tmdb.OnMovieClickCallback
 import com.tikal.tmdb.data.model.DatesEntity
 import com.tikal.tmdb.data.model.MoviesPage
 import com.tikal.tmdb.data.model.MoviesPageEntity
 import com.tikal.tmdb.data.model.MoviesPageType
 import com.tikal.tmdb.movie550
+import com.tikal.tmdb.movies.OnMovieClickCallback
 import com.tikal.tmdb.ui.common.R
 
 @Composable

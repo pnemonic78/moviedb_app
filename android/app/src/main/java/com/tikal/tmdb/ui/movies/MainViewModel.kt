@@ -11,6 +11,8 @@ import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.data.model.MoviesPage
 import com.tikal.tmdb.data.model.MoviesPageType
 import com.tikal.tmdb.data.source.TmdbDataSource
+import com.tikal.tmdb.moviedetails.MovieDetailsViewState
+import com.tikal.tmdb.movies.MoviesPageViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Job
@@ -20,17 +22,16 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @HiltViewModel
-class MainViewModel @Inject constructor(repository: TmdbDataSource) :
-    BaseViewModel(repository),
+class MainViewModel @Inject constructor(repository: TmdbDataSource) : BaseViewModel(repository),
     MainViewState {
 
     private val _movies = MutableStateFlow<List<MovieEntity>>(emptyList())
-    override val movies: StateFlow<List<MovieEntity>> = _movies
+    val movies: StateFlow<List<MovieEntity>> = _movies
 
     private val _moviesNowPlaying = MutableStateFlow<List<MoviesPage>>(emptyList())
 
-    private val _isGridPage = MutableStateFlow(false)
-    override val isGridPage: StateFlow<Boolean> = _isGridPage
+    private val _isGridPage = MutableStateFlow(true)
+    val isGridPage: StateFlow<Boolean> = _isGridPage
 
     private var loadMoviesJob: Job? = null
     private var loadMovieJob: Job? = null
@@ -52,12 +53,11 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) :
             showLoadingIndicator(true)
 
             try {
-                repository.getMoviesNowPlaying()
-                    .collect { pages ->
-                        _movies.emit(pages.flatMap { it.movies })
-                        _moviesNowPlaying.emit(pages)
-                        showLoadingIndicator(false)
-                    }
+                repository.getMoviesNowPlaying().collect { pages ->
+                    _movies.emit(pages.flatMap { it.movies })
+                    _moviesNowPlaying.emit(pages)
+                    showLoadingIndicator(false)
+                }
             } catch (e: Exception) {
                 Timber.e(e, "loadMovies error: $e")
                 showLoadingIndicator(false)
@@ -65,7 +65,7 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) :
         }
     }
 
-    override fun onMovieClicked(movie: MovieEntity, navController: NavController) {
+    fun onMovieClicked(movie: MovieEntity, navController: NavController) {
         showMovieDetails(movie, navController)
     }
 
@@ -75,7 +75,7 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) :
 
     private val _movieDetails = MutableStateFlow<MovieEntity?>(null)
 
-    override fun movieDetails(movieId: Long): StateFlow<MovieEntity?> {
+    fun movieDetails(movieId: Long): StateFlow<MovieEntity?> {
         val movie = _movieDetails.value
         if (movie?.id == movieId) return _movieDetails
 
@@ -84,11 +84,10 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) :
             showLoadingIndicator(true)
 
             try {
-                repository.getMovie(movieId)
-                    .collect { movie ->
-                        _movieDetails.emit(movie)
-                        showLoadingIndicator(false)
-                    }
+                repository.getMovie(movieId).collect { movie ->
+                    _movieDetails.emit(movie)
+                    showLoadingIndicator(false)
+                }
             } catch (e: Exception) {
                 Timber.e(e, "movieDetails($movieId) error: $e")
                 _movieDetails.emit(null)
@@ -98,11 +97,11 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) :
         return _movieDetails
     }
 
-    override fun onPosterClicked(movie: MovieEntity, navController: NavController) {
+    fun onPosterClicked(movie: MovieEntity, navController: NavController) {
         navigateMoviePoster(movie, navController)
     }
 
-    override fun onLinkClicked(movie: MovieEntity, uri: Uri) {
+    fun onLinkClicked(movie: MovieEntity, uri: Uri) {
         navigateMovieLink(movie, uri)
     }
 
@@ -115,13 +114,13 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) :
         _launchUri.postValue(uri)
     }
 
-    override fun onToggleGridPage() {
+    fun onToggleGridPage() {
         viewModelScope.launch {
             _isGridPage.emit(_isGridPage.value.not())
         }
     }
 
-    override fun onTitleClicked(type: MoviesPageType, navController: NavHostController) {
+    fun onTitleClicked(type: MoviesPageType, navController: NavHostController) {
         when (type) {
             MoviesPageType.NOW_PLAYING -> navigateNowPlaying(navController)
             else -> TODO("show $type page")
@@ -132,11 +131,45 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) :
         navController.navigate(MoviesScreen.NowPlaying.route)
     }
 
-    override val nowPlayingViewState = object : MoviesCarouselViewState {
-        override val movies: StateFlow<List<MoviesPage>> = _moviesNowPlaying
+    override val moviesPageViewState = object : MoviesPageViewState {
+        override val isGridPage: StateFlow<Boolean> = this@MainViewModel.isGridPage
+        override val movies: StateFlow<List<MovieEntity>> = this@MainViewModel.movies
 
-        override fun onMovieClicked(movie: MovieEntity, navController: NavController) {
+        override fun onMovieClicked(movie: MovieEntity, navController: NavController) =
             this@MainViewModel.onMovieClicked(movie, navController)
+
+        override fun onToggleLayout() = onToggleGridPage()
+
+        override val isLoading: StateFlow<Boolean> = this@MainViewModel.isLoading
+        override val title: MutableStateFlow<String> = this@MainViewModel.title
+    }
+
+    override val movieDetailsViewState = object : MovieDetailsViewState {
+        override fun movieDetails(movieId: Long): StateFlow<MovieEntity?> =
+            this@MainViewModel.movieDetails(movieId)
+
+        override fun onPosterClicked(movie: MovieEntity, navController: NavController) =
+            this@MainViewModel.onPosterClicked(movie, navController)
+
+        override fun onLinkClicked(movie: MovieEntity, uri: Uri) =
+            this@MainViewModel.onLinkClicked(movie, uri)
+
+        override val isLoading: StateFlow<Boolean> = this@MainViewModel.isLoading
+        override val title: MutableStateFlow<String> = this@MainViewModel.title
+    }
+
+    override val moviesMainViewState = object : MoviesMainViewState {
+        override fun onTitleClicked(type: MoviesPageType, navController: NavHostController) =
+            this@MainViewModel.onTitleClicked(type, navController)
+
+        override val nowPlayingViewState = object : MoviesCarouselViewState {
+            override val movies: StateFlow<List<MoviesPage>> = _moviesNowPlaying
+
+            override fun onMovieClicked(movie: MovieEntity, navController: NavController) =
+                this@MainViewModel.onMovieClicked(movie, navController)
+
         }
+        override val isLoading: StateFlow<Boolean> = this@MainViewModel.isLoading
+        override val title: MutableStateFlow<String> = this@MainViewModel.title
     }
 }

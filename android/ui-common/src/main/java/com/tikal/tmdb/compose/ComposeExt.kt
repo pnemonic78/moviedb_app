@@ -1,4 +1,4 @@
-package com.tikal.tmdb
+package com.tikal.tmdb.compose
 
 import android.content.Context
 import android.net.Uri
@@ -7,7 +7,6 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.IntSize
 import coil.compose.rememberImagePainter
-import coil.request.ImageRequest
 import com.tikal.tmdb.api.TmdbApi
 import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.ui.common.R
@@ -15,8 +14,6 @@ import com.tikal.tmdb.ui.common.R
 typealias OnClickCallback = (() -> Unit)
 
 typealias OnLinkCallback = ((uri: Uri) -> Unit)
-
-typealias OnMovieClickCallback = ((movie: MovieEntity) -> Unit)
 
 @Composable
 fun MovieEntity.thumbnailPainter(context: Context, width: Int, height: Int): Painter {

@@ -7,9 +7,9 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -23,15 +23,16 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
-fun MoviesGridPage(title: String, viewState: MoviesPageViewState, navController: NavController) {
-    LaunchedEffect(title) {
-        viewState.title.emit(title)
-    }
-
+fun MoviesGridPage(
+    modifier: Modifier = Modifier,
+    viewState: MoviesPageViewState,
+    navController: NavController
+) {
     val movies by viewState.movies.collectAsState()
     val scrollState = rememberLazyGridState()
 
     LazyVerticalGrid(
+        modifier = modifier,
         state = scrollState,
         columns = GridCells.Adaptive(dimensionResource(id = R.dimen.posterWidth)),
         contentPadding = PaddingValues(8.dp),
@@ -51,8 +52,7 @@ fun MoviesGridPage(title: String, viewState: MoviesPageViewState, navController:
 @Preview(widthDp = 450)
 @Composable
 private fun ThisPreview() {
-    val title = "Grid Page"
-    val listState = object : MoviesPageViewState {
+    val viewState = object : MoviesPageViewState {
         override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
         override val title: MutableStateFlow<String> = MutableStateFlow("Movies Grid")
         override val isGridPage: StateFlow<Boolean> = MutableStateFlow(true)
@@ -60,10 +60,10 @@ private fun ThisPreview() {
             MutableStateFlow(listOf(movie550, movie550, movie550, movie550))
 
         override fun onMovieClicked(movie: MovieEntity, navController: NavController) = Unit
-        override fun onToggleGridPage() = Unit
+        override fun onToggleLayout() = Unit
     }
     val navController = rememberNavController()
     MaterialTheme {
-        MoviesGridPage(title, listState, navController)
+        MoviesGridPage(viewState = viewState, navController = navController)
     }
 }

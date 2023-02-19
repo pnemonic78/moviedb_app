@@ -1,45 +1,42 @@
 package com.tikal.tmdb.moviedetails
 
-import android.annotation.SuppressLint
 import android.net.Uri
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.tikal.tmdb.compose.SimpleErrorScreen
 import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.ui.common.R
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 
-@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
-fun MoviePosterPage(
+fun MoviePosterScreen(
     viewState: MovieDetailsViewState,
+    navController: NavController,
     movieId: Long
 ) {
-    val coroutineScope = rememberCoroutineScope()
-    var title = stringResource(id = R.string.movie_details)
-    LaunchedEffect(title) {
-        viewState.title.emit(title)
-    }
-
+    val title = stringResource(id = R.string.movie_poster)
     val movieState by viewState.movieDetails(movieId).collectAsState()
+
     if (movieState != null) {
         val movie = movieState!!
-        title = movie.title
-        coroutineScope.launch { viewState.title.emit(title) }
-        MoviePosterContent(movie = movie)
+
+        PosterScreen(
+            title = title,
+            navController = navController,
+            posterPathSuffix = movie.posterPath
+        )
     } else {
-        Box(modifier = Modifier.background(color = MaterialTheme.colors.error))
+        SimpleErrorScreen(
+            title = title,
+            navController = navController
+        )
     }
 }
 
@@ -55,7 +52,12 @@ private fun ThisPreview() {
         override fun onPosterClicked(movie: MovieEntity, navController: NavController) = Unit
         override fun onLinkClicked(movie: MovieEntity, uri: Uri) = Unit
     }
+    val navController = rememberNavController()
     MaterialTheme {
-        MoviePosterPage(viewState, movie550Details.id)
+        MoviePosterScreen(
+            viewState = viewState,
+            navController = navController,
+            movieId = movie550Details.id
+        )
     }
 }

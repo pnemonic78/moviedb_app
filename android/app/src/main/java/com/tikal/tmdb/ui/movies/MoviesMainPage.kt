@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,15 +24,11 @@ import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 fun MoviesMainPage(
+    modifier: Modifier = Modifier,
     viewState: MoviesMainViewState,
     navController: NavHostController
 ) {
-    val title = stringResource(id = R.string.title)
-    LaunchedEffect(viewState) {
-        viewState.title.emit(title)
-    }
-
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = modifier.fillMaxSize()) {
         Text(
             modifier = Modifier
                 .fillMaxWidth()
@@ -65,6 +60,6 @@ private fun ThisPreview() {
     val navController = rememberNavController()
 
     MaterialTheme {
-        MoviesMainPage(viewState, navController)
+        MoviesMainPage(viewState = viewState, navController = navController)
     }
 }
