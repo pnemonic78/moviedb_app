@@ -38,6 +38,11 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) : BaseViewMo
     }
 
     fun loadMovies() {
+        fetchMoviesNowPlaying()
+        fetchMoviesPopular()
+    }
+
+    private fun fetchMoviesNowPlaying() {
         viewModelScope.launch {
             showLoadingIndicator(true)
 
@@ -47,10 +52,13 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) : BaseViewMo
                     showLoadingIndicator(false)
                 }
             } catch (e: Exception) {
-                Timber.e(e, "loadMovies error: $e")
+                Timber.e(e, "fetchMoviesNowPlaying error: $e")
                 showLoadingIndicator(false)
             }
         }
+    }
+
+    private fun fetchMoviesPopular() {
         viewModelScope.launch {
             showLoadingIndicator(true)
 
@@ -60,7 +68,7 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) : BaseViewMo
                     showLoadingIndicator(false)
                 }
             } catch (e: Exception) {
-                Timber.e(e, "loadMovies error: $e")
+                Timber.e(e, "fetchMoviesPopular error: $e")
                 showLoadingIndicator(false)
             }
         }
