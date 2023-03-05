@@ -9,14 +9,14 @@ include(":feature-popular")
 dependencyResolutionManagement {
     versionCatalogs {
         create("androidCatalog") {
-            version("compose", "1.3.3")
-            version("composeCompiler", "1.3.1")
-            version("composeMaterial", "1.3.1")
-            version("gradle", "7.4.1")
-            version("hilt", "2.44.2")
+            version("compose", "1.4.0-beta02")
+            version("composeCompiler", "1.4.3")
+            version("gradle", "7.4.2")
+            version("hilt", "2.45")
             version("navigation", "2.5.0")
             version("okhttp", "4.9.3")
-            version("room", "2.4.3")
+            version("paging", "3.2.0-alpha04")
+            version("room", "2.5.0")
             version("test", "1.4.0")
 
             // Database
@@ -35,18 +35,23 @@ dependencyResolutionManagement {
             // Jetpack
             library("jetpack-appcompat", "androidx.appcompat:appcompat:1.4.1")
             library("jetpack-composeMaterial", "androidx.compose.material", "material")
-                .versionRef("composeMaterial")
+                .versionRef("compose")
             library("jetpack-composeMaterialIcons", "androidx.compose.material", "material-icons-extended")
-                .versionRef("composeMaterial")
+                .versionRef("compose")
             library("jetpack-composeTooling", "androidx.compose.ui", "ui-tooling")
                 .versionRef("compose")
             library("jetpack-composeNavigation", "androidx.navigation", "navigation-compose")
                 .versionRef("navigation")
+            library("jetpack-composeNavigation", "androidx.navigation", "navigation-compose")
+                .versionRef("navigation")
+            library("jetpack-composePaging", "androidx.paging:paging-compose:1.0.0-alpha18")
             library("jetpack-composeUI", "androidx.compose.ui", "ui")
                 .versionRef("compose")
             library("jetpack-core", "androidx.core:core-ktx:1.7.0")
             library("jetpack-navigationFragment", "androidx.navigation", "navigation-fragment-ktx")
                 .versionRef("navigation")
+            library("jetpack-paging", "androidx.paging", "paging-common-ktx")
+                .versionRef("paging")
 
             bundle(
                 "jetpack-compose",
@@ -54,6 +59,7 @@ dependencyResolutionManagement {
                     "jetpack-composeMaterial",
                     "jetpack-composeMaterialIcons",
                     "jetpack-composeNavigation",
+                    "jetpack-composePaging",
                     "jetpack-composeTooling",
                     "jetpack-composeUI"
                 )
@@ -87,7 +93,7 @@ dependencyResolutionManagement {
             plugin("hilt", "dagger.hilt.android.plugin").versionRef("hilt")
         }
         create("kotlinCatalog") {
-            version("kotlin", "1.7.10")
+            version("kotlin", "1.8.10")
 
             library(
                 "json-serialization",

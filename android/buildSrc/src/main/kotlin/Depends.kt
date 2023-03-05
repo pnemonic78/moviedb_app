@@ -8,13 +8,14 @@ object Android {
         const val minSdk = 24
         const val targetSdk = 33
 
-        const val hilt = "2.43.2"
+        const val gradle = "7.4.2"
+        const val hilt = "2.45"
     }
 }
 
 object Kotlin {
     object Version {
-        const val kotlin = "1.7.10"
+        const val kotlin = "1.8.10"
     }
 }
 
