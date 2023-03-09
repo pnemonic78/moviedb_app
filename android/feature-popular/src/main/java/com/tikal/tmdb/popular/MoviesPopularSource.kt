@@ -16,7 +16,7 @@ class MoviesPopularSource(private val dataSource: TmdbDataSource) : PagingSource
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieEntity> {
         return try {
             val nextPage = params.key ?: 1
-            val response = dataSource.getMoviesPopular(page = nextPage)
+            val response = dataSource.getMoviesPopular(page = nextPage, refresh = params is LoadParams.Refresh)!!
             val moviesPage = response.page
             LoadResult.Page(
                 data = response.movies,

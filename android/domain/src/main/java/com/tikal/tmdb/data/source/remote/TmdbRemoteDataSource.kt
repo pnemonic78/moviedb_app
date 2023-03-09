@@ -22,19 +22,21 @@ class TmdbRemoteDataSource @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher
 ) : TmdbDataSource {
 
-    override suspend fun getMoviesNowPlaying(page: Int): MoviesPage = withContext(ioDispatcher) {
-        val entity = service.getMoviesNowPlaying(page = page)
-            .toEntity(MoviesPageType.NOW_PLAYING)
-        savePage(entity)
-        entity
-    }
+    override suspend fun getMoviesNowPlaying(page: Int, refresh: Boolean): MoviesPage =
+        withContext(ioDispatcher) {
+            val entity = service.getMoviesNowPlaying(page = page)
+                .toEntity(MoviesPageType.NOW_PLAYING)
+            savePage(entity)
+            entity
+        }
 
-    override suspend fun getMoviesPopular(page: Int): MoviesPage = withContext(ioDispatcher) {
-        val entity = service.getMoviesPopular(page = page)
-            .toEntity(MoviesPageType.POPULAR)
-        savePage(entity)
-        entity
-    }
+    override suspend fun getMoviesPopular(page: Int, refresh: Boolean): MoviesPage =
+        withContext(ioDispatcher) {
+            val entity = service.getMoviesPopular(page = page)
+                .toEntity(MoviesPageType.POPULAR)
+            savePage(entity)
+            entity
+        }
 
     override suspend fun getMovie(movieId: Long): MovieEntity = withContext(ioDispatcher) {
         val movie = service.getMovieDetails(movieId).toEntity()

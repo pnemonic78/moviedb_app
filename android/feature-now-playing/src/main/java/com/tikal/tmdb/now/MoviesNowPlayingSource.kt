@@ -5,7 +5,8 @@ import androidx.paging.PagingState
 import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.data.source.TmdbDataSource
 
-class MoviesNowPlayingSource(private val dataSource: TmdbDataSource) : PagingSource<Int, MovieEntity>() {
+class MoviesNowPlayingSource(private val dataSource: TmdbDataSource) :
+    PagingSource<Int, MovieEntity>() {
     override fun getRefreshKey(state: PagingState<Int, MovieEntity>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             val anchorPage = state.closestPageToPosition(anchorPosition)
@@ -16,7 +17,10 @@ class MoviesNowPlayingSource(private val dataSource: TmdbDataSource) : PagingSou
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieEntity> {
         return try {
             val nextPage = params.key ?: 1
-            val response = dataSource.getMoviesNowPlaying(page = nextPage)
+            val response = dataSource.getMoviesNowPlaying(
+                page = nextPage,
+                refresh = params is LoadParams.Refresh
+            )!!
             val moviesPage = response.page
             LoadResult.Page(
                 data = response.movies,

@@ -15,24 +15,34 @@ class TmdbRepository @Inject constructor(
     private val remoteRepository: TmdbRemoteDataSource
 ) : TmdbDataSource {
 
-    override suspend fun getMoviesNowPlaying(page: Int): MoviesPage {
-        // Fetch from server and save to database.
-        remoteRepository.getMoviesNowPlaying(page = page)
+    override suspend fun getMoviesNowPlaying(page: Int, refresh: Boolean): MoviesPage {
+        var result = localRepository.getMoviesNowPlaying(page = page)
 
-        return localRepository.getMoviesNowPlaying(page = page)
+        // Fetch from server and save to database.
+        if ((result == null) || refresh) {
+            result = remoteRepository.getMoviesNowPlaying(page = page)
+        }
+
+        return result
     }
 
-    override suspend fun getMoviesPopular(page: Int): MoviesPage {
-        // Fetch from server and save to database.
-        remoteRepository.getMoviesPopular(page = page)
+    override suspend fun getMoviesPopular(page: Int, refresh: Boolean): MoviesPage {
+        var result = localRepository.getMoviesPopular(page = page)
 
-        return localRepository.getMoviesPopular(page = page)
+        // Fetch from server and save to database.
+        if ((result == null) || refresh) {
+            result = remoteRepository.getMoviesPopular(page = page)
+        }
+        return result
     }
 
     override suspend fun getMovie(movieId: Long): MovieEntity {
-        // Fetch from server and save to database.
-        remoteRepository.getMovie(movieId)
+        var result = localRepository.getMovie(movieId)
 
-        return localRepository.getMovie(movieId)
+        // Fetch from server and save to database.
+        if (result == null) {
+            result = remoteRepository.getMovie(movieId)
+        }
+        return result
     }
 }

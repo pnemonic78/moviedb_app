@@ -8,9 +8,9 @@ import com.tikal.tmdb.data.model.MoviesPage
  */
 interface TmdbDataSource {
 
-    suspend fun getMoviesNowPlaying(page: Int = 1): MoviesPage
+    suspend fun getMoviesNowPlaying(page: Int = 1, refresh: Boolean = false): MoviesPage?
 
-    suspend fun getMoviesPopular(page: Int = 1): MoviesPage
+    suspend fun getMoviesPopular(page: Int = 1, refresh: Boolean = false): MoviesPage?
 
-    suspend fun getMovie(movieId: Long): MovieEntity
+    suspend fun getMovie(movieId: Long): MovieEntity?
 }

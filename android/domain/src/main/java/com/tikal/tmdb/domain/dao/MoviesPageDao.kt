@@ -20,11 +20,15 @@ interface MoviesPageDao : BaseDao<MoviesPageEntity> {
 
     @Transaction
     @Query("SELECT * FROM movies_page WHERE (type = :type) AND (page = :page)")
-    suspend fun getByPage(type: MoviesPageType, page: Int): MoviesPage
+    suspend fun getByPage(type: MoviesPageType, page: Int): MoviesPage?
 
     suspend fun getNowPlaying() = getByType(MoviesPageType.NOW_PLAYING)
 
     suspend fun getNowPlaying(page: Int = 1) = getByPage(MoviesPageType.NOW_PLAYING, page)
+
+    suspend fun getPopular() = getByType(MoviesPageType.POPULAR)
+
+    suspend fun getPopular(page: Int = 1) = getByPage(MoviesPageType.POPULAR, page)
 
     /**
      * Delete all records.
