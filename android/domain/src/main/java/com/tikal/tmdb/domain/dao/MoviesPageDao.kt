@@ -30,6 +30,10 @@ interface MoviesPageDao : BaseDao<MoviesPageEntity> {
 
     suspend fun getPopular(page: Int = 1) = getByPage(MoviesPageType.POPULAR, page)
 
+    suspend fun getTopRated() = getByType(MoviesPageType.TOP_RATED)
+
+    suspend fun getTopRated(page: Int) = getByPage(MoviesPageType.TOP_RATED, page)
+
     /**
      * Delete all records.
      */

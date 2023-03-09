@@ -34,7 +34,4 @@
 
     <!-- Upcoming -->
     <string name="upcoming">"Upcoming"</string>
-
-    <!-- Top Rated -->
-    <string name="top_rated">"Top Rated"</string>
 </resources>

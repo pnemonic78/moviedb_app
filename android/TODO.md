@@ -1,7 +1,6 @@
 # To Do
 
 - ui feature modules
-  - top_rated
   - upcoming
 - migrate retrofit to ktor
 

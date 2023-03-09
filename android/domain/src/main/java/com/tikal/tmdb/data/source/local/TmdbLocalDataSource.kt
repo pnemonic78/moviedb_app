@@ -29,6 +29,12 @@ class TmdbLocalDataSource @Inject constructor(
             dao.getPopular(page)
         }
 
+    override suspend fun getMoviesTopRated(page: Int, refresh: Boolean): MoviesPage? =
+        withContext(ioDispatcher) {
+            val dao = db.moviePagesDao()
+            dao.getTopRated(page)
+        }
+
     override suspend fun getMovie(movieId: Long): MovieEntity? = withContext(ioDispatcher) {
         val dao = db.movieDao()
         val movie = dao.getById(movieId)

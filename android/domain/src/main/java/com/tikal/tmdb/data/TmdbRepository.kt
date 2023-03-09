@@ -36,6 +36,16 @@ class TmdbRepository @Inject constructor(
         return result
     }
 
+    override suspend fun getMoviesTopRated(page: Int, refresh: Boolean): MoviesPage {
+        var result = localRepository.getMoviesTopRated(page = page)
+
+        // Fetch from server and save to database.
+        if ((result == null) || refresh) {
+            result = remoteRepository.getMoviesTopRated(page = page)
+        }
+        return result
+    }
+
     override suspend fun getMovie(movieId: Long): MovieEntity {
         var result = localRepository.getMovie(movieId)
 

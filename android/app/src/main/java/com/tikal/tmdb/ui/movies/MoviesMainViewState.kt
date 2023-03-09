@@ -7,4 +7,5 @@ import com.tikal.tmdb.data.model.MoviesPageType
 interface MoviesMainViewState : ViewState {
     val moviesNowPlayingViewState: MoviesCarouselViewState
     val moviesPopularViewState: MoviesCarouselViewState
+    val moviesTopRatedViewState: MoviesCarouselViewState
 }

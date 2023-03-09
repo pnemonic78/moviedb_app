@@ -37,6 +37,11 @@ fun MoviesMainPage(
             viewState = viewState.moviesPopularViewState,
             navController = navController
         )
+        MoviesMainPageCategory(
+            title = stringResource(id = R.string.top_rated),
+            viewState = viewState.moviesTopRatedViewState,
+            navController = navController
+        )
     }
 }
 

@@ -1,4 +1,4 @@
-package com.tikal.tmdb.popular
+package com.tikal.tmdb.now
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.tikal.tmdb.popular.test", appContext.packageName)
+        assertEquals("com.tikal.tmdb.top_rated.test", appContext.packageName)
     }
 }
