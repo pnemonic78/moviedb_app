@@ -11,8 +11,6 @@ import com.tikal.tmdb.data.source.TmdbDataSource
 import com.tikal.tmdb.domain.TmdbDb
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.withContext
 
 /**
@@ -24,26 +22,25 @@ class TmdbRemoteDataSource @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher
 ) : TmdbDataSource {
 
-    override suspend fun getMoviesNowPlaying(): Flow<List<MoviesPage>> =
-        withContext(ioDispatcher) {
-            val entity = service.getMoviesNowPlaying().toEntity(MoviesPageType.NOW_PLAYING)
-            savePage(entity)
-            flowOf(listOf(entity))
-        }
+    override suspend fun getMoviesNowPlaying(page: Int): MoviesPage = withContext(ioDispatcher) {
+        val entity = service.getMoviesNowPlaying(page = page)
+            .toEntity(MoviesPageType.NOW_PLAYING)
+        savePage(entity)
+        entity
+    }
 
-    override suspend fun getMoviesPopular(): Flow<List<MoviesPage>> =
-        withContext(ioDispatcher) {
-            val entity = service.getMoviesPopular().toEntity(MoviesPageType.POPULAR)
-            savePage(entity)
-            flowOf(listOf(entity))
-        }
+    override suspend fun getMoviesPopular(page: Int): MoviesPage = withContext(ioDispatcher) {
+        val entity = service.getMoviesPopular(page = page)
+            .toEntity(MoviesPageType.POPULAR)
+        savePage(entity)
+        entity
+    }
 
-    override suspend fun getMovie(movieId: Long): Flow<MovieEntity> =
-        withContext(ioDispatcher) {
-            val movie = service.getMovieDetails(movieId).toEntity()
-            saveMovie(movie)
-            flowOf(movie)
-        }
+    override suspend fun getMovie(movieId: Long): MovieEntity = withContext(ioDispatcher) {
+        val movie = service.getMovieDetails(movieId).toEntity()
+        saveMovie(movie)
+        movie
+    }
 
     private suspend fun savePage(page: MoviesPage) {
         savePage(page.page)

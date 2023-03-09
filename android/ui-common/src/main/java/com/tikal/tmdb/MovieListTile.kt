@@ -49,8 +49,8 @@ private const val posterAspectRatio = 1.5f
 
 @Composable
 fun MovieListTile(
-    movie: MovieEntity,
     modifier: Modifier = Modifier,
+    movie: MovieEntity,
     onMovieClicked: OnMovieClickCallback
 ) {
     val context = LocalContext.current
@@ -66,7 +66,6 @@ fun MovieListTile(
 
     Card(
         modifier = modifier
-            .wrapContentHeight()
             .clickable { onMovieClicked(movie) }
     ) {
         Row(

@@ -52,11 +52,6 @@ class MoviesFragment : Fragment() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        viewModel.loadMovies()
-    }
-
     private fun showLoadingIndicator(isLoading: Boolean) {
         if (isLoading) {
             progressBar?.show()

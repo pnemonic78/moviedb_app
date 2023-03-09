@@ -6,7 +6,6 @@ import com.tikal.tmdb.data.source.TmdbDataSource
 import com.tikal.tmdb.data.source.local.TmdbLocalDataSource
 import com.tikal.tmdb.data.source.remote.TmdbRemoteDataSource
 import javax.inject.Inject
-import kotlinx.coroutines.flow.Flow
 
 /**
  * TMDB data repository.
@@ -16,21 +15,21 @@ class TmdbRepository @Inject constructor(
     private val remoteRepository: TmdbRemoteDataSource
 ) : TmdbDataSource {
 
-    override suspend fun getMoviesNowPlaying(): Flow<List<MoviesPage>> {
+    override suspend fun getMoviesNowPlaying(page: Int): MoviesPage {
         // Fetch from server and save to database.
-        remoteRepository.getMoviesNowPlaying()
+        remoteRepository.getMoviesNowPlaying(page = page)
 
-        return localRepository.getMoviesNowPlaying()
+        return localRepository.getMoviesNowPlaying(page = page)
     }
 
-    override suspend fun getMoviesPopular(): Flow<List<MoviesPage>> {
+    override suspend fun getMoviesPopular(page: Int): MoviesPage {
         // Fetch from server and save to database.
-        remoteRepository.getMoviesPopular()
+        remoteRepository.getMoviesPopular(page = page)
 
-        return localRepository.getMoviesPopular()
+        return localRepository.getMoviesPopular(page = page)
     }
 
-    override suspend fun getMovie(movieId: Long): Flow<MovieEntity> {
+    override suspend fun getMovie(movieId: Long): MovieEntity {
         // Fetch from server and save to database.
         remoteRepository.getMovie(movieId)
 

@@ -20,7 +20,7 @@ interface MoviesPageDao : BaseDao<MoviesPageEntity> {
 
     @Transaction
     @Query("SELECT * FROM movies_page WHERE (type = :type) AND (page = :page)")
-    fun getByPage(type: MoviesPageType, page: Int): Flow<MoviesPage>
+    suspend fun getByPage(type: MoviesPageType, page: Int): MoviesPage
 
     suspend fun getNowPlaying() = getByType(MoviesPageType.NOW_PLAYING)
 

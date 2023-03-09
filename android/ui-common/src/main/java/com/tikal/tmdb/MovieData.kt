@@ -1,11 +1,16 @@
 package com.tikal.tmdb
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.tikal.tmdb.data.model.DatesEntity
 import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.data.model.MoviesPage
 import com.tikal.tmdb.data.model.MoviesPageEntity
 import com.tikal.tmdb.data.model.MoviesPageType
+import com.tikal.tmdb.movies.MoviesPreviewSource
 import java.util.Calendar
+import kotlinx.coroutines.flow.Flow
 
 val movie550 = MovieEntity(
     adult = false,
@@ -27,7 +32,11 @@ val movie550 = MovieEntity(
     voteCount = 11400
 )
 
-private val moviesList = listOf(movie550, movie550, movie550)
+private val moviesList = listOf(
+    movie550,
+    movie550.copy(id = movie550.id + 1),
+    movie550.copy(id = movie550.id + 2)
+)
 
 val page550 = MoviesPage(
     page = MoviesPageEntity(
@@ -39,3 +48,8 @@ val page550 = MoviesPage(
     ),
     movies = moviesList
 )
+
+internal val moviesPreview: Flow<PagingData<MovieEntity>> =
+    Pager(PagingConfig(pageSize = 20)) {
+        MoviesPreviewSource()
+    }.flow

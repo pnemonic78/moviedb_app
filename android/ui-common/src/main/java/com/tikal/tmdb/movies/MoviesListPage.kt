@@ -5,18 +5,21 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import androidx.paging.PagingData
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.items
+import com.tikal.tmdb.LoadingListTile
 import com.tikal.tmdb.MovieListTile
 import com.tikal.tmdb.compose.AppTheme
 import com.tikal.tmdb.data.model.MovieEntity
-import com.tikal.tmdb.data.model.MoviesPage
-import com.tikal.tmdb.page550
+import com.tikal.tmdb.moviesPreview
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -26,22 +29,36 @@ fun MoviesListPage(
     viewState: MoviesPageViewState,
     navController: NavController
 ) {
-    val pages by viewState.pages.collectAsState()
-    val movies = pages.flatMap { it.movies }
+    val pagingItems = viewState.movies.collectAsLazyPagingItems()
+
+    MoviesListPage(
+        modifier = modifier,
+        pagingItems = pagingItems,
+        onMovieClicked = { movie -> viewState.onMovieClicked(movie, navController) }
+    )
+}
+
+@Composable
+fun MoviesListPage(
+    modifier: Modifier = Modifier,
+    pagingItems: LazyPagingItems<MovieEntity>,
+    onMovieClicked: OnMovieClickCallback
+) {
     val scrollState = rememberLazyListState()
 
     LazyColumn(
         modifier = modifier,
         state = scrollState,
-        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
+        contentPadding = PaddingValues(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(count = movies.size) { index ->
-            val movie = movies[index]
-            MovieListTile(
-                movie = movie,
-                onMovieClicked = { viewState.onMovieClicked(movie, navController) }
-            )
+        items(items = pagingItems, key = { it.id }) { movie ->
+            movie?.let {
+                MovieListTile(
+                    movie = it,
+                    onMovieClicked = onMovieClicked
+                )
+            } ?: LoadingListTile()
         }
     }
 }
@@ -52,7 +69,7 @@ private fun ThisPreview() {
     val viewState = object : MoviesPageViewState {
         override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
         override val isGridPage: StateFlow<Boolean> = MutableStateFlow(false)
-        override val pages: StateFlow<List<MoviesPage>> = MutableStateFlow(listOf(page550))
+        override val movies: Flow<PagingData<MovieEntity>> = moviesPreview
 
         override fun onMovieClicked(movie: MovieEntity, navController: NavController) = Unit
         override fun onToggleLayout() = Unit

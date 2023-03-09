@@ -8,8 +8,6 @@ import com.tikal.tmdb.data.source.TmdbDataSource
 import com.tikal.tmdb.domain.TmdbDb
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.withContext
 
 /**
@@ -20,25 +18,22 @@ class TmdbLocalDataSource @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher
 ) : TmdbDataSource {
 
-    override suspend fun getMoviesNowPlaying(): Flow<List<MoviesPage>> =
-        withContext(ioDispatcher) {
-            val dao = db.moviePagesDao()
-            dao.getByType(MoviesPageType.NOW_PLAYING)
-        }
+    override suspend fun getMoviesNowPlaying(page: Int): MoviesPage = withContext(ioDispatcher) {
+        val dao = db.moviePagesDao()
+        dao.getByPage(MoviesPageType.NOW_PLAYING, page)
+    }
 
-    override suspend fun getMoviesPopular(): Flow<List<MoviesPage>> =
-        withContext(ioDispatcher) {
-            val dao = db.moviePagesDao()
-            dao.getByType(MoviesPageType.POPULAR)
-        }
+    override suspend fun getMoviesPopular(page: Int): MoviesPage = withContext(ioDispatcher) {
+        val dao = db.moviePagesDao()
+        dao.getByPage(MoviesPageType.POPULAR, page)
+    }
 
-    override suspend fun getMovie(movieId: Long): Flow<MovieEntity> =
-        withContext(ioDispatcher) {
-            val dao = db.movieDao()
-            val movie = dao.getById(movieId)
-            populateMovie(movie)
-            flowOf(movie)
-        }
+    override suspend fun getMovie(movieId: Long): MovieEntity = withContext(ioDispatcher) {
+        val dao = db.movieDao()
+        val movie = dao.getById(movieId)
+        populateMovie(movie)
+        movie
+    }
 
     private suspend fun populateMovie(movie: MovieEntity) {
         movie.genres = getGenres(movie.genreIds)

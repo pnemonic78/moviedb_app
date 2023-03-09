@@ -16,12 +16,13 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import androidx.paging.PagingData
 import com.tikal.tmdb.BackButton
 import com.tikal.tmdb.compose.AppTheme
 import com.tikal.tmdb.data.model.MovieEntity
-import com.tikal.tmdb.data.model.MoviesPage
-import com.tikal.tmdb.page550
+import com.tikal.tmdb.moviesPreview
 import com.tikal.tmdb.ui.common.R
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -78,7 +79,7 @@ private fun ThisPreview() {
     val viewState = object : MoviesPageViewState {
         override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
         override val isGridPage: StateFlow<Boolean> = MutableStateFlow(false)
-        override val pages: StateFlow<List<MoviesPage>> = MutableStateFlow(listOf(page550))
+        override val movies: Flow<PagingData<MovieEntity>> = moviesPreview
 
         override fun onMovieClicked(movie: MovieEntity, navController: NavController) = Unit
         override fun onToggleLayout() = Unit

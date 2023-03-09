@@ -3,8 +3,6 @@
 - ui feature modules
   - top_rated
   - upcoming
-
-- pagination
 - migrate retrofit to ktor
 
 - add movies details

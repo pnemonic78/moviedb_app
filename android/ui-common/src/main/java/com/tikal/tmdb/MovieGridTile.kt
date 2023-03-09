@@ -48,8 +48,8 @@ private const val posterAspectRatio = 1.5f
 
 @Composable
 fun MovieGridTile(
-    movie: MovieEntity,
     modifier: Modifier = Modifier,
+    movie: MovieEntity,
     onMovieClicked: OnMovieClickCallback
 ) {
     val context = LocalContext.current

@@ -50,6 +50,7 @@ dependencies {
     implementation(androidCatalog.log.timber)
 
     // Networking
+    implementation(androidCatalog.jetpack.paging)
     implementation(androidCatalog.net.logging)
     implementation(androidCatalog.net.okhttp)
     implementation(androidCatalog.net.retrofit)
