@@ -21,18 +21,17 @@ fun MoviePosterScreen(
     navController: NavController,
     movieId: Long
 ) {
-    val title = stringResource(id = R.string.movie_poster)
     val movieState by viewState.movieDetails(movieId).collectAsState()
 
     if (movieState != null) {
         val movie = movieState!!
 
         PosterScreen(
-            title = title,
             navController = navController,
             posterPathSuffix = movie.posterPath
         )
     } else {
+        val title = stringResource(id = R.string.movie_poster)
         SimpleErrorScreen(
             title = title,
             navController = navController

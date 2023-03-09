@@ -35,7 +35,7 @@ fun MoviesScreen(title: String, viewState: MoviesPageViewState, navController: N
         TopAppBar(
             title = { Text(title) },
             navigationIcon = {
-                BackButton(navController)
+                BackButton(navController = navController)
             },
             actions = {
                 ToggleLayoutButton(viewState, isGrid)

@@ -19,7 +19,7 @@ fun SimpleScreen(
             TopAppBar(
                 title = { Text(title) },
                 navigationIcon = {
-                    BackButton(navController)
+                    BackButton(navController = navController)
                 }
             )
         },
