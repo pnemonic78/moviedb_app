@@ -31,7 +31,4 @@
     <string name="person_crew_label">"Production"</string>
     <string name="person_crew_format">"<b>%s</b> as %s"</string>
     <string name="person_crew_format_none">"<b>%s</b>"</string>
-
-    <!-- Upcoming -->
-    <string name="upcoming">"Upcoming"</string>
 </resources>

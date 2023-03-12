@@ -1,4 +1,4 @@
-package com.tikal.tmdb.now
+package com.tikal.tmdb.upcoming
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

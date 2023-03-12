@@ -18,6 +18,7 @@ import com.tikal.tmdb.moviedetails.MoviePosterScreen
 import com.tikal.tmdb.now.MoviesNowPlayingScreen
 import com.tikal.tmdb.popular.MoviesPopularScreen
 import com.tikal.tmdb.top_rated.MoviesTopRatedScreen
+import com.tikal.tmdb.upcoming.MoviesUpcomingScreen
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -71,6 +72,12 @@ fun MoviesMainScreen(
         composable(route = MoviesScreen.TopRated.route) {
             MoviesTopRatedScreen(
                 viewState.moviesMainViewState.moviesTopRatedViewState.pageViewState,
+                navController
+            )
+        }
+        composable(route = MoviesScreen.Upcoming.route) {
+            MoviesUpcomingScreen(
+                viewState.moviesMainViewState.moviesUpcomingViewState.pageViewState,
                 navController
             )
         }

@@ -14,5 +14,7 @@ interface TmdbDataSource {
 
     suspend fun getMoviesTopRated(page: Int = 1, refresh: Boolean = false): MoviesPage?
 
+    suspend fun getMoviesUpcoming(page: Int = 1, refresh: Boolean = false): MoviesPage?
+
     suspend fun getMovie(movieId: Long): MovieEntity?
 }

@@ -19,6 +19,7 @@ import com.tikal.tmdb.movies.MoviesPageViewState
 import com.tikal.tmdb.now.MoviesNowPlayingSource
 import com.tikal.tmdb.popular.MoviesPopularSource
 import com.tikal.tmdb.top_rated.MoviesTopRatedSource
+import com.tikal.tmdb.upcoming.MoviesUpcomingSource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
@@ -44,6 +45,11 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) : BaseViewMo
     private val moviesTopRated: Flow<PagingData<MovieEntity>> =
         Pager(PagingConfig(pageSize = 20)) {
             MoviesTopRatedSource(repository)
+        }.flow.cachedIn(viewModelScope)
+
+    private val moviesUpcoming: Flow<PagingData<MovieEntity>> =
+        Pager(PagingConfig(pageSize = 20)) {
+            MoviesUpcomingSource(repository)
         }.flow.cachedIn(viewModelScope)
 
     private val _isGridPage = MutableStateFlow(true)
@@ -110,6 +116,7 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) : BaseViewMo
             MoviesPageType.NOW_PLAYING -> navigateMoviesNowPlaying(navController)
             MoviesPageType.POPULAR -> navigateMoviesPopular(navController)
             MoviesPageType.TOP_RATED -> navigateMoviesTopRated(navController)
+            MoviesPageType.UPCOMING -> navigateMoviesUpcoming(navController)
             else -> TODO("show $type page")
         }
     }
@@ -124,6 +131,10 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) : BaseViewMo
 
     private fun navigateMoviesTopRated(navController: NavController) {
         navController.navigate(MoviesScreen.TopRated.route)
+    }
+
+    private fun navigateMoviesUpcoming(navController: NavController) {
+        navController.navigate(MoviesScreen.Upcoming.route)
     }
 
     override val moviesMainViewState = object : MoviesMainViewState {
@@ -183,6 +194,28 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) : BaseViewMo
             override val pageViewState = object : MoviesPageViewState {
                 override val isGridPage: StateFlow<Boolean> = this@MainViewModel.isGridPage
                 override val movies: Flow<PagingData<MovieEntity>> = moviesTopRated
+
+                override fun onMovieClicked(movie: MovieEntity, navController: NavController) =
+                    this@MainViewModel.onMovieClicked(movie, navController)
+
+                override fun onToggleLayout() = onToggleGridPage()
+
+                override val isLoading: StateFlow<Boolean> = this@MainViewModel.isLoading
+            }
+        }
+
+        override val moviesUpcomingViewState = object : MoviesCarouselViewState {
+            override val movies: Flow<PagingData<MovieEntity>> = moviesUpcoming
+
+            override fun onMovieClicked(movie: MovieEntity, navController: NavController) =
+                this@MainViewModel.onMovieClicked(movie, navController)
+
+            override fun onTitleClicked(navController: NavHostController) =
+                this@MainViewModel.onTitleClicked(MoviesPageType.UPCOMING, navController)
+
+            override val pageViewState = object : MoviesPageViewState {
+                override val isGridPage: StateFlow<Boolean> = this@MainViewModel.isGridPage
+                override val movies: Flow<PagingData<MovieEntity>> = moviesUpcoming
 
                 override fun onMovieClicked(movie: MovieEntity, navController: NavController) =
                     this@MainViewModel.onMovieClicked(movie, navController)

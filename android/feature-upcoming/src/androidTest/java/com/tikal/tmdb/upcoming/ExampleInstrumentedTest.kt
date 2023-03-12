@@ -1,7 +1,7 @@
-package com.tikal.tmdb.ui.common
+package com.tikal.tmdb.upcoming
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,6 +17,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.tikal.tmdb.ui.common.test", appContext.packageName)
+        assertEquals("com.tikal.tmdb.upcoming.test", appContext.packageName)
     }
 }

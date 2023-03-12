@@ -31,7 +31,4 @@
     <string name="person_crew_label">"הפקה"</string>
     <string name="person_crew_format">"<b>%s</b> בתור %s"</string>
     <string name="person_crew_format_none">"<b>%s</b>"</string>
-
-    <!-- Upcoming -->
-    <string name="upcoming">"עתידיים"</string>
 </resources>

@@ -34,6 +34,10 @@ interface MoviesPageDao : BaseDao<MoviesPageEntity> {
 
     suspend fun getTopRated(page: Int) = getByPage(MoviesPageType.TOP_RATED, page)
 
+    suspend fun getUpcoming() = getByType(MoviesPageType.UPCOMING)
+
+    suspend fun getUpcoming(page: Int) = getByPage(MoviesPageType.UPCOMING, page)
+
     /**
      * Delete all records.
      */

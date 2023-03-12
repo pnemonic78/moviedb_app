@@ -8,4 +8,5 @@ interface MoviesMainViewState : ViewState {
     val moviesNowPlayingViewState: MoviesCarouselViewState
     val moviesPopularViewState: MoviesCarouselViewState
     val moviesTopRatedViewState: MoviesCarouselViewState
+    val moviesUpcomingViewState: MoviesCarouselViewState
 }

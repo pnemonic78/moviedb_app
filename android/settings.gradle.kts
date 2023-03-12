@@ -6,6 +6,7 @@ include(":ui-common")
 include(":feature-now-playing")
 include(":feature-popular")
 include(":feature-top-rated")
+include(":feature-upcoming")
 
 dependencyResolutionManagement {
     versionCatalogs {

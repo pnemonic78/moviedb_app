@@ -46,6 +46,14 @@ class TmdbRemoteDataSource @Inject constructor(
             entity
         }
 
+    override suspend fun getMoviesUpcoming(page: Int, refresh: Boolean): MoviesPage =
+        withContext(ioDispatcher) {
+            val entity = service.getMoviesUpcoming(page = page)
+                .toEntity(MoviesPageType.UPCOMING)
+            savePage(entity)
+            entity
+        }
+
     override suspend fun getMovie(movieId: Long): MovieEntity = withContext(ioDispatcher) {
         val movie = service.getMovieDetails(movieId).toEntity()
         saveMovie(movie)
