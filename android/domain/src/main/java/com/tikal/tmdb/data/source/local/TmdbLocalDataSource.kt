@@ -20,24 +20,28 @@ class TmdbLocalDataSource @Inject constructor(
     override suspend fun getMoviesNowPlaying(page: Int, refresh: Boolean): MoviesPage? =
         withContext(ioDispatcher) {
             val dao = db.moviePagesDao()
+            if (refresh) dao.deleteNowPlaying()
             dao.getNowPlaying(page)
         }
 
     override suspend fun getMoviesPopular(page: Int, refresh: Boolean): MoviesPage? =
         withContext(ioDispatcher) {
             val dao = db.moviePagesDao()
+            if (refresh) dao.deletePopular()
             dao.getPopular(page)
         }
 
     override suspend fun getMoviesTopRated(page: Int, refresh: Boolean): MoviesPage? =
         withContext(ioDispatcher) {
             val dao = db.moviePagesDao()
+            if (refresh) dao.deleteTopRated()
             dao.getTopRated(page)
         }
 
     override suspend fun getMoviesUpcoming(page: Int, refresh: Boolean): MoviesPage? =
         withContext(ioDispatcher) {
             val dao = db.moviePagesDao()
+            if (refresh) dao.deleteUpcoming()
             dao.getUpcoming(page)
         }
 

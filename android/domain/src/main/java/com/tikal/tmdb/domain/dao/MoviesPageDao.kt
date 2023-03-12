@@ -48,4 +48,10 @@ interface MoviesPageDao : BaseDao<MoviesPageEntity> {
     suspend fun deleteByType(type: MoviesPageType): Int
 
     suspend fun deleteNowPlaying() = deleteByType(MoviesPageType.NOW_PLAYING)
+
+    suspend fun deletePopular() = deleteByType(MoviesPageType.POPULAR)
+
+    suspend fun deleteTopRated() = deleteByType(MoviesPageType.TOP_RATED)
+
+    suspend fun deleteUpcoming() = deleteByType(MoviesPageType.UPCOMING)
 }
