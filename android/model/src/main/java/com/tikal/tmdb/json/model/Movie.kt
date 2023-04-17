@@ -9,18 +9,21 @@ import java.util.Calendar
  * Movie POJO.
  */
 @Serializable
-data class Movie(
+class Movie(
     @SerialName("id")
-    val id: Long,
+    override val id: Long,
 
     @SerialName("adult")
-    val adult: Boolean,
+    override val adult: Boolean = false,
 
     @SerialName("backdrop_path")
     val backdropPath: String? = null,
 
     @SerialName("genre_ids")
     val genreIds: LongArray = longArrayOf(),
+
+    @SerialName("media_type")
+    override val mediaType: MediaType = MediaType.movie,
 
     @SerialName("original_language")
     val originalLanguage: String,
@@ -32,7 +35,7 @@ data class Movie(
     val overview: String?,
 
     @SerialName("popularity")
-    val popularity: Float,
+    override val popularity: Float = 0f,
 
     @SerialName("poster_path")
     val posterPath: String? = null,
@@ -48,16 +51,16 @@ data class Movie(
     val video: Boolean = false,
 
     @SerialName("vote_average")
-    val voteAverage: Float,
+    val voteAverage: Float = 0f,
 
     @SerialName("vote_count")
-    val voteCount: Int,
+    val voteCount: Int = 0,
 
     @SerialName("budget")
     val budget: Long = 0,
 
-    //TODO @SerialName("credits")
-    //TODO val credits: CreditsResponse? = null,
+//    @SerialName("credits")
+//    val credits: CreditsResponse? = null,
 
     @SerialName("genres")
     val genres: List<Genre>? = null,
@@ -88,4 +91,4 @@ data class Movie(
 
     @SerialName("tagline")
     val tagline: String? = null
-)
+) : Media()

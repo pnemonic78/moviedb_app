@@ -12,23 +12,4 @@
     <string name="summary_label">"Overview"</string>
     <string name="videos_label">"Videos"</string>
     <string name="vote_average_label">"User Score"</string>
-
-    <!-- Person -->
-    <string name="personal_info_label">"Personal Info"</string>
-    <string name="known_for_label">"Known For"</string>
-    <string name="known_credits_label">"Known Credits"</string>
-    <string name="gender_label">"Gender"</string>
-    <string name="birthday_label">"Birthday"</string>
-    <string name="place_of_birth_label">"Place of Birth"</string>
-    <string name="deathday_label">"Date of Death"</string>
-    <string name="also_known_as_label">"Also Known As"</string>
-    <string name="biography_label">"Biography"</string>
-    <string name="gender_female">"Female"</string>
-    <string name="gender_male">"Male"</string>
-    <string name="person_cast_label">"Acting"</string>
-    <string name="person_cast_format">"<b>%s</b> as %s"</string>
-    <string name="person_cast_format_none">"<b>%s</b>"</string>
-    <string name="person_crew_label">"Production"</string>
-    <string name="person_crew_format">"<b>%s</b> as %s"</string>
-    <string name="person_crew_format_none">"<b>%s</b>"</string>
 </resources>

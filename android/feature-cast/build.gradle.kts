@@ -1,30 +1,22 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    aliasWV(androidCatalog.plugins.app)
-    aliasWV(androidCatalog.plugins.hilt)
+    aliasWV(androidCatalog.plugins.lib)
     aliasWV(kotlinCatalog.plugins.android)
-    aliasWV(kotlinCatalog.plugins.kapt)
-    alias(kotlinCatalog.plugins.serialization)
 }
 
 android {
     compileSdk = Android.Version.compileSdk
 
     defaultConfig {
-        applicationId = "com.tikalk.tmdb.app"
         minSdk = Android.Version.minSdk
-        targetSdk = Android.Version.targetSdk
-        versionCode = 2
-        versionName = "1.0"
+
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
-        debug {
-            applicationIdSuffix = ".debug"
-        }
         release {
             isMinifyEnabled = false
-            proguardFile(getDefaultProguardFile("proguard-android.txt"))
+            proguardFile(getDefaultProguardFile("proguard-android-optimize.txt"))
             proguardFile("proguard-rules.pro")
         }
     }
@@ -43,22 +35,10 @@ android {
     }
 }
 
-kapt {
-    correctErrorTypes = true
-}
-
 dependencies {
     implementation(project(":domain"))
     implementation(project(":model"))
     implementation(project(":ui-common"))
-    implementation(project(":feature-cast"))
-    implementation(project(":feature-now-playing"))
-    implementation(project(":feature-popular"))
-    implementation(project(":feature-top-rated"))
-    implementation(project(":feature-upcoming"))
-
-    implementation(androidCatalog.di.hilt)
-    kapt(androidCatalog.di.hiltCompiler)
 
     implementation(androidCatalog.log.timber)
 

@@ -49,10 +49,10 @@ data class MovieEntity(
     val video: Boolean = false,
 
     @ColumnInfo(name = "vote_average")
-    val voteAverage: Float,
+    val voteAverage: Float = 0f,
 
     @ColumnInfo(name = "vote_count")
-    val voteCount: Int,
+    val voteCount: Int = 0,
 
     @ColumnInfo(name = "budget")
     val budget: Long = 0,
