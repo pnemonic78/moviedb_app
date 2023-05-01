@@ -9,7 +9,7 @@ import java.util.Calendar
  * Movie POJO.
  */
 @Serializable
-class Movie(
+data class Movie(
     @SerialName("id")
     override val id: Long,
 
@@ -35,7 +35,7 @@ class Movie(
     val overview: String?,
 
     @SerialName("popularity")
-    override val popularity: Float = 0f,
+    override val popularity: Double = 0.0,
 
     @SerialName("poster_path")
     val posterPath: String? = null,
@@ -51,7 +51,7 @@ class Movie(
     val video: Boolean = false,
 
     @SerialName("vote_average")
-    val voteAverage: Float = 0f,
+    val voteAverage: Double = 0.0,
 
     @SerialName("vote_count")
     val voteCount: Int = 0,

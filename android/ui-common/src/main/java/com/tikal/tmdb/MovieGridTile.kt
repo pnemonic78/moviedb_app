@@ -105,7 +105,7 @@ fun MovieGridTile(
             )
             RatingBar(
                 modifier = Modifier.padding(top = 4.dp),
-                value = movie.voteAverage / 2,
+                value = (movie.voteAverage / 2).toFloat(),
                 config = RatingBarConfig()
                     .isIndicator(true)
                     .numStars(5)

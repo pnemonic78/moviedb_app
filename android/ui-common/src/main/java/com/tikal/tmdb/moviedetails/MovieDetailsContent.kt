@@ -150,7 +150,7 @@ fun MovieDetailsContent(
                     style = textTheme.h6
                 )
                 RatingBar(
-                    value = movie.voteAverage / 2,
+                    value = (movie.voteAverage / 2).toFloat(),
                     config = RatingBarConfig()
                         .isIndicator(true)
                         .numStars(5)
@@ -267,7 +267,7 @@ val movie550Details = MovieEntity(
     originalLanguage = "en",
     originalTitle = "Fight Club",
     overview = "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.",
-    popularity = 46.747329f,
+    popularity = 46.747329,
     posterPath = "/adw6Lq9FiC9zjYEpOqfq03ituwp.jpg",
 //    productionCompanies = null,
 //    productionCountries = null,
@@ -293,7 +293,7 @@ val movie550Details = MovieEntity(
     tagline = "Mischief. Mayhem. Soap.",
     title = "Fight Club",
     video = false,
-    voteAverage = 8.3f,
+    voteAverage = 8.3,
     voteCount = 11400
 ).apply {
     genres = listOf(GenreEntity(id = 18, name = "Drama"))

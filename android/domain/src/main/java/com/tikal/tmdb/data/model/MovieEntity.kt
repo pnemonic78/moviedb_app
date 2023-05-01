@@ -13,16 +13,19 @@ import java.util.Calendar
 data class MovieEntity(
     @ColumnInfo(name = "id")
     @PrimaryKey
-    val id: Long,
+    override val id: Long,
 
     @ColumnInfo(name = "adult")
-    val adult: Boolean,
+    override val adult: Boolean,
 
     @ColumnInfo(name = "backdrop_path")
     val backdropPath: String? = null,
 
     @ColumnInfo(name = "genre_ids")
     var genreIds: LongArray = longArrayOf(),
+
+    @ColumnInfo(name = "media_type")
+    override val mediaType: MediaType = MediaType.movie,
 
     @ColumnInfo(name = "original_language")
     val originalLanguage: String,
@@ -34,7 +37,7 @@ data class MovieEntity(
     val overview: String?,
 
     @ColumnInfo(name = "popularity")
-    val popularity: Float,
+    override val popularity: Double,
 
     @ColumnInfo(name = "poster_path")
     val posterPath: String? = null,
@@ -49,7 +52,7 @@ data class MovieEntity(
     val video: Boolean = false,
 
     @ColumnInfo(name = "vote_average")
-    val voteAverage: Float = 0f,
+    val voteAverage: Double = 0.0,
 
     @ColumnInfo(name = "vote_count")
     val voteCount: Int = 0,
@@ -74,7 +77,7 @@ data class MovieEntity(
 
     @ColumnInfo(name = "tagline")
     val tagline: String? = null
-) {
+) : MediaEntity() {
     // TODO val credits: CreditsResponseEntity? =null,
 
     @Ignore
