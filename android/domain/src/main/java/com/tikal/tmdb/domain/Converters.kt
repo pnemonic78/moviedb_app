@@ -41,6 +41,8 @@ import java.sql.Timestamp
 import java.util.Calendar
 import java.util.Date
 
+typealias DateTime = java.util.Calendar
+
 class Converters {
 
     fun fromCalendar(value: Calendar): Long = value.timeInMillis

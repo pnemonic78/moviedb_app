@@ -4,80 +4,84 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import java.util.Calendar
+import com.tikal.tmdb.domain.DateTime
 
 /**
  * Movie entity.
  */
 @Entity(tableName = "movie")
 data class MovieEntity(
-    @ColumnInfo(name = "id")
+    @ColumnInfo("id")
     @PrimaryKey
     override val id: Long,
 
-    @ColumnInfo(name = "adult")
+    @ColumnInfo("adult")
     override val adult: Boolean,
 
-    @ColumnInfo(name = "backdrop_path")
+    @ColumnInfo("backdrop_path")
     val backdropPath: String? = null,
 
-    @ColumnInfo(name = "genre_ids")
+    @ColumnInfo("genre_ids")
     var genreIds: LongArray = longArrayOf(),
 
-    @ColumnInfo(name = "media_type")
+    @ColumnInfo("media_type")
     override val mediaType: MediaType = MediaType.movie,
 
-    @ColumnInfo(name = "original_language")
+    @ColumnInfo("original_language")
     val originalLanguage: String,
 
-    @ColumnInfo(name = "original_title")
+    @ColumnInfo("original_title")
     val originalTitle: String,
 
-    @ColumnInfo(name = "overview")
+    @ColumnInfo("overview")
     val overview: String?,
 
-    @ColumnInfo(name = "popularity")
+    @ColumnInfo("popularity")
     override val popularity: Double,
 
-    @ColumnInfo(name = "poster_path")
+    @ColumnInfo("poster_path")
     val posterPath: String? = null,
 
-    @ColumnInfo(name = "release_date")
-    val releaseDate: Calendar? = null,
+    @ColumnInfo("release_date")
+    val releaseDate: DateTime? = null,
 
-    @ColumnInfo(name = "title")
+    @ColumnInfo("title")
     val title: String,
 
-    @ColumnInfo(name = "video")
+    @ColumnInfo("video")
     val video: Boolean = false,
 
-    @ColumnInfo(name = "vote_average")
+    @ColumnInfo("vote_average")
     val voteAverage: Double = 0.0,
 
-    @ColumnInfo(name = "vote_count")
+    @ColumnInfo("vote_count")
     val voteCount: Int = 0,
 
-    @ColumnInfo(name = "budget")
+    @ColumnInfo("budget")
     val budget: Long = 0,
 
-    @ColumnInfo(name = "homepage")
+    @ColumnInfo("homepage")
     val homepage: String? = null,
 
-    @ColumnInfo(name = "imdb_id")
+    @ColumnInfo("imdb_id")
     val imdbId: String? = null,
 
-    @ColumnInfo(name = "revenue")
+    @ColumnInfo("revenue")
     val revenue: Long? = null,
 
-    @ColumnInfo(name = "runtime")
+    @ColumnInfo("runtime")
     val runtime: Int? = null,
 
-    @ColumnInfo(name = "status")
+    @ColumnInfo("status")
     val status: String = "",
 
-    @ColumnInfo(name = "tagline")
+    @ColumnInfo("tagline")
     val tagline: String? = null
 ) : MediaEntity() {
+
+    override val name: String
+        get() = originalTitle
+
     // TODO val credits: CreditsResponseEntity? =null,
 
     @Ignore
@@ -94,22 +98,4 @@ data class MovieEntity(
 //    TODO val productionCountries: List<ProductionCountryEntity>? = null,
 
 //    TODO val spokenLanguages: List<SpokenLanguageEntity>? = null,
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as MovieEntity
-
-        if (id != other.id) return false
-        if (originalTitle != other.originalTitle) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = id.hashCode()
-        result = 31 * result + originalTitle.hashCode()
-        return result
-    }
 }

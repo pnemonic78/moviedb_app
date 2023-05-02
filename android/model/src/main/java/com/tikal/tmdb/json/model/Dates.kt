@@ -1,9 +1,9 @@
 package com.tikal.tmdb.json.model
 
-import com.tikal.tmdb.json.DateCalendarSerializer
+import com.tikal.tmdb.json.DateTimeSerializer
+import com.tikal.tmdb.json.DateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import java.util.Calendar
 
 /**
  * Dates.
@@ -11,10 +11,10 @@ import java.util.Calendar
 @Serializable
 data class Dates(
     @SerialName("maximum")
-    @Serializable(with = DateCalendarSerializer::class)
-    val maximum: Calendar?,
+    @Serializable(with = DateTimeSerializer::class)
+    val maximum: DateTime?,
 
     @SerialName("minimum")
-    @Serializable(with = DateCalendarSerializer::class)
-    val minimum: Calendar?
+    @Serializable(with = DateTimeSerializer::class)
+    val minimum: DateTime?
 )

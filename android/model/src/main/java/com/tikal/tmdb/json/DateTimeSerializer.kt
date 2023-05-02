@@ -5,4 +5,4 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @Keep
-class DateCalendarSerializer : NullableCalendarSerializer(SimpleDateFormat("yyyy-MM-dd", Locale.US))
+class DateTimeSerializer : NullableCalendarSerializer(SimpleDateFormat("yyyy-MM-dd", Locale.US))

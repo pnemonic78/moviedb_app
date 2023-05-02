@@ -1,18 +1,15 @@
 package com.tikal.tmdb.json.model
 
-import com.tikal.tmdb.json.DateCalendarSerializer
+import com.tikal.tmdb.json.DateTimeSerializer
+import com.tikal.tmdb.json.DateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import java.util.Calendar
 
 /**
  * Movie POJO.
  */
 @Serializable
 data class Movie(
-    @SerialName("id")
-    override val id: Long,
-
     @SerialName("adult")
     override val adult: Boolean = false,
 
@@ -21,6 +18,9 @@ data class Movie(
 
     @SerialName("genre_ids")
     val genreIds: LongArray = longArrayOf(),
+
+    @SerialName("id")
+    override val id: Long,
 
     @SerialName("media_type")
     override val mediaType: MediaType = MediaType.movie,
@@ -40,9 +40,9 @@ data class Movie(
     @SerialName("poster_path")
     val posterPath: String? = null,
 
-    @Serializable(with = DateCalendarSerializer::class)
+    @Serializable(with = DateTimeSerializer::class)
     @SerialName("release_date")
-    val releaseDate: Calendar? = null,
+    val releaseDate: DateTime? = null,
 
     @SerialName("title")
     val title: String,

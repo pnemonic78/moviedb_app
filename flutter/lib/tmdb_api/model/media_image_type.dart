@@ -1,4 +1,3 @@
-//TODO rename to MediaImageType
 class MovieImageType {
   final String _value;
 

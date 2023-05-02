@@ -28,7 +28,7 @@ import com.tikal.tmdb.domain.dao.MoviesPageDao
         TrailerEntity::class
     ],
     exportSchema = false,
-    version = 5
+    version = 6
 )
 @TypeConverters(Converters::class)
 abstract class TmdbDb : RoomDatabase() {
