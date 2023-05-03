@@ -1,7 +1,7 @@
 package com.tikal.tmdb.json.model
 
-import com.tikal.tmdb.json.DateTimeSerializer
 import com.tikal.tmdb.json.DateTime
+import com.tikal.tmdb.json.DateTimeSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -9,43 +9,52 @@ import kotlinx.serialization.Serializable
  * Person POJO.
  */
 @Serializable
-data class Person(
-    @SerialName("adult")
-    override val adult: Boolean = false,
-    @SerialName("id")
-    override val id: Long,
-    @SerialName("media_type")
-    override val mediaType: MediaType = MediaType.person,
-    @SerialName("popularity")
-    override val popularity: Double = 0.0,
+open class Person : Media() {
+    init {
+        mediaType = MediaType.person
+    }
+
     @SerialName("also_known_as")
-    val aliases: List<String> ,
+    var aliases: List<String> = emptyList()
+
     @SerialName("biography")
-    val biography: String,
+    var biography: String? = null
+
     @Serializable(with = DateTimeSerializer::class)
     @SerialName("birthday")
-    val birthday: DateTime? = null,
-    //TODO @SerialName("combined_credits")
-    //TODO val credits: PersonCreditsResponse,
+    var birthday: DateTime? = null
+
+    @SerialName("combined_credits")
+    var credits: PersonCreditsResponse? = null
+
     @SerialName("place_of_birth")
-    val birthplace: String,
+    var birthplace: String? = null
+
     @Serializable(with = DateTimeSerializer::class)
     @SerialName("deathday")
-    val deathday: DateTime? = null,
-    //TODO @SerialName("external_ids")
-    //TODO val externalIds: PersonExternalIds,
+    var deathday: DateTime? = null
+
+    @SerialName("external_ids")
+    var externalIds: PersonExternalIds? = null
+
     @SerialName("gender")
-    val gender: Gender,
+    var gender: Gender = Gender.unknown
+
     @SerialName("homepage")
-    val homepage: String,
+    var homepage: String? = null
+
     @SerialName("imdb_id")
-    val imdbId: String,
+    var imdbId: String? = null
+
     @SerialName("known_for_department")
-    val knownDepartment: String,
+    var knownDepartment: String? = null
+
     @SerialName("name")
-    val name: String,
+    var name: String = ""
+
     @SerialName("original_name")
-    val originalName: String,
+    var originalName: String = ""
+
     @SerialName("profile_path")
-    val profilePath: String
-) : Media()
+    var profilePath: String? = null
+}

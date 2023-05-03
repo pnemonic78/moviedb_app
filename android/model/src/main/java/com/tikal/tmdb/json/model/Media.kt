@@ -1,11 +1,19 @@
 package com.tikal.tmdb.json.model
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
 abstract class Media {
-    abstract val adult: Boolean
+    @SerialName("adult")
+    var adult: Boolean = false
 
-    abstract val id: Long
+    @SerialName("id")
+    var id: Long = 0
 
-    abstract val mediaType: MediaType
+    @SerialName("media_type")
+    var mediaType: MediaType = MediaType.all
 
-    abstract val popularity: Double
+    @SerialName("popularity")
+    var popularity: Double = 0.0
 }

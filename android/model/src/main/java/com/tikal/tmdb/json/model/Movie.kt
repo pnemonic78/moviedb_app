@@ -9,86 +9,78 @@ import kotlinx.serialization.Serializable
  * Movie POJO.
  */
 @Serializable
-data class Movie(
-    @SerialName("adult")
-    override val adult: Boolean = false,
+class Movie : Media() {
+    init {
+        mediaType = MediaType.movie
+    }
 
     @SerialName("backdrop_path")
-    val backdropPath: String? = null,
+    var backdropPath: String? = null
 
     @SerialName("genre_ids")
-    val genreIds: LongArray = longArrayOf(),
-
-    @SerialName("id")
-    override val id: Long,
-
-    @SerialName("media_type")
-    override val mediaType: MediaType = MediaType.movie,
+    var genreIds: LongArray = longArrayOf()
 
     @SerialName("original_language")
-    val originalLanguage: String,
+    var originalLanguage: String = ""
 
     @SerialName("original_title")
-    val originalTitle: String,
+    var originalTitle: String = ""
 
     @SerialName("overview")
-    val overview: String?,
-
-    @SerialName("popularity")
-    override val popularity: Double = 0.0,
+    var overview: String? = null
 
     @SerialName("poster_path")
-    val posterPath: String? = null,
+    var posterPath: String? = null
 
     @Serializable(with = DateTimeSerializer::class)
     @SerialName("release_date")
-    val releaseDate: DateTime? = null,
+    var releaseDate: DateTime? = null
 
     @SerialName("title")
-    val title: String,
+    var title: String = ""
 
     @SerialName("video")
-    val video: Boolean = false,
+    var video: Boolean = false
 
     @SerialName("vote_average")
-    val voteAverage: Double = 0.0,
+    var voteAverage: Double = 0.0
 
     @SerialName("vote_count")
-    val voteCount: Int = 0,
+    var voteCount: Int = 0
 
     @SerialName("budget")
-    val budget: Long = 0,
+    var budget: Long = 0
 
-//    @SerialName("credits")
-//    val credits: CreditsResponse? = null,
+    @SerialName("credits")
+    var credits: CreditsResponse? = null
 
     @SerialName("genres")
-    val genres: List<Genre>? = null,
+    var genres: List<Genre> = emptyList()
 
     @SerialName("homepage")
-    val homepage: String? = null,
+    var homepage: String? = null
 
     @SerialName("imdb_id")
-    val imdbId: String? = null,
+    var imdbId: String? = null
 
     @SerialName("production_companies")
-    val productionCompanies: List<ProductionCompany>? = null,
+    var productionCompanies: List<ProductionCompany> = emptyList()
 
     @SerialName("production_countries")
-    val productionCountries: List<ProductionCountry>? = null,
+    var productionCountries: List<ProductionCountry> = emptyList()
 
     @SerialName("revenue")
-    val revenue: Long? = null,
+    var revenue: Long? = null
 
     @SerialName("runtime")
-    val runtime: Int? = null,
+    var runtime: Int? = null
 
     @SerialName("spoken_languages")
-    val spokenLanguages: List<SpokenLanguage>? = null,
+    var spokenLanguages: List<SpokenLanguage> = emptyList()
 
     @SerialName("status")
-    val status: String = "",
+    var status: String = ""
 
     @SerialName("tagline")
-    val tagline: String? = null
-) : Media()
+    var tagline: String? = null
+}
