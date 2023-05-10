@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MovieVideo(
+data class Video(
     @SerialName("id")
     val id: String,
     @SerialName("iso_639_1")
@@ -21,7 +21,7 @@ data class MovieVideo(
     @SerialName("size")
     val size: Int = 0,
     @SerialName("type")
-    val type: String?,
+    val type: VideoType?
 ) {
     val locale: Locale by lazy { Locale(localeLanguage.orEmpty(), localeCountry.orEmpty()) }
 }

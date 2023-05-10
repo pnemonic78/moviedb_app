@@ -12,16 +12,18 @@ data class MediaImage(
     private val localeCountry: String? = null,
     @SerialName("iso_3166_1")
     private val localeLanguage: String? = null,
-    @SerialName("key")
-    val key: String,
-    @SerialName("name")
-    val name: String,
-    @SerialName("site")
-    val site: String,
-    @SerialName("size")
-    val size: Int = 0,
-    @SerialName("type")
-    val type: String
+    @SerialName("width")
+    val width: Int,
+    @SerialName("height")
+    val height: Int,
+    @SerialName("aspect_ratio")
+    val aspectRatio: Double = 1.0,
+    @SerialName("file_path")
+    val path: String,
+    @SerialName("vote_average")
+    val voteAverage: Double = 0.0,
+    @SerialName("vote_count")
+    val voteCount: Int = 0
 ) {
     val locale: Locale by lazy { Locale(localeLanguage.orEmpty(), localeCountry.orEmpty()) }
 }

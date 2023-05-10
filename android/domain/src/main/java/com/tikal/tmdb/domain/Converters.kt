@@ -40,8 +40,12 @@ import com.tikal.tmdb.util.toLongArray
 import java.sql.Timestamp
 import java.util.Calendar
 import java.util.Date
+import java.util.Locale
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
-typealias DateTime = java.util.Calendar
+typealias DateTime = Calendar
 
 class Converters {
 
@@ -94,4 +98,21 @@ class Converters {
 
     @TypeConverter
     fun toNullableLongArray(value: String?): LongArray? = value?.let { toLongArray(it) }
+
+    @TypeConverter
+    fun fromListOfString(value: List<String>): String = Json.encodeToString(value)
+
+    @TypeConverter
+    fun toListOfString(value: String?): List<String> =
+        if (value.isNullOrEmpty()) emptyList() else Json.decodeFromString(value)
+
+    fun fromLocale(value: Locale): String = value.toLanguageTag()
+
+    fun toLocale(value: String): Locale = Locale.forLanguageTag(value)
+
+    @TypeConverter
+    fun fromNullableLocale(value: Locale?): String? = value?.let { fromLocale(it) }
+
+    @TypeConverter
+    fun toNullableLocale(value: String?): Locale? = value?.let { toLocale(it) }
 }

@@ -9,6 +9,7 @@ data class GenreEntity(
     @ColumnInfo(name = "id")
     @PrimaryKey
     val id: Long,
+
     @ColumnInfo(name = "name")
     val name: String
 )

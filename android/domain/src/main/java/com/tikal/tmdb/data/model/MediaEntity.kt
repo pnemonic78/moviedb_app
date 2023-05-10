@@ -1,32 +1,21 @@
 package com.tikal.tmdb.data.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity("media")
 abstract class MediaEntity {
-    abstract val adult: Boolean
+    @ColumnInfo("adult")
+    var adult: Boolean = false
 
-    abstract val id: Long
+    @ColumnInfo("id")
+    @PrimaryKey
+    var id: Long = 0
 
-    abstract val mediaType: MediaType
+    @ColumnInfo("media_type")
+    var mediaType: MediaType = MediaType.all
 
-    abstract val popularity: Double
-
-    abstract val name: String
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as MediaEntity
-
-        if (id != other.id) return false
-        if (name != other.name) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = id.hashCode()
-        result = 31 * result + name.hashCode()
-        return result
-    }
-
+    @ColumnInfo("popularity")
+    var popularity: Double = 0.0
 }

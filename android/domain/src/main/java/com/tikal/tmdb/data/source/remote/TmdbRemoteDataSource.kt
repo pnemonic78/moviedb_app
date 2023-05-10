@@ -55,7 +55,7 @@ class TmdbRemoteDataSource @Inject constructor(
         }
 
     override suspend fun getMovie(movieId: Long): MovieEntity = withContext(ioDispatcher) {
-        val movie = service.getMovieDetails(movieId).toEntity()
+        val movie = service.getMovieDetails(movieId, append = "credits").toEntity()
         saveMovie(movie)
         movie
     }

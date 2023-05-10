@@ -1,9 +1,10 @@
 package com.tikal.tmdb.json.model
 
+import com.tikal.tmdb.json.MediaSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@Serializable
+@Serializable(with = MediaSerializer::class)
 abstract class Media {
     @SerialName("adult")
     var adult: Boolean = false

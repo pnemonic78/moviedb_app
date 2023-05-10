@@ -8,5 +8,5 @@ data class VideosResponse(
     @SerialName("id")
     val id: Long,
     @SerialName("results")
-    val results: List<MovieVideo>
+    val results: List<Video>
 )

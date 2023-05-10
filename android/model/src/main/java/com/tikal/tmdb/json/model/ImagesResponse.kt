@@ -9,8 +9,8 @@ data class ImagesResponse(
     val id: Long,
 
     @SerialName("backdrops")
-    val backdrops: List<MovieImage> = emptyList(),
+    val backdrops: List<MediaImage> = emptyList(),
 
     @SerialName("posters")
-    val posters: List<MovieImage> = emptyList()
+    val posters: List<MediaImage> = emptyList()
 )

@@ -3,86 +3,82 @@ package com.tikal.tmdb.data.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
-import androidx.room.PrimaryKey
 import com.tikal.tmdb.domain.DateTime
 
 /**
  * Movie entity.
  */
 @Entity(tableName = "movie")
-data class MovieEntity(
-    @ColumnInfo("id")
-    @PrimaryKey
-    override val id: Long,
-
-    @ColumnInfo("adult")
-    override val adult: Boolean,
+class MovieEntity : MediaEntity() {
+    init {
+        mediaType = MediaType.movie
+    }
 
     @ColumnInfo("backdrop_path")
-    val backdropPath: String? = null,
+    var backdropPath: String? = null
 
     @ColumnInfo("genre_ids")
-    var genreIds: LongArray = longArrayOf(),
-
-    @ColumnInfo("media_type")
-    override val mediaType: MediaType = MediaType.movie,
+    var genreIds: LongArray = longArrayOf()
 
     @ColumnInfo("original_language")
-    val originalLanguage: String,
+    var originalLanguage: String = ""
 
     @ColumnInfo("original_title")
-    val originalTitle: String,
+    var originalTitle: String = ""
 
     @ColumnInfo("overview")
-    val overview: String?,
-
-    @ColumnInfo("popularity")
-    override val popularity: Double,
+    var overview: String? = null
 
     @ColumnInfo("poster_path")
-    val posterPath: String? = null,
+    var posterPath: String? = null
 
     @ColumnInfo("release_date")
-    val releaseDate: DateTime? = null,
+    var releaseDate: DateTime? = null
 
     @ColumnInfo("title")
-    val title: String,
+    var title: String = ""
 
     @ColumnInfo("video")
-    val video: Boolean = false,
+    var video: Boolean = false
 
     @ColumnInfo("vote_average")
-    val voteAverage: Double = 0.0,
+    var voteAverage: Double = 0.0
 
     @ColumnInfo("vote_count")
-    val voteCount: Int = 0,
+    var voteCount: Int = 0
 
     @ColumnInfo("budget")
-    val budget: Long = 0,
+    var budget: Long = 0
 
     @ColumnInfo("homepage")
-    val homepage: String? = null,
+    var homepage: String? = null
 
     @ColumnInfo("imdb_id")
-    val imdbId: String? = null,
+    var imdbId: String? = null
+
+    // TODO @ColumnInfo("production_companies")
+    // TODO var productionCompanies: List<ProductionCompanyEntity> = emptyList()
+
+    // TODO @ColumnInfo("production_countries")
+    // TODO var productionCountries: List<ProductionCountryEntity> = emptyList()
 
     @ColumnInfo("revenue")
-    val revenue: Long? = null,
+    var revenue: Long? = null
 
     @ColumnInfo("runtime")
-    val runtime: Int? = null,
+    var runtime: Int? = null
+
+    // TODO @ColumnInfo("spoken_languages")
+    // TODO var spokenLanguages: List<SpokenLanguageEntity> = emptyList()
 
     @ColumnInfo("status")
-    val status: String = "",
+    var status: String = ""
 
     @ColumnInfo("tagline")
-    val tagline: String? = null
-) : MediaEntity() {
+    var tagline: String? = null
 
-    override val name: String
+    val name: String
         get() = originalTitle
-
-    // TODO val credits: CreditsResponseEntity? =null,
 
     @Ignore
     var genres: List<GenreEntity>? = null
@@ -92,10 +88,4 @@ data class MovieEntity(
                 genreIds = value.map { it.id }.toLongArray()
             }
         }
-
-//    TODO val productionCompanies: List<ProductionCompanyEntity>? = null,
-
-//    TODO val productionCountries: List<ProductionCountryEntity>? = null,
-
-//    TODO val spokenLanguages: List<SpokenLanguageEntity>? = null,
 }

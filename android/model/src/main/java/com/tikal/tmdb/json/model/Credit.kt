@@ -1,5 +1,6 @@
 package com.tikal.tmdb.json.model
 
+import kotlinx.serialization.Polymorphic
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -9,5 +10,6 @@ open class Credit : Person() {
     var creditId: String = ""
 
     // What is this credit for?
-    //TODO var media: Media
+    @Polymorphic
+    var media: Media? = null
 }
