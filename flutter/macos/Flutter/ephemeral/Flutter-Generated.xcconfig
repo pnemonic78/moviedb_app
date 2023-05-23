@@ -1,11 +1,13 @@
 // This is a generated file; do not edit or check into version control.
-FLUTTER_ROOT=/Users/moshe/Library/flutter
-FLUTTER_APPLICATION_PATH=/Users/moshe/GitHub/pnemonic78/moviedb_app
+FLUTTER_ROOT=/usr/local/Caskroom/flutter/3.7.11/flutter
+FLUTTER_APPLICATION_PATH=/Users/moshe/GitHub/pnemonic78/moviedb_app/flutter
+COCOAPODS_PARALLEL_CODE_SIGN=true
+FLUTTER_TARGET=/Users/moshe/GitHub/pnemonic78/moviedb_app/flutter/lib/main.dart
 FLUTTER_BUILD_DIR=build
-FLUTTER_FRAMEWORK_DIR=/Users/moshe/Library/flutter/bin/cache/artifacts/engine/darwin-x64
 FLUTTER_BUILD_NAME=1.0.0
 FLUTTER_BUILD_NUMBER=1
+DART_DEFINES=Zmx1dHRlci5pbnNwZWN0b3Iuc3RydWN0dXJlZEVycm9ycz10cnVl,RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ==
 DART_OBFUSCATION=false
-TRACK_WIDGET_CREATION=false
+TRACK_WIDGET_CREATION=true
 TREE_SHAKE_ICONS=false
-PACKAGE_CONFIG=.packages
+PACKAGE_CONFIG=/Users/moshe/GitHub/pnemonic78/moviedb_app/flutter/.dart_tool/package_config.json

@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:pinch_zoom_image_updated/pinch_zoom_image_updated.dart';
+import 'package:pinch_zoom/pinch_zoom.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/movie_details.dart';
@@ -58,8 +58,8 @@ class MoviePosterPage extends StatelessWidget {
       height: imageHeight,
       fit: BoxFit.contain,
     );
-    final posterWidget = PinchZoomImage(
-      image: poster,
+    final posterWidget = PinchZoom(
+      child: poster,
     );
 
     return Scaffold(
