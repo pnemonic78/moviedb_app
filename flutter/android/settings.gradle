@@ -1,4 +1,4 @@
-rootProject.name = "Movie DB"
+rootProject.name = "Movie DB - Flutter"
 include ':app'
 
 def localPropertiesFile = new File(rootProject.projectDir, "local.properties")
