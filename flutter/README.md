@@ -14,3 +14,8 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## The Movie Database API
+
+- [OAS](https://api.stoplight.io/v1/versions/9WaNJfGpnnQ76opqe/export/oas.json)
+- [OpenAPI plugins](https://openapi-generator.tech/docs/plugins)
