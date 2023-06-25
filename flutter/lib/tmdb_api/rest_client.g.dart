@@ -35,7 +35,7 @@ class _RestClient implements RestClient {
             extra: _extra,
         ),
         data: _data);
-    final value = MoviesResponse.fromJson(_result.data);
+    final value = MoviesResponse.fromJson(_result.data)!;
     return value;
   }
 
@@ -59,7 +59,7 @@ class _RestClient implements RestClient {
             extra: _extra,
         ),
         data: _data);
-    final value = MoviesResponse.fromJson(_result.data);
+    final value = MoviesResponse.fromJson(_result.data)!;
     return value;
   }
 
@@ -83,7 +83,7 @@ class _RestClient implements RestClient {
             extra: _extra,
         ),
         data: _data);
-    final value = MoviesResponse.fromJson(_result.data);
+    final value = MoviesResponse.fromJson(_result.data)!;
     return value;
   }
 
@@ -107,7 +107,7 @@ class _RestClient implements RestClient {
             extra: _extra,
         ),
         data: _data);
-    final value = MoviesResponse.fromJson(_result.data);
+    final value = MoviesResponse.fromJson(_result.data)!;
     return value;
   }
 
@@ -126,7 +126,7 @@ class _RestClient implements RestClient {
             extra: _extra,
         ),
         data: _data);
-    final value = CreditsResponse.fromJson(_result.data);
+    final value = CreditsResponse.fromJson(_result.data)!;
     return value;
   }
 
@@ -149,7 +149,7 @@ class _RestClient implements RestClient {
             extra: _extra,
         ),
         data: _data);
-    final value = MovieDetails.fromJson(_result.data);
+    final value = MovieDetails.fromJson(_result.data)!;
     return value;
   }
 
@@ -172,7 +172,7 @@ class _RestClient implements RestClient {
             extra: _extra,
         ),
         data: _data);
-    final value = ImagesResponse.fromJson(_result.data);
+    final value = ImagesResponse.fromJson(_result.data)!;
     return value;
   }
 
@@ -194,7 +194,7 @@ class _RestClient implements RestClient {
             extra: _extra,
         ),
         data: _data);
-    final value = VideosResponse.fromJson(_result.data);
+    final value = VideosResponse.fromJson(_result.data)!;
     return value;
   }
 
@@ -217,7 +217,7 @@ class _RestClient implements RestClient {
             extra: _extra,
         ),
         data: _data);
-    final value = Person.fromJson(_result.data);
+    final value = Person.fromJson(_result.data)!;
     return value;
   }
 }

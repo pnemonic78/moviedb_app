@@ -1,5 +1,7 @@
 class R_he {
-  static const Map<String, String> string = const {
+  R_he._();
+
+  static const Map<String, String> string = {
     "title": "הדגמת מאגר הסרטים",
 
     // Now Playing

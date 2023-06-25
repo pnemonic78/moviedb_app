@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:tmdb/tmdb_api/credits_response.dart';
 import 'package:tmdb/tmdb_api/model/person.dart';
@@ -13,12 +14,14 @@ part 'rest_client.g.dart';
 // `flutter pub run build_runner build --delete-conflicting-outputs`
 @RestApi(baseUrl: "https://api.themoviedb.org/3")
 abstract class RestClient {
+  @factoryMethod
   factory RestClient(Dio dio, String baseUrl) = _RestClient;
 
+  @factoryMethod
   static RestClient of(Dio dio) => RestClient(dio, 'https://api.themoviedb.org/3');
 
   @GET("/movie/now_playing")
-  Future<MoviesResponse?> getMoviesNowPlaying({
+  Future<MoviesResponse> getMoviesNowPlaying({
     @Query("api_key")  required String apiKey,
     @Query("language") required String language,
     @Query("page") int page = 1,
@@ -26,7 +29,7 @@ abstract class RestClient {
   });
 
   @GET("/movie/popular")
-  Future<MoviesResponse?> getMoviesPopular({
+  Future<MoviesResponse> getMoviesPopular({
     @Query("api_key")  required String apiKey,
     @Query("language") required String language,
     @Query("page") int page = 1,
@@ -34,7 +37,7 @@ abstract class RestClient {
   });
 
   @GET("/movie/top_rated")
-  Future<MoviesResponse?> getMoviesTopRated({
+  Future<MoviesResponse> getMoviesTopRated({
     @Query("api_key")  required String apiKey,
     @Query("language") required String language,
     @Query("page") int page = 1,
@@ -42,7 +45,7 @@ abstract class RestClient {
   });
 
   @GET("/movie/upcoming")
-  Future<MoviesResponse?> getMoviesUpcoming({
+  Future<MoviesResponse> getMoviesUpcoming({
     @Query("api_key")  required String apiKey,
     @Query("language") required String language,
     @Query("page") int page = 1,
@@ -50,13 +53,13 @@ abstract class RestClient {
   });
 
   @GET("/movie/{movie_id}/credits")
-  Future<CreditsResponse?> getMovieCredits({
+  Future<CreditsResponse> getMovieCredits({
     @Path("movie_id") required int moveId,
     @Query("api_key") required String apiKey,
   });
 
   @GET("/movie/{movie_id}")
-  Future<MovieDetails?> getMovieDetails({
+  Future<MovieDetails> getMovieDetails({
     @Path("movie_id") required int moveId,
     @Query("api_key") required String apiKey,
     @Query("language") String language = "en-US",
@@ -64,7 +67,7 @@ abstract class RestClient {
   });
 
   @GET("/movie/{movie_id}/images")
-  Future<ImagesResponse?> getMovieImages({
+  Future<ImagesResponse> getMovieImages({
     @Path("movie_id") required int moveId,
     @Query("api_key") required String apiKey,
     @Query("language") String language = "en-US",
@@ -72,14 +75,14 @@ abstract class RestClient {
   });
 
   @GET("/movie/{movie_id}/videos")
-  Future<VideosResponse?> getMovieVideos({
+  Future<VideosResponse> getMovieVideos({
     @Path("movie_id") required int moveId,
     @Query("api_key") required String apiKey,
     @Query("language") String language = "en-US",
   });
 
   @GET("/person/{person_id}")
-  Future<Person?> getPerson({
+  Future<Person> getPerson({
     @Path("person_id") required int personId,
     @Query("api_key") required String apiKey,
     @Query("language") String language = "en-US",

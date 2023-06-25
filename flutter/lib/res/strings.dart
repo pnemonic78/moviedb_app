@@ -1,5 +1,7 @@
 class R {
-  static const Map<String, String> string = const {
+  R._();
+
+  static const Map<String, String> string = {
     "title": "The Movie Database Demo",
 
     // Now Playing

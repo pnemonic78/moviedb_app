@@ -3,20 +3,24 @@ class MovieImageType {
 
   const MovieImageType(this._value);
 
-  static const trailer = MovieImageType("Trailer");
-  static const teaser = MovieImageType("Teaser");
-  static const clip = MovieImageType("Clip");
-  static const featurette = MovieImageType("Featurette");
-  static const behindTheScenes = MovieImageType("Behind the Scenes");
-  static const bloopers = MovieImageType("Bloopers");
+  static const Trailer = MovieImageType("Trailer");
+  static const Teaser = MovieImageType("Teaser");
+  static const Clip = MovieImageType("Clip");
+  static const Featurette = MovieImageType("Featurette");
+  static const OpeningCredits = MovieImageType("Opening Credits");
+  static const BehindTheScenes = MovieImageType("Behind the Scenes");
+  static const Bloopers = MovieImageType("Bloopers");
+  static const Recap = MovieImageType("Recap");
 
   static const values = [
-    trailer,
-    teaser,
-    clip,
-    featurette,
-    behindTheScenes,
-    bloopers
+    Trailer,
+    Teaser,
+    Clip,
+    Featurette,
+    OpeningCredits,
+    BehindTheScenes,
+    Bloopers,
+    Recap,
   ];
 
   @override

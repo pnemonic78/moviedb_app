@@ -80,6 +80,6 @@ class Person extends Media {
 
   @override
   String? getTitle() {
-    return name;
+    return name ?? originalName;
   }
 }

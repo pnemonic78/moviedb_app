@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:js_interop';
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -11,9 +10,12 @@ import 'package:tmdb/tmdb_api/model/movie_details.dart';
 import 'package:tmdb/tmdb_api/model/person.dart';
 import 'package:tmdb/tmdb_api/model/video.dart';
 import 'package:tmdb/tmdb_api/movies_response.dart';
+import 'package:tmdb/tmdb_api/poster_widget.dart';
+import 'package:tmdb/tmdb_api/profile_widget.dart';
 import 'package:tmdb/tmdb_api/videos_response.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
+import 'backdrop_widget.dart';
 import 'model/movie.dart';
 
 const Duration fetchTimeout = Duration(seconds: 30);
@@ -37,6 +39,7 @@ abstract class TMDBApi {
     "w1280",
     _original,
   ];
+
   // static const _logo_sizes = [
   //   "w45",
   //   "w92",
@@ -61,6 +64,7 @@ abstract class TMDBApi {
     "h632",
     _original,
   ];
+
   // static const _still_sizes = [
   //   "w92",
   //   "w185",
@@ -70,7 +74,7 @@ abstract class TMDBApi {
 
   static String? generatePosterUrl(String? path, double width, double height,
       {double devicePixelRatio = 1.0}) {
-    if (path.isUndefinedOrNull || (width <= 0) || (height <= 0)) {
+    if ((path == null) || path.isEmpty || (width <= 0) || (height <= 0)) {
       return null;
     }
     final size = findSize(width, height, _poster_sizes);
@@ -80,7 +84,7 @@ abstract class TMDBApi {
 
   static String? generateBackdropUrl(String? path, double width, double height,
       {double devicePixelRatio = 1.0}) {
-    if (path.isUndefinedOrNull || (width <= 0) || (height <= 0)) {
+    if ((path == null) || path.isEmpty || (width <= 0) || (height <= 0)) {
       return null;
     }
     final size = findSize(width, height, _backdrop_sizes);
@@ -91,7 +95,7 @@ abstract class TMDBApi {
   static String? generateProfileThumbnail(
       String? path, double width, double height,
       {double devicePixelRatio = 1.0}) {
-    if (path.isUndefinedOrNull || (width <= 0) || (height <= 0)) {
+    if ((path == null) || path.isEmpty || (width <= 0) || (height <= 0)) {
       return null;
     }
     final size = findSize(width, height, _profile_sizes);
@@ -132,43 +136,43 @@ abstract class TMDBApi {
     return result;
   }
 
-  Future<MoviesResponse?> getNowPlaying(BuildContext context);
+  Future<MoviesResponse> getNowPlaying(BuildContext context);
 
-  Future<MoviesResponse?> getPopular(BuildContext context);
+  Future<MoviesResponse> getPopular(BuildContext context);
 
-  Future<MoviesResponse?> getTopRated(BuildContext context);
+  Future<MoviesResponse> getTopRated(BuildContext context);
 
-  Future<MoviesResponse?> getUpcoming(BuildContext context);
+  Future<MoviesResponse> getUpcoming(BuildContext context);
 
-  Future<CreditsResponse?> getMovieCreditsById(
+  Future<CreditsResponse> getMovieCreditsById(
       BuildContext context, int movieId);
 
-  Future<CreditsResponse?> getMovieCredits(
+  Future<CreditsResponse> getMovieCredits(
       BuildContext context, Movie movie) async {
     return getMovieCreditsById(context, movie.id);
   }
 
-  Future<MovieDetails?> getMovieDetailsById(BuildContext context, int movieId);
+  Future<MovieDetails> getMovieDetailsById(BuildContext context, int movieId);
 
-  Future<MovieDetails?> getMovieDetails(
+  Future<MovieDetails> getMovieDetails(
       BuildContext context, Movie movie) async {
     return getMovieDetailsById(context, movie.id);
   }
 
-  Future<VideosResponse?> getMovieVideos(
+  Future<VideosResponse> getMovieVideos(
       BuildContext context, Movie movie) async {
     return getMovieVideosById(context, movie.id);
   }
 
-  Future<VideosResponse?> getMovieVideosById(BuildContext context, int movieId);
+  Future<VideosResponse> getMovieVideosById(BuildContext context, int movieId);
 
-  Future<Person?> getPersonById(BuildContext context, int personId);
+  Future<Person> getPersonById(BuildContext context, int personId);
 
-  Future<Person?> getPerson(BuildContext context, Person person) async {
+  Future<Person> getPerson(BuildContext context, Person person) async {
     return getPersonById(context, person.id);
   }
 
-  static Future<Widget?> generateVideoThumbnail(
+  static Future<Widget?>? generateVideoThumbnail(
       MovieVideo? video, double width, double height) async {
     if ((video == null) || (width <= 0) || (height <= 0)) {
       return null;
@@ -195,7 +199,8 @@ abstract class TMDBApi {
     return null;
   }
 
-  static Future<Widget> _generateYouTubeThumbnail(String videoId, double width, double height) async {
+  static Future<Widget> _generateYouTubeThumbnail(
+      String videoId, double width, double height) async {
     final url = sprintf(_youtube_thumbnail_url, [videoId]);
     return CachedNetworkImage(
       imageUrl: url,
@@ -232,5 +237,47 @@ abstract class TMDBApi {
 
   static String generateTwitterUrl(String id) {
     return sprintf(_twitter_url, [id]);
+  }
+
+  static MovieBackdrop generateBackdrop({
+    String? backdropPath,
+    required double backdropWidth,
+    required double backdropHeight,
+    BoxFit fit = BoxFit.fitWidth,
+  }) {
+    return MovieBackdrop(
+      backdropPath: backdropPath,
+      backdropWidth: backdropWidth,
+      backdropHeight: backdropHeight,
+      fit: fit,
+    );
+  }
+
+  static MoviePoster generatePoster({
+    String? posterPath,
+    required double posterWidth,
+    required double posterHeight,
+    BoxFit fit = BoxFit.fitHeight,
+  }) {
+    return MoviePoster(
+      posterPath: posterPath,
+      posterWidth: posterWidth,
+      posterHeight: posterHeight,
+      fit: fit,
+    );
+  }
+
+  static MovieProfile generateProfile({
+    String? profilePath,
+    required double profileWidth,
+    required double profileHeight,
+    BoxFit fit = BoxFit.fitHeight,
+  }) {
+    return MovieProfile(
+      profilePath: profilePath,
+      profileWidth: profileWidth,
+      profileHeight: profileHeight,
+      fit: fit,
+    );
   }
 }

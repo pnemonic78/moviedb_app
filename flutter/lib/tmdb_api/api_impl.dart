@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:tmdb/keys.dart';
 import 'package:tmdb/tmdb_api/credits_response.dart';
 import 'package:tmdb/tmdb_api/model/movie_details.dart';
@@ -14,9 +15,11 @@ class TMDBApiImpl extends TMDBApi {
 
   final RestClient _client;
 
-  TMDBApiImpl(this._client) : assert(_client != null);
+  @factoryMethod
+  TMDBApiImpl(this._client);
 
-  Future<MoviesResponse?> getNowPlaying(BuildContext context) async {
+  @override
+  Future<MoviesResponse> getNowPlaying(BuildContext context) async {
     final Locale locale = Localizations.localeOf(context);
     return _client.getMoviesNowPlaying(
       apiKey: _apiKey,
@@ -24,7 +27,8 @@ class TMDBApiImpl extends TMDBApi {
     );
   }
 
-  Future<MoviesResponse?> getPopular(BuildContext context) async {
+  @override
+  Future<MoviesResponse> getPopular(BuildContext context) async {
     final Locale locale = Localizations.localeOf(context);
     return _client.getMoviesPopular(
       apiKey: _apiKey,
@@ -32,7 +36,8 @@ class TMDBApiImpl extends TMDBApi {
     );
   }
 
-  Future<MoviesResponse?> getTopRated(BuildContext context) async {
+  @override
+  Future<MoviesResponse> getTopRated(BuildContext context) async {
     final Locale locale = Localizations.localeOf(context);
     return _client.getMoviesTopRated(
       apiKey: _apiKey,
@@ -40,7 +45,8 @@ class TMDBApiImpl extends TMDBApi {
     );
   }
 
-  Future<MoviesResponse?> getUpcoming(BuildContext context) async {
+  @override
+  Future<MoviesResponse> getUpcoming(BuildContext context) async {
     final Locale locale = Localizations.localeOf(context);
     return _client.getMoviesUpcoming(
       apiKey: _apiKey,
@@ -48,16 +54,22 @@ class TMDBApiImpl extends TMDBApi {
     );
   }
 
-  Future<CreditsResponse?> getMovieCreditsById(
-      BuildContext context, int movieId) async {
+  @override
+  Future<CreditsResponse> getMovieCreditsById(
+    BuildContext context,
+    int movieId,
+  ) async {
     return _client.getMovieCredits(
       apiKey: _apiKey,
       moveId: movieId,
     );
   }
 
-  Future<MovieDetails?> getMovieDetailsById(
-      BuildContext context, int movieId) async {
+  @override
+  Future<MovieDetails> getMovieDetailsById(
+    BuildContext context,
+    int movieId,
+  ) async {
     final Locale locale = Localizations.localeOf(context);
     return _client.getMovieDetails(
       apiKey: _apiKey,
@@ -67,15 +79,19 @@ class TMDBApiImpl extends TMDBApi {
     );
   }
 
-  Future<VideosResponse?> getMovieVideosById(
-      BuildContext context, int movieId) async {
+  @override
+  Future<VideosResponse> getMovieVideosById(
+    BuildContext context,
+    int movieId,
+  ) async {
     return _client.getMovieVideos(
       apiKey: _apiKey,
       moveId: movieId,
     );
   }
 
-  Future<Person?> getPersonById(BuildContext context, int personId) async {
+  @override
+  Future<Person> getPersonById(BuildContext context, int personId) async {
     final Locale locale = Localizations.localeOf(context);
     return _client.getPerson(
       apiKey: _apiKey,
