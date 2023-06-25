@@ -15,9 +15,9 @@ import 'package:tmdb/videos/video_page.dart';
 import 'movie_screen.dart';
 
 class MovieDetailsHomePage extends StatefulWidget {
-  Movie movie;
+  final Movie movie;
 
-  MovieDetailsHomePage({super.key, required this.movie});
+  const MovieDetailsHomePage({super.key, required this.movie});
 
   @override
   State<MovieDetailsHomePage> createState() => _MovieDetailsHomePageState();
@@ -57,12 +57,55 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
             final MovieDetails movie = snapshot.data!;
-            widget.movie = movie;
-            content = MovieDetailsWidget(
+            final detailsWidget = MovieDetailsWidget(
               movie: movie,
               onTapPoster: _onTapPoster,
               onVideoTap: _onTapVideo,
               onCastTap: _onTapCast,
+            );
+
+            final media = MediaQuery.of(context);
+            final screenSize = media.size;
+            final screenWidth = screenSize.width;
+
+            final backdropWidth = screenWidth;
+            final backdropHeight = backdropWidth * 9 / 16;
+            final backdrop = TMDBApi.generateBackdrop(
+              backdropPath: movie.backdropPath,
+              backdropWidth: backdropWidth,
+              backdropHeight: backdropHeight,
+            );
+
+            final textTheme = Theme.of(context).textTheme;
+            final titleStyle = textTheme.headlineSmall!;
+            final luminance = titleStyle.color?.computeLuminance() ?? 0.5;
+            final titleWidget = BorderedText(
+              strokeWidth: 2.0,
+              strokeColor: (luminance > 0.5 ? Colors.black54 : Colors.white54),
+              child: Text(
+                movie.getTitle() ?? "",
+                maxLines: 3,
+                style: titleStyle,
+                overflow: TextOverflow.ellipsis,
+              ),
+            );
+
+            content = CustomScrollView(
+              slivers: <Widget>[
+                SliverAppBar(
+                  expandedHeight: backdropHeight,
+                  pinned: true,
+                  flexibleSpace: FlexibleSpaceBar(
+                    title: titleWidget,
+                    centerTitle: true,
+                    background: backdrop,
+                  ),
+                ),
+                SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: detailsWidget,
+                ),
+              ],
             );
           } else {
             content = const Center(
@@ -76,54 +119,8 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
           content = const Center(child: CircularProgressIndicator());
         }
 
-        final movie = widget.movie;
-
-        final media = MediaQuery.of(context);
-        final screenSize = media.size;
-        final screenWidth = screenSize.width;
-
-        final backdropWidth = screenWidth;
-        final backdropHeight = backdropWidth * 9 / 16;
-        final backdrop = TMDBApi.generateBackdrop(
-          backdropPath: movie.backdropPath,
-          backdropWidth: backdropWidth,
-          backdropHeight: backdropHeight,
-        );
-
-        final textTheme = Theme.of(context).textTheme;
-        final titleStyle = textTheme.headlineSmall!;
-        final luminance = titleStyle.color?.computeLuminance() ?? 0.5;
-        final titleWidget = BorderedText(
-          strokeWidth: 2.0,
-          strokeColor: (luminance > 0.5 ? Colors.black54 : Colors.white54),
-          child: Text(
-            movie.getTitle() ?? "",
-            maxLines: 3,
-            style: titleStyle,
-            overflow: TextOverflow.ellipsis,
-          ),
-        );
-
-        final bodySlivers = CustomScrollView(
-          slivers: <Widget>[
-            SliverAppBar(
-              expandedHeight: backdropHeight,
-              pinned: true,
-              flexibleSpace: FlexibleSpaceBar(
-                title: titleWidget,
-                centerTitle: true,
-                background: backdrop,
-              ),
-            ),
-            SliverFillRemaining(
-              hasScrollBody: false,
-              child: content,
-            ),
-          ],
-        );
-
         return Scaffold(
-          body: bodySlivers,
+          body: content,
         );
       },
     );

@@ -247,7 +247,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
       style: labelStyle,
     );
 
-    final castMargin = const SizedBox(height: padding_8);
+    const castMargin = SizedBox(height: padding_8);
 
     final castWidget = _buildCast(movie);
 

@@ -1,11 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:tmdb/tmdb_api/person_credits_response.dart';
 
-import 'external_ids.dart';
-import 'gender.dart';
 import 'media.dart';
-import 'media_type.dart';
 import 'person.dart';
 
 part 'media_credit.g.dart';
@@ -15,7 +10,7 @@ part 'media_credit.g.dart';
 class MediaCredit extends Person {
   @JsonKey(name: 'credit_id')
   String creditId;
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false)
   Media media;
 
   MediaCredit({

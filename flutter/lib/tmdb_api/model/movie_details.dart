@@ -1,13 +1,11 @@
 import 'dart:core';
 
-import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tmdb/tmdb_api/credits_response.dart';
 
 import '../date_converter.dart';
 import 'genre.dart';
 import 'language.dart';
-import 'media_type.dart';
 import 'movie.dart';
 import 'production_company.dart';
 import 'production_country.dart';

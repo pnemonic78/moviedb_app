@@ -11,7 +11,7 @@ class CreditsCrewRow {
     PersonCrew item,
     ValueChanged<PersonCrew> onTap,
   ) {
-    final onTapItem = () => onTap(item);
+    onTapItem() => onTap(item);
 
     final string = AppLocalizations.get(context);
 
@@ -20,7 +20,7 @@ class CreditsCrewRow {
     final yearWidget = Text(year);
 
     final String title = item.title() ?? "";
-    final String character = item.job ?? "";
+    final String character = item.job;
     final format = character.isEmpty
         ? string.person_cast_format_none
         : string.person_cast_format;

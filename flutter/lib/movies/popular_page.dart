@@ -6,7 +6,7 @@ import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movies_response.dart';
 
 class PopularPage extends MoviesPage {
-  PopularPage() : super();
+  const PopularPage({super.key});
 
   @override
   MoviesState<PopularPage> createState() => _PopularPageState();

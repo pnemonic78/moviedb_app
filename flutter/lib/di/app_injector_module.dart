@@ -7,7 +7,7 @@ import 'package:tmdb/tmdb_api/rest_client.dart';
 
 @module
 class AppInjectorModule {
-  MyApp get app => MyApp();
+  MyApp get app => const MyApp();
 
   @singleton
   Dio get dio => Dio();

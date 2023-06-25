@@ -16,7 +16,7 @@ import 'top_rated_page.dart';
 import 'upcoming_page.dart';
 
 class MoviesAllPage extends StatefulWidget {
-  MoviesAllPage() : super();
+  const MoviesAllPage({super.key});
 
   @override
   State<StatefulWidget> createState() => _MoviesAllPageState();
@@ -243,19 +243,19 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
   }
 
   void _onTapNowPlaying(String title) {
-    _navigateToPage(NowPlayingPage());
+    _navigateToPage(const NowPlayingPage());
   }
 
   void _onTapPopular(String title) {
-    _navigateToPage(PopularPage());
+    _navigateToPage(const PopularPage());
   }
 
   void _onTapTopRated(String title) {
-    _navigateToPage(TopRatedPage());
+    _navigateToPage(const TopRatedPage());
   }
 
   void _onTapUpcoming(String title) {
-    _navigateToPage(UpcomingPage());
+    _navigateToPage(const UpcomingPage());
   }
 
   void _onTapMovie(Movie movie) {

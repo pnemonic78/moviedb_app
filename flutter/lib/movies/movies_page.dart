@@ -14,7 +14,7 @@ import 'movies_grid_page.dart';
 import 'movies_list_page.dart';
 
 abstract class MoviesPage extends StatefulWidget {
-  MoviesPage({super.key});
+  const MoviesPage({super.key});
 }
 
 abstract class MoviesState<P extends MoviesPage> extends State<P> {
@@ -68,7 +68,7 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
     } else if (state.error == null) {
       _fetchMovies(context, movieBloc);
 
-      content = Center(child: CircularProgressIndicator());
+      content = const Center(child: CircularProgressIndicator());
     } else {
       content = const Center(
         child: Icon(
@@ -95,7 +95,7 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
     final iconViewStyle = IconButton(
       icon:
           state.showAsList ? Icon(MdiIcons.viewGrid) : Icon(MdiIcons.viewList),
-      onPressed: () => movieBloc.add(new ToggleViewStyleEvent()),
+      onPressed: () => movieBloc.add(const ToggleViewStyleEvent()),
     );
 
     return Scaffold(

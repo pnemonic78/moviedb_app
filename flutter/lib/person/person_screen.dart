@@ -73,7 +73,7 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
     final nameWidget = Text(
       person.getTitle() ?? "",
       maxLines: 2,
-      style: textTheme.headline4,
+      style: textTheme.headlineMedium,
       overflow: TextOverflow.ellipsis,
     );
 
@@ -268,8 +268,8 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
     final creditsWidget = hasCredits
         ? CreditsTable(
             credits: person.credits!,
-            onCastTap: widget.onCastTap ?? (PersonCast) => {},
-            onCrewTap: widget.onCrewTap ?? (PersonCrew) => {},
+            onCastTap: widget.onCastTap ?? (PersonCast person) => {},
+            onCrewTap: widget.onCrewTap ?? (PersonCrew person) => {},
           )
         : gone;
 

@@ -21,26 +21,26 @@ import 'model/movie.dart';
 const Duration fetchTimeout = Duration(seconds: 30);
 
 abstract class TMDBApi {
-  static const api_url = "https://api.themoviedb.org/3/";
-  static const _image_url = "https://image.tmdb.org/t/p/%s%s";
-  static const _youtube_url = "https://www.youtube.com/watch?v=%s";
-  static const _youtube_thumbnail_url = "https://img.youtube.com/vi/%s/0.jpg";
-  static const _facebook_url = "https://facebook.com/%s";
-  static const _imdb_url = "https://imdb.com/name/%s";
-  static const _instagram_url = "https://instagram.com/%s";
-  static const _twitter_url = "https://twitter.com/%s";
+  static const urlApi = "https://api.themoviedb.org/3/";
+  static const _urlImage = "https://image.tmdb.org/t/p/%s%s";
+  static const _urlYoutube = "https://www.youtube.com/watch?v=%s";
+  static const _urlYoutubeThumbnail = "https://img.youtube.com/vi/%s/0.jpg";
+  static const _urlFacebook = "https://facebook.com/%s";
+  static const _urlImdb = "https://imdb.com/name/%s";
+  static const _urlInstagram = "https://instagram.com/%s";
+  static const _urlTwitter = "https://twitter.com/%s";
 
   static const siteYouTube = "YouTube";
 
   static const _original = "original";
-  static const _backdrop_sizes = [
+  static const _backdropSizes = [
     "w300",
     "w780",
     "w1280",
     _original,
   ];
 
-  // static const _logo_sizes = [
+  // static const _logoSizes = [
   //   "w45",
   //   "w92",
   //   "w154",
@@ -49,7 +49,7 @@ abstract class TMDBApi {
   //   "w500",
   //   _original,
   // ];
-  static const _poster_sizes = [
+  static const _posterSizes = [
     "w92",
     "w154",
     "w185",
@@ -58,14 +58,14 @@ abstract class TMDBApi {
     "w780",
     _original,
   ];
-  static const _profile_sizes = [
+  static const _profileSizes = [
     "w45",
     "w185",
     "h632",
     _original,
   ];
 
-  // static const _still_sizes = [
+  // static const _stillSizes = [
   //   "w92",
   //   "w185",
   //   "w300",
@@ -77,9 +77,9 @@ abstract class TMDBApi {
     if ((path == null) || path.isEmpty || (width <= 0) || (height <= 0)) {
       return null;
     }
-    final size = findSize(width, height, _poster_sizes);
+    final size = findSize(width, height, _posterSizes);
 
-    return sprintf(_image_url, [size, path]);
+    return sprintf(_urlImage, [size, path]);
   }
 
   static String? generateBackdropUrl(String? path, double width, double height,
@@ -87,9 +87,9 @@ abstract class TMDBApi {
     if ((path == null) || path.isEmpty || (width <= 0) || (height <= 0)) {
       return null;
     }
-    final size = findSize(width, height, _backdrop_sizes);
+    final size = findSize(width, height, _backdropSizes);
 
-    return sprintf(_image_url, [size, path]);
+    return sprintf(_urlImage, [size, path]);
   }
 
   static String? generateProfileThumbnail(
@@ -98,9 +98,9 @@ abstract class TMDBApi {
     if ((path == null) || path.isEmpty || (width <= 0) || (height <= 0)) {
       return null;
     }
-    final size = findSize(width, height, _profile_sizes);
+    final size = findSize(width, height, _profileSizes);
 
-    return sprintf(_image_url, [size, path]);
+    return sprintf(_urlImage, [size, path]);
   }
 
   static String findSize(double width, double height, List<String> sizes,
@@ -201,7 +201,7 @@ abstract class TMDBApi {
 
   static Future<Widget> _generateYouTubeThumbnail(
       String videoId, double width, double height) async {
-    final url = sprintf(_youtube_thumbnail_url, [videoId]);
+    final url = sprintf(_urlYoutubeThumbnail, [videoId]);
     return CachedNetworkImage(
       imageUrl: url,
       placeholder: (context, url) => Icon(
@@ -218,25 +218,25 @@ abstract class TMDBApi {
       return null;
     }
     if (video.site == siteYouTube) {
-      return sprintf(_youtube_url, [video.key]);
+      return sprintf(_urlYoutube, [video.key]);
     }
     return null;
   }
 
   static String generateFacebookUrl(String id) {
-    return sprintf(_facebook_url, [id]);
+    return sprintf(_urlFacebook, [id]);
   }
 
   static String generateImdbUrl(String id) {
-    return sprintf(_imdb_url, [id]);
+    return sprintf(_urlImdb, [id]);
   }
 
   static String generateInstagramUrl(String id) {
-    return sprintf(_instagram_url, [id]);
+    return sprintf(_urlInstagram, [id]);
   }
 
   static String generateTwitterUrl(String id) {
-    return sprintf(_twitter_url, [id]);
+    return sprintf(_urlTwitter, [id]);
   }
 
   static MovieBackdrop generateBackdrop({

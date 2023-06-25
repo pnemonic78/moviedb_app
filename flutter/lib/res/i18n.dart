@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'strings.dart';
 import 'strings_he.dart';
 
-const ISO639_ENGLISH = 'en';
-const ISO639_HEBREW = 'he';
+const iso639English = 'en';
+const iso639Hebrew = 'he';
 
 class AppLocalizations {
   AppLocalizations(this.locale);
@@ -21,18 +21,18 @@ class AppLocalizations {
   }
 
   static final Map<String, Map<String, String>> _localizedValues = {
-    ISO639_ENGLISH: R.string,
-    ISO639_HEBREW: R_he.string,
+    iso639English: R.string,
+    iso639Hebrew: R_he.string,
   };
 
   static const locales = [
-    Locale(ISO639_ENGLISH, ''), // English, no country code
-    Locale(ISO639_HEBREW, ''), // Hebrew, no country code
+    Locale(iso639English, ''), // English, no country code
+    Locale(iso639Hebrew, ''), // Hebrew, no country code
   ];
 
   String _getValue(String key) {
     return _localizedValues[locale.languageCode]?[key] ??
-        _localizedValues[ISO639_ENGLISH]![key]!;
+        _localizedValues[iso639English]![key]!;
   }
 
   String get title {
@@ -176,7 +176,7 @@ class AppLocalizations {
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const AppLocalizationsDelegate();
 
-  static const _languages = [ISO639_ENGLISH, ISO639_HEBREW];
+  static const _languages = [iso639English, iso639Hebrew];
 
   @override
   bool isSupported(Locale locale) => _languages.contains(locale.languageCode);

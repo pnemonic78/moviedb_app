@@ -15,10 +15,10 @@ class CastTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final onTapCast = () => onTap(cast);
+    onTapCast() => onTap(cast);
 
-    final imageWidth = castTileWidth;
-    final imageHeight = castTileHeight;
+    const imageWidth = castTileWidth;
+    const imageHeight = castTileHeight;
     final thumbnail = TMDBApi.generateProfile(
       profilePath: cast.profilePath,
       profileWidth: imageWidth,

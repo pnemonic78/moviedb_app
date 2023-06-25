@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
 

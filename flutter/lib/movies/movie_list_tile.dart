@@ -21,10 +21,10 @@ class MovieListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final thumbnailWidth = posterListWidth;
-    final thumbnailHeight = posterListHeight;
-    final imageWidth = thumbnailWidth;
-    final imageHeight = thumbnailHeight / _parallaxFactor;
+    const thumbnailWidth = posterListWidth;
+    const thumbnailHeight = posterListHeight;
+    const imageWidth = thumbnailWidth;
+    const imageHeight = thumbnailHeight / _parallaxFactor;
 
     final thumbnail = TMDBApi.generatePoster(
       posterPath: movie.posterPath,

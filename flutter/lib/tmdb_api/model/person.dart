@@ -5,7 +5,6 @@ import '../date_converter.dart';
 import 'external_ids.dart';
 import 'gender.dart';
 import 'media.dart';
-import 'media_type.dart';
 
 part 'person.g.dart';
 
@@ -80,6 +79,6 @@ class Person extends Media {
 
   @override
   String? getTitle() {
-    return name ?? originalName;
+    return name;
   }
 }

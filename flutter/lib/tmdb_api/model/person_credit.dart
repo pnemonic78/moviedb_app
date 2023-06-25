@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'media.dart';
@@ -11,9 +10,9 @@ part 'person_credit.g.dart';
 class PersonCredit {
   @JsonKey(name: 'credit_id')
   String creditId;
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false)
   Media media;
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false)
   Person person;
 
   PersonCredit({

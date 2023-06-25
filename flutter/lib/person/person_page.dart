@@ -15,9 +15,9 @@ import 'person_screen.dart';
 
 class PersonPage extends StatefulWidget {
   final String title;
-  Person person;
+  final Person person;
 
-  PersonPage({super.key, required this.title, required this.person});
+  const PersonPage({super.key, required this.title, required this.person});
 
   @override
   State<PersonPage> createState() => _PersonPageState();
@@ -40,6 +40,8 @@ class _PersonPageState extends State<PersonPage> {
 
   @override
   Widget build(BuildContext context) {
+    String name = "";
+
     return StreamBuilder<Person>(
       stream: _fetchPerson(context),
       builder: (BuildContext context, AsyncSnapshot<Person> snapshot) {
@@ -47,7 +49,7 @@ class _PersonPageState extends State<PersonPage> {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
             final Person person = snapshot.data!;
-            widget.person = person;
+            name = person.name;
             content = SingleChildScrollView(
               child: PersonDetailsWidget(
                 person: person,
@@ -68,11 +70,9 @@ class _PersonPageState extends State<PersonPage> {
           content = const Center(child: CircularProgressIndicator());
         }
 
-        final person = widget.person;
-
         return Scaffold(
           appBar: AppBar(
-            title: Text(person.name ?? ""),
+            title: Text(name),
           ),
           body: content,
         );

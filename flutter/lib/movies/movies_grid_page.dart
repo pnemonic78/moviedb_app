@@ -36,7 +36,7 @@ class _MoviesGridState<P extends MoviesGridPage> extends State<P> {
     final media = MediaQuery.of(context);
     final screenSize = media.size;
     final screenWidth = screenSize.width;
-    final cellWidth = padding_8 + posterGridWidth + padding_8;
+    const cellWidth = padding_8 + posterGridWidth + padding_8;
     final columnCount = screenWidth ~/ cellWidth;
     final columnWidth = screenWidth / columnCount;
     final cellRatio = 0.49 + (-0.02 * screenSize.aspectRatio);

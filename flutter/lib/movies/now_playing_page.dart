@@ -6,7 +6,7 @@ import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movies_response.dart';
 
 class NowPlayingPage extends MoviesPage {
-  NowPlayingPage() : super();
+  const NowPlayingPage({super.key});
 
   @override
   MoviesState<NowPlayingPage> createState() => _NowPlayingPageState();

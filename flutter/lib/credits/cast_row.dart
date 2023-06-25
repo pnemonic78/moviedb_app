@@ -11,7 +11,7 @@ class CreditsCastRow {
     PersonCast item,
     ValueChanged<PersonCast> onTap,
   ) {
-    final onTapItem = () => onTap(item);
+    onTapItem() => onTap(item);
 
     final string = AppLocalizations.get(context);
 
@@ -20,7 +20,7 @@ class CreditsCastRow {
     final yearWidget = Text(year);
 
     final String title = item.title() ?? "";
-    final String character = item.character ?? "";
+    final String character = item.character;
     final format = character.isEmpty
         ? string.person_cast_format_none
         : string.person_cast_format;

@@ -1,8 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'media.dart';
-import 'person.dart';
 import 'person_credit.dart';
 
 part 'person_cast.g.dart';

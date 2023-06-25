@@ -6,7 +6,7 @@ import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movies_response.dart';
 
 class UpcomingPage extends MoviesPage {
-  UpcomingPage() : super();
+  const UpcomingPage({super.key});
 
   @override
   MoviesState<UpcomingPage> createState() => _UpcomingPageState();

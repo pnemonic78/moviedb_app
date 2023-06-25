@@ -9,6 +9,8 @@ import 'package:tmdb/res/i18n.dart';
 
 @injectable
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     final cardTheme = CardTheme.of(context).copyWith(
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData.dark().copyWith(
         cardTheme: cardTheme,
       ),
-      home: MoviesAllPage(),
+      home: const MoviesAllPage(),
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

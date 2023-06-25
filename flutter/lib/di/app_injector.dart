@@ -1,4 +1,3 @@
-import 'package:injectable/injectable.dart';
 import 'package:tmdb/main/my_app.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 
