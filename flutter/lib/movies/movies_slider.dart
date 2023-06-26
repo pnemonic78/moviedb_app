@@ -13,7 +13,7 @@ class MoviesSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final titleHeight = textTheme.titleLarge?.fontSize ?? 20;
+    final titleHeight = textTheme.titleLarge?.fontSize ?? (20 * 2);
     final tileHeight = paddingVertical_8.top +
         posterGridHeight +
         titleHeight +

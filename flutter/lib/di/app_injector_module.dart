@@ -10,7 +10,7 @@ class AppInjectorModule {
   MyApp get app => const MyApp();
 
   @singleton
-  Dio get dio => Dio();
+  Dio get dio => Dio(BaseOptions(baseUrl: 'https://api.themoviedb.org/3'));
 
   @lazySingleton
   RestClient client(Dio dio) => RestClient.of(dio);

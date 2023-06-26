@@ -18,7 +18,7 @@ abstract class RestClient {
   factory RestClient(Dio dio, String baseUrl) = _RestClient;
 
   @factoryMethod
-  static RestClient of(Dio dio) => RestClient(dio, 'https://api.themoviedb.org/3');
+  static RestClient of(Dio dio) => RestClient(dio, '');
 
   @GET("/movie/now_playing")
   Future<MoviesResponse> getMoviesNowPlaying({
