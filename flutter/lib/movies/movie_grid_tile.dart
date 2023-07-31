@@ -52,8 +52,8 @@ class MovieGridTile extends StatelessWidget {
 
     final titleWidget = Text(
       movie.title,
-      maxLines: 1,
-      style: textTheme.titleLarge,
+      maxLines: 2,
+      style: textTheme.titleMedium,
       overflow: TextOverflow.ellipsis,
     );
 
@@ -62,7 +62,7 @@ class MovieGridTile extends StatelessWidget {
       rating: movie.voteAverage / 2.0,
       color: Colors.yellow,
       borderColor: Colors.yellow,
-      size: (width - voteAverageWidgetPadding) / 5.5,
+      size: (width - voteAverageWidgetPadding) / 7,
     );
 
     final dateValue = movie.releaseDate;
@@ -71,7 +71,7 @@ class MovieGridTile extends StatelessWidget {
       maxLines: 1,
     );
 
-    final card = Card(
+    return Card(
       child: InkWell(
         onTap: () => onTap(movie),
         child: SizedBox(
@@ -89,7 +89,5 @@ class MovieGridTile extends StatelessWidget {
         ),
       ),
     );
-
-    return card;
   }
 }

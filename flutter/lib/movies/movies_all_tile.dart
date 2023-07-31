@@ -4,6 +4,8 @@ import 'package:tmdb/res/dimens.dart';
 
 import '../tmdb_api/api.dart';
 
+const maxLinesMoviesAllTile = 2;
+
 class MoviesAllTile extends MovieGridTile {
   const MoviesAllTile({
     super.key,
@@ -43,12 +45,12 @@ class MoviesAllTile extends MovieGridTile {
 
     final titleWidget = Text(
       movie.title,
-      maxLines: 2,
+      maxLines: maxLinesMoviesAllTile,
       style: textTheme.titleMedium,
       overflow: TextOverflow.ellipsis,
     );
 
-    final card = Card(
+    return Card(
       child: InkWell(
         onTap: () => onTap(movie),
         child: SizedBox(
@@ -64,7 +66,5 @@ class MoviesAllTile extends MovieGridTile {
         ),
       ),
     );
-
-    return card;
   }
 }
