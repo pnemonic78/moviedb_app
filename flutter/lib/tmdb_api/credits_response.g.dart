@@ -8,7 +8,7 @@ part of 'credits_response.dart';
 
 CreditsResponse _$CreditsResponseFromJson(Map<String, dynamic> json) {
   return CreditsResponse(
-    id: json['id'] as int,
+    id: json['id'] as int?,
     cast: (json['cast'] == null)
         ? []
         : (json['cast'] as List)

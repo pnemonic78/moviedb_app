@@ -7,7 +7,7 @@ part 'videos_response.g.dart';
 @JsonSerializable(explicitToJson: true, createToJson: false)
 class VideosResponse {
   @JsonKey(name: 'id')
-  int id;
+  int? id;
   @JsonKey(name: 'results')
   List<MovieVideo> results;
 

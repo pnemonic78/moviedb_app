@@ -9,7 +9,7 @@ part of 'person_credits_response.dart';
 PersonCreditsResponse _$PersonCreditsResponseFromJson(
     Map<String, dynamic> json) {
   return PersonCreditsResponse(
-    id: json['id'] as int,
+    id: json['id'] as int?,
     cast: (json['cast'] == null)
         ? []
         : (json['cast'] as List)

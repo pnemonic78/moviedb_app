@@ -7,7 +7,7 @@ part 'images_response.g.dart';
 @JsonSerializable(explicitToJson: true, createToJson: false)
 class ImagesResponse {
   @JsonKey(name: 'id')
-  int id;
+  int? id;
   @JsonKey(name: 'backdrops')
   List<MovieImage> backdrops;
   @JsonKey(name: 'posters')

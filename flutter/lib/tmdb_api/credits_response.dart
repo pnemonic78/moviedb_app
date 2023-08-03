@@ -8,14 +8,14 @@ part 'credits_response.g.dart';
 @JsonSerializable(explicitToJson: true, createToJson: false)
 class CreditsResponse {
   @JsonKey(name: 'id')
-  int id;
+  int? id;
   @JsonKey(name: 'cast')
   List<MediaCast> cast;
   @JsonKey(name: 'crew')
   List<MediaCrew> crew;
 
   CreditsResponse({
-    required this.id,
+    this.id,
     this.cast = const [],
     this.crew = const [],
   });
