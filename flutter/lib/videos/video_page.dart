@@ -37,7 +37,8 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
     } else {
       final url = TMDBApi.getVideoUrl(widget.video);
       if (url != null) {
-        _controller = VideoPlayerController.network(url)
+        Uri uri = Uri.parse(url);
+        _controller = VideoPlayerController.networkUrl(uri)
           ..addListener(() {
             setState(() {});
           })
