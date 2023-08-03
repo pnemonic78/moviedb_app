@@ -1,37 +1,37 @@
-import 'app_injector.dart' as _i1;
-import 'app_injector_module.dart' as _i2;
-import 'package:dio/dio.dart' as _i3;
-import '../tmdb_api/rest_client.dart' as _i4;
-import '../tmdb_api/api.dart' as _i5;
-import 'dart:async' as _i6;
-import '../main/my_app.dart' as _i7;
+import 'app_injector.dart' as i1;
+import 'app_injector_module.dart' as i2;
+import 'package:dio/dio.dart' as i3;
+import '../tmdb_api/rest_client.dart' as i4;
+import '../tmdb_api/api.dart' as i5;
+import 'dart:async' as i6;
+import '../main/my_app.dart' as i7;
 
-class AppInjector$Injector implements _i1.AppInjector {
+class AppInjector$Injector implements i1.AppInjector {
   AppInjector$Injector._(this._appInjectorModule);
 
-  final _i2.AppInjectorModule _appInjectorModule;
+  final i2.AppInjectorModule _appInjectorModule;
 
-  _i3.Dio? _singletonDio;
+  i3.Dio? _singletonDio;
 
-  _i4.RestClient? _singletonRestClient;
+  i4.RestClient? _singletonRestClient;
 
-  _i5.TMDBApi? _singletonTMDBApi;
+  i5.TMDBApi? _singletonTMDBApi;
 
-  static _i6.Future<_i1.AppInjector> create(
-      _i2.AppInjectorModule appInjectorModule) async {
+  static i6.Future<i1.AppInjector> create(
+      i2.AppInjectorModule appInjectorModule) async {
     final injector = AppInjector$Injector._(appInjectorModule);
 
     return injector;
   }
 
-  _i7.MyApp _createMyApp() => _appInjectorModule.app;
-  _i5.TMDBApi _createTMDBApi() =>
+  i7.MyApp _createMyApp() => _appInjectorModule.app;
+  i5.TMDBApi _createTMDBApi() =>
       _singletonTMDBApi ??= _appInjectorModule.api(_createRestClient());
-  _i4.RestClient _createRestClient() =>
+  i4.RestClient _createRestClient() =>
       _singletonRestClient ??= _appInjectorModule.client(_createDio());
-  _i3.Dio _createDio() => _singletonDio ??= _appInjectorModule.dio;
+  i3.Dio _createDio() => _singletonDio ??= _appInjectorModule.dio;
   @override
-  _i7.MyApp get app => _createMyApp();
+  i7.MyApp get app => _createMyApp();
   @override
-  _i5.TMDBApi get api => _createTMDBApi();
+  i5.TMDBApi get api => _createTMDBApi();
 }
