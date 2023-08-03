@@ -7,4 +7,6 @@ enum Gender {
   female,
   @JsonValue(2)
   male,
+  @JsonValue(3)
+  other,
 }

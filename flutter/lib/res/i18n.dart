@@ -134,6 +134,10 @@ class AppLocalizations {
     return _getValue('gender_male');
   }
 
+  String get gender_other {
+    return _getValue('gender_other');
+  }
+
   String get person_cast_label {
     return _getValue('person_cast_label');
   }

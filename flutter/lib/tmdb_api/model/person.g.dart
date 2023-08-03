@@ -73,4 +73,5 @@ const _$GenderEnumMap = {
   Gender.unknown: 0,
   Gender.female: 1,
   Gender.male: 2,
+  Gender.other: 3,
 };

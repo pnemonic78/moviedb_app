@@ -32,6 +32,7 @@ class R_he {
     "biography_label": "ביוגרפיה",
     "gender_female": "נקבה",
     "gender_male": "זכר",
+    "gender_other": "לא בינארי",
     "person_cast_label": "משחק",
     "person_cast_format": "<b>%s</b> בתור %s",
     "person_cast_format_none": "<b>%s</b>",

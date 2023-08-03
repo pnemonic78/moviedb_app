@@ -102,6 +102,9 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
       case Gender.male:
         gender = string.gender_male;
         break;
+      case Gender.other:
+        gender = string.gender_other;
+        break;
       default:
         break;
     }

@@ -20,6 +20,7 @@ class MoviePosterPage extends StatelessWidget {
     );
     final posterWidget = PinchZoom(
       child: poster,
+      maxScale: 6.0,
     );
 
     return Scaffold(
