@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import 'person.dart';
 import 'person_credit.dart';
 
 part 'person_crew.g.dart';
@@ -27,6 +28,6 @@ class PersonCrew extends PersonCredit {
   }
 
   /// Creates a [PersonCrew] from a JSON object.
-  static PersonCrew? fromJson(Map<String, dynamic>? json) =>
-      (json == null) ? null : _$PersonCrewFromJson(json);
+  static PersonCrew? fromJson(Map<String, dynamic>? json, Person person) =>
+      (json == null) ? null : _$PersonCrewFromJson(json, person);
 }

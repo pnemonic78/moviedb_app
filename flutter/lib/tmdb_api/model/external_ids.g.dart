@@ -8,7 +8,7 @@ part of 'external_ids.dart';
 
 PersonExternalIds _$PersonExternalIdsFromJson(Map<String, dynamic> json) {
   return PersonExternalIds(
-    id: json['id'] as int,
+    id: json['id'] as int?,
     imdbId: json['imdb_id'] as String?,
     facebookId: json['facebook_id'] as String?,
     freebaseMid: json['freebase_mid'] as String?,

@@ -5,7 +5,7 @@ part 'external_ids.g.dart';
 @JsonSerializable(explicitToJson: true, createToJson: false)
 class PersonExternalIds {
   @JsonKey(name: 'id')
-  int id;
+  int? id;
 
   /// IMDB ID
   @JsonKey(name: 'imdb_id')
@@ -36,7 +36,7 @@ class PersonExternalIds {
   String? twitterId;
 
   PersonExternalIds({
-    required this.id,
+    this.id,
     this.imdbId,
     this.facebookId,
     this.freebaseMid,

@@ -9,14 +9,14 @@ part 'person_credit.g.dart';
 @JsonSerializable(explicitToJson: true, createToJson: false)
 class PersonCredit {
   @JsonKey(name: 'credit_id')
-  String creditId;
+  String? creditId;
   @JsonKey(includeFromJson: false)
   Media media;
   @JsonKey(includeFromJson: false)
   Person person;
 
   PersonCredit({
-    required this.creditId,
+    this.creditId,
     required this.media,
     required this.person,
   });
@@ -27,8 +27,8 @@ class PersonCredit {
   }
 
   /// Creates a [PersonCredit] from a JSON object.
-  static PersonCredit? fromJson(Map<String, dynamic>? json) =>
-      (json == null) ? null : _$PersonCreditFromJson(json);
+  static PersonCredit? fromJson(Map<String, dynamic>? json, Person person) =>
+      (json == null) ? null : _$PersonCreditFromJson(json, person);
 
   String? title() {
     return media.getTitle() ?? person.getTitle();

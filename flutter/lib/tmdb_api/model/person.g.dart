@@ -7,7 +7,7 @@ part of 'person.dart';
 // **************************************************************************
 
 Person _$PersonFromJson(Map<String, dynamic> json) {
-  return Person(
+  final person = Person(
     media: Media.fromJson(json)!,
     aliases: (json['also_known_as'] == null)
         ? []
@@ -19,10 +19,6 @@ Person _$PersonFromJson(Map<String, dynamic> json) {
     birthday:
         const MovieDateTimeConverter().fromJson(json['birthday'] as String?),
     birthplace: json['place_of_birth'] as String?,
-    credits: json['combined_credits'] == null
-        ? null
-        : PersonCreditsResponse.fromJson(
-            json['combined_credits'] as Map<String, dynamic>?),
     deathday:
         const MovieDateTimeConverter().fromJson(json['deathday'] as String?),
     externalIds: json['external_ids'] == null
@@ -37,6 +33,11 @@ Person _$PersonFromJson(Map<String, dynamic> json) {
     originalName: json['original_name'] as String?,
     profilePath: json['profile_path'] as String?,
   );
+  return person
+    ..credits = json['combined_credits'] == null
+        ? null
+        : PersonCreditsResponse.fromJson(
+            json['combined_credits'] as Map<String, dynamic>?, person);
 }
 
 T _$enumDecode<T>(

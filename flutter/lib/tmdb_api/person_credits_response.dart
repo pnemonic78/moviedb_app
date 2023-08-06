@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tmdb/tmdb_api/model/person.dart';
 
 import 'model/person_cast.dart';
 import 'model/person_crew.dart';
@@ -21,6 +22,9 @@ class PersonCreditsResponse {
   });
 
   /// Creates a [PersonCreditsResponse] from a JSON object.
-  static PersonCreditsResponse? fromJson(Map<String, dynamic>? json) =>
-      (json == null) ? null : _$PersonCreditsResponseFromJson(json);
+  static PersonCreditsResponse? fromJson(
+    Map<String, dynamic>? json,
+    Person person,
+  ) =>
+      (json == null) ? null : _$PersonCreditsResponseFromJson(json, person);
 }

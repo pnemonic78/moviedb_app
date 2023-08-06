@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import 'person.dart';
 import 'person_credit.dart';
 
 part 'person_cast.g.dart';
@@ -7,7 +8,7 @@ part 'person_cast.g.dart';
 @JsonSerializable(explicitToJson: true, createToJson: false)
 class PersonCast extends PersonCredit {
   @JsonKey(name: 'cast_id')
-  int castId;
+  int? castId;
   @JsonKey(name: 'character')
   String character;
   @JsonKey(name: 'order')
@@ -15,7 +16,7 @@ class PersonCast extends PersonCredit {
 
   PersonCast({
     required PersonCredit credit,
-    required this.castId,
+    this.castId,
     required this.character,
     this.order = 0,
   }) : super(
@@ -30,6 +31,6 @@ class PersonCast extends PersonCredit {
   }
 
   /// Creates a [PersonCast] from a JSON object.
-  static PersonCast? fromJson(Map<String, dynamic>? json) =>
-      (json == null) ? null : _$PersonCastFromJson(json);
+  static PersonCast? fromJson(Map<String, dynamic>? json, Person person) =>
+      (json == null) ? null : _$PersonCastFromJson(json, person);
 }
