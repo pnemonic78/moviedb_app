@@ -1,8 +1,7 @@
 import 'dart:ui';
 
 import 'package:json_annotation/json_annotation.dart';
-
-import '../locale_converter.dart';
+import 'package:tmdb/tmdb_api/locale_converter.dart';
 
 part 'video.g.dart';
 

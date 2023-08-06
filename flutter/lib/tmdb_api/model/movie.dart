@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tmdb/tmdb_api/date_converter.dart';
 
-import '../date_converter.dart';
 import 'media.dart';
 import 'media_type.dart';
 

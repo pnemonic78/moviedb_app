@@ -1,10 +1,10 @@
 import 'app_injector.dart' as i1;
 import 'app_injector_module.dart' as i2;
 import 'package:dio/dio.dart' as i3;
-import '../tmdb_api/rest_client.dart' as i4;
-import '../tmdb_api/api.dart' as i5;
+import 'package:tmdb/tmdb_api/rest_client.dart' as i4;
+import 'package:tmdb/tmdb_api/api.dart' as i5;
 import 'dart:async' as i6;
-import '../main/my_app.dart' as i7;
+import 'package:tmdb/main/my_app.dart' as i7;
 
 class AppInjector$Injector implements i1.AppInjector {
   AppInjector$Injector._(this._appInjectorModule);

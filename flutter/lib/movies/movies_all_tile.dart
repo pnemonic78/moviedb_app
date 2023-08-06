@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tmdb/movies/movie_grid_tile.dart';
+import 'package:tmdb/parallax/parallax_image.dart';
 import 'package:tmdb/res/dimens.dart';
-
-import '../tmdb_api/api.dart';
+import 'package:tmdb/tmdb_api/api.dart';
 
 const maxLinesMoviesAllTile = 2;
 
@@ -34,10 +34,9 @@ class MoviesAllTile extends MovieGridTile {
       child: SizedBox(
         width: thumbnailWidth,
         height: thumbnailHeight,
-        // child: ParallaxImage(
-        // extent: thumbnailHeight,
-        child: thumbnail,
-        // ),
+        child: ParallaxImage(
+          child: thumbnail,
+        ),
       ),
     );
 

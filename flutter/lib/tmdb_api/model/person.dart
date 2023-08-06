@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tmdb/tmdb_api/date_converter.dart';
 import 'package:tmdb/tmdb_api/person_credits_response.dart';
 
-import '../date_converter.dart';
 import 'external_ids.dart';
 import 'gender.dart';
 import 'media.dart';

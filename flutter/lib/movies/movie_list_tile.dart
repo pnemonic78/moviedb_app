@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
+import 'package:tmdb/parallax/parallax_image.dart';
 import 'package:tmdb/res/dimens.dart';
+import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
-
-import '../tmdb_api/api.dart';
 
 final _dateFormat = DateFormat.yMMMd();
 const _parallaxFactor = 0.85;
@@ -36,10 +36,9 @@ class MovieListTile extends StatelessWidget {
       child: SizedBox(
         width: thumbnailWidth,
         height: thumbnailHeight,
-        // child: ParallaxImage(
-        //   extent: thumbnailHeight,
-        child: thumbnail,
-        // ),
+        child: ParallaxImage(
+          child: thumbnail,
+        ),
       ),
     );
 

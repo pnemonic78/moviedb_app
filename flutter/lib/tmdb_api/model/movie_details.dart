@@ -2,8 +2,8 @@ import 'dart:core';
 
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tmdb/tmdb_api/credits_response.dart';
+import 'package:tmdb/tmdb_api/date_converter.dart';
 
-import '../date_converter.dart';
 import 'genre.dart';
 import 'language.dart';
 import 'movie.dart';

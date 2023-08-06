@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pinch_zoom/pinch_zoom.dart';
 import 'package:tmdb/res/dimens.dart';
+import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/movie_details.dart';
-
-import '../tmdb_api/api.dart';
 
 class MoviePosterPage extends StatelessWidget {
   final MovieDetails movie;
@@ -19,8 +18,8 @@ class MoviePosterPage extends StatelessWidget {
       fit: BoxFit.contain,
     );
     final posterWidget = PinchZoom(
-      child: poster,
       maxScale: 6.0,
+      child: poster,
     );
 
     return Scaffold(
