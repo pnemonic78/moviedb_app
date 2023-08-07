@@ -10,32 +10,37 @@ import 'package:tmdb/tmdb_api/model/movie_details.dart';
 import 'package:tmdb/tmdb_api/model/person.dart';
 import 'package:tmdb/tmdb_api/model/video.dart';
 import 'package:tmdb/tmdb_api/movies_response.dart';
+import 'package:tmdb/tmdb_api/poster_widget.dart';
+import 'package:tmdb/tmdb_api/profile_widget.dart';
 import 'package:tmdb/tmdb_api/videos_response.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
+import 'backdrop_widget.dart';
 import 'model/movie.dart';
-import 'movies_response.dart';
 
-final Duration fetchTimeout = Duration(seconds: 30);
+const Duration fetchTimeout = Duration(seconds: 30);
 
 abstract class TMDBApi {
-  static const api_url = "https://api.themoviedb.org/3/";
-  static const _image_url = "https://image.tmdb.org/t/p/%s%s";
-  static const _youtube_url = "https://www.youtube.com/watch?v=%s";
-  static const _youtube_thumbnail_url = "https://img.youtube.com/vi/%s/0.jpg";
-  static const _facebook_url = "https://facebook.com/%s";
-  static const _imdb_url = "https://imdb.com/name/%s";
-  static const _instagram_url = "https://instagram.com/%s";
-  static const _twitter_url = "https://twitter.com/%s";
+  static const urlApi = "https://api.themoviedb.org/3/";
+  static const _urlImage = "https://image.tmdb.org/t/p/%s%s";
+  static const _urlYoutube = "https://www.youtube.com/watch?v=%s";
+  static const _urlYoutubeThumbnail = "https://img.youtube.com/vi/%s/0.jpg";
+  static const _urlFacebook = "https://facebook.com/%s";
+  static const _urlImdb = "https://imdb.com/name/%s";
+  static const _urlInstagram = "https://instagram.com/%s";
+  static const _urlTwitter = "https://twitter.com/%s";
+
+  static const siteYouTube = "YouTube";
 
   static const _original = "original";
-  static const _backdrop_sizes = [
+  static const _backdropSizes = [
     "w300",
     "w780",
     "w1280",
     _original,
   ];
-  // static const _logo_sizes = [
+
+  // static const _logoSizes = [
   //   "w45",
   //   "w92",
   //   "w154",
@@ -44,7 +49,7 @@ abstract class TMDBApi {
   //   "w500",
   //   _original,
   // ];
-  static const _poster_sizes = [
+  static const _posterSizes = [
     "w92",
     "w154",
     "w185",
@@ -53,48 +58,49 @@ abstract class TMDBApi {
     "w780",
     _original,
   ];
-  static const _profile_sizes = [
+  static const _profileSizes = [
     "w45",
     "w185",
     "h632",
     _original,
   ];
-  // static const _still_sizes = [
+
+  // static const _stillSizes = [
   //   "w92",
   //   "w185",
   //   "w300",
   //   _original,
   // ];
 
-  static String generatePosterUrl(String path, double width, double height,
+  static String? generatePosterUrl(String? path, double width, double height,
       {double devicePixelRatio = 1.0}) {
-    if ((path == null) || (width <= 0) || (height <= 0)) {
+    if ((path == null) || path.isEmpty || (width <= 0) || (height <= 0)) {
       return null;
     }
-    final size = findSize(width, height, _poster_sizes);
+    final size = findSize(width, height, _posterSizes);
 
-    return sprintf(_image_url, [size, path]);
+    return sprintf(_urlImage, [size, path]);
   }
 
-  static String generateBackdropUrl(String path, double width, double height,
+  static String? generateBackdropUrl(String? path, double width, double height,
       {double devicePixelRatio = 1.0}) {
-    if ((path == null) || (width <= 0) || (height <= 0)) {
+    if ((path == null) || path.isEmpty || (width <= 0) || (height <= 0)) {
       return null;
     }
-    final size = findSize(width, height, _backdrop_sizes);
+    final size = findSize(width, height, _backdropSizes);
 
-    return sprintf(_image_url, [size, path]);
+    return sprintf(_urlImage, [size, path]);
   }
 
-  static String generateProfileThumbnail(
-      String path, double width, double height,
+  static String? generateProfileThumbnail(
+      String? path, double width, double height,
       {double devicePixelRatio = 1.0}) {
-    if ((path == null) || (width <= 0) || (height <= 0)) {
+    if ((path == null) || path.isEmpty || (width <= 0) || (height <= 0)) {
       return null;
     }
-    final size = findSize(width, height, _profile_sizes);
+    final size = findSize(width, height, _profileSizes);
 
-    return sprintf(_image_url, [size, path]);
+    return sprintf(_urlImage, [size, path]);
   }
 
   static String findSize(double width, double height, List<String> sizes,
@@ -166,17 +172,17 @@ abstract class TMDBApi {
     return getPersonById(context, person.id);
   }
 
-  static Future<Widget> generateVideoThumbnail(
-      MovieVideo video, double width, double height) async {
+  static Future<Widget?>? generateVideoThumbnail(
+      MovieVideo? video, double width, double height) async {
     if ((video == null) || (width <= 0) || (height <= 0)) {
       return null;
     }
 
-    if (video.site == "YouTube") {
+    if (video.site == siteYouTube) {
       return _generateYouTubeThumbnail(video.key, width, height);
     }
 
-    var videoUrl;
+    var videoUrl = getVideoUrl(video);
     if (videoUrl != null) {
       final temp = await getTemporaryDirectory();
       final path = await VideoThumbnail.thumbnailFile(
@@ -186,6 +192,7 @@ abstract class TMDBApi {
         maxHeight: height.toInt(),
         quality: 75,
       );
+      if (path == null) return null;
       final file = File(path);
       return Image.file(file, width: width, height: height);
     }
@@ -194,7 +201,7 @@ abstract class TMDBApi {
 
   static Future<Widget> _generateYouTubeThumbnail(
       String videoId, double width, double height) async {
-    final url = sprintf(_youtube_thumbnail_url, [videoId]);
+    final url = sprintf(_urlYoutubeThumbnail, [videoId]);
     return CachedNetworkImage(
       imageUrl: url,
       placeholder: (context, url) => Icon(
@@ -206,29 +213,71 @@ abstract class TMDBApi {
     );
   }
 
-  static String getVideoUrl(MovieVideo video) {
+  static String? getVideoUrl(MovieVideo? video) {
     if (video == null) {
       return null;
     }
-    if (video.site == "YouTube") {
-      return sprintf(_youtube_url, [video.key]);
+    if (video.site == siteYouTube) {
+      return sprintf(_urlYoutube, [video.key]);
     }
     return null;
   }
 
   static String generateFacebookUrl(String id) {
-    return sprintf(_facebook_url, [id]);
+    return sprintf(_urlFacebook, [id]);
   }
 
   static String generateImdbUrl(String id) {
-    return sprintf(_imdb_url, [id]);
+    return sprintf(_urlImdb, [id]);
   }
 
   static String generateInstagramUrl(String id) {
-    return sprintf(_instagram_url, [id]);
+    return sprintf(_urlInstagram, [id]);
   }
 
   static String generateTwitterUrl(String id) {
-    return sprintf(_twitter_url, [id]);
+    return sprintf(_urlTwitter, [id]);
+  }
+
+  static MovieBackdrop generateBackdrop({
+    String? backdropPath,
+    required double backdropWidth,
+    required double backdropHeight,
+    BoxFit fit = BoxFit.fitWidth,
+  }) {
+    return MovieBackdrop(
+      backdropPath: backdropPath,
+      backdropWidth: backdropWidth,
+      backdropHeight: backdropHeight,
+      fit: fit,
+    );
+  }
+
+  static MoviePoster generatePoster({
+    String? posterPath,
+    required double posterWidth,
+    required double posterHeight,
+    BoxFit fit = BoxFit.fitHeight,
+  }) {
+    return MoviePoster(
+      posterPath: posterPath,
+      posterWidth: posterWidth,
+      posterHeight: posterHeight,
+      fit: fit,
+    );
+  }
+
+  static MovieProfile generateProfile({
+    String? profilePath,
+    required double profileWidth,
+    required double profileHeight,
+    BoxFit fit = BoxFit.fitHeight,
+  }) {
+    return MovieProfile(
+      profilePath: profilePath,
+      profileWidth: profileWidth,
+      profileHeight: profileHeight,
+      fit: fit,
+    );
   }
 }

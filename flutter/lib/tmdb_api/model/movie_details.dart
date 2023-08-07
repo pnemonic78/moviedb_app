@@ -1,13 +1,11 @@
 import 'dart:core';
 
-import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tmdb/tmdb_api/credits_response.dart';
+import 'package:tmdb/tmdb_api/date_converter.dart';
 
-import 'date_converter.dart';
 import 'genre.dart';
 import 'language.dart';
-import 'media_type.dart';
 import 'movie.dart';
 import 'production_company.dart';
 import 'production_country.dart';
@@ -20,13 +18,13 @@ class MovieDetails extends Movie {
   @JsonKey(name: 'budget')
   int budget;
   @JsonKey(name: 'credits')
-  CreditsResponse credits;
+  CreditsResponse? credits;
   @JsonKey(name: 'genres')
   List<Genre> genres;
   @JsonKey(name: 'homepage')
-  String homepage;
+  String? homepage;
   @JsonKey(name: 'imdb_id')
-  String imdbId;
+  String? imdbId;
   @JsonKey(name: 'production_companies')
   List<ProductionCompany> productionCompanies;
   @JsonKey(name: 'production_countries')
@@ -38,42 +36,42 @@ class MovieDetails extends Movie {
   @JsonKey(name: 'spoken_languages')
   List<SpokenLanguage> spokenLanguages;
   @JsonKey(name: 'status')
-  String status;
+  String? status;
   @JsonKey(name: 'tagline')
-  String tagline;
+  String? tagline;
 
   MovieDetails({
-    @required Movie movie,
-    this.budget,
-    this.genres,
+    required Movie movie,
+    this.budget = 0,
+    this.genres = const [],
     this.homepage,
     this.imdbId,
-    this.productionCompanies,
-    this.productionCountries,
-    this.revenue,
-    this.runtime,
-    this.spokenLanguages,
+    this.productionCompanies = const [],
+    this.productionCountries = const [],
+    this.revenue = 0,
+    this.runtime = 0,
+    this.spokenLanguages = const [],
     this.status,
     this.tagline,
     this.credits,
   }) : super(
-          backdropPath: movie?.backdropPath,
-          genreIds: movie?.genreIds,
+          backdropPath: movie.backdropPath,
+          genreIds: movie.genreIds,
           media: movie,
-          originalLanguage: movie?.originalLanguage,
-          originalTitle: movie?.originalTitle,
-          overview: movie?.overview,
-          posterPath: movie?.posterPath,
-          releaseDate: movie?.releaseDate,
-          title: movie?.title,
-          video: movie?.video,
-          voteAverage: movie?.voteAverage,
-          voteCount: movie?.voteCount,
+          originalLanguage: movie.originalLanguage,
+          originalTitle: movie.originalTitle,
+          overview: movie.overview,
+          posterPath: movie.posterPath,
+          releaseDate: movie.releaseDate,
+          title: movie.title,
+          video: movie.video,
+          voteAverage: movie.voteAverage,
+          voteCount: movie.voteCount,
         );
 
   MovieDetails.of(Movie movie) : this(movie: movie);
 
   /// Creates a [MovieDetails] from a JSON object.
-  factory MovieDetails.fromJson(Map<String, dynamic> json) =>
+  static MovieDetails? fromJson(Map<String, dynamic>? json) =>
       (json == null) ? null : _$MovieDetailsFromJson(json);
 }

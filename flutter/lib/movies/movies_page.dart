@@ -14,7 +14,7 @@ import 'movies_grid_page.dart';
 import 'movies_list_page.dart';
 
 abstract class MoviesPage extends StatefulWidget {
-  MoviesPage() : super();
+  const MoviesPage({super.key});
 }
 
 abstract class MoviesState<P extends MoviesPage> extends State<P> {
@@ -38,21 +38,20 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
   /// Navigates to the movie details.
   void _navigateToDetails(Movie movie) {
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => MovieDetailsHomePage(
-                  movie: movie,
-                )));
+      context,
+      MaterialPageRoute(
+          builder: (context) => MovieDetailsHomePage(movie: movie)),
+    );
   }
 
   Widget _buildPage(BuildContext context, MovieBloc movieBloc) {
     final theme = Theme.of(context);
-    final string = AppLocalizations.of(context);
+    final string = AppLocalizations.get(context);
     final title = getTitle(context);
 
     final header = Text(
       title,
-      style: theme.textTheme.headline6,
+      style: theme.textTheme.titleLarge,
     );
 
     final state = movieBloc.state;
@@ -69,9 +68,9 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
     } else if (state.error == null) {
       _fetchMovies(context, movieBloc);
 
-      content = Center(child: CircularProgressIndicator());
+      content = const Center(child: CircularProgressIndicator());
     } else {
-      content = Center(
+      content = const Center(
         child: Icon(
           Icons.error_outline,
           size: errorIconSize,
@@ -96,7 +95,7 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
     final iconViewStyle = IconButton(
       icon:
           state.showAsList ? Icon(MdiIcons.viewGrid) : Icon(MdiIcons.viewList),
-      onPressed: () => movieBloc.add(new ToggleViewStyleEvent()),
+      onPressed: () => movieBloc.add(const ToggleViewStyleEvent()),
     );
 
     return Scaffold(
@@ -132,7 +131,7 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
   }
 
   void _fetchMovies(BuildContext context, MovieBloc movieBloc) {
-    final api = InjectorWidget.of(context).api;
+    final api = InjectorWidget.get(context).api;
 
     fetchMovies(context, api)
         .timeout(fetchTimeout)
@@ -140,7 +139,7 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
         .catchError((e) => movieBloc.add(MovieError(e)));
   }
 
-  MoviesResponse getMovies(MovieState state);
+  MoviesResponse? getMovies(MovieState state);
 
   Future<MoviesResponse> fetchMovies(BuildContext context, TMDBApi api);
 

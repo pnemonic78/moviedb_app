@@ -6,9 +6,10 @@ part of 'person_crew.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PersonCrew _$PersonCrewFromJson(Map<String, dynamic> json) {
+PersonCrew _$PersonCrewFromJson(Map<String, dynamic> json, Person person) {
   return PersonCrew(
+    credit: PersonCredit.fromJson(json, person)!,
     department: json['department'] as String,
     job: json['job'] as String,
-  )..creditId = json['credit_id'] as String;
+  );
 }

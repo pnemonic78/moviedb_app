@@ -3,12 +3,11 @@ part of 'movie_bloc.dart';
 @immutable
 class MovieState extends Equatable {
   final bool showAsList;
-  final MoviesResponse moviesNowPlaying;
-  final MoviesResponse moviesPopular;
-  final MoviesResponse moviesTopRated;
-  final MoviesResponse moviesUpcoming;
-
-  final Exception error;
+  final MoviesResponse? moviesNowPlaying;
+  final MoviesResponse? moviesPopular;
+  final MoviesResponse? moviesTopRated;
+  final MoviesResponse? moviesUpcoming;
+  final Exception? error;
 
   const MovieState({
     this.showAsList = false,
@@ -20,14 +19,14 @@ class MovieState extends Equatable {
   });
 
   MovieState copy({
-    bool showAsList,
-    MoviesResponse moviesNowPlaying,
-    MoviesResponse moviesPopular,
-    MoviesResponse moviesTopRated,
-    MoviesResponse moviesUpcoming,
-    Exception error,
+    bool? showAsList,
+    MoviesResponse? moviesNowPlaying,
+    MoviesResponse? moviesPopular,
+    MoviesResponse? moviesTopRated,
+    MoviesResponse? moviesUpcoming,
+    Exception? error,
   }) =>
-      new MovieState(
+      MovieState(
         showAsList: showAsList ?? this.showAsList,
         moviesNowPlaying: moviesNowPlaying ?? this.moviesNowPlaying,
         moviesPopular: moviesPopular ?? this.moviesPopular,
@@ -36,10 +35,10 @@ class MovieState extends Equatable {
         error: error ?? this.error,
       );
 
-  MovieState toggleViewStyle() => copy(showAsList: !this.showAsList);
+  MovieState toggleViewStyle() => copy(showAsList: !showAsList);
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         showAsList,
         moviesNowPlaying,
         moviesPopular,

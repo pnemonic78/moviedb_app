@@ -1,11 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:tmdb/tmdb_api/person_credits_response.dart';
 
-import 'external_ids.dart';
-import 'gender.dart';
 import 'media.dart';
-import 'media_type.dart';
 import 'person.dart';
 
 part 'media_credit.g.dart';
@@ -15,33 +10,32 @@ part 'media_credit.g.dart';
 class MediaCredit extends Person {
   @JsonKey(name: 'credit_id')
   String creditId;
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false)
   Media media;
 
   MediaCredit({
-    @required Person person,
-    @required this.creditId,
-    @required this.media,
+    required Person person,
+    required this.creditId,
+    required this.media,
   })  : super(
-          aliases: person?.aliases,
-          biography: person?.biography,
-          birthday: person?.birthday,
-          birthplace: person?.birthplace,
-          credits: person?.credits,
-          deathday: person?.deathday,
-          externalIds: person?.externalIds,
-          gender: person?.gender,
-          homepage: person?.homepage,
-          imdbId: person?.imdbId,
-          knownDepartment: person?.knownDepartment,
+          aliases: person.aliases,
+          biography: person.biography,
+          birthday: person.birthday,
+          birthplace: person.birthplace,
+          credits: person.credits,
+          deathday: person.deathday,
+          externalIds: person.externalIds,
+          gender: person.gender,
+          homepage: person.homepage,
+          imdbId: person.imdbId,
+          knownDepartment: person.knownDepartment,
           media: media,
-          name: person?.name,
-          originalName: person?.originalName,
-          profilePath: person?.profilePath,
+          name: person.name,
+          originalName: person.originalName,
+          profilePath: person.profilePath,
         );
 
   /// Creates a [MediaCredit] from a JSON object.
-  factory MediaCredit.fromJson(Map<String, dynamic> json) =>
-      (json == null) ? null : _$MediaCreditFromJson(json)
-        ..media = Media.fromJsonType(json);
+  static MediaCredit? fromJson(Map<String, dynamic>? json) =>
+      (json == null) ? null : _$MediaCreditFromJson(json);
 }

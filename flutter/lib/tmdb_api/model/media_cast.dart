@@ -1,10 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:tmdb/tmdb_api/person_credits_response.dart';
 
-import 'external_ids.dart';
-import 'gender.dart';
 import 'media_credit.dart';
-import 'media_type.dart';
 
 part 'media_cast.g.dart';
 
@@ -18,13 +14,13 @@ class MediaCast extends MediaCredit {
   int order;
 
   MediaCast({
-    MediaCredit credit,
-    this.castId,
-    this.character,
-    this.order,
+    required MediaCredit credit,
+    required this.castId,
+    required this.character,
+    this.order = 0,
   }) : super(
-          creditId: credit?.creditId,
-          media: credit?.media,
+          creditId: credit.creditId,
+          media: credit.media,
           person: credit,
         );
 
@@ -34,6 +30,6 @@ class MediaCast extends MediaCredit {
   }
 
   /// Creates a [MediaCast] from a JSON object.
-  factory MediaCast.fromJson(Map<String, dynamic> json) =>
+  static MediaCast? fromJson(Map<String, dynamic>? json) =>
       (json == null) ? null : _$MediaCastFromJson(json);
 }

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tmdb/tmdb_api/model/tv.dart';
 
@@ -15,22 +14,22 @@ class Media {
   @JsonKey(name: 'id')
   int id;
   @JsonKey(name: 'media_type')
-  MediaType mediaType;
+  MediaType? mediaType;
   @JsonKey(name: 'popularity')
   double popularity;
 
   Media({
-    this.adult,
-    @required this.id,
+    this.adult = false,
+    required this.id,
     this.mediaType,
-    this.popularity,
+    this.popularity = 0,
   });
 
   /// Creates a [Media] from a JSON object.
-  factory Media.fromJson(Map<String, dynamic> json) =>
+  static Media? fromJson(Map<String, dynamic>? json) =>
       (json == null) ? null : _$MediaFromJson(json);
 
-  factory Media.fromJsonType(Map<String, dynamic> json) {
+  static Media? fromJsonType(Map<String, dynamic>? json) {
     if (json == null) return null;
 
     final mediaType =  _$enumDecodeNullable(_$MediaTypeEnumMap, json['media_type']) ?? MediaType.all;
@@ -47,11 +46,11 @@ class Media {
     }
   }
 
-  DateTime date() {
+  DateTime? date() {
     return null;
   }
 
-  String getTitle() {
+  String? getTitle() {
     return null;
   }
 }

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'media.dart';
@@ -10,16 +9,16 @@ part 'person_credit.g.dart';
 @JsonSerializable(explicitToJson: true, createToJson: false)
 class PersonCredit {
   @JsonKey(name: 'credit_id')
-  String creditId;
-  @JsonKey(ignore: true)
+  String? creditId;
+  @JsonKey(includeFromJson: false)
   Media media;
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false)
   Person person;
 
   PersonCredit({
-    @required this.creditId,
-    @required this.media,
-    @required this.person,
+    this.creditId,
+    required this.media,
+    required this.person,
   });
 
   @override
@@ -28,12 +27,10 @@ class PersonCredit {
   }
 
   /// Creates a [PersonCredit] from a JSON object.
-  factory PersonCredit.fromJson(Map<String, dynamic> json) =>
-      (json == null) ? null : _$PersonCreditFromJson(json)
-        ..media = Media.fromJsonType(json)
-        ..person = Person.fromJson(json);
+  static PersonCredit? fromJson(Map<String, dynamic>? json, Person person) =>
+      (json == null) ? null : _$PersonCreditFromJson(json, person);
 
-  String title() {
+  String? title() {
     return media.getTitle() ?? person.getTitle();
   }
 }

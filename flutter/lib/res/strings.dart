@@ -1,5 +1,7 @@
 class R {
-  static const Map<String, String> string = const {
+  R._();
+
+  static const Map<String, String> string = {
     "title": "The Movie Database Demo",
 
     // Now Playing
@@ -30,6 +32,7 @@ class R {
     "biography_label": "Biography",
     "gender_female": "Female",
     "gender_male": "Male",
+    "gender_other": "Non-binary",
     "person_cast_label": "Acting",
     "person_cast_format": "<b>%s</b> as %s",
     "person_cast_format_none": "<b>%s</b>",

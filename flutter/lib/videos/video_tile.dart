@@ -10,42 +10,48 @@ class VideoTile extends StatelessWidget {
   final ValueChanged<MovieVideo> onTap;
 
   const VideoTile({
-    Key key,
-    @required this.video,
-    @required this.onTap,
-  })  : assert(video != null),
-        super(key: key);
+    super.key,
+    required this.video,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final imageWidth = thumbnailWidth;
-    final imageHeight = thumbnailHeight;
+    const imageWidth = thumbnailWidth;
+    const imageHeight = thumbnailHeight;
 
-    return FutureBuilder<Widget>(
+    return FutureBuilder<Widget?>(
       future: TMDBApi.generateVideoThumbnail(
         video,
         imageWidth,
         imageHeight,
       ),
-      builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<Widget?> snapshot) {
         Widget content;
-        Function onVideoTap;
+        GestureTapCallback? onVideoTap;
 
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
             final thumbnail = snapshot.data;
 
-            content = Stack(
-              alignment: Alignment.center,
-              children: <Widget>[
-                thumbnail,
-                Icon(
-                  Icons.play_circle_outline,
-                  size: min(imageWidth, imageHeight) / 2,
-                ),
-              ],
-            );
-            onVideoTap = onTap == null ? null : () => onTap(video);
+            if (thumbnail == null) {
+              content = Icon(
+                Icons.error_outline,
+                size: min(imageWidth, imageHeight),
+              );
+            } else {
+              content = Stack(
+                alignment: Alignment.center,
+                children: <Widget>[
+                  thumbnail,
+                  Icon(
+                    Icons.play_circle_outline,
+                    size: min(imageWidth, imageHeight) / 2,
+                  ),
+                ],
+              );
+              onVideoTap = () => onTap(video);
+            }
           } else {
             content = Icon(
               Icons.error_outline,
@@ -53,24 +59,22 @@ class VideoTile extends StatelessWidget {
             );
           }
         } else {
-          content = Center(
-            child: Container(
-              child: CircularProgressIndicator(),
+          content = const Center(
+            child: SizedBox(
               width: imageWidth,
               height: imageHeight,
+              child: CircularProgressIndicator(),
             ),
           );
         }
 
         final textTheme = Theme.of(context).textTheme;
 
-        final titleWidget = Flexible(
-          child: Text(
-            video.name,
-            maxLines: 2,
-            style: textTheme.caption,
-            overflow: TextOverflow.ellipsis,
-          ),
+        final titleWidget = Text(
+          video.name,
+          maxLines: 2,
+          style: textTheme.bodySmall,
+          overflow: TextOverflow.ellipsis,
         );
 
         return Card(
@@ -78,7 +82,7 @@ class VideoTile extends StatelessWidget {
             onTap: onVideoTap,
             child: Padding(
               padding: paddingAll_8,
-              child: Container(
+              child: SizedBox(
                 width: imageWidth,
                 child: Column(
                   children: <Widget>[

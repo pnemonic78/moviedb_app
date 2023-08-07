@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tmdb/di/injector_inherited.dart';
 import 'package:tmdb/movie_details/home_page.dart';
@@ -17,7 +16,7 @@ import 'top_rated_page.dart';
 import 'upcoming_page.dart';
 
 class MoviesAllPage extends StatefulWidget {
-  MoviesAllPage() : super();
+  const MoviesAllPage({super.key});
 
   @override
   State<StatefulWidget> createState() => _MoviesAllPageState();
@@ -40,7 +39,7 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
   }
 
   Widget _buildPage(BuildContext context) {
-    final string = AppLocalizations.of(context);
+    final string = AppLocalizations.get(context);
 
     final popularTitle = _buildTitle(
       context,
@@ -109,12 +108,12 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
     final theme = Theme.of(context);
     final text = Text(
       title,
-      style: theme.textTheme.headline5,
+      style: theme.textTheme.headlineSmall,
     );
 
     return InkWell(
-      onTap: onTap == null ? null : () => onTap(title),
-      child: Container(
+      onTap: () => onTap(title),
+      child: SizedBox(
         width: double.infinity,
         child: Padding(
           padding: paddingAll_8,
@@ -158,10 +157,10 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
     final blocMovies = movieBloc.state.moviesNowPlaying;
     if (blocMovies == null) {
       if (movieBloc.state.error != null) {
-        return null;
+        return [];
       }
 
-      final api = InjectorWidget.of(context).api;
+      final api = InjectorWidget.get(context).api;
 
       api
           .getNowPlaying(context)
@@ -169,7 +168,7 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
           .then((response) => movieBloc.add(NowPlayingResponseEvent(response)))
           .catchError((e) => movieBloc.add(MovieError(e)));
 
-      return List<Movie>();
+      return [];
     }
     return blocMovies.results;
   }
@@ -180,17 +179,17 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
     final blocMovies = movieBloc.state.moviesPopular;
     if (blocMovies == null) {
       if (movieBloc.state.error != null) {
-        return null;
+        return [];
       }
 
-      final api = InjectorWidget.of(context).api;
+      final api = InjectorWidget.get(context).api;
       api
           .getPopular(context)
           .timeout(fetchTimeout)
           .then((response) => movieBloc.add(PopularResponseEvent(response)))
           .catchError((e) => movieBloc.add(MovieError(e)));
 
-      return List<Movie>();
+      return [];
     }
 
     return blocMovies.results;
@@ -202,17 +201,17 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
     final blocMovies = movieBloc.state.moviesTopRated;
     if (blocMovies == null) {
       if (movieBloc.state.error != null) {
-        return null;
+        return [];
       }
 
-      final api = InjectorWidget.of(context).api;
+      final api = InjectorWidget.get(context).api;
       api
           .getTopRated(context)
           .timeout(fetchTimeout)
           .then((response) => movieBloc.add(TopRatedResponseEvent(response)))
           .catchError((e) => movieBloc.add(MovieError(e)));
 
-      return List<Movie>();
+      return [];
     }
     return blocMovies.results;
   }
@@ -223,17 +222,17 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
     final blocMovies = movieBloc.state.moviesUpcoming;
     if (blocMovies == null) {
       if (movieBloc.state.error != null) {
-        return null;
+        return [];
       }
 
-      final api = InjectorWidget.of(context).api;
+      final api = InjectorWidget.get(context).api;
       api
           .getUpcoming(context)
           .timeout(fetchTimeout)
           .then((response) => movieBloc.add(UpcomingResponseEvent(response)))
           .catchError((e) => movieBloc.add(MovieError(e)));
 
-      return List<Movie>();
+      return [];
     }
     return blocMovies.results;
   }
@@ -244,19 +243,19 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
   }
 
   void _onTapNowPlaying(String title) {
-    _navigateToPage(NowPlayingPage());
+    _navigateToPage(const NowPlayingPage());
   }
 
   void _onTapPopular(String title) {
-    _navigateToPage(PopularPage());
+    _navigateToPage(const PopularPage());
   }
 
   void _onTapTopRated(String title) {
-    _navigateToPage(TopRatedPage());
+    _navigateToPage(const TopRatedPage());
   }
 
   void _onTapUpcoming(String title) {
-    _navigateToPage(UpcomingPage());
+    _navigateToPage(const UpcomingPage());
   }
 
   void _onTapMovie(Movie movie) {
@@ -266,10 +265,10 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
   /// Navigates to the movie details.
   void _navigateToMovie(Movie movie) {
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => MovieDetailsHomePage(
-                  movie: movie,
-                )));
+      context,
+      MaterialPageRoute(
+        builder: (context) => MovieDetailsHomePage(movie: movie),
+      ),
+    );
   }
 }

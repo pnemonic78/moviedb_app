@@ -1,6 +1,3 @@
-import 'dart:math';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
@@ -11,47 +8,26 @@ class CastTile extends StatelessWidget {
   final ValueChanged<MediaCast> onTap;
 
   const CastTile({
-    Key key,
-    @required this.cast,
-    @required this.onTap,
-  })  : assert(cast != null),
-        super(key: key);
+    super.key,
+    required this.cast,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final onTapCast = onTap == null ? null : () => onTap(cast);
+    onTapCast() => onTap(cast);
 
-    final media = MediaQuery.of(context);
-    final imageWidth = castTileWidth;
-    final imageHeight = castTileHeight;
-    final thumbnailUrl = TMDBApi.generateProfileThumbnail(
-      cast.profilePath,
-      imageWidth,
-      imageHeight,
-      devicePixelRatio: media.devicePixelRatio,
+    const imageWidth = castTileWidth;
+    const imageHeight = castTileHeight;
+    final thumbnail = TMDBApi.generateProfile(
+      profilePath: cast.profilePath,
+      profileWidth: imageWidth,
+      profileHeight: imageHeight,
+      fit: BoxFit.fitWidth,
     );
-    final thumbnail = (thumbnailUrl != null)
-        ? CachedNetworkImage(
-            imageUrl: thumbnailUrl,
-            placeholder: (context, url) => Icon(
-              Icons.person,
-              size: min(imageWidth, imageHeight),
-            ),
-            width: imageWidth,
-            height: imageHeight,
-            fit: BoxFit.fitWidth,
-          )
-        : Container(
-            width: imageWidth,
-            height: imageHeight,
-            child: Icon(
-              Icons.person,
-              size: min(imageWidth, imageHeight),
-            ),
-          );
     final thumbnailWidget = ClipPath.shape(
       // rounded rectangle crop for top side only.
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: cardRadius),
       ),
       child: thumbnail,
@@ -62,30 +38,30 @@ class CastTile extends StatelessWidget {
     final titleWidget = Text(
       cast.name,
       maxLines: 2,
-      style: textTheme.subtitle1,
+      style: textTheme.titleMedium,
       overflow: TextOverflow.ellipsis,
     );
 
     final characterWidget = Text(
       cast.character,
       maxLines: 2,
-      style: textTheme.subtitle2,
+      style: textTheme.titleSmall,
       overflow: TextOverflow.ellipsis,
     );
 
     return Card(
       child: InkWell(
         onTap: onTapCast,
-        child: Container(
+        child: SizedBox(
           width: imageWidth,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               thumbnailWidget,
-              SizedBox(height: padding_8),
+              const SizedBox(height: padding_8),
               Padding(padding: paddingHorizontal_8, child: titleWidget),
-              SizedBox(height: padding_4),
+              const SizedBox(height: padding_4),
               Padding(padding: paddingHorizontal_8, child: characterWidget),
             ],
           ),

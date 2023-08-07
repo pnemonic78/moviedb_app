@@ -12,9 +12,7 @@ class VideosList extends StatelessWidget {
   final MovieDetails movie;
   final ValueChanged<MovieVideo> onTap;
 
-  VideosList({Key key, @required this.movie, this.onTap})
-      : assert(movie != null),
-        super(key: key);
+  const VideosList({super.key, required this.movie, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -24,18 +22,18 @@ class VideosList extends StatelessWidget {
         Widget content;
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
-            content = Container(
+            content = SizedBox(
               height: thumbnailHeight + 62,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                children: _buildList(context, snapshot.data.results),
+                children: _buildList(context, snapshot.data?.results),
               ),
             );
           } else {
             content = Container();
           }
         } else {
-          content = Center(child: CircularProgressIndicator());
+          content = const Center(child: CircularProgressIndicator());
         }
 
         return content;
@@ -44,18 +42,20 @@ class VideosList extends StatelessWidget {
   }
 
   Future<VideosResponse> _fetchVideos(BuildContext context) async {
-    final TMDBApi api = InjectorWidget.of(context).api;
+    final TMDBApi api = InjectorWidget.get(context).api;
     return api.getMovieVideos(context, movie);
   }
 
-  List<Widget> _buildList(BuildContext context, List<MovieVideo> videos) {
+  List<Widget> _buildList(BuildContext context, List<MovieVideo>? videos) {
     final list = <Widget>[];
 
-    for (var video in videos) {
-      list.add(VideoTile(
-        video: video,
-        onTap: onTap,
-      ));
+    if (videos != null) {
+      for (var video in videos) {
+        list.add(VideoTile(
+          video: video,
+          onTap: onTap,
+        ));
+      }
     }
 
     return list;

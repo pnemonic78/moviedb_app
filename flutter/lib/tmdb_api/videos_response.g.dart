@@ -8,10 +8,12 @@ part of 'videos_response.dart';
 
 VideosResponse _$VideosResponseFromJson(Map<String, dynamic> json) {
   return VideosResponse(
-    id: json['id'] as int,
-    results: (json['results'] as List)
-        ?.map((e) =>
-            e == null ? null : MovieVideo.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    id: json['id'] as int?,
+    results: (json['results'] == null)
+        ? []
+        : (json['results'] as List)
+            .nonNulls
+            .map((e) => MovieVideo.fromJson(e as Map<String, dynamic>)!)
+            .toList(),
   );
 }

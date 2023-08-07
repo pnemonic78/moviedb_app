@@ -1,5 +1,7 @@
 class R_he {
-  static const Map<String, String> string = const {
+  R_he._();
+
+  static const Map<String, String> string = {
     "title": "הדגמת מאגר הסרטים",
 
     // Now Playing
@@ -8,7 +10,7 @@ class R_he {
     // Movie Details
     "budget_label": "תקציב",
     "cast_label": "שחקנים עיקריים",
-    "genres_label": "ז\'אנרים",
+    "genres_label": "ז'אנרים",
     "movie_details": "פרטי הסרט",
     "popularity_label": "פופולריות",
     "release_date_label": "תאריך הוצאה",
@@ -30,6 +32,7 @@ class R_he {
     "biography_label": "ביוגרפיה",
     "gender_female": "נקבה",
     "gender_male": "זכר",
+    "gender_other": "לא בינארי",
     "person_cast_label": "משחק",
     "person_cast_format": "<b>%s</b> בתור %s",
     "person_cast_format_none": "<b>%s</b>",

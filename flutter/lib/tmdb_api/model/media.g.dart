@@ -8,17 +8,17 @@ part of 'media.dart';
 
 Media _$MediaFromJson(Map<String, dynamic> json) {
   return Media(
-    adult: json['adult'] as bool,
+    adult: (json['adult'] as bool?) ?? false,
     id: json['id'] as int,
-    mediaType: _$enumDecodeNullable(_$MediaTypeEnumMap, json['media_type']),
-    popularity: (json['popularity'] as num)?.toDouble(),
+    mediaType: _$enumDecodeNullable(_$MediaTypeEnumMap, json['media_type']) ?? MediaType.all,
+    popularity: (json['popularity'] as num?)?.toDouble() ?? 0,
   );
 }
 
 T _$enumDecode<T>(
-  Map<T, dynamic> enumValues,
+  Map<T?, dynamic> enumValues,
   dynamic source, {
-  T unknownValue,
+  T? unknownValue,
 }) {
   if (source == null) {
     throw ArgumentError('A value must be provided. Supported values: '
@@ -26,20 +26,20 @@ T _$enumDecode<T>(
   }
 
   final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
+      .singleWhere((e) => e.value == source)
+      .key;
 
   if (value == null && unknownValue == null) {
     throw ArgumentError('`$source` is not one of the supported values: '
         '${enumValues.values.join(', ')}');
   }
-  return value ?? unknownValue;
+  return value ?? unknownValue!;
 }
 
-T _$enumDecodeNullable<T>(
-  Map<T, dynamic> enumValues,
+T? _$enumDecodeNullable<T>(
+  Map<T?, dynamic> enumValues,
   dynamic source, {
-  T unknownValue,
+  T? unknownValue,
 }) {
   if (source == null) {
     return null;

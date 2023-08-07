@@ -15,39 +15,41 @@ import 'person_screen.dart';
 
 class PersonPage extends StatefulWidget {
   final String title;
-  Person person;
+  final Person person;
 
-  PersonPage({this.title, @required this.person})
-      : assert(person != null),
-        super();
+  const PersonPage({super.key, required this.title, required this.person});
 
   @override
-  _PersonPageState createState() => _PersonPageState();
+  State<PersonPage> createState() => _PersonPageState();
 }
 
 class _PersonPageState extends State<PersonPage> {
-  Person _person;
+  Person? _person;
 
   Stream<Person> _fetchPerson(BuildContext context) async* {
-    if (_person != null) {
-      yield _person;
+    Person? person = _person;
+    if (person != null) {
+      yield person;
       return;
     }
-    final TMDBApi api = InjectorWidget.of(context).api;
-    _person = await api.getPerson(context, widget.person);
-    yield _person;
+    final TMDBApi api = InjectorWidget.get(context).api;
+    person = await api.getPerson(context, widget.person);
+    _person = person;
+    yield person;
   }
 
   @override
   Widget build(BuildContext context) {
+    String name = "";
+
     return StreamBuilder<Person>(
       stream: _fetchPerson(context),
       builder: (BuildContext context, AsyncSnapshot<Person> snapshot) {
         Widget content;
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
-            final Person person = snapshot.data;
-            widget.person = person;
+            final Person person = snapshot.data!;
+            name = person.name;
             content = SingleChildScrollView(
               child: PersonDetailsWidget(
                 person: person,
@@ -57,7 +59,7 @@ class _PersonPageState extends State<PersonPage> {
               ),
             );
           } else {
-            content = Center(
+            content = const Center(
               child: Icon(
                 Icons.error_outline,
                 size: errorIconSize,
@@ -65,14 +67,12 @@ class _PersonPageState extends State<PersonPage> {
             );
           }
         } else {
-          content = Center(child: CircularProgressIndicator());
+          content = const Center(child: CircularProgressIndicator());
         }
-
-        final person = widget.person;
 
         return Scaffold(
           appBar: AppBar(
-            title: Text(person.name ?? ""),
+            title: Text(name),
           ),
           body: content,
         );
@@ -90,11 +90,11 @@ class _PersonPageState extends State<PersonPage> {
   /// Navigates to the movie poster.
   void _navigateToPoster(Person person) {
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => PersonPosterPage(
-                  person: person,
-                )));
+      context,
+      MaterialPageRoute(
+        builder: (context) => PersonPosterPage(person: person),
+      ),
+    );
   }
 
   /// Function to call when a cast item is tapped.

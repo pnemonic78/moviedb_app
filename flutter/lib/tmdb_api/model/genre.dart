@@ -9,13 +9,13 @@ class Genre {
   @JsonKey(name: 'name')
   String name;
 
-  Genre({this.id, this.name});
+  Genre({required this.id, required this.name});
 
   @override
   String toString() {
     return name;
   }
 
-  factory Genre.fromJson(Map<String, dynamic> json) =>
+  static Genre? fromJson(Map<String, dynamic>? json) =>
       (json == null) ? null : _$GenreFromJson(json);
 }

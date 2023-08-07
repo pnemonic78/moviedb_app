@@ -7,19 +7,19 @@ part 'images_response.g.dart';
 @JsonSerializable(explicitToJson: true, createToJson: false)
 class ImagesResponse {
   @JsonKey(name: 'id')
-  int id;
+  int? id;
   @JsonKey(name: 'backdrops')
   List<MovieImage> backdrops;
   @JsonKey(name: 'posters')
   List<MovieImage> posters;
 
   ImagesResponse({
-    this.id,
-    this.backdrops,
-    this.posters,
+    required this.id,
+    this.backdrops = const [],
+    this.posters = const [],
   });
 
   /// Creates a [ImagesResponse] from a JSON object.
-  factory ImagesResponse.fromJson(Map<String, dynamic> json) =>
+  static ImagesResponse? fromJson(Map<String, dynamic>? json) =>
       (json == null) ? null : _$ImagesResponseFromJson(json);
 }

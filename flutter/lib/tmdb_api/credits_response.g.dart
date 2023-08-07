@@ -8,14 +8,18 @@ part of 'credits_response.dart';
 
 CreditsResponse _$CreditsResponseFromJson(Map<String, dynamic> json) {
   return CreditsResponse(
-    id: json['id'] as int,
-    cast: (json['cast'] as List)
-        ?.map((e) =>
-            e == null ? null : MediaCast.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    crew: (json['crew'] as List)
-        ?.map((e) =>
-            e == null ? null : MediaCrew.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    id: json['id'] as int?,
+    cast: (json['cast'] == null)
+        ? []
+        : (json['cast'] as List)
+            .nonNulls
+            .map((e) => MediaCast.fromJson(e as Map<String, dynamic>)!)
+            .toList(),
+    crew: (json['crew'] == null)
+        ? []
+        : (json['crew'] as List)
+            .nonNulls
+            .map((e) => MediaCrew.fromJson(e as Map<String, dynamic>)!)
+            .toList(),
   );
 }

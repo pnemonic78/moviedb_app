@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:inject/inject.dart';
+import 'package:injectable/injectable.dart';
 import 'package:tmdb/main/my_app.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/api_impl.dart';
@@ -7,18 +7,14 @@ import 'package:tmdb/tmdb_api/rest_client.dart';
 
 @module
 class AppInjectorModule {
-  @provide
-  MyApp provideApp() => new MyApp();
+  MyApp get app => const MyApp();
 
-  @provide
   @singleton
-  Dio provideDio() => new Dio();
+  Dio get dio => Dio(BaseOptions(baseUrl: 'https://api.themoviedb.org/3'));
 
-  @provide
-  @singleton
-  RestClient provideClient(Dio dio) => new RestClient(dio);
+  @lazySingleton
+  RestClient client(Dio dio) => RestClient.of(dio);
 
-  @provide
-  @singleton
-  TMDBApi provideApi(RestClient client) => new TMDBApiImpl(client);
+  @lazySingleton
+  TMDBApi api(RestClient client) => TMDBApiImpl(client);
 }

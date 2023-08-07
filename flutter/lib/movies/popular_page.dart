@@ -6,21 +6,21 @@ import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movies_response.dart';
 
 class PopularPage extends MoviesPage {
-  PopularPage() : super();
+  const PopularPage({super.key});
 
   @override
-  _PopularPageState createState() => _PopularPageState();
+  MoviesState<PopularPage> createState() => _PopularPageState();
 }
 
 class _PopularPageState extends MoviesState<PopularPage> {
   @override
   String getTitle(BuildContext context) {
-    final string = AppLocalizations.of(context);
+    final string = AppLocalizations.get(context);
     return string.popular;
   }
 
   @override
-  MoviesResponse getMovies(MovieState state) => state.moviesPopular;
+  MoviesResponse? getMovies(MovieState state) => state.moviesPopular;
 
   @override
   Future<MoviesResponse> fetchMovies(BuildContext context, TMDBApi api) async {

@@ -7,16 +7,20 @@ class MovieImageType {
   static const teaser = MovieImageType("Teaser");
   static const clip = MovieImageType("Clip");
   static const featurette = MovieImageType("Featurette");
+  static const openingCredits = MovieImageType("Opening Credits");
   static const behindTheScenes = MovieImageType("Behind the Scenes");
   static const bloopers = MovieImageType("Bloopers");
+  static const recap = MovieImageType("Recap");
 
   static const values = [
     trailer,
     teaser,
     clip,
     featurette,
+    openingCredits,
     behindTheScenes,
-    bloopers
+    bloopers,
+    recap,
   ];
 
   @override
@@ -24,7 +28,7 @@ class MovieImageType {
     return _value;
   }
 
-  factory MovieImageType.valueOf(String json) {
+  static MovieImageType? valueOf(String? json) {
     return values.firstWhere((v) => json == v._value);
   }
 }

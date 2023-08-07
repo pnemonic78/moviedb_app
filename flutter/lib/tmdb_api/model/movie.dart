@@ -1,7 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tmdb/tmdb_api/date_converter.dart';
 
-import 'date_converter.dart';
 import 'media.dart';
 import 'media_type.dart';
 
@@ -11,21 +10,21 @@ part 'movie.g.dart';
 @MovieDateTimeConverter()
 class Movie extends Media {
   @JsonKey(name: 'backdrop_path')
-  String backdropPath;
+  String? backdropPath;
   @JsonKey(name: 'genre_ids')
   List<int> genreIds;
   @JsonKey(name: 'origin_country')
   List<String> originCountry;
   @JsonKey(name: 'original_language')
-  String originalLanguage;
+  String? originalLanguage;
   @JsonKey(name: 'original_title')
-  String originalTitle;
+  String? originalTitle;
   @JsonKey(name: 'overview')
-  String overview;
+  String? overview;
   @JsonKey(name: 'poster_path')
-  String posterPath;
+  String? posterPath;
   @JsonKey(name: 'release_date')
-  DateTime releaseDate;
+  DateTime? releaseDate;
   @JsonKey(name: 'title')
   String title;
   @JsonKey(name: 'video')
@@ -36,39 +35,39 @@ class Movie extends Media {
   int voteCount;
 
   Movie({
-    @required Media media,
+    required Media media,
     this.backdropPath,
-    this.genreIds,
-    this.originCountry,
+    this.genreIds = const [],
+    this.originCountry = const [],
     this.originalLanguage,
-    @required this.originalTitle,
+    this.originalTitle,
     this.overview,
     this.posterPath,
     this.releaseDate,
-    @required this.title,
-    this.video,
-    this.voteAverage,
-    this.voteCount,
+    required this.title,
+    this.video = false,
+    this.voteAverage = 0,
+    this.voteCount = 0,
   }) : super(
-          adult: media?.adult,
-          id: media?.id,
-          mediaType: media?.mediaType ?? MediaType.movie,
-          popularity: media?.popularity,
+          adult: media.adult,
+          id: media.id,
+          mediaType: media.mediaType ?? MediaType.movie,
+          popularity: media.popularity,
         );
 
   /// Creates a [Movie] from a JSON object.
-  factory Movie.fromJson(Map<String, dynamic> json) =>
+  static Movie? fromJson(Map<String, dynamic>? json) =>
       (json == null) ? null : _$MovieFromJson(json);
 
-  Movie.of(Media media) : this(media: media);
+  Movie.of(Media media) : this(media: media, title: media.getTitle() ?? "");
 
   @override
-  DateTime date() {
+  DateTime? date() {
     return releaseDate;
   }
 
   @override
-  String getTitle() {
-    return title ?? originalTitle;
+  String? getTitle() {
+    return title;
   }
 }

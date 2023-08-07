@@ -9,13 +9,13 @@ class ProductionCountry {
   @JsonKey(name: 'name')
   String name;
 
-  ProductionCountry({this.id, this.name});
+  ProductionCountry({required this.id, required this.name});
 
   @override
   String toString() {
     return name;
   }
 
-  factory ProductionCountry.fromJson(Map<String, dynamic> json) =>
-      _$ProductionCountryFromJson(json);
+  static ProductionCountry? fromJson(Map<String, dynamic>? json) =>
+      (json == null) ? null : _$ProductionCountryFromJson(json);
 }

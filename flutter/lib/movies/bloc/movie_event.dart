@@ -5,7 +5,7 @@ abstract class MovieEvent extends Equatable {
   const MovieEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 @immutable
@@ -19,7 +19,7 @@ abstract class MoviesResponseEvent extends MovieEvent {
   const MoviesResponseEvent(this.response) : super();
 
   @override
-  List<Object> get props => [response];
+  List<Object?> get props => [response];
 }
 
 class NowPlayingResponseEvent extends MoviesResponseEvent {
@@ -44,5 +44,5 @@ class MovieError extends MovieEvent {
   const MovieError(this.error) : super();
 
   @override
-  List<Object> get props => [error];
+  List<Object?> get props => [error];
 }

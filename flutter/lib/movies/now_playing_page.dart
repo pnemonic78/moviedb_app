@@ -6,21 +6,21 @@ import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/movies_response.dart';
 
 class NowPlayingPage extends MoviesPage {
-  NowPlayingPage() : super();
+  const NowPlayingPage({super.key});
 
   @override
-  _NowPlayingPageState createState() => _NowPlayingPageState();
+  MoviesState<NowPlayingPage> createState() => _NowPlayingPageState();
 }
 
 class _NowPlayingPageState extends MoviesState<NowPlayingPage> {
   @override
   String getTitle(BuildContext context) {
-    final string = AppLocalizations.of(context);
+    final string = AppLocalizations.get(context);
     return string.now_playing;
   }
 
   @override
-  MoviesResponse getMovies(MovieState state) => state.moviesNowPlaying;
+  MoviesResponse? getMovies(MovieState state) => state.moviesNowPlaying;
 
   @override
   Future<MoviesResponse> fetchMovies(BuildContext context, TMDBApi api) async {

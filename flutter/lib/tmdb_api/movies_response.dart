@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'model/dates.dart';
@@ -11,7 +10,7 @@ class MoviesResponse {
   @JsonKey(name: 'results')
   List<Movie> results;
   @JsonKey(name: 'dates')
-  Dates dates;
+  Dates? dates;
   @JsonKey(name: 'page')
   int page;
   @JsonKey(name: 'total_pages')
@@ -20,14 +19,14 @@ class MoviesResponse {
   int totalResults;
 
   MoviesResponse({
-    @required this.results,
+    required this.results,
     this.dates,
-    @required this.page,
-    @required this.totalPages,
-    this.totalResults,
+    this.page = 1,
+    this.totalPages = 1,
+    required this.totalResults,
   });
 
   /// Creates a [MoviesResponse] from a JSON object.
-  factory MoviesResponse.fromJson(Map<String, dynamic> json) =>
+  static MoviesResponse? fromJson(Map<String, dynamic>? json) =>
       (json == null) ? null : _$MoviesResponseFromJson(json);
 }

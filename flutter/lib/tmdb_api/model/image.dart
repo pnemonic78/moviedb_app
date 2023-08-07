@@ -1,8 +1,7 @@
 import 'dart:ui';
 
 import 'package:json_annotation/json_annotation.dart';
-
-import 'locale_converter.dart';
+import 'package:tmdb/tmdb_api/locale_converter.dart';
 
 part 'image.g.dart';
 
@@ -12,7 +11,7 @@ class MovieImage {
   @JsonKey(name: 'id')
   String id;
   @JsonKey(name: 'iso_639_1')
-  Locale locale;
+  Locale? locale;
   @JsonKey(name: 'width')
   int width;
   @JsonKey(name: 'height')
@@ -27,14 +26,14 @@ class MovieImage {
   int voteCount;
 
   MovieImage({
-    this.id,
+    required this.id,
     this.locale,
-    this.width,
-    this.height,
-    this.aspectRatio,
-    this.path,
-    this.voteAverage,
-    this.voteCount,
+    required this.width,
+    required this.height,
+    this.aspectRatio = 1,
+    required this.path,
+    this.voteAverage = 0,
+    this.voteCount = 0,
   });
 
   @override
@@ -43,7 +42,7 @@ class MovieImage {
   }
 
   /// Creates a [MovieImage] from a JSON object.
-  factory MovieImage.fromJson(Map<String, dynamic> json) =>
+  static MovieImage? fromJson(Map<String, dynamic>? json) =>
       (json == null) ? null : _$MovieImageFromJson(json)
-        ..locale = MovieLocaleConverter.fromJsons(json);
+        ?..locale = MovieLocaleConverter.fromJsonMap(json);
 }

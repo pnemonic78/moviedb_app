@@ -12,9 +12,11 @@ class CastList extends StatelessWidget {
   final MovieDetails movie;
   final ValueChanged<MediaCast> onTap;
 
-  CastList({Key key, @required this.movie, this.onTap})
-      : assert(movie != null),
-        super(key: key);
+  const CastList({
+    super.key,
+    required this.movie,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,18 +26,20 @@ class CastList extends StatelessWidget {
         Widget content;
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
-            content = Container(
+            List<MediaCast> cast = snapshot.data?.cast ?? [];
+
+            content = SizedBox(
+              height: castTileHeight + 100,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                children: _buildCastList(context, snapshot.data.cast),
+                children: _buildCastList(context, cast),
               ),
-              height: castTileHeight + 100,
             );
           } else {
             content = Container();
           }
         } else {
-          content = Center(child: CircularProgressIndicator());
+          content = const Center(child: CircularProgressIndicator());
         }
 
         return content;
@@ -44,8 +48,10 @@ class CastList extends StatelessWidget {
   }
 
   Future<CreditsResponse> _fetchCast(BuildContext context) async {
-    final TMDBApi api = InjectorWidget.of(context).api;
-    return movie.credits ?? api.getMovieCredits(context, movie);
+    final TMDBApi api = InjectorWidget.get(context).api;
+    CreditsResponse? credits = movie.credits;
+    if (credits != null) return credits;
+    return api.getMovieCredits(context, movie);
   }
 
   List<Widget> _buildCastList(BuildContext context, List<MediaCast> cast) {

@@ -9,13 +9,13 @@ class ProductionCompany {
   @JsonKey(name: 'name')
   String name;
   @JsonKey(name: 'logo_path')
-  String logoPath;
+  String? logoPath;
   @JsonKey(name: 'origin_country')
-  String originCountry;
+  String? originCountry;
 
   ProductionCompany({
-    this.id,
-    this.name,
+    required this.id,
+    required this.name,
     this.logoPath,
     this.originCountry,
   });
@@ -25,6 +25,6 @@ class ProductionCompany {
     return name;
   }
 
-  factory ProductionCompany.fromJson(Map<String, dynamic> json) =>
-      _$ProductionCompanyFromJson(json);
+  static ProductionCompany? fromJson(Map<String, dynamic>? json) =>
+      (json == null) ? null : _$ProductionCompanyFromJson(json);
 }

@@ -1,6 +1,5 @@
-import 'dart:math';
+import 'dart:developer';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -16,30 +15,29 @@ import 'package:url_launcher/url_launcher.dart';
 
 final _dateFormat = DateFormat.yMMMd();
 
-final _summaryLinesMin = 5;
-final _summaryLinesMax = 1000;
+const _summaryLinesMin = 5;
+const _summaryLinesMax = 1000;
 
 class PersonDetailsWidget extends StatefulWidget {
   final Person person;
-  final ValueChanged<Person> onTapPoster;
-  final ValueChanged<PersonCast> onCastTap;
-  final ValueChanged<PersonCrew> onCrewTap;
+  final ValueChanged<Person>? onTapPoster;
+  final ValueChanged<PersonCast>? onCastTap;
+  final ValueChanged<PersonCrew>? onCrewTap;
 
   const PersonDetailsWidget({
-    Key key,
-    @required this.person,
+    super.key,
+    required this.person,
     this.onTapPoster,
     this.onCastTap,
     this.onCrewTap,
-  })  : assert(person != null),
-        super(key: key);
+  });
 
   @override
-  _PersonDetailsWidgetState createState() => _PersonDetailsWidgetState();
+  State<PersonDetailsWidget> createState() => _PersonDetailsWidgetState();
 }
 
 class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
-  bool _summaryLinesExpanded;
+  bool _summaryLinesExpanded = false;
 
   @override
   void initState() {
@@ -50,44 +48,32 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
   @override
   Widget build(BuildContext context) {
     final person = widget.person;
-    final media = MediaQuery.of(context);
-    final imageWidth = personDetailsWidth;
-    final imageHeight = personDetailsHeight;
-    final posterUrl = TMDBApi.generatePosterUrl(
-      person.profilePath,
-      imageWidth,
-      imageHeight,
-      devicePixelRatio: media.devicePixelRatio,
-    );
-    final poster = CachedNetworkImage(
-      imageUrl: posterUrl,
-      placeholder: (context, url) => Icon(
-        Icons.image,
-        size: min(imageWidth, imageHeight),
-      ),
-      width: imageWidth,
-      height: imageHeight,
-      fit: BoxFit.contain,
+    const imageWidth = personDetailsWidth;
+    const imageHeight = personDetailsHeight;
+    final poster = TMDBApi.generatePoster(
+      posterPath: person.profilePath,
+      posterWidth: imageWidth,
+      posterHeight: imageHeight,
     );
     final posterWidget = InkWell(
       child: ClipRRect(
         borderRadius: borderCircular_8,
         child: poster,
       ),
-      onTap: () => widget.onTapPoster(person),
+      onTap: () => widget.onTapPoster?.call(person),
     );
 
     final textTheme = Theme.of(context).textTheme;
-    final groupStyle = textTheme.headline5;
-    final labelStyle = textTheme.headline6;
-    final textStyle = textTheme.bodyText2.apply(fontSizeFactor: 1.25);
+    final groupStyle = textTheme.headlineSmall;
+    final labelStyle = textTheme.titleLarge;
+    final textStyle = textTheme.bodyLarge;
     final gone = Container();
-    final string = AppLocalizations.of(context);
+    final string = AppLocalizations.of(context)!;
 
     final nameWidget = Text(
-      person.name,
+      person.getTitle() ?? "",
       maxLines: 2,
-      style: textTheme.headline4,
+      style: textTheme.headlineMedium,
       overflow: TextOverflow.ellipsis,
     );
 
@@ -96,15 +82,15 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
       style: groupStyle,
     );
 
-    final knownForMargin = SizedBox(height: padding_8);
+    const knownForMargin = SizedBox(height: padding_8);
 
     final knownForLabel = Text(
       string.known_for_label,
       style: labelStyle,
     );
 
-    final knownForValue = Text(
-      person.knownDepartment,
+    final knownForWidget = Text(
+      person.knownDepartment ?? "",
       style: textStyle,
     );
 
@@ -116,63 +102,69 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
       case Gender.male:
         gender = string.gender_male;
         break;
+      case Gender.other:
+        gender = string.gender_other;
+        break;
       default:
         break;
     }
 
-    final hasGender = (gender == null) || gender.isNotEmpty;
+    final hasGender = gender.isNotEmpty;
 
-    final genderMargin = hasGender ? SizedBox(height: padding_8) : gone;
+    final genderMargin = hasGender ? const SizedBox(height: padding_8) : gone;
 
     final genderLabel =
         hasGender ? Text(string.gender_label, style: labelStyle) : gone;
 
-    final genderValue = hasGender ? Text(gender, style: textStyle) : gone;
+    final genderWidget = hasGender ? Text(gender, style: textStyle) : gone;
 
     final hasBirthday = (person.birthday != null);
 
-    final birthdayMargin = hasBirthday ? SizedBox(height: padding_8) : gone;
+    final birthdayMargin =
+        hasBirthday ? const SizedBox(height: padding_8) : gone;
 
     final birthdayLabel =
         hasBirthday ? Text(string.birthday_label, style: labelStyle) : gone;
 
-    final birthdayValue = hasBirthday
-        ? Text(_dateFormat.format(person.birthday), style: textStyle)
+    final birthdayWidget = hasBirthday
+        ? Text(_dateFormat.format(person.birthday!), style: textStyle)
         : gone;
 
     final hasBirthplace = (person.birthplace != null);
 
-    final birthplaceMargin = hasBirthplace ? SizedBox(height: padding_8) : gone;
+    final birthplaceMargin =
+        hasBirthplace ? const SizedBox(height: padding_8) : gone;
 
     final birthplaceLabel = hasBirthplace
         ? Text(string.place_of_birth_label, style: labelStyle)
         : gone;
 
-    final birthplaceValue =
-        hasBirthplace ? Text(person.birthplace, style: textStyle) : gone;
+    final birthplaceWidget =
+        hasBirthplace ? Text(person.birthplace!, style: textStyle) : gone;
 
     final hasDeathday = (person.deathday != null);
 
-    final deathdayMargin = hasDeathday ? SizedBox(height: padding_8) : gone;
+    final deathdayMargin =
+        hasDeathday ? const SizedBox(height: padding_8) : gone;
 
     final deathdayLabel =
         hasDeathday ? Text(string.deathday_label, style: labelStyle) : gone;
 
-    final deathdayValue = hasDeathday
-        ? Text(_dateFormat.format(person.deathday), style: textStyle)
+    final deathdayWidget = hasDeathday
+        ? Text(_dateFormat.format(person.deathday!), style: textStyle)
         : gone;
 
-    final hasAliases = (person.aliases != null) && person.aliases.isNotEmpty;
+    final hasAliases = person.aliases.isNotEmpty;
 
-    final aliasesMargin = hasAliases ? SizedBox(height: padding_8) : gone;
+    final aliasesMargin = hasAliases ? const SizedBox(height: padding_8) : gone;
 
     final aliasesLabel =
         hasAliases ? Text(string.also_known_as_label, style: labelStyle) : gone;
 
-    final aliasesValue =
+    final aliasesWidget =
         hasAliases ? Text(person.aliases.join(", "), style: textStyle) : gone;
 
-    final summaryMargin = SizedBox(height: padding_8);
+    const summaryMargin = SizedBox(height: padding_8);
 
     final summaryLabel = Text(
       string.summary_label,
@@ -199,76 +191,75 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
 
     final homepageWidget = hasHomepage
         ? InkWell(
+            onTap: _gotoHomepage,
             child: Icon(
               MdiIcons.web,
               size: personIconSize,
             ),
-            onTap: _gotoHomepage,
           )
         : gone;
 
-    final hasFacebook =
-        (person.externalIds != null) && (person.externalIds.facebookId != null);
+    final hasFacebook = (person.externalIds?.facebookId != null);
 
-    final facebookMargin = hasFacebook ? SizedBox(width: padding_8) : gone;
+    final facebookMargin =
+        hasFacebook ? const SizedBox(width: padding_8) : gone;
 
     final facebookWidget = hasFacebook
         ? InkWell(
+            onTap: _gotoFacebook,
             child: Icon(
               MdiIcons.facebook,
               size: personIconSize,
             ),
-            onTap: _gotoFacebook,
           )
         : gone;
 
     final hasImdb = (person.imdbId != null);
 
-    final imdbMargin = hasImdb ? SizedBox(width: padding_8) : gone;
+    final imdbMargin = hasImdb ? const SizedBox(width: padding_8) : gone;
 
     final imdbWidget = hasImdb
         ? InkWell(
+            onTap: _gotoImdb,
             child: Icon(
               MdiIcons.database,
               size: personIconSize,
             ),
-            onTap: _gotoImdb,
           )
         : gone;
 
-    final hasInstagram = (person.externalIds != null) &&
-        (person.externalIds.instagramId != null);
+    final hasInstagram = (person.externalIds?.instagramId != null);
 
-    final instagramMargin = hasInstagram ? SizedBox(width: padding_8) : gone;
+    final instagramMargin =
+        hasInstagram ? const SizedBox(width: padding_8) : gone;
 
     final instagramWidget = hasInstagram
         ? InkWell(
+            onTap: _gotoInstagram,
             child: Icon(
               MdiIcons.instagram,
               size: personIconSize,
             ),
-            onTap: _gotoInstagram,
           )
         : gone;
 
-    final hasTwitter =
-        (person.externalIds != null) && (person.externalIds.twitterId != null);
+    final hasTwitter = (person.externalIds?.twitterId != null);
 
-    final twitterMargin = hasTwitter ? SizedBox(width: padding_8) : gone;
+    final twitterMargin = hasTwitter ? const SizedBox(width: padding_8) : gone;
 
     final twitterWidget = hasTwitter
         ? InkWell(
+            onTap: _gotoTwitter,
             child: Icon(
               MdiIcons.twitter,
               size: personIconSize,
             ),
-            onTap: _gotoTwitter,
           )
         : gone;
 
     final hasCredits = person.credits != null;
 
-    final creditsMargin = hasCredits ? SizedBox(height: padding_8) : gone;
+    final creditsMargin = hasCredits ? const SizedBox(height: padding_8) : gone;
 
     final creditsLabel = hasCredits
         ? Text(
@@ -279,9 +270,9 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
 
     final creditsWidget = hasCredits
         ? CreditsTable(
-            credits: person.credits,
-            onCastTap: widget.onCastTap,
-            onCrewTap: widget.onCrewTap,
+            credits: person.credits!,
+            onCastTap: widget.onCastTap ?? (PersonCast person) => {},
+            onCrewTap: widget.onCrewTap ?? (PersonCrew person) => {},
           )
         : gone;
 
@@ -291,14 +282,14 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           nameWidget,
-          SizedBox(height: padding_8),
+          const SizedBox(height: padding_8),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Column(
                 children: [
                   posterWidget,
-                  SizedBox(height: padding_8),
+                  const SizedBox(height: padding_8),
                   Row(
                     children: [
                       homepageWidget,
@@ -314,7 +305,7 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
                   )
                 ],
               ),
-              SizedBox(width: padding_16),
+              const SizedBox(width: padding_16),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -322,22 +313,22 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
                     personalInfoLabel,
                     knownForMargin,
                     knownForLabel,
-                    knownForValue,
+                    knownForWidget,
                     genderMargin,
                     genderLabel,
-                    genderValue,
+                    genderWidget,
                     birthdayMargin,
                     birthdayLabel,
-                    birthdayValue,
+                    birthdayWidget,
                     birthplaceMargin,
                     birthplaceLabel,
-                    birthplaceValue,
+                    birthplaceWidget,
                     deathdayMargin,
                     deathdayLabel,
-                    deathdayValue,
+                    deathdayWidget,
                     aliasesMargin,
                     aliasesLabel,
-                    aliasesValue,
+                    aliasesWidget,
                   ],
                 ),
               ),
@@ -357,7 +348,9 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
   }
 
   void _gotoFacebook() async {
-    final url = TMDBApi.generateFacebookUrl(widget.person.externalIds.facebookId);
+    final id = widget.person.externalIds?.facebookId;
+    if ((id == null) || id.isEmpty) return;
+    final url = TMDBApi.generateFacebookUrl(id);
     _goto(url);
   }
 
@@ -367,23 +360,34 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
   }
 
   void _gotoImdb() async {
-    final url = TMDBApi.generateImdbUrl(widget.person.imdbId ?? widget.person.externalIds.imdbId);
+    final id = widget.person.imdbId ?? widget.person.externalIds?.imdbId;
+    if ((id == null) || id.isEmpty) return;
+    final url = TMDBApi.generateImdbUrl(id);
     _goto(url);
   }
 
   void _gotoInstagram() async {
-    final url = TMDBApi.generateInstagramUrl(widget.person.externalIds.instagramId);
+    final id = widget.person.externalIds?.instagramId;
+    if ((id == null) || id.isEmpty) return;
+    final url = TMDBApi.generateInstagramUrl(id);
     _goto(url);
   }
 
   void _gotoTwitter() async {
-    final url = TMDBApi.generateTwitterUrl(widget.person.externalIds.twitterId);
+    final id = widget.person.externalIds?.twitterId;
+    if ((id == null) || id.isEmpty) return;
+    final url = TMDBApi.generateTwitterUrl(id);
     _goto(url);
   }
 
-  void _goto(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
+  void _goto(String? urlString) async {
+    if ((urlString == null) || urlString.isEmpty) {
+      log('URL expected');
+      return;
+    }
+    final url = Uri.parse(urlString);
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
     }
   }
 }

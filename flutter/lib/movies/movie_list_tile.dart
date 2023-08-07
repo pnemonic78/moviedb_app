@@ -1,10 +1,7 @@
-import 'dart:math';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_parallax/flutter_parallax.dart';
 import 'package:intl/intl.dart';
-import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
+import 'package:tmdb/parallax/parallax_image.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
@@ -17,44 +14,30 @@ class MovieListTile extends StatelessWidget {
   final ValueChanged<Movie> onTap;
 
   const MovieListTile({
-    Key key,
-    @required this.movie,
-    @required this.onTap,
-  })  : assert(movie != null),
-        super(key: key);
+    super.key,
+    required this.movie,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final media = MediaQuery.of(context);
-    final thumbnailWidth = posterListWidth;
-    final thumbnailHeight = posterListHeight;
-    final imageWidth = thumbnailWidth;
-    final imageHeight = thumbnailHeight / _parallaxFactor;
+    const thumbnailWidth = posterListWidth;
+    const thumbnailHeight = posterListHeight;
+    const imageWidth = thumbnailWidth;
+    const imageHeight = thumbnailHeight / _parallaxFactor;
 
-    final thumbnailUrl = TMDBApi.generatePosterUrl(
-      movie.posterPath,
-      imageWidth,
-      imageHeight,
-      devicePixelRatio: media.devicePixelRatio,
-    );
-    final thumbnail = CachedNetworkImage(
-      imageUrl: thumbnailUrl,
-      placeholder: (context, url) => Icon(
-        Icons.image,
-        size: min(imageWidth, imageHeight),
-      ),
-      width: imageWidth,
-      height: imageHeight,
-      fit: BoxFit.fitHeight,
+    final thumbnail = TMDBApi.generatePoster(
+      posterPath: movie.posterPath,
+      posterWidth: imageWidth,
+      posterHeight: imageHeight,
     );
     final thumbnailWidget = ClipRRect(
       borderRadius: borderCircular_8,
-      child: Container(
+      child: SizedBox(
         width: thumbnailWidth,
         height: thumbnailHeight,
-        child: Parallax.inside(
+        child: ParallaxImage(
           child: thumbnail,
-          mainAxisExtent: thumbnailHeight,
         ),
       ),
     );
@@ -64,33 +47,33 @@ class MovieListTile extends StatelessWidget {
     final titleWidget = Text(
       movie.title,
       maxLines: 2,
-      style: textTheme.headline6,
+      style: textTheme.titleLarge,
       overflow: TextOverflow.ellipsis,
     );
 
     final voteAverageWidget = SmoothStarRating(
       rating: movie.voteAverage / 2.0,
-      isReadOnly: true,
       color: Colors.yellow,
       borderColor: Colors.yellow,
     );
 
+    final dateValue = movie.releaseDate;
     final dateWidget = Text(
-      _dateFormat.format(movie.releaseDate),
+      (dateValue != null) ? _dateFormat.format(dateValue) : "",
       maxLines: 1,
     );
 
     final summaryWidget = Text(
-      movie.overview,
+      movie.overview ?? "",
       maxLines: 4,
       overflow: TextOverflow.ellipsis,
     );
 
-    final marginTop = SizedBox(height: padding_8);
+    const marginTop = SizedBox(height: padding_8);
 
     final card = Card(
       child: InkWell(
-        onTap: onTap == null ? null : () => onTap(movie),
+        onTap: () => onTap(movie),
         child: Padding(
           padding: paddingAll_8,
           child: Row(
@@ -98,7 +81,7 @@ class MovieListTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               thumbnailWidget,
-              SizedBox(width: padding_8),
+              const SizedBox(width: padding_8),
               Expanded(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,

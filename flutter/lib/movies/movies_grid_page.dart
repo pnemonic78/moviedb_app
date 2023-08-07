@@ -5,20 +5,22 @@ import 'package:tmdb/tmdb_api/model/movie.dart';
 import 'movie_grid_tile.dart';
 
 class MoviesGridPage extends StatefulWidget {
-  final String title;
   final List<Movie> movies;
   final ValueChanged<Movie> onMovieTap;
 
-  MoviesGridPage({Key key, this.title, this.movies, this.onMovieTap})
-      : super(key: key);
+  const MoviesGridPage({
+    super.key,
+    required this.movies,
+    required this.onMovieTap,
+  });
 
   @override
-  _MoviesGridState createState() => _MoviesGridState();
+  State<MoviesGridPage> createState() => _MoviesGridState();
 }
 
 class _MoviesGridState<P extends MoviesGridPage> extends State<P> {
   //TODO can add listener to controller to load next page
-  ScrollController _scrollController;
+  ScrollController? _scrollController;
 
   @override
   void initState() {
@@ -34,7 +36,7 @@ class _MoviesGridState<P extends MoviesGridPage> extends State<P> {
     final media = MediaQuery.of(context);
     final screenSize = media.size;
     final screenWidth = screenSize.width;
-    final cellWidth = padding_8 + posterGridWidth + padding_8;
+    const cellWidth = padding_8 + posterGridWidth + padding_8;
     final columnCount = screenWidth ~/ cellWidth;
     final columnWidth = screenWidth / columnCount;
     final cellRatio = 0.49 + (-0.02 * screenSize.aspectRatio);

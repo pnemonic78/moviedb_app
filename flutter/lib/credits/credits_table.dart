@@ -17,24 +17,23 @@ class CreditsTable extends StatelessWidget {
   final ValueChanged<PersonCrew> onCrewTap;
 
   const CreditsTable({
-    Key key,
-    this.credits,
-    this.onCastTap,
-    this.onCrewTap,
-  })  : assert(credits != null),
-        super(key: key);
+    super.key,
+    required this.credits,
+    required this.onCastTap,
+    required this.onCrewTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final labelStyle = textTheme.headline6;
+    final labelStyle = textTheme.titleLarge;
     final gone = Container();
-    final string = AppLocalizations.of(context);
+    final string = AppLocalizations.get(context);
 
     final cast = credits.cast;
     final crew = credits.crew;
 
-    final hasCast = (cast != null) && cast.isNotEmpty;
+    final hasCast = cast.isNotEmpty;
 
     final castLabel = hasCast
         ? Text(
@@ -47,14 +46,14 @@ class CreditsTable extends StatelessWidget {
         ? Card(
             child: Table(
               children: _buildCastList(context, cast),
-              columnWidths: {0: IntrinsicColumnWidth()},
+              columnWidths: const {0: IntrinsicColumnWidth()},
             ),
           )
         : gone;
 
-    final hasCrew = (crew != null) && crew.isNotEmpty;
+    final hasCrew = crew.isNotEmpty;
 
-    final crewMargin = hasCast ? SizedBox(height: padding_8) : gone;
+    final crewMargin = hasCast ? const SizedBox(height: padding_8) : gone;
 
     final crewLabel = hasCrew
         ? Text(
@@ -67,7 +66,7 @@ class CreditsTable extends StatelessWidget {
         ? Card(
             child: Table(
               children: _buildCrewList(context, crew),
-              columnWidths: {0: IntrinsicColumnWidth()},
+              columnWidths: const {0: IntrinsicColumnWidth()},
             ),
           )
         : gone;

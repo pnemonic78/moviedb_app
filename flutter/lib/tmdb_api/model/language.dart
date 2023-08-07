@@ -9,13 +9,13 @@ class SpokenLanguage {
   @JsonKey(name: 'name')
   String name;
 
-  SpokenLanguage({this.id, this.name});
+  SpokenLanguage({required this.id, required this.name});
 
   @override
   String toString() {
     return name;
   }
 
-  factory SpokenLanguage.fromJson(Map<String, dynamic> json) =>
-      _$SpokenLanguageFromJson(json);
+  static SpokenLanguage? fromJson(Map<String, dynamic>? json) =>
+      (json == null) ? null : _$SpokenLanguageFromJson(json);
 }

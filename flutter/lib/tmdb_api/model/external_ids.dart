@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'external_ids.g.dart';
@@ -6,38 +5,38 @@ part 'external_ids.g.dart';
 @JsonSerializable(explicitToJson: true, createToJson: false)
 class PersonExternalIds {
   @JsonKey(name: 'id')
-  int id;
+  int? id;
 
   /// IMDB ID
   @JsonKey(name: 'imdb_id')
-  String imdbId;
+  String? imdbId;
 
   /// Facebook
   @JsonKey(name: 'facebook_id')
-  String facebookId;
+  String? facebookId;
 
   /// Freebase MID
   @JsonKey(name: 'freebase_mid')
-  String freebaseMid;
+  String? freebaseMid;
 
   /// Freebase ID
   @JsonKey(name: 'freebase_id')
-  String freebaseId;
+  String? freebaseId;
 
   /// Instagram
   @JsonKey(name: 'instagram_id')
-  String instagramId;
+  String? instagramId;
 
   /// TVRage ID
   @JsonKey(name: 'tvrage_id')
-  int tvRageId;
+  int? tvRageId;
 
   /// Twitter
   @JsonKey(name: 'twitter_id')
-  String twitterId;
+  String? twitterId;
 
   PersonExternalIds({
-    @required this.id,
+    this.id,
     this.imdbId,
     this.facebookId,
     this.freebaseMid,
@@ -48,6 +47,6 @@ class PersonExternalIds {
   });
 
   /// Creates a [PersonExternalIds] from a JSON object.
-  factory PersonExternalIds.fromJson(Map<String, dynamic> json) =>
+  static PersonExternalIds? fromJson(Map<String, dynamic>? json) =>
       (json == null) ? null : _$PersonExternalIdsFromJson(json);
 }

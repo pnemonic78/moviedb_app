@@ -8,7 +8,7 @@ part 'credits_response.g.dart';
 @JsonSerializable(explicitToJson: true, createToJson: false)
 class CreditsResponse {
   @JsonKey(name: 'id')
-  int id;
+  int? id;
   @JsonKey(name: 'cast')
   List<MediaCast> cast;
   @JsonKey(name: 'crew')
@@ -16,11 +16,11 @@ class CreditsResponse {
 
   CreditsResponse({
     this.id,
-    this.cast,
-    this.crew,
+    this.cast = const [],
+    this.crew = const [],
   });
 
   /// Creates a [CreditsResponse] from a JSON object.
-  factory CreditsResponse.fromJson(Map<String, dynamic> json) =>
+  static CreditsResponse? fromJson(Map<String, dynamic>? json) =>
       (json == null) ? null : _$CreditsResponseFromJson(json);
 }

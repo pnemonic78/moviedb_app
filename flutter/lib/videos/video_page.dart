@@ -9,26 +9,24 @@ class VideoPlayerPage extends StatefulWidget {
   final String title;
   final MovieVideo video;
 
-  VideoPlayerPage({Key key, this.title, this.video})
-      : assert(video != null),
-        super(key: key);
+  const VideoPlayerPage({super.key, required this.title, required this.video});
 
   @override
-  _VideoPlayerPageState createState() => _VideoPlayerPageState();
+  State<VideoPlayerPage> createState() => _VideoPlayerPageState();
 }
 
 class _VideoPlayerPageState extends State<VideoPlayerPage> {
-  VideoPlayerController _controller;
-  YoutubePlayerController _youtubeController;
+  VideoPlayerController? _controller;
+  YoutubePlayerController? _youtubeController;
 
   @override
   void initState() {
     super.initState();
 
-    if (widget.video.site == "YouTube") {
+    if (widget.video.site == TMDBApi.siteYouTube) {
       _youtubeController = YoutubePlayerController(
         initialVideoId: widget.video.key,
-        flags: YoutubePlayerFlags(
+        flags: const YoutubePlayerFlags(
           mute: false,
           autoPlay: true,
           loop: false,
@@ -38,12 +36,15 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
         });
     } else {
       final url = TMDBApi.getVideoUrl(widget.video);
-      _controller = VideoPlayerController.network(url)
-        ..addListener(() {
-          setState(() {});
-        })
-        ..initialize()
-        ..play();
+      if (url != null) {
+        Uri uri = Uri.parse(url);
+        _controller = VideoPlayerController.networkUrl(uri)
+          ..addListener(() {
+            setState(() {});
+          })
+          ..initialize()
+          ..play();
+      }
     }
   }
 
@@ -62,25 +63,37 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
     final titleWidget = Text(
       widget.video.name,
       maxLines: 4,
-      style: textTheme.headline5,
+      style: textTheme.headlineSmall,
       overflow: TextOverflow.ellipsis,
     );
 
     Widget player;
-    if (_youtubeController != null) {
+    final youtubeController = _youtubeController;
+    final controller = _controller;
+    if (youtubeController != null) {
       player = YoutubePlayer(
-        controller: _youtubeController,
+        controller: youtubeController,
         showVideoProgressIndicator: true,
       );
-    } else {
+    } else if (controller != null) {
       player = AspectRatio(
-        aspectRatio: _controller.value.aspectRatio,
+        aspectRatio: controller.value.aspectRatio,
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: <Widget>[
-            VideoPlayer(_controller),
-            VideoProgressIndicator(_controller),
+            VideoPlayer(controller),
+            VideoProgressIndicator(
+              controller,
+              allowScrubbing: true,
+            ),
           ],
+        ),
+      );
+    } else {
+      player = const Center(
+        child: Icon(
+          Icons.error_outline,
+          size: errorIconSize,
         ),
       );
     }

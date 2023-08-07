@@ -11,16 +11,16 @@ class CreditsCastRow {
     PersonCast item,
     ValueChanged<PersonCast> onTap,
   ) {
-    final onTapItem = onTap == null ? null : () => onTap(item);
+    onTapItem() => onTap(item);
 
-    final string = AppLocalizations.of(context);
+    final string = AppLocalizations.get(context);
 
     final date = item.media.date();
-    final year = date?.year?.toString() ?? "—";
+    final year = date?.year.toString() ?? "—";
     final yearWidget = Text(year);
 
-    final String title = item.title();
-    final String character = item.character ?? "";
+    final String title = item.title() ?? "";
+    final String character = item.character;
     final format = character.isEmpty
         ? string.person_cast_format_none
         : string.person_cast_format;
@@ -29,19 +29,19 @@ class CreditsCastRow {
     final characterWidget = StyledText(
       text: formatted,
       overflow: TextOverflow.ellipsis,
-      styles: {
-        'b': TextStyle(fontWeight: FontWeight.bold),
+      tags: {
+        'b': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
       },
     );
 
     return [
       TableRowInkWell(
-        child: Padding(padding: paddingAll_8, child: yearWidget),
         onTap: onTapItem,
+        child: Padding(padding: paddingAll_8, child: yearWidget),
       ),
       TableRowInkWell(
-        child: Padding(padding: paddingAll_8, child: characterWidget),
         onTap: onTapItem,
+        child: Padding(padding: paddingAll_8, child: characterWidget),
       ),
     ];
   }

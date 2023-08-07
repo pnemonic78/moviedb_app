@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
 
@@ -9,32 +8,28 @@ class MoviesSlider extends StatelessWidget {
   final List<Movie> movies;
   final ValueChanged<Movie> onTap;
 
-  MoviesSlider({Key key, @required this.movies, this.onTap}) : super(key: key);
+  const MoviesSlider({super.key, required this.movies, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final titleHeight = textTheme.subtitle1.fontSize * 2.25;
+    final titleHeight =
+        (textTheme.titleMedium?.fontSize ?? 20) * maxLinesMoviesAllTile;
+    // height of a `MoviesAllTile`
     final tileHeight = paddingVertical_8.top +
         posterGridHeight +
         titleHeight +
         paddingVertical_8.bottom;
 
-    return Container(
+    return SizedBox(
       height: tileHeight,
       width: double.infinity,
-      child: (movies == null)
-          ? Center(
-              child: Icon(
-              Icons.error_outline,
-              size: errorIconSize,
-            ))
-          : (movies.isEmpty
-              ? Center(child: CircularProgressIndicator())
-              : ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: _buildList(context, movies),
-                )),
+      child: movies.isEmpty
+          ? const Center(child: CircularProgressIndicator())
+          : ListView(
+              scrollDirection: Axis.horizontal,
+              children: _buildList(context, movies),
+            ),
     );
   }
 
