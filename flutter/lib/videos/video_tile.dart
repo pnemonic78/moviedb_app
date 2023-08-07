@@ -70,13 +70,11 @@ class VideoTile extends StatelessWidget {
 
         final textTheme = Theme.of(context).textTheme;
 
-        final titleWidget = Flexible(
-          child: Text(
-            video.name,
-            maxLines: 2,
-            style: textTheme.bodySmall,
-            overflow: TextOverflow.ellipsis,
-          ),
+        final titleWidget = Text(
+          video.name,
+          maxLines: 2,
+          style: textTheme.bodySmall,
+          overflow: TextOverflow.ellipsis,
         );
 
         return Card(
