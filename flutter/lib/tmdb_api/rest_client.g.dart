@@ -211,4 +211,94 @@ class _RestClient implements RestClient {
     final value = Person.fromJson(result.data)!;
     return value;
   }
+
+  @override
+  getTVAiringToday({required apiKey, required language, page = 1, timezone = ""}) async {
+    const extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'api_key': apiKey,
+      r'language': language,
+      r'page': page,
+      r'timezone': timezone
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final Response<Map<String, dynamic>> result = await _dio.request(
+        '/tv/airing_today',
+        queryParameters: queryParameters,
+        options: Options(
+          method: 'GET',
+          headers: <String, dynamic>{},
+          extra: extra,
+        ),
+        data: null);
+    final value = TelevisionResponse.fromJson(result.data)!;
+    return value;
+  }
+
+  @override
+  getTVOnTheAir({required apiKey, required language, page = 1, timezone = ""}) async {
+    const extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'api_key': apiKey,
+      r'language': language,
+      r'page': page,
+      r'timezone': timezone
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final Response<Map<String, dynamic>> result = await _dio.request(
+        '/tv/on_the_air',
+        queryParameters: queryParameters,
+        options: Options(
+          method: 'GET',
+          headers: <String, dynamic>{},
+          extra: extra,
+        ),
+        data: null);
+    final value = TelevisionResponse.fromJson(result.data)!;
+    return value;
+  }
+
+  @override
+  getTVPopular({required apiKey, required language, page = 1}) async {
+    const extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'api_key': apiKey,
+      r'language': language,
+      r'page': page
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final Response<Map<String, dynamic>> result = await _dio.request(
+        '/tv/popular',
+        queryParameters: queryParameters,
+        options: Options(
+          method: 'GET',
+          headers: <String, dynamic>{},
+          extra: extra,
+        ),
+        data: null);
+    final value = TelevisionResponse.fromJson(result.data)!;
+    return value;
+  }
+
+  @override
+  getTVTopRated({required apiKey, required language, page = 1}) async {
+    const extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'api_key': apiKey,
+      r'language': language,
+      r'page': page
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final Response<Map<String, dynamic>> result = await _dio.request(
+        '/tv/top_rated',
+        queryParameters: queryParameters,
+        options: Options(
+          method: 'GET',
+          headers: <String, dynamic>{},
+          extra: extra,
+        ),
+        data: null);
+    final value = TelevisionResponse.fromJson(result.data)!;
+    return value;
+  }
 }
