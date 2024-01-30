@@ -1,4 +1,4 @@
-package com.tikalk.moviedb.android
+package com.tikal.tmdb.android
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape

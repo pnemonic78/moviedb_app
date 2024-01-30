@@ -37,7 +37,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.tikalk.moviedb.kmp"
+    namespace = "com.tikal.tmdb"
     compileSdk = 34
     defaultConfig {
         minSdk = 24

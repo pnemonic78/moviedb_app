@@ -1,4 +1,4 @@
-package com.tikalk.moviedb
+package com.tikal.tmdb
 
 interface Platform {
     val name: String

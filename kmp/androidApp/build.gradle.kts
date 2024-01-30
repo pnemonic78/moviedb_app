@@ -4,10 +4,10 @@ plugins {
 }
 
 android {
-    namespace = "com.tikalk.moviedb.kmp.android"
+    namespace = "com.tikal.tmdb"
     compileSdk = 34
     defaultConfig {
-        applicationId = "com.tikalk.moviedb.kmp.android"
+        applicationId = "com.tikalk.tmdb.kmp"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

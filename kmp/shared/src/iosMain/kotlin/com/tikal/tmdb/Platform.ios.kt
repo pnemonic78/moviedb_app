@@ -1,4 +1,4 @@
-package com.tikalk.moviedb
+package com.tikal.tmdb
 
 import platform.UIKit.UIDevice
 

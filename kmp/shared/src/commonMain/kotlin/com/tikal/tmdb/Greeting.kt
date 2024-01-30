@@ -1,4 +1,4 @@
-package com.tikalk.moviedb
+package com.tikal.tmdb
 
 class Greeting {
     private val platform: Platform = getPlatform()
