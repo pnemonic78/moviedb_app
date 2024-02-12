@@ -1,4 +1,4 @@
-package com.tikal.tmdb
+package com.tikal.tmdb.compose
 
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton

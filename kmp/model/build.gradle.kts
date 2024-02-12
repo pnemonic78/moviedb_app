@@ -37,7 +37,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.tikal.tmdb"
+    namespace = "com.tikal.tmdb.model"
     compileSdk = 34
     defaultConfig {
         minSdk = 24

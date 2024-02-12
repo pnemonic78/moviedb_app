@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.tikal.tmdb.BackButton
+import com.tikal.tmdb.compose.BackButton
 import com.tikal.tmdb.compose.AppTheme
 import com.tikal.tmdb.data.model.MovieEntity
 import kotlinx.coroutines.flow.MutableStateFlow

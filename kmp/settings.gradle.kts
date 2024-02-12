@@ -18,3 +18,4 @@ rootProject.name = "Movie_DB"
 include(":androidApp")
 include(":model")
 include(":shared")
+include(":ui-common")
