@@ -51,34 +51,34 @@ interface TmdbService {
 
     @GET("movie/{movie_id}")
     suspend fun getMovieDetails(
-        @Path("movie_id") moveId: Long,
+        @Path("movie_id") movieId: Long,
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
         @Query("language") language: String = Locale.getDefault().language,
         @Query("append_to_response") append: String? = null
     ): Movie
 
-    @GET("/movie/{movie_id}/credits")
+    @GET("movie/{movie_id}/credits")
     suspend fun getMovieCredits(
-        @Path("movie_id") moveId: Long,
+        @Path("movie_id") movieId: Long,
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
     ): CreditsResponse
 
-    @GET("/movie/{movie_id}/images")
+    @GET("movie/{movie_id}/images")
     suspend fun getMovieImages(
-        @Path("movie_id") moveId: Long,
+        @Path("movie_id") movieId: Long,
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
         @Query("language") language: String = Locale.getDefault().language,
         @Query("include_image_language") languageInclude: String = "en",
     ): ImagesResponse
 
-    @GET("/movie/{movie_id}/videos")
+    @GET("movie/{movie_id}/videos")
     suspend fun getMovieVideos(
-        @Path("movie_id") moveId: Long,
+        @Path("movie_id") movieId: Long,
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
         @Query("language") language: String = Locale.getDefault().language,
     ): VideosResponse
 
-    @GET("/person/{person_id}")
+    @GET("person/{person_id}")
     suspend fun getPerson(
         @Path("person_id") personId: Long,
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,

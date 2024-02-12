@@ -32,7 +32,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":model"))
+    implementation(projects.model)
     api(libs.bundles.compose)
     api(libs.bundles.precompose)
 }
