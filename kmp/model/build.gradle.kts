@@ -19,7 +19,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "shared"
+            baseName = "model"
             isStatic = true
         }
     }
@@ -28,21 +28,16 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlin.coroutines)
             implementation(libs.logging.napier)
+            implementation(libs.serialization.json)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
-        }
-        androidMain.dependencies {
-            implementation(libs.ktor.client.android)
-        }
-        iosMain.dependencies {
-            implementation(libs.ktor.client.darwin)
         }
     }
 }
 
 android {
-    namespace = "com.tikalk.tmdb.shared"
+    namespace = "com.tikalk.tmdb.model"
     compileSdk = 34
     defaultConfig {
         minSdk = 24

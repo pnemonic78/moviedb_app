@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.tikalk.tmdb.kmp"
+    namespace = "com.tikalk.tmdb"
     compileSdk = 34
     defaultConfig {
         applicationId = "com.tikalk.tmdb.kmp"

@@ -16,4 +16,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "The_Movie_DB"
 include(":androidApp")
+include(":model")
 include(":shared")
