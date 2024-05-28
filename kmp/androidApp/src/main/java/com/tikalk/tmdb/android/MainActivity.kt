@@ -29,6 +29,12 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingView(text: String) {
     Text(text = text)
+
+    LaunchedEffect(text) {
+        val dataSource = Inject.repository
+        val movies = dataSource.getMoviesNowPlaying()
+        println("±!@ movies=$movies")
+    }
 }
 
 @Preview

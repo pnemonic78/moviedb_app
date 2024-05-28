@@ -19,21 +19,16 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "shared"
+            baseName = "domain"
             isStatic = true
         }
     }
 
     sourceSets {
         commonMain.dependencies {
-            implementation(libs.kamel)
             implementation(libs.kotlin.coroutines)
-            implementation(libs.ktor.client.core)
-            implementation(libs.ktor.client.content.negotiation)
-            implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.logging.napier)
-            implementation(libs.precompose)
-            implementation(libs.precompose.viewmodel)
+            implementation(libs.serialization.json)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -48,7 +43,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.tikalk.tmdb.shared"
+    namespace = "com.tikal.tmdb.domain"
     compileSdk = 34
     defaultConfig {
         minSdk = 24
@@ -60,5 +55,8 @@ android {
 }
 
 dependencies {
-    implementation(projects.domain)
+    api(projects.model)
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.serialization.kotlinx.json)
 }

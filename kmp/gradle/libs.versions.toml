@@ -10,7 +10,7 @@ kotlin = "1.9.20"
 ktor = "2.3.6"
 napier = "2.7.1"
 precompose = "1.5.7"
-uiToolingPreviewAndroid = "1.6.4"
+uiToolingPreviewAndroid = "1.6.7"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
