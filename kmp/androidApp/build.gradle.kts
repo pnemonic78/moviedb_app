@@ -4,10 +4,10 @@ plugins {
 }
 
 android {
-    namespace = "com.tikalk.tmdb.android"
+    namespace = "com.tikalk.tmdb.kmp"
     compileSdk = 34
     defaultConfig {
-        applicationId = "com.tikalk.tmdb.android"
+        applicationId = "com.tikalk.tmdb.kmp"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -34,7 +34,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 
