@@ -13,16 +13,16 @@ kotlin {
         }
     }
 
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
-            baseName = "shared"
-            isStatic = true
-        }
-    }
+//    listOf(
+//        iosX64(),
+//        iosArm64(),
+//        iosSimulatorArm64()
+//    ).forEach {
+//        it.binaries.framework {
+//            baseName = "shared"
+//            isStatic = true
+//        }
+//    }
 
     sourceSets {
         commonMain.dependencies {
@@ -41,9 +41,9 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.ktor.client.android)
         }
-        iosMain.dependencies {
-            implementation(libs.ktor.client.darwin)
-        }
+//        iosMain.dependencies {
+//            implementation(libs.ktor.client.darwin)
+//        }
     }
 }
 
@@ -61,4 +61,9 @@ android {
 
 dependencies {
     implementation(projects.domain)
+    implementation(projects.model)
+}
+
+// FIXME: Cannot locate tasks that match ':shared:testClasses' as task 'testClasses' not found in project ':shared'.
+tasks.register("testClasses") {
 }

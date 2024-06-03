@@ -13,33 +13,33 @@ kotlin {
         }
     }
 
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
-            baseName = "domain"
-            isStatic = true
-        }
-    }
+//    listOf(
+//        iosX64(),
+//        iosArm64(),
+//        iosSimulatorArm64()
+//    ).forEach {
+//        it.binaries.framework {
+//            baseName = "domain"
+//            isStatic = true
+//        }
+//    }
 
-    sourceSets {
-        commonMain.dependencies {
-            implementation(libs.kotlin.coroutines)
-            implementation(libs.logging.napier)
-            implementation(libs.serialization.json)
-        }
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-        }
-        androidMain.dependencies {
-            implementation(libs.ktor.client.android)
-        }
-        iosMain.dependencies {
-            implementation(libs.ktor.client.darwin)
-        }
-    }
+//    sourceSets {
+//        commonMain.dependencies {
+//            implementation(libs.kotlin.coroutines)
+//            implementation(libs.logging.napier)
+//            implementation(libs.serialization.json)
+//        }
+//        commonTest.dependencies {
+//            implementation(libs.kotlin.test)
+//        }
+//        androidMain.dependencies {
+//            implementation(libs.ktor.client.android)
+//        }
+//        iosMain.dependencies {
+//            implementation(libs.ktor.client.darwin)
+//        }
+//    }
 }
 
 android {
@@ -59,4 +59,8 @@ dependencies {
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.serialization.kotlinx.json)
+}
+
+// FIXME: Cannot locate tasks that match ':domain:testClasses' as task 'testClasses' not found in project ':domain'.
+tasks.register("testClasses") {
 }
