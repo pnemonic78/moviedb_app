@@ -17,8 +17,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.PagingData
-import com.tikal.tmdb.BackButton
 import com.tikal.tmdb.compose.AppTheme
+import com.tikal.tmdb.compose.BackButton
 import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.moviesPreview
 import com.tikal.tmdb.ui.common.R

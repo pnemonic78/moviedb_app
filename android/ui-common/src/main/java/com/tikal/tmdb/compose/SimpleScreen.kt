@@ -6,7 +6,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
-import com.tikal.tmdb.BackButton
 
 @Composable
 fun SimpleScreen(
