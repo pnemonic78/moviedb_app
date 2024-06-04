@@ -3,6 +3,7 @@ plugins {
     aliasNV(androidCatalog.plugins.app)
     aliasNV(androidCatalog.plugins.hilt)
     aliasNV(kotlinCatalog.plugins.android)
+    alias(kotlinCatalog.plugins.compose.compiler)
     aliasNV(kotlinCatalog.plugins.kapt)
     alias(kotlinCatalog.plugins.serialization)
 }
@@ -38,9 +39,6 @@ android {
     }
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = androidCatalog.versions.composeCompiler.get()
     }
 }
 

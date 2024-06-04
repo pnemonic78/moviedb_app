@@ -15,7 +15,7 @@ object Android {
 
 object Kotlin {
     object Version {
-        const val kotlin = "1.9.24"
+        const val kotlin = "2.0.0"
     }
 }
 

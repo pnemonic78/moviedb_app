@@ -13,8 +13,6 @@ dependencyResolutionManagement {
     versionCatalogs {
         create("androidCatalog") {
             version("compose", "1.6.7")
-            // androidx.compose.compiler:compiler
-            version("composeCompiler", "1.5.14")
             version("gradle", "8.2.2")
             version("hilt", "2.51")
             version("navigation", "2.7.7")
@@ -95,14 +93,15 @@ dependencyResolutionManagement {
             plugin("hilt", "dagger.hilt.android.plugin").versionRef("hilt")
         }
         create("kotlinCatalog") {
-            version("kotlin", "1.9.24")
+            version("kotlin", "2.0.0")
 
             library(
                 "json-serialization",
-                "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3"
+                "org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.0-RC"
             )
 
             plugin("android", "org.jetbrains.kotlin.android").versionRef("kotlin")
+            plugin("compose-compiler", "org.jetbrains.kotlin.plugin.compose").versionRef("kotlin")
             plugin("kapt", "org.jetbrains.kotlin.kapt").versionRef("kotlin")
             plugin("serialization", "org.jetbrains.kotlin.plugin.serialization")
                 .versionRef("kotlin")
