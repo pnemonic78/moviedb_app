@@ -1,13 +1,14 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    aliasWV(androidCatalog.plugins.app)
-    aliasWV(androidCatalog.plugins.hilt)
-    aliasWV(kotlinCatalog.plugins.android)
-    aliasWV(kotlinCatalog.plugins.kapt)
+    aliasNV(androidCatalog.plugins.app)
+    aliasNV(androidCatalog.plugins.hilt)
+    aliasNV(kotlinCatalog.plugins.android)
+    aliasNV(kotlinCatalog.plugins.kapt)
     alias(kotlinCatalog.plugins.serialization)
 }
 
 android {
+    namespace = "com.tikal.tmdb"
     compileSdk = Android.Version.compileSdk
 
     defaultConfig {

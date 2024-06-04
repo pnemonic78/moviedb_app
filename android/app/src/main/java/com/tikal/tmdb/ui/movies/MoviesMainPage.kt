@@ -28,22 +28,22 @@ fun MoviesMainPage(
             .verticalScroll(rememberScrollState())
     ) {
         MoviesMainPageCategory(
-            title = stringResource(id = R.string.now_playing),
+            title = stringResource(id = com.tikal.tmdb.now_playing.R.string.now_playing),
             viewState = viewState.moviesNowPlayingViewState,
             navController = navController
         )
         MoviesMainPageCategory(
-            title = stringResource(id = R.string.popular),
+            title = stringResource(id = com.tikal.tmdb.popular.R.string.popular),
             viewState = viewState.moviesPopularViewState,
             navController = navController
         )
         MoviesMainPageCategory(
-            title = stringResource(id = R.string.top_rated),
+            title = stringResource(id = com.tikal.tmdb.top_rated.R.string.top_rated),
             viewState = viewState.moviesTopRatedViewState,
             navController = navController
         )
         MoviesMainPageCategory(
-            title = stringResource(id = R.string.upcoming),
+            title = stringResource(id = com.tikal.tmdb.upcoming.R.string.upcoming),
             viewState = viewState.moviesUpcomingViewState,
             navController = navController
         )

@@ -12,14 +12,15 @@ include(":feature-upcoming")
 dependencyResolutionManagement {
     versionCatalogs {
         create("androidCatalog") {
-            version("compose", "1.4.0-beta02")
-            version("composeCompiler", "1.4.3")
-            version("gradle", "7.4.2")
-            version("hilt", "2.45")
-            version("navigation", "2.5.0")
-            version("okhttp", "4.9.3")
-            version("paging", "3.2.0-alpha04")
-            version("room", "2.5.0")
+            version("compose", "1.6.7")
+            // androidx.compose.compiler:compiler
+            version("composeCompiler", "1.5.14")
+            version("gradle", "8.2.2")
+            version("hilt", "2.51")
+            version("navigation", "2.7.7")
+            version("okhttp", "4.12.0")
+            version("paging", "3.3.0")
+            version("room", "2.6.1")
             version("test", "1.4.0")
 
             // Database
@@ -43,8 +44,6 @@ dependencyResolutionManagement {
                 .versionRef("compose")
             library("jetpack-composeTooling", "androidx.compose.ui", "ui-tooling")
                 .versionRef("compose")
-            library("jetpack-composeNavigation", "androidx.navigation", "navigation-compose")
-                .versionRef("navigation")
             library("jetpack-composeNavigation", "androidx.navigation", "navigation-compose")
                 .versionRef("navigation")
             library("jetpack-composePaging", "androidx.paging:paging-compose:1.0.0-alpha18")
@@ -96,11 +95,11 @@ dependencyResolutionManagement {
             plugin("hilt", "dagger.hilt.android.plugin").versionRef("hilt")
         }
         create("kotlinCatalog") {
-            version("kotlin", "1.8.10")
+            version("kotlin", "1.9.24")
 
             library(
                 "json-serialization",
-                "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0"
+                "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3"
             )
 
             plugin("android", "org.jetbrains.kotlin.android").versionRef("kotlin")

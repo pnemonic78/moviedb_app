@@ -13,10 +13,10 @@ import androidx.navigation.compose.rememberNavController
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.items
 import com.tikal.tmdb.LoadingListTile
 import com.tikal.tmdb.MovieListTile
 import com.tikal.tmdb.compose.AppTheme
+import com.tikal.tmdb.compose.items
 import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.moviesPreview
 import kotlinx.coroutines.flow.Flow
@@ -52,7 +52,7 @@ fun MoviesListPage(
         contentPadding = PaddingValues(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(items = pagingItems, key = { it.id }) { movie ->
+        items(items = pagingItems /*FIXME, key = { it.id }*/) { movie ->
             movie?.let {
                 MovieListTile(
                     movie = it,

@@ -32,11 +32,11 @@ fun MoviesGridPage(
     viewState: MoviesPageViewState,
     navController: NavController
 ) {
-    val movies = viewState.movies.collectAsLazyPagingItems()
+    val pagingItems = viewState.movies.collectAsLazyPagingItems()
 
     MoviesGridPage(
         modifier = modifier,
-        pagingItems = movies,
+        pagingItems = pagingItems,
         onMovieClicked = { movie -> viewState.onMovieClicked(movie, navController) }
     )
 }
@@ -57,7 +57,7 @@ fun MoviesGridPage(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(items = pagingItems, key = { it.id }) { movie ->
+        items(items = pagingItems /*FIXME, key = { it.id }*/) { movie ->
             movie?.let {
                 MovieGridTile(
                     movie = it,

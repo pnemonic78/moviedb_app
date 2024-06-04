@@ -4,21 +4,21 @@ import org.gradle.plugin.use.PluginDependency
 
 object Android {
     object Version {
-        const val compileSdk = 33
+        const val compileSdk = 34
         const val minSdk = 24
-        const val targetSdk = 33
+        const val targetSdk = 34
 
-        const val gradle = "7.4.2"
-        const val hilt = "2.45"
+        const val gradle = "8.4.1"
+        const val hilt = "2.51"
     }
 }
 
 object Kotlin {
     object Version {
-        const val kotlin = "1.8.10"
+        const val kotlin = "1.9.24"
     }
 }
 
-// Alias without version.
-fun PluginDependenciesSpec.aliasWV(notation: Provider<PluginDependency>) =
+// Alias with no (without) version.
+fun PluginDependenciesSpec.aliasNV(notation: Provider<PluginDependency>) =
     id(notation.get().pluginId)

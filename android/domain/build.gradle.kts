@@ -1,11 +1,12 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    aliasWV(androidCatalog.plugins.lib)
-    aliasWV(kotlinCatalog.plugins.android)
-    aliasWV(kotlinCatalog.plugins.kapt)
+    aliasNV(androidCatalog.plugins.lib)
+    aliasNV(kotlinCatalog.plugins.android)
+    aliasNV(kotlinCatalog.plugins.kapt)
 }
 
 android {
+    namespace = "com.tikal.tmdb.domain"
     compileSdk = Android.Version.compileSdk
 
     defaultConfig {
@@ -15,7 +16,9 @@ android {
 
         buildConfigField("String", "TMDB_API_KEY", "\"${project.properties["TMDB_API_KEY"]}\"")
     }
-
+    buildFeatures {
+        buildConfig = true
+    }
     buildTypes {
         release {
             isMinifyEnabled = false

@@ -12,9 +12,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.items
 import com.tikal.tmdb.LoadingGridTile
 import com.tikal.tmdb.MovieGridTile
+import com.tikal.tmdb.compose.items
 import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.movies.OnMovieClickCallback
 import com.tikal.tmdb.ui.common.R
@@ -49,7 +49,7 @@ fun MoviesCarousel(
         contentPadding = PaddingValues(8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(items = pagingItems, key = { it.id }) { movie ->
+        items(items = pagingItems /*FIXME, key = { it.id }*/) { movie ->
             movie?.let {
                 MovieGridTile(
                     modifier = Modifier.width(tileWidth),

@@ -11,7 +11,6 @@ import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.tikal.tmdb.R
 import com.tikal.tmdb.compose.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -28,14 +27,14 @@ class MoviesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_compose, container, false)
+        return inflater.inflate(com.tikal.tmdb.ui.common.R.layout.fragment_compose, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         progressBar = view.findViewById(android.R.id.progress)
 
-        val composeView = view.findViewById<ComposeView>(R.id.compose_view)
+        val composeView = view.findViewById<ComposeView>(com.tikal.tmdb.ui.common.R.id.compose_view)
         composeView.setContent {
             AppTheme {
                 MoviesMainScreen(viewModel)

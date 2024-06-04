@@ -3,6 +3,8 @@ package com.tikal.tmdb.compose
 import android.annotation.SuppressLint
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.compose.foundation.lazy.LazyItemScope
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.grid.LazyGridItemScope
 import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.runtime.Composable
@@ -12,6 +14,26 @@ fun <T : Any> LazyGridScope.items(
     items: LazyPagingItems<T>,
     key: ((item: T) -> Any)? = null,
     itemContent: @Composable LazyGridItemScope.(value: T?) -> Unit
+) {
+    items(
+        count = items.itemCount,
+        key = if (key == null) null else { index ->
+            val item = items.peek(index)
+            if (item == null) {
+                PagingPlaceholderKey(index)
+            } else {
+                key(item)
+            }
+        }
+    ) { index ->
+        itemContent(items[index])
+    }
+}
+
+fun <T : Any> LazyListScope.items(
+    items: LazyPagingItems<T>,
+    key: ((item: T) -> Any)? = null,
+    itemContent: @Composable LazyItemScope.(value: T?) -> Unit
 ) {
     items(
         count = items.itemCount,
