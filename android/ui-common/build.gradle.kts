@@ -1,10 +1,9 @@
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    aliasNV(androidCatalog.plugins.lib)
-    aliasNV(androidCatalog.plugins.hilt)
-    aliasNV(kotlinCatalog.plugins.android)
-    alias(kotlinCatalog.plugins.compose.compiler)
-    aliasNV(kotlinCatalog.plugins.kapt)
+    aliasNV(libs.plugins.androidLibrary)
+    aliasNV(libs.plugins.hilt)
+    aliasNV(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.compose.compiler)
+    aliasNV(libs.plugins.kapt)
 }
 
 android {
@@ -37,25 +36,25 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain"))
-    implementation(project(":model"))
+    implementation(projects.domain)
 
-    implementation(androidCatalog.di.hilt)
-    kapt(androidCatalog.di.hiltCompiler)
+    implementation(libs.di.hilt)
+    kapt(libs.di.hilt.compiler)
 
-    api(androidCatalog.image.coil)
-    api(androidCatalog.image.ratingbar)
+    api(libs.bundles.compose)
+    api(libs.compose.coil)
+    api(libs.compose.ratingbar)
 
-    api(androidCatalog.jetpack.appcompat)
-    api(androidCatalog.bundles.jetpack.compose)
-    api(androidCatalog.jetpack.navigationFragment)
+    api(libs.jetpack.appcompat)
+    api(libs.jetpack.navigationFragment)
+    api(libs.jetpack.paging)
 
-    implementation(androidCatalog.log.timber)
+    implementation(libs.logging.timber)
 
     // Testing
-    testImplementation(androidCatalog.test.junit)
-    androidTestImplementation(androidCatalog.test.junitExt)
-    androidTestImplementation(androidCatalog.test.espresso)
-    androidTestImplementation(androidCatalog.test.runner)
-    androidTestImplementation(androidCatalog.test.rules)
+    testImplementation(libs.test.junit)
+    androidTestImplementation(libs.test.junitExt)
+    androidTestImplementation(libs.test.espresso)
+    androidTestImplementation(libs.test.runner)
+    androidTestImplementation(libs.test.rules)
 }

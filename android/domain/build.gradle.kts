@@ -1,8 +1,7 @@
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    aliasNV(androidCatalog.plugins.lib)
-    aliasNV(kotlinCatalog.plugins.android)
-    aliasNV(kotlinCatalog.plugins.kapt)
+    aliasNV(libs.plugins.androidLibrary)
+    aliasNV(libs.plugins.kotlinAndroid)
+    aliasNV(libs.plugins.kapt)
 }
 
 android {
@@ -40,30 +39,30 @@ kapt {
 }
 
 dependencies {
-    implementation(project(":model"))
+    api(projects.model)
 
-    implementation(androidCatalog.di.hilt)
-    kapt(androidCatalog.di.hiltCompiler)
+    implementation(libs.di.hilt)
+    kapt(libs.di.hilt.compiler)
 
-    implementation(androidCatalog.jetpack.core)
+    implementation(libs.jetpack.core)
 
-    implementation(kotlinCatalog.json.serialization)
-    implementation(androidCatalog.json.retrofit)
+    implementation(libs.serialization.json)
+    implementation(libs.net.retrofit.json)
 
-    implementation(androidCatalog.log.timber)
+    implementation(libs.logging.timber)
 
     // Networking
-    implementation(androidCatalog.jetpack.paging)
-    implementation(androidCatalog.net.logging)
-    implementation(androidCatalog.net.okhttp)
-    implementation(androidCatalog.net.retrofit)
+    implementation(libs.jetpack.paging)
+    implementation(libs.net.okhttp)
+    implementation(libs.net.okhttp.logging)
+    implementation(libs.net.retrofit)
 
     // Database
-    implementation(androidCatalog.db.roomKtx)
-    kapt(androidCatalog.db.roomCompiler)
+    implementation(libs.db.room.kotlin)
+    kapt(libs.db.room.compiler)
 
     // Testing
-    testImplementation(androidCatalog.test.junit)
-    androidTestImplementation(androidCatalog.test.junitExt)
-    androidTestImplementation(androidCatalog.test.espresso)
+    testImplementation(libs.test.junit)
+    androidTestImplementation(libs.test.junitExt)
+    androidTestImplementation(libs.test.espresso)
 }

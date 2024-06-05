@@ -14,7 +14,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "The_Movie_DB"
+rootProject.name = "Movie_DB_KMP"
 include(":androidApp")
 include(":domain")
 include(":model")

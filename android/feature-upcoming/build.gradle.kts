@@ -1,8 +1,7 @@
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    aliasNV(androidCatalog.plugins.lib)
-    aliasNV(kotlinCatalog.plugins.android)
-    alias(kotlinCatalog.plugins.compose.compiler)
+    aliasNV(libs.plugins.androidLibrary)
+    aliasNV(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -35,15 +34,14 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain"))
-    implementation(project(":model"))
-    implementation(project(":ui-common"))
+    implementation(projects.domain)
+    implementation(projects.uiCommon)
 
-    implementation(androidCatalog.log.timber)
+    implementation(libs.logging.timber)
 
     // Testing
-    testImplementation(androidCatalog.test.junit)
-    androidTestImplementation(androidCatalog.test.espresso)
-    androidTestImplementation(androidCatalog.test.runner)
-    androidTestImplementation(androidCatalog.test.rules)
+    testImplementation(libs.test.junit)
+    androidTestImplementation(libs.test.espresso)
+    androidTestImplementation(libs.test.runner)
+    androidTestImplementation(libs.test.rules)
 }

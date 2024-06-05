@@ -1,9 +1,8 @@
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    aliasNV(androidCatalog.plugins.lib)
-    aliasNV(kotlinCatalog.plugins.android)
-    aliasNV(kotlinCatalog.plugins.kapt)
-    alias(kotlinCatalog.plugins.serialization)
+    aliasNV(libs.plugins.androidLibrary)
+    aliasNV(libs.plugins.kotlinAndroid)
+    aliasNV(libs.plugins.kapt)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 android {
@@ -33,20 +32,15 @@ android {
 }
 
 dependencies {
-    implementation(androidCatalog.di.hilt)
-    kapt(androidCatalog.di.hiltCompiler)
+    implementation(libs.di.hilt)
+    kapt(libs.di.hilt.compiler)
 
-    implementation(kotlinCatalog.json.serialization)
+    implementation(libs.serialization.json)
 
-    implementation(androidCatalog.log.timber)
-
-    // Networking
-    implementation(androidCatalog.net.logging)
-    implementation(androidCatalog.net.okhttp)
-    implementation(androidCatalog.net.retrofit)
+    implementation(libs.logging.timber)
 
     // Testing
-    testImplementation(androidCatalog.test.junit)
-    androidTestImplementation(androidCatalog.test.junitExt)
-    androidTestImplementation(androidCatalog.test.espresso)
+    testImplementation(libs.test.junit)
+    androidTestImplementation(libs.test.junitExt)
+    androidTestImplementation(libs.test.espresso)
 }

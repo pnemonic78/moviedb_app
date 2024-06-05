@@ -1,11 +1,10 @@
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    aliasNV(androidCatalog.plugins.app)
-    aliasNV(androidCatalog.plugins.hilt)
-    aliasNV(kotlinCatalog.plugins.android)
-    alias(kotlinCatalog.plugins.compose.compiler)
-    aliasNV(kotlinCatalog.plugins.kapt)
-    alias(kotlinCatalog.plugins.serialization)
+    aliasNV(libs.plugins.androidApplication)
+    aliasNV(libs.plugins.hilt)
+    aliasNV(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.compose.compiler)
+    aliasNV(libs.plugins.kapt)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 android {
@@ -47,23 +46,23 @@ kapt {
 }
 
 dependencies {
-    implementation(project(":domain"))
-    implementation(project(":model"))
-    implementation(project(":ui-common"))
-    implementation(project(":feature-cast"))
-    implementation(project(":feature-now-playing"))
-    implementation(project(":feature-popular"))
-    implementation(project(":feature-top-rated"))
-    implementation(project(":feature-upcoming"))
+    implementation(projects.domain)
+    implementation(projects.model)
+    implementation(projects.uiCommon)
+    implementation(projects.featureCast)
+    implementation(projects.featureNowPlaying)
+    implementation(projects.featurePopular)
+    implementation(projects.featureTopRated)
+    implementation(projects.featureUpcoming)
 
-    implementation(androidCatalog.di.hilt)
-    kapt(androidCatalog.di.hiltCompiler)
+    implementation(libs.di.hilt)
+    kapt(libs.di.hilt.compiler)
 
-    implementation(androidCatalog.log.timber)
+    implementation(libs.logging.timber)
 
     // Testing
-    testImplementation(androidCatalog.test.junit)
-    androidTestImplementation(androidCatalog.test.espresso)
-    androidTestImplementation(androidCatalog.test.runner)
-    androidTestImplementation(androidCatalog.test.rules)
+    testImplementation(libs.test.junit)
+    androidTestImplementation(libs.test.espresso)
+    androidTestImplementation(libs.test.runner)
+    androidTestImplementation(libs.test.rules)
 }
