@@ -1,4 +1,4 @@
-package com.tikal.tmdb.model
+package com.tikal.tmdb.json.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -7,10 +7,8 @@ import kotlinx.serialization.Serializable
 data class ApiError(
     @SerialName("status_code")
     val statusCode: Int,
-
     @SerialName("status_message")
     val statusMessage: String? = null,
-
     @SerialName("success")
     val success: Boolean = false
 )

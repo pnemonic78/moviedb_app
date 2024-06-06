@@ -1,9 +1,9 @@
 package com.tikal.tmdb.json
 
-import com.tikal.tmdb.model.Movie
-import com.tikal.tmdb.model.Person
-import com.tikal.tmdb.model.Television
-import com.tikal.tmdb.model.Media
+import com.tikal.tmdb.json.model.Media
+import com.tikal.tmdb.json.model.Movie
+import com.tikal.tmdb.json.model.Person
+import com.tikal.tmdb.json.model.Television
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.json.JsonContentPolymorphicSerializer
 import kotlinx.serialization.json.JsonElement

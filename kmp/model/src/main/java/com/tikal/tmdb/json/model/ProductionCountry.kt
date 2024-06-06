@@ -1,4 +1,4 @@
-package com.tikal.tmdb.model
+package com.tikal.tmdb.json.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

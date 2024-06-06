@@ -6,11 +6,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable(with = MediaSerializer::class)
 abstract class Media {
-    abstract var adult: Boolean
+    open var adult: Boolean = false
 
-    abstract var id: Long
+    open var id: Long = 0
 
-    abstract var mediaType: MediaType
+    open var mediaType: MediaType = MediaType.all
 
-    abstract var popularity: Double
+    open var popularity: Double = 0.0
 }

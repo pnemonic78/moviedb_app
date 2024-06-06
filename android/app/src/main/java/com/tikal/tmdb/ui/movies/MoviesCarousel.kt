@@ -49,7 +49,7 @@ fun MoviesCarousel(
         contentPadding = PaddingValues(8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(items = pagingItems /*FIXME, key = { it.id }*/) { movie ->
+        items(items = pagingItems, key = { it.id }) { movie ->
             movie?.let {
                 MovieGridTile(
                     modifier = Modifier.width(tileWidth),

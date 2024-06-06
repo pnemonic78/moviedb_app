@@ -11,7 +11,7 @@ import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
 object MediaSerializer : JsonContentPolymorphicSerializer<Media>(Media::class) {
-    override fun selectDeserializer(element: JsonElement): DeserializationStrategy<out Media> {
+    override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Media> {
         return when (element.jsonObject["media_type"]?.jsonPrimitive?.content) {
             "movie" -> Movie.serializer()
             "person" -> Person.serializer()

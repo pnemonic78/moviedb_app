@@ -1,4 +1,4 @@
-package com.tikal.tmdb.model
+package com.tikal.tmdb.json.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
  * Response for a page of movies.
  */
 @Serializable
-data class MoviesPage(
+data class MoviesPageResponse(
     @SerialName("results")
     val results: List<Movie>,
 
@@ -21,5 +21,5 @@ data class MoviesPage(
     val totalPages: Int,
 
     @SerialName("total_results")
-    val totalResult: Int
+    val totalResults: Int
 )

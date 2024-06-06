@@ -10,9 +10,17 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 open class Person : Media() {
-    init {
-        mediaType = MediaType.person
-    }
+    @SerialName("adult")
+    override var adult: Boolean = false
+
+    @SerialName("id")
+    override var id: Long = 0
+
+    @SerialName("media_type")
+    override var mediaType: MediaType = MediaType.person
+
+    @SerialName("popularity")
+    override var popularity: Double = 0.0
 
     @SerialName("also_known_as")
     var aliases: List<String> = emptyList()

@@ -1,4 +1,4 @@
-package com.tikal.tmdb.model
+package com.tikal.tmdb.json.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -6,20 +6,20 @@ import kotlinx.serialization.Serializable
 @Serializable
 enum class VideoType {
     @SerialName("Trailer")
-    Trailer,
+    trailer,
 
     @SerialName("Teaser")
-    Teaser,
+    teaser,
 
     @SerialName("Clip")
-    Clip,
+    clip,
 
     @SerialName("Featurette")
-    Featurette,
+    featurette,
 
     @SerialName("Behind the Scenes")
-    BehindTheScenes,
+    behindTheScenes,
 
     @SerialName("Bloopers")
-    Bloopers
+    bloopers
 }

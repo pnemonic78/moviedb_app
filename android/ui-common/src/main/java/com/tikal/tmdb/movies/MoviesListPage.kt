@@ -52,7 +52,7 @@ fun MoviesListPage(
         contentPadding = PaddingValues(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(items = pagingItems /*FIXME, key = { it.id }*/) { movie ->
+        items(items = pagingItems, key = { it.id }) { movie ->
             movie?.let {
                 MovieListTile(
                     movie = it,

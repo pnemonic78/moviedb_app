@@ -1,7 +1,7 @@
 package com.tikal.tmdb.data.source
 
-import com.tikal.tmdb.model.Movie
-import com.tikal.tmdb.model.MoviesPage
+import com.tikal.tmdb.json.model.Movie
+import com.tikal.tmdb.json.model.MoviesPage
 
 /**
  * TMDB data source.

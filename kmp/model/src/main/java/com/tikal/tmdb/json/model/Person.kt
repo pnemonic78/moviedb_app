@@ -1,4 +1,4 @@
-package com.tikal.tmdb.model
+package com.tikal.tmdb.json.model
 
 import com.tikal.tmdb.json.DateTime
 import com.tikal.tmdb.json.DateTimeSerializer
@@ -10,9 +10,17 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 open class Person : Media() {
-    init {
-        mediaType = MediaType.Person
-    }
+    @SerialName("adult")
+    override var adult: Boolean = false
+
+    @SerialName("id")
+    override var id: Long = 0
+
+    @SerialName("media_type")
+    override var mediaType: MediaType = MediaType.person
+
+    @SerialName("popularity")
+    override var popularity: Double = 0.0
 
     @SerialName("also_known_as")
     var aliases: List<String> = emptyList()
@@ -25,7 +33,7 @@ open class Person : Media() {
     var birthday: DateTime? = null
 
     @SerialName("combined_credits")
-    var credits: PersonCredits? = null
+    var credits: PersonCreditsResponse? = null
 
     @SerialName("place_of_birth")
     var birthplace: String? = null
@@ -57,8 +65,4 @@ open class Person : Media() {
 
     @SerialName("profile_path")
     var profilePath: String? = null
-
-    override fun toString(): String {
-        return name
-    }
 }

@@ -1,8 +1,8 @@
 package com.tikal.tmdb.data.source.local
 
 import com.tikal.tmdb.data.source.TmdbDataSource
-import com.tikal.tmdb.model.Movie
-import com.tikal.tmdb.model.MoviesPage
+import com.tikal.tmdb.json.model.Movie
+import com.tikal.tmdb.json.model.MoviesPage
 import kotlinx.coroutines.CoroutineDispatcher
 
 /**

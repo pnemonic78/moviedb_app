@@ -1,4 +1,4 @@
-package com.tikal.tmdb.model
+package com.tikal.tmdb.json.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -6,14 +6,14 @@ import kotlinx.serialization.Serializable
 @Serializable
 enum class MediaType {
     @SerialName("all")
-    All,
+    all,
 
     @SerialName("movie")
-    Movie,
+    movie,
 
     @SerialName("tv")
-    TV,
+    tv,
 
     @SerialName("person")
-    Person
+    person
 }

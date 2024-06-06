@@ -1,10 +1,10 @@
-package com.tikal.tmdb.model
+package com.tikal.tmdb.json.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Credits(
+data class PersonCredits(
     @SerialName("id")
     val id: Long,
 

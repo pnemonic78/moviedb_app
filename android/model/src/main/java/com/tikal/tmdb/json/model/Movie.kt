@@ -10,9 +10,17 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 class Movie : Media() {
-    init {
-        mediaType = MediaType.movie
-    }
+    @SerialName("adult")
+    override var adult: Boolean = false
+
+    @SerialName("id")
+    override var id: Long = 0
+
+    @SerialName("media_type")
+    override var mediaType: MediaType = MediaType.movie
+
+    @SerialName("popularity")
+    override var popularity: Double = 0.0
 
     @SerialName("backdrop_path")
     var backdropPath: String? = null

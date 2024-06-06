@@ -1,7 +1,7 @@
-package com.tikal.tmdb.model
+package com.tikal.tmdb.json.model
 
-import com.tikal.tmdb.json.DateTime
 import com.tikal.tmdb.json.DateTimeSerializer
+import com.tikal.tmdb.json.DateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

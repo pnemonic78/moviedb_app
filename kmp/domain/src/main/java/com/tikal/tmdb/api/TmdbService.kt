@@ -1,11 +1,11 @@
 package com.tikal.tmdb.api
 
-import com.tikal.tmdb.model.Credits
-import com.tikal.tmdb.model.Images
-import com.tikal.tmdb.model.Movie
-import com.tikal.tmdb.model.MoviesPage
-import com.tikal.tmdb.model.Person
-import com.tikal.tmdb.model.Videos
+import com.tikal.tmdb.json.model.Credits
+import com.tikal.tmdb.json.model.Images
+import com.tikal.tmdb.json.model.Movie
+import com.tikal.tmdb.json.model.MoviesPage
+import com.tikal.tmdb.json.model.Person
+import com.tikal.tmdb.json.model.Videos
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*

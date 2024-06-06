@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -41,11 +42,11 @@ fun PosterContent(
     } else {
         rememberImagePainter(data = posterPath)
     }
-    val scale = remember { mutableStateOf(1f) }
+    val scale = remember { mutableFloatStateOf(1f) }
     val scaleValue = maxOf(1f, minOf(6f, scale.value))
 
-    val offsetX = remember { mutableStateOf(0f) }
-    val offsetY = remember { mutableStateOf(0f) }
+    val offsetX = remember { mutableFloatStateOf(0f) }
+    val offsetY = remember { mutableFloatStateOf(0f) }
     val scaleValue1 = scaleValue - 1f
     val offsetXMax = (posterSize.value.width * scaleValue1) / 2f
     val offsetYMax = (posterSize.value.height * scaleValue1) / 2f

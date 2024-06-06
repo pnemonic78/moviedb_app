@@ -1,4 +1,4 @@
-package com.tikal.tmdb.model
+package com.tikal.tmdb.json.model
 
 import com.tikal.tmdb.json.DateTime
 import com.tikal.tmdb.json.DateTimeSerializer
@@ -10,9 +10,17 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 class Movie : Media() {
-    init {
-        mediaType = MediaType.Movie
-    }
+    @SerialName("adult")
+    override var adult: Boolean = false
+
+    @SerialName("id")
+    override var id: Long = 0
+
+    @SerialName("media_type")
+    override var mediaType: MediaType = MediaType.movie
+
+    @SerialName("popularity")
+    override var popularity: Double = 0.0
 
     @SerialName("backdrop_path")
     var backdropPath: String? = null
@@ -52,7 +60,7 @@ class Movie : Media() {
     var budget: Long = 0
 
     @SerialName("credits")
-    var credits: Credits? = null
+    var credits: CreditsResponse? = null
 
     @SerialName("genres")
     var genres: List<Genre> = emptyList()
@@ -83,8 +91,4 @@ class Movie : Media() {
 
     @SerialName("tagline")
     var tagline: String? = null
-
-    override fun toString(): String {
-        return title
-    }
 }

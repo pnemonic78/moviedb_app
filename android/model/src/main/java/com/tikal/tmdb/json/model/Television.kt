@@ -7,9 +7,17 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 class Television : Media() {
-    init {
-        mediaType = MediaType.tv
-    }
+    @SerialName("adult")
+    override var adult: Boolean = false
+
+    @SerialName("id")
+    override var id: Long = 0
+
+    @SerialName("media_type")
+    override var mediaType: MediaType = MediaType.tv
+
+    @SerialName("popularity")
+    override var popularity: Double = 0.0
 
     @SerialName("episode_count")
     var episodeCount: Int = 0
