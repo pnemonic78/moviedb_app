@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.support.kotlinCompilerOptions
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
@@ -27,13 +29,13 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.kamel)
+            implementation(libs.bundles.compose)
+            implementation(libs.bundles.precompose)
             implementation(libs.kotlin.coroutines)
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.logging.napier)
-            implementation(libs.precompose)
-            implementation(libs.precompose.viewmodel)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -56,6 +58,12 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 }
 
