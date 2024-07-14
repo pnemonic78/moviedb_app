@@ -1,6 +1,6 @@
 plugins {
-    aliasNV(libs.plugins.androidLibrary)
-    aliasNV(libs.plugins.kotlinAndroid)
+    aliasId(libs.plugins.androidLibrary)
+    aliasId(libs.plugins.kotlinAndroid)
     alias(libs.plugins.compose.compiler)
 }
 
@@ -22,11 +22,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = Java.Version.jvm
+        targetCompatibility = Java.Version.jvm
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = Java.Version.jvm.toString()
     }
     buildFeatures {
         compose = true

@@ -1,7 +1,7 @@
 plugins {
-    aliasNV(libs.plugins.androidLibrary)
-    aliasNV(libs.plugins.kotlinAndroid)
-    aliasNV(libs.plugins.kapt)
+    aliasId(libs.plugins.androidLibrary)
+    aliasId(libs.plugins.kotlinAndroid)
+    aliasId(libs.plugins.kapt)
     alias(libs.plugins.kotlinSerialization)
 }
 
@@ -23,11 +23,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = Java.Version.jvm
+        targetCompatibility = Java.Version.jvm
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = Java.Version.jvm.toString()
     }
 }
 

@@ -1,3 +1,4 @@
+import org.gradle.api.JavaVersion
 import org.gradle.api.provider.Provider
 import org.gradle.plugin.use.PluginDependenciesSpec
 import org.gradle.plugin.use.PluginDependency
@@ -13,6 +14,12 @@ object Android {
     }
 }
 
+object Java {
+    object Version {
+        val jvm = JavaVersion.VERSION_11
+    }
+}
+
 object Kotlin {
     object Version {
         const val kotlin = "2.0.0"
@@ -20,5 +27,5 @@ object Kotlin {
 }
 
 // Alias with no (without) version.
-fun PluginDependenciesSpec.aliasNV(notation: Provider<PluginDependency>) =
+fun PluginDependenciesSpec.aliasId(notation: Provider<PluginDependency>) =
     id(notation.get().pluginId)
