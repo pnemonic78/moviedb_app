@@ -2,7 +2,6 @@ package com.tikal.tmdb
 
 import android.text.format.DateUtils
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,8 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -20,7 +17,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
@@ -35,9 +31,6 @@ import com.gowtham.ratingbar.RatingBarConfig
 import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize
 import com.tikal.tmdb.compose.AppTheme
-import com.tikal.tmdb.compose.CornerSizeLarge
-import com.tikal.tmdb.compose.CornerSizeMedium
-import com.tikal.tmdb.compose.CornerSizeSmall
 import com.tikal.tmdb.compose.CornerSizeZero
 import com.tikal.tmdb.compose.thumbnailPainter
 import com.tikal.tmdb.data.model.MovieEntity
