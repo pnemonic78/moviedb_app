@@ -2,7 +2,7 @@
 <androidx.fragment.app.FragmentContainerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_host_fragment"
-    android:name="com.tikal.tmdb.ui.movies.MoviesFragment"
+    android:name="com.tikalk.tmdb.ui.movies.MoviesFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainActivity" />
+    tools:context="com.tikalk.tmdb.ui.MainActivity" />

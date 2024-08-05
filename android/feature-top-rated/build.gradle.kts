@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.tikal.tmdb.top_rated"
+    namespace = "com.tikalk.tmdb.top_rated"
     compileSdk = Android.Version.compileSdk
 
     defaultConfig {

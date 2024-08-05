@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.tikal.tmdb.now_playing"
+    namespace = "com.tikalk.tmdb.now_playing"
     compileSdk = Android.Version.compileSdk
 
     defaultConfig {

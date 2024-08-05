@@ -4,7 +4,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.tikal.tmdb.MyApplication"
+        android:name="com.tikalk.tmdb.MyApplication"
         android:allowBackup="false"
         android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"
@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.tikal.tmdb.ui.MainActivity"
+            android:name="com.tikalk.tmdb.ui.MainActivity"
             android:exported="true"
             android:label="@string/title">
             <intent-filter>

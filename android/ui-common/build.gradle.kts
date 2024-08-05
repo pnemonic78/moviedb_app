@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.tikal.tmdb.ui.common"
+    namespace = "com.tikalk.tmdb.ui.common"
     compileSdk = Android.Version.compileSdk
 
     defaultConfig {
