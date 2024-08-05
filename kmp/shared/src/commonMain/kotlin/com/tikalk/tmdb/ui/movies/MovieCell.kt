@@ -12,15 +12,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.tikal.tmdb.json.model.Movie
+import com.tikal.tmdb.data.model.MovieEntity
 import com.tikalk.tmdb.api.TmdbApi
+import com.tikalk.tmdb.compose.AppTheme
+import com.tikalk.tmdb.movie550
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 
 @Composable
 fun MovieCell(
-    movie: Movie,
+    movie: MovieEntity,
     onClick: (movieId: Long, title: String) -> Unit
 ) {
     val density = LocalDensity.current
@@ -52,6 +55,16 @@ fun MovieCell(
                 contentScale = ContentScale.FillWidth
             )
         }
-        Text(text = movie.title)
+        Text(modifier = Modifier.width(width), text = movie.title)
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFCC00CC, widthDp = 200)
+@Composable
+private fun ThisPreview() {
+    AppTheme {
+        MovieCell(movie = movie550) { id, title ->
+            println("click movie $id $title")
+        }
     }
 }

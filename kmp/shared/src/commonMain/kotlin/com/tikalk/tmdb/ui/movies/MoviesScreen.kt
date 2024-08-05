@@ -20,14 +20,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.tikal.Result
-import com.tikal.tmdb.json.model.Movie
+import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.ui.UiState
 import com.tikalk.tmdb.ui.components.Loader
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MoviesScreen(
-    uiState: UiState<List<Movie>>,
+    uiState: UiState<List<MovieEntity>>,
     onClick: (Long, String) -> Unit
 ) {
     Scaffold(
@@ -41,7 +41,7 @@ fun MoviesScreen(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            when (val state: Result<List<Movie>> = uiState.state) {
+            when (val state: Result<List<MovieEntity>> = uiState.state) {
                 is Result.Loading -> {
                     Loader(modifier = Modifier.padding(paddingValues))
                 }
@@ -60,7 +60,7 @@ fun MoviesScreen(
 
 @Composable
 private fun SuccessState(
-    movies: List<Movie>,
+    movies: List<MovieEntity>,
     paddingValues: PaddingValues,
     onClick: (Long, String) -> Unit
 ) {

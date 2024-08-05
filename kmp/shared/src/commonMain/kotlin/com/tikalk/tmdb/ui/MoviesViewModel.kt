@@ -1,8 +1,8 @@
 package com.tikalk.tmdb.ui
 
 import com.tikal.Result
+import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.data.source.TmdbDataSource
-import com.tikal.tmdb.json.model.Movie
 import com.tikal.tmdb.ui.UiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +15,7 @@ import moe.tlaster.precompose.viewmodel.viewModelScope
 class MoviesViewModel(private val dataSource: TmdbDataSource) : ViewModel() {
 
     private var page = 1
-    private val _uiState = MutableStateFlow(UiState<List<Movie>>())
+    private val _uiState = MutableStateFlow(UiState<List<MovieEntity>>())
     val uiState = _uiState.asStateFlow()
 
     init {

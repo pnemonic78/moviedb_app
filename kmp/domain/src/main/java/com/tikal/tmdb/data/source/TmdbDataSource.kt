@@ -1,7 +1,7 @@
 package com.tikal.tmdb.data.source
 
-import com.tikal.tmdb.json.model.Movie
-import com.tikal.tmdb.json.model.MoviesPage
+import com.tikal.tmdb.data.model.MovieEntity
+import com.tikal.tmdb.data.model.MoviesPage
 
 /**
  * TMDB data source.
@@ -16,5 +16,5 @@ interface TmdbDataSource {
 
     suspend fun getMoviesUpcoming(page: Int = 1, refresh: Boolean = false): MoviesPage?
 
-    suspend fun getMovie(movieId: Long): Movie?
+    suspend fun getMovie(movieId: Long): MovieEntity?
 }

@@ -1,9 +1,9 @@
 package com.tikal.tmdb.data.source.remote
 
 import com.tikal.tmdb.api.TmdbService
+import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.data.source.TmdbDataSource
-import com.tikal.tmdb.json.model.Movie
-import com.tikal.tmdb.json.model.MoviesPage
+import com.tikal.tmdb.data.model.MoviesPage
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
@@ -34,7 +34,7 @@ class TmdbRemoteDataSource(
             service.getMoviesUpcoming(page = page)
         }
 
-    override suspend fun getMovie(movieId: Long): Movie =
+    override suspend fun getMovie(movieId: Long): MovieEntity =
         withContext(ioDispatcher) {
             service.getMovieDetails(movieId=movieId)
         }

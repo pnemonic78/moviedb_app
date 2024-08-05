@@ -1,10 +1,10 @@
 package com.tikal.tmdb.data
 
+import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.data.source.TmdbDataSource
 import com.tikal.tmdb.data.source.local.TmdbLocalDataSource
 import com.tikal.tmdb.data.source.remote.TmdbRemoteDataSource
-import com.tikal.tmdb.json.model.Movie
-import com.tikal.tmdb.json.model.MoviesPage
+import com.tikal.tmdb.data.model.MoviesPage
 
 /**
  * TMDB data repository.
@@ -55,7 +55,7 @@ class TmdbRepository(
         return result
     }
 
-    override suspend fun getMovie(movieId: Long): Movie {
+    override suspend fun getMovie(movieId: Long): MovieEntity {
         var result = localRepository.getMovie(movieId)
 
         // Fetch from server and save to database.

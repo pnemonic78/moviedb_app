@@ -1,8 +1,8 @@
 package com.tikal.tmdb.data.source.local
 
+import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.data.source.TmdbDataSource
-import com.tikal.tmdb.json.model.Movie
-import com.tikal.tmdb.json.model.MoviesPage
+import com.tikal.tmdb.data.model.MoviesPage
 import kotlinx.coroutines.CoroutineDispatcher
 
 /**
@@ -19,5 +19,5 @@ class TmdbLocalDataSource(
 
     override suspend fun getMoviesUpcoming(page: Int, refresh: Boolean): MoviesPage? = null
 
-    override suspend fun getMovie(movieId: Long): Movie? = null
+    override suspend fun getMovie(movieId: Long): MovieEntity? = null
 }
