@@ -1,15 +1,15 @@
 package com.tikal.tmdb.compose
 
-import androidx.compose.material.Colors
-import androidx.compose.material.contentColorFor
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.contentColorFor
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
 
-val appLightColors = lightColors()
+val appDarkColors = darkColorScheme()
 
-val appDarkColors = darkColors()
+val appLightColors = lightColorScheme()
 
-val Colors.textColorPrimary: Color get() = contentColorFor(primary)
+val ColorScheme.textColorPrimary: Color get() = contentColorFor(primary)
 
-val Colors.textColorSecondary: Color get() = contentColorFor(secondary)
+val ColorScheme.textColorSecondary: Color get() = contentColorFor(secondary)

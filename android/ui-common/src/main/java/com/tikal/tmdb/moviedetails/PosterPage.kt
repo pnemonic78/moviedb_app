@@ -2,8 +2,10 @@ package com.tikal.tmdb.moviedetails
 
 import android.net.Uri
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Scaffold
-import androidx.compose.material.TopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -17,6 +19,7 @@ import com.tikal.tmdb.data.model.MovieEntity
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PosterScreen(
     navController: NavController,
@@ -28,9 +31,9 @@ fun PosterScreen(
             navigationIcon = {
                 BackButton(navController = navController)
             },
-            backgroundColor = Color.Transparent,
-            contentColor = Color.Transparent,
-            elevation = 0.dp
+            colors = TopAppBarDefaults.topAppBarColors().copy(
+                containerColor = Color.Transparent
+            ),
         )
     }) { innerPadding ->
         PosterPage(modifier = Modifier.padding(innerPadding), posterPathSuffix = posterPathSuffix)

@@ -16,10 +16,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Storage
@@ -85,7 +85,7 @@ fun MovieDetailsContent(
     ) {
         Text(
             text = movie.title,
-            style = textTheme.h5
+            style = textTheme.headlineSmall
         )
         Spacer(modifier = Modifier.height(8.dp))
         Row(modifier = Modifier.fillMaxWidth()) {
@@ -147,7 +147,7 @@ fun MovieDetailsContent(
             ) {
                 Text(
                     text = stringResource(id = R.string.popularity_label),
-                    style = textTheme.h6
+                    style = textTheme.titleLarge
                 )
                 RatingBar(
                     value = (movie.voteAverage / 2).toFloat(),
@@ -164,7 +164,7 @@ fun MovieDetailsContent(
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = stringResource(id = R.string.release_date_label),
-                        style = textTheme.h6
+                        style = textTheme.titleLarge
                     )
                     Text(
                         text = DateUtils.formatDateTime(
@@ -178,7 +178,7 @@ fun MovieDetailsContent(
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = stringResource(id = R.string.runtime_label),
-                        style = textTheme.h6
+                        style = textTheme.titleLarge
                     )
                     Text(
                         text = DateUtils.formatElapsedTime(
@@ -190,7 +190,7 @@ fun MovieDetailsContent(
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = stringResource(id = R.string.budget_label),
-                        style = textTheme.h6
+                        style = textTheme.titleLarge
                     )
                     Text(
                         text = currencyFormatter.format(movie.budget)
@@ -200,7 +200,7 @@ fun MovieDetailsContent(
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = stringResource(id = R.string.revenue_label),
-                        style = textTheme.h6
+                        style = textTheme.titleLarge
                     )
                     Text(
                         text = currencyFormatter.format(it)
@@ -210,7 +210,7 @@ fun MovieDetailsContent(
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = stringResource(id = R.string.genres_label),
-                        style = textTheme.h6
+                        style = textTheme.titleLarge
                     )
                     Text(
                         text = it.joinToString(separator = ", ") { it.name }
@@ -222,7 +222,7 @@ fun MovieDetailsContent(
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = stringResource(id = R.string.summary_label),
-                style = textTheme.h6
+                style = textTheme.titleLarge
             )
             Text(
                 text = it

@@ -9,9 +9,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -88,7 +88,7 @@ fun MovieListTile(
             ) {
                 Text(
                     text = movie.title,
-                    style = textTheme.subtitle1.copy(fontWeight = FontWeight.Medium),
+                    style = textTheme.titleMedium.copy(fontWeight = FontWeight.Medium),
                     maxLines = 2
                 )
                 RatingBar(

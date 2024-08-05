@@ -7,9 +7,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
@@ -99,7 +99,7 @@ fun MovieGridTile(
                     .padding(top = 4.dp, start = 4.dp, end = 4.dp)
                     .fillMaxWidth(),
                 text = movie.title + "\n",
-                style = textTheme.subtitle1.copy(fontWeight = FontWeight.Medium),
+                style = textTheme.titleMedium.copy(fontWeight = FontWeight.Medium),
                 maxLines = 2,
                 textAlign = TextAlign.Center
             )

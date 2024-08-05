@@ -1,7 +1,7 @@
 package com.tikal.tmdb.compose
 
 import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.material.Shapes
+import androidx.compose.material3.Shapes
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
