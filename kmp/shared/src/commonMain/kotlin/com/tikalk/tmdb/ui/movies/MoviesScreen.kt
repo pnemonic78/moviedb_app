@@ -22,13 +22,14 @@ import androidx.compose.ui.unit.dp
 import com.tikal.Result
 import com.tikal.tmdb.data.model.MovieEntity
 import com.tikal.tmdb.ui.UiState
+import com.tikalk.tmdb.movies.OnMovieClickCallback
 import com.tikalk.tmdb.ui.components.Loader
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MoviesScreen(
     uiState: UiState<List<MovieEntity>>,
-    onClick: (Long, String) -> Unit
+    onClick: OnMovieClickCallback
 ) {
     Scaffold(
         topBar = {
@@ -62,7 +63,7 @@ fun MoviesScreen(
 private fun SuccessState(
     movies: List<MovieEntity>,
     paddingValues: PaddingValues,
-    onClick: (Long, String) -> Unit
+    onClick: OnMovieClickCallback
 ) {
     AnimatedVisibility(
         visible = movies.isNotEmpty(),

@@ -9,8 +9,8 @@ fun App() {
     val viewModel = MoviesViewModel(Inject.repository)
     MoviesRoute(
         viewModel = viewModel,
-        onClick = { id, title ->
-            println("clicked movie $id $title")
+        onClick = { movie ->
+            println("clicked movie $movie")
         }
     )
 }

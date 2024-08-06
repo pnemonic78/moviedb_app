@@ -18,13 +18,14 @@ import com.tikal.tmdb.data.model.MovieEntity
 import com.tikalk.tmdb.api.TmdbApi
 import com.tikalk.tmdb.compose.AppTheme
 import com.tikalk.tmdb.movie550
+import com.tikalk.tmdb.movies.OnMovieClickCallback
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 
 @Composable
 fun MovieCell(
     movie: MovieEntity,
-    onClick: (movieId: Long, title: String) -> Unit
+    onClick: OnMovieClickCallback
 ) {
     val density = LocalDensity.current
 
@@ -48,7 +49,7 @@ fun MovieCell(
                 modifier = Modifier
                     .size(width, height)
                     .clickable {
-                        onClick(movie.id, movie.title)
+                        onClick(movie)
                     },
                 resource = asyncPainterResource(posterPath),
                 contentDescription = "",
@@ -63,8 +64,8 @@ fun MovieCell(
 @Composable
 private fun ThisPreview() {
     AppTheme {
-        MovieCell(movie = movie550) { id, title ->
-            println("click movie $id $title")
+        MovieCell(movie = movie550) { movie ->
+            println("click movie $movie")
         }
     }
 }
