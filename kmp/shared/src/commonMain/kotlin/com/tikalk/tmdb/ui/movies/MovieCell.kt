@@ -14,7 +14,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.tikal.tmdb.data.model.MovieEntity
+import com.tikalk.tmdb.data.model.MovieEntity
 import com.tikalk.tmdb.api.TmdbApi
 import com.tikalk.tmdb.compose.AppTheme
 import com.tikalk.tmdb.movie550

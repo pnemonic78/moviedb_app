@@ -1,9 +1,9 @@
 package com.tikalk.tmdb.ui
 
-import com.tikal.Result
-import com.tikal.tmdb.data.model.MovieEntity
-import com.tikal.tmdb.data.source.TmdbDataSource
-import com.tikal.tmdb.ui.UiState
+import com.tikalk.Result
+import com.tikalk.tmdb.data.model.MovieEntity
+import com.tikalk.tmdb.data.source.TmdbDataSource
+import com.tikalk.tmdb.ui.UiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

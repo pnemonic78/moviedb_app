@@ -1,6 +1,6 @@
 package com.tikalk.tmdb.api
 
-import com.tikal.tmdb.json.model.Movie
+import com.tikalk.tmdb.json.model.Movie
 import java.util.Locale
 
 /**

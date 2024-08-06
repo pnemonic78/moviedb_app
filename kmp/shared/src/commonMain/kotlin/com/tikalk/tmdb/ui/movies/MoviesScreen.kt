@@ -19,9 +19,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.tikal.Result
-import com.tikal.tmdb.data.model.MovieEntity
-import com.tikal.tmdb.ui.UiState
+import com.tikalk.Result
+import com.tikalk.tmdb.data.model.MovieEntity
+import com.tikalk.tmdb.ui.UiState
 import com.tikalk.tmdb.movies.OnMovieClickCallback
 import com.tikalk.tmdb.ui.components.Loader
 

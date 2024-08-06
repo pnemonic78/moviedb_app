@@ -3,8 +3,8 @@ package com.tikalk.tmdb
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.tikal.tmdb.data.model.MovieEntity
-import com.tikal.tmdb.data.model.MoviesPage
+import com.tikalk.tmdb.data.model.MovieEntity
+import com.tikalk.tmdb.data.model.MoviesPage
 import com.tikalk.tmdb.movies.MoviesPreviewSource
 import java.util.Calendar
 import kotlinx.coroutines.flow.Flow

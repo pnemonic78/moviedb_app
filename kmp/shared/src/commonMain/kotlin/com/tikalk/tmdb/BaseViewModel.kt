@@ -1,7 +1,7 @@
 package com.tikalk.tmdb
 
 import androidx.lifecycle.ViewModel
-import com.tikal.tmdb.data.source.TmdbDataSource
+import com.tikalk.tmdb.data.source.TmdbDataSource
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

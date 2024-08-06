@@ -2,7 +2,7 @@ package com.tikalk.tmdb.movies
 
 import androidx.navigation.NavController
 import androidx.paging.PagingData
-import com.tikal.tmdb.data.model.MovieEntity
+import com.tikalk.tmdb.data.model.MovieEntity
 import com.tikalk.tmdb.ViewState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow

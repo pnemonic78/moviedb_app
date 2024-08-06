@@ -2,8 +2,8 @@ package com.tikalk.tmdb.movies
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.tikal.tmdb.data.model.MovieEntity
-import com.tikal.tmdb.data.model.MoviesPage
+import com.tikalk.tmdb.data.model.MovieEntity
+import com.tikalk.tmdb.data.model.MoviesPage
 import com.tikalk.tmdb.page550
 
 internal class MoviesPreviewSource() : PagingSource<Int, MovieEntity>() {
