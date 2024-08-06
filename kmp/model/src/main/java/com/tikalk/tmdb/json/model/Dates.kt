@@ -1,7 +1,7 @@
 package com.tikalk.tmdb.json.model
 
-import com.tikalk.tmdb.json.DateTimeSerializer
 import com.tikalk.tmdb.json.DateTime
+import com.tikalk.tmdb.json.DateTimeSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -11,10 +11,10 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Dates(
     @SerialName("maximum")
-    @Serializable(with = com.tikalk.tmdb.json.DateTimeSerializer::class)
-    val maximum: com.tikalk.tmdb.json.DateTime?,
+    @Serializable(with = DateTimeSerializer::class)
+    val maximum: DateTime?,
 
     @SerialName("minimum")
-    @Serializable(with = com.tikalk.tmdb.json.DateTimeSerializer::class)
-    val minimum: com.tikalk.tmdb.json.DateTime?
+    @Serializable(with = DateTimeSerializer::class)
+    val minimum: DateTime?
 )

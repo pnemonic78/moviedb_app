@@ -40,9 +40,9 @@ class Movie : Media() {
     @SerialName("poster_path")
     var posterPath: String? = null
 
-    @Serializable(with = com.tikalk.tmdb.json.DateTimeSerializer::class)
+    @Serializable(with = DateTimeSerializer::class)
     @SerialName("release_date")
-    var releaseDate: com.tikalk.tmdb.json.DateTime? = null
+    var releaseDate: DateTime? = null
 
     @SerialName("title")
     var title: String = ""

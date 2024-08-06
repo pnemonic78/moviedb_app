@@ -20,9 +20,9 @@ internal class MoviesPreviewSource() : PagingSource<Int, MovieEntity>() {
             val response: MoviesPage = page550
             val moviesPage: MoviesPage = response
             LoadResult.Page(
-                data = response.results,
+                data = response.page.results,
                 prevKey = if (nextPage == 1) null else nextPage - 1,
-                nextKey = if (moviesPage.page < moviesPage.totalPages) response.page + 1 else null
+                nextKey = if (moviesPage.page.page < moviesPage.page.totalPages) response.page.page + 1 else null
             )
         } catch (e: Exception) {
             return LoadResult.Error(e)

@@ -3,7 +3,6 @@ package com.tikalk.tmdb.ui
 import com.tikalk.Result
 import com.tikalk.tmdb.data.model.MovieEntity
 import com.tikalk.tmdb.data.source.TmdbDataSource
-import com.tikalk.tmdb.ui.UiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -26,7 +25,7 @@ class MoviesViewModel(private val dataSource: TmdbDataSource) : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             val movies = dataSource.getMoviesPopular(page)!!
             _uiState.update {
-                it.copy(state = Result.Success(movies.results))
+                it.copy(state = Result.Success(movies.page.results))
             }
         }
     }

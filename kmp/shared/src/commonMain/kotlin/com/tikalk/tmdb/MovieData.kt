@@ -3,8 +3,10 @@ package com.tikalk.tmdb
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.tikalk.tmdb.data.model.DatesEntity
 import com.tikalk.tmdb.data.model.MovieEntity
 import com.tikalk.tmdb.data.model.MoviesPage
+import com.tikalk.tmdb.data.model.MoviesPageEntity
 import com.tikalk.tmdb.movies.MoviesPreviewSource
 import java.util.Calendar
 import kotlinx.coroutines.flow.Flow
@@ -37,11 +39,15 @@ private val moviesList = listOf(
 )
 
 val page550 = MoviesPage(
-    dates = null,
-    page = 1,
-    totalPages = 1,
-    totalResults = moviesList.size,
-    results = moviesList
+    page = MoviesPageEntity(
+        dates = DatesEntity(null, null),
+        page = 1,
+        totalPages = 1,
+        totalResults = moviesList.size,
+        results =  moviesList
+//        type = MoviesPageType.NOW_PLAYING
+    ),
+    movies = moviesList
 )
 
 internal val moviesPreview: Flow<PagingData<MovieEntity>> =
