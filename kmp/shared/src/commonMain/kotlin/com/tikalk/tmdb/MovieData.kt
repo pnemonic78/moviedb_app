@@ -40,7 +40,7 @@ val page550 = MoviesPage(
     dates = null,
     page = 1,
     totalPages = 1,
-    totalResult = moviesList.size,
+    totalResults = moviesList.size,
     results = moviesList
 )
 

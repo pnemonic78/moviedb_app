@@ -18,7 +18,7 @@ data class MoviesPageEntity(
     @ColumnInfo(name = "total_pages")
     val totalPages: Int,
     @ColumnInfo(name = "total_results")
-    val totalResult: Int,
+    val totalResults: Int,
     @ColumnInfo(name = "type")
     private var _type: MoviesPageType
 ) {
@@ -27,14 +27,14 @@ data class MoviesPageEntity(
         dates: DatesEntity?,
         page: Int,
         totalPages: Int,
-        totalResult: Int,
+        totalResults: Int,
         type: MoviesPageType
     ) : this(
         dates = dates,
         id = 0L,
         _page = page,
         totalPages = totalPages,
-        totalResult = totalResult,
+        totalResults = totalResults,
         _type = type
     )
 

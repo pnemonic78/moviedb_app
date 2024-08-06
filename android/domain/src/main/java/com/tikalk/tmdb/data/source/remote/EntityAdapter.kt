@@ -64,7 +64,7 @@ fun MoviesPageResponse.toEntity(type: MoviesPageType) = MoviesPage(
         dates = dates?.toEntity(),
         page = page,
         totalPages = totalPages,
-        totalResult = totalResults,
+        totalResults = totalResults,
         type = type
     ),
     movies = results.map { it.toEntity() }

@@ -44,7 +44,7 @@ val page550 = MoviesPage(
         dates = DatesEntity(),
         page = 1,
         totalPages = 1,
-        totalResult = moviesList.size,
+        totalResults = moviesList.size,
         type = MoviesPageType.NOW_PLAYING
     ),
     movies = moviesList
