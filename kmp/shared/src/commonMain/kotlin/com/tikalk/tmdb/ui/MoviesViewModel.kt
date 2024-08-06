@@ -3,6 +3,7 @@ package com.tikalk.tmdb.ui
 import com.tikalk.Result
 import com.tikalk.tmdb.data.model.MovieEntity
 import com.tikalk.tmdb.data.source.TmdbDataSource
+import io.github.aakira.napier.Napier
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -23,9 +24,16 @@ class MoviesViewModel(private val dataSource: TmdbDataSource) : ViewModel() {
 
     private fun fetchMovies() {
         viewModelScope.launch(Dispatchers.IO) {
-            val movies = dataSource.getMoviesPopular(page)!!
-            _uiState.update {
-                it.copy(state = Result.Success(movies.page.results))
+            try {
+                val movies = dataSource.getMoviesPopular(page)!!
+                _uiState.update {
+                    it.copy(state = Result.Success(movies.page.results))
+                }
+            } catch (e: Exception) {
+                Napier.e("fetchMovies", e)
+                _uiState.update {
+                    it.copy(state = Result.Error(e))
+                }
             }
         }
     }
