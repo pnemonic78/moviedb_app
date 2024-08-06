@@ -3,7 +3,7 @@ package com.tikal.tmdb.api
 import com.tikal.tmdb.json.model.Credits
 import com.tikal.tmdb.json.model.Images
 import com.tikal.tmdb.json.model.Movie
-import com.tikal.tmdb.json.model.MoviesPage
+import com.tikal.tmdb.json.model.MoviesPageResponse
 import com.tikal.tmdb.json.model.Person
 import com.tikal.tmdb.json.model.Videos
 import io.ktor.client.*
@@ -22,7 +22,7 @@ class TmdbService(private val baseUrl: String, private val client: HttpClient) {
         language: String = Locale.getDefault().language,
         page: Int = 1,
         region: String? = null
-    ): MoviesPage = client.get(baseUrl) {
+    ): MoviesPageResponse = client.get(baseUrl) {
         method = HttpMethod.Get
         url {
             appendPathSegments("movie/now_playing")
@@ -31,14 +31,14 @@ class TmdbService(private val baseUrl: String, private val client: HttpClient) {
             parameters.append("page", page.toString())
             region?.let { parameters.append("region", region) }
         }
-    }.body<MoviesPage>()
+    }.body<MoviesPageResponse>()
 
     suspend fun getMoviesPopular(
         apiKey: String = TMDB_API_KEY,
         language: String = Locale.getDefault().language,
         page: Int = 1,
         region: String? = null
-    ): MoviesPage = client.get(baseUrl) {
+    ): MoviesPageResponse = client.get(baseUrl) {
         method = HttpMethod.Get
         url {
             appendPathSegments("movie/popular")
@@ -47,14 +47,14 @@ class TmdbService(private val baseUrl: String, private val client: HttpClient) {
             parameters.append("page", page.toString())
             region?.let { parameters.append("region", region) }
         }
-    }.body<MoviesPage>()
+    }.body<MoviesPageResponse>()
 
     suspend fun getMoviesTopRated(
         apiKey: String = TMDB_API_KEY,
         language: String = Locale.getDefault().language,
         page: Int = 1,
         region: String? = null
-    ): MoviesPage = client.get(baseUrl) {
+    ): MoviesPageResponse = client.get(baseUrl) {
         method = HttpMethod.Get
         url {
             appendPathSegments("movie/top_rated")
@@ -63,14 +63,14 @@ class TmdbService(private val baseUrl: String, private val client: HttpClient) {
             parameters.append("page", page.toString())
             region?.let { parameters.append("region", region) }
         }
-    }.body<MoviesPage>()
+    }.body<MoviesPageResponse>()
 
     suspend fun getMoviesUpcoming(
         apiKey: String = TMDB_API_KEY,
         language: String = Locale.getDefault().language,
         page: Int = 1,
         region: String? = null
-    ): MoviesPage = client.get(baseUrl) {
+    ): MoviesPageResponse = client.get(baseUrl) {
         method = HttpMethod.Get
         url {
             appendPathSegments("movie/upcoming")
@@ -79,7 +79,7 @@ class TmdbService(private val baseUrl: String, private val client: HttpClient) {
             parameters.append("page", page.toString())
             region?.let { parameters.append("region", region) }
         }
-    }.body<MoviesPage>()
+    }.body<MoviesPageResponse>()
 
     suspend fun getMovieDetails(
         movieId: Long,
