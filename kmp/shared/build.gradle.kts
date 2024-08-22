@@ -1,8 +1,8 @@
-import org.gradle.kotlin.dsl.support.kotlinCompilerOptions
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.kotlinSerialization)
 }
 
@@ -31,6 +31,7 @@ kotlin {
             implementation(libs.kamel)
             implementation(libs.bundles.compose)
             implementation(libs.bundles.precompose)
+            implementation(libs.compose.ratingbar)
             implementation(libs.kotlin.coroutines)
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
@@ -38,6 +39,7 @@ kotlin {
             implementation(libs.logging.napier)
             implementation(libs.navigation.compose)
             implementation(libs.paging.compose)
+            implementation(compose.components.resources)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -64,9 +66,11 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
-    }
+}
+
+compose.resources {
+    generateResClass = always
+    packageOfResClass = "com.tikalk.tmdb.shared.resources"
 }
 
 dependencies {

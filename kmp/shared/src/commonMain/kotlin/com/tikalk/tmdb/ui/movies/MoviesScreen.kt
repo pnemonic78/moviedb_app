@@ -23,6 +23,7 @@ import com.tikalk.Result
 import com.tikalk.tmdb.data.model.MovieEntity
 import com.tikalk.tmdb.ui.UiState
 import com.tikalk.tmdb.movies.OnMovieClickCallback
+import com.tikalk.tmdb.ui.MovieGridTile
 import com.tikalk.tmdb.ui.components.Loader
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -78,9 +79,9 @@ private fun SuccessState(
                 .padding(horizontal = 5.dp),
             content = {
                 items(items = movies, key = { it.id }) {
-                    MovieCell(
+                    MovieGridTile(
                         movie = it,
-                        onClick = onClick
+                        onMovieClicked = onClick
                     )
                 }
             }

@@ -10,20 +10,15 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tikalk.tmdb.compose.AppTheme
-
-private const val parallaxFactor = 0.85f
-private const val posterAspectRatio = 1.5f
-private val posterWidth = 160.dp
 
 @Composable
 fun LoadingListTile(
     modifier: Modifier = Modifier
 ) {
-    val thumbnailWidth = posterWidth
+    val thumbnailWidth = dimen.posterWidth
     val thumbnailHeight = thumbnailWidth * posterAspectRatio
     val imageHeight = thumbnailHeight * parallaxFactor
 

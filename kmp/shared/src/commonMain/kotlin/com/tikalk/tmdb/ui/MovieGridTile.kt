@@ -1,7 +1,6 @@
-package com.tikalk.tmdb
+package com.tikalk.tmdb.ui
 
 import android.text.format.DateUtils
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,7 +19,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,12 +31,10 @@ import com.tikalk.tmdb.compose.AppTheme
 import com.tikalk.tmdb.compose.CornerSizeZero
 import com.tikalk.tmdb.compose.thumbnailPainter
 import com.tikalk.tmdb.data.model.MovieEntity
+import com.tikalk.tmdb.movie550
 import com.tikalk.tmdb.movies.OnMovieClickCallback
-import com.tikalk.tmdb.ui.common.R
+import io.kamel.image.KamelImage
 import kotlin.math.max
-
-private const val parallaxFactor = 0.85f
-private const val posterAspectRatio = 1.5f
 
 @Composable
 fun MovieGridTile(
@@ -49,7 +45,7 @@ fun MovieGridTile(
     val context = LocalContext.current
     val density = LocalDensity.current
 
-    val posterWidth = dimensionResource(id = R.dimen.posterWidth)
+    val posterWidth = dimen.posterWidth
     val posterWidthPx = with(density) { posterWidth.toPx() }
     val thumbnailWidthState = remember { mutableFloatStateOf(posterWidthPx) }
     val thumbnailWidthPx = max(posterWidthPx, thumbnailWidthState.floatValue)
@@ -58,7 +54,6 @@ fun MovieGridTile(
     val imageHeight = thumbnailHeight * parallaxFactor
     val imageHeightPx = with(density) { imageHeight.toPx() }
     val thumbnailPainter = movie.thumbnailPainter(
-        context = context,
         width = thumbnailWidthState.floatValue.toInt(),
         height = imageHeightPx.toInt()
     )
@@ -75,7 +70,7 @@ fun MovieGridTile(
                 .padding(bottom = 4.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Image(
+            KamelImage(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(imageHeight)
@@ -90,7 +85,7 @@ fun MovieGridTile(
                             thumbnailWidthState.floatValue = size.width.toFloat()
                         }
                     },
-                painter = thumbnailPainter,
+                resource = thumbnailPainter,
                 contentDescription = "poster",
                 contentScale = ContentScale.FillWidth
             )
@@ -134,6 +129,8 @@ fun MovieGridTile(
 @Composable
 private fun ThisPreview() {
     AppTheme {
-        MovieGridTile(movie = movie550) {}
+        MovieGridTile(movie = movie550) {
+            println("clicked movie")
+        }
     }
 }

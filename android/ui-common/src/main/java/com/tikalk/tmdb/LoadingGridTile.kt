@@ -36,7 +36,7 @@ fun LoadingGridTile(
     val posterWidth = dimensionResource(id = R.dimen.posterWidth)
     val posterWidthPx = with(density) { posterWidth.toPx() }
     val thumbnailWidthState = remember { mutableFloatStateOf(posterWidthPx) }
-    val thumbnailWidthPx = max(posterWidthPx, thumbnailWidthState.value)
+    val thumbnailWidthPx = max(posterWidthPx, thumbnailWidthState.floatValue)
     val thumbnailWidth = with(density) { thumbnailWidthPx.toDp() }
     val thumbnailHeight = thumbnailWidth * posterAspectRatio
     val imageHeight = thumbnailHeight * parallaxFactor

@@ -43,7 +43,7 @@ fun PosterContent(
         rememberImagePainter(data = posterPath)
     }
     val scale = remember { mutableFloatStateOf(1f) }
-    val scaleValue = maxOf(1f, minOf(6f, scale.value))
+    val scaleValue = maxOf(1f, minOf(6f, scale.floatValue))
 
     val offsetX = remember { mutableFloatStateOf(0f) }
     val offsetY = remember { mutableFloatStateOf(0f) }
@@ -52,17 +52,17 @@ fun PosterContent(
     val offsetYMax = (posterSize.value.height * scaleValue1) / 2f
     val offsetXMin = -offsetXMax
     val offsetYMin = -offsetYMax
-    val offsetXValue = maxOf(offsetXMin, minOf(offsetXMax, offsetX.value))
-    val offsetYValue = maxOf(offsetYMin, minOf(offsetYMax, offsetY.value))
+    val offsetXValue = maxOf(offsetXMin, minOf(offsetXMax, offsetX.floatValue))
+    val offsetYValue = maxOf(offsetYMin, minOf(offsetYMax, offsetY.floatValue))
 
     Box(
         modifier = modifier
             .fillMaxSize()
             .pointerInput(Unit) {
                 detectTransformGestures { _, pan, zoom, _ ->
-                    scale.value *= zoom
-                    offsetX.value += pan.x
-                    offsetY.value += pan.y
+                    scale.floatValue *= zoom
+                    offsetX.floatValue += pan.x
+                    offsetY.floatValue += pan.y
                 }
             },
         contentAlignment = Alignment.Center

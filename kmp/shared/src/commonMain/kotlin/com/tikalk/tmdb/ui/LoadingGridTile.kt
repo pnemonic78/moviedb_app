@@ -16,16 +16,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tikalk.tmdb.compose.AppTheme
 import kotlin.math.max
-
-private const val parallaxFactor = 0.85f
-private const val posterAspectRatio = 1.5f
-private val posterWidth = 160.dp
 
 @Composable
 fun LoadingGridTile(
@@ -33,7 +28,7 @@ fun LoadingGridTile(
 ) {
     val density = LocalDensity.current
 
-    val posterWidth = posterWidth
+    val posterWidth = dimen.posterWidth
     val posterWidthPx = with(density) { posterWidth.toPx() }
     val thumbnailWidthState = remember { mutableFloatStateOf(posterWidthPx) }
     val thumbnailWidthPx = max(posterWidthPx, thumbnailWidthState.floatValue)
