@@ -1,19 +1,17 @@
 package com.tikalk.tmdb.ui.movies
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import com.tikalk.tmdb.movies.OnMovieClickCallback
+import androidx.navigation.compose.rememberNavController
 import com.tikalk.tmdb.ui.MoviesViewModel
 
 @Composable
 fun MoviesRoute(
-    viewModel: MoviesViewModel,
-    onClick: OnMovieClickCallback
+    viewModel: MoviesViewModel
 ) {
-    val uiState by viewModel.uiState.collectAsState()
+    val navController = rememberNavController()
     MoviesScreen(
-        uiState = uiState,
-        onClick = onClick
+        title = "TMDB KMP",
+        viewState = viewModel,
+        navController = navController
     )
 }

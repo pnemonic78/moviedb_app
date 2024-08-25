@@ -11,10 +11,5 @@ fun App() {
     Napier.base(DebugAntilog())
 
     val viewModel = MoviesViewModel(Inject.repository)
-    MoviesRoute(
-        viewModel = viewModel,
-        onClick = { movie ->
-            println("clicked movie $movie")
-        }
-    )
+    MoviesRoute(viewModel = viewModel)
 }
