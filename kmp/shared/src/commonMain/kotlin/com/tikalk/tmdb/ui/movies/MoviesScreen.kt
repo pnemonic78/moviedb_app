@@ -1,15 +1,10 @@
 package com.tikalk.tmdb.ui.movies
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -18,13 +13,19 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import androidx.paging.PagingData
 import com.tikalk.Result
 import com.tikalk.tmdb.data.model.MovieEntity
-import com.tikalk.tmdb.ui.UiState
+import com.tikalk.tmdb.movies.MoviesPageViewState
 import com.tikalk.tmdb.movies.OnMovieClickCallback
-import com.tikalk.tmdb.ui.MovieGridTile
+import com.tikalk.tmdb.ui.UiState
 import com.tikalk.tmdb.ui.components.Loader
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flowOf
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -66,27 +67,22 @@ private fun SuccessState(
     paddingValues: PaddingValues,
     onClick: OnMovieClickCallback
 ) {
-    AnimatedVisibility(
-        visible = movies.isNotEmpty(),
-        modifier = Modifier.padding(paddingValues)
-    ) {
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            horizontalArrangement = Arrangement.spacedBy(5.dp),
-            verticalArrangement = Arrangement.spacedBy(5.dp),
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 5.dp),
-            content = {
-                items(items = movies, key = { it.id }) {
-                    MovieGridTile(
-                        movie = it,
-                        onMovieClicked = onClick
-                    )
-                }
-            }
-        )
+    val viewState = object : MoviesPageViewState {
+        override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
+        override val isGridPage: StateFlow<Boolean> = MutableStateFlow(true)
+        override val movies: Flow<PagingData<MovieEntity>> = flowOf(PagingData.from(movies))
+
+        override fun onMovieClicked(movie: MovieEntity, navController: NavController) =
+            onClick(movie)
+
+        override fun onToggleLayout() = Unit
     }
+    val navController = rememberNavController()
+    MoviesGridPage(
+        modifier = Modifier.padding(paddingValues),
+        viewState = viewState,
+        navController = navController
+    )
 }
 
 @Composable
