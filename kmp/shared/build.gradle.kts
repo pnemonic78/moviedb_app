@@ -40,6 +40,13 @@ kotlin {
             implementation(libs.navigation.compose)
             implementation(libs.paging.compose)
             implementation(compose.components.resources)
+
+            implementation(projects.featureCast)
+            implementation(projects.featureNowPlaying)
+            implementation(projects.featurePopular)
+            implementation(projects.featureTopRated)
+            implementation(projects.featureUpcoming)
+            implementation(projects.uiCommon)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -68,9 +75,10 @@ android {
     }
 }
 
-compose.resources {
-    generateResClass = always
-    packageOfResClass = "com.tikalk.tmdb.shared.resources"
+compose {
+    resources {
+        generateResClass = always
+    }
 }
 
 dependencies {

@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.jetbrainsCompose)
 }
 
 kotlin {
@@ -15,7 +16,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.tikalk.tmdb.model"
+    namespace = "com.tikalk.tmdb.popular"
     compileSdk = 34
     defaultConfig {
         minSdk = 24
@@ -24,16 +25,18 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        compose = true
+    }
+}
+
+compose.resources {
+    generateResClass = always
 }
 
 dependencies {
-    implementation(libs.kotlin.coroutines)
-    implementation(libs.logging.napier)
-    implementation(libs.serialization.json)
-
-    testImplementation(libs.kotlin.test)
-}
-
-// FIXME: Cannot locate tasks that match ':model:testClasses' as task 'testClasses' not found in project ':model'.
-tasks.register("testClasses") {
+    implementation(projects.domain)
+    implementation(projects.uiCommon)
+    implementation(compose.components.resources)
+    implementation(libs.paging.compose)
 }
