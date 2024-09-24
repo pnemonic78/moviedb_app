@@ -1,15 +1,15 @@
 <resources>
     <!-- Movie Details -->
-    <string name="budget_label">"תקציב"</string>
-    <string name="cast_label">"שחקנים עיקריים"</string>
-    <string name="genres_label">"ז\'אנרים"</string>
-    <string name="movie_details">"פרטי הסרט"</string>
-    <string name="movie_poster">"פוסטר של סרט"</string>
-    <string name="popularity_label">"פופולריות"</string>
-    <string name="release_date_label">"תאריך הוצאה"</string>
-    <string name="revenue_label">"הכנסות"</string>
-    <string name="runtime_label">"זמן פעולה"</string>
-    <string name="summary_label">"סקירה כללית"</string>
-    <string name="videos_label">"סרטונים"</string>
-    <string name="vote_average_label">"ציון משתמש"</string>
+    <string name="budget_label">תקציב</string>
+    <string name="cast_label">שחקנים עיקריים</string>
+    <string name="genres_label">ז\'אנרים</string>
+    <string name="movie_details">פרטי הסרט</string>
+    <string name="movie_poster">פוסטר של סרט</string>
+    <string name="popularity_label">פופולריות</string>
+    <string name="release_date_label">תאריך הוצאה</string>
+    <string name="revenue_label">הכנסות</string>
+    <string name="runtime_label">זמן פעולה</string>
+    <string name="summary_label">סקירה כללית</string>
+    <string name="videos_label">סרטונים</string>
+    <string name="vote_average_label">ציון משתמש</string>
 </resources>

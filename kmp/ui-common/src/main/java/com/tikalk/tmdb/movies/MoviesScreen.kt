@@ -28,6 +28,7 @@ import com.tikalk.tmdb.compose.BackButton
 import com.tikalk.tmdb.data.model.MovieEntity
 import com.tikalk.tmdb.ui.Loader
 import com.tikalk.tmdb.ui.UiState
+import com.tikalk.tmdb.ui.ic_grid_on
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -73,12 +74,12 @@ private fun ToggleLayoutButton(
             )
         }
     } else {
-//        IconButton(onClick = viewState::onToggleLayout) {
-//            Icon(
-//                imageVector = vectorResource(Res.drawable.ic_grid_on),
-//                contentDescription = null
-//            )
-//        }
+        IconButton(onClick = viewState::onToggleLayout) {
+            Icon(
+                imageVector = vectorResource(Res.drawable.ic_grid_on),
+                contentDescription = null
+            )
+        }
     }
 }
 

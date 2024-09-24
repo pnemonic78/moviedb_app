@@ -16,6 +16,7 @@ import com.tikalk.tmdb.movies.movie550Details
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import movie_db_kmp.shared.generated.resources.Res
+import movie_db_kmp.shared.generated.resources.movie_details
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -24,7 +25,7 @@ fun MovieDetailsScreen(
     navController: NavController,
     movieId: Long
 ) {
-    val title = "stringResource(Res.string.movie_details)"
+    val title = stringResource(Res.string.movie_details)
 
     SimpleScreen(
         title = title,

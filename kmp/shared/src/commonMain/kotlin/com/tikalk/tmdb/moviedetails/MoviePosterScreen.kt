@@ -14,6 +14,7 @@ import com.tikalk.tmdb.movies.movie550Details
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import movie_db_kmp.shared.generated.resources.Res
+import movie_db_kmp.shared.generated.resources.movie_poster
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -32,7 +33,7 @@ fun MoviePosterScreen(
             posterPathSuffix = movie.posterPath
         )
     } else {
-        val title = "stringResource(Res.string.movie_poster)"
+        val title = stringResource(Res.string.movie_poster)
         SimpleErrorScreen(
             title = title,
             navController = navController

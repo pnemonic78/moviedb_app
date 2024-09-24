@@ -46,6 +46,13 @@ import io.kamel.image.KamelImage
 import java.text.NumberFormat
 import java.util.Locale
 import movie_db_kmp.shared.generated.resources.Res
+import movie_db_kmp.shared.generated.resources.budget_label
+import movie_db_kmp.shared.generated.resources.genres_label
+import movie_db_kmp.shared.generated.resources.popularity_label
+import movie_db_kmp.shared.generated.resources.release_date_label
+import movie_db_kmp.shared.generated.resources.revenue_label
+import movie_db_kmp.shared.generated.resources.runtime_label
+import movie_db_kmp.shared.generated.resources.summary_label
 import org.jetbrains.compose.resources.stringResource
 
 private const val posterAspectRatio = 1f / 1.5f
@@ -134,7 +141,7 @@ fun MovieDetailsContent(
                     .padding(start = 8.dp)
             ) {
                 Text(
-                    text = "stringResource(Res.string.popularity_label)",
+                    text = stringResource(Res.string.popularity_label),
                     style = textTheme.titleLarge
                 )
                 RatingBar(
@@ -151,7 +158,7 @@ fun MovieDetailsContent(
                 movie.releaseDate?.let {
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "stringResource(Res.string.release_date_label)",
+                        text = stringResource(Res.string.release_date_label),
                         style = textTheme.titleLarge
                     )
                     Text(
@@ -165,7 +172,7 @@ fun MovieDetailsContent(
                 movie.runtime?.let {
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "stringResource(Res.string.runtime_label)",
+                        text = stringResource(Res.string.runtime_label),
                         style = textTheme.titleLarge
                     )
                     Text(
@@ -177,7 +184,7 @@ fun MovieDetailsContent(
                 if (movie.budget > 0) {
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "stringResource(Res.string.budget_label)",
+                        text = stringResource(Res.string.budget_label),
                         style = textTheme.titleLarge
                     )
                     Text(
@@ -187,7 +194,7 @@ fun MovieDetailsContent(
                 movie.revenue?.let {
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "stringResource(Res.string.revenue_label)",
+                        text = stringResource(Res.string.revenue_label),
                         style = textTheme.titleLarge
                     )
                     Text(
@@ -197,7 +204,7 @@ fun MovieDetailsContent(
                 movie.genres.let {
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "stringResource(Res.string.genres_label)",
+                        text = stringResource(Res.string.genres_label),
                         style = textTheme.titleLarge
                     )
                     Text(
@@ -209,7 +216,7 @@ fun MovieDetailsContent(
         movie.overview?.let {
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "stringResource(Res.string.summary_label)",
+                text = stringResource(Res.string.summary_label),
                 style = textTheme.titleLarge
             )
             Text(

@@ -5,6 +5,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.IntSize
 import com.tikalk.tmdb.api.TmdbApi
 import com.tikalk.tmdb.data.model.MovieEntity
+import com.tikalk.tmdb.ui.ic_movie_black
 import io.kamel.core.ExperimentalKamelApi
 import io.kamel.core.Resource
 import io.kamel.image.asyncPainterResource
@@ -18,15 +19,14 @@ typealias OnMovieClickCallback = ((movie: MovieEntity) -> Unit)
 @Composable
 fun MovieEntity.posterPainter(width: Int, height: Int): Resource<Painter> {
     val url = TmdbApi.generatePosterUrl(posterPath, width, height)
-    val urlIcon = Res.getUri("ic_movie_black")
-//    return if (url.isNullOrBlank()) {
-        return asyncPainterResource(data = "@Res.drawable.ic_movie_black")
-//    } else {
-//        asyncPainterResource(
-//            data = url,
-//            onLoadingPainter = { Result.success(painterResource(Res.drawable.ic_movie_black)) }
-//        )
-//    }
+    return if (url.isNullOrBlank()) {
+        asyncPainterResource(Res.drawable.ic_movie_black)
+    } else {
+        asyncPainterResource(
+            data = url,
+            onLoadingPainter = { Result.success(painterResource(Res.drawable.ic_movie_black)) }
+        )
+    }
 }
 
 @Composable

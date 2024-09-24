@@ -22,6 +22,7 @@ import io.kamel.core.Resource
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import movie_db_kmp.shared.generated.resources.Res
+import movie_db_kmp.shared.generated.resources.ic_movie_black
 import org.jetbrains.compose.resources.painterResource
 
 private const val posterAspectRatio = 1f / 1.5f
@@ -35,11 +36,11 @@ fun PosterContent(
     val posterSize = remember { mutableStateOf(IntSize.Zero) }
     val posterPath = generatePosterUrl(posterPathSuffix, Int.MAX_VALUE, Int.MAX_VALUE)
     val posterPainter: Resource<Painter> = if (posterPath.isNullOrBlank()) {
-        asyncPainterResource("Res.drawable.ic_movie_black")
+        asyncPainterResource(Res.drawable.ic_movie_black)
     } else {
         asyncPainterResource(
             data = posterPath,
-//            onLoadingPainter = { Result.success(painterResource(Res.drawable.ic_movie_black)) }
+            onLoadingPainter = { Result.success(painterResource(Res.drawable.ic_movie_black)) }
         )
     }
     val scale = remember { mutableFloatStateOf(1f) }
