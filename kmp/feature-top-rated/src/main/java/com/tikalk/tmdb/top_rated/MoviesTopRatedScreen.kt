@@ -5,6 +5,7 @@ import androidx.navigation.NavController
 import com.tikalk.tmdb.movies.MoviesPageViewState
 import com.tikalk.tmdb.movies.MoviesScreen
 import movie_db_kmp.feature_top_rated.generated.resources.Res
+import movie_db_kmp.feature_top_rated.generated.resources.top_rated
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

@@ -5,11 +5,11 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.IntSize
 import com.tikalk.tmdb.api.TmdbApi
 import com.tikalk.tmdb.data.model.MovieEntity
-import com.tikalk.tmdb.ui.ic_movie_black
 import io.kamel.core.ExperimentalKamelApi
 import io.kamel.core.Resource
 import io.kamel.image.asyncPainterResource
 import movie_db_kmp.ui_common.generated.resources.Res
+import movie_db_kmp.ui_common.generated.resources.ic_movie_black
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 

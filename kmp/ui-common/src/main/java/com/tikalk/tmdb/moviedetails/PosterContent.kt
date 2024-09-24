@@ -21,8 +21,8 @@ import io.kamel.core.ExperimentalKamelApi
 import io.kamel.core.Resource
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
-import movie_db_kmp.shared.generated.resources.Res
-import movie_db_kmp.shared.generated.resources.ic_movie_black
+import movie_db_kmp.ui_common.generated.resources.Res
+import movie_db_kmp.ui_common.generated.resources.ic_movie_black
 import org.jetbrains.compose.resources.painterResource
 
 private const val posterAspectRatio = 1f / 1.5f

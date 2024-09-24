@@ -28,12 +28,12 @@ import com.tikalk.tmdb.compose.BackButton
 import com.tikalk.tmdb.data.model.MovieEntity
 import com.tikalk.tmdb.ui.Loader
 import com.tikalk.tmdb.ui.UiState
-import com.tikalk.tmdb.ui.ic_grid_on
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flowOf
 import movie_db_kmp.ui_common.generated.resources.Res
+import movie_db_kmp.ui_common.generated.resources.ic_grid_on
 import org.jetbrains.compose.resources.vectorResource
 
 @OptIn(ExperimentalMaterial3Api::class)

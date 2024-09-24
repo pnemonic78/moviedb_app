@@ -1,8 +1,9 @@
-package com.tikalk.tmdb.ui.movies
+package com.tikalk.tmdb
 
 import androidx.compose.runtime.Composable
 import com.tikalk.tmdb.inject.Inject
-import com.tikalk.tmdb.ui.MoviesViewModel
+import com.tikalk.tmdb.ui.movies.MainViewModel
+import com.tikalk.tmdb.ui.movies.MoviesMainScreen
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 
@@ -10,6 +11,6 @@ import io.github.aakira.napier.Napier
 fun App() {
     Napier.base(DebugAntilog())
 
-    val viewModel = MoviesViewModel(Inject.repository)
-    MoviesRoute(viewModel = viewModel)
+    val viewModel = MainViewModel(Inject.repository)
+    MoviesMainScreen(viewState = viewModel)
 }

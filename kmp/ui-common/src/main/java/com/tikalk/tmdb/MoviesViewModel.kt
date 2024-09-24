@@ -1,4 +1,4 @@
-package com.tikalk.tmdb.ui
+package com.tikalk.tmdb
 
 import androidx.navigation.NavController
 import androidx.paging.PagingData

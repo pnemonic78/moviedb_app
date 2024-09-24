@@ -15,8 +15,8 @@ import com.tikalk.tmdb.data.model.MovieEntity
 import com.tikalk.tmdb.movies.movie550Details
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import movie_db_kmp.shared.generated.resources.Res
-import movie_db_kmp.shared.generated.resources.movie_details
+import movie_db_kmp.ui_common.generated.resources.Res
+import movie_db_kmp.ui_common.generated.resources.movie_details
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

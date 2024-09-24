@@ -9,9 +9,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface MoviesCarouselViewState {
     val movies: Flow<PagingData<MovieEntity>>
+    val pageViewState: MoviesPageViewState
 
     fun onMovieClicked(movie: MovieEntity, navController: NavController)
     fun onTitleClicked(navController: NavHostController)
-
-    val pageViewState: MoviesPageViewState
 }

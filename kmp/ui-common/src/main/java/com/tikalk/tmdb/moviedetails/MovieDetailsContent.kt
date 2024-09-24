@@ -45,14 +45,14 @@ import com.tikalk.tmdb.movies.posterPainter
 import io.kamel.image.KamelImage
 import java.text.NumberFormat
 import java.util.Locale
-import movie_db_kmp.shared.generated.resources.Res
-import movie_db_kmp.shared.generated.resources.budget_label
-import movie_db_kmp.shared.generated.resources.genres_label
-import movie_db_kmp.shared.generated.resources.popularity_label
-import movie_db_kmp.shared.generated.resources.release_date_label
-import movie_db_kmp.shared.generated.resources.revenue_label
-import movie_db_kmp.shared.generated.resources.runtime_label
-import movie_db_kmp.shared.generated.resources.summary_label
+import movie_db_kmp.ui_common.generated.resources.Res
+import movie_db_kmp.ui_common.generated.resources.budget_label
+import movie_db_kmp.ui_common.generated.resources.genres_label
+import movie_db_kmp.ui_common.generated.resources.popularity_label
+import movie_db_kmp.ui_common.generated.resources.release_date_label
+import movie_db_kmp.ui_common.generated.resources.revenue_label
+import movie_db_kmp.ui_common.generated.resources.runtime_label
+import movie_db_kmp.ui_common.generated.resources.summary_label
 import org.jetbrains.compose.resources.stringResource
 
 private const val posterAspectRatio = 1f / 1.5f

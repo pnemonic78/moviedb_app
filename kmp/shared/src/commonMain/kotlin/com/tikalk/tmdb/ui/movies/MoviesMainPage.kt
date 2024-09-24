@@ -11,9 +11,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import movie_db_kmp.shared.generated.resources.Res
+import movie_db_kmp.shared.generated.resources.now_playing
+import movie_db_kmp.shared.generated.resources.popular
+import movie_db_kmp.shared.generated.resources.top_rated
+import movie_db_kmp.shared.generated.resources.upcoming
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun MoviesMainPage(
@@ -27,22 +32,22 @@ fun MoviesMainPage(
             .verticalScroll(rememberScrollState())
     ) {
         MoviesMainPageCategory(
-            title = stringResource(id = com.tikalk.tmdb.now_playing.R.string.now_playing),
+            title = stringResource(Res.string.now_playing),
             viewState = viewState.moviesNowPlayingViewState,
             navController = navController
         )
         MoviesMainPageCategory(
-            title = stringResource(id = com.tikalk.tmdb.popular.R.string.popular),
+            title = stringResource(Res.string.popular),
             viewState = viewState.moviesPopularViewState,
             navController = navController
         )
         MoviesMainPageCategory(
-            title = stringResource(id = com.tikalk.tmdb.top_rated.R.string.top_rated),
+            title = stringResource(Res.string.top_rated),
             viewState = viewState.moviesTopRatedViewState,
             navController = navController
         )
         MoviesMainPageCategory(
-            title = stringResource(id = com.tikalk.tmdb.upcoming.R.string.upcoming),
+            title = stringResource(Res.string.upcoming),
             viewState = viewState.moviesUpcomingViewState,
             navController = navController
         )
