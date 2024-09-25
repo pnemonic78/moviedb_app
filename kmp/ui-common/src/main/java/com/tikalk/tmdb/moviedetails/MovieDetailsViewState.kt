@@ -1,6 +1,7 @@
 package com.tikalk.tmdb.moviedetails
 
 import android.net.Uri
+import androidx.compose.ui.platform.UriHandler
 import androidx.navigation.NavController
 import com.tikalk.tmdb.ViewState
 import com.tikalk.tmdb.data.model.MovieEntity
@@ -10,5 +11,5 @@ interface MovieDetailsViewState : ViewState {
     fun movieDetails(movieId: Long): StateFlow<MovieEntity?>
 
     fun onPosterClicked(movie: MovieEntity, navController: NavController)
-    fun onLinkClicked(movie: MovieEntity, uri: Uri)
+    fun onLinkClicked(movie: MovieEntity, uri: Uri, handler: UriHandler)
 }

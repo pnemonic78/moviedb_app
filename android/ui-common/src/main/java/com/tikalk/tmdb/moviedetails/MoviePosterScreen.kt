@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
@@ -48,7 +49,7 @@ private fun ThisPreview() {
             MutableStateFlow(movie550Details)
 
         override fun onPosterClicked(movie: MovieEntity, navController: NavController) = Unit
-        override fun onLinkClicked(movie: MovieEntity, uri: Uri) = Unit
+        override fun onLinkClicked(movie: MovieEntity, uri: Uri, handler: UriHandler) = Unit
     }
     val navController = rememberNavController()
     AppTheme {

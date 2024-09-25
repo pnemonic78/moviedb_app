@@ -1,8 +1,7 @@
 package com.tikalk.tmdb.ui.movies
 
 import android.net.Uri
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.compose.ui.platform.UriHandler
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -55,8 +54,8 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) : BaseViewMo
     private val _isGridPage = MutableStateFlow(true)
     val isGridPage: StateFlow<Boolean> = _isGridPage
 
-    private val _launchUri = MutableLiveData<Uri>(null)
-    val launchUri: LiveData<Uri> = _launchUri
+    private val _launchUri = MutableStateFlow<Uri?>(null)
+    val launchUri: StateFlow<Uri?> = _launchUri
 
     fun onMovieClicked(movie: MovieEntity, navController: NavController) {
         showMovieDetails(movie, navController)
@@ -92,17 +91,23 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) : BaseViewMo
         navigateMoviePoster(movie, navController)
     }
 
-    fun onLinkClicked(movie: MovieEntity, uri: Uri) {
-        navigateMovieLink(movie, uri)
+    fun onLinkClicked(movie: MovieEntity, uri: Uri, handler: UriHandler) {
+        navigateMovieLink(movie, uri, handler)
     }
 
     private fun navigateMoviePoster(movie: MovieEntity, navController: NavController) {
         navController.navigate("${MoviesScreen.Poster.route}/${movie.id}")
     }
 
-    private fun navigateMovieLink(movie: MovieEntity, uri: Uri) {
+    private fun navigateMovieLink(movie: MovieEntity, uri: Uri, handler: UriHandler? = null) {
         Timber.v("link $movie")
-        _launchUri.postValue(uri)
+        if (handler != null ) {
+            handler.openUri(uri.toString())
+        } else {
+            viewModelScope.launch {
+                _launchUri.emit(uri)
+            }
+        }
     }
 
     fun onToggleGridPage() {
@@ -236,8 +241,8 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) : BaseViewMo
         override fun onPosterClicked(movie: MovieEntity, navController: NavController) =
             this@MainViewModel.onPosterClicked(movie, navController)
 
-        override fun onLinkClicked(movie: MovieEntity, uri: Uri) =
-            this@MainViewModel.onLinkClicked(movie, uri)
+        override fun onLinkClicked(movie: MovieEntity, uri: Uri, handler: UriHandler) =
+            this@MainViewModel.onLinkClicked(movie, uri, handler)
 
         override val isLoading: StateFlow<Boolean> = this@MainViewModel.isLoading
     }

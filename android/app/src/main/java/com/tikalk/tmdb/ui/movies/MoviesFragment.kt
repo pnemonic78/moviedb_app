@@ -46,8 +46,10 @@ class MoviesFragment : Fragment() {
                 showLoadingIndicator(isLoading)
             }
         }
-        viewModel.launchUri.observe(viewLifecycleOwner) { uri ->
-            if (uri != null) launchUri(uri)
+        lifecycleScope.launch {
+            viewModel.launchUri.collect { uri ->
+                if (uri != null) launchUri(uri)
+            }
         }
     }
 

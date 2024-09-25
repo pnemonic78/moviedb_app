@@ -9,6 +9,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -56,11 +57,13 @@ fun PosterPage(
 private fun ThisPreview() {
     val viewState = object : MovieDetailsViewState {
         override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
+
         override fun movieDetails(movieId: Long): StateFlow<MovieEntity?> =
             MutableStateFlow(movie550Details)
 
         override fun onPosterClicked(movie: MovieEntity, navController: NavController) = Unit
-        override fun onLinkClicked(movie: MovieEntity, uri: Uri) = Unit
+
+        override fun onLinkClicked(movie: MovieEntity, uri: Uri, handler: UriHandler) = Unit
     }
     val navController = rememberNavController()
     AppTheme {

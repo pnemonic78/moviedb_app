@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -50,11 +52,13 @@ fun MovieDetailsPage(
     val movieState = viewState.movieDetails(movieId).collectAsState()
     val movie = movieState.value
     if (movie != null) {
+        val uriHandler = LocalUriHandler.current
+
         MovieDetailsContent(
             modifier = modifier,
             movie = movie,
             onPosterClick = { viewState.onPosterClicked(movie, navController) },
-            onLinkClick = { viewState.onLinkClicked(movie, it) }
+            onLinkClick = { viewState.onLinkClicked(movie, it, uriHandler) }
         )
     } else {
         SimpleErrorContent(modifier = modifier)
@@ -66,6 +70,7 @@ fun MovieDetailsPage(
 private fun ThisPreview() {
     val viewState = object : MovieDetailsViewState {
         override val isLoading: StateFlow<Boolean> = MutableStateFlow(false)
+
         override fun movieDetails(movieId: Long): StateFlow<MovieEntity?> =
             MutableStateFlow(movie550Details)
 
@@ -73,7 +78,7 @@ private fun ThisPreview() {
             println("Poster clicked")
         }
 
-        override fun onLinkClicked(movie: MovieEntity, uri: Uri) {
+        override fun onLinkClicked(movie: MovieEntity, uri: Uri, handler: UriHandler) {
             println("Link clicked $uri")
         }
     }
