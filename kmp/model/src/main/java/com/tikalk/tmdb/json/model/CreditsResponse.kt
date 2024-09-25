@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CreditsResponse(
     @SerialName("id")
-    val id: Long,
+    val id: Long? = 0L,
 
     @SerialName("cast")
     val cast: List<Cast> = emptyList(),
