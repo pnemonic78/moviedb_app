@@ -8,7 +8,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
+import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.tikalk.tmdb.compose.items
@@ -17,19 +17,20 @@ import com.tikalk.tmdb.movies.OnMovieClickCallback
 import com.tikalk.tmdb.ui.LoadingGridTile
 import com.tikalk.tmdb.ui.MovieGridTile
 import com.tikalk.tmdb.ui.dimen
+import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun MoviesCarousel(
     modifier: Modifier = Modifier,
-    viewState: MoviesCarouselViewState,
-    navController: NavHostController
+    movies: Flow<PagingData<MovieEntity>>,
+    onMovieClicked: OnMovieClickCallback
 ) {
-    val pagingItems = viewState.movies.collectAsLazyPagingItems()
+    val pagingItems = movies.collectAsLazyPagingItems()
 
     MoviesCarousel(
         modifier = modifier,
         pagingItems = pagingItems,
-        onMovieClicked = { viewState.onMovieClicked(it, navController) }
+        onMovieClicked = onMovieClicked
     )
 }
 

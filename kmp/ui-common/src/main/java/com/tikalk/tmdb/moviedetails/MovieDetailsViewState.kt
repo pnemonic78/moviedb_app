@@ -1,15 +1,9 @@
 package com.tikalk.tmdb.moviedetails
 
-import android.net.Uri
-import androidx.compose.ui.platform.UriHandler
-import androidx.navigation.NavController
-import com.tikalk.tmdb.ViewState
 import com.tikalk.tmdb.data.model.MovieEntity
-import kotlinx.coroutines.flow.StateFlow
+import com.tikalk.tmdb.ui.ViewState
 
-interface MovieDetailsViewState : ViewState {
-    fun movieDetails(movieId: Long): StateFlow<MovieEntity?>
-
-    fun onPosterClicked(movie: MovieEntity, navController: NavController)
-    fun onLinkClicked(movie: MovieEntity, uri: Uri, handler: UriHandler)
-}
+data class MovieDetailsViewState(
+    override val isLoading: Boolean = false,
+    val movie: MovieEntity? = null
+): ViewState

@@ -16,6 +16,7 @@ precompose = "1.5.7"
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 compose-animation = { module = "androidx.compose.animation:animation", version.ref = "compose" }
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
+compose-lifecycle = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version = "2.8.0" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
 compose-materialIcons = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose" }
 compose-ratingbar = { module = "io.github.a914-gowtham:compose-ratingbar", version = "1.2.2" }
@@ -40,7 +41,16 @@ precompose-viewmodel = { module = "moe.tlaster:precompose-viewmodel", version.re
 serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.6.0" }
 
 [bundles]
-compose = ["compose-animation", "compose-foundation", "compose-material3", "compose-materialIcons", "compose-ui", "compose-ui-tooling", "compose-ui-tooling-preview"]
+compose = [
+    "compose-animation",
+    "compose-foundation",
+    "compose-lifecycle",
+    "compose-material3",
+    "compose-materialIcons",
+    "compose-ui",
+    "compose-ui-tooling",
+    "compose-ui-tooling-preview"
+]
 precompose = ["precompose", "precompose-koin", "precompose-viewmodel"]
 
 [plugins]

@@ -10,9 +10,16 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.paging.PagingData
+import com.tikalk.tmdb.compose.OnClickCallback
+import com.tikalk.tmdb.data.model.MovieEntity
+import com.tikalk.tmdb.data.model.MoviesPageType
+import com.tikalk.tmdb.movies.OnMovieClickCallback
+import kotlinx.coroutines.flow.Flow
 import movie_db_kmp.shared.generated.resources.Res
 import movie_db_kmp.shared.generated.resources.now_playing
 import movie_db_kmp.shared.generated.resources.popular
@@ -23,9 +30,12 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MoviesMainPage(
     modifier: Modifier = Modifier,
-    viewState: MoviesMainViewState,
+    viewModel: MainViewModel,
     navController: NavHostController
 ) {
+    val viewState = viewModel.uiState.collectAsState()
+    val onMovieClicked: OnMovieClickCallback = { viewModel.onMovieClicked(it, navController) }
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -33,23 +43,35 @@ fun MoviesMainPage(
     ) {
         MoviesMainPageCategory(
             title = stringResource(Res.string.now_playing),
-            viewState = viewState.moviesNowPlayingViewState,
-            navController = navController
+            movies = viewState.value.moviesNowPlaying,
+            onTitleClicked = {
+                viewModel.onTitleClicked(MoviesPageType.NOW_PLAYING, navController)
+            },
+            onMovieClicked = onMovieClicked
         )
         MoviesMainPageCategory(
             title = stringResource(Res.string.popular),
-            viewState = viewState.moviesPopularViewState,
-            navController = navController
+            movies = viewState.value.moviesPopular,
+            onTitleClicked = {
+                viewModel.onTitleClicked(MoviesPageType.POPULAR, navController)
+            },
+            onMovieClicked = onMovieClicked
         )
         MoviesMainPageCategory(
             title = stringResource(Res.string.top_rated),
-            viewState = viewState.moviesTopRatedViewState,
-            navController = navController
+            movies = viewState.value.moviesTopRated,
+            onTitleClicked = {
+                viewModel.onTitleClicked(MoviesPageType.TOP_RATED, navController)
+            },
+            onMovieClicked = onMovieClicked
         )
         MoviesMainPageCategory(
             title = stringResource(Res.string.upcoming),
-            viewState = viewState.moviesUpcomingViewState,
-            navController = navController
+            movies = viewState.value.moviesUpcoming,
+            onTitleClicked = {
+                viewModel.onTitleClicked(MoviesPageType.UPCOMING, navController)
+            },
+            onMovieClicked = onMovieClicked
         )
     }
 }
@@ -57,19 +79,20 @@ fun MoviesMainPage(
 @Composable
 private fun MoviesMainPageCategory(
     title: String,
-    viewState: MoviesCarouselViewState,
-    navController: NavHostController
+    movies: Flow<PagingData<MovieEntity>>,
+    onTitleClicked: OnClickCallback,
+    onMovieClicked: OnMovieClickCallback
 ) {
     Text(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .clickable { viewState.onTitleClicked(navController) },
+            .clickable { onTitleClicked() },
         text = title,
         style = MaterialTheme.typography.headlineSmall
     )
     MoviesCarousel(
-        viewState = viewState,
-        navController = navController
+        movies = movies,
+        onMovieClicked = onMovieClicked
     )
 }

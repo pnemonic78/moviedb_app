@@ -51,4 +51,5 @@ dependencies {
     api(libs.navigation.compose)
     implementation(libs.paging.compose)
     implementation(compose.components.resources)
+    implementation(kotlin("reflect"))
 }

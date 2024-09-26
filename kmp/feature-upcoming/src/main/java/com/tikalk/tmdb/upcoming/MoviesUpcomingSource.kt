@@ -27,4 +27,8 @@ class MoviesUpcomingSource(private val dataSource: TmdbDataSource) : PagingSourc
             return LoadResult.Error(e)
         }
     }
+
+    companion object {
+        fun create(dataSource: TmdbDataSource) = MoviesUpcomingSource(dataSource)
+    }
 }

@@ -31,4 +31,8 @@ class MoviesTopRatedSource(private val dataSource: TmdbDataSource) :
             return LoadResult.Error(e)
         }
     }
+
+    companion object {
+        fun create(dataSource: TmdbDataSource) = MoviesTopRatedSource(dataSource)
+    }
 }

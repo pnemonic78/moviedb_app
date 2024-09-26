@@ -1,2 +1,2 @@
-ViewModel instances using "by"
 db entities
+koin

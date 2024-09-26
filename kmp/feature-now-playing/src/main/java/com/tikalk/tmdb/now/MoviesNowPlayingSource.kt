@@ -31,4 +31,8 @@ class MoviesNowPlayingSource(private val dataSource: TmdbDataSource) :
             return LoadResult.Error(e)
         }
     }
+
+    companion object {
+        fun create(dataSource: TmdbDataSource) = MoviesNowPlayingSource(dataSource)
+    }
 }
