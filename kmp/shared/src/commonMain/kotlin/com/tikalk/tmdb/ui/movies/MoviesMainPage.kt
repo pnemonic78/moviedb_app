@@ -45,7 +45,7 @@ fun MoviesMainPage(
             title = stringResource(Res.string.now_playing),
             movies = viewState.value.moviesNowPlaying,
             onTitleClicked = {
-                viewModel.onTitleClicked(MoviesPageType.NOW_PLAYING, navController)
+                viewModel.onTitleClicked(MoviesPageType.now_playing, navController)
             },
             onMovieClicked = onMovieClicked
         )
@@ -53,7 +53,7 @@ fun MoviesMainPage(
             title = stringResource(Res.string.popular),
             movies = viewState.value.moviesPopular,
             onTitleClicked = {
-                viewModel.onTitleClicked(MoviesPageType.POPULAR, navController)
+                viewModel.onTitleClicked(MoviesPageType.popular, navController)
             },
             onMovieClicked = onMovieClicked
         )
@@ -61,7 +61,7 @@ fun MoviesMainPage(
             title = stringResource(Res.string.top_rated),
             movies = viewState.value.moviesTopRated,
             onTitleClicked = {
-                viewModel.onTitleClicked(MoviesPageType.TOP_RATED, navController)
+                viewModel.onTitleClicked(MoviesPageType.top_rated, navController)
             },
             onMovieClicked = onMovieClicked
         )
@@ -69,7 +69,7 @@ fun MoviesMainPage(
             title = stringResource(Res.string.upcoming),
             movies = viewState.value.moviesUpcoming,
             onTitleClicked = {
-                viewModel.onTitleClicked(MoviesPageType.UPCOMING, navController)
+                viewModel.onTitleClicked(MoviesPageType.upcoming, navController)
             },
             onMovieClicked = onMovieClicked
         )

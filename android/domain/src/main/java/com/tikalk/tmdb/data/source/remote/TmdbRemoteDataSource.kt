@@ -25,7 +25,7 @@ class TmdbRemoteDataSource @Inject constructor(
     override suspend fun getMoviesNowPlaying(page: Int, refresh: Boolean): MoviesPage =
         withContext(ioDispatcher) {
             val entity = service.getMoviesNowPlaying(page = page)
-                .toEntity(MoviesPageType.NOW_PLAYING)
+                .toEntity(MoviesPageType.now_playing)
             savePage(entity)
             entity
         }
@@ -33,7 +33,7 @@ class TmdbRemoteDataSource @Inject constructor(
     override suspend fun getMoviesPopular(page: Int, refresh: Boolean): MoviesPage =
         withContext(ioDispatcher) {
             val entity = service.getMoviesPopular(page = page)
-                .toEntity(MoviesPageType.POPULAR)
+                .toEntity(MoviesPageType.popular)
             savePage(entity)
             entity
         }
@@ -41,7 +41,7 @@ class TmdbRemoteDataSource @Inject constructor(
     override suspend fun getMoviesTopRated(page: Int, refresh: Boolean): MoviesPage =
         withContext(ioDispatcher) {
             val entity = service.getMoviesTopRated(page = page)
-                .toEntity(MoviesPageType.TOP_RATED)
+                .toEntity(MoviesPageType.top_rated)
             savePage(entity)
             entity
         }
@@ -49,7 +49,7 @@ class TmdbRemoteDataSource @Inject constructor(
     override suspend fun getMoviesUpcoming(page: Int, refresh: Boolean): MoviesPage =
         withContext(ioDispatcher) {
             val entity = service.getMoviesUpcoming(page = page)
-                .toEntity(MoviesPageType.UPCOMING)
+                .toEntity(MoviesPageType.upcoming)
             savePage(entity)
             entity
         }

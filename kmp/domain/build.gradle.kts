@@ -56,6 +56,8 @@ android {
 
 dependencies {
     api(projects.model)
+    annotationProcessor(libs.room.compiler)
+    implementation(libs.room.runtime)
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.serialization.kotlinx.json)

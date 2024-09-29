@@ -201,7 +201,7 @@ fun MovieDetailsContent(
                         text = currencyFormatter.format(it)
                     )
                 }
-                movie.genres.let {
+                movie.genres?.let {
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = stringResource(Res.string.genres_label),

@@ -1,5 +1,14 @@
 package com.tikalk.tmdb.data.model
 
-import com.tikalk.tmdb.json.model.ProductionCountry
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-typealias ProductionCountryEntity = ProductionCountry
+@Entity(tableName = "production_country")
+data class ProductionCountryEntity(
+    @ColumnInfo(name = "id")
+    @PrimaryKey
+    val id: String,
+    @ColumnInfo(name = "name")
+    val name: String
+)

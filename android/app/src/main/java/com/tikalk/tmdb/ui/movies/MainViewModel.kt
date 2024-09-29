@@ -118,10 +118,10 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) : BaseViewMo
 
     fun onTitleClicked(type: MoviesPageType, navController: NavHostController) {
         when (type) {
-            MoviesPageType.NOW_PLAYING -> navigateMoviesNowPlaying(navController)
-            MoviesPageType.POPULAR -> navigateMoviesPopular(navController)
-            MoviesPageType.TOP_RATED -> navigateMoviesTopRated(navController)
-            MoviesPageType.UPCOMING -> navigateMoviesUpcoming(navController)
+            MoviesPageType.now_playing -> navigateMoviesNowPlaying(navController)
+            MoviesPageType.popular -> navigateMoviesPopular(navController)
+            MoviesPageType.top_rated -> navigateMoviesTopRated(navController)
+            MoviesPageType.upcoming -> navigateMoviesUpcoming(navController)
             else -> TODO("show $type page")
         }
     }
@@ -150,7 +150,7 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) : BaseViewMo
                 this@MainViewModel.onMovieClicked(movie, navController)
 
             override fun onTitleClicked(navController: NavHostController) =
-                this@MainViewModel.onTitleClicked(MoviesPageType.NOW_PLAYING, navController)
+                this@MainViewModel.onTitleClicked(MoviesPageType.now_playing, navController)
 
             override val pageViewState = object : MoviesPageViewState {
                 override val isGridPage: StateFlow<Boolean> = this@MainViewModel.isGridPage
@@ -172,7 +172,7 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) : BaseViewMo
                 this@MainViewModel.onMovieClicked(movie, navController)
 
             override fun onTitleClicked(navController: NavHostController) =
-                this@MainViewModel.onTitleClicked(MoviesPageType.POPULAR, navController)
+                this@MainViewModel.onTitleClicked(MoviesPageType.popular, navController)
 
             override val pageViewState = object : MoviesPageViewState {
                 override val isGridPage: StateFlow<Boolean> = this@MainViewModel.isGridPage
@@ -194,7 +194,7 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) : BaseViewMo
                 this@MainViewModel.onMovieClicked(movie, navController)
 
             override fun onTitleClicked(navController: NavHostController) =
-                this@MainViewModel.onTitleClicked(MoviesPageType.TOP_RATED, navController)
+                this@MainViewModel.onTitleClicked(MoviesPageType.top_rated, navController)
 
             override val pageViewState = object : MoviesPageViewState {
                 override val isGridPage: StateFlow<Boolean> = this@MainViewModel.isGridPage
@@ -216,7 +216,7 @@ class MainViewModel @Inject constructor(repository: TmdbDataSource) : BaseViewMo
                 this@MainViewModel.onMovieClicked(movie, navController)
 
             override fun onTitleClicked(navController: NavHostController) =
-                this@MainViewModel.onTitleClicked(MoviesPageType.UPCOMING, navController)
+                this@MainViewModel.onTitleClicked(MoviesPageType.upcoming, navController)
 
             override val pageViewState = object : MoviesPageViewState {
                 override val isGridPage: StateFlow<Boolean> = this@MainViewModel.isGridPage

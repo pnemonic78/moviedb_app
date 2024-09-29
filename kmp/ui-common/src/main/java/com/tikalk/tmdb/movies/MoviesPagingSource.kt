@@ -19,7 +19,7 @@ internal open class MoviesPagingSource(private val page: MoviesPage) : PagingSou
             val response: MoviesPage = page
             val moviesPage: MoviesPage = response
             LoadResult.Page(
-                data = response.page.results,
+                data = response.movies,
                 prevKey = if (nextPage == 1) null else nextPage - 1,
                 nextKey = if (moviesPage.page.page < moviesPage.page.totalPages) response.page.page + 1 else null
             )

@@ -1,5 +1,19 @@
 package com.tikalk.tmdb.data.model
 
-import com.tikalk.tmdb.json.model.ProductionCompany
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import kotlinx.serialization.SerialName
 
-typealias ProductionCompanyEntity = ProductionCompany
+@Entity(tableName = "production_company")
+data class ProductionCompanyEntity(
+    @ColumnInfo(name="id")
+    @PrimaryKey
+    val id: Long,
+    @ColumnInfo(name="name")
+    val name: String,
+    @SerialName("logo_path")
+    val logoPath: String? = null,
+    @SerialName("origin_country")
+    val originCountry: String? = null
+)

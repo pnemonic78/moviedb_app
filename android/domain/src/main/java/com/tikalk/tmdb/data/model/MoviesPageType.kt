@@ -1,8 +1,8 @@
 package com.tikalk.tmdb.data.model
 
 enum class MoviesPageType {
-    NOW_PLAYING,
-    POPULAR,
-    TOP_RATED,
-    UPCOMING
+    now_playing,
+    popular,
+    top_rated,
+    upcoming
 }

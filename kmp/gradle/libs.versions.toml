@@ -1,7 +1,7 @@
 [versions]
 agp = "8.2.2"
 androidx-activityCompose = "1.9.2"
-compose = "1.7.2"
+compose = "1.7.3"
 compose-material3 = "1.3.0"
 compose-plugin = "1.7.0-beta02"
 coroutines = "1.8.0"
@@ -11,6 +11,7 @@ ktor = "2.3.6"
 napier = "2.7.1"
 paging = "3.3.2"
 precompose = "1.5.7"
+room = "2.7.0-alpha09"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
@@ -38,6 +39,8 @@ paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pag
 precompose = { module = "moe.tlaster:precompose", version.ref = "precompose" }
 precompose-koin = { module = "moe.tlaster:precompose-koin", version.ref = "precompose" }
 precompose-viewmodel = { module = "moe.tlaster:precompose-viewmodel", version.ref = "precompose" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.6.0" }
 
 [bundles]
@@ -52,6 +55,7 @@ compose = [
     "compose-ui-tooling-preview"
 ]
 precompose = ["precompose", "precompose-koin", "precompose-viewmodel"]
+room = ["room-compiler", "room-runtime"]
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -62,3 +66,4 @@ kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+room = { id = "androidx.room", version.ref = "room" }

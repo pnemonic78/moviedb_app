@@ -62,10 +62,10 @@ class MainViewModel(private val repository: TmdbDataSource) : BaseViewModel() {
 
     fun onTitleClicked(type: MoviesPageType, navController: NavHostController) {
         when (type) {
-            MoviesPageType.NOW_PLAYING -> navigateMoviesNowPlaying(navController)
-            MoviesPageType.POPULAR -> navigateMoviesPopular(navController)
-            MoviesPageType.TOP_RATED -> navigateMoviesTopRated(navController)
-            MoviesPageType.UPCOMING -> navigateMoviesUpcoming(navController)
+            MoviesPageType.now_playing -> navigateMoviesNowPlaying(navController)
+            MoviesPageType.popular -> navigateMoviesPopular(navController)
+            MoviesPageType.top_rated -> navigateMoviesTopRated(navController)
+            MoviesPageType.upcoming -> navigateMoviesUpcoming(navController)
             else -> TODO("show $type page")
         }
     }

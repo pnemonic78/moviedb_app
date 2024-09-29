@@ -1,5 +1,14 @@
 package com.tikalk.tmdb.data.model
 
-import com.tikalk.tmdb.json.model.Dates
+import androidx.room.ColumnInfo
+import com.tikalk.tmdb.domain.DateTime
 
-typealias DatesEntity = Dates
+/**
+ * Dates.
+ */
+data class DatesEntity(
+    @ColumnInfo(name = "maximum")
+    val maximum: DateTime? = null,
+    @ColumnInfo(name = "minimum")
+    val minimum: DateTime? = null
+)

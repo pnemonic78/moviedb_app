@@ -45,7 +45,7 @@ val page550 = MoviesPage(
         page = 1,
         totalPages = 1,
         totalResults = moviesList.size,
-        type = MoviesPageType.NOW_PLAYING
+        type = MoviesPageType.top_rated
     ),
     movies = moviesList
 )

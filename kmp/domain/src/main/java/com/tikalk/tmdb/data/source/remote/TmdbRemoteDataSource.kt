@@ -18,25 +18,25 @@ class TmdbRemoteDataSource(
     override suspend fun getMoviesNowPlaying(page: Int, refresh: Boolean): MoviesPage =
         withContext(ioDispatcher) {
             service.getMoviesNowPlaying(page = page)
-                .toEntity(MoviesPageType.NOW_PLAYING)
+                .toEntity(MoviesPageType.now_playing)
         }
 
     override suspend fun getMoviesPopular(page: Int, refresh: Boolean): MoviesPage =
         withContext(ioDispatcher) {
             service.getMoviesPopular(page = page)
-                .toEntity(MoviesPageType.POPULAR)
+                .toEntity(MoviesPageType.popular)
         }
 
     override suspend fun getMoviesTopRated(page: Int, refresh: Boolean): MoviesPage =
         withContext(ioDispatcher) {
             service.getMoviesTopRated(page = page)
-                .toEntity(MoviesPageType.TOP_RATED)
+                .toEntity(MoviesPageType.top_rated)
         }
 
     override suspend fun getMoviesUpcoming(page: Int, refresh: Boolean): MoviesPage =
         withContext(ioDispatcher) {
             service.getMoviesUpcoming(page = page)
-                .toEntity(MoviesPageType.UPCOMING)
+                .toEntity(MoviesPageType.upcoming)
         }
 
     override suspend fun getMovie(movieId: Long): MovieEntity =

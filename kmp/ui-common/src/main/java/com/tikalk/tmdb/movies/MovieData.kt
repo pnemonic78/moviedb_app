@@ -8,6 +8,7 @@ import com.tikalk.tmdb.data.model.GenreEntity
 import com.tikalk.tmdb.data.model.MovieEntity
 import com.tikalk.tmdb.data.model.MoviesPage
 import com.tikalk.tmdb.data.model.MoviesPageEntity
+import com.tikalk.tmdb.data.model.MoviesPageType
 import java.util.Calendar
 import kotlinx.coroutines.flow.Flow
 
@@ -88,8 +89,7 @@ val page550 = MoviesPage(
         page = 1,
         totalPages = 1,
         totalResults = moviesList.size,
-        results =  moviesList
-//        type = MoviesPageType.NOW_PLAYING
+        type = MoviesPageType.top_rated
     ),
     movies = moviesList
 )
