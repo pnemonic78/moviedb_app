@@ -1,8 +1,8 @@
 plugins {
     aliasId(libs.plugins.androidLibrary)
     aliasId(libs.plugins.kotlinAndroid)
-    aliasId(libs.plugins.kapt)
     alias(libs.plugins.kotlinSerialization)
+    aliasId(libs.plugins.ksp)
 }
 
 android {
@@ -33,7 +33,7 @@ android {
 
 dependencies {
     implementation(libs.di.hilt)
-    kapt(libs.di.hilt.compiler)
+    ksp(libs.di.hilt.compiler)
 
     implementation(libs.serialization.json)
 

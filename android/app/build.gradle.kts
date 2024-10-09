@@ -3,8 +3,8 @@ plugins {
     aliasId(libs.plugins.hilt)
     aliasId(libs.plugins.kotlinAndroid)
     alias(libs.plugins.compose.compiler)
-    aliasId(libs.plugins.kapt)
     alias(libs.plugins.kotlinSerialization)
+    aliasId(libs.plugins.ksp)
 }
 
 android {
@@ -41,10 +41,6 @@ android {
     }
 }
 
-kapt {
-    correctErrorTypes = true
-}
-
 dependencies {
     implementation(projects.domain)
     implementation(projects.model)
@@ -56,7 +52,7 @@ dependencies {
     implementation(projects.featureUpcoming)
 
     implementation(libs.di.hilt)
-    kapt(libs.di.hilt.compiler)
+    ksp(libs.di.hilt.compiler)
 
     implementation(libs.logging.timber)
 

@@ -1,7 +1,8 @@
 plugins {
     aliasId(libs.plugins.androidLibrary)
+    aliasId(libs.plugins.hilt)
     aliasId(libs.plugins.kotlinAndroid)
-    aliasId(libs.plugins.kapt)
+    aliasId(libs.plugins.ksp)
 }
 
 android {
@@ -34,15 +35,11 @@ android {
     }
 }
 
-kapt {
-    correctErrorTypes = true
-}
-
 dependencies {
     api(projects.model)
 
     implementation(libs.di.hilt)
-    kapt(libs.di.hilt.compiler)
+    ksp(libs.di.hilt.compiler)
 
     implementation(libs.jetpack.core)
 
@@ -59,7 +56,7 @@ dependencies {
 
     // Database
     implementation(libs.db.room.kotlin)
-    kapt(libs.db.room.compiler)
+    ksp(libs.db.room.compiler)
 
     // Testing
     testImplementation(libs.test.junit)

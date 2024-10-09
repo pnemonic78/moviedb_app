@@ -10,3 +10,7 @@ buildscript {
         classpath(libs.di.hilt.gradle)
     }
 }
+
+plugins {
+    alias(libs.plugins.ksp)
+}

@@ -3,7 +3,7 @@ plugins {
     aliasId(libs.plugins.hilt)
     aliasId(libs.plugins.kotlinAndroid)
     alias(libs.plugins.compose.compiler)
-    aliasId(libs.plugins.kapt)
+    aliasId(libs.plugins.ksp)
 }
 
 android {
@@ -39,7 +39,7 @@ dependencies {
     implementation(projects.domain)
 
     implementation(libs.di.hilt)
-    kapt(libs.di.hilt.compiler)
+    ksp(libs.di.hilt.compiler)
 
     api(libs.bundles.compose)
     api(libs.compose.coil)
