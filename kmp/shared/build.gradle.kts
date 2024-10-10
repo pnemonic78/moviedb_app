@@ -28,6 +28,8 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(compose.components.resources)
+
             implementation(libs.kamel)
             implementation(libs.bundles.compose)
             implementation(libs.bundles.precompose)
@@ -39,7 +41,7 @@ kotlin {
             implementation(libs.logging.napier)
             implementation(libs.navigation.compose)
             implementation(libs.paging.compose)
-            implementation(compose.components.resources)
+            implementation(libs.db.room.runtime)
 
             implementation(projects.featureCast)
             implementation(projects.featureNowPlaying)

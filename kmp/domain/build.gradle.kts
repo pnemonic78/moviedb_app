@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.ksp)
 }
 
 kotlin {
@@ -23,23 +24,6 @@ kotlin {
 //            isStatic = true
 //        }
 //    }
-
-//    sourceSets {
-//        commonMain.dependencies {
-//            implementation(libs.kotlin.coroutines)
-//            implementation(libs.logging.napier)
-//            implementation(libs.serialization.json)
-//        }
-//        commonTest.dependencies {
-//            implementation(libs.kotlin.test)
-//        }
-//        androidMain.dependencies {
-//            implementation(libs.ktor.client.android)
-//        }
-//        iosMain.dependencies {
-//            implementation(libs.ktor.client.darwin)
-//        }
-//    }
 }
 
 android {
@@ -56,8 +40,8 @@ android {
 
 dependencies {
     api(projects.model)
-    annotationProcessor(libs.room.compiler)
-    implementation(libs.room.runtime)
+    implementation(libs.db.room.runtime)
+    ksp(libs.db.room.compiler)
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.serialization.kotlinx.json)
