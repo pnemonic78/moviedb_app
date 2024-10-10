@@ -3,7 +3,7 @@ package com.tikalk.tmdb.json.model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@Serializable
+@Serializable(with = GenderSerializer::class)
 enum class Gender {
     @SerialName("0")
     unknown,

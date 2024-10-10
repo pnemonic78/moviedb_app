@@ -59,7 +59,7 @@ class TmdbRepository(
         var result = localRepository.getMovie(movieId)
 
         // Fetch from server and save to database.
-        if (result == null) {
+        if (result == null || result.status.isEmpty()) {
             result = remoteRepository.getMovie(movieId)
         }
         return result
