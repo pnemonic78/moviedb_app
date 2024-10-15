@@ -44,10 +44,6 @@ android {
 compose {
     resources {
         generateResClass = always
-        customDirectory(
-            sourceSetName = "commonMain",
-            directoryProvider = provider { layout.projectDirectory.dir("composeResources2") }
-        )
     }
 }
 
