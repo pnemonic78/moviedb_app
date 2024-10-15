@@ -15,23 +15,22 @@ kotlin {
         }
     }
 
-//    listOf(
-//        iosX64(),
-//        iosArm64(),
-//        iosSimulatorArm64()
-//    ).forEach {
-//        it.binaries.framework {
-//            baseName = "shared"
-//            isStatic = true
-//        }
-//    }
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach {
+        it.binaries.framework {
+            baseName = "shared"
+            isStatic = true
+        }
+    }
 
     sourceSets {
         commonMain.dependencies {
             implementation(compose.components.resources)
 
             implementation(libs.kamel)
-            implementation(libs.bundles.compose)
             implementation(libs.bundles.precompose)
             implementation(libs.compose.ratingbar)
             implementation(libs.kotlin.coroutines)
@@ -40,7 +39,6 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.logging.napier)
             implementation(libs.navigation.compose)
-            implementation(libs.paging.compose)
             implementation(libs.db.room.runtime)
 
             implementation(projects.featureCast)
@@ -56,9 +54,9 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.ktor.client.android)
         }
-//        iosMain.dependencies {
-//            implementation(libs.ktor.client.darwin)
-//        }
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
+        }
     }
 }
 
@@ -87,6 +85,9 @@ compose {
 dependencies {
     implementation(projects.domain)
     implementation(projects.model)
+
+    implementation(libs.bundles.compose)
+    implementation(libs.paging.compose)
 }
 
 // FIXME: Cannot locate tasks that match ':shared:testClasses' as task 'testClasses' not found in project ':shared'.

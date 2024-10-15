@@ -14,16 +14,16 @@ kotlin {
         }
     }
 
-//    listOf(
-//        iosX64(),
-//        iosArm64(),
-//        iosSimulatorArm64()
-//    ).forEach {
-//        it.binaries.framework {
-//            baseName = "domain"
-//            isStatic = true
-//        }
-//    }
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach {
+        it.binaries.framework {
+            baseName = "domain"
+            isStatic = true
+        }
+    }
 }
 
 android {
@@ -41,7 +41,14 @@ android {
 dependencies {
     api(projects.model)
     implementation(libs.db.room.runtime)
-    ksp(libs.db.room.compiler)
+    listOf(
+        "kspAndroid",
+        "kspIosArm64",
+        "kspIosX64",
+        "kspIosSimulatorArm64"
+    ).forEach {
+        add(it, libs.db.room.compiler)
+    }
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.serialization.kotlinx.json)
