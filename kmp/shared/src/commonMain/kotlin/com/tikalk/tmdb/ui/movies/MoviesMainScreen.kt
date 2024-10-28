@@ -2,7 +2,6 @@ package com.tikalk.tmdb.ui.movies
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -27,31 +26,13 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun MoviesMainScreen() {
-    val viewModel = viewModel { MainViewModel(Inject.repository) }
-    val viewModelDetails = viewModel {
-        MovieDetailsViewModel(
-            Inject.repository,
-            posterScreenRoute = MoviesScreen.Poster.route
-        )
-    }
-
-    MoviesMainScreen(viewModel = viewModel, viewModelDetails = viewModelDetails)
-}
-
-@Composable
-fun MoviesMainScreen(
-    viewModel: MainViewModel,
-    viewModelDetails: MovieDetailsViewModel
-) {
     val navController = rememberNavController()
 
-    MoviesMainScreen(viewModel, viewModelDetails, navController)
+    MoviesMainScreen(navController)
 }
 
 @Composable
 fun MoviesMainScreen(
-    viewModel: MainViewModel,
-    viewModelDetails: MovieDetailsViewModel,
     navController: NavHostController
 ) {
     NavHost(
@@ -63,6 +44,12 @@ fun MoviesMainScreen(
             arguments = listOf(navArgument("id") { type = NavType.LongType })
         ) {
             val movieId = it.arguments?.getLong("id") ?: 0L
+            val viewModelDetails = viewModel {
+                MovieDetailsViewModel(
+                    Inject.repository,
+                    posterScreenRoute = MoviesScreen.Poster.route
+                )
+            }
             viewModelDetails.fetchMovie(movieId)
 
             MovieDetailsScreen(
@@ -71,14 +58,17 @@ fun MoviesMainScreen(
             )
         }
         composable(route = MoviesScreen.Main.route) {
+            val viewModel = viewModel { MainViewModel(Inject.repository) }
+
             MoviesMainScreen(
                 viewModel = viewModel,
                 navController = navController
             )
         }
         composable(route = MoviesScreen.NowPlaying.route) {
-            val viewModelPage =
-                viewModel { MoviesPageViewModel(Inject.repository, MoviesScreen.Details.route) }
+            val viewModelPage = viewModel {
+                MoviesPageViewModel(Inject.repository, MoviesScreen.Details.route)
+            }
 
             MoviesNowPlayingScreen(
                 viewModel = viewModelPage,
@@ -86,8 +76,9 @@ fun MoviesMainScreen(
             )
         }
         composable(route = MoviesScreen.Popular.route) {
-            val viewModelPage =
-                viewModel { MoviesPageViewModel(Inject.repository, MoviesScreen.Details.route) }
+            val viewModelPage = viewModel {
+                MoviesPageViewModel(Inject.repository, MoviesScreen.Details.route)
+            }
 
             MoviesPopularScreen(
                 viewModel = viewModelPage,
@@ -99,6 +90,12 @@ fun MoviesMainScreen(
             arguments = listOf(navArgument("id") { type = NavType.LongType })
         ) {
             val movieId = it.arguments?.getLong("id") ?: 0L
+            val viewModelDetails = viewModel {
+                MovieDetailsViewModel(
+                    Inject.repository,
+                    posterScreenRoute = MoviesScreen.Poster.route
+                )
+            }
             viewModelDetails.fetchMovie(movieId)
 
             MoviePosterScreen(
@@ -107,8 +104,9 @@ fun MoviesMainScreen(
             )
         }
         composable(route = MoviesScreen.TopRated.route) {
-            val viewModelPage =
-                viewModel { MoviesPageViewModel(Inject.repository, MoviesScreen.Details.route) }
+            val viewModelPage = viewModel {
+                MoviesPageViewModel(Inject.repository, MoviesScreen.Details.route)
+            }
 
             MoviesTopRatedScreen(
                 viewModel = viewModelPage,
@@ -116,8 +114,9 @@ fun MoviesMainScreen(
             )
         }
         composable(route = MoviesScreen.Upcoming.route) {
-            val viewModelPage =
-                viewModel { MoviesPageViewModel(Inject.repository, MoviesScreen.Details.route) }
+            val viewModelPage = viewModel {
+                MoviesPageViewModel(Inject.repository, MoviesScreen.Details.route)
+            }
 
             MoviesUpcomingScreen(
                 viewModel = viewModelPage,
