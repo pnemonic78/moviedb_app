@@ -5,24 +5,15 @@ import org.gradle.plugin.use.PluginDependency
 
 object Android {
     object Version {
-        const val compileSdk = 34
+        const val compileSdk = 36
         const val minSdk = 24
-        const val targetSdk = 34
-
-        const val gradle = "8.4.1"
-        const val hilt = "2.51"
+        const val targetSdk = 36
     }
 }
 
 object Java {
     object Version {
         val jvm = JavaVersion.VERSION_11
-    }
-}
-
-object Kotlin {
-    object Version {
-        const val kotlin = "2.0.0"
     }
 }
 
