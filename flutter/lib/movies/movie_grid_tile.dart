@@ -60,7 +60,7 @@ class MovieGridTile extends StatelessWidget {
     final voteAverageWidget = SmoothStarRating(
       rating: movie.voteAverage / 2.0,
       color: Colors.yellow,
-      borderColor: Colors.yellow,
+      borderColor: Colors.yellow.shade600,
       size: (width - voteAverageWidgetPadding) / 7,
     );
 

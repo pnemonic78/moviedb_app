@@ -14,16 +14,15 @@ class MoviesSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final titleHeight =
-        (textTheme.titleMedium?.fontSize ?? 20) * maxLinesMoviesAllTile;
+        textTheme.titleMedium!.fontSize! * maxLinesMoviesAllTile;
     // height of a `MoviesAllTile`
-    final tileHeight = paddingVertical_8.top +
-        posterGridHeight +
+    final tileHeight = posterGridHeight +
+        paddingVertical_8.top +
         titleHeight +
-        paddingVertical_8.bottom;
+        titleHeight;
 
     return SizedBox(
       height: tileHeight,
-      width: double.infinity,
       child: movies.isEmpty
           ? const Center(child: CircularProgressIndicator())
           : ListView(

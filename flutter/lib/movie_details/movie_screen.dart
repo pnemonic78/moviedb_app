@@ -110,7 +110,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
     final voteAverageRating = SmoothStarRating(
       rating: movie.voteAverage / 2.0,
       color: Colors.yellow,
-      borderColor: Colors.yellow,
+      borderColor: Colors.yellow.shade600,
     );
 
     final voteAverageWidget = Text(

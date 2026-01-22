@@ -16,6 +16,16 @@ class VideosList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final titleHeight = textTheme.bodySmall!.fontSize!;
+    final cellHeight = paddingAll_8.top +
+        thumbnailHeight +
+        paddingTop_8.top +
+        titleHeight +
+        titleHeight +
+        paddingAll_8.bottom +
+        20;
+
     return FutureBuilder<VideosResponse>(
       future: _fetchVideos(context),
       builder: (BuildContext context, AsyncSnapshot<VideosResponse> snapshot) {
@@ -23,7 +33,7 @@ class VideosList extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
             content = SizedBox(
-              height: thumbnailHeight + 62,
+              height: cellHeight,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: _buildList(context, snapshot.data?.results),

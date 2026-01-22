@@ -54,7 +54,7 @@ class MovieListTile extends StatelessWidget {
     final voteAverageWidget = SmoothStarRating(
       rating: movie.voteAverage / 2.0,
       color: Colors.yellow,
-      borderColor: Colors.yellow,
+      borderColor: Colors.yellow.shade600,
     );
 
     final dateValue = movie.releaseDate;
