@@ -1,14 +1,14 @@
 # To Do
 
-* multi-module
+* clean architecture (multi-module)
   * core
-  * ui-common
+  * ui/common
     * styles
     * themes
     * widgets
-  * ui-movie
-  * ui-person
-  * ui-tv
+  * feature/movie
+  * feature/person
+  * feature/tv
 * GetIt
   * DI
 * GetX
