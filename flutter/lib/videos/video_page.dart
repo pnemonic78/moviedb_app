@@ -80,7 +80,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
         aspectRatio: controller.value.aspectRatio,
         child: Stack(
           alignment: Alignment.bottomCenter,
-          children: <Widget>[
+          children: [
             VideoPlayer(controller),
             VideoProgressIndicator(
               controller,
@@ -106,7 +106,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
         padding: paddingAll_8,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
+          children: [
             titleWidget,
             Expanded(
               child: Center(child: player),

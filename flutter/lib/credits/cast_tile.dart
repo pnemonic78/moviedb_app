@@ -36,14 +36,14 @@ class CastTile extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     final titleWidget = Text(
-      cast.name,
+      "${cast.name}\n\n",
       maxLines: 2,
       style: textTheme.titleMedium,
       overflow: TextOverflow.ellipsis,
     );
 
     final characterWidget = Text(
-      cast.character,
+      "${cast.character}\n\n",
       maxLines: 2,
       style: textTheme.titleSmall,
       overflow: TextOverflow.ellipsis,
@@ -57,7 +57,7 @@ class CastTile extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
+            children: [
               thumbnailWidget,
               const SizedBox(height: padding_8),
               Padding(padding: paddingHorizontal_8, child: titleWidget),

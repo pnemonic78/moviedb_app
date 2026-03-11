@@ -42,7 +42,7 @@ class VideoTile extends StatelessWidget {
             } else {
               content = Stack(
                 alignment: Alignment.center,
-                children: <Widget>[
+                children: [
                   thumbnail,
                   Icon(
                     Icons.play_circle_outline,
@@ -85,7 +85,7 @@ class VideoTile extends StatelessWidget {
               child: SizedBox(
                 width: imageWidth,
                 child: Column(
-                  children: <Widget>[
+                  children: [
                     content,
                     Padding(padding: paddingTop_8, child: titleWidget),
                   ],

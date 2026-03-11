@@ -3,8 +3,9 @@ import 'package:tmdb/movies/movie_grid_tile.dart';
 import 'package:tmdb/parallax/parallax_image.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
+import 'package:tmdb/utils/flutter_ui.dart';
 
-const maxLinesMoviesAllTile = 2;
+const _titleMaxLines = 2;
 
 class MoviesAllTile extends MovieGridTile {
   const MoviesAllTile({
@@ -43,10 +44,11 @@ class MoviesAllTile extends MovieGridTile {
     final textTheme = Theme.of(context).textTheme;
 
     final titleWidget = Text(
-      movie.title,
-      maxLines: maxLinesMoviesAllTile,
+      "${movie.title}\n\n",
+      maxLines: _titleMaxLines,
       style: textTheme.titleMedium,
       overflow: TextOverflow.ellipsis,
+      textAlign: TextAlign.center,
     );
 
     return Card(
@@ -55,9 +57,7 @@ class MoviesAllTile extends MovieGridTile {
         child: SizedBox(
           width: width,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
+            children: [
               thumbnailWidget,
               Padding(padding: paddingHorizontal_8, child: titleWidget),
             ],
@@ -65,5 +65,14 @@ class MoviesAllTile extends MovieGridTile {
         ),
       ),
     );
+  }
+
+  double height(BuildContext context) {
+    final thumbnailWidth = width;
+    final thumbnailHeight = thumbnailWidth * 1.5;
+    final textTheme = Theme.of(context).textTheme;
+    final titleHeight =
+        textSize("\n\n", textTheme.titleMedium!, _titleMaxLines).height;
+    return thumbnailHeight + titleHeight + 8;
   }
 }

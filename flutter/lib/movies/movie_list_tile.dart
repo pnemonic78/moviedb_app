@@ -79,14 +79,14 @@ class MovieListTile extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
+            children: [
               thumbnailWidget,
               const SizedBox(width: padding_8),
               Expanded(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
+                  children: [
                     titleWidget,
                     marginTop,
                     voteAverageWidget,

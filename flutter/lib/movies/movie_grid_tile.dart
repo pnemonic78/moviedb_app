@@ -50,7 +50,7 @@ class MovieGridTile extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     final titleWidget = Text(
-      movie.title,
+      "${movie.title}\n\n",
       maxLines: 2,
       style: textTheme.titleMedium,
       overflow: TextOverflow.ellipsis,
@@ -78,7 +78,7 @@ class MovieGridTile extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
+            children: [
               thumbnailWidget,
               Padding(padding: paddingHorizontal_8, child: voteAverageWidget),
               Padding(padding: paddingHorizontal_8, child: titleWidget),

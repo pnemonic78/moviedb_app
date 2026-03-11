@@ -254,20 +254,20 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
       padding: paddingAll_8,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
+        children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
+            children: [
               posterWidget,
               const SizedBox(width: padding_16),
               Expanded(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
+                  children: [
                     voteAverageLabel,
                     Row(
-                      children: <Widget>[
+                      children: [
                         voteAverageRating,
                         voteAverageWidget,
                       ],
@@ -307,7 +307,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
+      children: [
         Padding(padding: paddingAll_8, child: taglineWidget),
         details,
       ],

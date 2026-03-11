@@ -80,15 +80,13 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
 
     final body = Padding(
       padding: paddingAll_8,
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            header,
-            Expanded(
-              child: content,
-            ),
-          ],
-        ),
+      child: Column(
+        children: [
+          header,
+          Expanded(
+            child: content,
+          ),
+        ],
       ),
     );
 

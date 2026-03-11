@@ -91,7 +91,7 @@ class _MovieDetailsHomePageState extends State<MovieDetailsHomePage> {
             );
 
             content = CustomScrollView(
-              slivers: <Widget>[
+              slivers: [
                 SliverAppBar(
                   expandedHeight: backdropHeight,
                   pinned: true,

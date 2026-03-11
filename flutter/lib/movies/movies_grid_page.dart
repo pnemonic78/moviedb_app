@@ -39,7 +39,7 @@ class _MoviesGridState<P extends MoviesGridPage> extends State<P> {
     const cellWidth = padding_8 + posterGridWidth + padding_8;
     final columnCount = screenWidth ~/ cellWidth;
     final columnWidth = screenWidth / columnCount;
-    final cellRatio = 0.45;
+    final cellRatio = 0.475;
 
     return GridView.builder(
       controller: _scrollController,

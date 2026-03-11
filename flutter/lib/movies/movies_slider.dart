@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tmdb/movies/movies_all_tile.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
-
-import 'movies_all_tile.dart';
 
 class MoviesSlider extends StatelessWidget {
   final List<Movie> movies;
@@ -12,36 +11,25 @@ class MoviesSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final titleHeight =
-        textTheme.titleMedium!.fontSize! * maxLinesMoviesAllTile;
-    // height of a `MoviesAllTile`
-    final tileHeight = posterGridHeight +
-        paddingVertical_8.top +
-        titleHeight +
-        titleHeight;
+    final tile =
+        movies.isEmpty ? null : MoviesAllTile(movie: movies[0], onTap: onTap);
+    final tileHeight = tile?.height(context) ?? thumbnailHeight;
 
     return SizedBox(
       height: tileHeight,
       child: movies.isEmpty
           ? const Center(child: CircularProgressIndicator())
-          : ListView(
+          : ListView.builder(
               scrollDirection: Axis.horizontal,
-              children: _buildList(context, movies),
+              itemBuilder: _buildItem,
             ),
     );
   }
 
-  List<Widget> _buildList(BuildContext context, List<Movie> movies) {
-    final list = <Widget>[];
-
-    for (var movie in movies) {
-      list.add(MoviesAllTile(
-        movie: movie,
-        onTap: onTap,
-      ));
-    }
-
-    return list;
+  Widget? _buildItem(BuildContext context, int index) {
+    return MoviesAllTile(
+      movie: movies[index],
+      onTap: onTap,
+    );
   }
 }

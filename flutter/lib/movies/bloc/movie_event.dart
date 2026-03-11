@@ -23,19 +23,19 @@ abstract class MoviesResponseEvent extends MovieEvent {
 }
 
 class NowPlayingResponseEvent extends MoviesResponseEvent {
-  const NowPlayingResponseEvent(response) : super(response);
+  const NowPlayingResponseEvent(super.response);
 }
 
 class PopularResponseEvent extends MoviesResponseEvent {
-  const PopularResponseEvent(response) : super(response);
+  const PopularResponseEvent(super.response);
 }
 
 class TopRatedResponseEvent extends MoviesResponseEvent {
-  const TopRatedResponseEvent(response) : super(response);
+  const TopRatedResponseEvent(super.response);
 }
 
 class UpcomingResponseEvent extends MoviesResponseEvent {
-  const UpcomingResponseEvent(response) : super(response);
+  const UpcomingResponseEvent(super.response);
 }
 
 class MovieError extends MovieEvent {

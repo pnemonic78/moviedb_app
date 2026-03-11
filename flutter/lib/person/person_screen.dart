@@ -280,12 +280,12 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
       padding: paddingAll_8,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
+        children: [
           nameWidget,
           const SizedBox(height: padding_8),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
+            children: [
               Column(
                 children: [
                   posterWidget,
@@ -309,7 +309,7 @@ class _PersonDetailsWidgetState extends State<PersonDetailsWidget> {
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
+                  children: [
                     personalInfoLabel,
                     knownForMargin,
                     knownForLabel,
