@@ -4,9 +4,6 @@ class R {
   static const Map<String, String> string = {
     "title": "The Movie Database Demo",
 
-    // Now Playing
-    "now_playing": "Movies Now Playing",
-
     // Movie Details
     "budget_label": "Budget",
     "cast_label": "Credited Cast",
@@ -41,12 +38,19 @@ class R {
     "person_crew_format_none": "<b>%s</b>",
 
     // Popular
-    "popular": "Popular Movies",
+    "popular": "Popular",
+    "popular_movies": "Popular Movies",
+
+    // Now Playing
+    "now_playing": "Now Playing",
+    "now_playing_movies": "Now Playing Movies",
 
     // Upcoming
-    "upcoming": "Upcoming Movies",
+    "upcoming": "Upcoming",
+    "upcoming_movies": "Upcoming Movies",
 
     // Top Rated
-    "top_rated": "Top Rated Movies",
+    "top_rated": "Top Rated",
+    "top_rated_movies": "Top Rated Movies",
   };
 }

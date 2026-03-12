@@ -16,7 +16,7 @@ class _PopularPageState extends MoviesState<PopularPage> {
   @override
   String getTitle(BuildContext context) {
     final string = AppLocalizations.get(context);
-    return string.popular;
+    return string.popularMovies;
   }
 
   @override

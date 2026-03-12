@@ -1,5 +1,6 @@
 # To Do
 
+* rating as circular progress with inner percentage
 * clean architecture (multi-module)
   * core
   * ui/common

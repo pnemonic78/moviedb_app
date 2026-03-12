@@ -39,11 +39,6 @@ class AppLocalizations {
     return _getValue('title');
   }
 
-  // Now Playing
-  String get now_playing {
-    return _getValue('now_playing');
-  }
-
   // Movie Details
   String get budget_label {
     return _getValue('budget_label');
@@ -166,12 +161,34 @@ class AppLocalizations {
     return _getValue('popular');
   }
 
+  String get popularMovies {
+    return _getValue('popular_movies');
+  }
+
+  // Now Playing
+  String get nowPlaying {
+    return _getValue('now_playing');
+  }
+
+  // Now Playing
+  String get nowPlayingMovies {
+    return _getValue('now_playing_movies');
+  }
+
   String get upcoming {
     return _getValue('upcoming');
   }
 
-  String get top_rated {
+  String get upcomingMovies {
+    return _getValue('upcoming_movies');
+  }
+
+  String get topRated {
     return _getValue('top_rated');
+  }
+
+  String get topRatedMovies {
+    return _getValue('top_rated_movies');
   }
 
   static const delegate = AppLocalizationsDelegate();

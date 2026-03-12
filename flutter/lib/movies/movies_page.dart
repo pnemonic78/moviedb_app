@@ -4,7 +4,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:tmdb/di/injector_inherited.dart';
 import 'package:tmdb/movie_details/home_page.dart';
 import 'package:tmdb/res/dimens.dart';
-import 'package:tmdb/res/i18n.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
 import 'package:tmdb/tmdb_api/movies_response.dart';
@@ -45,15 +44,7 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
   }
 
   Widget _buildPage(BuildContext context, MovieBloc movieBloc) {
-    final theme = Theme.of(context);
-    final string = AppLocalizations.get(context);
     final title = getTitle(context);
-
-    final header = Text(
-      title,
-      style: theme.textTheme.titleLarge,
-    );
-
     final state = movieBloc.state;
     final movies = getMovies(state);
 
@@ -80,13 +71,8 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
 
     final body = Padding(
       padding: paddingAll_8,
-      child: Column(
-        children: [
-          header,
-          Expanded(
-            child: content,
-          ),
-        ],
+      child: Expanded(
+        child: content,
       ),
     );
 
@@ -98,7 +84,7 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(string.title),
+        title: Text(title),
         actions: [
           iconViewStyle,
         ],

@@ -4,9 +4,6 @@ class R_he {
   static const Map<String, String> string = {
     "title": "הדגמת מאגר הסרטים",
 
-    // Now Playing
-    "now_playing": "סרטים המוקרנים כיום",
-
     // Movie Details
     "budget_label": "תקציב",
     "cast_label": "שחקנים עיקריים",
@@ -41,12 +38,19 @@ class R_he {
     "person_crew_format_none": "<b>%s</b>",
 
     // Popular
-    "popular": "סרטים פופולריים",
+    "popular": "פופולריים",
+    "popular_movies": "סרטים פופולריים",
+
+    // Now Playing
+    "now_playing": "המוקרנים כיום",
+    "now_playing_movies": "סרטים המוקרנים כיום",
 
     // Upcoming
-    "upcoming": "סרטים עתידיים",
+    "upcoming": "עתידיים",
+    "upcoming_movies": "סרטים עתידיים",
 
     // Top Rated
-    "top_rated": "סרטים בראש הדירוג",
+    "top_rated": "בראש הדירוג",
+    "top_rated_movies": "סרטים בראש הדירוג",
   };
 }

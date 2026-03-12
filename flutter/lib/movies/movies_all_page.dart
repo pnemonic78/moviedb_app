@@ -51,7 +51,7 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
 
     final nowPlayingTitle = _buildTitle(
       context,
-      string.now_playing,
+      string.nowPlaying,
       _onTapNowPlaying,
     );
 
@@ -67,7 +67,7 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
 
     final topRatedTitle = _buildTitle(
       context,
-      string.top_rated,
+      string.topRated,
       _onTapTopRated,
     );
 

@@ -16,7 +16,7 @@ class _NowPlayingPageState extends MoviesState<NowPlayingPage> {
   @override
   String getTitle(BuildContext context) {
     final string = AppLocalizations.get(context);
-    return string.now_playing;
+    return string.nowPlayingMovies;
   }
 
   @override

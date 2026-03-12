@@ -16,7 +16,7 @@ class _UpcomingPageState extends MoviesState<UpcomingPage> {
   @override
   String getTitle(BuildContext context) {
     final string = AppLocalizations.get(context);
-    return string.upcoming;
+    return string.upcomingMovies;
   }
 
   @override
