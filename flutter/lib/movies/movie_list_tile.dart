@@ -32,7 +32,7 @@ class MovieListTile extends StatelessWidget {
       posterHeight: imageHeight,
     );
     final thumbnailWidget = ClipRRect(
-      borderRadius: borderCircular_8,
+      borderRadius: borderCircularLeft_8,
       child: SizedBox(
         width: thumbnailWidth,
         height: thumbnailHeight,
@@ -53,8 +53,8 @@ class MovieListTile extends StatelessWidget {
 
     final voteAverageWidget = SmoothStarRating(
       rating: movie.voteAverage / 2.0,
-      color: Colors.yellow,
-      borderColor: Colors.yellow.shade600,
+      color: Colors.amber,
+      borderColor: Colors.amber.shade600,
     );
 
     final dateValue = movie.releaseDate;
@@ -74,15 +74,14 @@ class MovieListTile extends StatelessWidget {
     final card = Card(
       child: InkWell(
         onTap: () => onTap(movie),
-        child: Padding(
-          padding: paddingAll_8,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              thumbnailWidget,
-              const SizedBox(width: padding_8),
-              Expanded(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            thumbnailWidget,
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,8 +96,8 @@ class MovieListTile extends StatelessWidget {
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

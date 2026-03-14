@@ -5,9 +5,11 @@ import 'package:tmdb/parallax/parallax_image.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/movie.dart';
+import 'package:tmdb/utils/flutter_ui.dart';
 
 final _dateFormat = DateFormat.yMMMd();
 const _parallaxFactor = 0.85;
+const _titleMaxLines = 2;
 
 class MovieGridTile extends StatelessWidget {
   final Movie movie;
@@ -24,7 +26,7 @@ class MovieGridTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final thumbnailWidth = width;
-    final thumbnailHeight = thumbnailWidth * 1.5;
+    final thumbnailHeight = thumbnailWidth * ratioPoster;
     final imageWidth = thumbnailWidth;
     final imageHeight = thumbnailHeight / _parallaxFactor;
 
@@ -33,11 +35,8 @@ class MovieGridTile extends StatelessWidget {
       posterWidth: imageWidth,
       posterHeight: imageHeight,
     );
-    final thumbnailWidget = ClipPath.shape(
-      // rounded rectangle crop for top side only.
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: cardRadius),
-      ),
+    final thumbnailWidget = ClipRRect(
+      borderRadius: borderCircularTop_8,
       child: SizedBox(
         width: thumbnailWidth,
         height: thumbnailHeight,
@@ -59,8 +58,8 @@ class MovieGridTile extends StatelessWidget {
     final voteAverageWidgetPadding = paddingHorizontal_8.horizontal * 2;
     final voteAverageWidget = SmoothStarRating(
       rating: movie.voteAverage / 2.0,
-      color: Colors.yellow,
-      borderColor: Colors.yellow.shade600,
+      color: Colors.amber,
+      borderColor: Colors.amber.shade600,
       size: (width - voteAverageWidgetPadding) / 7,
     );
 
@@ -82,11 +81,32 @@ class MovieGridTile extends StatelessWidget {
               thumbnailWidget,
               Padding(padding: paddingHorizontal_8, child: voteAverageWidget),
               Padding(padding: paddingHorizontal_8, child: titleWidget),
-              Padding(padding: paddingHorizontal_8, child: dateWidget),
+              Padding(padding: paddingBelow_8, child: dateWidget),
             ],
           ),
         ),
       ),
     );
+  }
+
+  double _height(BuildContext context, double width) {
+    final thumbnailWidth = width;
+    final thumbnailHeight = thumbnailWidth * ratioPoster;
+    final voteAverageWidgetHeight = 25;
+    final textTheme = Theme.of(context).textTheme;
+    final titleWidgetHeight =
+        textSize("\n\n", textTheme.titleMedium!, _titleMaxLines).height;
+    final dateWidgetHeight =
+        textSize("AD gy 0000", textTheme.titleSmall!, 1).height;
+    return thumbnailHeight +
+        voteAverageWidgetHeight +
+        titleWidgetHeight +
+        dateWidgetHeight +
+        paddingBelow_8.bottom +
+        8;
+  }
+
+  Size size(BuildContext context) {
+    return Size(width, _height(context, width));
   }
 }

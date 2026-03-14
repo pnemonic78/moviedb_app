@@ -14,10 +14,10 @@ class MoviesListPage extends StatefulWidget {
   });
 
   @override
-  State<MoviesListPage> createState() => _MoviesListState();
+  State<MoviesListPage> createState() => MoviesListState();
 }
 
-class _MoviesListState<P extends MoviesListPage> extends State<P> {
+class MoviesListState extends State<MoviesListPage> {
   //TODO can add listener to controller to load next page
   ScrollController? _scrollController;
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:tmdb/di/injector_inherited.dart';
 import 'package:tmdb/movie_details/home_page.dart';
 import 'package:tmdb/res/dimens.dart';
@@ -17,7 +16,7 @@ abstract class MoviesPage extends StatefulWidget {
 }
 
 abstract class MoviesState<P extends MoviesPage> extends State<P> {
-  Widget buildList(
+  Widget _buildList(
     List<Movie> movies,
     bool showAsList,
     ValueChanged<Movie> onMovieTap,
@@ -48,10 +47,10 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
     final state = movieBloc.state;
     final movies = getMovies(state);
 
-    Widget content;
+    final Widget content;
 
     if (movies != null) {
-      content = buildList(
+      content = _buildList(
         movies.results,
         state.showAsList,
         _onTapMovie,
@@ -71,14 +70,11 @@ abstract class MoviesState<P extends MoviesPage> extends State<P> {
 
     final body = Padding(
       padding: paddingAll_8,
-      child: Expanded(
-        child: content,
-      ),
+      child: content,
     );
 
     final iconViewStyle = IconButton(
-      icon:
-          state.showAsList ? Icon(MdiIcons.viewGrid) : Icon(MdiIcons.viewList),
+      icon: state.showAsList ? Icon(Icons.grid_on) : Icon(Icons.list),
       onPressed: () => movieBloc.add(const ToggleViewStyleEvent()),
     );
 

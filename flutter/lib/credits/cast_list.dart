@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tmdb/di/injector_inherited.dart';
-import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/credits_response.dart';
 import 'package:tmdb/tmdb_api/model/media_cast.dart';
@@ -27,14 +26,28 @@ class CastList extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
             List<MediaCast> cast = snapshot.data?.cast ?? [];
+            if (cast.isEmpty) {
+              content = Container();
+            } else {
+              cast.sort((a, b) => a.order.compareTo(b.order));
+              final tile = CastTile(
+                cast: cast[0],
+                onTap: onTap,
+              );
+              final tileHeight = tile.height(context);
 
-            content = SizedBox(
-              height: castTileHeight + 100,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: _buildCastList(context, cast),
-              ),
-            );
+              content = SizedBox(
+                height: tileHeight,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: cast.length,
+                  itemBuilder: (BuildContext context, int index) => CastTile(
+                    cast: cast[index],
+                    onTap: onTap,
+                  ),
+                ),
+              );
+            }
           } else {
             content = Container();
           }
@@ -52,19 +65,5 @@ class CastList extends StatelessWidget {
     CreditsResponse? credits = movie.credits;
     if (credits != null) return credits;
     return api.getMovieCredits(context, movie);
-  }
-
-  List<Widget> _buildCastList(BuildContext context, List<MediaCast> cast) {
-    final list = <Widget>[];
-    cast.sort((a, b) => a.order.compareTo(b.order));
-
-    for (var member in cast) {
-      list.add(CastTile(
-        cast: member,
-        onTap: onTap,
-      ));
-    }
-
-    return list;
   }
 }

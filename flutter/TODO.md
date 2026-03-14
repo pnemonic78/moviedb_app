@@ -1,5 +1,6 @@
 # To Do
 
+* bloc events for navigation
 * rating as circular progress with inner percentage
 * clean architecture (multi-module)
   * core

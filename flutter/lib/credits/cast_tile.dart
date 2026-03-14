@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:tmdb/res/dimens.dart';
 import 'package:tmdb/tmdb_api/api.dart';
 import 'package:tmdb/tmdb_api/model/media_cast.dart';
+import 'package:tmdb/utils/flutter_ui.dart';
+
+const _titleMaxLines = 2;
+const _characterMaxLines = 2;
 
 class CastTile extends StatelessWidget {
   final MediaCast cast;
@@ -25,11 +29,8 @@ class CastTile extends StatelessWidget {
       profileHeight: imageHeight,
       fit: BoxFit.fitWidth,
     );
-    final thumbnailWidget = ClipPath.shape(
-      // rounded rectangle crop for top side only.
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: cardRadius),
-      ),
+    final thumbnailWidget = ClipRRect(
+      borderRadius: borderCircularTop_8,
       child: thumbnail,
     );
 
@@ -37,14 +38,14 @@ class CastTile extends StatelessWidget {
 
     final titleWidget = Text(
       "${cast.name}\n\n",
-      maxLines: 2,
+      maxLines: _titleMaxLines,
       style: textTheme.titleMedium,
       overflow: TextOverflow.ellipsis,
     );
 
     final characterWidget = Text(
       "${cast.character}\n\n",
-      maxLines: 2,
+      maxLines: _characterMaxLines,
       style: textTheme.titleSmall,
       overflow: TextOverflow.ellipsis,
     );
@@ -68,5 +69,20 @@ class CastTile extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  double height(BuildContext context) {
+    const imageHeight = castTileHeight;
+    final textTheme = Theme.of(context).textTheme;
+    final titleWidgetHeight =
+        textSize("\n\n", textTheme.titleMedium!, _titleMaxLines).height;
+    final characterWidgetHeight =
+        textSize("\n\n", textTheme.titleSmall!, _characterMaxLines).height;
+    return imageHeight +
+        padding_8 +
+        titleWidgetHeight +
+        padding_4 +
+        characterWidgetHeight +
+        8;
   }
 }

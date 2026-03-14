@@ -18,7 +18,7 @@ class MoviesAllTile extends MovieGridTile {
   @override
   Widget build(BuildContext context) {
     final thumbnailWidth = width;
-    final thumbnailHeight = thumbnailWidth * 1.5;
+    final thumbnailHeight = thumbnailWidth * ratioPoster;
     final imageWidth = thumbnailWidth;
     final imageHeight = thumbnailHeight;
 
@@ -27,11 +27,8 @@ class MoviesAllTile extends MovieGridTile {
       posterWidth: imageWidth,
       posterHeight: imageHeight,
     );
-    final thumbnailWidget = ClipPath.shape(
-      // rounded rectangle crop for top side only.
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: cardRadius),
-      ),
+    final thumbnailWidget = ClipRRect(
+      borderRadius: borderCircularTop_8,
       child: SizedBox(
         width: thumbnailWidth,
         height: thumbnailHeight,
@@ -69,7 +66,7 @@ class MoviesAllTile extends MovieGridTile {
 
   double height(BuildContext context) {
     final thumbnailWidth = width;
-    final thumbnailHeight = thumbnailWidth * 1.5;
+    final thumbnailHeight = thumbnailWidth * ratioPoster;
     final textTheme = Theme.of(context).textTheme;
     final titleHeight =
         textSize("\n\n", textTheme.titleMedium!, _titleMaxLines).height;

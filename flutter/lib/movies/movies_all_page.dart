@@ -117,7 +117,13 @@ class _MoviesAllPageState extends State<MoviesAllPage> {
         width: double.infinity,
         child: Padding(
           padding: paddingAll_8,
-          child: text,
+          child: Row(
+            children: [
+              text,
+              Spacer(flex: 1),
+              Icon(Icons.navigate_next),
+            ],
+          ),
         ),
       ),
     );

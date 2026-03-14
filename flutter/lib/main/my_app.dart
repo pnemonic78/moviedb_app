@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final cardTheme = CardTheme.of(context).copyWith(
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(cardRadius),
+        borderRadius: borderCircular_8,
       ),
     );
 
