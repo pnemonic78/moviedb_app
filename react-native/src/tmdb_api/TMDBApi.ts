@@ -3,7 +3,7 @@ import { MovieDetails } from './model/MovieDetails'
 import { MoviesResponse } from './model/MoviesResponse'
 import { Person } from './model/Person'
 
-export default abstract class TMBDApi {
+export default abstract class TMDBApi {
     static api_url = "https://api.themoviedb.org/3/"
     private static _image_url = "https://image.tmdb.org/t/p/{size}{path}"
     private static _youtube_url = "https://www.youtube.com/watch?v={id}"
@@ -18,7 +18,7 @@ export default abstract class TMBDApi {
         "w300",
         "w780",
         "w1280",
-        TMBDApi._original,
+        TMDBApi._original,
     ]
     // private static _logo_sizes = [
     //   "w45",
@@ -27,7 +27,7 @@ export default abstract class TMBDApi {
     //   "w185",
     //   "w300",
     //   "w500",
-    //   TMBDApi._original,
+    //   TMDBApi._original,
     // ]
     private static _poster_sizes = [
         "w92",
@@ -36,13 +36,13 @@ export default abstract class TMBDApi {
         "w342",
         "w500",
         "w780",
-        TMBDApi._original,
+        TMDBApi._original,
     ]
     private static _profile_sizes = [
         "w45",
         "w185",
         "h632",
-        TMBDApi._original,
+        TMDBApi._original,
     ]
     // private static _still_sizes = [
     //   "w92",
@@ -55,34 +55,34 @@ export default abstract class TMBDApi {
         if ((path == null) || (width <= 0) || (height <= 0)) {
             return ""
         }
-        let size = TMBDApi.findSize(width, height, TMBDApi._poster_sizes)
+        let size = TMDBApi.findSize(width, height, TMDBApi._poster_sizes)
 
-        return TMBDApi._image_url.replace("{size}", size).replace("{path}", path)
+        return TMDBApi._image_url.replace("{size}", size).replace("{path}", path)
     }
 
     static generateBackdropUrl(path: string | null, width: number, height: number): string {
         if ((path == null) || (width <= 0) || (height <= 0)) {
             return ""
         }
-        let size = TMBDApi.findSize(width, height, TMBDApi._backdrop_sizes)
+        let size = TMDBApi.findSize(width, height, TMDBApi._backdrop_sizes)
 
-        return TMBDApi._image_url.replace("{size}", size).replace("{path}", path)
+        return TMDBApi._image_url.replace("{size}", size).replace("{path}", path)
     }
 
     static generateProfileThumbnail(path: string | null, width: number, height: number): string {
         if ((path == null) || (width <= 0) || (height <= 0)) {
             return ""
         }
-        let size = TMBDApi.findSize(width, height, TMBDApi._profile_sizes)
+        let size = TMDBApi.findSize(width, height, TMDBApi._profile_sizes)
 
-        return TMBDApi._image_url.replace("{size}", size).replace("{path}", path)
+        return TMDBApi._image_url.replace("{size}", size).replace("{path}", path)
     }
 
     static findSize(width: number, height: number, sizes: string[]): string {
         let widthPx = width * 1.0
         let heightPx = height * 1.0
 
-        var result = TMBDApi._original
+        var result = TMDBApi._original
         var minDelta = Number.MAX_VALUE
         var delta
 
@@ -128,18 +128,18 @@ export default abstract class TMBDApi {
     }
 
     static generateFacebookUrl(id: string | undefined): string {
-        return (id) ? TMBDApi._facebook_url.replace("{id}", id) : ""
+        return (id) ? TMDBApi._facebook_url.replace("{id}", id) : ""
     }
 
     static generateImdbUrl(id: string | undefined): string {
-        return (id) ? TMBDApi._imdb_url.replace("{id}", id) : ""
+        return (id) ? TMDBApi._imdb_url.replace("{id}", id) : ""
     }
 
     static generateInstagramUrl(id: string | undefined): string {
-        return (id) ? TMBDApi._instagram_url.replace("{id}", id) : ""
+        return (id) ? TMDBApi._instagram_url.replace("{id}", id) : ""
     }
 
     static generateTwitterUrl(id: string | undefined): string {
-        return (id) ? TMBDApi._twitter_url.replace("{id}", id) : ""
+        return (id) ? TMDBApi._twitter_url.replace("{id}", id) : ""
     }
 }
