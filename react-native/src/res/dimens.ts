@@ -1,4 +1,4 @@
-const cardRadius = 16
+const cardRadius = 12
 
 const ratioPoster = 1.5
 

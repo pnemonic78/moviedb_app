@@ -1,4 +1,4 @@
-export enum ScreenName {
+enum ScreenName {
     MOVIES_ALL = "MoviesAllPage",
     MOVIES_NOW_PLAYING = "MoviesNowPlaying",
     MOVIES_POPULAR = "MoviesPopular",
@@ -9,3 +9,4 @@ export enum ScreenName {
     PERSON_DETAILS = "PersonDetails",
     PERSON_POSTER = "PersonPoster",
 }
+export default ScreenName
