@@ -1,3 +1,4 @@
+import ScreenName from "@/app/ScreenName";
 import { MoviesCarousel } from "@/components/movies/movies-carousel";
 import { MoviesSection } from "@/components/movies/movies-section";
 import { Res } from "@/res/Res";
@@ -26,13 +27,15 @@ export const MoviesAllScreen = () => {
     }, [api]);
 
     /// Navigates to the movies page.
-    function navigateToPage(pageId, movies) {
+    function navigateToPage(pageId) {
+        console.log(`Navigating to page: ${pageId}`);
         //let navigation = this.props.navigation
-        //navigation.navigate(pageId, { movies });
+        //navigation.navigate(pageId);
     }
 
     /// Navigates to the movie details.
     function navigateToMovie(movie) {
+        console.log(`Navigating to movie details: ${movie.title}`);
         //let navigation = this.props.navigation
         //navigation.navigate(ScreenName.MOVIE_DETAILS, { movie })
     }
@@ -78,23 +81,19 @@ export const MoviesAllScreen = () => {
     }
 
     function onClickNowPlaying() {
-        const movies = getMoviesNowPlaying();
-        navigateToPage(ScreenName.MOVIES_NOW_PLAYING, movies);
+        navigateToPage(ScreenName.MOVIES_NOW_PLAYING);
     }
 
     function onClickPopular() {
-        const movies = getMoviesPopular();
-        navigateToPage(ScreenName.MOVIES_POPULAR, movies);
+        navigateToPage(ScreenName.MOVIES_POPULAR);
     }
 
     function onClickTopRated() {
-        const movies = getMoviesTopRated();
-        navigateToPage(ScreenName.MOVIES_TOP_RATED, movies);
+        navigateToPage(ScreenName.MOVIES_TOP_RATED);
     }
 
     function onClickUpcoming() {
-        const movies = getMoviesUpcoming();
-        navigateToPage(ScreenName.MOVIES_UPCOMING, movies);
+        navigateToPage(ScreenName.MOVIES_UPCOMING);
     }
 
     function onTapMovie(movie) {

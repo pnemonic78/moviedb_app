@@ -1,12 +1,12 @@
 enum ScreenName {
-    MOVIES_ALL = "MoviesAllPage",
-    MOVIES_NOW_PLAYING = "MoviesNowPlaying",
-    MOVIES_POPULAR = "MoviesPopular",
-    MOVIES_TOP_RATED = "MoviesTopRated",
-    MOVIES_UPCOMING = "MoviesUpcoming",
-    MOVIE_DETAILS = "MovieDetails",
-    MOVIE_POSTER = "MoviePoster",
-    PERSON_DETAILS = "PersonDetails",
-    PERSON_POSTER = "PersonPoster",
+    MOVIES_ALL = "movies-all",
+    MOVIES_NOW_PLAYING = "movies-now-playing",
+    MOVIES_POPULAR = "movies-popular",
+    MOVIES_TOP_RATED = "movies-top-rated",
+    MOVIES_UPCOMING = "movies-upcoming",
+    MOVIE_DETAILS = "movie-details",
+    MOVIE_POSTER = "movie-poster",
+    PERSON_DETAILS = "person-details",
+    PERSON_POSTER = "person-poster",
 }
 export default ScreenName
