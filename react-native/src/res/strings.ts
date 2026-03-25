@@ -1,5 +1,5 @@
 export const strings = {
-    title: "The Movie Database Demo",
+    title: "The Movie Database",
 
     // Now Playing
     now_playing: "Now Playing",

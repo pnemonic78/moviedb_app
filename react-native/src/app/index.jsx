@@ -3,19 +3,21 @@ import { MoviesCarousel } from "@/components/movies/movies-carousel";
 import { MoviesSection } from "@/components/movies/movies-section";
 import { Res } from "@/res/Res";
 import TMDBApiImpl from "@/tmdb_api/TMDBApiImpl";
+import { useRouter } from 'expo-router';
 import { useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
-export const MoviesAllScreen = () => {
+const MoviesAllScreen = () => {
 
     // TODO inject with provider
     const api = new TMDBApiImpl();
 
-    let [moviesNowPlaying, setMoviesNowPlaying] = useState([]);
-    let [moviesPopular, setMoviesPopular] = useState([]);
-    let [moviesUpcoming, setMoviesUpcoming] = useState([]);
-    let [moviesTopRated, setMoviesTopRated] = useState([]);
+    const [moviesNowPlaying, setMoviesNowPlaying] = useState([]);
+    const [moviesPopular, setMoviesPopular] = useState([]);
+    const [moviesUpcoming, setMoviesUpcoming] = useState([]);
+    const [moviesTopRated, setMoviesTopRated] = useState([]);
+
+    const router = useRouter();
 
     useEffect(() => {
         // fetch movies for all sections
@@ -29,15 +31,16 @@ export const MoviesAllScreen = () => {
     /// Navigates to the movies page.
     function navigateToPage(pageId) {
         console.log(`Navigating to page: ${pageId}`);
-        //let navigation = this.props.navigation
-        //navigation.navigate(pageId);
+        router.push(pageId);
     }
 
     /// Navigates to the movie details.
     function navigateToMovie(movie) {
-        console.log(`Navigating to movie details: ${movie.title}`);
-        //let navigation = this.props.navigation
-        //navigation.navigate(ScreenName.MOVIE_DETAILS, { movie })
+        console.log(`Navigating to movie details: ${movie.title} (${movie.id})`);
+        router.push({
+            pathname: ScreenName.MOVIE_DETAILS,
+            params: { id: movie.id, title: movie.title },
+        });
     }
 
     function getMoviesNowPlaying() {
@@ -101,19 +104,18 @@ export const MoviesAllScreen = () => {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <ScrollView style={{ flex: 1 }}>
-                <View style={{ flex: 1, flexDirection: 'column' }}>
-                    <MoviesSection label={Res.string.popular} onPress={onClickPopular} />
-                    <MoviesCarousel movies={moviesPopular} onPress={onTapMovie} />
-                    <MoviesSection label={Res.string.now_playing} onPress={onClickNowPlaying} />
-                    <MoviesCarousel movies={moviesNowPlaying} onPress={onTapMovie} />
-                    <MoviesSection label={Res.string.upcoming} onPress={onClickUpcoming} />
-                    <MoviesCarousel movies={moviesUpcoming} onPress={onTapMovie} />
-                    <MoviesSection label={Res.string.top_rated} onPress={onClickTopRated} />
-                    <MoviesCarousel movies={moviesTopRated} onPress={onTapMovie} />
-                </View>
-            </ScrollView>
-        </SafeAreaView>
+        <ScrollView style={{ flex: 1 }}>
+            <View style={{ flex: 1, flexDirection: 'column' }}>
+                <MoviesSection label={Res.string.popular} onPress={onClickPopular} />
+                <MoviesCarousel movies={moviesPopular} onPress={onTapMovie} />
+                <MoviesSection label={Res.string.now_playing} onPress={onClickNowPlaying} />
+                <MoviesCarousel movies={moviesNowPlaying} onPress={onTapMovie} />
+                <MoviesSection label={Res.string.upcoming} onPress={onClickUpcoming} />
+                <MoviesCarousel movies={moviesUpcoming} onPress={onTapMovie} />
+                <MoviesSection label={Res.string.top_rated} onPress={onClickTopRated} />
+                <MoviesCarousel movies={moviesTopRated} onPress={onTapMovie} />
+            </View>
+        </ScrollView>
     );
 }
+export default MoviesAllScreen;
