@@ -10,7 +10,7 @@ export interface Media {
     media_type: MediaType
     popularity: number
 
-// factory Media.fromJsonType(Map < String, dynamic > json) {
+// factory Media.fromJsonType(Map<String, dynamic> json) {
 //     if (json == null) return null
 
 //     let mediaType = media_type ?? MediaType.all

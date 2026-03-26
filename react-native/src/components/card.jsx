@@ -3,7 +3,7 @@ import { Res } from '@/res/Res';
 
 export const Card = ({ children, style }) => {
     return (
-        <ThemedView style={[styles.card, style]} >
+        <ThemedView style={[styles.card, style]}>
             {children}
         </ThemedView>
     );

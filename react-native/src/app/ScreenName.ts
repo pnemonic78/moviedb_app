@@ -1,4 +1,5 @@
 enum ScreenName {
+    ROOT = "/",
     MOVIES_ALL = "/",
     MOVIES_NOW_PLAYING = "/movie/now-playing",
     MOVIES_POPULAR = "/movie/popular",

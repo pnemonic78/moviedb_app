@@ -12,10 +12,10 @@ export const MovieTile = ({ movie, onPress }) => {
     const releaseDate = movie.release_date ? new Date(movie.release_date) : null;
 
     return (
-        <Pressable onPress={(event) => onPress(movie)} style={{ width: Res.dimen.posterListWidth }} >
+        <Pressable onPress={(event) => onPress(movie)} style={{ width: Res.dimen.posterListWidth }}>
             <Card>
-                <View style={styles.container} >
-                    <View style={styles.column} >
+                <View style={styles.container}>
+                    <View style={styles.column}>
                         <Image
                             source={{ uri: url }}
                             placeholder={require('@/assets/images/movie.png')}
@@ -29,7 +29,7 @@ export const MovieTile = ({ movie, onPress }) => {
                             {releaseDate ? releaseDate.toLocaleDateString() : ""}
                         </ThemedText>
                     </View>
-                    <View style={styles.ratingContainer} >
+                    <View style={styles.ratingContainer}>
                         <Rating rating={rating} />
                     </View>
                 </View>

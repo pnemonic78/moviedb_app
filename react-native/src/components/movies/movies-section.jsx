@@ -1,7 +1,7 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Pressable, StyleSheet, Text } from "react-native";
 
-const styleSheet = StyleSheet.create({
+const styles = StyleSheet.create({
     row: {
         display: 'flex',
         flexDirection: 'row',
@@ -16,8 +16,8 @@ const styleSheet = StyleSheet.create({
 
 export const MoviesSection = ({ label, onPress }) => {
     return (
-        <Pressable style={styleSheet.row} onPress={onPress}>
-            <Text style={styleSheet.headline5}>{label}</Text>
+        <Pressable style={styles.row} onPress={onPress}>
+            <Text style={styles.headline5}>{label}</Text>
             <MaterialIcons name="chevron-right" size={32} color="black" />
         </Pressable>
     );

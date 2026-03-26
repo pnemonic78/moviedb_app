@@ -14,7 +14,7 @@ export const MoviesCarousel = ({ movies, onPress }) => {
                 ItemSeparatorComponent={() => <View style={{ width: 4 }} />}
             />
         ) : (
-            <View style={{ height: Res.dimen.posterListHeight }} >
+            <View style={{ height: Res.dimen.posterListHeight }}>
                 <Loading />
             </View>
         )

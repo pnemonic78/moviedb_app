@@ -2,6 +2,7 @@ import { MoviesDetails } from '@/components/movies/movie-details';
 import TMDBApiImpl from '@/tmdb_api/TMDBApiImpl';
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const MoviesDetailsScreen = () => {
     const params = useLocalSearchParams();
@@ -15,13 +16,14 @@ const MoviesDetailsScreen = () => {
 
     useEffect(() => {
         // fetch movie details.
-        const response = require("@/tmdb_api/data/movies.json");
-        const movie = response.results.find(m => m.id == movieId);
+        const movie = require("@/tmdb_api/data/movie_550.json");
         setMovie(movie);
     }, [api]);
 
     return (
-        <MoviesDetails movie={movie} />
+        <SafeAreaView style={{ flex: 1 }}>
+            <MoviesDetails movie={movie} />
+        </SafeAreaView>
     );
 }
 export default MoviesDetailsScreen;
