@@ -83,20 +83,19 @@ export default abstract class TMDBApi {
         let heightPx = height * 1.0
 
         var result = TMDBApi._original
-        var minDelta = Number.MAX_VALUE
-        var delta
+        var minDelta = 10000
 
         for (let size of sizes) {
             if (size.startsWith("w")) {
-                var sizeWidth = parseFloat(size.substring(1))
-                delta = Math.abs(widthPx - sizeWidth)
+                let sizeWidth = parseFloat(size.substring(1))
+                let delta = Math.abs(widthPx - sizeWidth)
                 if (delta < minDelta) {
                     minDelta = delta
                     result = size
                 }
             } else if (size.startsWith("h")) {
-                var sizeHeight = parseFloat(size.substring(1))
-                delta = Math.abs(heightPx - sizeHeight)
+                let sizeHeight = parseFloat(size.substring(1))
+                let delta = Math.abs(heightPx - sizeHeight)
                 if (delta < minDelta) {
                     minDelta = delta
                     result = size

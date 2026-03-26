@@ -1,4 +1,4 @@
-import ScreenName from '@/app/ScreenName';
+import ScreenName from "@/app/ScreenName";
 import { Column } from '@/components/column';
 import { Rating } from '@/components/rating';
 import { Row } from '@/components/row';
@@ -22,15 +22,16 @@ export const MoviesDetails = ({ movie }) => {
 
     function onTapPoster() {
         console.log(`Tapped poster for movie: ${movie.title} (${movie.id})`);
+        const url = TMDBApi.generatePosterUrl(movie.poster_path, Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
         route.push({
             pathname: ScreenName.MOVIE_POSTER,
-            params: { url: posterUrl, title: movie.title },
+            params: { movieId: movie.id, title: movie.title, url: url },
         });
     }
 
     function label(text) {
         return (
-            <View style={{ flex: 0 }}>
+            <View style={{ alignSelf: "stretch" }}>
                 <ThemedText style={styles.label}>{text}</ThemedText>
             </View>
         );
@@ -176,6 +177,7 @@ export const MoviesDetails = ({ movie }) => {
 
 const styles = StyleSheet.create({
     details: {
+        flex: 1,
         flexDirection: "column",
         padding: 8,
     },
