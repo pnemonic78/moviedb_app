@@ -1,6 +1,6 @@
 import { Person } from "@/tmdb_api/model/Person";
 
-export default interface PersonDetailsReducerState {
+export default interface PersonDetailsState {
     loading: boolean
     people: Map<number, Person>
 }

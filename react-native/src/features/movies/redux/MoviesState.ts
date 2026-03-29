@@ -1,6 +1,6 @@
 import { Movie } from "@/tmdb_api/model/Movie";
 
-export default interface MoviesReducerState {
+export default interface MoviesState {
     loading: boolean
     moviesNowPlaying: Movie[]
     moviesPopular: Movie[]

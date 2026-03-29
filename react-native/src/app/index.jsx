@@ -45,7 +45,7 @@ const MoviesAllScreen = () => {
 
     function getMoviesNowPlaying() {
         let movies = moviesNowPlaying;
-        if (!movies?.length) {
+        if (!movies.length) {
             //let dispatch = this.props.dispatch;
             //this.api.getNowPlaying()
             //    .then(data => dispatch(fetchedMoviesNowPlaying(data.results)))
@@ -55,7 +55,7 @@ const MoviesAllScreen = () => {
 
     function getMoviesPopular() {
         let movies = moviesPopular;
-        if (!movies?.length) {
+        if (!movies.length) {
             //let dispatch = this.props.dispatch;
             //this.api.getPopular()
             //    .then(data => dispatch(fetchedMoviesPopular(data.results)))
@@ -65,7 +65,7 @@ const MoviesAllScreen = () => {
 
     function getMoviesTopRated() {
         let movies = moviesTopRated;
-        if (!movies?.length) {
+        if (!movies.length) {
             //let dispatch = this.props.dispatch;
             //this.api.getTopRated()
             //    .then(data => dispatch(fetchedMoviesTopRated(data.results)))
@@ -75,7 +75,7 @@ const MoviesAllScreen = () => {
 
     function getMoviesUpcoming() {
         let movies = moviesUpcoming;
-        if (!movies?.length) {
+        if (!movies.length) {
             //let dispatch = this.props.dispatch;
             //this.api.getUpcoming()
             //    .then(data => dispatch(fetchedMoviesUpcoming(data.results)))
