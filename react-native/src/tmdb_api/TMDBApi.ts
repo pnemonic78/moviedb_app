@@ -9,7 +9,8 @@ export default abstract class TMDBApi {
     private static _youtube_url = "https://www.youtube.com/watch?v={id}"
     private static _youtube_thumbnail_url = "https://img.youtube.com/vi/{id}/0.jpg"
     private static _facebook_url = "https://facebook.com/{id}"
-    private static _imdb_url = "https://imdb.com/name/{id}"
+    private static _imdb_movie_url = "https://imdb.com/title/{id}"
+    private static _imdb_person_url = "https://imdb.com/name/{id}"
     private static _instagram_url = "https://instagram.com/{id}"
     private static _twitter_url = "https://twitter.com/{id}"
 
@@ -131,7 +132,15 @@ export default abstract class TMDBApi {
     }
 
     static generateImdbUrl(id: string | undefined): string {
-        return (id) ? TMDBApi._imdb_url.replace("{id}", id) : ""
+        if (id) {
+            if (id.startsWith("nm")) {
+                return TMDBApi._imdb_person_url.replace("{id}", id)
+            }
+            if (id.startsWith("tt")) {
+                return TMDBApi._imdb_movie_url.replace("{id}", id)
+            }
+        }
+        return "";
     }
 
     static generateInstagramUrl(id: string | undefined): string {

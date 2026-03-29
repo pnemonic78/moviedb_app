@@ -6,8 +6,9 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Res } from '@/res/Res';
 import TMDBApi from '@/tmdb_api/TMDBApi';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
-import { useRouter } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import { Pressable, ScrollView, StyleSheet, View } from "react-native";
 import { formatCurrency } from "react-native-format-currency";
 
@@ -145,14 +146,56 @@ export const MoviesDetails = ({ movie }) => {
         }
     }
 
+    const homepageIcon = (url) => {
+        if (movie.homepage) {
+            const url = movie.homepage;
+
+            return (
+                <Link href={url} style={{ padding: 8 }}>
+                    <MaterialCommunityIcons name="home" size={32} />
+                </Link>
+            );
+        } else {
+            return null;
+        }
+    };
+
+
+    const imdbIcon = (url) => {
+        if (movie.imdb_id) {
+            const url = TMDBApi.generateImdbUrl(movie.imdb_id);
+
+            return (
+                <Link href={url} style={{ padding: 8 }}>
+                    <MaterialCommunityIcons name="database" size={32} />
+                </Link>
+            );
+        } else {
+            return null;
+        }
+    };
+
+    const links = () => {
+        return (
+            <Row style={{ alignSelf: "center" }}>
+                {homepageIcon()}
+                <View style={{ width: 8 }} />
+                {imdbIcon()}
+            </Row>
+        );
+    }
+
     return (
         movie.overview ? (
             <ScrollView>
                 <ThemedView style={styles.details}>
                     <Row>
-                        <Pressable onPress={() => onTapPoster()}>
-                            <Image source={{ uri: posterUrl }} style={styles.poster} placeholder={require('@/assets/images/movie.png')} />
-                        </Pressable>
+                        <Column>
+                            <Pressable onPress={() => onTapPoster()}>
+                                <Image source={{ uri: posterUrl }} style={styles.poster} placeholder={require('@/assets/images/movie.png')} />
+                            </Pressable>
+                            {links()}
+                        </Column>
                         <Column style={{ flex: 1 }}>
                             <ThemedText style={styles.title}>{movie.title}</ThemedText>
                             {tagline()}
