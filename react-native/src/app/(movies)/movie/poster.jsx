@@ -1,5 +1,5 @@
-import { Poster } from "@/components/movies/movie-poster";
 import { ThemedView } from "@/components/themed-view";
+import { Poster } from "@/features/movies/components/movie-poster";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { StyleSheet } from "react-native";
 

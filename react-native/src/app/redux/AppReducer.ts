@@ -4,7 +4,7 @@ import personDetailsReducer from "@/features/people/redux/PersonDetailsReducer"
 import { combineReducers } from "@reduxjs/toolkit"
 
 export const appReducers = combineReducers({
-    movies:moviesReducer,
+    movies: moviesReducer,
     movie: movieDetailsReducer,
     person: personDetailsReducer,
 })

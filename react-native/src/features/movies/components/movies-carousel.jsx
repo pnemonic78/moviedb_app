@@ -1,5 +1,5 @@
 import { Loading } from "@/components/loading";
-import { MovieTile } from "@/components/movies/movies-tile";
+import { MovieTile } from "@/features/movies/components/movies-tile";
 import { Res } from "@/res/Res";
 import { FlatList, View } from "react-native";
 
