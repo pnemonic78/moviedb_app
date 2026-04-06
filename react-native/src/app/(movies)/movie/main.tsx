@@ -1,36 +1,39 @@
+import AppState from "@/app/redux/AppState";
 import ScreenName from "@/app/ScreenName";
 import { MoviesCarousel } from "@/features/movies/components/movies-carousel";
 import { MoviesSection } from "@/features/movies/components/movies-section";
+import { nowPlaying, popular, topRated, upcoming } from "@/features/movies/redux/MoviesReducer";
 import { Res } from "@/res/Res";
 import { Movie } from "@/tmdb_api/model/Movie";
+import TMDBApi from "@/tmdb_api/TMDBApi";
 import TMDBApiImpl from "@/tmdb_api/TMDBApiImpl";
-import { RelativePathString, useRouter } from 'expo-router';
-import { useEffect, useState } from "react";
+import { ExternalPathString, RelativePathString, useRouter } from 'expo-router';
+import { useEffect } from "react";
 import { ScrollView, View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 
 const MoviesAllScreen = () => {
 
     // TODO inject with provider
     const api = new TMDBApiImpl();
 
-    const [moviesNowPlaying, setMoviesNowPlaying] = useState([]);
-    const [moviesPopular, setMoviesPopular] = useState([]);
-    const [moviesUpcoming, setMoviesUpcoming] = useState([]);
-    const [moviesTopRated, setMoviesTopRated] = useState([]);
-
     const router = useRouter();
+    const dispatch = useDispatch();
+    const moviesNowPlaying = useSelector((state: AppState) => state.movies.moviesNowPlaying);
+    const moviesPopular = useSelector((state: AppState) => state.movies.moviesPopular);
+    const moviesTopRated = useSelector((state: AppState) => state.movies.moviesTopRated);
+    const moviesUpcoming = useSelector((state: AppState) => state.movies.moviesUpcoming);
 
     useEffect(() => {
         // fetch movies for all sections
-        const response = require("@/tmdb_api/data/movies.json");
-        setMoviesNowPlaying(response.results);
-        setMoviesPopular(response.results);
-        setMoviesUpcoming(response.results);
-        setMoviesTopRated(response.results);
+        fetchMoviesNowPlaying(api);
+        fetchMoviesPopular(api);
+        fetchMoviesTopRated(api);
+        fetchMoviesUpcoming(api);
     }, [api]);
 
     /// Navigates to the movies page.
-    function navigateToPage(pageId: RelativePathString) {
+    function navigateToPage(pageId: RelativePathString | ExternalPathString) {
         console.log(`Navigating to page: ${pageId}`);
         router.push(pageId);
     }
@@ -44,44 +47,20 @@ const MoviesAllScreen = () => {
         });
     }
 
-    function getMoviesNowPlaying() {
-        let movies = moviesNowPlaying;
-        if (!movies.length) {
-            //let dispatch = this.props.dispatch;
-            //this.api.getNowPlaying()
-            //    .then(data => dispatch(fetchedMoviesNowPlaying(data.results)))
-        }
-        return movies
+    function fetchMoviesNowPlaying(api: TMDBApi) {
+        api.getNowPlaying().then(response => dispatch(nowPlaying(response.results)));
     }
 
-    function getMoviesPopular() {
-        let movies = moviesPopular;
-        if (!movies.length) {
-            //let dispatch = this.props.dispatch;
-            //this.api.getPopular()
-            //    .then(data => dispatch(fetchedMoviesPopular(data.results)))
-        }
-        return movies
+    function fetchMoviesPopular(api: TMDBApi) {
+        api.getPopular().then(response => dispatch(popular(response.results)));
     }
 
-    function getMoviesTopRated() {
-        let movies = moviesTopRated;
-        if (!movies.length) {
-            //let dispatch = this.props.dispatch;
-            //this.api.getTopRated()
-            //    .then(data => dispatch(fetchedMoviesTopRated(data.results)))
-        }
-        return movies
+    function fetchMoviesTopRated(api: TMDBApi) {
+        api.getTopRated().then(response => dispatch(topRated(response.results)));
     }
 
-    function getMoviesUpcoming() {
-        let movies = moviesUpcoming;
-        if (!movies.length) {
-            //let dispatch = this.props.dispatch;
-            //this.api.getUpcoming()
-            //    .then(data => dispatch(fetchedMoviesUpcoming(data.results)))
-        }
-        return movies
+    function fetchMoviesUpcoming(api: TMDBApi) {
+        api.getUpcoming().then(response => dispatch(upcoming(response.results)));
     }
 
     function onClickNowPlaying() {
@@ -100,7 +79,7 @@ const MoviesAllScreen = () => {
         navigateToPage(ScreenName.MOVIES_UPCOMING);
     }
 
-    function onTapMovie(movie) {
+    function onTapMovie(movie: Movie) {
         navigateToMovie(movie);
     }
 

@@ -1,11 +1,10 @@
-import { Person } from '@/tmdb_api/model/Person';
 import { createSlice } from '@reduxjs/toolkit';
 import PersonDetailsAction from "./PersonDetailsAction";
 import PersonDetailsState from "./PersonDetailsState";
 
 const initialState: PersonDetailsState = {
     loading: false,
-    people: new Map(),
+    people: [],
 }
 
 export const personSlice = createSlice({
@@ -16,8 +15,13 @@ export const personSlice = createSlice({
             state.loading = false
             let person = action.payload
             if (person != null) {
-                let people = state.people ?? new Map<number, Person>()
-                people.set(person.id, person)
+                let people = state.people ?? []
+                let index = people.findIndex((p) => p.id == person.id)
+                if (index >= 0) {
+                    people[index] = person
+                } else {
+                    people.concat(person)
+                }
                 state.people = people
             }
         }

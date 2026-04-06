@@ -8,6 +8,7 @@ const initialState: MoviesReducerState = {
     moviesPopular: [],
     moviesTopRated: [],
     moviesUpcoming: [],
+    showAsList: false,
 }
 
 export const moviesSlice = createSlice({

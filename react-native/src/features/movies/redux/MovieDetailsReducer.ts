@@ -1,11 +1,10 @@
-import { MovieDetails } from '@/tmdb_api/model/MovieDetails'
 import { createSlice } from '@reduxjs/toolkit'
 import MovieDetailsAction from './MovieDetailsAction'
 import MovieDetailsState from './MovieDetailsState'
 
 const initialState: MovieDetailsState = {
     loading: false,
-    movies: new Map(),
+    movies: [],
 }
 
 export const movieSlice = createSlice({
@@ -16,8 +15,13 @@ export const movieSlice = createSlice({
             state.loading = false
             let movie = action.payload
             if (movie != null) {
-                let movies = state.movies ?? new Map<number, MovieDetails>()
-                movies.set(movie.id, movie)
+                let movies = state.movies ?? []
+                let index = movies.findIndex((m) => m.id == movie.id)
+                if (index >= 0) {
+                    movies[index] = movie
+                } else {
+                    movies.concat(movie)
+                }
                 state.movies = movies
             }
         }

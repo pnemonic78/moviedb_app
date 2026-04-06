@@ -6,4 +6,5 @@ export default interface MoviesState {
     moviesPopular: Movie[]
     moviesTopRated: Movie[]
     moviesUpcoming: Movie[]
+    showAsList: boolean
 }

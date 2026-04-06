@@ -2,10 +2,17 @@ import { Loading } from "@/components/loading";
 import { MovieTile } from "@/features/movies/components/movies-tile";
 import { Res } from "@/res/Res";
 import { FlatList, View } from "react-native";
+import { useSelector } from "react-redux";
 
 export const MoviesCarousel = ({ movies, onPress }) => {
+    const loading = useSelector((state) => state.movies.loading);
+
     return (
-        movies?.length > 0 ? (
+        (loading || !movies.length) ? (
+            <View style={{ height: Res.dimen.posterListHeight }}>
+                <Loading />
+            </View>
+        ) : (
             <FlatList
                 data={movies}
                 horizontal={true}
@@ -13,10 +20,6 @@ export const MoviesCarousel = ({ movies, onPress }) => {
                 keyExtractor={(item, index) => item.id}
                 ItemSeparatorComponent={() => <View style={{ width: 4 }} />}
             />
-        ) : (
-            <View style={{ height: Res.dimen.posterListHeight }}>
-                <Loading />
-            </View>
         )
     );
 }

@@ -11,7 +11,8 @@ export default class TMDBApiImpl extends TMDBApi {
     readonly regionCode = "US"
 
     private async getMovies(url: string): Promise<MoviesResponse> {
-        return (await axios.get<MoviesResponse>(url)).data
+        return await require("@/tmdb_api/data/movies.json");
+        //return (await axios.get<MoviesResponse>(url)).data
     }
 
     async getNowPlaying(): Promise<MoviesResponse> {
