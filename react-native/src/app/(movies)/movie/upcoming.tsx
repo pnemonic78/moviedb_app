@@ -1,6 +1,6 @@
 import AppState from "@/app/redux/AppState";
 import ScreenName from '@/app/ScreenName';
-import { MoviesScreen } from '@/features/movies/components/movies-screen';
+import { MoviesScreen } from '@/features/movies/components/MoviesScreen';
 import { upcoming } from '@/features/movies/redux/MoviesReducer';
 import { Res } from '@/res/Res';
 import { Movie } from '@/tmdb_api/model/Movie';

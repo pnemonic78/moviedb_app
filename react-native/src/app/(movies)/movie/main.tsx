@@ -1,7 +1,7 @@
 import AppState from "@/app/redux/AppState";
 import ScreenName from "@/app/ScreenName";
-import { MoviesCarousel } from "@/features/movies/components/movies-carousel";
-import { MoviesSection } from "@/features/movies/components/movies-section";
+import { MoviesCarousel } from "@/features/movies/components/MoviesCarousel";
+import { MoviesSection } from "@/features/movies/components/MoviesSection";
 import { nowPlaying, popular, topRated, upcoming } from "@/features/movies/redux/MoviesReducer";
 import { Res } from "@/res/Res";
 import { Movie } from "@/tmdb_api/model/Movie";

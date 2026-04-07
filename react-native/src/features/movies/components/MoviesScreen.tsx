@@ -1,6 +1,6 @@
 import AppState from '@/app/redux/AppState';
 import { ThemedView } from '@/components/themed-view';
-import { MoviesCarousel } from '@/features/movies/components/movies-carousel';
+import { MoviesCarousel } from '@/features/movies/components/MoviesCarousel';
 import { showAsList } from "@/features/movies/redux/MoviesReducer";
 import { Movie } from "@/tmdb_api/model/Movie";
 import { MaterialCommunityIcons } from '@expo/vector-icons';

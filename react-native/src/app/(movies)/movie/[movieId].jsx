@@ -1,4 +1,4 @@
-import { MoviesDetails } from '@/features/movies/components/movie-details';
+import { MoviesDetails } from '@/features/movies/components/MoviesDetails';
 import TMDBApiImpl from '@/tmdb_api/TMDBApiImpl';
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
