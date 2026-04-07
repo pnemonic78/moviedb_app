@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import MoviesAction from './MoviesAction'
+import { MoviesAction, ToggleAction } from './MoviesAction'
 import { default as MoviesReducerState, default as MoviesState } from './MoviesState'
 
 const initialState: MoviesReducerState = {
@@ -30,10 +30,13 @@ export const moviesSlice = createSlice({
         upcoming: (state: MoviesState, action: MoviesAction) => {
             state.loading = false
             state.moviesUpcoming = action.payload
-        }
+        },
+        showAsList: (state: MoviesState, action: ToggleAction) => {
+            state.showAsList = action.payload
+        },
     }
 })
 
-export const { nowPlaying, popular, topRated, upcoming } = moviesSlice.actions
+export const { nowPlaying, popular, topRated, upcoming, showAsList } = moviesSlice.actions
 
 export default moviesSlice.reducer

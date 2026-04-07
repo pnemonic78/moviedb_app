@@ -5,13 +5,12 @@ import { StyleSheet } from "react-native";
 
 const PosterPage = () => {
     const params = useLocalSearchParams();
-    const movieId = parseInt(params.movieId);
-    let title = params.title;
-    let url = params.url;
+    const title = params.title;
+    const url = params.url;
 
     return (
         <ThemedView style={styles.page}>
-            <Stack.Screen options={{ title: title }} />
+            <Stack.Screen.Title>{title}</Stack.Screen.Title>
             <Poster url={url} />
         </ThemedView>
     );
