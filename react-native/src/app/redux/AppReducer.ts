@@ -5,6 +5,6 @@ import { combineReducers } from "@reduxjs/toolkit"
 
 export const appReducers = combineReducers({
     movies: moviesReducer,
-    movie: movieDetailsReducer,
-    person: personDetailsReducer,
+    movieDetails: movieDetailsReducer,
+    personDetails: personDetailsReducer,
 })

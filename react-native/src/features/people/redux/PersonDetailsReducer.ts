@@ -14,13 +14,13 @@ export const personSlice = createSlice({
         details: (state: PersonDetailsState, action: PersonDetailsAction) => {
             state.loading = false
             let person = action.payload
-            if (person != null) {
+            if (person) {
                 let people = state.people ?? []
-                let index = people.findIndex((p) => p.id == person.id)
+                let index = people.findIndex((p) => p.id === person.id)
                 if (index >= 0) {
                     people[index] = person
                 } else {
-                    people.concat(person)
+                    people.push(person)
                 }
                 state.people = people
             }

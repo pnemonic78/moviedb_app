@@ -36,9 +36,12 @@ export default class TMDBApiImpl extends TMDBApi {
     }
 
     async getMovieDetailsById(movieId: number): Promise<MovieDetails> {
-        let url = TMDBApi.api_url + "movie/" + movieId + "?api_key=" + this.apiKey + "&language=" + this.languageCode + "&append_to_response=credits"
-        let result = await axios.get(url)
-        return result.data as MovieDetails
+        var movie: MovieDetails = await require("@/tmdb_api/data/movie_550.json");
+        movie.id = movieId;
+        return movie;
+        //let url = TMDBApi.api_url + "movie/" + movieId + "?api_key=" + this.apiKey + "&language=" + this.languageCode + "&append_to_response=credits"
+        //let result = await axios.get(url)
+        //return result.data as MovieDetails
     }
 
     async getPersonById(personId: number): Promise<Person> {

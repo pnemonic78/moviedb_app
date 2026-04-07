@@ -14,13 +14,13 @@ export const movieSlice = createSlice({
         details: (state: MovieDetailsState, action: MovieDetailsAction) => {
             state.loading = false
             let movie = action.payload
-            if (movie != null) {
+            if (movie) {
                 let movies = state.movies ?? []
-                let index = movies.findIndex((m) => m.id == movie.id)
+                let index = movies.findIndex((m) => m.id === movie.id)
                 if (index >= 0) {
                     movies[index] = movie
                 } else {
-                    movies.concat(movie)
+                    movies.push(movie)
                 }
                 state.movies = movies
             }
